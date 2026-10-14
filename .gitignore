@@ -1,0 +1,19 @@
+# Ambientes e caches
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+
+# Quarto e relatórios
+.quarto/
+_site/
+
+# IDEs
+.vscode/
+.idea/
