@@ -14,7 +14,9 @@ Utilize este checklist no **Gate 2** da `audit-and-refactoring-pipeline` em conj
 - [ ] **Configuração de Freeze:** `_quarto.yml` contém `execute: freeze: auto` para evitar reprocessamento acidental?
 
 ## 3. Auditoria Cruzada: Texto × Código × Figuras no Quarto
+- [ ] **Aderência às 6 Seções CRISP-ML(Q) + Storytelling (P1):** O relatório está organizado nas 6 etapas canônicas (1. Contexto & Hipóteses; 2. Auditoria & Contratos; 3. EDA & Feature Engineering; 4. Modelagem & Baselines; 5. Avaliação, Diagnóstico & Explicabilidade; 6. Recomendações Executivas & Ação) ou IMRAD (se acadêmico estrito)?
+- [ ] **Rastreabilidade 1:1 Hipóteses ➔ Avaliação & Ação (P1):** Todas as perguntas de negócio e hipóteses formuladas na Seção 1 possuem validação visual/quantitativa na Seção 5 e recomendação prática na Seção 6?
+- [ ] **Comparação Multi-Métrica com Baseline (P1):** A Seção 4 compara formalmente um modelo Baseline simples contra os modelos candidatos usando métricas justificadas matematicamente?
 - [ ] **Fidelidade Numérica:** Cada métrica citada no texto do `.qmd` ou `README.md` coincide exatamente com a saída real das tabelas/modelos?
 - [ ] **Importância de Variáveis (`gain` vs. `split`):** Gráficos de modelos de árvore usam `importance_type='gain'` e a hierarquia descrita no texto reflete exatamente a ordem visual das barras?
-- [ ] **Rastreabilidade 1:1 (*Ask ➔ Share*):** Todas as perguntas de negócio ou hipóteses listadas na abertura possuem visualização e resposta direta na seção de resultados?
 - [ ] **Padrão Visual e Editorial Quarto:** `lang: pt-BR` ativo, zero numeração manual duplicada nos títulos (`number-sections: true`), subfiguras lado a lado niveladas (`ax.set_box_aspect(1)`), `sns.despine()` e `dpi=300`.

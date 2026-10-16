@@ -71,6 +71,7 @@ Gate 5 (Zero Regressão, Docs Sync & Handoff)   ──→ [Handoff: execution ou
   1. Inspecionar a árvore de diretórios, `README.md`, arquivos de manifesto (`pyproject.toml`, `package.json`, `_quarto.yml`) e histórico Git recente.
   2. Executar a heurística de detecção de arquétipo (`A`, `B` ou `C`) e gravar `docs/00_archetype.md`.
   3. Verificar o estado inicial de execução da suíte de testes existente (se houver) e inicializar o `task.md`.
+  4. Verificar a governança de dependências e ambiente Python: constatar se o projeto já adota o padrão obrigatório `uv + pyproject.toml + Ruff + pytest` ou se requer migração a partir de `requirements.txt` legado.
 - **Artefatos de Saída**: `docs/00_archetype.md`, `task.md` e sumário de reconhecimento arquitetural.
 - **Critério de Parada**: Confirmação humana do arquétipo detectado e do escopo da auditoria (marcar Gate 1 como `[x]` no `task.md`).
 
@@ -85,7 +86,7 @@ Gate 5 (Zero Regressão, Docs Sync & Handoff)   ──→ [Handoff: execution ou
 - **Operação nas 4 Camadas**:
   1. **Camada de Código & Segurança:** `clean-code`, `code-reviewer`, `code-review-excellence`, `simplify-code`, `systematic-debugging` *(Ativas)*, `ponytail-audit` / `ponytail-review` *(Ativas via plugin `ponytail`)*, mais `clean-code-guard`, `logic-lens` e `security-audit` *(Cold Storage)*.
   2. **Camada de Testes:** `test-guard` e `pytest-skill` *(Ativas)*. Audita lacunas de cobertura e testes frágeis.
-  3. **Camada Analítica, Científica & Visual (Arquétipo A):** `data-quality-frameworks`, `data-scientist`, `analytics`, `matplotlib`, `plotly` *(Ativas)*, `ml-best-practices` e `notebook-guidance` *(Ativas via plugin `data-agent-kit-plugin`)*, mais `weather-data-reproducibility` *(Cold Storage)*. Audita *data leakage*, sementes (`seed`), importância `gain` vs. `split`, alinhamento de subfiguras e DPI.
+  3. **Camada Analítica, Científica & Visual (Arquétipo A):** `data-quality-frameworks`, `data-scientist`, `analytics`, `matplotlib`, `plotly` *(Ativas)*, `ml-best-practices` e `notebook-guidance` *(Ativas via plugin `data-agent-kit-plugin`)*, mais `weather-data-reproducibility` *(Cold Storage)*. Avalia a conformidade com as **6 Seções Canônicas do CRISP-ML(Q) + Data Storytelling** (ou IMRAD se acadêmico), auditando *data leakage*, sementes (`seed`), ausência de Baseline comparativo na Seção 4, falta de explicabilidade (SHAP) na Seção 5, quebra de rastreabilidade entre hipóteses (Seção 1) e ações (Seção 6), importância `gain` vs. `split`, alinhamento de subfiguras e DPI.
   4. **Camada Documental & Editorial:** `docs-guard` *(Ativa)* e `writing-pipeline` *(Ativa — Modo 2)*. Confronta documentação com o código real e revisa estilo/citações.
 - **Artefato de Saída**: `docs/audit-report.md` estruturado na tabela canônica (`ID | Linha / Arquivo | Severidade | Diagnóstico Original | Sugestão de Refatoração | Racional Técnico`) e classificado em `Crítico (P0)`, `Alto (P1)`, `Médio (P2)` e `Baixo (P3)`.
 - **Critério de Parada**: Aprovação humana dos achados em `docs/audit-report.md` (marcar Gate 2 como `[x]` no `task.md`).
@@ -117,7 +118,7 @@ Gate 5 (Zero Regressão, Docs Sync & Handoff)   ──→ [Handoff: execution ou
 - **Operação e Skills por Arquétipo**:
   - **Arquétipo A (Data Science, Analytics & Quarto)**:
     - *Skills:* `code-refactoring-refactor-clean`, `polars`, `data-scientist`, `matplotlib`, `plotly`, `writing-pipeline` (Modo 1), `humanizer` *(Ativas)*, `seaborn` *(Cold Storage)*.
-    - Eliminar *data leakage*, fixar `seed` global, extrair funções de notebooks para `src/`, vetorizar rotinas lentas com Polars/NumPy e refatorar gráficos e `.qmd` conforme `/home/tales/.gemini/config/skills/pre-code-pipeline/references/quarto-quality-checklist.md` (300 DPI, `set_box_aspect(1)`, `sns.despine()`, `lang: pt-BR`, zero numeração manual duplicada).
+    - Eliminar *data leakage*, fixar `seed` global, extrair funções de notebooks para `src/`, vetorizar rotinas lentas com Polars/NumPy, reestruturar o relatório `.qmd` nas 6 seções canônicas do CRISP-ML(Q) + Data Storytelling caso esteja fora do padrão e refatorar gráficos e documentos conforme `/home/tales/.gemini/config/skills/pre-code-pipeline/references/quarto-quality-checklist.md` (300 DPI, `set_box_aspect(1)`, `sns.despine()`, `lang: pt-BR`, zero numeração manual duplicada). Conduzir validação contínua da fatia via `uv run pytest`, `uv run ruff check .` e `quarto render`.
   - **Arquétipo B (Software, Web & APIs)**:
     - *Skills:* `code-refactoring-refactor-clean`, `clean-code`, `simplify-code`, `architecture-patterns`, `writing-pipeline` (Modo 1) *(Ativas)*, `complexity-cuts`, `orchestrate-batch-refactor`, `repo-native-refactor` *(Cold Storage)*.
     - Desacoplar controladores/rotas extraindo serviços e repositórios, reduzir complexidade ciclomática, otimizar queries de banco e atualizar contratos de API.

@@ -78,11 +78,12 @@ flowchart TD
   - `tdd-workflow`: Ciclo Red-Green-Refactor como condutor do desenvolvimento.
   - `pytest-skill`: Implementação de suítes de teste com fixtures e parametrização.
   - `writing-pipeline`: Governança de docstrings e comentários técnicos alinhados ao arquétipo.
+- **Validação e Ferramental**: Uso obrigatório de `uv run pytest` e `uv run ruff check .` como validadores padrão do Gate 1.
 - **Artefatos de Saída**:
   - Módulos em `src/` com interfaces públicas limpas e anotações de tipo completas.
-  - Arquivos de teste correspondentes em `tests/` com execução limpa no `pytest`.
+  - Arquivos de teste correspondentes em `tests/` com execução limpa no `pytest` (`uv run pytest`).
   - Docstrings concisas no formato Google Style documentando parâmetros, retornos e exceções.
-- **Critério de Parada**: Suíte de testes rodando sem falhas no ambiente e aprovação dos contratos de entrada e saída.
+- **Critério de Parada**: Suíte de testes rodando sem falhas no ambiente (`uv run pytest`), validação limpa de linting e formatação (`uv run ruff check .`) e aprovação dos contratos de entrada e saída.
 
 ---
 
@@ -92,7 +93,7 @@ flowchart TD
 - **Operação por Arquétipo**:
   - **Arquétipo A (JupyterLab / Análise de Dados)**:
     - *Skills:* `notebook-guidance`, `polars`, `scikit-learn`, `statsmodels`.
-    - Execução do fluxo em `.ipynb` cobrindo as fases *Process* (tratamento) e *Analyze* (modelagem).
+    - Execução estruturada cobrindo as etapas do CRISP-ML(Q): Data Preparation & Feature Engineering (Seção 3), Statistical & ML Modeling com Baselines e Modelos Candidatos (Seção 4) e Evaluation, Diagnostics & Explainability via SHAP/resíduos (Seção 5).
     - Proibição estrita de dados sintéticos sem aviso ou troca arbitrária de estimadores.
     - Sementes fixas (`random_state` / `seed`) para reprodutibilidade estrita.
   - **Arquétipo B (Software / Web / APIs)**:
@@ -148,12 +149,19 @@ flowchart TD
   - **Arquétipo A (Relatório Quarto / `.qmd`)**:
     - *Skills:* `writing-pipeline`, `data-storytelling`, `humanizer`.
     - Consulta obrigatória às Seções 1, 2 e 4 do arquivo `/home/tales/.gemini/config/skills/pre-code-pipeline/references/quarto-quality-checklist.md`.
+    - Estruturação mandatória do `index.qmd` nas **6 Seções Canônicas do CRISP-ML(Q) + Data Storytelling** (ou IMRAD se acadêmico estrito):
+      1. *Contexto de Negócio & Hipóteses (Business Understanding / Ask)*
+      2. *Auditoria de Dados & Contratos (Data Understanding / Prepare)*
+      3. *Análise Exploratória & Engenharia de Atributos (Data Prep & EDA / Process)*
+      4. *Modelagem Estatística & Machine Learning (Modeling / Construct)*
+      5. *Avaliação, Diagnóstico & Explicabilidade (Evaluation / Share)*
+      6. *Recomendações Executivas & Plano de Ação (Deployment / Act)*
     - Configuração de `_quarto.yml`: `lang: pt-BR`, `toc: true`, `code-fold: true`, `freeze: auto` e `title-block-banner: true`.
     - Prevenção de numeração duplicada: quando `number-sections: true` estiver ativo no `_quarto.yml`, nunca numere títulos manualmente no Markdown.
     - Uso de callout blocks (`.callout-note`, `.callout-tip`, `.callout-important`) para hipóteses e achados centrais.
     - **Checklist de Entrega de Relatório**:
       - [ ] Execução do Quarto em ambiente limpo (`quarto check` passa sem erros).
-      - [ ] Âncoras cruzadas 1:1 entre as perguntas formuladas no Gate 1/Ask e as respostas no Gate 4/Share.
+      - [ ] Rastreabilidade 1:1 entre o Contexto de Negócio/Hipóteses (Seção 1) e a Avaliação/Explicabilidade e Plano de Ação (Seções 5 e 6).
       - [ ] Callouts destacando conclusões práticas e limitações analíticas.
   - **Arquétipo B (Documentação de Software)**:
     - *Skills:* `writing-pipeline`, `documentation-templates`, `humanizer`.

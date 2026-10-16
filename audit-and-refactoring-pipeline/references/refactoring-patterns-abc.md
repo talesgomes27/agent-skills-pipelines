@@ -6,7 +6,8 @@ Este guia orienta a execução cirúrgica no **Gate 4** da `audit-and-refactorin
 1. **Extração de Lógica de Notebooks para `src/`:** Mova funções longas de limpeza, *feature engineering* e plotagem de dentro de células `.ipynb`/`.qmd` para módulos testáveis em `src/`, importando-as de forma limpa no relatório.
 2. **Vetorização e Performance (`polars` / `numpy`):** Substitua loops explícitos (`iterrows()`, `.apply(..., axis=1)`) por operações vetorizadas ou expressões *lazy* em Polars.
 3. **Padronização Gráfica 300 DPI:** Centralize a configuração estética do Matplotlib/Seaborn (paleta, `sns.despine()`, `dpi=300`, `constrained_layout=True`, `set_box_aspect(1)`) em um módulo utilitário de estilo.
-4. **Saneamento de Quarto:** Remova números hardcoded dos cabeçalhos Markdown, adicione Callout Blocks para conclusões chave e corrija referências cruzadas `@fig-` e `@tbl-`.
+4. **Reestruturação Editorial CRISP-ML(Q) + Storytelling:** Reorganize relatórios `.qmd` legados ou fragmentados nas 6 seções canônicas, removendo numeração manual duplicada dos cabeçalhos Markdown, adicionando Callout Blocks (`.callout-note`, `.callout-tip`, `.callout-important`) e corrigindo referências cruzadas `@fig-` e `@tbl-`.
+5. **Modernização de Ambiente Python (uv + Ruff + pytest):** Em projetos Python sem dependências C++/R exclusivas do Conda, migre `requirements.txt` soltos para `pyproject.toml` + `uv.lock` e configure `ruff` e `pytest`.
 
 ## 2. Arquétipo B — Engenharia de Software, Web & APIs
 1. **Desacoplamento de Controladores/Rotas:** Extraia regras de negócio e chamadas diretas ao banco de dentro das rotas HTTP para casos de uso/serviços e repositórios isolados.
