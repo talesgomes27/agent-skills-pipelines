@@ -85,6 +85,7 @@ obedecer às métricas:
   `/home/tales/.gemini/config/skills/writing-pipeline/references/metrics-and-anti-ai.md`.
 - **Zero falsos contrastes**: proibido "não apenas X, mas Y".
 - **Zero gerundismos decorativos**: proibido "garantindo assim...".
+- **Diagramas em Quarto (.qmd):** Diagramas Mermaid e Graphviz DEVEM ser inseridos como executable cells (` ```{mermaid} ` / ` ```{dot} `), NUNCA como code blocks comuns. O Quarto compila essas células em SVG interativo para HTML e PNG para PDF.
 
 ### 1.3 Citação
 

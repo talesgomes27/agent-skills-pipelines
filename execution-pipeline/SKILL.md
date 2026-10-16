@@ -96,6 +96,7 @@ flowchart TD
     - Execução estruturada cobrindo as etapas do CRISP-ML(Q): Data Preparation & Feature Engineering (Seção 3), Statistical & ML Modeling com Baselines e Modelos Candidatos (Seção 4) e Evaluation, Diagnostics & Explainability via SHAP/resíduos (Seção 5).
     - Proibição estrita de dados sintéticos sem aviso ou troca arbitrária de estimadores.
     - Sementes fixas (`random_state` / `seed`) para reprodutibilidade estrita.
+    - Qualquer diagrama de arquitetura, fluxo ou topologia inserido no relatório deve usar executable cells (` ```{mermaid} ` ou ` ```{dot} `) com cell options canônicas (`%%|` ou `//|`), NUNCA code blocks genéricos sem chaves.
   - **Arquétipo B (Software / Web / APIs)**:
     - *Skills:* `database-design`, `api-documentation`, `fastapi-pro` *(Cold Storage)*.
     - Implementação de repositórios, migrações de banco e clientes externos.
@@ -163,6 +164,7 @@ flowchart TD
       - [ ] Execução do Quarto em ambiente limpo (`quarto check` passa sem erros).
       - [ ] Rastreabilidade 1:1 entre o Contexto de Negócio/Hipóteses (Seção 1) e a Avaliação/Explicabilidade e Plano de Ação (Seções 5 e 6).
       - [ ] Callouts destacando conclusões práticas e limitações analíticas.
+      - [ ] Todos os diagramas usam {mermaid}/{dot}, estão com label/fig-cap e renderizam corretamente em HTML e PDF.
   - **Arquétipo B (Documentação de Software)**:
     - *Skills:* `writing-pipeline`, `documentation-templates`, `humanizer`.
     - Elaboração de `README.md` objetivo: visão geral, setup local (< 5 min), arquitetura, variáveis de ambiente e deploy.

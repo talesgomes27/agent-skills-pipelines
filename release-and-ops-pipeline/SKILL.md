@@ -72,6 +72,7 @@ Gate 5 (Smoke Tests & Verificação no Ar)  ──→ [Entrega Homologada]
   1. Auditar e atualizar `.gitignore` conforme o arquétipo (em Arquétipo A: bloquear `*.csv`, `*.parquet`, `*.pkl`, `/.quarto/`, e manter `/_freeze/` versionado quando `freeze: auto` ou `true`).
   2. Executar varredura contra segredos vazados (`.env`, chaves, tokens) e verificar se há arquivos `> 50 MB` no workspace.
   3. Validar sincronia de lockfiles (`uv.lock`, `pnpm-lock.yaml`).
+  4. Para relatórios Quarto (Arquétipo A): verificar pré-requisitos de renderização de diagramas — garantir que `quarto install chrome-headless-shell` foi executado se o pipeline gerar saídas PDF/print com diagramas, e checar se `rsvg-convert` ou `inkscape` está no PATH caso `mermaid-format: svg` seja configurado no `_quarto.yml`.
 - **Artefatos de Saída**: `.gitignore` blindado, lockfiles validados e parecer de saneamento pré-push.
 - **Critério de Parada**: Confirmação humana do parecer de saneamento (atualizar Gate 1 como `[x]` no `task.md`).
 
@@ -140,7 +141,7 @@ Gate 5 (Smoke Tests & Verificação no Ar)  ──→ [Entrega Homologada]
   - `webapp-testing` *(Ativa — para interfaces web no Arquétipo B)*
   - `writing-pipeline` (Para redação do sumário final de entrega)
 - **Operação por Arquétipo**:
-  - **Arquétipo A:** Checagem de integridade das imagens `<img src>` no HTML compilado e validação de status HTTP 200 na URL pública do GitHub Pages.
+  - **Arquétipo A:** Checagem de integridade das imagens `<img src>` e renderização de diagramas Mermaid/Graphviz (SVG) no HTML compilado, validação de status HTTP 200 na URL pública do GitHub Pages e confirmação de `chrome-headless-shell` instalado para saídas PDF/print.
   - **Arquétipo B:** Healthcheck HTTP 200 (`< 2s`) nas rotas da API e smoke test com Playwright na interface web.
   - **Arquétipo C:** Execução isolada do pacote/binário confirmando funcionamento de `--help`, `--version` e exit code `0`.
   - *Contingência:* Se o smoke test falhar, aplicar imediatamente o protocolo de rollback da Seção 4 de `smoke-and-healthcheck.md`.

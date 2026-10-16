@@ -20,3 +20,6 @@ Utilize este checklist no **Gate 2** da `audit-and-refactoring-pipeline` em conj
 - [ ] **Fidelidade Numérica:** Cada métrica citada no texto do `.qmd` ou `README.md` coincide exatamente com a saída real das tabelas/modelos?
 - [ ] **Importância de Variáveis (`gain` vs. `split`):** Gráficos de modelos de árvore usam `importance_type='gain'` e a hierarquia descrita no texto reflete exatamente a ordem visual das barras?
 - [ ] **Padrão Visual e Editorial Quarto:** `lang: pt-BR` ativo, zero numeração manual duplicada nos títulos (`number-sections: true`), subfiguras lado a lado niveladas (`ax.set_box_aspect(1)`), `sns.despine()` e `dpi=300`.
+- [ ] **Diagramas como Executable Cells (P1):** Todo diagrama Mermaid usa ` ```{mermaid} ` e Graphviz usa ` ```{dot} `? O documento possui extensão `.qmd`?
+- [ ] **Cell Options Canônicas em Diagramas (P2):** As opções `%%|` ou `//|` estão no topo da célula antes do conteúdo?
+- [ ] **Cross-References em Diagramas (P2):** Diagramas possuem `label: fig-*` e `fig-cap` e são referenciados no texto via `@fig-*`?

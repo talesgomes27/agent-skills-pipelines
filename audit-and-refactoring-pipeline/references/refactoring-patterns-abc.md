@@ -8,6 +8,7 @@ Este guia orienta a execução cirúrgica no **Gate 4** da `audit-and-refactorin
 3. **Padronização Gráfica 300 DPI:** Centralize a configuração estética do Matplotlib/Seaborn (paleta, `sns.despine()`, `dpi=300`, `constrained_layout=True`, `set_box_aspect(1)`) em um módulo utilitário de estilo.
 4. **Reestruturação Editorial CRISP-ML(Q) + Storytelling:** Reorganize relatórios `.qmd` legados ou fragmentados nas 6 seções canônicas, removendo numeração manual duplicada dos cabeçalhos Markdown, adicionando Callout Blocks (`.callout-note`, `.callout-tip`, `.callout-important`) e corrigindo referências cruzadas `@fig-` e `@tbl-`.
 5. **Modernização de Ambiente Python (uv + Ruff + pytest):** Em projetos Python sem dependências C++/R exclusivas do Conda, migre `requirements.txt` soltos para `pyproject.toml` + `uv.lock` e configure `ruff` e `pytest`.
+6. **Correção de Renderização de Diagramas Quarto:** Converter code blocks ` ```mermaid ` e ` ```dot ` em executable cells ` ```{mermaid} ` e ` ```{dot} `. Mover opções para cell options (`%%|` ou `//|`), adicionar `label: fig-*` e `fig-cap: "..."`, atualizar referências cruzadas no texto via `@fig-*` e renomear arquivos `.md` para `.qmd` se contiverem células executáveis.
 
 ## 2. Arquétipo B — Engenharia de Software, Web & APIs
 1. **Desacoplamento de Controladores/Rotas:** Extraia regras de negócio e chamadas diretas ao banco de dentro das rotas HTTP para casos de uso/serviços e repositórios isolados.

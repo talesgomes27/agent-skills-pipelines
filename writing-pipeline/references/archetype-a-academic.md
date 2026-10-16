@@ -9,9 +9,8 @@
 
 ## Estrutura
 
-- **IMRAD** para relatórios: Introduction, Methods, Results, and
-  Discussion.
-- Relatórios Quarto devem seguir as fases Ask → Analyze → Share → Act.
+- **Modelo Híbrido CRISP-ML(Q) + Storytelling (Padrão para Projetos de Data Science & ML em Quarto):** Estruturar em 6 seções canônicas (*1. Contexto de Negócio & Hipóteses ➔ 2. Auditoria de Dados & Contratos ➔ 3. EDA & Engenharia de Atributos ➔ 4. Modelagem Estatística/ML ➔ 5. Avaliação, Diagnóstico & Explicabilidade ➔ 6. Recomendações Executivas & Ação*).
+- **IMRAD (Padrão para Artigos Científicos e Teses/TCC):** *Introduction, Methods, Results, and Discussion*.
 - Cada seção abre com o dado central, depois contextualiza.
 
 ## Citação

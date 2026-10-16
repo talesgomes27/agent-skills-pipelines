@@ -1,6 +1,6 @@
 ---
 name: pre-code-pipeline
-description: "Orquestra o pipeline completo de planejamento pré-código em 5 Gates sequenciais antes da escrita de código. Suporta tanto Engenharia de Software (PRD, DDD, Clean Architecture, DB Design, Scaffolding, TDD) quanto Ciência de Dados e Analytics (Six Phases of Data Analytics: Ask, Prepare, Process, Analyze, Share, Act com Python/R e Quarto). Use sempre que iniciar um novo projeto, estruturar uma análise de dados ou planejar uma arquitetura."
+description: "Orquestra o planejamento pré-código em 5 Gates sequenciais para Engenharia de Software (DDD, Clean Arch, TDD) e Ciência de Dados (CRISP-ML(Q) + Data Storytelling com Python/R e Quarto)."
 ---
 
 # Pre-Code Pipeline (v2.1): Orquestrador de Concepção e Planejamento
@@ -23,7 +23,7 @@ Este playbook define o fluxo obrigatório de preparação técnica antes da escr
 
 3. **Roteamento Inteligente por Arquétipo de Projeto (Prevenção de Context Bloat)**:
    - Ao iniciar o pipeline, classifique o projeto em um dos 3 arquétipos abaixo e **carregue apenas as skills pertinentes àquele arquétipo** em cada Gate:
-     - **Arquétipo A — Data Science, Analytics & ML (Python/R/Quarto):** Alinha os 5 Gates às *Six Phases of Data Analytics (`Ask`, `Prepare`, `Process`, `Analyze`, `Share`, `Act`)*. Consulta obrigatoriamente `/home/tales/.gemini/config/skills/pre-code-pipeline/references/quarto-quality-checklist.md`. Dispensa DDD complexo, OpenAPI e SaaS MVP.
+     - **Arquétipo A — Data Science, Analytics & ML (Python/R/Quarto):** Alinha os 5 Gates à **Metodologia Híbrida CRISP-ML(Q) + Data Storytelling** (1. *Business Understanding & Hypotheses / Ask*; 2. *Data Understanding & Contracts / Prepare*; 3. *Data Prep, EDA & Feature Engineering / Process*; 4. *Statistical & ML Modeling / Construct*; 5. *Evaluation, Diagnostics & Explainability / Share*; 6. *Deployment & Executive Action / Act*), ou **IMRAD** para relatórios estritamente acadêmicos. Consulta obrigatoriamente `/home/tales/.gemini/config/skills/pre-code-pipeline/references/quarto-quality-checklist.md`. Dispensa DDD complexo, OpenAPI e SaaS MVP.
      - **Arquétipo B — Engenharia de Software, Web, APIs & SaaS:** Mobiliza o conjunto completo de arquitetura de sistemas (DDD, Clean Architecture, DB Design, API Contracts, SaaS MVP e Webapp Testing).
      - **Arquétipo C — Automação, CLI & Scripts Técnicos:** Fluxo enxuto focado em contratos de I/O, requisitos diretos, Scaffolding e TDD.
 
@@ -47,7 +47,7 @@ Gate 1 (Dados/Prepare) ──→ Gate 2 (PRD/Ask) ──→ Gate 3 (Arquitetura)
 
 ---
 
-### Gate 1: Contexto Inicial, Descoberta e Contratos de Dados (Fases ASK Preliminar & PREPARE)
+### Gate 1: Contexto Inicial, Descoberta e Contratos de Dados (*Data Understanding & Contracts / Prepare*)
 *Opcional apenas quando o projeto for 100% Greenfield e não consumir fontes de dados preexistentes.*
 
 - **Objetivo**: Ler a documentação prévia (`README.md`), inicializar o `task.md`, inspecionar fontes de dados, catalogar esquemas, verificar riscos de *data leakage* e formalizar contratos de dados.
@@ -59,15 +59,15 @@ Gate 1 (Dados/Prepare) ──→ Gate 2 (PRD/Ask) ──→ Gate 3 (Arquitetura)
   - `data-quality-frameworks` (Contratos de dados e regras de validação prévia)
   - `discovering-gcp-data-assets` *(Condicional: apenas se o projeto usar GCP/BigQuery/Spanner)*
 - **Artefato de Saída**: `docs/00_archetype.md` (com frontmatter YAML definindo archetype: A|B|C, stack, project_name, gerado_por e data) e `docs/01-data-discovery-and-contracts.md`
-  - Síntese do contexto inicial extraído do `README.md` (Fase *Ask* preliminar).
-  - Catálogo de tabelas/arquivos de entrada com tipos, janelas temporais e volumetria (Fase *Prepare*).
+  - Síntese do contexto inicial extraído do `README.md` (*Business Understanding / Ask* preliminar).
+  - Catálogo de tabelas/arquivos de entrada com tipos, janelas temporais e volumetria (*Data Understanding & Contracts / Prepare*).
   - Mapeamento de relacionamentos (*join keys*), identificação da variável *target* e análise de risco de *data leakage*.
-  - Contratos de qualidade (*Data Contracts*) que os dados brutos devem cumprir antes da fase *Process*.
+  - Contratos de qualidade (*Data Contracts*) que os dados brutos devem cumprir antes da etapa *Data Prep & Feature Engineering / Process*.
 - **Critério de Parada**: Confirmação pelo usuário de que o diagnóstico das fontes e os contratos de dados estão corretos (atualizar Gate 1 como `[x]` no `task.md`).
 
 ---
 
-### Gate 2: Ideação, Escopo, Hipóteses e Especificação (Fase ASK)
+### Gate 2: Ideação, Escopo, Hipóteses e Especificação (*Business Understanding, Hypotheses & Specs / Ask & Plan*)
 
 - **Objetivo**: Lapidar a proposta do projeto/pesquisa, formular hipóteses/requisitos, estipular métricas de avaliação e delimitar explicitamente o que **não** será feito.
 - **Skills Mobilizadas**:
@@ -93,13 +93,13 @@ Gate 1 (Dados/Prepare) ──→ Gate 2 (PRD/Ask) ──→ Gate 3 (Arquitetura)
   - `docs/02-PRD-and-specs.md`:
     - Definição do problema central, questões norteadoras e hipóteses de negócio/pesquisa.
     - Requisitos funcionais (RF) e não-funcionais (RNF).
-    - **Para Arquétipo A (Data Science):** Justificativa matemática da métrica primária de avaliação (ex: RMSLE vs. RMSE vs. MAE), estratégia de validação (temporal vs. K-Fold) e matriz 1:1 ligando cada pergunta da fase *Ask* a uma visualização planejada na fase *Share*.
+    - **Para Arquétipo A (Data Science):** Justificativa matemática da métrica primária de avaliação (ex: RMSLE vs. RMSE vs. MAE), estratégia de validação (temporal vs. K-Fold) e matriz 1:1 ligando cada pergunta/hipótese de *Business Understanding / Ask* a uma visualização e diagnóstico planejados em *Evaluation & Storytelling / Share*.
     - Seção obrigatória de **Non-Goals** (escopo negativo).
 - **Critério de Parada**: Aprovação explícita do PRD/Especificação, gravação validada de `docs/00_archetype.md` e encerramento das dúvidas conceituais (atualizar Gate 2 como `[x]` no `task.md`).
 
 ---
 
-### Gate 3: Arquitetura do Sistema / Pipeline e Modelagem (Desenho de PROCESS, ANALYZE, SHARE)
+### Gate 3: Arquitetura do Pipeline: Data Prep, Modeling, Evaluation & Storytelling (*Process, Construct & Share*)
 
 - **Objetivo**: Definir padrões arquiteturais, limites modulares, modelo de dados ou arquitetura do pipeline analítico e plano visual.
 - **Skills Mobilizadas (Selecione conforme o Arquétipo)**:
@@ -108,7 +108,7 @@ Gate 1 (Dados/Prepare) ──→ Gate 2 (PRD/Ask) ──→ Gate 3 (Arquitetura)
   - *Arquétipo B (Software/Web/API):* `domain-driven-design`, `senior-architect`, `architecture-patterns`, `database-architect`, `database-design`, `architect-review`, `api-design-principles` *(Cold Storage)*, `c4-architecture-c4-architecture` *(Cold Storage)*.
 - **Artefato de Saída**: `docs/03-architecture-and-schema.md` e pasta `docs/adr/`
   - Diagrama de arquitetura ou fluxo do pipeline de dados em Mermaid/C4.
-  - *Para Arquétipo A:* Arquitetura das etapas **Process** (limpeza e *feature engineering*), **Analyze** (modelos candidatos e baselines), **Share** (storyboard de figuras obedecendo ao `quarto-quality-checklist.md`) e **Act** (deploy/publicação).
+  - *Para Arquétipo A:* Arquitetura das etapas **Data Prep, EDA & Feature Engineering / Process** (limpeza e transformações), **Statistical & ML Modeling / Construct** (modelos candidatos e baselines), **Evaluation, Diagnostics & Explainability / Share** (storyboard de figuras obedecendo ao `quarto-quality-checklist.md`) e **Deployment & Executive Action / Act** (deploy/publicação).
   - *Para Arquétipo B:* Esquema de banco de dados (DDL/ERD) e contratos de API (OpenAPI/Pydantic/TS).
   - Registros de decisão arquitetural (`docs/adr/0001-*.md`).
 - **Critério de Parada**: Aprovação da topologia técnica, contratos e storyboard analítico (atualizar Gate 3 como `[x]` no `task.md`).
@@ -133,7 +133,7 @@ Gate 1 (Dados/Prepare) ──→ Gate 2 (PRD/Ask) ──→ Gate 3 (Arquitetura)
 
 ---
 
-### Gate 5: Quebra de Tarefas, Estratégia de Testes e Plano de Implementação (Fase ACT)
+### Gate 5: Plano de Implementação, Validação & Action (*Deployment / Act*)
 
 - **Objetivo**: Fragmentar a implementação em passos atômicos ordenados por dependência, com verificação automatizada definida antes do código.
 - **Skills Mobilizadas**:
