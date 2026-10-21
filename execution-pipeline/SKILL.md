@@ -92,8 +92,11 @@ flowchart TD
 - **Objetivo**: Conectar a lógica do Gate 1 ao mecanismo primário de execução do arquétipo.
 - **Operação por Arquétipo**:
   - **Arquétipo A (JupyterLab / Análise de Dados)**:
-    - *Skills:* `notebook-guidance`, `polars`, `scikit-learn`, `statsmodels`.
+    - *Skills:* `notebook-guidance`, `polars`, `scikit-learn`, `statsmodels`, `ponytail` *(código analítico enxuto)*.
     - Execução estruturada cobrindo as etapas do CRISP-ML(Q): Data Preparation & Feature Engineering (Seção 3), Statistical & ML Modeling com Baselines e Modelos Candidatos (Seção 4) e Evaluation, Diagnostics & Explainability via SHAP/resíduos (Seção 5).
+    - **Diretriz Ponytail em Data Science (Simplicidade Sem Perda de Rigor)**:
+      - *O que eliminar (Anti-Overengineering):* Proibição estrita de classes wrappers OOP desnecessárias (`class PipelineCleaner`, `class FeatureTransformer`) para fluxos lineares; priorize funções puras e encadeamentos vetorizados nativos (`polars.Expr`, `pandas.pipe`, `numpy`). Proibição de bibliotecas acessórias para tarefas já cobertas pela stack padrão.
+      - *Cláusulas Pétreas (Rigor Inegociável):* Prevenção de *data leakage* (`fit` estrito no treino), validação de contratos de dados (`patito`/`pandera`), tratamento explícito de nulos/outliers, sementes fixas (`random_state`), verificação de pressupostos estatísticos, diagnóstico de resíduos e explicabilidade via SHAP.
     - Proibição estrita de dados sintéticos sem aviso ou troca arbitrária de estimadores.
     - Sementes fixas (`random_state` / `seed`) para reprodutibilidade estrita.
     - Qualquer diagrama de arquitetura, fluxo ou topologia inserido no relatório deve usar executable cells (` ```{mermaid} ` ou ` ```{dot} `) com cell options canônicas (`%%|` ou `//|`), NUNCA code blocks genéricos sem chaves.
@@ -191,6 +194,7 @@ flowchart TD
   - **Arquétipo A (Compilação Quarto)**:
     - Execução de `quarto check` e `uv run quarto render` com suporte e validação da `quarto-expert`.
     - Confirmação de que todas as figuras foram carregadas, links internos funcionam e o output em `docs/` ou `_site/` está completo.
+    - Saneamento de código exploratório descartável via `simplify-code`, preservando apenas o pipeline de dados essencial e reprodutível.
   - **Arquétipo B (Validação de Cobertura e Integração)**:
     - Execução da suíte completa com relatório de cobertura (`pytest --cov=src`).
     - Testes E2E via `webapp-testing` quando o projeto contiver interface web.
@@ -218,7 +222,7 @@ Assim que o usuário aprovar formalmente o **Gate 5** da `execution-pipeline`:
 
 | Arquétipo | Gate 1 (Lógica & Contratos) | Gate 2 (Integração & Execução) | Gate 3 (Apresentação & Visual) | Gate 4 (Redação & Docs) | Gate 5 (Auditoria & Build) |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **A: Data Science & Quarto** | `clean-code`<br>`python-pro`<br>`tdd-workflow`<br>`pytest-skill`<br>`writing-pipeline`<br>*(src/ + tests/)* | `notebook-guidance`<br>`data-scientist`<br>`polars`<br>`scikit-learn`<br>*(notebook .ipynb)* | `matplotlib`<br>`seaborn`*<br>`plotly`<br>*(reports/figures/)* | `writing-pipeline`<br>`quarto-expert`<br>`quarto-quality-checklist`<br>`data-storytelling`<br>`humanizer`<br>*(index.qmd)* | `docs-guard`<br>`clean-code-guard`*<br>`quarto-expert`<br>`quarto render`<br>*(docs/ ou _site/)* |
+| **A: Data Science & Quarto** | `clean-code`<br>`python-pro`<br>`tdd-workflow`<br>`pytest-skill`<br>`writing-pipeline`<br>*(src/ + tests/)* | `notebook-guidance`<br>`data-scientist`<br>`polars`<br>`scikit-learn`<br>`ponytail`<br>*(notebook .ipynb)* | `matplotlib`<br>`seaborn`*<br>`plotly`<br>*(reports/figures/)* | `writing-pipeline`<br>`quarto-expert`<br>`quarto-quality-checklist`<br>`data-storytelling`<br>`humanizer`<br>*(index.qmd)* | `docs-guard`<br>`clean-code-guard`*<br>`quarto-expert`<br>`simplify-code`<br>`quarto render`<br>*(docs/ ou _site/)* |
 | **B: Software, APIs & Web** | `clean-code`<br>`python-pro`<br>`tdd-workflow`<br>`pytest-skill`<br>`writing-pipeline`<br>*(src/ + tests/)* | `database-design`<br>`api-documentation`<br>`fastapi-pro`*<br>*(models/ + routes/)* | `frontend-design`<br>`react-patterns`<br>`tailwind-design-system`<br>*(UI / OpenAPI JSON)* | `writing-pipeline`<br>`documentation-templates`<br>`humanizer`<br>*(README + Swagger)* | `clean-code-guard`*<br>`test-guard`<br>`webapp-testing`<br>*(pytest-cov + build)* |
 | **C: CLI & Scripts** | `clean-code`<br>`python-pro`<br>`tdd-workflow`<br>`pytest-skill`<br>`writing-pipeline`<br>*(src/ + tests/)* | `python-pro`<br>`ponytail`<br>*(cli.py + parsers)* | `python-pro`<br>`clean-code`<br>*(logs estruturados)* | `writing-pipeline`<br>`documentation-templates`<br>`humanizer`<br>*(README operacional)* | `simplify-code`<br>`test-guard`<br>`clean-code-guard`*<br>*(cli tests + lint)* |
 
