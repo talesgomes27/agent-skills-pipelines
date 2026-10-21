@@ -1,0 +1,9 @@
+---
+title: "Titulo da Dissertacao"
+---
+
+# Introducao {#sec-intro}
+
+Texto introdutorio. Consulte `references/abnt-thesis-guide.md` para a ordem
+estrita dos elementos pre-textuais (capa, folha de rosto, folha de aprovacao,
+resumo, sumario).

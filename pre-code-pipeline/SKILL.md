@@ -104,11 +104,11 @@ Gate 1 (Dados/Prepare) ──→ Gate 2 (PRD/Ask) ──→ Gate 3 (Arquitetura)
 - **Objetivo**: Definir padrões arquiteturais, limites modulares, modelo de dados ou arquitetura do pipeline analítico e plano visual.
 - **Skills Mobilizadas (Selecione conforme o Arquétipo)**:
   - *Comuns:* `planning-with-files`, `software-architecture`, `architecture-decision-records`, `writing-pipeline` (Governança de redação de docs/03 e ADRs), `mermaid-expert` *(Cold Storage)*.
-  - *Arquétipo A (Data Science/Quarto):* `data-scientist`, `data-storytelling` + leitura obrigatória de `/home/tales/.gemini/config/skills/pre-code-pipeline/references/quarto-quality-checklist.md`.
+  - *Arquétipo A (Data Science/Quarto):* `data-scientist`, `data-storytelling`, `quarto-expert` (`/home/tales/.gemini/config/skills/quarto-expert/SKILL.md`) + leitura obrigatória de `/home/tales/.gemini/config/skills/pre-code-pipeline/references/quarto-quality-checklist.md`.
   - *Arquétipo B (Software/Web/API):* `domain-driven-design`, `senior-architect`, `architecture-patterns`, `database-architect`, `database-design`, `architect-review`, `api-design-principles` *(Cold Storage)*, `c4-architecture-c4-architecture` *(Cold Storage)*.
 - **Artefato de Saída**: `docs/03-architecture-and-schema.md` e pasta `docs/adr/`
   - Diagrama de arquitetura ou fluxo do pipeline de dados em Mermaid/C4.
-  - *Para Arquétipo A:* Arquitetura das etapas **Data Prep, EDA & Feature Engineering / Process** (limpeza e transformações), **Statistical & ML Modeling / Construct** (modelos candidatos e baselines), **Evaluation, Diagnostics & Explainability / Share** (storyboard de figuras obedecendo ao `quarto-quality-checklist.md`) e **Deployment & Executive Action / Act** (deploy/publicação).
+  - *Para Arquétipo A:* Arquitetura das etapas **Data Prep, EDA & Feature Engineering / Process** (limpeza e transformações), **Statistical & ML Modeling / Construct** (modelos candidatos e baselines), **Evaluation, Diagnostics & Explainability / Share** (storyboard de figuras obedecendo ao `quarto-quality-checklist.md`) e **Deployment & Executive Action / Act** (deploy/publicação via `_quarto.yml`, formatos Typst/PDF/HTML e templates ABNT/manuscript governados pela `quarto-expert`).
   - *Para Arquétipo B:* Esquema de banco de dados (DDL/ERD) e contratos de API (OpenAPI/Pydantic/TS).
   - Registros de decisão arquitetural (`docs/adr/0001-*.md`).
 - **Critério de Parada**: Aprovação da topologia técnica, contratos e storyboard analítico (atualizar Gate 3 como `[x]` no `task.md`).
@@ -121,13 +121,14 @@ Gate 1 (Dados/Prepare) ──→ Gate 2 (PRD/Ask) ──→ Gate 3 (Arquitetura)
 - **Skills Mobilizadas**:
   - `planning-with-files` (Atualização do `task.md`)
   - `agy-customizations` (Ajustes locais do ambiente Antigravity/Gemini)
+  - `quarto-expert` (`/home/tales/.gemini/config/skills/quarto-expert/SKILL.md`) *(Para Arquétipo A: inicialização da estrutura Quarto, `/home/tales/.gemini/config/skills/quarto-expert/scripts/init_quarto_project.sh`, `_quarto.yml` e formatos `website`, `book`, `manuscript`, `typst`/`pdf`, ABNT)*
   - `python-development-python-scaffold` *(Para projetos Python: `uv`, `pyproject.toml`, `ruff`, `pytest`)*
   - `javascript-typescript-typescript-scaffold` *(Para projetos JS/TS: `pnpm`, Vite/Next/Astro, `eslint`, `typescript`)*
   - `agents-generator` *(Cold Storage)* (Geração de `AGENTS.md` customizado para o domínio)
 - **Artefato de Saída**:
   - Documento `docs/04-scaffolding-and-conventions.md` registrando a árvore de diretórios e padrões adotados.
   - Estrutura física de pastas instanciada e arquivos de configuração (`pyproject.toml`/`package.json`).
-  - *Para Arquétipo A (Quarto):* Inicialização de `_quarto.yml` (com `lang: pt-BR`, `execute: freeze: auto`, tema customizado e regras de numeração) e esqueleto `.qmd` seguindo `/home/tales/.gemini/config/skills/pre-code-pipeline/references/quarto-quality-checklist.md`.
+  - *Para Arquétipo A (Quarto):* Inicialização de `_quarto.yml` (com `lang: pt-BR`, `execute: freeze: auto`, tema customizado e regras de numeração) e esqueleto `.qmd` seguindo `/home/tales/.gemini/config/skills/pre-code-pipeline/references/quarto-quality-checklist.md` e `quarto-expert`.
   - Guia de convenções e guardrails do repositório em `AGENTS.md`.
 - **Critério de Parada**: Repositório inicializado, configurações validadas e `docs/04-scaffolding-and-conventions.md` + `AGENTS.md` aprovados (atualizar Gate 4 como `[x]` no `task.md`).
 

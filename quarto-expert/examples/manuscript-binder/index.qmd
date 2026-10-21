@@ -1,0 +1,18 @@
+---
+title: "Artigo Cientifico Reprodutivel"
+author: "Nome do Autor"
+---
+
+## Introducao
+
+Texto principal do artigo.
+
+## Resultados
+
+Conforme @fig-roc:
+
+{{< embed notebooks/01-analise.qmd#fig-roc >}}
+
+## Metodos
+
+Detalhes reproduziveis em `notebooks/01-analise.qmd`.

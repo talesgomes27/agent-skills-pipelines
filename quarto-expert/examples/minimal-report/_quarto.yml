@@ -1,0 +1,16 @@
+project:
+  type: default
+  render:
+    - index.qmd
+
+lang: pt-BR
+
+execute:
+  freeze: auto
+  warning: false
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    number-sections: true

@@ -1,0 +1,25 @@
+---
+title: "Relatorio Minimo Exemplo"
+author: "Tales Gomes"
+date: last-modified
+---
+
+## Introducao {#sec-intro}
+
+Este e um relatorio minimo funcional. A referencia @sec-intro demonstra
+referencia cruzada nativa do Quarto.
+
+## Analise {#sec-analise}
+
+```{python}
+#| label: fig-exemplo
+#| fig-cap: "Grafico de dispersao sintetico."
+#| echo: false
+import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots(figsize=(6, 4))
+ax.plot([1, 2, 3], [4, 5, 6], marker='o')
+plt.show()
+```
+
+Conforme @fig-exemplo, a tendencia e linear.

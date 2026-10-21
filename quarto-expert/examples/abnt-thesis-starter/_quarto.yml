@@ -1,0 +1,30 @@
+project:
+  type: book
+  output-dir: _book
+
+lang: pt-BR
+
+book:
+  title: "Titulo da Dissertacao"
+  author: "Nome do Autor"
+  date: last-modified
+  chapters:
+    - index.qmd
+    - 01-introducao.qmd
+    - 02-metodologia.qmd
+    - 03-resultados.qmd
+    - 04-conclusao.qmd
+    - references.qmd
+
+bibliography: references.bib
+
+format:
+  typst:
+    papersize: a4
+    margin:
+      top: 3cm
+      left: 3cm
+      bottom: 2cm
+      right: 2cm
+    toc: true
+    number-sections: true

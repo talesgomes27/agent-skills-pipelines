@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+REPO_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || echo "")"
+[ -z "$REPO_ROOT" ] && exit 0
+
+STAGED="$(git diff --cached --name-only 2>/dev/null | grep '^skills/quarto-expert/' || true)"
+[ -z "$STAGED" ] && exit 0
+
+VALIDATOR="$REPO_ROOT/skills/quarto-expert/scripts/validate_skill.sh"
+if [ ! -x "$VALIDATOR" ]; then
+    echo "AVISO: validate_skill.sh nao executavel, pulando hook"
+    exit 0
+fi
+
+echo "[pre-commit] Validando skills/quarto-expert/..."
+if ! "$VALIDATOR"; then
+    echo ""
+    echo "[pre-commit] BLOQUEADO: validacao falhou."
+    exit 1
+fi
+
+echo "[pre-commit] Validacao OK."
+exit 0

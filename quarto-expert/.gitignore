@@ -1,0 +1,14 @@
+.backups/
+*.bak
+*.bak.*
+_site/
+_book/
+_manuscript/
+.quarto/
+.jupyter_cache/
+
+# Artefatos de renderizacao dos exemplos
+examples/**/_freeze/
+examples/**/*_files/
+examples/**/.quarto/
+examples/**/*.html

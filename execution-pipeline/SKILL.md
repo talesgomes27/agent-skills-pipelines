@@ -148,8 +148,8 @@ flowchart TD
   - Todo o texto produzido é governado pela skill writing-pipeline (/home/tales/.gemini/config/skills/writing-pipeline/SKILL.md) em coordenação com humanizer. Mantenha tom sênior, adapte o registro ao arquétipo (A, B ou C) e elimine vícios de IA.
 - **Operação por Arquétipo**:
   - **Arquétipo A (Relatório Quarto / `.qmd`)**:
-    - *Skills:* `writing-pipeline`, `data-storytelling`, `humanizer`.
-    - Consulta obrigatória às Seções 1, 2 e 4 do arquivo `/home/tales/.gemini/config/skills/pre-code-pipeline/references/quarto-quality-checklist.md`.
+    - *Skills:* `writing-pipeline`, `data-storytelling`, `humanizer`, `quarto-expert` (`/home/tales/.gemini/config/skills/quarto-expert/SKILL.md`).
+    - Consulta obrigatória às Seções 1, 2 e 4 do arquivo `/home/tales/.gemini/config/skills/pre-code-pipeline/references/quarto-quality-checklist.md` e às regras de sintaxe `#|`, referências cruzadas `@fig-`/`@tbl-`, `{{< embed >}}` e compilação da `quarto-expert`.
     - Estruturação mandatória do `index.qmd` nas **6 Seções Canônicas do CRISP-ML(Q) + Data Storytelling** (ou IMRAD se acadêmico estrito):
       1. *Contexto de Negócio & Hipóteses (Business Understanding / Ask)*
       2. *Auditoria de Dados & Contratos (Data Understanding / Prepare)*
@@ -189,7 +189,7 @@ flowchart TD
   3. *Guarda de Documentação:* `docs-guard` compara o texto dos relatórios com o comportamento do código real para evitar divergências.
 - **Operação de Build por Arquétipo**:
   - **Arquétipo A (Compilação Quarto)**:
-    - Execução de `quarto check` e `quarto render`.
+    - Execução de `quarto check` e `uv run quarto render` com suporte e validação da `quarto-expert`.
     - Confirmação de que todas as figuras foram carregadas, links internos funcionam e o output em `docs/` ou `_site/` está completo.
   - **Arquétipo B (Validação de Cobertura e Integração)**:
     - Execução da suíte completa com relatório de cobertura (`pytest --cov=src`).
@@ -218,7 +218,7 @@ Assim que o usuário aprovar formalmente o **Gate 5** da `execution-pipeline`:
 
 | Arquétipo | Gate 1 (Lógica & Contratos) | Gate 2 (Integração & Execução) | Gate 3 (Apresentação & Visual) | Gate 4 (Redação & Docs) | Gate 5 (Auditoria & Build) |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **A: Data Science & Quarto** | `clean-code`<br>`python-pro`<br>`tdd-workflow`<br>`pytest-skill`<br>`writing-pipeline`<br>*(src/ + tests/)* | `notebook-guidance`<br>`data-scientist`<br>`polars`<br>`scikit-learn`<br>*(notebook .ipynb)* | `matplotlib`<br>`seaborn`*<br>`plotly`<br>*(reports/figures/)* | `writing-pipeline`<br>`quarto-quality-checklist`<br>`data-storytelling`<br>`humanizer`<br>*(index.qmd)* | `docs-guard`<br>`clean-code-guard`*<br>`quarto render`<br>*(docs/ ou _site/)* |
+| **A: Data Science & Quarto** | `clean-code`<br>`python-pro`<br>`tdd-workflow`<br>`pytest-skill`<br>`writing-pipeline`<br>*(src/ + tests/)* | `notebook-guidance`<br>`data-scientist`<br>`polars`<br>`scikit-learn`<br>*(notebook .ipynb)* | `matplotlib`<br>`seaborn`*<br>`plotly`<br>*(reports/figures/)* | `writing-pipeline`<br>`quarto-expert`<br>`quarto-quality-checklist`<br>`data-storytelling`<br>`humanizer`<br>*(index.qmd)* | `docs-guard`<br>`clean-code-guard`*<br>`quarto-expert`<br>`quarto render`<br>*(docs/ ou _site/)* |
 | **B: Software, APIs & Web** | `clean-code`<br>`python-pro`<br>`tdd-workflow`<br>`pytest-skill`<br>`writing-pipeline`<br>*(src/ + tests/)* | `database-design`<br>`api-documentation`<br>`fastapi-pro`*<br>*(models/ + routes/)* | `frontend-design`<br>`react-patterns`<br>`tailwind-design-system`<br>*(UI / OpenAPI JSON)* | `writing-pipeline`<br>`documentation-templates`<br>`humanizer`<br>*(README + Swagger)* | `clean-code-guard`*<br>`test-guard`<br>`webapp-testing`<br>*(pytest-cov + build)* |
 | **C: CLI & Scripts** | `clean-code`<br>`python-pro`<br>`tdd-workflow`<br>`pytest-skill`<br>`writing-pipeline`<br>*(src/ + tests/)* | `python-pro`<br>`ponytail`<br>*(cli.py + parsers)* | `python-pro`<br>`clean-code`<br>*(logs estruturados)* | `writing-pipeline`<br>`documentation-templates`<br>`humanizer`<br>*(README operacional)* | `simplify-code`<br>`test-guard`<br>`clean-code-guard`*<br>*(cli tests + lint)* |
 

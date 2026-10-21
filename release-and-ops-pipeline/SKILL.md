@@ -115,9 +115,9 @@ Gate 5 (Smoke Tests & Verificação no Ar)  ──→ [Entrega Homologada]
 
 - **Objetivo**: Executar o empacotamento final, push autorizado para o repositório remoto e publicação no ambiente de destino.
 - **Operação e Skills por Arquétipo**:
-  - **Arquétipo A (Relatório Quarto no GitHub Pages)**:
-    - *Referência:* `/home/tales/.gemini/config/skills/release-and-ops-pipeline/references/archetype-a-ghpages.md`.
-    - Garantir presença de `.nojekyll` (se publicado via `docs/`), versionar `_freeze/` e `reports/figures/`, executar `git push` (após autorização) e acionar publicação no GitHub Pages.
+  - **Arquétipo A (Relatório Quarto no GitHub Pages & Empacotamento Científico)**:
+    - *Skills e Referências:* `/home/tales/.gemini/config/skills/release-and-ops-pipeline/references/archetype-a-ghpages.md` e `quarto-expert` (`/home/tales/.gemini/config/skills/quarto-expert/SKILL.md`).
+    - Garantir presença de `.nojekyll` (se publicado via `docs/`), versionar `_freeze/` e `reports/figures/`, empacotar `MECA bundles` (`meca-bundle: true`), configurar `Binder` (`quarto use binder`), executar `git push` (após autorização) e acionar publicação no GitHub Pages.
   - **Arquétipo B (Software, Web, APIs & Containers)**:
     - *Skills (Cold Storage):* `docker-expert`, `docker-compose`, `deploy-to-vercel` / `cloudflare-pages`, `pre-release-review`.
     - Construir e testar imagem Docker multi-stage ou executar deploy na plataforma alvo (Vercel, Netlify, Cloud Run, Render) com variáveis de ambiente validadas.
@@ -154,7 +154,7 @@ Gate 5 (Smoke Tests & Verificação no Ar)  ──→ [Entrega Homologada]
 
 | Arquétipo | Gate 1 (Saneamento & Segredos) | Gate 2 (Git, SemVer & Changelog) | Gate 3 (CI/CD GitHub Actions) | Gate 4 (Deploy & Empacotamento) | Gate 5 (Smoke Tests & Homologação) |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **A: Data Science & Quarto** | `pre-push-sanitation.md`<br>`codebase-audit-pre-push`*<br>`managing-python-dependencies`<br>*(.gitignore + _freeze/)* | `writing-pipeline`<br>`humanizer`<br>`changelog-automation`*<br>`git-pushing`*<br>*(CHANGELOG.md + tag)* | `archetype-a-ghpages.md`<br>`github-actions-templates`*<br>`github-actions-advanced`*<br>*(publish.yml)* | `archetype-a-ghpages.md`<br>`git-pushing`*<br>*(GitHub Pages deploy)* | `smoke-and-healthcheck.md`<br>`shipping-and-launch`*<br>*(HTTP 200 + img check)* |
+| **A: Data Science & Quarto** | `pre-push-sanitation.md`<br>`codebase-audit-pre-push`*<br>`managing-python-dependencies`<br>*(.gitignore + _freeze/)* | `writing-pipeline`<br>`humanizer`<br>`changelog-automation`*<br>`git-pushing`*<br>*(CHANGELOG.md + tag)* | `archetype-a-ghpages.md`<br>`github-actions-templates`*<br>`github-actions-advanced`*<br>*(publish.yml)* | `archetype-a-ghpages.md`<br>`quarto-expert`<br>`git-pushing`*<br>*(GitHub Pages / MECA)* | `smoke-and-healthcheck.md`<br>`shipping-and-launch`*<br>*(HTTP 200 + img check)* |
 | **B: Software, APIs & Web** | `pre-push-sanitation.md`<br>`codebase-audit-pre-push`*<br>`dependency-management-deps-audit`*<br>`client-secret-exposure-audit`* | `writing-pipeline`<br>`humanizer`<br>`changelog-automation`*<br>`git-workflow`*<br>*(CHANGELOG.md + PR/tag)* | `github-actions-templates`*<br>`github-actions-advanced`*<br>*(ci.yml + matrix)* | `docker-expert`*<br>`docker-compose`*<br>`deploy-to-vercel`*<br>`pre-release-review`* | `smoke-and-healthcheck.md`<br>`webapp-testing`<br>`shipping-and-launch`*<br>*(/health + Playwright)* |
 | **C: CLI & Scripts** | `pre-push-sanitation.md`<br>`codebase-audit-pre-push`*<br>`managing-python-dependencies`<br>`dependency-management-deps-audit`* | `writing-pipeline`<br>`humanizer`<br>`changelog-automation`*<br>`git-pushing`*<br>*(CHANGELOG.md + tag)* | `github-actions-templates`*<br>`github-actions-advanced`*<br>*(ci.yml + release)* | `python-packaging`*<br>`pre-release-review`*<br>*(uv build + dist/)* | `smoke-and-healthcheck.md`<br>`shipping-and-launch`*<br>*(uv tool run + exit 0)* |
 

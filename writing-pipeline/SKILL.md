@@ -21,7 +21,7 @@ sub-rotina especializada em escrita.
 Antes de escrever qualquer documento, ler `docs/00_archetype.md`. O
 arquétipo determina qual arquivo de referência carregar:
 
-- **Arquétipo A** (Data Science/Quarto) → `/home/tales/.gemini/config/skills/writing-pipeline/references/archetype-a-academic.md`
+- **Arquétipo A** (Data Science/Quarto) → `/home/tales/.gemini/config/skills/writing-pipeline/references/archetype-a-academic.md` (em coordenação técnica com `quarto-expert` em `/home/tales/.gemini/config/skills/quarto-expert/SKILL.md` para formatação de manuscritos, teses ABNT NBR 14724:2024 e citações BibTeX/CSL)
 - **Arquétipo B** (Software/APIs) → `/home/tales/.gemini/config/skills/writing-pipeline/references/archetype-b-software.md`
 - **Arquétipo C** (CLI/Scripts) → `/home/tales/.gemini/config/skills/writing-pipeline/references/archetype-c-cli.md`
 
