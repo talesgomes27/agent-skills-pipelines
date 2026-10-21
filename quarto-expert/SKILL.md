@@ -154,6 +154,7 @@ Todas as instruções detalhadas, tabelas de mapeamento e runbooks foram modular
 - **Validador Rápido de Skill:** `/home/tales/.gemini/config/skills/quarto-expert/scripts/validate_skill.sh`
 - **Validador Profundo com Compilação:** `/home/tales/.gemini/config/skills/quarto-expert/scripts/validate_skill_deep.sh`
 - **Verificador Pós-Execução:** `/home/tales/.gemini/config/skills/quarto-expert/scripts/verify_skill.sh`
+- **Integração `graphify` (referência compartilhada entre 5 Meta-Skills):** `/home/tales/.gemini/config/skills/quarto-expert/references/graphify-integration.md`
 
 ---
 

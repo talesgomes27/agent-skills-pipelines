@@ -115,6 +115,28 @@ Gate 1 (Dados/Prepare) ──→ Gate 2 (PRD/Ask) ──→ Gate 3 (Arquitetura)
 
 ---
 
+## Gate 3.1 — Validação de Bounded Contexts com `graphify` (OPCIONAL, Arquétipo B)
+
+Referência completa: `/home/tales/.gemini/config/skills/quarto-expert/references/graphify-integration.md`
+
+### Detecção obrigatória
+
+```bash
+if command -v graphify > /dev/null 2>&1; then
+    USE_GRAPHIFY=1
+else
+    USE_GRAPHIFY=0
+fi
+```
+
+**Aplicável apenas ao Arquétipo B (APIs e Microsserviços em repositórios existentes/híbridos).**
+
+**Se `USE_GRAPHIFY=1`**: rode `graphify .` e consulte `.graphify/GRAPH_REPORT.md` para verificar se as comunidades Leiden/Louvain separam Domínio de Infraestrutura. Se aparecerem na mesma comunidade, aponte vazamento de abstração. Registre em `docs/03-architecture-and-schema.md` como `[VERIFICADO: graphify]`.
+
+**Se `USE_GRAPHIFY=0`**: manter análise manual por inspeção de imports e contratos.
+
+---
+
 ### Gate 4: Scaffolding, Estrutura de Pastas e Convenções
 
 - **Objetivo**: Inicializar a árvore física do repositório, configurações de ambiente, templates de relatório e regras de agentes.

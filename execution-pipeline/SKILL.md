@@ -210,6 +210,44 @@ flowchart TD
 
 ---
 
+## Integração `graphify` (OPCIONAL)
+
+Referência completa: `/home/tales/.gemini/config/skills/quarto-expert/references/graphify-integration.md`
+
+### Detecção obrigatória
+
+```bash
+if ! command -v graphify > /dev/null 2>&1; then
+    USE_GRAPHIFY=0
+else
+    USE_GRAPHIFY=1
+fi
+```
+
+### Durante implementação de fatias (Greenfield e Brownfield)
+
+**Se `USE_GRAPHIFY=1`**, antes de `read_file` em massa para responder perguntas estruturais (ex: "onde a classe X é instanciada?"):
+
+```bash
+graphify query "<pergunta>" --budget 1000
+```
+
+Retorna apenas o subgrafo conectado à dúvida, economizando janela de contexto.
+
+### Gate 5 (Saneamento Pós-Execução)
+
+**Se `USE_GRAPHIFY=1`**, ao final da implementação:
+
+```bash
+graphify --update
+```
+
+Audita código morto (*orphan nodes*), arquivos desconectados e acoplamento acidental entre camadas.
+
+**Se `USE_GRAPHIFY=0`**, manter revisão manual via `git diff` + `read_file`.
+
+---
+
 ## Handoff para Publicação e Release (Pós-Gate 5)
 
 Assim que o usuário aprovar formalmente o **Gate 5** da `execution-pipeline`:

@@ -147,7 +147,53 @@ Gate 5 (Zero Regressão, Docs Sync & Handoff)   ──→ [Handoff: execution ou
 
 ---
 
-## 6. Matriz de Rastreabilidade Arquétipo × Gate × Skill
+## 2.1 Integração `graphify` (GraphRAG Estático — OPCIONAL)
+
+Referência completa: `/home/tales/.gemini/config/skills/quarto-expert/references/graphify-integration.md`
+
+### Detecção obrigatória antes de usar
+
+```bash
+if ! command -v graphify > /dev/null 2>&1; then
+    echo "AVISO: graphify nao disponivel. Pipeline prossegue com read_file/grep."
+    USE_GRAPHIFY=0
+else
+    USE_GRAPHIFY=1
+fi
+```
+
+### Gate 1 (Reconhecimento & Engenharia Reversa) — com `graphify`
+
+**Se `USE_GRAPHIFY=1`**, antes de qualquer `read_file` em massa:
+
+```bash
+graphify .
+cat .graphify/GRAPH_REPORT.md
+```
+
+Use o relatório para preencher `docs/00_archetype.md` com:
+- contagem de módulos,
+- acoplamento médio/máximo,
+- mapa das comunidades funcionais detectadas.
+
+**Se `USE_GRAPHIFY=0`**, mantenha o fluxo original (`read_file` sobre arquivos-chave).
+
+### Gate 2 (Diagnóstico & Matriz de Severidade) — com `graphify`
+
+**Se `USE_GRAPHIFY=1`**:
+- **God Nodes:** extrair do `GRAPH_REPORT.md` os nós com centralidade desproporcional (candidatos P0/P1).
+- **Dependências circulares:** `graphify query "ciclos" --budget 500`.
+- **Acoplamento acidental:** comparar estrutura do grafo com `docs/03-architecture-and-schema.md`.
+
+**Se `USE_GRAPHIFY=0`**, mantenha análise heurística manual.
+
+### Gate 4 (Fatiamento Seguro & Testes de Caracterização) — com `graphify`
+
+**Se `USE_GRAPHIFY=1`**: antes de alterar qualquer nó, rode `graphify path "<origem>" "<destino>"` para mapear o raio de impacto exato. Ordenar escrita de testes *Golden Master* dos nós mais profundos para os mais rasos.
+
+**Se `USE_GRAPHIFY=0`**, manter ordem baseada em dependências inferidas por `grep`.
+
+---
 
 | Arquétipo | Gate 1 (Reconhecimento) | Gate 2 (Diagnóstico Modo 2) | Gate 3 (Safety Net & Plano) | Gate 4 (Refatoração Cirúrgica) | Gate 5 (Verificação & Handoff) |
 | :--- | :--- | :--- | :--- | :--- | :--- |

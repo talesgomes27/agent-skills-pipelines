@@ -132,6 +132,36 @@ Gate 5 (Smoke Tests & Verificação no Ar)  ──→ [Entrega Homologada]
 
 ---
 
+## Gate 4.1 — Artefatos Visuais de Arquitetura com `graphify` (OPCIONAL)
+
+Referência completa: `/home/tales/.gemini/config/skills/quarto-expert/references/graphify-integration.md`
+
+### Detecção obrigatória
+
+```bash
+if command -v graphify > /dev/null 2>&1; then
+    USE_GRAPHIFY=1
+else
+    USE_GRAPHIFY=0
+fi
+```
+
+**Se `USE_GRAPHIFY=1`**: antes do deploy, exportar artefatos visuais para documentação viva:
+
+```bash
+graphify export html   # .graphify/graph.html
+graphify export svg    # .graphify/graph.svg
+mkdir -p docs/graph
+cp .graphify/graph.html docs/graph/
+cp .graphify/graph.svg docs/graph/
+```
+
+**Regra de versionamento:** `docs/graph/graph.{html,svg}` são versionados para publicação (GitHub Pages / Quarto); `.graphify/graph.{html,svg}` e `.graphify/cache/` são ignorados no `.gitignore`.
+
+**Se `USE_GRAPHIFY=0`**: manter diagramas manuais existentes (Mermaid, PlantUML).
+
+---
+
 ## 5. Gate 5: Smoke Tests Pós-Deploy & Homologação Final (Polimórfico)
 
 - **Objetivo**: Verificar empiricamente que o artefato publicado está no ar, íntegro e respondendo conforme esperado.
