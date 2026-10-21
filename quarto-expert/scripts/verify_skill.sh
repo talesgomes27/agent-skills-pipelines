@@ -75,6 +75,15 @@ echo "[verify] ETAPA 2/6: Referencias" >&2
 check_file "$SKILL_DIR/references/abnt-thesis-guide.md" 1 "Referencia ABNT"
 check_file "$SKILL_DIR/references/typst-and-templates.md" 1 "Referencia Typst"
 check_file "$SKILL_DIR/references/rmd-to-quarto-migration.md" 1 "Referencia migracao"
+check_file "$SKILL_DIR/references/code-cells.md" 1 "Referencia celulas de codigo (Posit)"
+check_file "$SKILL_DIR/references/cross-references.md" 1 "Referencia referencias cruzadas (Posit)"
+check_file "$SKILL_DIR/references/callouts.md" 1 "Referencia callouts (Posit)"
+check_file "$SKILL_DIR/references/figures.md" 1 "Referencia figuras (Posit)"
+check_file "$SKILL_DIR/references/tables.md" 1 "Referencia tabelas (Posit)"
+check_file "$SKILL_DIR/references/brand-yml.md" 1 "Referencia brand-yml (Posit)"
+check_file "$SKILL_DIR/references/alt-text.md" 1 "Referencia alt-text (Posit)"
+check_file "$SKILL_DIR/references/conversion-rmarkdown.md" 1 "Referencia conversao rmarkdown (Posit)"
+check_file "$SKILL_DIR/references/yaml-front-matter.md" 1 "Referencia yaml front matter (Posit)"
 
 echo "[verify] ETAPA 3/6: Scripts" >&2
 check_exec "$SKILL_DIR/scripts/init_quarto_project.sh" "init_quarto_project.sh"
@@ -139,8 +148,14 @@ if [ -d "$REPO_ROOT/.git" ]; then
     if [ -L "$HOOK_PATH" ]; then record_ok "pre-commit hook instalado (symlink)"
     elif [ -x "$HOOK_PATH" ]; then record_warn "pre-commit hook nao e symlink"
     else record_warn "pre-commit hook NAO instalado"; fi
+elif [ -d "/home/tales/Documentos/github/antigravity-meta-skills/.git" ]; then
+    GIT_DIR="/home/tales/Documentos/github/antigravity-meta-skills"
+    UNTRACKED=$(git -C "$GIT_DIR" status --porcelain quarto-expert/ 2>/dev/null | wc -l)
+    if [ "$UNTRACKED" -eq 0 ]; then record_ok "Todos os arquivos versionados em antigravity-meta-skills"
+    else record_warn "$UNTRACKED arquivo(s) com alteracoes em antigravity-meta-skills"; fi
+    record_ok "Repositorio git oficial detectado em $GIT_DIR"
 else
-    record_fail "Nao e um repositorio git"
+    record_warn "Repositorio git nao localizado para validacao automatica"
 fi
 
 if [ "$OUTPUT_MODE" = "json" ]; then

@@ -4,8 +4,17 @@ set -euo pipefail
 SKILL_FILE="/home/tales/.gemini/config/skills/quarto-expert/SKILL.md"
 SKILL_DIR="/home/tales/.gemini/config/skills/quarto-expert"
 
+PYTHON_BIN="/usr/bin/python3"
+if ! "$PYTHON_BIN" -c "import yaml" >/dev/null 2>&1; then
+    if /home/tales/miniforge3/bin/python -c "import yaml" >/dev/null 2>&1; then
+        PYTHON_BIN="/home/tales/miniforge3/bin/python"
+    else
+        PYTHON_BIN="$(command -v python3)"
+    fi
+fi
+
 echo "=== [1/4] Validando frontmatter YAML e tamanho do header ==="
-python3 << 'PYEOF'
+"$PYTHON_BIN" << 'PYEOF'
 import yaml, sys
 
 SKILL_FILE = "/home/tales/.gemini/config/skills/quarto-expert/SKILL.md"
@@ -32,7 +41,7 @@ if tokens_est >= 80:
 PYEOF
 
 echo "=== [2/4] Verificando existencia de caminhos internos do pacote ==="
-python3 << 'PYEOF'
+"$PYTHON_BIN" << 'PYEOF'
 import re, os, sys
 
 SKILL_FILE = "/home/tales/.gemini/config/skills/quarto-expert/SKILL.md"
@@ -54,7 +63,7 @@ print(f"OK: Todos os {len(paths)} caminhos internos existem.")
 PYEOF
 
 echo "=== [3/4] Validando sintaxe YAML dos projetos de exemplo ==="
-python3 << 'PYEOF'
+"$PYTHON_BIN" << 'PYEOF'
 import glob, yaml, sys
 
 files = glob.glob('/home/tales/.gemini/config/skills/quarto-expert/examples/**/*.yml', recursive=True)
