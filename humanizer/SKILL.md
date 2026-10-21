@@ -1,11 +1,6 @@
 ---
 name: humanizer
-description: |
-  Reescreve e produz textos, documentações, commits e interfaces eliminando padrões e vícios típicos de IA.
-  Garante que o texto soe humano, autêntico e técnico, evitando acionar classificadores e detectores de IA
-  (como GPTZero, Turnitin). Aplica variação de ritmo (burstiness), elimina falsos contrastes, travessões excessivos,
-  tríades forçadas, adjetivação inflada e gerundismos vazios. Baseado no artigo da Wikipédia lusófona "Detecção de
-  conteúdo gerado por IA" e no guia "Signs of AI writing" do WikiProject AI Cleanup.
+description: "Reescreve textos, commits e documentações com voz sênior, variação métrica de ritmo (burstiness) e eliminação de vícios e clichês de IA."
 license: MIT
 metadata:
   version: "3.1.0"
