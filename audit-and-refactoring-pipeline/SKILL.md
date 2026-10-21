@@ -151,47 +151,61 @@ Gate 5 (Zero Regressão, Docs Sync & Handoff)   ──→ [Handoff: execution ou
 
 Referência completa: `/home/tales/.gemini/config/skills/quarto-expert/references/graphify-integration.md`
 
-### Detecção obrigatória antes de usar
+**Requer `graphify >= 0.9.93`.** Detecte antes de usar:
 
 ```bash
 if ! command -v graphify > /dev/null 2>&1; then
-    echo "AVISO: graphify nao disponivel. Pipeline prossegue com read_file/grep."
+    echo "AVISO: graphify indisponivel. Fallback: read_file/grep."
     USE_GRAPHIFY=0
 else
     USE_GRAPHIFY=1
 fi
 ```
 
-### Gate 1 (Reconhecimento & Engenharia Reversa) — com `graphify`
+### Gate 1 (Reconhecimento) — com `graphify`
 
-**Se `USE_GRAPHIFY=1`**, antes de qualquer `read_file` em massa:
+Se `USE_GRAPHIFY=1`, antes de `read_file` em massa:
 
 ```bash
-graphify .
-cat .graphify/GRAPH_REPORT.md
+graphify .                          # construcao inicial (uma vez por projeto)
+cat graphify-out/GRAPH_REPORT.md    # comunidades, god nodes, ciclos
 ```
 
-Use o relatório para preencher `docs/00_archetype.md` com:
-- contagem de módulos,
-- acoplamento médio/máximo,
-- mapa das comunidades funcionais detectadas.
+Preencher `docs/00_archetype.md` com contagem de módulos, acoplamento e
+comunidades detectadas.
 
-**Se `USE_GRAPHIFY=0`**, mantenha o fluxo original (`read_file` sobre arquivos-chave).
+Se `USE_GRAPHIFY=0`, manter `read_file` sobre arquivos-chave.
 
-### Gate 2 (Diagnóstico & Matriz de Severidade) — com `graphify`
+### Gate 2 (Diagnóstico) — com `graphify`
 
-**Se `USE_GRAPHIFY=1`**:
-- **God Nodes:** extrair do `GRAPH_REPORT.md` os nós com centralidade desproporcional (candidatos P0/P1).
-- **Dependências circulares:** `graphify query "ciclos" --budget 500`.
-- **Acoplamento acidental:** comparar estrutura do grafo com `docs/03-architecture-and-schema.md`.
+Se `USE_GRAPHIFY=1`:
 
-**Se `USE_GRAPHIFY=0`**, mantenha análise heurística manual.
+```bash
+graphify god-nodes --top 10         # God Nodes direto (candidatos P0/P1)
+graphify diagnose multigraph        # arestas orfas, colapsos multi-endpoint
+```
 
-### Gate 4 (Fatiamento Seguro & Testes de Caracterização) — com `graphify`
+Não parsear `GRAPH_REPORT.md` manualmente — `god-nodes` retorna direto.
 
-**Se `USE_GRAPHIFY=1`**: antes de alterar qualquer nó, rode `graphify path "<origem>" "<destino>"` para mapear o raio de impacto exato. Ordenar escrita de testes *Golden Master* dos nós mais profundos para os mais rasos.
+Se `USE_GRAPHIFY=0`, análise heurística manual.
 
-**Se `USE_GRAPHIFY=0`**, manter ordem baseada em dependências inferidas por `grep`.
+### Gate 4 (Fatiamento Seguro) — com `graphify`
+
+Se `USE_GRAPHIFY=1`, antes de alterar qualquer módulo:
+
+```bash
+graphify affected "ModuloX" --depth 2   # quem depende de X (raio de impacto)
+graphify path "Origem" "Destino"        # caminho entre dois modulos
+```
+
+Ordenar testes *Golden Master* dos nós mais dependentes (mais profundos no
+grafo) para os mais rasos.
+
+Se `USE_GRAPHIFY=0`, ordem baseada em dependências inferidas por `grep`.
+
+---
+
+## 6. Matriz de Rastreabilidade Arquétipo × Gate × Skill
 
 ---
 

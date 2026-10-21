@@ -214,7 +214,7 @@ flowchart TD
 
 Referência completa: `/home/tales/.gemini/config/skills/quarto-expert/references/graphify-integration.md`
 
-### Detecção obrigatória
+**Requer `graphify >= 0.9.93`.** Detecção:
 
 ```bash
 if ! command -v graphify > /dev/null 2>&1; then
@@ -224,27 +224,30 @@ else
 fi
 ```
 
-### Durante implementação de fatias (Greenfield e Brownfield)
+### Consultas cirúrgicas
 
-**Se `USE_GRAPHIFY=1`**, antes de `read_file` em massa para responder perguntas estruturais (ex: "onde a classe X é instanciada?"):
+Se `USE_GRAPHIFY=1`:
 
 ```bash
-graphify query "<pergunta>" --budget 1000
+graphify query "<pergunta>" --budget 2000
+graphify explain "funcao_central" --all
 ```
 
-Retorna apenas o subgrafo conectado à dúvida, economizando janela de contexto.
+`query` consulta `graphify-out/graph.json` e tem exit codes documentados:
+- `0` = resposta encontrada
+- `3` = nome ambíguo (use `--seed`)
+- `4` = nenhum nó encontrado
 
 ### Gate 5 (Saneamento Pós-Execução)
 
-**Se `USE_GRAPHIFY=1`**, ao final da implementação:
+Se `USE_GRAPHIFY=1`, ao final:
 
 ```bash
-graphify --update
+graphify update . --force    # re-extrai AST (rapido, sem LLM)
+graphify diagnose multigraph # detecta arestas orfas e colapsos
 ```
 
-Audita código morto (*orphan nodes*), arquivos desconectados e acoplamento acidental entre camadas.
-
-**Se `USE_GRAPHIFY=0`**, manter revisão manual via `git diff` + `read_file`.
+Se `USE_GRAPHIFY=0`, revisão manual via `git diff` + `read_file`.
 
 ---
 

@@ -132,11 +132,11 @@ Gate 5 (Smoke Tests & Verificação no Ar)  ──→ [Entrega Homologada]
 
 ---
 
-## Gate 4.1 — Artefatos Visuais de Arquitetura com `graphify` (OPCIONAL)
+## Gate 4.1 — Artefatos Visuais com `graphify` (OPCIONAL)
 
 Referência completa: `/home/tales/.gemini/config/skills/quarto-expert/references/graphify-integration.md`
 
-### Detecção obrigatória
+**Requer `graphify >= 0.9.93`.** Detecção:
 
 ```bash
 if command -v graphify > /dev/null 2>&1; then
@@ -146,19 +146,24 @@ else
 fi
 ```
 
-**Se `USE_GRAPHIFY=1`**: antes do deploy, exportar artefatos visuais para documentação viva:
+Se `USE_GRAPHIFY=1`, gerar visualização para docs publicados:
 
 ```bash
-graphify export html   # .graphify/graph.html
-graphify export svg    # .graphify/graph.svg
+graphify cluster-only . --no-viz   # regera cluster + GRAPH_REPORT.md
+graphify .                         # garante graph.html atualizado
 mkdir -p docs/graph
-cp .graphify/graph.html docs/graph/
-cp .graphify/graph.svg docs/graph/
+cp graphify-out/graph.html docs/graph/
 ```
 
-**Regra de versionamento:** `docs/graph/graph.{html,svg}` são versionados para publicação (GitHub Pages / Quarto); `.graphify/graph.{html,svg}` e `.graphify/cache/` são ignorados no `.gitignore`.
+**Nota:** o v0.9.93 **nao gera SVG**. `graph.html` e o artefato interativo
+padrao. Se SVG for obrigatorio, converter via ferramenta externa
+(graphviz, mermaid) — fora do escopo do `graphify`.
 
-**Se `USE_GRAPHIFY=0`**: manter diagramas manuais existentes (Mermaid, PlantUML).
+**Regra de versionamento:**
+- `docs/graph/graph.html` → **versionado** (publicação GitHub Pages)
+- `graphify-out/graph.html`, `graphify-out/manifest.json`, `graphify-out/cache/` → **ignorados** no Git
+
+Se `USE_GRAPHIFY=0`, manter diagramas manuais (Mermaid, PlantUML).
 
 ---
 

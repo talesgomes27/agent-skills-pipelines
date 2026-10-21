@@ -181,19 +181,19 @@ o Gate 5 (`docs-guard`) detecta divergências e reporta.
 
 Referência completa: `/home/tales/.gemini/config/skills/quarto-expert/references/graphify-integration.md`
 
-O `writing-pipeline` **não invoca** `graphify` diretamente, mas pode **consumir passivamente** `.graphify/GRAPH_REPORT.md` (quando existir) para enriquecer relatórios Quarto com métricas de módulos, acoplamento, comunidades funcionais e *God Nodes*.
+O `writing-pipeline` **não invoca** `graphify` diretamente, mas pode **consumir passivamente** `graphify-out/GRAPH_REPORT.md` (quando existir) para enriquecer relatórios Quarto com métricas de módulos, acoplamento, comunidades funcionais e God Nodes.
 
 ```bash
-if [ -f ".graphify/GRAPH_REPORT.md" ]; then
+if [ -f "graphify-out/GRAPH_REPORT.md" ]; then
     USE_GRAPH_REPORT=1
 else
     USE_GRAPH_REPORT=0
 fi
 ```
 
-**Se `USE_GRAPH_REPORT=1`**: incluir subseção de arquitetura baseada no `GRAPH_REPORT.md` como fonte auditável.
+Se `USE_GRAPH_REPORT=1`: incluir subseção de arquitetura baseada no `GRAPH_REPORT.md` como fonte auditável.
 
-**Se `USE_GRAPH_REPORT=0`**: omitir sem quebra de fluxo.
+Se `USE_GRAPH_REPORT=0`: omitir sem quebra de fluxo.
 
 ---
 

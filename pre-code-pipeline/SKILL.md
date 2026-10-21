@@ -119,7 +119,9 @@ Gate 1 (Dados/Prepare) ──→ Gate 2 (PRD/Ask) ──→ Gate 3 (Arquitetura)
 
 Referência completa: `/home/tales/.gemini/config/skills/quarto-expert/references/graphify-integration.md`
 
-### Detecção obrigatória
+**Requer `graphify >= 0.9.93`. Aplicável ao Arquétipo B.**
+
+Detecção:
 
 ```bash
 if command -v graphify > /dev/null 2>&1; then
@@ -129,11 +131,19 @@ else
 fi
 ```
 
-**Aplicável apenas ao Arquétipo B (APIs e Microsserviços em repositórios existentes/híbridos).**
+Se `USE_GRAPHIFY=1`, validar coesão real das comunidades:
 
-**Se `USE_GRAPHIFY=1`**: rode `graphify .` e consulte `.graphify/GRAPH_REPORT.md` para verificar se as comunidades Leiden/Louvain separam Domínio de Infraestrutura. Se aparecerem na mesma comunidade, aponte vazamento de abstração. Registre em `docs/03-architecture-and-schema.md` como `[VERIFICADO: graphify]`.
+```bash
+graphify .                                     # se ainda nao construido
+cat graphify-out/GRAPH_REPORT.md               # secoes de comunidades
+cat graphify-out/.graphify_labels.json         # labels reais (JSON)
+```
 
-**Se `USE_GRAPHIFY=0`**: manter análise manual por inspeção de imports e contratos.
+Se Domínio e Infraestrutura aparecerem na **mesma comunidade**, há vazamento
+de abstração. Registrar em `docs/03-architecture-and-schema.md` como
+`[VERIFICADO: graphify]`.
+
+Se `USE_GRAPHIFY=0`, análise manual por inspeção de imports e contratos.
 
 ---
 
