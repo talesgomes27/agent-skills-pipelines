@@ -1,213 +1,46 @@
 ---
 name: writing-pipeline
-description: "Conduz a redação e revisão técnica de documentos (PRDs, Quarto, READMEs, ADRs) com voz sênior anti-IA, estilo canônico e adaptação estrita aos Arquétipos A, B e C."
+description: "Redige, edita e revisa documentos técnicos com preservação de fatos e fontes. Use para PRDs, ADRs, relatórios, READMEs, manuais e revisões editoriais em tabela."
 ---
 
-# Skill: writing-pipeline
+# Escrita e revisão técnica
 
-Este playbook governa a redação técnica, revisão editorial e
-verificação de fontes dos artefatos produzidos pelas pipelines
-`pre-code-pipeline` (PRDs, specs, planos) e `execution-pipeline`
-(READMEs, relatórios Quarto, ADRs, docstrings). A skill não substitui
-as pipelines existentes: ela é invocada nos Gates 2, 3 e 5 da pre-code-pipeline e nos Gates 1 e 4 da execution-pipeline como
-sub-rotina especializada em escrita.
+Entregue texto adequado ao leitor, ao documento e às evidências disponíveis. Preserve fatos, números, qualificadores, unidades, comandos, identificadores e significado durante edições; mudanças de conteúdo exigem fundamento explícito.
 
----
+## Entrada e seleção
 
-## 0. Contrato de Herança e Coordenação
+- Identifique documento-alvo, público, idioma, formato, objetivo e modo a partir do pedido, das instruções locais e do texto existente. Leia o alvo antes de editar. Respeite a voz do autor e as convenções do projeto.
+- Use `docs/00_archetype.md` se existir ou se for encaminhado por outra pipeline; não crie esse arquivo como efeito da revisão de um texto. Para escrita avulsa, o tipo de documento pode bastar. Pergunte apenas se uma lacuna impedir preservar o significado ou atender ao pedido.
+- **Modo 1 — redação/edição:** crie ou altere o alvo quando isso estiver autorizado pelo pedido ou pela tarefa encaminhada.
+- **Modo 2 — revisão não destrutiva:** entregue achados e sugestões sem modificar o alvo. Preserve o formato de achados exigido pelo chamador; consulte o [protocolo de revisão](references/review-protocol.md).
+- Consulte o [guia por documento](references/document-types.md) apenas para a modalidade necessária. Para citações, bibliografia ou afirmações quantitativas, consulte [fontes e evidências](references/citations-and-evidence.md).
 
-### 0.1 Herança de Arquétipo
+## Fluxo
 
-Antes de escrever qualquer documento, ler `docs/00_archetype.md`. O
-arquétipo determina qual arquivo de referência carregar:
+1. Delimite o trecho e o resultado solicitado. Reaproveite informações já disponíveis; não leia todas as referências nem toda a base de código para revisar um parágrafo.
+2. Separe alegações factuais, hipóteses, requisitos planejados e decisões. Confira as afirmações materiais em código, configurações, saídas ou fontes fornecidas. Para documentação factual, confronte o comportamento observado; para PRDs e planos, preserve o caráter futuro dos critérios. Divergência entre especificação e código é um achado, não autorização para mudar o contrato.
+3. Organize a informação conforme a tarefa do leitor. Explique o resultado ou ação principal cedo e mantenha uma ideia central por parágrafo. Use listas e tabelas quando melhorarem comparação ou execução.
+4. Redija ou proponha a edição mantendo a evidência. Corte repetição e linguagem promocional sem retirar limitações, pré-requisitos ou distinções técnicas. Não imponha cotas de frases curtas, desvio padrão de palavras, sinônimos artificiais ou variação por aparência.
+5. Confira termos, números, referências, exemplos e sintaxe no escopo alterado. Use ferramentas configuradas no projeto para checks repetíveis; não declare precisão factual a partir de lint, link HTTP válido ou presença de chave bibliográfica.
+6. Entregue o texto/arquivo no Modo 1 ou os achados no Modo 2. Resuma mudanças materiais, verificações e pendências quando útil; para uma pequena edição sem limitações, evite relatório adicional.
 
-- **Arquétipo A** (Data Science/Quarto) → `/home/tales/.gemini/config/skills/writing-pipeline/references/archetype-a-academic.md` (em coordenação técnica com `quarto-expert` em `/home/tales/.gemini/config/skills/quarto-expert/SKILL.md` para formatação de manuscritos, teses ABNT NBR 14724:2024 e citações BibTeX/CSL)
-- **Arquétipo B** (Software/APIs) → `/home/tales/.gemini/config/skills/writing-pipeline/references/archetype-b-software.md`
-- **Arquétipo C** (CLI/Scripts) → `/home/tales/.gemini/config/skills/writing-pipeline/references/archetype-c-cli.md`
+## Preservação de conteúdo
 
-Se `docs/00_archetype.md` não existir:
-1. Procure declaração explícita de arquétipo (`archetype: A|B|C` ou `Arquétipo [A/B/C]`) no contexto do prompt ativo, em `docs/01-data-discovery-and-contracts.md` ou em `docs/02-PRD-and-specs.md`.
-2. Se encontrar, grave imediatamente `docs/00_archetype.md` com o frontmatter YAML padrão e prossiga.
-3. Se continuar ausente, PARAR e perguntar ao usuário. Nunca inferir arquétipo por heurística.
+- Não transforme adjetivos vagos em benchmarks, SLAs, percentuais ou causalidade inventados. Sem evidência, remova a alegação vazia, peça o dado indispensável ou registre a lacuna fora do texto final. Não substitua um valor desconhecido por um número plausível.
+- Preserve jargão correto, citações literais e exemplos de código. Uma blacklist não justifica trocar nomes de domínio ou termos como robustez estatística e escalabilidade quando têm significado preciso.
+- Adeque registro e comprimento à informação. Clareza tem precedência sobre um molde de voz, proibição genérica de prosa ou meta de detecção de IA. Não prometa autoria humana ou indetectabilidade.
+- Se faltar evidência material, não apresente a afirmação como verificada. No Modo 1, entregue rascunho/trecho seguro e destaque a pendência; no Modo 2, registre o achado. Suspenda apenas o trecho ou decisão dependente, quando possível.
+- Não execute comandos com efeitos externos para validar exemplos sem autorização. Versões, flags e símbolos podem ser conferidos no código, ajuda da CLI e documentação oficial; execução real depende do escopo permitido. Redija separadamente o que foi observado e o que foi apenas inspecionado.
 
-### 0.2 Coordenação com `humanizer`
+## Fontes, formato e especialistas
 
-A skill `humanizer` é a autoridade de micro-estilo (vícios de IA,
-travessões, falsos contrastes, tríades, gerundismos, vocabulário
-clichê). Esta skill invoca `humanizer` como sub-rotina durante a
-redação e nunca duplica suas regras.
+Bibliografia e estilo de citação pertencem ao projeto/documento. Resolva chaves nos arquivos e metadados configurados, usando o parser/motor adequado quando disponível. Um catálogo editorial da skill pode sugerir leituras; não autoriza citações nem substitui a bibliografia efetiva.
+Links devem apontar à fonte que sustenta a afirmação. Metadados confirmam identidade bibliográfica, não sustentação de conteúdo. Cite somente o que foi consultado ou marque a verificação pendente, sem fingir leitura do texto integral.
+Para Quarto, preserve formato, bibliografia e referências cruzadas existentes; use `quarto-expert` quando a tarefa exigir conhecimento específico de configuração/renderização. Criar `.qmd` não autoriza reexecutar análises custosas ou publicar.
+Use `humanizer` apenas quando disponível e útil à revisão de estilo solicitada, preservando estas restrições de significado e evidência. Não carregue uma segunda cadeia editorial para cada docstring. Conectores/MCP existentes podem acessar fontes privadas autorizadas; não instale servidor ou conecte conta para uma edição local simples.
+Se um relatório Graphify for pertinente ao documento, confira escopo, cobertura e atualidade antes de citar. Não acrescente uma seção arquitetural apenas porque o arquivo existe; métrica do grafo não prova qualidade do projeto.
 
-Ordem de execução em qualquer redação:
+## Integração e conclusão
 
-1. Identificar arquétipo (0.1).
-2. Carregar `/home/tales/.gemini/config/skills/writing-pipeline/references/archetype-{a,b,c}.md`.
-3. Aplicar `humanizer` para micro-estilo.
-4. Aplicar esta skill para macro-estrutura (argumentação, citação,
-   adaptação por arquétipo).
-5. Executar o checklist de entrega (Seção 4).
-
-### 0.3 Stop Conditions
-
-- Se `docs/00_archetype.md` não existir e o fallback de 0.1 falhar → PARAR e perguntar ao usuário.
-- Se o arquivo `/home/tales/.gemini/config/skills/writing-pipeline/references/archetype-{a,b,c}.md` correspondente não
-  existir → PARAR.
-- Se uma citação usar `[@chave]` que não conste em
-  `/home/tales/.gemini/config/skills/writing-pipeline/references/canonical-sources.md` → PARAR e reportar. Não inventar
-  fontes. Substituir por link inline `[Autor, Ano](URL)` se aplicável.
-
----
-
-## 1. Modo 1: Geração e Redação Direta (Invocado por Pipelines)
-
-Use este modo ao criar ou atualizar artefatos de projeto (PRDs, ADRs, planos, index.qmd, README.md, docstrings) dentro dos Gates da pre-code-pipeline e execution-pipeline.
-
-### 1.1 Pré-escrita
-
-1. Ler o arquétipo (0.1).
-2. Ler o documento-alvo se for revisão (não escrever do zero sobre
-   algo existente sem antes entender o que está lá).
-3. Consultar `/home/tales/.gemini/config/skills/writing-pipeline/references/archetype-{a,b,c}.md` para registrar as
-   convenções obrigatórias (registro, pessoa gramatical, comprimento
-   de frase, citação, tom).
-4. Consultar `/home/tales/.gemini/config/skills/writing-pipeline/references/metrics-and-anti-ai.md` para as 5 métricas
-   operacionais.
-
-### 1.2 Escrita
-
-Escrever seguindo as convenções do arquétipo. Cada parágrafo deve
-obedecer às métricas:
-
-- **Burstiness e Comprimento de Frase (Adaptado por Arquétipo)**:
-  - *Arquétipo A e Prosa Argumentativa (PRDs/ADRs):* alternar frases curtas (3–6 palavras, ≥ 15% do parágrafo) com frases articuladas (22–32 palavras), mantendo desvio padrão ≥ 6,5 palavras.
-  - *Arquétipo B (Docs de Software e Docstrings):* frases médias e contratuais de 10–18 palavras (dispensado de atingir 22–32 palavras).
-  - *Arquétipo C (CLI, Manpages e Erros POSIX):* frases telegráficas e imperativas de 5–12 palavras (dispensado de burstiness longo).
-- **Zero tells de IA**: consultar blacklist em
-  `/home/tales/.gemini/config/skills/writing-pipeline/references/metrics-and-anti-ai.md`.
-- **Zero falsos contrastes**: proibido "não apenas X, mas Y".
-- **Zero gerundismos decorativos**: proibido "garantindo assim...".
-- **Diagramas em Quarto (.qmd):** Diagramas Mermaid e Graphviz DEVEM ser inseridos como executable cells (` ```{mermaid} ` / ` ```{dot} `), NUNCA como code blocks comuns. O Quarto compila essas células em SVG interativo para HTML e PNG para PDF.
-
-### 1.3 Citação
-
-- Fontes no manifesto → usar `[@chave]`.
-- Fontes fora do manifesto → usar link inline `[Autor, Ano](URL)`.
-- Nunca forjar citações.
-
----
-
-## 2. Modo 2: Revisão Editorial Não-Destrutiva (Invocado para Auditoria)
-
-Use este modo exclusivamente quando o usuário solicitar auditoria ou revisão editorial de um texto existente sem reescrita direta.
-
-Baseado em `/home/tales/.gemini/config/skills/writing-pipeline/references/review-protocol.md`. A revisão NUNCA reescreve
-o conteúdo. Ela produz uma tabela:
-
-| Linha | Original | Sugestão | Racional |
-|:---:|:---|:---|:---|
-
-Categorias verificadas (6):
-1. Fatos técnicos (valores, APIs, comandos).
-2. Gramática e pontuação.
-3. Consistência de terminologia.
-4. Estrutura e ordem das seções.
-5. Tom e registro (aderente ao arquétipo).
-6. Citações e referências.
-
----
-
-## 3. Política Anti-Alucinação
-
-### 3.1 Mecanismo
-
-1. Varrer o documento com regex `\[@([a-zA-Z0-9_\.\:-]+)\]`.
-2. Para cada chave capturada, consultar `/home/tales/.gemini/config/skills/writing-pipeline/references/canonical-sources.md`.
-3. Chaves ausentes → marcar como não-validadas e PARAR.
-
-### 3.2 Manifesto Canônico
-
-`/home/tales/.gemini/config/skills/writing-pipeline/references/canonical-sources.md` lista as fontes autorizadas. Novas
-fontes entram apenas via edição explícita do manifesto.
-
-### 3.3 Fontes Externas
-
-Se o documento precisar de fonte fora do manifesto, usar link inline:
-
-  Segundo [Pinker, 2014](https://example.com/sense-of-style), ...
-
-Proibido: `[@pinker_sense_style]` sem registro prévio.
-
----
-
-## 4. Checklist de Entrega
-
-Antes de considerar o documento pronto, verificar os 10 itens:
-
-1. [ ] O parágrafo abre com o dado concreto, sem preâmbulos.
-2. [ ] Há alternância nítida entre frases curtas e longas.
-3. [ ] Zero adjetivos de marketing ("robusto", "vital", "inovador").
-4. [ ] Zero falsos contrastes ("não apenas X, mas Y").
-5. [ ] Zero travessões duplos conectando orações independentes.
-6. [ ] Listas assimétricas (sem negrito obrigatório em cada item).
-7. [ ] Pessoa gramatical consistente com o arquétipo.
-8. [ ] Toda citação rastreável no manifesto ou como link inline.
-9. [ ] Conclusão encerra no último resultado útil (sem sermão).
-10. [ ] O texto soa como relato de engenheiro sênior.
-
----
-
-## 5. Integração com as Pipelines
-
-### 5.1 pre-code-pipeline
-
-Invocada no Modo 1 (Geração) nos seguintes portões:
-- **Gate 2**: redação de `docs/02-PRD-and-specs.md`.
-- **Gate 3**: redação de `docs/03-architecture-and-schema.md` e ADRs (`docs/adr/`).
-- **Gate 5**: redação de `docs/05-implementation-plan.md`.
-
-### 5.2 execution-pipeline
-
-Invocada no Modo 1 (Geração) nos seguintes portões:
-- **Gate 1**: docstrings Google Style em `src/`.
-- **Gate 4**: `index.qmd` (Arquétipo A), `README.md` de software e guias de API (Arquétipo B), ou `README.md` operacional POSIX (Arquétipo C).
-
-### 5.3 Handoff
-
-Esta skill NÃO bloqueia os Gates 5. Se a redação estiver incompleta,
-o Gate 5 (`docs-guard`) detecta divergências e reporta.
-
----
-
-## Consumo Opcional de `GRAPH_REPORT.md` para Relatórios Arquiteturais
-
-Referência completa: `/home/tales/.gemini/config/skills/quarto-expert/references/graphify-integration.md`
-
-O `writing-pipeline` **não invoca** `graphify` diretamente, mas pode **consumir passivamente** `graphify-out/GRAPH_REPORT.md` (quando existir) para enriquecer relatórios Quarto com métricas de módulos, acoplamento, comunidades funcionais e God Nodes.
-
-```bash
-if [ -f "graphify-out/GRAPH_REPORT.md" ]; then
-    USE_GRAPH_REPORT=1
-else
-    USE_GRAPH_REPORT=0
-fi
-```
-
-Se `USE_GRAPH_REPORT=1`: incluir subseção de arquitetura baseada no `GRAPH_REPORT.md` como fonte auditável.
-
-Se `USE_GRAPH_REPORT=0`: omitir sem quebra de fluxo.
-
----
-
-## 6. Referências
-
-- `/home/tales/.gemini/config/skills/writing-pipeline/references/archetype-a-academic.md` — Convenções IMRAD, APA,
-  Chicago, IEEE, CONSORT, STROBE, PRISMA.
-- `/home/tales/.gemini/config/skills/writing-pipeline/references/archetype-b-software.md` — Convenções Google/Microsoft
-  Style, OpenAPI, ADR, README.
-- `/home/tales/.gemini/config/skills/writing-pipeline/references/archetype-c-cli.md` — Convenções POSIX, manpages,
-  mensagens de erro.
-- `/home/tales/.gemini/config/skills/writing-pipeline/references/metrics-and-anti-ai.md` — 5 métricas + blacklist + 10
-  itens de checklist.
-- `/home/tales/.gemini/config/skills/writing-pipeline/references/canonical-sources.md` — Manifesto de fontes autorizadas.
-- `/home/tales/.gemini/config/skills/writing-pipeline/references/before-after-examples.md` — 5 pares antes/depois.
-- `/home/tales/.gemini/config/skills/writing-pipeline/references/review-protocol.md` — Padrão Original → Sugestão →
-  Racional.
+A pipeline chamadora mantém seus gates, estado e critérios de aceite. Esta skill devolve artefatos e pendências, sem marcar aprovação do usuário, iniciar outro gate ou fazer commit/publicação. Não crie um plano paralelo.
+No Modo 1, atualize apenas os arquivos autorizados e confira o diff. No Modo 2, preserve o alvo e indique localização e evidência dos achados. Nunca apresente rascunho com pendência factual impeditiva como pronto para publicação; o chamador decide o avanço com esse estado explícito.

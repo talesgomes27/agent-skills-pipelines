@@ -4,12 +4,13 @@ title: "Analise Estatistica"
 
 ```{python}
 #| label: fig-roc
-#| fig-cap: "Curva ROC do modelo."
+#| fig-cap: "Curva ilustrativa sintética; não representa um modelo avaliado."
 import numpy as np
 import matplotlib.pyplot as plt
 
 fpr, tpr = np.linspace(0, 1, 10), np.linspace(0, 1, 10) ** 0.7
-plt.plot(fpr, tpr, label='AUC = 0.87')
+auc = float(((fpr[1:] - fpr[:-1]) * (tpr[1:] + tpr[:-1]) / 2).sum())
+plt.plot(fpr, tpr, label=f'AUC ilustrativa = {auc:.3f}')
 plt.plot([0, 1], [0, 1], 'k--', alpha=0.3)
 plt.xlabel('FPR'); plt.ylabel('TPR'); plt.legend()
 plt.show()

@@ -1,21 +1,27 @@
-# Padrões Canônicos de Refatoração por Arquétipo (A, B e C)
+# Mudanças condicionais por arquétipo
 
-Este guia orienta a execução cirúrgica no **Gate 4** da `audit-and-refactoring-pipeline`.
+Um padrão é candidato, não objetivo obrigatório. Preserve a stack e o desenho saudável do projeto; cada mudança precisa de problema, escopo, contrato e verificação.
 
-## 1. Arquétipo A — Data Science, Analytics & Quarto
-1. **Extração de Lógica de Notebooks para `src/`:** Mova funções longas de limpeza, *feature engineering* e plotagem de dentro de células `.ipynb`/`.qmd` para módulos testáveis em `src/`, importando-as de forma limpa no relatório.
-2. **Vetorização e Performance (`polars` / `numpy`):** Substitua loops explícitos (`iterrows()`, `.apply(..., axis=1)`) por operações vetorizadas ou expressões *lazy* em Polars.
-3. **Padronização Gráfica 300 DPI:** Centralize a configuração estética do Matplotlib/Seaborn (paleta, `sns.despine()`, `dpi=300`, `constrained_layout=True`, `set_box_aspect(1)`) em um módulo utilitário de estilo.
-4. **Reestruturação Editorial CRISP-ML(Q) + Storytelling:** Reorganize relatórios `.qmd` legados ou fragmentados nas 6 seções canônicas, removendo numeração manual duplicada dos cabeçalhos Markdown, adicionando Callout Blocks (`.callout-note`, `.callout-tip`, `.callout-important`) e corrigindo referências cruzadas `@fig-` e `@tbl-`.
-5. **Modernização de Ambiente Python (uv + Ruff + pytest):** Em projetos Python sem dependências C++/R exclusivas do Conda, migre `requirements.txt` soltos para `pyproject.toml` + `uv.lock` e configure `ruff` e `pytest`.
-6. **Correção de Renderização de Diagramas Quarto:** Converter code blocks ` ```mermaid ` e ` ```dot ` em executable cells ` ```{mermaid} ` e ` ```{dot} `. Mover opções para cell options (`%%|` ou `//|`), adicionar `label: fig-*` e `fig-cap: "..."`, atualizar referências cruzadas no texto via `@fig-*` e renomear arquivos `.md` para `.qmd` se contiverem células executáveis.
+## A: dados, ciência e publicação
 
-## 2. Arquétipo B — Engenharia de Software, Web & APIs
-1. **Desacoplamento de Controladores/Rotas:** Extraia regras de negócio e chamadas diretas ao banco de dentro das rotas HTTP para casos de uso/serviços e repositórios isolados.
-2. **Inversão de Dependência e Contratos:** Introduza schemas estritos (Pydantic / TypeScript) nas fronteiras de entrada e saída e elimine acoplamento circular entre pacotes.
-3. **Saneamento de Banco e I/O:** Elimine queries N+1, adicione índices ausentes e garanta fechamento seguro de conexões/transações.
+Extraia lógica de notebook quando melhorar teste/reuso comprovado, preservando ordem, efeitos e interfaces. Não force `src/` ou notebook adicional a um relatório funcional.
+Vetorização ou troca de biblioteca pode alterar precisão, ordenação, tratamento de nulos, execução e uso de memória. Classifique como otimização/migração e compare resultados e desempenho com dados representativos antes de declarar ganho.
+Leakage, split, seed, estimador e métrica são decisões metodológicas que podem mudar resultados. Faça correção aprovada com critérios próprios, sem chamá-la de refatoração equivalente.
+Reorganização de relatório, idioma, política de cache, estética, DPI e formato dependem do destino e pedido. Não introduza SHAP/modelos em análise descritiva nem migre R Markdown/ambiente só por preferência. Mudança de engine ou dependências é migração separada, com paridade avaliada.
 
-## 3. Arquétipo C — Automação, CLI & Scripts Técnicos
-1. **Decomposição de Scripts Monolíticos:** Separe o parsing de argumentos (`argparse`/`click`/`typer`) da lógica pura de processamento, permitindo testar o núcleo sem invocar o shell.
-2. **Enxugamento de Dependências (`ponytail`):** Substitua bibliotecas externas pesadas ou desnecessárias por módulos nativos da biblioteca padrão (`pathlib`, `json`, `csv`, `urllib`, `subprocess`).
-3. **Conformidade POSIX:** Padronize mensagens de erro no `stderr` (`erro: <causa>. <ação sugerida>.`), resultados limpos no `stdout` e códigos de saída (`0` sucesso, `>0` falha).
+## B: serviços, APIs e interfaces
+
+Extraia serviços/repositórios apenas quando separar responsabilidade ou reduzir acoplamento real; não crie camadas para todo controlador.
+Preserve schema, status, erros, autorização, transações, concorrência e compatibilidade dos consumidores. Otimizações SQL precisam preservar resultados, ordenação contratada e garantias transacionais. Índice/migração pode ter custo e efeitos operacionais, além do diff de código.
+Renomeações e codemods devem considerar imports, configuração, serialização, referências dinâmicas e chamados externos; parser/IDE ajuda, mas testes e revisão continuam necessários.
+
+## C: CLI e automação
+
+Separar parser e lógica pode facilitar testes. Transformar um comando existente em subcomandos ou trocar dependências pode quebrar flags, códigos de saída, mensagens e pipelines; precisa de contrato de compatibilidade e autorização.
+Confira stdout/stderr, quoting, ambiente, arquivos, interrupções e idempotência pertinentes. Uma nova mensagem de erro não é apenas estilo quando integrações a consomem.
+
+## Aplicação e integração
+
+Não altere golden files, tolerâncias ou testes para esconder uma diferença. Para correção intencional, atualize evidência e expectativa com justificativa.
+Use fatias com propriedade de arquivos e pré-requisitos claros. Paralelismo não é obrigatório; só execute mudanças independentes quando capacidade e autorização existirem. Revise integração antes do aceite.
+Não rode formatador com reescrita no reconhecimento nem misture migração de ambiente e mudança de lógica em uma fatia sem razão verificável.

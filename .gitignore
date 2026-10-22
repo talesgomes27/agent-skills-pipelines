@@ -13,6 +13,7 @@ Thumbs.db
 # Quarto e relatórios
 .quarto/
 _site/
+graphify-out/
 
 # IDEs
 .vscode/

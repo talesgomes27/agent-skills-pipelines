@@ -1,72 +1,23 @@
-# Guia de Publicação: Relatórios Quarto no GitHub Pages (Arquétipo A)
+# Quarto e publicação estática
 
-Este documento define as duas estratégias canônicas e seguras para publicar relatórios Quarto (`.qmd`) no GitHub Pages sem reexecutar modelos pesados ou depender de bases `.csv` ignoradas no Git.
+Escolha a estratégia configurada/autorizada no projeto. Idioma, formatos, cache, MECA e Binder pertencem ao contrato do documento, não ao simples rótulo A.
 
-## Pré-requisitos Obrigatórios no `_quarto.yml`
-```yaml
-project:
-  type: website # ou default
-  output-dir: docs # se usar Estratégia 1 (Branch main/docs)
+## Estratégias distintas
 
-lang: pt-BR
+1. **Branch/pasta:** renderizar localmente, revisar e versionar os arquivos estáticos no diretório configurado, como `/docs`, e publicar pela branch/pasta escolhida. `.nojekyll` é pertinente quando esse fluxo precisa evitar processamento Jekyll. Não force push para main ou altere a configuração remota de Pages sem autorização.
+2. **Publicação Quarto para gh-pages:** usar o fluxo Quarto existente que escreve na branch de publicação. O job precisa da permissão de conteúdo necessária a essa estratégia; não lhe conceda permissões extras de outro fluxo sem uso.
+3. **Artifact Pages via Actions:** build produz artefato e job de deploy o consome. O deploy precisa de `pages: write`, `id-token: write`, dependência do build e ambiente apropriado; conferir configuração e proteção reais. Não confundir esse modelo com push à branch gh-pages.
 
-execute:
-  freeze: auto
-```
+Não misture as três estratégias como requisitos simultâneos. Não instale setup/workflow novo quando o projeto já possui entrega funcional, salvo mudança solicitada.
 
-## Estratégia 1: Renderização Local + Publicação via Pasta `docs/` (Mais Simples e Determinística)
-Ideal quando todo o processamento de dados e gráficos (`reports/figures/` em 300 DPI) já foi concluído localmente no Gate 5 da `execution-pipeline`.
-1. Execute `quarto render` localmente. O HTML compilado e os assets irão para `docs/`.
-2. Crie o arquivo vazio `docs/.nojekyll` (`touch docs/.nojekyll`) para impedir que o processador Jekyll do GitHub ignore pastas iniciadas com underscore (como `site_libs` ou `_files`).
-3. Versione `docs/` e `_freeze/` no commit de release e faça push para `main`.
-4. Configure o GitHub Pages do repositório para servir a partir da branch `main`, diretório `/docs` (via `gh api` ou interface web).
+## Computação e conteúdo
 
-## Estratégia 2: Publicação Automatizada via GitHub Actions (`quarto-actions/publish`)
-Ideal para CI/CD contínuo a cada push na `main`.
-- **Requisito Crítico:** A pasta `_freeze/` gerada localmente **deve estar commitada no Git** (com `execute: freeze: auto` no `_quarto.yml`) para que o runner não tente reexecutar treinamentos sobre bases `.csv` ausentes. Caso algum bloco leve precise de pacotes Python, os passos condicionais de `uv` abaixo instalam o ambiente a partir do `uv.lock`.
+Quando o runner não terá dados/ambiente para reexecutar, use outputs computacionais já gerados e revisados conforme o mecanismo Quarto. `_freeze/` é uma opção dessa estratégia, não obrigação universal: CI com dados/ambiente pode executar o estudo deliberadamente.
+Valide que os outputs correspondem a código, dados e versão pretendidos, incluindo a política para dados externos alterados. Não reexecute treinamento caro só para atualizar tema sem necessidade; não declare freshness a partir de cache existente.
+Revise conteúdo publicado: dados em tabelas, outputs de notebooks, gráficos e bundles podem conter informação privada. HTML final e grafo não são seguros só porque arquivos brutos ficaram fora do Git.
+Compile apenas os formatos contratados. Browser headless e conversores só são pré-requisitos quando o motor/formato efetivo precisar deles; sua presença local não comprova deploy ou conteúdo remoto.
 
-Arquivo `.github/workflows/publish.yml`:
-```yaml
-name: Publish Quarto Report to GitHub Pages
+## Verificação do site
 
-on:
-  push:
-    branches: [main, master]
-  workflow_dispatch:
-
-permissions:
-  contents: write
-  pages: write
-  id-token: write
-
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
-
-jobs:
-  build-and-publish:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Set up Quarto
-        uses: quarto-dev/quarto-actions/setup@v2
-
-      - name: Set up Python and uv (condicional)
-        if: hashFiles('pyproject.toml') != ''
-        uses: astral-sh/setup-uv@v3
-        with:
-          enable-cache: true
-
-      - name: Install Python dependencies (condicional)
-        if: hashFiles('pyproject.toml') != ''
-        run: uv sync --frozen
-
-      - name: Render and Publish to gh-pages
-        uses: quarto-dev/quarto-actions/publish@v2
-        with:
-          target: gh-pages
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-```
+Confira output real, páginas afetadas e links/assets com parser/checker adequado. Resolva caminhos conforme URL base, subdiretório do site, percent-encoding e query/fragment, considerando `src`, `srcset` e recursos CSS/JS necessários à jornada. Regex de `<img>` no index é uma checagem parcial, não integridade completa do site.
+Após publicar, confirme domínio/caminho, conteúdo da versão e assets críticos no destino. Preview e site público definitivo são estados diferentes. Se houver recuperação, restaure/republique o artefato/revisão anterior pelo mecanismo remoto aprovado e verifique o site de novo; checkout de tag local não faz isso.

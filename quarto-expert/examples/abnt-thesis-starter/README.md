@@ -1,13 +1,3 @@
-# Exemplo: TCC / Dissertacao ABNT NBR 14724:2024
+# Esqueleto inicial de tese
 
-Configuracao minima de um projeto `type: book` usando **Typst** para
-compilacao rapida em PDF com geometria ABNT.
-
-Para conformidade integral com `abntex2` (folha de aprovacao, errata,
-lombada, PDF/A), prefira o template `danielvartan/abnt`:
-
-    git clone https://github.com/danielvartan/abnt.git meu-tcc
-    cd meu-tcc && quarto render
-
-Os arquivos `01-introducao.qmd` a `references.qmd` sao stubs para garantir
-que `quarto render` funcione sem erros.
+Exemplo Quarto book/Typst com capítulos e geometria inicial A4. Não implementa todos os elementos institucionais e não comprova conformidade ABNT ou PDF/A. Consulte o manual exigido e a documentação da extensão escolhida antes de completar o projeto. Copie para um destino de trabalho; não renderize fontes desconhecidas sem examinar código e filtros.

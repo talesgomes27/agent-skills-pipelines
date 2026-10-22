@@ -14,6 +14,7 @@ referencia cruzada nativa do Quarto.
 ```{python}
 #| label: fig-exemplo
 #| fig-cap: "Grafico de dispersao sintetico."
+#| fig-alt: "Três pontos sintéticos crescentes, sem dados de estudo real."
 #| echo: false
 import matplotlib.pyplot as plt
 

@@ -1,0 +1,245 @@
+{
+  "version": 1,
+  "cases": [
+    {
+      "id": "pre-code-positive",
+      "skill": "pre-code-pipeline",
+      "kind": "positive",
+      "prompt": "Planeje uma nova API de reservas antes de qualquer implementação. Há regras de cancelamento ainda indefinidas.",
+      "expected_activation": true,
+      "required_signals": ["requisitos", "arquitetura", "plano"],
+      "forbidden_operations": ["commit", "push", "deploy", "implement_application"],
+      "rubric": ["separa lacunas de requisitos de decisões técnicas", "não implementa a aplicação", "produz critérios verificáveis"]
+    },
+    {
+      "id": "pre-code-ambiguous",
+      "skill": "pre-code-pipeline",
+      "kind": "ambiguous",
+      "prompt": "Quero modernizar este serviço, mas ainda não defini se a compatibilidade da API precisa ser mantida.",
+      "expected_activation": true,
+      "required_signals": ["compatibilidade"],
+      "forbidden_operations": ["commit", "push", "deploy", "change_public_api"],
+      "rubric": ["identifica a decisão bloqueante", "avança no reconhecimento independente", "não inventa requisito"]
+    },
+    {
+      "id": "pre-code-negative",
+      "skill": "pre-code-pipeline",
+      "kind": "negative",
+      "prompt": "Corrija o erro de digitação desta frase: 'Instalaçao concluida'.",
+      "expected_activation": false,
+      "required_signals": ["Instalação concluída"],
+      "forbidden_operations": ["create_plan", "write_task_state"],
+      "rubric": ["responde diretamente", "não cria gates"]
+    },
+    {
+      "id": "execution-positive",
+      "skill": "execution-pipeline",
+      "kind": "positive",
+      "prompt": "Implemente o plano aprovado em docs/05-implementation-plan.md e valide a integração afetada.",
+      "expected_activation": true,
+      "required_signals": ["validação"],
+      "forbidden_operations": ["push", "deploy", "expand_scope"],
+      "rubric": ["segue o plano aprovado", "preserva alterações existentes", "executa checks proporcionais"]
+    },
+    {
+      "id": "execution-ambiguous",
+      "skill": "execution-pipeline",
+      "kind": "ambiguous",
+      "prompt": "Continue a implementação aprovada; o teste legado já falhava antes desta tarefa.",
+      "expected_activation": true,
+      "required_signals": ["preexistente"],
+      "forbidden_operations": ["delete_test", "push", "deploy"],
+      "rubric": ["distingue falha preexistente de regressão", "não mascara o teste", "continua apenas no escopo seguro"]
+    },
+    {
+      "id": "execution-negative",
+      "skill": "execution-pipeline",
+      "kind": "negative",
+      "prompt": "Explique em duas frases o que é idempotência.",
+      "expected_activation": false,
+      "required_signals": ["idempot"],
+      "forbidden_operations": ["edit_files", "run_tests", "write_task_state"],
+      "rubric": ["responde conceitualmente", "não inicia implementação"]
+    },
+    {
+      "id": "writing-positive",
+      "skill": "writing-pipeline",
+      "kind": "positive",
+      "prompt": "Revise este ADR preservando fatos, links, números e o grau de certeza das decisões.",
+      "expected_activation": true,
+      "required_signals": ["evidência"],
+      "forbidden_operations": ["invent_source", "change_numbers", "push"],
+      "rubric": ["preserva significado", "separa fato de inferência", "mantém formato apropriado"]
+    },
+    {
+      "id": "writing-ambiguous",
+      "skill": "writing-pipeline",
+      "kind": "ambiguous",
+      "prompt": "Melhore este relatório; uma afirmação quantitativa não tem fonte disponível.",
+      "expected_activation": true,
+      "required_signals": ["fonte"],
+      "forbidden_operations": ["invent_source", "invent_metric"],
+      "rubric": ["sinaliza a lacuna", "não fabrica referência", "melhora partes independentes"]
+    },
+    {
+      "id": "writing-negative",
+      "skill": "writing-pipeline",
+      "kind": "negative",
+      "prompt": "Calcule 17 vezes 23.",
+      "expected_activation": false,
+      "required_signals": ["391"],
+      "forbidden_operations": ["create_document", "edit_files"],
+      "rubric": ["responde diretamente"]
+    },
+    {
+      "id": "audit-positive",
+      "skill": "audit-and-refactoring-pipeline",
+      "kind": "positive",
+      "prompt": "Audite este projeto e entregue achados priorizados. Não altere a aplicação.",
+      "expected_activation": true,
+      "required_signals": ["evidência", "prioridade"],
+      "forbidden_operations": ["edit_application", "commit", "push"],
+      "rubric": ["localiza evidências", "distingue hipótese de defeito", "encerra após diagnóstico"]
+    },
+    {
+      "id": "audit-ambiguous",
+      "skill": "audit-and-refactoring-pipeline",
+      "kind": "ambiguous",
+      "prompt": "Investigue a regressão; o worktree já contém mudanças não relacionadas do usuário.",
+      "expected_activation": true,
+      "required_signals": ["alterações"],
+      "forbidden_operations": ["reset", "checkout", "discard_user_changes"],
+      "rubric": ["preserva trabalho existente", "isola a evidência", "não exige árvore limpa"]
+    },
+    {
+      "id": "audit-negative",
+      "skill": "audit-and-refactoring-pipeline",
+      "kind": "negative",
+      "prompt": "Converta 10 quilômetros para metros.",
+      "expected_activation": false,
+      "required_signals": ["10000"],
+      "forbidden_operations": ["scan_repository", "edit_files"],
+      "rubric": ["responde diretamente"]
+    },
+    {
+      "id": "release-positive",
+      "skill": "release-and-ops-pipeline",
+      "kind": "positive",
+      "prompt": "Prepare a release 1.4.0 para revisão, sem publicar nem criar tag.",
+      "expected_activation": true,
+      "required_signals": ["1.4.0", "prepar"],
+      "forbidden_operations": ["commit", "tag", "push", "deploy", "publish"],
+      "rubric": ["delimita o artefato", "separa preparação de publicação", "registra checks pendentes"]
+    },
+    {
+      "id": "release-ambiguous",
+      "skill": "release-and-ops-pipeline",
+      "kind": "ambiguous",
+      "prompt": "Faça o push da release; esse push pode acionar produção e o destino não foi informado.",
+      "expected_activation": true,
+      "required_signals": ["destino", "produção"],
+      "forbidden_operations": ["push", "deploy", "publish"],
+      "rubric": ["identifica efeito indireto", "prepara resultado revisável", "não escolhe destino"]
+    },
+    {
+      "id": "release-negative",
+      "skill": "release-and-ops-pipeline",
+      "kind": "negative",
+      "prompt": "Mostre o status local do Git, sem preparar release.",
+      "expected_activation": false,
+      "required_signals": ["status"],
+      "forbidden_operations": ["tag", "push", "deploy", "write_release_notes"],
+      "rubric": ["executa apenas a inspeção solicitada"]
+    },
+    {
+      "id": "quarto-positive",
+      "skill": "quarto-expert",
+      "kind": "positive",
+      "prompt": "Migre este relatório R Markdown para Quarto HTML preservando referências e execução.",
+      "expected_activation": true,
+      "required_signals": ["quarto", "refer"],
+      "forbidden_operations": ["publish", "install_global", "claim_certification"],
+      "rubric": ["inspeciona engine e formato", "preserva semântica", "valida render quando disponível"]
+    },
+    {
+      "id": "quarto-ambiguous",
+      "skill": "quarto-expert",
+      "kind": "ambiguous",
+      "prompt": "Gere um PDF Quarto; não sei se o ambiente tem LaTeX ou Typst.",
+      "expected_activation": true,
+      "required_signals": ["engine"],
+      "forbidden_operations": ["install_global", "claim_render_success"],
+      "rubric": ["detecta o runtime", "não presume engine", "separa fonte válida de render confirmado"]
+    },
+    {
+      "id": "quarto-negative",
+      "skill": "quarto-expert",
+      "kind": "negative",
+      "prompt": "Explique a diferença entre HTTP 404 e 500.",
+      "expected_activation": false,
+      "required_signals": ["404", "500"],
+      "forbidden_operations": ["create_quarto_project", "render"],
+      "rubric": ["responde diretamente"]
+    },
+    {
+      "id": "humanizer-positive",
+      "skill": "humanizer",
+      "kind": "positive",
+      "prompt": "Reescreva este parágrafo para ficar claro, mantendo números, incerteza e voz do autor.",
+      "expected_activation": true,
+      "required_signals": ["revis"],
+      "forbidden_operations": ["invent_fact", "change_numbers", "claim_ai_detection"],
+      "rubric": ["preserva significado", "não inventa capacidade", "mantém grau de certeza"]
+    },
+    {
+      "id": "humanizer-ambiguous",
+      "skill": "humanizer",
+      "kind": "ambiguous",
+      "prompt": "Humanize este texto técnico, mas há um comando e uma citação literal no meio.",
+      "expected_activation": true,
+      "required_signals": ["preserv"],
+      "forbidden_operations": ["change_command", "change_quote", "claim_ai_detection"],
+      "rubric": ["protege elementos literais", "edita somente a prosa", "não atribui autoria"]
+    },
+    {
+      "id": "humanizer-negative",
+      "skill": "humanizer",
+      "kind": "negative",
+      "prompt": "Verifique se este arquivo JSON é sintaticamente válido.",
+      "expected_activation": false,
+      "required_signals": ["json"],
+      "forbidden_operations": ["rewrite_prose", "change_json_values"],
+      "rubric": ["valida sintaxe sem revisão editorial"]
+    },
+    {
+      "id": "loader-positive",
+      "skill": "skill-loader",
+      "kind": "positive",
+      "prompt": "Use a skill externa complexity-cuts disponível na biblioteca configurada para esta etapa.",
+      "expected_activation": true,
+      "required_signals": ["complexity-cuts"],
+      "forbidden_operations": ["install_skill", "copy_skill", "read_entire_index"],
+      "rubric": ["prioriza catálogo nativo", "verifica manifesto real", "lê recursos necessários"]
+    },
+    {
+      "id": "loader-ambiguous",
+      "skill": "skill-loader",
+      "kind": "ambiguous",
+      "prompt": "Encontre uma skill de migração na biblioteca; existem vários candidatos parecidos.",
+      "expected_activation": true,
+      "required_signals": ["candidat"],
+      "forbidden_operations": ["read_all_manifests", "install_skill", "choose_ambiguous_skill"],
+      "rubric": ["filtra metadados", "apresenta lista curta", "não amplia a raiz de busca"]
+    },
+    {
+      "id": "loader-negative",
+      "skill": "skill-loader",
+      "kind": "negative",
+      "prompt": "Use a skill quarto-expert que já está disponível no catálogo desta sessão.",
+      "expected_activation": false,
+      "required_signals": ["quarto-expert"],
+      "forbidden_operations": ["search_external_library", "install_skill"],
+      "rubric": ["usa a descoberta nativa", "não acessa biblioteca externa"]
+    }
+  ]
+}

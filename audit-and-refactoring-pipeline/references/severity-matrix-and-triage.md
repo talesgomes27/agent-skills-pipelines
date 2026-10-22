@@ -1,18 +1,28 @@
-# Matriz de Severidade e Triagem de Dívida Técnica
+# Triagem por impacto e evidência
 
-Todo achado diagnosticado no **Gate 2** da `audit-and-refactoring-pipeline` deve ser classificado segundo esta matriz em `docs/audit-report.md`.
+Preserve a escala do projeto quando houver. Caso contrário, use P0–P3 como prioridades justificadas pelo cenário, separando severidade do problema, confiança na evidência e ordem de execução.
 
-## 1. Critérios Objetivos de Severidade
+| Prioridade | Critério contextual | Resposta |
+|---|---|---|
+| P0 — Crítico | Dano grave imediato ou bloqueio crítico confirmado no contexto de uso, como exposição ativa de credencial privilegiada ou corrupção de dados em operação | Informar e priorizar contenção/correção autorizada; não publicar segredo no relatório |
+| P1 — Alto | Risco material de segurança, integridade ou função essencial, com impacto e alcance demonstráveis | Planejar proteção e correção prioritária |
+| P2 — Médio | Defeito ou dificuldade de manutenção relevante, com consequência localizada e evidência | Planejar conforme benefício, dependências e custo |
+| P3 — Baixo | Ajuste de baixo impacto ou convenção local sem comprometimento funcional importante | Opcional se houver justificativa e autorização de escopo |
 
-| Severidade | Critérios Técnicos, Analíticos e Editoriais | Regra de Triagem e Execução |
-| :--- | :--- | :--- |
-| **Crítico (P0)** | - **Dados/ML (Arq. A):** *Data leakage* temporal/grupo ou *target leakage*; números no texto contradizendo tabelas/código; ausência de validação.<br>- **Software/CLI (Arq. B/C):** Credenciais/segredos expostos; vulnerabilidades de segurança (SQLi, auth bypass); corrupção silenciosa de dados; falha de build.<br>- **Editorial:** Citações `[@chave]` inventadas (alucinação bibliográfica). | **Bloqueante.** Deve ser corrigido obrigatoriamente na Fatia 1 (Batch 1) do Gate 4 antes de qualquer outra alteração. |
-| **Alto (P1)** | - **Dados/ML (Arq. A):** Ausência de `seed`/`random_state` global; falta de `execute: freeze: auto` em relatórios pesados; quebra da estrutura CRISP-ML(Q) + Storytelling (hipóteses da Seção 1 sem resposta/gráfico na Seção 5, ausência de Baseline comparativo na Seção 4 ou falta de Recomendações Executivas na Seção 6); importância `split` contradizendo a narrativa; diagramas em code blocks sem chaves (```mermaid / ```dot) que não renderizam no Quarto; documentos com diagramas usando extensão .md em vez de .qmd.<br>- **Software/CLI (Arq. B/C):** Módulos críticos sem testes (`0%` cobertura); dependências cíclicas; queries N+1; complexidade ciclomática `> 20`. | **Obrigatório no ciclo atual.** Exige Teste de Caracterização no Gate 3 antes da refatoração no Gate 4. |
-| **Médio (P2)** | - **Dados/ML (Arq. A):** Figuras com `dpi < 300`, subfiguras desalinhadas (falta de `set_box_aspect(1)`), numeração manual duplicada com `number-sections: true`, falta de `lang: pt-BR`, ausência de padronização com `uv + pyproject.toml + Ruff` quando o projeto for Python puro; cell options de diagrama (%%| ou //|) fora da posição canônica; diagramas referenciados por @fig- sem label: fig-* correspondente.<br>- **Software/CLI (Arq. B/C):** *Code smells* moderados (complexidade `10–20`), código morto isolado, docstrings defasadas (`docs-guard`), testes com *over-mocking* (`test-guard`).<br>- **Editorial:** Vícios de IA detectados pela `writing-pipeline` / `humanizer`. | **Recomendado no ciclo atual.** Agrupar em fatias temáticas (código, visual, documentação) no Gate 4. |
-| **Baixo (P3)** | - Formatação cosmética, ordenação de imports, variáveis locais pouco descritivas ou comentários óbvios. | **Opcional / Batch Final.** Automatizar via linter (`ruff check --fix` / `ruff format`). |
+Falha de build pode ser P0/P1 ou limitação local conforme alcance e ambiente. Leakage, citação sem fonte ou seed ausente exigem análise do uso e consequência; não atribua prioridade máxima só pelo rótulo. Falta de `freeze`, pt-BR, DPI específico, gerenciador uv ou seção CRISP não é defeito sem requisito correspondente.
+Centralidade do grafo, complexidade ciclomática, cobertura e alertas de scanner orientam investigação, não definem automaticamente severidade ou obrigatoriedade de alterar código.
 
-## 2. Template Obrigatório para `docs/audit-report.md` (Modo 2 da `writing-pipeline`)
+## Achado verificável
+
+Use a tabela do chamador:
 
 | ID | Linha / Arquivo | Severidade | Diagnóstico Original | Sugestão de Refatoração | Racional Técnico |
-| :--- | :--- | :---: | :--- | :--- | :--- |
-| `AUD-01` | `src/pipeline.py:42` | `Crítico` | `StandardScaler().fit_transform(df)` antes do split temporal | Mover para `Pipeline` ajustado apenas em `X_train` | Elimina *data leakage* da distribuição futura no conjunto de validação. |
+|---|---|---|---|---|---|
+
+Para cada achado, inclua junto à linha ou em nota identificada: cenário, evidência/reprodução, impacto, confiança e verificação proposta. Use localização real e excerto curto. Diferencie confirmado, hipótese e não verificável com os acessos atuais.
+Não reproduza tokens, senhas, dados pessoais ou payloads privados para sustentar o achado; use referências e excertos minimizados.
+
+## Plano de resposta
+
+Ordene por dano, dependências e capacidade de validação. Uma preparação pequena pode ser necessária antes de corrigir o achado mais grave. Aprovação do relatório reconhece achados e prioridades; não aprova automaticamente toda sugestão, migração, rotação de segredo ou mudança funcional.
+Mantenha estado por ID: aberto, planejado, resolvido, não confirmado ou aceito com ressalva. Registre quem aceitou a ressalva a partir de evidência real; não invente aceite para encerrar o ciclo.

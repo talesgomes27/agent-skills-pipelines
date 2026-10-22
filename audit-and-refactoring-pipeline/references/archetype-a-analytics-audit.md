@@ -1,25 +1,26 @@
-# Checklist de Auditoria Analítica, Científica & Quarto (Arquétipo A)
+# Auditoria analítica orientada ao estudo
 
-Utilize este checklist no **Gate 2** da `audit-and-refactoring-pipeline` em conjunto com `/home/tales/.gemini/config/skills/pre-code-pipeline/references/quarto-quality-checklist.md`.
+Leia somente as partes aplicáveis ao escopo: analytics, ML, pesquisa ou publicação. Ausência de um modelo ou SHAP não é defeito em análise descritiva.
 
-## 1. Integridade Estatística e Vazamento de Dados (*Data Leakage*)
-- [ ] **Partição Temporal / Grupo:** Eventos cronológicos usam split *Out-of-Time*? Entidades repetidas (ex: `customer_id`) respeitam isolamento de grupo ou janela temporal?
-- [ ] **Isolamento de Pré-processamento:** Imputações, normalizações, *target encodings* e janelas móveis são calculados sem usar informações futuras do conjunto de validação/teste?
-- [ ] **Isolamento de Múltiplos Targets:** Em bases com mais de uma coluna *target*, as variáveis-alvo irmãs foram estritamente excluídas das features preditoras ($X$)?
-- [ ] **Coerência de Métricas:** A métrica primária é adequada ao problema (PR-AUC / Macro-F1 para desbalanceamento severo; RMSLE / MAE para regressão com assimetria forte)?
+## Dados e método
 
-## 2. Reprodutibilidade e Governança de Notebooks
-- [ ] **Determinismo Estrito:** Sementes aleatórias (`random_state` / `seed`) estão fixadas em todos os estimadores, splits e cálculos de SHAP/permutação?
-- [ ] **Execução Linear Limpa:** Notebooks `.ipynb` executam do topo ao fim sem células fora de ordem, variáveis órfãs ou warnings/logs poluindo a saída?
-- [ ] **Configuração de Freeze:** `_quarto.yml` contém `execute: freeze: auto` para evitar reprocessamento acidental?
+- Identifique pergunta, fontes, recortes, unidades, chaves, nulos e regras de transformação. Confira proveniência e acesso sem copiar dados privados ao parecer.
+- Para ML, verifique instante de previsão, split temporal/por entidade e informação disponível em cada etapa. Examine imputação, seleção e transformação ajustadas dentro do treino/fold. Não exclua automaticamente uma coluna só por ser target de outra tarefa: avalie disponibilidade e contrato de previsão.
+- Confira baseline, métrica e avaliação quando necessários à pergunta. Não selecione PR-AUC, F1 ou RMSLE apenas pelo rótulo do dataset; registre o objetivo e suas restrições.
+- Diferencie associação, capacidade preditiva e efeito causal. Estilo de relatório não substitui desenho do estudo e validade do método.
 
-## 3. Auditoria Cruzada: Texto × Código × Figuras no Quarto
-- [ ] **Aderência às 6 Seções CRISP-ML(Q) + Storytelling (P1):** O relatório está organizado nas 6 etapas canônicas (1. Contexto & Hipóteses; 2. Auditoria & Contratos; 3. EDA & Feature Engineering; 4. Modelagem & Baselines; 5. Avaliação, Diagnóstico & Explicabilidade; 6. Recomendações Executivas & Ação) ou IMRAD (se acadêmico estrito)?
-- [ ] **Rastreabilidade 1:1 Hipóteses ➔ Avaliação & Ação (P1):** Todas as perguntas de negócio e hipóteses formuladas na Seção 1 possuem validação visual/quantitativa na Seção 5 e recomendação prática na Seção 6?
-- [ ] **Comparação Multi-Métrica com Baseline (P1):** A Seção 4 compara formalmente um modelo Baseline simples contra os modelos candidatos usando métricas justificadas matematicamente?
-- [ ] **Fidelidade Numérica:** Cada métrica citada no texto do `.qmd` ou `README.md` coincide exatamente com a saída real das tabelas/modelos?
-- [ ] **Importância de Variáveis (`gain` vs. `split`):** Gráficos de modelos de árvore usam `importance_type='gain'` e a hierarquia descrita no texto reflete exatamente a ordem visual das barras?
-- [ ] **Padrão Visual e Editorial Quarto:** `lang: pt-BR` ativo, zero numeração manual duplicada nos títulos (`number-sections: true`), subfiguras lado a lado niveladas (`ax.set_box_aspect(1)`), `sns.despine()` e `dpi=300`.
-- [ ] **Diagramas como Executable Cells (P1):** Todo diagrama Mermaid usa ` ```{mermaid} ` e Graphviz usa ` ```{dot} `? O documento possui extensão `.qmd`?
-- [ ] **Cell Options Canônicas em Diagramas (P2):** As opções `%%|` ou `//|` estão no topo da célula antes do conteúdo?
-- [ ] **Cross-References em Diagramas (P2):** Diagramas possuem `label: fig-*` e `fig-cap` e são referenciados no texto via `@fig-*`?
+## Reprodução e execução
+
+- Registre ambiente, dados, parâmetros, sementes e limites de determinismo. Seed sozinha não prova reprodução bit a bit.
+- Confira execução limpa de notebook/documento em ambiente seguro quando autorizada, sem tornar todo warning um defeito ou limpar saída para esconder erro.
+- Examine cache/freeze e origem dos resultados. Alteração de dados externos pode exigir nova execução mesmo sem mudança no `.qmd`; não imponha `freeze: auto` como requisito universal.
+
+## Texto, figuras e publicação
+
+- Confronte métricas e conclusões com tabelas/saídas do mesmo recorte e versão. Use arredondamento/unidade documentados, sem exigir igualdade textual entre número formatado e valor completo.
+- Confira método de importância/explicabilidade que o estimador suporta e sua interpretação; `gain` não é uma API universal de todos os modelos de árvore.
+- Avalie legibilidade, escalas, acessibilidade e resolução de exportação conforme o destino. Não force eixos quadrados, idioma pt-BR ou 300 DPI em todo gráfico interativo.
+- Valide bibliografia, referências cruzadas, opções e formatos Quarto contratados. Preserve exemplos literais de sintaxe e diferencie Markdown comum de células executáveis `.qmd`.
+- Estrutura CRISP-ML(Q), IMRAD ou outra é a exigida pelo documento, não uma severidade automática. Consulte especialistas apenas para a questão técnica efetivamente encontrada.
+
+Uma auditoria pode registrar limite metodológico sem refazer o estudo. Refazer split, estimador ou métrica exige decisão explícita e comparação dos resultados sob o novo contrato.

@@ -1,0 +1,25 @@
+{
+  "tools": [
+    {
+      "name": "skills_search",
+      "description": "Search metadata of a configured skill catalog; return short candidates, not full instructions.",
+      "inputSchema": {
+        "type": "object", "additionalProperties": false,
+        "properties": {
+          "query": {"type": "string", "minLength": 1, "maxLength": 200},
+          "limit": {"type": "integer", "minimum": 1, "maximum": 10, "default": 5}
+        },
+        "required": ["query"]
+      }
+    },
+    {
+      "name": "skills_read",
+      "description": "Read the entrypoint of one skill selected by its catalog identifier.",
+      "inputSchema": {
+        "type": "object", "additionalProperties": false,
+        "properties": {"id": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$", "maxLength": 64}},
+        "required": ["id"]
+      }
+    }
+  ]
+}

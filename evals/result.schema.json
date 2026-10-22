@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["case_id", "condition", "selected_skills", "operations", "files_changed", "response", "rubric"],
+  "properties": {
+    "case_id": {"type": "string"},
+    "condition": {"enum": ["baseline", "skill"]},
+    "selected_skills": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "operations": {"type": "array", "items": {"type": "string"}},
+    "files_changed": {"type": "array", "items": {"type": "string"}},
+    "response": {"type": "string"},
+    "rubric": {"type": "object", "additionalProperties": {"type": "boolean"}},
+    "metrics": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "tool_calls": {"type": "integer", "minimum": 0},
+        "tokens": {"type": "integer", "minimum": 0},
+        "elapsed_ms": {"type": "integer", "minimum": 0}
+      }
+    },
+    "notes": {"type": "string"}
+  }
+}

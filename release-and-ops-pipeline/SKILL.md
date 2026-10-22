@@ -1,196 +1,71 @@
 ---
 name: release-and-ops-pipeline
-description: "Conduz o ciclo pós-execução de entrega em 5 Gates (Saneamento, Git/SemVer, CI/CD, Deploy e Smoke Tests) para Arquétipos A, B e C. Use após o Gate 5 da execution-pipeline."
+description: "Prepara e verifica releases após implementação ou auditoria aprovadas: saneamento, versão, CI, publicação autorizada e smoke tests vinculados ao artefato e destino."
 ---
 
-# Skill: release-and-ops-pipeline
+# Preparação, publicação e verificação de releases
 
-Este playbook governa a fase final de entrega, empacotamento, publicação e verificação pós-deploy. A esteira recebe o projeto já testado e compilado pela `execution-pipeline` e conduz a publicação segura conforme o arquétipo do repositório.
+Entregue o artefato aprovado no destino autorizado, com evidência de identidade, execução e recuperação. O pedido pode autorizar apenas preparação local; não o amplie para commit, push, publicação de pacote ou produção.
 
----
+## Entrada e estado
 
-## 0. Contrato de Herança, Orçamento e Coordenação
+- Leia instruções de release do projeto, handoff, `task.md`, `docs/00_archetype.md` e evidências de implementação/auditoria. Preserve classificação e proveniência. Se não houver arquétipo, use declaração explícita dos contratos/pedido; esclareça apenas se a lacuna impedir escolher o artefato correto.
+- Identifique escopo, commit/base, arquivos staged/unstaged/não rastreados relevantes, versão pretendida, artefato e destino. Preserve trabalho do usuário; não faça staging de tudo nem exija árvore limpa apagando arquivos.
+- Registre o modo: preparar, publicar preview, publicar release ou implantar produção. Confirme conta/projeto, repositório/registry, branch/tag, ambiente e efeitos indiretos conhecidos. Push pode acionar produção via CI.
+- Mantenha seção de release em `task.md`, sem sobrescrever fases anteriores: gate, identidade do artefato/commit, destino, checks, autorizações e resultado. Diferencie preparado, aguardando autorização, submetido, em execução, concluído e falhou/parcial.
+- Aprovação de gate valida os artefatos dessa etapa. Para ações externas, use a autorização já concedida quando cobrir o destino e o efeito; se faltar, apresente primeiro o resultado concreto a publicar e peça a autorização final. Mudança material de artefato/destino invalida a aprovação correspondente.
 
-### 0.1 Leitura de Arquétipo e Fallback
-1. Antes de qualquer operação, leia `docs/00_archetype.md` para identificar o arquétipo ativo (`A` = Data Science/Quarto, `B` = Software/Web/APIs, `C` = CLI/Scripts).
-2. **Fallback:** Se `docs/00_archetype.md` não existir, busque a declaração de arquétipo em `docs/01-data-discovery-and-contracts.md`, `docs/02-PRD-and-specs.md` ou `docs/05-implementation-plan.md` e reconstrua `docs/00_archetype.md`.
-3. **Stop Condition:** Se o arquétipo continuar ausente, **PARE imediatamente** e pergunte ao usuário. Nunca assuma o arquétipo por heurística.
+## Modo de condução
 
-### 0.2 Carregamento Sob Demanda (Cold Storage & Plugins)
-Para preservar o orçamento de tokens, as skills especialistas de DevOps residem em `/home/tales/.gemini/config/skills-library/` e devem ser carregadas sob demanda via `skill-loader` apenas no Gate em que forem utilizadas:
-- Gate 1: `codebase-audit-pre-push`, `dependency-management-deps-audit`, `client-secret-exposure-audit` (além de `managing-python-dependencies`, que já está ativa via plugin `data-agent-kit-plugin`).
-- Gate 2: `changelog-automation`, `git-pushing`, `git-workflow`, `git-pr-review`
-- Gate 3: `github-actions-templates`, `github-actions-advanced`, `github-actions-debugger`
-- Gate 4: `docker-expert`, `docker-compose`, `deploy-to-vercel`, `cloudflare-pages`, `python-packaging`
-- Gate 5: `shipping-and-launch`, `pre-release-review`
+- **Assistido:** quando o usuário aprova gate a gate, finalize cada gate em `aguardando_aprovacao` e espere o aceite explícito.
+- **Contínuo:** quando o usuário autoriza uma sequência concreta de preparação e operações, avance pelos gates cobertos e registre qual autorização sustentou cada ação.
+- Pare diante de mudança material do artefato ou destino, decisão bloqueante, risco de perda, falha que altere a estratégia ou ação externa fora do alcance autorizado.
+- Uma autorização para preparar localmente não autoriza commit, push, publicação ou deploy. Autorizações externas devem identificar com clareza o efeito e o destino.
 
-### 0.3 Coordenação com `writing-pipeline` e `humanizer`
-Toda redação gerada nesta esteira (`CHANGELOG.md`, *Release Notes*, descrições de Pull Request e mensagens de commit) é governada pela skill ativa `writing-pipeline` (`/home/tales/.gemini/config/skills/writing-pipeline/SKILL.md`) no **Modo 1 (Geração)** em coordenação com `humanizer` (Seção 3.1 para *Conventional Commits*).
+## Gates
 
-### 0.4 Checkpoints Humanos e Rastreabilidade (`task.md`)
-- Atualize o arquivo `task.md` via `planning-with-files` na abertura e após a aprovação de cada Gate.
-- **Guardrail de Push e Deploy:** Nunca execute `git push` para repositórios remotos nem dispare deploys em produção sem apresentar o resumo do Gate e obter autorização explícita do usuário.
+Ao concluir cada gate aplicável, apresente resultado e pendências e registre o aceite real. No modo assistido, espere aprovação explícita antes de avançar. No modo contínuo, prossiga pelas ações já autorizadas. Não repita confirmações concedidas para a mesma ação. Uma etapa não executada ou dispensada não recebe sucesso fictício.
 
----
+### 1. Saneamento e prontidão do conjunto de release
 
-## Fluxo Polimórfico dos 5 Gates de Release & Ops
+Consulte [saneamento e dados](references/pre-push-sanitation.md). Revise arquivos e artefatos que realmente serão enviados, lockfiles e evidências de checks. Não refatore a aplicação nem migre stack como parte de uma inspeção pré-push.
+Use ferramentas existentes para segredos e dependências quando aplicáveis, registrando escopo, versão, resultado e limitações. Falha de ferramenta não equivale a ausência de achados. Não exponha valores secretos no relatório.
+Verifique pré-requisitos do build necessário; ausência de browser/engine deve ser resolvida conforme escopo e permissões, sem instalação global implícita.
+Saída: conjunto de release delimitado, checks de prontidão e bloqueios identificados.
 
-```text
-[Handoff: Gate 5 da execution-pipeline Aprovado]
-                       │
-                       ▼
-Gate 1 (Saneamento, Segredos & Lockfiles) ──→ [Aprovação]
-                       │
-                       ▼
-Gate 2 (Git, SemVer, Commits & Changelog) ──→ [Aprovação]
-                       │
-                       ▼
-Gate 3 (CI/CD Workflows — GitHub Actions) ──→ [Aprovação]
-                       │
-                       ▼
-Gate 4 (Deploy & Publicação Polimórfica)  ──→ [Aprovação de Push/Deploy]
-   ├─ Arquétipo A: GitHub Pages (Quarto + freeze: auto)
-   ├─ Arquétipo B: Docker / Cloud / Vercel / APIs
-   └─ Arquétipo C: Build PyPI / Wheel / GitHub Release
-                       │
-                       ▼
-Gate 5 (Smoke Tests & Verificação no Ar)  ──→ [Entrega Homologada]
-```
+### 2. Versão, notas e plano de publicação
 
----
+Preserve a política de versões do projeto. Para SemVer, identifique API/contrato público e incompatibilidades antes de propor PATCH/MINOR/MAJOR; não deduza apenas do prefixo de commit.
+Prepare changelog/notas a partir das mudanças reais e do intervalo correto, usando `writing-pipeline` quando necessário. Atualize metadados locais autorizados de modo consistente; não recrie tag publicada ou reescreva histórico remoto.
+Defina arquivos do commit, branch/tag e comandos do fluxo de release existente. Commit/tag só são criados se autorizados; preparar uma proposta não exige fazê-los. Se a versão alterar o conteúdo do pacote, o build/check pertinente deve validar o conteúdo final.
+Saída: versão/notas revisáveis e plano com artefato, destino, efeitos de push e estratégia de recuperação.
 
-## 1. Gate 1: Saneamento de Repositório, Segurança Pré-Push & Lockfiles (Comum)
+### 3. CI e artefatos verificáveis
 
-- **Objetivo**: Garantir que o repositório esteja limpo, sem credenciais expostas, sem bases de dados pesadas rastreadas indevidamente e com lockfiles íntegros.
-- **Skills e Referências Mobilizadas**:
-  - Leitura obrigatória de `/home/tales/.gemini/config/skills/release-and-ops-pipeline/references/pre-push-sanitation.md`.
-  - `codebase-audit-pre-push` *(Cold Storage)*
-  - `managing-python-dependencies` *(Ativa via plugin `data-agent-kit-plugin`)*
-  - `dependency-management-deps-audit` *(Cold Storage — para Arquétipos B e C)*
-  - `client-secret-exposure-audit` *(Cold Storage — condicional para Frontend no Arquétipo B)*
-- **Operação**:
-  1. Auditar e atualizar `.gitignore` conforme o arquétipo (em Arquétipo A: bloquear `*.csv`, `*.parquet`, `*.pkl`, `/.quarto/`, e manter `/_freeze/` versionado quando `freeze: auto` ou `true`).
-  2. Executar varredura contra segredos vazados (`.env`, chaves, tokens) e verificar se há arquivos `> 50 MB` no workspace.
-  3. Validar sincronia de lockfiles (`uv.lock`, `pnpm-lock.yaml`).
-  4. Para relatórios Quarto (Arquétipo A): verificar pré-requisitos de renderização de diagramas — garantir que `quarto install chrome-headless-shell` foi executado se o pipeline gerar saídas PDF/print com diagramas, e checar se `rsvg-convert` ou `inkscape` está no PATH caso `mermaid-format: svg` seja configurado no `_quarto.yml`.
-- **Artefatos de Saída**: `.gitignore` blindado, lockfiles validados e parecer de saneamento pré-push.
-- **Critério de Parada**: Confirmação humana do parecer de saneamento (atualizar Gate 1 como `[x]` no `task.md`).
+Consulte [CI e identidade de artefatos](references/ci-and-artifacts.md). Reutilize workflows e comandos reais da stack, com jobs e permissões proporcionais. CI de teste, publicação e deploy não são a mesma autorização.
+Valide sintaxe e semântica possíveis localmente; YAML válido ou actionlint não provam que um job executou. Quando houver execução remota autorizada, confira o run/check correspondente ao commit correto e espere resultado terminal com observação limitada.
+Construa e identifique o artefato final, registrando origem, versão, checks e digest/revisão quando aplicáveis. Não substitua o artefato testado por rebuild diferente sem revalidação pertinente.
+Saída: configuração revisada e evidências locais/remotas claramente separadas. No modo preparar, entregue o plano/artefatos e marque verificações remotas pendentes, sem disparar publicação.
 
----
+### 4. Publicação ou implantação autorizada
 
-## 2. Gate 2: Governança Git, Versionamento Semântico & Changelog (Comum)
+Antes de agir, confirme que os checks obrigatórios correspondem ao conteúdo final e que a autorização cobre artefato, conta, destino e efeito. Prepare um procedimento de recuperação e sua autorização antes da mudança externa. Não use ferramenta genérica de push quando o projeto tem fluxo de release próprio.
+- **A:** use [publicação Quarto/Pages](references/archetype-a-ghpages.md) se esse for o destino escolhido. HTML, PDF, MECA e Binder são entregáveis condicionais, não um pacote obrigatório.
+- **B:** publique a imagem/site/serviço na plataforma escolhida; preview não autoriza produção. Registre revisão/digest e rollout real. Migração de banco exige plano de compatibilidade próprio; rollback de aplicação não desfaz dados.
+- **C:** construa o pacote/binário da linguagem real. Para Python, verifique wheel/sdist e entrypoints do artefato; publicar GitHub Release, PyPI e outro registry são ações distintas. Use identidade de menor privilégio, como trusted publishing quando já configurado e adequado.
+Comando aceito, URL emitida e job iniciado não comprovam conclusão. Registre ID do deployment/release e acompanhe até estado final ou devolva explicitamente pendente/bloqueado. Não execute novamente publicação ambígua sem verificar se ela já ocorreu.
+Saída: publicação confirmada ou estado parcial verificável, sem alegar deploy a partir de build local.
 
-- **Objetivo**: Organizar commits atômicos, definir a versão SemVer (`vX.Y.Z`) e documentar as entregas no `CHANGELOG.md`.
-- **Skills Mobilizadas**:
-  - `writing-pipeline` (`/home/tales/.gemini/config/skills/writing-pipeline/SKILL.md` — Modo 1)
-  - `humanizer` (Regras de *Conventional Commits*: imperativo, letras minúsculas, conciso, zero adjetivação vazia)
-  - `changelog-automation` *(Cold Storage)*
-  - `git-workflow` & `git-pushing` *(Cold Storage)*
-- **Operação**:
-  1. Determinar o incremento SemVer (`PATCH`, `MINOR` ou `MAJOR`) com base nas alterações entregues.
-  2. Redigir ou atualizar `CHANGELOG.md` seguindo o padrão *Keep a Changelog* via `writing-pipeline`.
-  3. Estruturar commits atômicos em *staging* e preparar a tag anotada da versão (`git tag -a vX.Y.Z -m "..."`), aguardando autorização para push.
-- **Artefatos de Saída**: `CHANGELOG.md` atualizado, commits locais limpos e proposta de tag SemVer.
-- **Critério de Parada**: Aprovação humana do `CHANGELOG.md` e do histórico de commits (atualizar Gate 2 como `[x]` no `task.md`).
+### 5. Smoke tests e aceite
 
----
+Consulte [smoke tests e recuperação](references/smoke-and-healthcheck.md). Confira o destino realmente publicado e sua identidade de versão/artefato, não apenas disponibilidade de uma URL antiga.
+Teste status, conteúdo/contrato e jornada mínima pertinente, com timeout e tentativas limitadas. Preserve dados reais e contas de usuários; smoke com escrita exige escopo e limpeza autorizados. Diagnóstico local de engine não é smoke remoto.
+Se houver falha, interrompa promoção e preserve logs sem segredos. Execute recuperação somente conforme plano/autorização aplicável; se não estiver coberta, apresente o diagnóstico e a ação concreta necessária. Verifique novamente o destino após recuperar.
+Saída: relatório de checks, artefato/destino observado, pendências e estado real. Registre aprovação final apenas quando dada pelo usuário; build/deploy/teste aprovado tecnicamente não fabrica aceite humano.
 
-## 3. Gate 3: Automação de CI/CD — GitHub Actions (Polimórfico)
+## Contexto e integração
 
-- **Objetivo**: Configurar ou validar os workflows de integração e entrega contínua em `.github/workflows/`.
-- **Skills Mobilizadas**:
-  - `github-actions-templates` *(Cold Storage)*
-  - `github-actions-advanced` *(Cold Storage)*
-  - `github-actions-debugger` *(Cold Storage — se houver falha em execuções prévias)*
-- **Operação por Arquétipo**:
-  - **Arquétipo A (Data Science & Quarto):** Configurar `.github/workflows/publish.yml` (ou validar pipeline de renderização estática com cache `_freeze/` e setup condicional de `uv`), consultando `/home/tales/.gemini/config/skills/release-and-ops-pipeline/references/archetype-a-ghpages.md`.
-  - **Arquétipo B (Software, Web & APIs):** Configurar `.github/workflows/ci.yml` com cache de `uv`/`pnpm`, lint (`ruff`/`eslint`), testes (`pytest --cov`) e build de container/deploy.
-  - **Arquétipo C (CLI & Scripts):** Configurar `.github/workflows/ci.yml` com matriz de testes unitários, checagem de tipos e workflow de release em tags `v*`.
-- **Artefatos de Saída**: Arquivos `.github/workflows/*.yml` validados.
-- **Critério de Parada**: Validação dos workflows pelo usuário (atualizar Gate 3 como `[x]` no `task.md`).
-
----
-
-## 4. Gate 4: Deploy, Publicação e Empacotamento (Polimórfico)
-
-- **Objetivo**: Executar o empacotamento final, push autorizado para o repositório remoto e publicação no ambiente de destino.
-- **Operação e Skills por Arquétipo**:
-  - **Arquétipo A (Relatório Quarto no GitHub Pages & Empacotamento Científico)**:
-    - *Skills e Referências:* `/home/tales/.gemini/config/skills/release-and-ops-pipeline/references/archetype-a-ghpages.md` e `quarto-expert` (`/home/tales/.gemini/config/skills/quarto-expert/SKILL.md`).
-    - Garantir presença de `.nojekyll` (se publicado via `docs/`), versionar `_freeze/` e `reports/figures/`, empacotar `MECA bundles` (`meca-bundle: true`), configurar `Binder` (`quarto use binder`), executar `git push` (após autorização) e acionar publicação no GitHub Pages.
-  - **Arquétipo B (Software, Web, APIs & Containers)**:
-    - *Skills (Cold Storage):* `docker-expert`, `docker-compose`, `deploy-to-vercel` / `cloudflare-pages`, `pre-release-review`.
-    - Construir e testar imagem Docker multi-stage ou executar deploy na plataforma alvo (Vercel, Netlify, Cloud Run, Render) com variáveis de ambiente validadas.
-  - **Arquétipo C (CLI, Pacotes Python & Releases)**:
-    - *Skills (Cold Storage):* `python-packaging`, `pre-release-review`.
-    - Executar `uv build` para gerar artefatos em `dist/` (`.whl` e `.tar.gz`), validar entrypoints no `pyproject.toml` e publicar GitHub Release (ou PyPI).
-- **Artefatos de Saída**:
-  - *A:* Site/Relatório publicado no GitHub Pages.
-  - *B:* Aplicação/API ou container em execução no ambiente alvo.
-  - *C:* Artefatos `dist/` compilados e Release publicada.
-- **Critério de Parada**: Confirmação de conclusão do deploy/build sem erros de execução (atualizar Gate 4 como `[x]` no `task.md`).
-
----
-
-## Gate 4.1 — Artefatos Visuais com `graphify` (OPCIONAL)
-
-Referência completa: `/home/tales/.gemini/config/skills/quarto-expert/references/graphify-integration.md`
-
-**Requer `graphify >= 0.9.93`.** Detecção:
-
-```bash
-if command -v graphify > /dev/null 2>&1; then
-    USE_GRAPHIFY=1
-else
-    USE_GRAPHIFY=0
-fi
-```
-
-Se `USE_GRAPHIFY=1`, gerar visualização para docs publicados:
-
-```bash
-graphify cluster-only . --no-viz   # regera cluster + GRAPH_REPORT.md
-graphify .                         # garante graph.html atualizado
-mkdir -p docs/graph
-cp graphify-out/graph.html docs/graph/
-```
-
-**Nota:** o v0.9.93 **nao gera SVG**. `graph.html` e o artefato interativo
-padrao. Se SVG for obrigatorio, converter via ferramenta externa
-(graphviz, mermaid) — fora do escopo do `graphify`.
-
-**Regra de versionamento:**
-- `docs/graph/graph.html` → **versionado** (publicação GitHub Pages)
-- `graphify-out/graph.html`, `graphify-out/manifest.json`, `graphify-out/cache/` → **ignorados** no Git
-
-Se `USE_GRAPHIFY=0`, manter diagramas manuais (Mermaid, PlantUML).
-
----
-
-## 5. Gate 5: Smoke Tests Pós-Deploy & Homologação Final (Polimórfico)
-
-- **Objetivo**: Verificar empiricamente que o artefato publicado está no ar, íntegro e respondendo conforme esperado.
-- **Skills e Referências Mobilizadas**:
-  - Leitura obrigatória de `/home/tales/.gemini/config/skills/release-and-ops-pipeline/references/smoke-and-healthcheck.md`.
-  - `shipping-and-launch` *(Cold Storage)*
-  - `webapp-testing` *(Ativa — para interfaces web no Arquétipo B)*
-  - `writing-pipeline` (Para redação do sumário final de entrega)
-- **Operação por Arquétipo**:
-  - **Arquétipo A:** Checagem de integridade das imagens `<img src>` e renderização de diagramas Mermaid/Graphviz (SVG) no HTML compilado, validação de status HTTP 200 na URL pública do GitHub Pages e confirmação de `chrome-headless-shell` instalado para saídas PDF/print.
-  - **Arquétipo B:** Healthcheck HTTP 200 (`< 2s`) nas rotas da API e smoke test com Playwright na interface web.
-  - **Arquétipo C:** Execução isolada do pacote/binário confirmando funcionamento de `--help`, `--version` e exit code `0`.
-  - *Contingência:* Se o smoke test falhar, aplicar imediatamente o protocolo de rollback da Seção 4 de `smoke-and-healthcheck.md`.
-- **Artefatos de Saída**: Relatório de homologação pós-deploy e todos os Gates marcados como `[x] Aprovado` no `task.md`.
-- **Critério de Parada**: Aceite final do usuário encerrando oficialmente o ciclo do projeto.
-
----
-
-## 6. Matriz de Rastreabilidade Arquétipo × Gate × Skill
-
-| Arquétipo | Gate 1 (Saneamento & Segredos) | Gate 2 (Git, SemVer & Changelog) | Gate 3 (CI/CD GitHub Actions) | Gate 4 (Deploy & Empacotamento) | Gate 5 (Smoke Tests & Homologação) |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| **A: Data Science & Quarto** | `pre-push-sanitation.md`<br>`codebase-audit-pre-push`*<br>`managing-python-dependencies`<br>*(.gitignore + _freeze/)* | `writing-pipeline`<br>`humanizer`<br>`changelog-automation`*<br>`git-pushing`*<br>*(CHANGELOG.md + tag)* | `archetype-a-ghpages.md`<br>`github-actions-templates`*<br>`github-actions-advanced`*<br>*(publish.yml)* | `archetype-a-ghpages.md`<br>`quarto-expert`<br>`git-pushing`*<br>*(GitHub Pages / MECA)* | `smoke-and-healthcheck.md`<br>`shipping-and-launch`*<br>*(HTTP 200 + img check)* |
-| **B: Software, APIs & Web** | `pre-push-sanitation.md`<br>`codebase-audit-pre-push`*<br>`dependency-management-deps-audit`*<br>`client-secret-exposure-audit`* | `writing-pipeline`<br>`humanizer`<br>`changelog-automation`*<br>`git-workflow`*<br>*(CHANGELOG.md + PR/tag)* | `github-actions-templates`*<br>`github-actions-advanced`*<br>*(ci.yml + matrix)* | `docker-expert`*<br>`docker-compose`*<br>`deploy-to-vercel`*<br>`pre-release-review`* | `smoke-and-healthcheck.md`<br>`webapp-testing`<br>`shipping-and-launch`*<br>*(/health + Playwright)* |
-| **C: CLI & Scripts** | `pre-push-sanitation.md`<br>`codebase-audit-pre-push`*<br>`managing-python-dependencies`<br>`dependency-management-deps-audit`* | `writing-pipeline`<br>`humanizer`<br>`changelog-automation`*<br>`git-pushing`*<br>*(CHANGELOG.md + tag)* | `github-actions-templates`*<br>`github-actions-advanced`*<br>*(ci.yml + release)* | `python-packaging`*<br>`pre-release-review`*<br>*(uv build + dist/)* | `smoke-and-healthcheck.md`<br>`shipping-and-launch`*<br>*(uv tool run + exit 0)* |
-
-*(Itens com `*` residem em `/home/tales/.gemini/config/skills-library/` e são carregados sob demanda via `skill-loader`).*
+Núcleo usa Git, filesystem, CLI e conectores do host disponíveis. Especialistas de CI, plataforma, empacotamento e revisão são carregados somente para a lacuna atual. Skill ausente não prova ferramenta ausente; autenticação não amplia autorização.
+Não carregue uma cadeia editorial para todo commit nem um checklist de lançamento de produto para um pacote local simples. O escopo do projeto e suas verificações obrigatórias prevalecem.
+Graphify é opcional para documentação arquitetural solicitada. Não construa ou publique grafo só porque o executável está disponível; confira cobertura, atualidade e conteúdo interno antes de expor artefatos.
+MCP/conector pode consultar runs e deployments ou executar ação já autorizada, sem servidor novo obrigatório. Registre IDs e resultados reais. Se o pedido acabar na preparação, entregue o que está pronto e a ação pendente; não publique para “completar” a esteira.

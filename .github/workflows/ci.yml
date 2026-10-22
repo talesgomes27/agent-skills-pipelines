@@ -1,0 +1,47 @@
+name: CI
+
+"on":
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: ${{ matrix.os }} / Python ${{ matrix.python }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python: ["3.9", "3.14"]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: ${{ matrix.python }}
+          cache: pip
+      - name: Install validation dependencies
+        run: python -m pip install -r distribution/requirements.txt
+      - name: Run unit tests
+        run: python -m unittest discover -s tests -v
+      - name: Validate catalog and skills
+        run: python scripts/skills.py doctor --agent codex --scope project
+      - name: Validate behavioral eval cases
+        run: python scripts/evals.py validate
+      - name: Exercise copy installation
+        run: python scripts/skills.py install --agent codex --dest "${{ runner.temp }}/skills-copy" --all --exclude humanizer
+
+  link-install:
+    name: Linux symbolic-link installation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.14"
+          cache: pip
+      - run: python -m pip install -r distribution/requirements.txt
+      - name: Exercise link installation
+        run: python scripts/skills.py install --agent codex --dest "${{ runner.temp }}/skills-link" --all --exclude humanizer --mode link

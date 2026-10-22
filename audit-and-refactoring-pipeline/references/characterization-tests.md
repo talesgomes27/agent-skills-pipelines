@@ -1,29 +1,30 @@
-# Protocolo de Testes de Caracterização (Pinning Tests / Golden Master)
+# Caracterização, mudanças intencionais e recuperação
 
-Este protocolo é obrigatório no **Gate 3** da `audit-and-refactoring-pipeline` antes de modificar qualquer módulo legado sem cobertura de testes confiável.
+## O que proteger
 
-## 1. Regra de Ouro (Preservação Comportamental)
-O teste de caracterização registra o comportamento **atual** do sistema em produção como uma rede de segurança (*Safety Net*).
-- **Invariante:** Nenhum teste de caracterização pode falhar durante as refatorações estruturais do Gate 4, **exceto** quando a fatia atual estiver corrigindo intencionalmente um bug classificado como **Crítico (P0)** no `docs/audit-report.md`.
+Caracterização registra comportamento observado, inclusive comportamentos suspeitos. Ela não decide se o comportamento está correto. Identifique fronteiras e casos relevantes à fatia: retornos, serialização, erros, efeitos em persistência, ordem significativa, recursos e contratos de terminal.
+Use testes existentes quando já cobrem esses contratos. Golden Master/snapshot é uma técnica opcional; asserts específicos e testes de integração podem produzir proteção melhor e menor custo. Use runner e diretório de testes compatíveis com o projeto.
 
-## 2. Implementação Prática por Arquétipo (`pytest`)
+## Fixtures e oráculos
 
-### 2.1 Arquétipo A (Pipelines de Dados e Modelos)
-1. Fixe a semente global (`np.random.seed(42)`) e crie uma amostra reduzida determinística (20 a 100 linhas).
-2. Grave em `tests/characterization/test_pinning_<modulo>.py` asserções que congelem:
-   - Colunas de saída, ordem e `dtypes` exatos.
-   - Dimensões (`shape`) pós-transformação e contagem de nulos.
-   - Somas de verificação e estatísticas invariantes (`np.isclose(df['feature'].sum(), valor_registrado, rtol=1e-5)`).
+- Use dados pequenos representativos dos riscos, não uma quantidade universal de 20–100 linhas. Inclua limites, nulos, duplicatas, datas, grupos e casos de falha quando pertinentes. Preserve fontes brutas; fixtures públicas/sintéticas identificadas evitam copiar dados sensíveis.
+- Controle relógio, aleatoriedade, caminhos e fronteiras externas quando isso for parte do teste. Uma seed global não controla sozinha todos os estimadores, threads, backends ou serviços.
+- Compare conteúdo ou propriedades que realmente detectem o defeito. Shape, dtype e soma podem coincidir entre resultados diferentes. Para arrays/tabelas, confira chaves, valores e alinhamento relevantes; para APIs, status/payload e transições; para CLI, streams, exit codes e efeitos em diretórios temporários.
+- Defina tolerâncias numéricas pela precisão e domínio, com casos próximos de zero quando pertinentes. Não copie `rtol=1e-5` para todo cálculo.
+- Normalize apenas volatilidade conhecida e irrelevante, como caminho temporário, preservando campos que fazem parte do contrato. Não remova erro, timestamp de negócio ou diferença significativa para obter snapshot verde.
+- Aprove a baseline por inspeção; não atualize snapshots indiscriminadamente. Guarde dados de entrada e ambiente suficientes para reexecutar sem segredos.
 
-### 2.2 Arquétipo B (APIs, Serviços e Repositórios)
-1. Capture pares reais de `(payload_entrada, resposta_esperada)` nos endpoints ou serviços principais.
-2. Congele o status HTTP, o schema JSON retornado e as transições de estado no banco de teste.
+## Correções de comportamento
 
-### 2.3 Arquétipo C (Scripts e Ferramentas CLI)
-1. Invoque o comando via `subprocess.run([sys.executable, ...], capture_output=True, text=True)`.
-2. Congele o código de saída POSIX (`returncode`), o `stdout` padrão e as mensagens de erro em `stderr`.
+Registre o comportamento atual e o desejado, com motivo e critério de aceite aprovado. Acrescente teste do requisito corrigido e demonstre a falha esperada antes de implementar quando viável. Requisitos de segurança ou integridade não devem ficar congelados como comportamento correto.
+Toda alteração intencional precisa dessa distinção, seja P0, P1 ou outra prioridade. Não trate P0 como licença para quebrar testes, nem bloqueie correção aprovada de outro nível apenas por não ser P0.
 
-## 3. Protocolo *Verify-Revert-Stop* (Durante o Gate 4)
-Ao final de cada fatia de refatoração no Gate 4:
-1. Execute `pytest` completo (incluindo `tests/characterization/`).
-2. Se houver quebra não intencional: **reverta imediatamente a fatia** (`git checkout -- <arquivos>`) e reavalie o acoplamento antes de tentar novamente.
+## Verify, recuperar, parar
+
+1. Antes da fatia, identifique base, arquivos e estado staged/unstaged/não rastreado. Registre patch/backup ou use isolamento apropriado sem sobrescrever trabalho prévio. Não faça stash, reset ou checkout geral para obter árvore limpa.
+2. Verifique os testes afetados e as dependências da fatia; execute checks integrados obrigatórios no fechamento e quando o risco exigir. Registre os resultados observados, sem esconder falhas preexistentes.
+3. Havendo diferença não autorizada, interrompa novas fatias. Se diagnóstico indicar reversão, remova apenas suas edições, preservando alterações anteriores e posteriores de outros autores. Snapshot de arquivo inteiro só é seguro sem edições concorrentes naquele arquivo desde a captura.
+4. Não use `git checkout -- <arquivos>` como desfazer universal: ele restaura o índice e pode descartar alterações unstaged que já existiam antes da fatia. Se a aplicação inversa não for segura, preserve evidências/diff e resolva o conflito antes de prosseguir.
+5. Confirme a recuperação com checks relevantes. Repetição de falha sem nova evidência exige replanejamento, não tentativas ilimitadas ou alteração do oráculo.
+
+Falha de ambiente, requisito conhecido não atendido e regressão introduzida são estados diferentes; todos devem aparecer no relatório quando limitarem o aceite.
