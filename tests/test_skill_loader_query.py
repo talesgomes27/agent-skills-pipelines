@@ -31,7 +31,10 @@ class QueryTests(unittest.TestCase):
     def test_exact_and_search_validate_manifest(self):
         code, result = self.run_cli('exact', 'alpha', '--root', str(self.root))
         self.assertEqual(code, 0)
-        self.assertTrue(result['result']['manifest'].endswith('/nested/alpha/SKILL.md'))
+        manifest = Path(result['result']['manifest'])
+        self.assertEqual(manifest.name, 'SKILL.md')
+        self.assertEqual(manifest.parent.name, 'alpha')
+        self.assertEqual(manifest.parent.parent.name, 'nested')
         code, result = self.run_cli('search', 'database architecture', '--root', str(self.root))
         self.assertEqual(code, 0)
         self.assertEqual(result['results'][0]['id'], 'alpha')
@@ -40,7 +43,8 @@ class QueryTests(unittest.TestCase):
         config = self.root / 'library.json'
         config.write_text(json.dumps({'root': str(self.root)}))
         with patch.object(cli, 'USER_CONFIG', config):
-            self.assertEqual(self.run_cli('root')[1]['root'], str(self.root))
+            resolved = Path(self.run_cli('root')[1]['root'])
+            self.assertTrue(resolved.samefile(self.root))
 
     def test_identity_mismatch_is_rejected(self):
         (self.root / 'nested/alpha/SKILL.md').write_text('---\nname: beta\ndescription: Wrong.\n---\n')
