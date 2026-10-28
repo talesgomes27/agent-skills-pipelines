@@ -1,5 +1,7 @@
 # Avaliações comportamentais
 
+Fonte operacional do contrato de casos, traces e relatório do harness. Mantida pelo responsável pelas avaliações; consumidores: executor de traces e avaliador. A [matriz de governança](distribution/architecture.md#governança-documental-vigente) define propriedade e precedência; logs datados preservam resultados sem substituir este contrato.
+
 O conjunto em `evals/cases.json` contém três casos por skill: ativação positiva, pedido ambíguo e caso negativo. Cada caso declara ativação esperada, sinais observáveis da resposta, operações proibidas e critérios que um avaliador deve marcar. O harness não chama um modelo e não atribui qualidade por semelhança textual; ele valida o contrato dos casos e classifica traces capturados por um executor externo.
 
 ## Fluxo

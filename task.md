@@ -1,5 +1,17 @@
 # Estado de melhoria do ecossistema
 
+## Estado vigente — MOD-004 / 2026-10-28
+
+- Modo: execução somente da MOD-004, autorizada pelo pedido atual.
+- Base: `fce31fe` (auditoria e MOD-001–MOD-003 commitadas nesta sessão, sem push).
+- Gate: MOD-004 validada tecnicamente; sem aceite humano final presumido.
+- Escopo, critérios e evidência: [contrato MOD-004](docs/audits/modernization-2026-10-28/roadmap.md#mod-004--formalizar-propriedade-e-verificação-documental).
+- Fonte da política vigente: [governança documental](docs/distribution/architecture.md#governança-documental-vigente).
+- Próxima ação: apresentar [resultado MOD-004](docs/audits/modernization-2026-10-28/mod-004.md) e parar; MOD-005 não autorizada. O commit pedido abrangeu as mudanças existentes até MOD-003; a nova fatia fica para revisão.
+- Os registros abaixo são históricos datados; suas versões, permissões e próximos passos não substituem esta seção.
+
+## Histórico — melhoria de 2026-10-22
+
 - modo: auditoria com execução autorizada
 - arquétipo: C (CLI e automação), com conteúdo declarativo de Agent Skills
 - base: `main` em `f89b9c9`; worktree já continha a refatoração aprovada das oito skills e a Fase 2 sem commit
@@ -58,3 +70,11 @@ Commit e push da entrega estão autorizados. Renomeação do repositório será 
 - Validação: baseline 35 testes OK; regressões reproduzidas antes da correção; final 38 testes OK, oito skills/24 casos/doctor Quarto/diff-check OK; smoke da CLI em cinco cenários sem traceback e sem alterar traces.
 - Evidência: [resultado MOD-003](docs/audits/modernization-2026-10-28/mod-003.md).
 - Próxima ação autorizada: apresentar resultado e parar. Sem MOD-004 ou operações Git de escrita.
+
+## Execução MOD-004 — 2026-10-28
+
+- Autorização: commit das mudanças acumuladas até MOD-003 e implementação da MOD-004, conforme pedido atual; sem push ou avanço à MOD-005.
+- Commit acumulado: `fce31fe`; árvore limpa antes de iniciar esta fatia.
+- Resultado: MOD-004 validada tecnicamente, em mudanças locais para revisão. Matriz operacional de fontes, precedência do estado vigente e validação dos links de referências ativas adotadas sem remover história.
+- Verificações: baseline 38 testes OK, quatro falhas reproduzidas antes da correção, final 42 testes OK; doctors/24 casos/instalação temporária copy e link/diff-check OK.
+- Evidência: [resultado MOD-004](docs/audits/modernization-2026-10-28/mod-004.md); nenhuma atualização de instalação real.

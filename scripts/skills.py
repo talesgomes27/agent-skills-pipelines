@@ -119,19 +119,6 @@ def validate_skill(folder, expected):
         raise ValueError(str(folder) + ': invalid name/description')
     if 'metadata' in data and (not isinstance(data['metadata'], dict) or any(not isinstance(k, str) or not isinstance(v, str) for k, v in data['metadata'].items())):
         raise ValueError(str(folder) + ': metadata must map strings to strings')
-    # Entrypoint links are executable routing, unlike illustrative snippets in guides.
-    body = re.sub(r'```.*?```', '', text[match.end():], flags=re.S)
-    for link in re.findall(r'\]\(([^)]+)\)', body):
-        url = urlsplit(link.strip('<>'))
-        if url.scheme or not url.path:
-            continue
-        resource = (folder / unquote(url.path)).resolve()
-        try:
-            resource.relative_to(folder.resolve())
-        except ValueError as exc:
-            raise ValueError('Entrypoint reference escapes package: ' + link) from exc
-        if not resource.exists():
-            raise ValueError('Missing entrypoint reference: ' + link)
     for f in folder.rglob('*'):
         if f.is_symlink():
             raise ValueError('Nested symlink unsupported in distributed package: ' + str(f))
@@ -140,6 +127,23 @@ def validate_skill(folder, expected):
                 yaml.load(f.read_text(encoding='utf-8'), Loader=UniqueLoader)
             except yaml.YAMLError as exc:
                 raise ValueError('Invalid resource YAML: ' + str(f)) from exc
+    sources = [folder / 'SKILL.md'] + sorted((folder / 'references').rglob('*.md'))
+    for source in sources:
+        body = text[match.end():] if source == folder / 'SKILL.md' else source.read_text(encoding='utf-8')
+        body = re.sub(r'(?ms)^[ \t]*(`{3,}|~{3,})[^\n]*\n.*?^[ \t]*\1[ \t]*(?:\n|$)', '', body)
+        body = re.sub(r'(`+).*?\1', '', body, flags=re.S)
+        # shortcut: checks inline Markdown destinations, use a parser if reference-style links are adopted.
+        for link in re.findall(r'\]\(([^)]+)\)', body):
+            url = urlsplit(link.strip('<>'))
+            if url.scheme or url.netloc or not url.path:
+                continue
+            resource = (source.parent / unquote(url.path)).resolve()
+            try:
+                resource.relative_to(folder.resolve())
+            except ValueError as exc:
+                raise ValueError('Reference escapes package: ' + str(source) + ': ' + link) from exc
+            if not resource.exists():
+                raise ValueError('Missing reference: ' + str(source) + ': ' + link)
     return {'skill': expected, 'status': 'pass', 'characters': len(text)}
 
 

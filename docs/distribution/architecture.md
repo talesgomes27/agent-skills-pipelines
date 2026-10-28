@@ -2,6 +2,29 @@
 
 Implementado em 2026-10-22 após aprovação e consolidação das oito auditorias. Fonte única: oito pacotes na raiz; catálogo versionado em `distribution/catalog.json`; CLI em `scripts/skills.py`. Arquivos históricos e propostas não são pacotes distribuíveis.
 
+## Governança documental vigente
+
+Política adotada na MOD-004 (2026-10-28). Consumidores: mantenedor, autores de skills, revisores e operadores de distribuição. Este guia mantém a propriedade da informação; os documentos apontados mantêm seu conteúdo, sem cópia obrigatória entre pipelines.
+
+| Informação | Fonte canônica | Mantenedor / consumidor | Quando conferir |
+|---|---|---|---|
+| Escopo e autorização | Pedido atual e contrato aprovado da tarefa | Usuário / executor | Antes de agir; autorização histórica não amplia tarefa nova |
+| Comportamento requerido | Contrato aprovado, referenciado no task | Responsável pelo requisito / implementador e revisor | Mudança de requisito ou discrepância com código |
+| Comportamento observado | Código, testes e saídas com base identificada | Autor da mudança / revisor | Mudança funcional e validação |
+| Seleção, bundles e release | `distribution/catalog.json` | Mantenedor da distribuição / CLI e operador | Alteração de pacote ou release; conferir derivados no README |
+| Identidade e procedimento da skill | Frontmatter e corpo do `SKILL.md` ativo | Autor da skill / host e chamador | Alteração do contrato; referências especializadas sob demanda |
+| Instalação e comandos | CLI e este guia; biblioteca em `docs/library-maintenance.md`; evals em `docs/evals.md` | Mantenedor do componente / operador | Mudança de interface, dependência ou recuperação |
+| Estado vigente | Seção inicial de `task.md`, com base, autorização e próxima ação | Executor / retomada | Por tarefa ou check; registros anteriores permanecem históricos |
+| Decisões duráveis | ADR aprovado, quando necessário | Responsável pela decisão / futuros autores | Mudança arquitetural relevante; nenhum ADR obrigatório por tarefa |
+| Resultado verificado | Log/artefato datado com comando, ambiente, base e limites | Executor / avaliador | Nova execução; não substituir resultado anterior |
+| História e propostas | Auditorias datadas, `legacy/`, `proposals/` e planos anteriores | Mantenedor como custodiante / auditor | Consulta explícita; não são procedimento ativo nem autorização |
+
+Quando código e requisito aprovado divergem, investigue e registre a decisão antes de alterar qualquer fonte. Documentação de uso deriva do contrato e da evidência; código não é autoridade absoluta sobre comportamento esperado. Conteúdo sem consumidor conhecido recebe investigação, não exclusão automática.
+
+Atualize apenas as fontes afetadas, com finalidade e consumidor claros. Correção local pode usar o contrato existente; mudança de interface exige conferir exemplos e compatibilidade; decisão arquitetural relevante registra alternativas e consequências; experimento preserva método, configuração e proveniência. A MOD-004 não altera os gates nem dispensa os artefatos atualmente exigidos pelas pipelines: esforço proporcional é assunto da MOD-005.
+
+Arquive somente com motivo/data, fonte sucessora e consumidor verificados; preserve histórico Git e resultados necessários à reprodução. Não apague cópias históricas por hash, baixa frequência de leitura ou quantidade de linhas. Antes de remover material de valor incerto, obtenha decisão do mantenedor. Não carregue histórico nem referências inteiras por padrão.
+
 ## Compatibilidade
 
 | Ambiente | Projeto | Usuário | Comportamento adotado |
@@ -55,7 +78,7 @@ O instalador aplica `--exclude` antes de gerar entradas; não depende de semânt
 
 - Cada pacote usa YAML frontmatter em `SKILL.md` com `name` e `description`, seguindo [Agent Skills](https://agentskills.io/specification). Referências de recursos são relativas ao arquivo que as contém, dentro do pacote; o entrypoint parte da raiz da skill.
 - O catálogo usa schema JSON versão 1 e release SemVer; `distribution/catalog.schema.json` publica o contrato declarativo. A CLI valida campos, versão, release, tipos, unicidade e pertencimento de membros aos nomes do catálogo com verificações locais; não depende de um motor genérico de JSON Schema.
-- `doctor` valida sintaxe YAML e chaves duplicadas do frontmatter e dos recursos `.yml`/`.yaml`, identidade de nome, descrição e metadata string/string; verifica links locais do entrypoint fora de blocos de exemplo. Não é um validador de todas as extensões específicas de cada host, de todos os links de exemplos/referências ou de todos os schemas Quarto.
+- `doctor` valida sintaxe YAML e chaves duplicadas do frontmatter e dos recursos `.yml`/`.yaml`, identidade de nome, descrição e metadata string/string. Verifica existência e confinamento dos destinos de links Markdown inline no entrypoint e em `references/**/*.md`, relativos ao arquivo que contém o link. Ignora código cercado por backticks/tis e código inline, URLs externas e fragmentos sem arquivo; para `arquivo.md#seção`, confere o arquivo, sem certificar a âncora. Links por definição/HTML e títulos opcionais em links não fazem parte deste checker. `examples/` e históricos fora dos pacotes ativos ficam fora da varredura documental, mas YAML e restrições de symlinks do pacote continuam verificados. A mesma validação precede `manifest`/`install`, sem buscar rede ou executar snippets. Não é um validador completo de Markdown, de todas as extensões dos hosts ou dos schemas Quarto.
 - As cópias são registradas por caminho relativo e SHA-256 dos arquivos. O doctor detecta divergências em cópias gerenciadas. Links são fontes vivas: verifica destino e estrutura, sem afirmar imutabilidade do conteúdo.
 - `agents/openai.yaml` é opcional no Codex para interface, política e ferramentas. Nenhum dos oito pacotes exige MCP ou bloqueio de invocação implícita por padrão. Não foram adicionadas dependências fictícias ou políticas globais.
 

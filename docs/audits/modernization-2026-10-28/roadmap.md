@@ -1,6 +1,6 @@
 # Roadmap incremental e estratégia de validação
 
-Finalidade: contratos revisáveis para execução futura, uma tarefa aprovada por vez. Consumidores: mantenedor e implementador. Estado vigente: **MOD-001–MOD-003 validadas tecnicamente** ([MOD-001](mod-001.md), [MOD-002](mod-002.md), [MOD-003](mod-003.md)); MOD-004–MOD-010 permanecem **planejadas**, sem autorização de avanço. Diagnóstico não autoriza implementação. Critérios de cada tarefa são cumulativos com os invariantes comuns. A ordem prioriza defeitos observados sobre expansão de capacidades; tarefas independentes podem ser reordenadas por decisão explícita.
+Finalidade: contratos revisáveis para execução futura, uma tarefa aprovada por vez. Consumidores: mantenedor e implementador. Estado vigente: **MOD-001–MOD-004 validadas tecnicamente** ([MOD-001](mod-001.md), [MOD-002](mod-002.md), [MOD-003](mod-003.md), [MOD-004](mod-004.md)); MOD-005–MOD-010 permanecem **planejadas**, sem autorização de avanço. Diagnóstico não autoriza implementação. Critérios de cada tarefa são cumulativos com os invariantes comuns. A ordem prioriza defeitos observados sobre expansão de capacidades; tarefas independentes podem ser reordenadas por decisão explícita.
 
 ## Regras comuns dos contratos MOD
 
@@ -8,7 +8,7 @@ Invariantes: preservar nomes/pacotes, limites de autorização, histórico, alte
 
 Rollback comum: reverter somente o patch daquela tarefa e os derivados que ela alterou, preservando trabalho anterior/concorrente e evidência. Sem reset/checkout global, publicação ou exclusão de história. Se houver conflito, preservar diff e pedir resolução concreta. Nenhuma tarefa autoriza commit/push/merge/deploy. Ganhos só serão registrados após medição comparável.
 
-Baseline original da auditoria: testes completos impedidos por PyYAML ausente e tentativa temporária bloqueada por DNS; retomar a verificação com dependência declarada disponível antes de declarar uma mudança validada. A verificação atual usa `/usr/bin/python3` com PyYAML já disponível: MOD-001–MOD-003 têm baseline e validação aprovadas. Os logs originais foram preservados.
+Baseline original da auditoria: testes completos impedidos por PyYAML ausente e tentativa temporária bloqueada por DNS; retomar a verificação com dependência declarada disponível antes de declarar uma mudança validada. A verificação atual usa `/usr/bin/python3` com PyYAML já disponível: MOD-001–MOD-004 têm baseline e validação aprovadas. Os logs originais foram preservados.
 
 ## Ordenação
 
@@ -54,7 +54,7 @@ MOD-009 pode anteceder os experimentos: sua independência evita bloquear reduç
 
 **Problema/evidência:** F05/F09, snapshots e instruções sem precedência; checker restrito ao entrypoint. **Objetivo:** localizar fonte correta e detectar divergência verificável. **Prioridade:** P2. **Escopo:** `task.md`, `docs/distribution/architecture.md`, `docs/evals.md`, guias operacionais afetados, checker em `scripts/skills.py` ou utilitário existente e testes pertinentes. **Dependências:** nenhuma MOD.
 
-**Mudanças:** aplicar matriz de governança aprovada; histórico explicitamente datado com sucessor; estender checks locais só a referências ativas, com exemplos e história tratados separadamente. Não mover/apagar auditorias por hash. **Invariantes:** pacotes instalados continuam independentes; contratos esperados não são substituídos pelo código sem decisão. **Documentação:** modificar fontes canônicas afetadas e um índice, sem criar 14 manuais novos. **Testes:** referência existente, quebrada, âncora, snippet, escape, arquivo histórico e release/catálogo coerentes. **Aceite:** o usuário distingue vigente/histórico e fontes têm consumidor; referências novas quebradas são detectadas sem exigir correção de história. **Riscos:** falso positivo e centralização não empacotável. **Rollback:** reverter novo check/adendos preservando fontes históricas. **Esforço:** médio. **Estado:** planejada.
+**Mudanças:** aplicar matriz de governança aprovada; histórico explicitamente datado com sucessor; estender checks locais só a referências ativas, com exemplos e história tratados separadamente. Não mover/apagar auditorias por hash. **Invariantes:** pacotes instalados continuam independentes; contratos esperados não são substituídos pelo código sem decisão. **Documentação:** modificar fontes canônicas afetadas e um índice, sem criar 14 manuais novos. **Testes:** referência existente, quebrada, âncora, snippet, escape, arquivo histórico e release/catálogo coerentes. **Aceite:** o usuário distingue vigente/histórico e fontes têm consumidor; referências novas quebradas são detectadas sem exigir correção de história. **Riscos:** falso positivo e centralização não empacotável. **Rollback:** reverter novo check/adendos preservando fontes históricas. **Esforço:** médio. **Estado:** validada tecnicamente; [resultado e aceite](mod-004.md).
 
 ## MOD-005 — Experimentar esforço e documentação proporcionais
 

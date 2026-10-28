@@ -1,6 +1,6 @@
 # Inventário e governança documental
 
-Finalidade: definir propriedade da informação e manutenção mínima. Consumidores: pipelines, mantenedor e revisores. Estado: proposta; nenhuma fonte histórica foi removida ou reclassificada em disco.
+Finalidade: definir propriedade da informação e manutenção mínima. Consumidores: pipelines, mantenedor e revisores. Estado original: proposta da auditoria. A matriz abaixo e o inventário preservam a base daquela inspeção. Na MOD-004, a política vigente foi adotada em [arquitetura de distribuição](../../distribution/architecture.md#governança-documental-vigente); esse guia é a fonte operacional de propriedade e precedência. Nenhuma fonte histórica foi removida.
 
 ## Inventário e método
 

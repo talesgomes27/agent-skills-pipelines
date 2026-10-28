@@ -137,6 +137,7 @@ O workflow de CI repete testes, doctors e instalações temporárias em Linux, W
 
 ## Documentação
 
+- [Governança documental e fontes canônicas](docs/distribution/architecture.md#governança-documental-vigente)
 - [Arquitetura de distribuição](docs/distribution/architecture.md)
 - [Protocolo de descoberta](docs/distribution/discovery.md)
 - [Validação da distribuição](docs/distribution/validation.md)

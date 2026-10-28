@@ -1,5 +1,7 @@
 # Evidências da Fase 2
 
+Snapshot histórico de 2026-10-22, preservado sem recontar testes como resultados atuais. Para verificações locais posteriores, consulte a [MOD-004](../audits/modernization-2026-10-28/mod-004.md); regras operacionais vigentes estão na [arquitetura de distribuição](architecture.md). Esta evidência não concede autorização de instalação, commit ou publicação.
+
 Data: 2026-10-22. Ambiente de execução: Linux, Python do sistema com PyYAML 6.0.3.
 
 ## Entregas verificadas

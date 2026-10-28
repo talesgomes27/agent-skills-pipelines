@@ -166,6 +166,46 @@ class InstallerTests(unittest.TestCase):
         self.assertEqual(self.install('--skill', 'alpha')[0], 1)
         self.assertEqual((self.dest / cli.STATE).read_text(), '[]')
 
+    def test_reference_links_are_relative_to_the_reference_and_check_installed_copy(self):
+        refs = self.repo / 'alpha/references'
+        (refs / 'nested').mkdir()
+        (refs / 'guide.md').write_text('[Details](nested/detail.md#section)\n[Local](#section)\n')
+        (refs / 'nested/detail.md').write_text('# Section\n[Back](../guide.md)\n')
+        self.assertEqual(self.install('--skill', 'alpha')[0], 0)
+        self.assertEqual(self.run_cli('doctor', '--destination', str(self.dest), '--skill', 'alpha')[0], 0)
+        (refs / 'nested/detail.md').write_text('[Missing](missing.md)\n')
+        self.assertEqual(self.install('--skill', 'alpha', '--update')[0], 1)
+
+    def test_reference_broken_or_escaping_link_blocks_install_and_doctor(self):
+        guide = self.repo / 'alpha/references/guide.md'
+        for link in ('missing.md', '../../beta/SKILL.md', '%2e%2e/%2e%2e/beta/SKILL.md'):
+            with self.subTest(link=link):
+                guide.write_text('[Broken](' + link + ')\n')
+                self.assertEqual(self.install('--skill', 'alpha')[0], 1)
+                self.assertEqual(self.run_cli('doctor', '--skill', 'alpha')[0], 1)
+                self.assertFalse(self.dest.exists())
+
+    def test_code_examples_and_history_do_not_block_reference_checks(self):
+        guide = self.repo / 'alpha/references/guide.md'
+        guide.write_text('```md\n[Example](missing.md)\n```\n'
+                         '~~~markdown\n[Example](missing-too.md)\n~~~\n'
+                         '`[Inline](not-a-resource.md)`\n[External](https://example.com)\n')
+        for relative in ('docs/audits/legacy/alpha/SKILL.md',
+                         'docs/audits/proposals/alpha/SKILL.md',
+                         'alpha/examples/README.md'):
+            path = self.repo / relative
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text('[Historical or illustrative](missing.md)\n')
+        self.assertEqual(self.run_cli('doctor', '--skill', 'alpha')[0], 0)
+        self.assertEqual(self.install('--skill', 'alpha')[0], 0)
+
+    def test_readme_release_matches_catalog(self):
+        repo = Path(__file__).resolve().parents[1]
+        release = cli.read_json(repo / 'distribution/catalog.json')['release']
+        readme = (repo / 'README.md').read_text(encoding='utf-8')
+        self.assertIn('Release atual: **' + release + '**.', readme)
+        self.assertIn('release-' + release + '-blue.svg', readme)
+
 
 if __name__ == '__main__':
     unittest.main()
