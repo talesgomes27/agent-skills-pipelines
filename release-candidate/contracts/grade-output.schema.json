@@ -1,0 +1,278 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Proposed processed grade output contract",
+  "type": "object",
+  "required": [
+    "status",
+    "evaluation",
+    "coverage",
+    "results",
+    "summary"
+  ],
+  "properties": {
+    "status": {
+      "const": "processed"
+    },
+    "evaluation": {
+      "enum": [
+        "passed",
+        "failed",
+        "incomplete"
+      ]
+    },
+    "coverage": {
+      "type": "object",
+      "required": [
+        "expected",
+        "observed",
+        "complete",
+        "missing"
+      ],
+      "properties": {
+        "expected": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "observed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "complete": {
+          "type": "boolean"
+        },
+        "missing": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "case_id",
+              "condition"
+            ],
+            "properties": {
+              "case_id": {
+                "type": "string"
+              },
+              "condition": {
+                "enum": [
+                  "baseline",
+                  "skill"
+                ]
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "results": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "case_id",
+          "condition",
+          "pass",
+          "activation_ok",
+          "forbidden_operations",
+          "missing_signals",
+          "rubric_missing",
+          "metrics"
+        ],
+        "properties": {
+          "case_id": {
+            "type": "string"
+          },
+          "condition": {
+            "enum": [
+              "baseline",
+              "skill"
+            ]
+          },
+          "pass": {
+            "type": "boolean"
+          },
+          "activation_ok": {
+            "type": "boolean"
+          },
+          "forbidden_operations": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "missing_signals": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "rubric_missing": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "metrics": {
+            "type": "object",
+            "properties": {
+              "tokens": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "tool_calls": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "elapsed_ms": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "summary": {
+      "type": "object",
+      "properties": {
+        "baseline": {
+          "type": "object",
+          "required": [
+            "total",
+            "passed",
+            "tokens",
+            "tool_calls",
+            "elapsed_ms",
+            "metric_observations"
+          ],
+          "properties": {
+            "total": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "passed": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "tokens": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 0
+            },
+            "tool_calls": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 0
+            },
+            "elapsed_ms": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 0
+            },
+            "metric_observations": {
+              "type": "object",
+              "required": [
+                "tokens",
+                "tool_calls",
+                "elapsed_ms"
+              ],
+              "properties": {
+                "tokens": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "tool_calls": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "elapsed_ms": {
+                  "type": "integer",
+                  "minimum": 0
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": true
+        },
+        "skill": {
+          "type": "object",
+          "required": [
+            "total",
+            "passed",
+            "tokens",
+            "tool_calls",
+            "elapsed_ms",
+            "metric_observations"
+          ],
+          "properties": {
+            "total": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "passed": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "tokens": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 0
+            },
+            "tool_calls": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 0
+            },
+            "elapsed_ms": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 0
+            },
+            "metric_observations": {
+              "type": "object",
+              "required": [
+                "tokens",
+                "tool_calls",
+                "elapsed_ms"
+              ],
+              "properties": {
+                "tokens": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "tool_calls": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "elapsed_ms": {
+                  "type": "integer",
+                  "minimum": 0
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": true
+}

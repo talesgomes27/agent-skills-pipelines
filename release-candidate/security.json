@@ -1,0 +1,60 @@
+{
+  "checked_at": "2026-10-28T16:16:53.112348+00:00",
+  "queries": {
+    "OSV": {
+      "url": "https://api.osv.dev/v1/query",
+      "response": {},
+      "success": true
+    },
+    "GitHub Advisory Database": {
+      "success": true,
+      "response": []
+    }
+  },
+  "package": {
+    "name": "PyYAML",
+    "version": "6.0.3",
+    "requires_python": ">=3.8",
+    "requires_dist": null,
+    "license": "MIT",
+    "license_expression": null,
+    "project_urls": {
+      "Bug Tracker": "https://github.com/yaml/pyyaml/issues",
+      "CI": "https://github.com/yaml/pyyaml/actions",
+      "Documentation": "https://pyyaml.org/wiki/PyYAMLDocumentation",
+      "Download": "https://pypi.org/project/PyYAML/",
+      "Homepage": "https://pyyaml.org/",
+      "Mailing lists": "http://lists.sourceforge.net/lists/listinfo/yaml-core",
+      "Source Code": "https://github.com/yaml/pyyaml"
+    }
+  },
+  "pypi_vulnerabilities": [],
+  "sdist": {
+    "filename": "pyyaml-6.0.3.tar.gz",
+    "url": "https://files.pythonhosted.org/packages/05/8e/961c0007c59b8dd7729d542c61a4d537767a59645b82a0b521206e1e25c2/pyyaml-6.0.3.tar.gz",
+    "digests": {
+      "blake2b_256": "058e961c0007c59b8dd7729d542c61a4d537767a59645b82a0b521206e1e25c2",
+      "md5": "dbc6f815cd75160ccf12e470be1c8d6e",
+      "sha256": "d76623373421df22fb4cf8817020cbb7ef15c725b9d5e45f17e189bfc384190f"
+    },
+    "upload_time_iso_8601": "2025-09-25T21:33:16.546886Z"
+  },
+  "sdist_inspection": {
+    "pyyaml-6.0.3/LICENSE": "Copyright (c) 2017-2021 Ingy döt Net\nCopyright (c) 2006-2016 Kirill Simonov\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of\nthis software and associated documentation files (the \"Software\"), to deal in\nthe Software without restriction, including without limitation the rights to\nuse, copy, modify, merge, publish, distribute, sublicense, and/or sell copies\nof the Software, and to permit persons to whom the Software is furnished to do\nso, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+    "pyyaml-6.0.3/pyproject.toml": "[build-system]\nrequires = [\n    \"setuptools\",  # FIXME: declare min/max setuptools versions?\n    \"Cython; python_version < '3.13'\",\n    \"Cython>=3.0; python_version >= '3.13'\"\n]\nbackend-path = [\"packaging\"]\nbuild-backend = \"_pyyaml_pep517\"\n"
+  },
+  "actions": {
+    "checkout": {
+      "sha": "3d3c42e5aac5ba805825da76410c181273ba90b1",
+      "source": "https://raw.githubusercontent.com/actions/checkout/3d3c42e5aac5ba805825da76410c181273ba90b1/action.yml",
+      "node24": true,
+      "action_yaml_sha256": "d59219cb79590abdb877deaa14e3b65a00c05318bf5a6f3b989b9162b5d08c35"
+    },
+    "setup-python": {
+      "sha": "6d4fd22b20465ccc0f7354476588e8df7c9ca0e0",
+      "source": "https://raw.githubusercontent.com/actions/setup-python/6d4fd22b20465ccc0f7354476588e8df7c9ca0e0/action.yml",
+      "node24": true,
+      "action_yaml_sha256": "0829b3f54d769f8b25cefd4d856c735bc8e097d6597835b838ebb4da497c838d"
+    }
+  }
+}

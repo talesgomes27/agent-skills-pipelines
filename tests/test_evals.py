@@ -148,7 +148,7 @@ class EvalTests(unittest.TestCase):
             {'rubric': {'criterion': 1}}, {'notes': []}, {'unexpected': True},
         ]
         invalid += [{'metrics': value} for value in ('bad', None, [], {'other': 1})]
-        invalid += [{'metrics': {'tokens': value}} for value in ('1', None, -1, True, 1.5)]
+        invalid += [{'metrics': {'tokens': value}} for value in ('1', None, -1, True, 1.0, 1.5)]
         with tempfile.TemporaryDirectory() as temp:
             path = Path(temp) / 'results.jsonl'
             for changes in invalid:

@@ -2,13 +2,13 @@
 
 [![CI](https://github.com/talesgomes27/agent-skills-pipelines/actions/workflows/ci.yml/badge.svg)](https://github.com/talesgomes27/agent-skills-pipelines/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Release](https://img.shields.io/badge/release-1.0.1-blue.svg)](distribution/catalog.json)
+[![Release](https://img.shields.io/badge/release-2.0.0-blue.svg)](distribution/catalog.json)
 [![Python](https://img.shields.io/badge/Python-3.9%2B-3776AB.svg?logo=python&logoColor=white)](https://www.python.org/)
 [![Agent Skills](https://img.shields.io/badge/Agent%20Skills-Codex%20%7C%20Claude%20Code%20%7C%20Antigravity-6f42c1.svg)](docs/distribution/architecture.md)
 
 Ecossistema modular de Agent Skills para planejar, implementar, auditar, documentar e entregar projetos com agentes de IA. Os mesmos pacotes podem ser distribuídos para OpenAI Codex, Claude Code, Google Antigravity e adaptadores customizados sem carregar toda a biblioteca no contexto.
 
-Release atual: **1.0.1**.
+Release atual: **2.0.0**.
 
 ## O que o projeto oferece
 
