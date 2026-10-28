@@ -1,13 +1,13 @@
 # Estado de melhoria do ecossistema
 
-## Estado vigente — MOD-004 / 2026-10-28
+## Estado vigente — MOD-005 / 2026-10-28
 
-- Modo: execução somente da MOD-004, autorizada pelo pedido atual.
-- Base: `fce31fe` (auditoria e MOD-001–MOD-003 commitadas nesta sessão, sem push).
-- Gate: MOD-004 validada tecnicamente; sem aceite humano final presumido.
-- Escopo, critérios e evidência: [contrato MOD-004](docs/audits/modernization-2026-10-28/roadmap.md#mod-004--formalizar-propriedade-e-verificação-documental).
-- Fonte da política vigente: [governança documental](docs/distribution/architecture.md#governança-documental-vigente).
-- Próxima ação: apresentar [resultado MOD-004](docs/audits/modernization-2026-10-28/mod-004.md) e parar; MOD-005 não autorizada. O commit pedido abrangeu as mudanças existentes até MOD-003; a nova fatia fica para revisão.
+- Modo: execução somente da MOD-005, autorizada pelo pedido atual, com A/B de agentes isolados autorizado em resposta explícita do usuário.
+- Base: `b9b9469` (MOD-004 commitada nesta sessão, sem push).
+- Gate: MOD-005 implementada e validada no escopo das fixtures, sem aceite humano final presumido.
+- Escopo e critérios: [contrato MOD-005](docs/audits/modernization-2026-10-28/roadmap.md#mod-005--experimentar-esforço-e-documentação-proporcionais).
+- Fonte da propriedade documental: [governança vigente](docs/distribution/architecture.md#governança-documental-vigente); procedimentos são mantidos nos SKILL.md de cada pacote.
+- Próxima ação: apresentar [resultado MOD-005](docs/audits/modernization-2026-10-28/mod-005.md) e parar; MOD-006 e push não autorizados. As mudanças da MOD-005 ficam para revisão, sem commit automático.
 - Os registros abaixo são históricos datados; suas versões, permissões e próximos passos não substituem esta seção.
 
 ## Histórico — melhoria de 2026-10-22
@@ -78,3 +78,12 @@ Commit e push da entrega estão autorizados. Renomeação do repositório será 
 - Resultado: MOD-004 validada tecnicamente, em mudanças locais para revisão. Matriz operacional de fontes, precedência do estado vigente e validação dos links de referências ativas adotadas sem remover história.
 - Verificações: baseline 38 testes OK, quatro falhas reproduzidas antes da correção, final 42 testes OK; doctors/24 casos/instalação temporária copy e link/diff-check OK.
 - Evidência: [resultado MOD-004](docs/audits/modernization-2026-10-28/mod-004.md); nenhuma atualização de instalação real.
+
+## Execução MOD-005 — 2026-10-28
+
+- Autorização: commit da MOD-004 e somente MOD-005; A/B com agentes isolados autorizado explicitamente. Sem push ou avanço à MOD-006.
+- Commit anterior: `b9b9469`; MOD-005 fica sem commit para revisão.
+- Resultado: política de esforço e contratos equivalentes adotada nos três pacotes após comparação; quatro casos adicionados, sem novo roteador/flag/serviço.
+- Evidência: [MOD-005](docs/audits/modernization-2026-10-28/mod-005.md). Candidata final atendeu 4/4 casos da amostra; baseline 3/4 por documentação adicional no caso simples. Captura/resumo corrigida de forma simétrica, com resultado original preservado.
+- Limites: cobertura do experimento 8/56 pares; relatório combinado failed inclui falha da baseline. Não há medição de economia de tokens nem validação de ativação automática.
+- Checks: baseline 42 testes, final 43 testes OK; doctors/oito pacotes/28 casos/diff-check OK. Históricos e instalações reais preservados.

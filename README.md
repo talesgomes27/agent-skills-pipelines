@@ -57,6 +57,8 @@ As pipelines classificam o trabalho quando necessário em três arquétipos:
 
 Skills especialistas são carregadas somente quando uma decisão depende delas. Graphify, MCPs e conectores são integrações opcionais; nenhuma delas amplia permissões ou autorização do usuário.
 
+Planejamento, execução e auditoria ajustam esforço e documentação ao risco: leve, padrão ou rigoroso, com motivo registrado e contratos existentes reutilizados por referência. Esses níveis preservam os controles essenciais e não substituem os modos de aprovação assistido/contínuo.
+
 ## Instalação
 
 Requisitos: Python 3.9 ou superior e PyYAML.
@@ -131,7 +133,7 @@ python3 -m unittest discover -s tests -v
 python3 quarto-expert/scripts/doctor.py
 ```
 
-O harness contém 24 casos para as oito skills e classifica traces A/B capturados por um executor externo. Ele mede ativação, operações proibidas, sinais esperados e, quando fornecidos, tokens, chamadas de ferramenta e latência. Veja [avaliações comportamentais](docs/evals.md) e [verificação de descoberta](docs/distribution/discovery.md).
+O harness contém 28 casos para as oito skills e classifica traces A/B capturados por um executor externo. Ele mede ativação, operações proibidas, sinais esperados e, quando fornecidos, tokens, chamadas de ferramenta e latência. Veja [avaliações comportamentais](docs/evals.md) e [verificação de descoberta](docs/distribution/discovery.md).
 
 O workflow de CI repete testes, doctors e instalações temporárias em Linux, Windows e macOS. Validação estrutural não substitui uma execução real no host, renderização dos formatos solicitados ou revisão humana do resultado.
 

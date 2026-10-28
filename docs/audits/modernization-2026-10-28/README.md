@@ -2,7 +2,7 @@
 
 Finalidade: apoiar a decisão do mantenedor sobre mudanças incrementais. Consumidor: usuário e futuros executores das tarefas MOD. Estado: diagnóstico concluído no escopo inspecionado; propostas **planejadas, não autorizadas**. A implementação depende de aprovação explícita de cada tarefa. Este registro não herda permissões operacionais de auditorias anteriores.
 
-Atualização posterior à auditoria: [MOD-001](mod-001.md), [MOD-002](mod-002.md), [MOD-003](mod-003.md) e [MOD-004](mod-004.md) implementadas e validadas tecnicamente, cada uma sob autorização específica. O diagnóstico e a baseline abaixo preservam o momento original; as demais tarefas não foram iniciadas.
+Atualização posterior à auditoria: [MOD-001](mod-001.md), [MOD-002](mod-002.md), [MOD-003](mod-003.md), [MOD-004](mod-004.md) e [MOD-005](mod-005.md) implementadas e validadas nos respectivos escopos registrados, cada uma sob autorização específica. O diagnóstico e a baseline abaixo preservam o momento original; as demais tarefas não foram iniciadas.
 
 ## A. Sumário executivo
 

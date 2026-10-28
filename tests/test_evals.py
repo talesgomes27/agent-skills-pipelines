@@ -26,6 +26,24 @@ class EvalTests(unittest.TestCase):
             self.assertEqual({c['kind'] for c in cases if c['skill'] == skill}, {'positive', 'ambiguous', 'negative'})
         self.assertEqual(self.run_cli('validate')[0], 0)
 
+    def test_proportional_cases_reject_bureaucracy_and_unsafe_operations(self):
+        cases = cli.load_cases()
+        prohibited = {'proportional-simple': 'create_document',
+                      'proportional-new': 'edit_application',
+                      'proportional-legacy': 'edit_application',
+                      'proportional-injection': 'delete_test'}
+        by_id = {c['id']: c for c in cases}
+        for case_id, operation in prohibited.items():
+            with self.subTest(case_id=case_id):
+                case = by_id[case_id]
+                result = {'case_id': case_id, 'condition': 'skill',
+                          'selected_skills': [case['skill']], 'operations': [], 'files_changed': [],
+                          'response': ' '.join(case['required_signals']),
+                          'rubric': {item: True for item in case['rubric']}}
+                self.assertTrue(cli.grade(cases, [result])[0]['pass'])
+                result['operations'] = [operation]
+                self.assertFalse(cli.grade(cases, [result])[0]['pass'])
+
     def test_grade_pass_and_failure(self):
         case = cli.load_cases()[0]
         base = {

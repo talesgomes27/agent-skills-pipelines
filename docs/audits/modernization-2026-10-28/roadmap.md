@@ -1,6 +1,6 @@
 # Roadmap incremental e estratégia de validação
 
-Finalidade: contratos revisáveis para execução futura, uma tarefa aprovada por vez. Consumidores: mantenedor e implementador. Estado vigente: **MOD-001–MOD-004 validadas tecnicamente** ([MOD-001](mod-001.md), [MOD-002](mod-002.md), [MOD-003](mod-003.md), [MOD-004](mod-004.md)); MOD-005–MOD-010 permanecem **planejadas**, sem autorização de avanço. Diagnóstico não autoriza implementação. Critérios de cada tarefa são cumulativos com os invariantes comuns. A ordem prioriza defeitos observados sobre expansão de capacidades; tarefas independentes podem ser reordenadas por decisão explícita.
+Finalidade: contratos revisáveis para execução futura, uma tarefa aprovada por vez. Consumidores: mantenedor e implementador. Estado vigente: **MOD-001–MOD-005 validadas no escopo registrado** ([MOD-001](mod-001.md), [MOD-002](mod-002.md), [MOD-003](mod-003.md), [MOD-004](mod-004.md), [MOD-005](mod-005.md)); MOD-006–MOD-010 permanecem **planejadas**, sem autorização de avanço. Diagnóstico não autoriza implementação. Critérios de cada tarefa são cumulativos com os invariantes comuns. A ordem prioriza defeitos observados sobre expansão de capacidades; tarefas independentes podem ser reordenadas por decisão explícita.
 
 ## Regras comuns dos contratos MOD
 
@@ -8,7 +8,7 @@ Invariantes: preservar nomes/pacotes, limites de autorização, histórico, alte
 
 Rollback comum: reverter somente o patch daquela tarefa e os derivados que ela alterou, preservando trabalho anterior/concorrente e evidência. Sem reset/checkout global, publicação ou exclusão de história. Se houver conflito, preservar diff e pedir resolução concreta. Nenhuma tarefa autoriza commit/push/merge/deploy. Ganhos só serão registrados após medição comparável.
 
-Baseline original da auditoria: testes completos impedidos por PyYAML ausente e tentativa temporária bloqueada por DNS; retomar a verificação com dependência declarada disponível antes de declarar uma mudança validada. A verificação atual usa `/usr/bin/python3` com PyYAML já disponível: MOD-001–MOD-004 têm baseline e validação aprovadas. Os logs originais foram preservados.
+Baseline original da auditoria: testes completos impedidos por PyYAML ausente e tentativa temporária bloqueada por DNS; retomar a verificação com dependência declarada disponível antes de declarar uma mudança validada. A verificação atual usa `/usr/bin/python3` com PyYAML já disponível: MOD-001–MOD-005 têm baseline e validação locais registradas. Os logs originais foram preservados.
 
 ## Ordenação
 
@@ -60,7 +60,7 @@ MOD-009 pode anteceder os experimentos: sua independência evita bloquear reduç
 
 **Problema/evidência:** F06, produção nominal fixa de docs no pré-código. **Objetivo:** reduzir custo onde não houver perda de qualidade. **Prioridade:** P2. **Escopo:** `pre-code-pipeline/SKILL.md`, contratos de auditoria/execução afetados, referências selecionadas e casos de avaliação. **Dependências:** MOD-004.
 
-**Mudanças:** permitir referência a contratos equivalentes existentes, definir leve/padrão/rigoroso como política e registrar motivo; não acrescentar roteador/flag universal. **Invariantes:** autorização, segurança, testes e evidência essencial em qualquer esforço. **Documentação:** política curta e exemplos de dispensa justificada. **Testes:** cenário E versus A/B e caso crítico H, corpus de ativação; comparação com baseline antes de promover. **Aceite:** tarefa pequena usa apenas artefatos necessários e cumpre critérios; tarefa crítica mantém controles; sem afirmar economia sem trace. **Riscos:** agent interpretar leve como permissão de pular validação. **Rollback:** retirar política candidata, preservar resultados. **Esforço:** médio. **Estado:** planejada.
+**Mudanças:** permitir referência a contratos equivalentes existentes, definir leve/padrão/rigoroso como política e registrar motivo; não acrescentar roteador/flag universal. **Invariantes:** autorização, segurança, testes e evidência essencial em qualquer esforço. **Documentação:** política curta e exemplos de dispensa justificada. **Testes:** cenário E versus A/B e caso crítico H, corpus de ativação; comparação com baseline antes de promover. **Aceite:** tarefa pequena usa apenas artefatos necessários e cumpre critérios; tarefa crítica mantém controles; sem afirmar economia sem trace. **Riscos:** agent interpretar leve como permissão de pular validação. **Rollback:** retirar política candidata, preservar resultados. **Esforço:** médio. **Estado:** implementada e validada no escopo das fixtures; [resultado e limites](mod-005.md).
 
 ## MOD-006 — Definir handoff mínimo e casos de roteamento/retomada
 
