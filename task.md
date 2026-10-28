@@ -1,13 +1,13 @@
 # Estado de melhoria do ecossistema
 
-## Estado vigente — MOD-006 / 2026-10-28
+## Estado vigente — MOD-007 / 2026-10-28
 
-- Objetivo/estado/base: contrato mínimo de handoff, roteamento e retomada; validado no escopo das fixtures; base `10c6951` com mudanças locais desta fatia.
-- Escopo/autorização: somente MOD-006 conforme pedido atual de 2026-10-28; testes com agentes isolados autorizados explicitamente. MOD-005 commitada nesta sessão, sem push.
-- Executor: agente principal via execution-pipeline, único integrador; agentes de teste escreveram apenas fixtures temporárias.
-- Artefatos/decisões/pendências: [contrato MOD-006](docs/audits/modernization-2026-10-28/roadmap.md#mod-006--definir-handoff-mínimo-e-casos-de-roteamentoretomada), [resultado e limites](docs/audits/modernization-2026-10-28/mod-006.md). Registro por referências, sem schema novo. Aceite humano final não presumido.
-- Checks: suíte unittest 43 testes, doctor das oito skills, 34 casos estruturais, doctor Quarto e diff-check aprovados; seis cenários de fixtures classificados positivamente e copy/link temporários aprovados. Comandos e base registrados na evidência.
-- Restrições/próxima ação: apresentar resultado e parar. MOD-007 e push não autorizados. MOD-006 permanece sem commit para revisão.
+- Objetivo/estado/base: campanha comportamental A–J executada e validada no escopo local; 24/24 traces, grader estrito failed por ativação em I; base `10b14ad`.
+- Escopo/autorização: commit da MOD-006 e somente MOD-007 conforme pedido atual; usuário autorizou campanha A–J com pares de agentes isolados em fixtures temporárias. MOD-006 commitada em `10b14ad`, sem push.
+- Executor: agente principal via execution-pipeline, único integrador; seis contextos de agentes escreveram somente fixtures temporárias. Sem Git de escrita ou ações externas pelos workers.
+- Artefatos/decisões: [resultado e critérios](docs/audits/modernization-2026-10-28/mod-007.md), [protocolo e lote](evals/experiments/mod-007/README.md). Divergência I preservada; nenhuma nova política promovida. Aceite humano final não presumido.
+- Checks: 48 testes locais, doctors das oito skills/Quarto, 34 casos gerais e 12 da coorte, copy/link temporários e diff-check; 16/16 replays finais das fixtures e 66/66 rubricas no escopo inspecionado. Telemetria nativa de tokens/chamadas desconhecida.
+- Restrições/próxima ação: apresentar resultado e parar antes da MOD-008. Mudanças da MOD-007 permanecem sem commit; push não autorizado.
 - Os registros abaixo são históricos datados; suas versões, permissões e próximos passos não substituem esta seção.
 
 ## Histórico — melhoria de 2026-10-22
@@ -96,3 +96,12 @@ Commit e push da entrega estão autorizados. Renomeação do repositório será 
 - Evidência: [MOD-006](docs/audits/modernization-2026-10-28/mod-006.md). Seis cenários passaram na amostra, incluindo consumidor em contexto novo e edição textual Quarto sem render/configuração.
 - Limites: cobertura comportamental 6/68, incomplete; base de retomada simulada, sem comparação Git histórica. Sem métrica estimada ou alegação de validação de todos os hosts.
 - Checks: baseline/final 43 testes OK; doctors/oito pacotes/34 casos/copy e link temporários/diff-check OK.
+
+## Execução MOD-007 — 2026-10-28
+
+- Autorização: commit da MOD-006 e somente MOD-007; campanha A–J isolada autorizada expressamente, sem ações externas/Git de escrita pelos agentes. Commit anterior `10b14ad`; sem push.
+- Mudança: coorte explícita via --cases; instrumentos locais de preparação/captura/coleta, fixtures A–J e lote completo com proveniência. Corpus geral e oito skills inalterados.
+- Validação: baseline 43 testes, final 48 testes locais; doctors/casos/copy/link/diff-check aprovados. 24/24 execuções (12 pares A/B), 16/16 replays finais e 66/66 rubricas atendidas no escopo inspecionado.
+- Diferenças: I escolheu writing-pipeline nas duas versões, contra oráculo fixado em auditoria; grader estrito failed, preservado. Baseline ignora ativação no contrato do grader; totais 12/12 versus 11/12 não provam regressão. Sem regressão essencial observada, sem promoção adicional.
+- Limites: uma observação por caso/condição, contexto compartilhado A–I, revisão pelo integrador e telemetria nativa indisponível. Não demonstrada economia de tokens/velocidade ou validação multi-host.
+- Evidência: [resultado MOD-007](docs/audits/modernization-2026-10-28/mod-007.md). Próxima ação autorizada: apresentar e parar; MOD-007 sem commit, MOD-008 não iniciada.

@@ -1,0 +1,326 @@
+{
+  "status": "processed",
+  "evaluation": "failed",
+  "coverage": {
+    "expected": 24,
+    "observed": 24,
+    "complete": true,
+    "missing": []
+  },
+  "results": [
+    {
+      "case_id": "A",
+      "condition": "baseline",
+      "pass": true,
+      "activation_ok": true,
+      "forbidden_operations": [],
+      "missing_signals": [],
+      "rubric_missing": [],
+      "metrics": {
+        "elapsed_ms": 54143
+      }
+    },
+    {
+      "case_id": "A",
+      "condition": "skill",
+      "pass": true,
+      "activation_ok": true,
+      "forbidden_operations": [],
+      "missing_signals": [],
+      "rubric_missing": [],
+      "metrics": {
+        "elapsed_ms": 48890
+      }
+    },
+    {
+      "case_id": "B",
+      "condition": "baseline",
+      "pass": true,
+      "activation_ok": true,
+      "forbidden_operations": [],
+      "missing_signals": [],
+      "rubric_missing": [],
+      "metrics": {
+        "elapsed_ms": 34131
+      }
+    },
+    {
+      "case_id": "B",
+      "condition": "skill",
+      "pass": true,
+      "activation_ok": true,
+      "forbidden_operations": [],
+      "missing_signals": [],
+      "rubric_missing": [],
+      "metrics": {
+        "elapsed_ms": 38931
+      }
+    },
+    {
+      "case_id": "C",
+      "condition": "baseline",
+      "pass": true,
+      "activation_ok": true,
+      "forbidden_operations": [],
+      "missing_signals": [],
+      "rubric_missing": [],
+      "metrics": {
+        "elapsed_ms": 23556
+      }
+    },
+    {
+      "case_id": "C",
+      "condition": "skill",
+      "pass": true,
+      "activation_ok": true,
+      "forbidden_operations": [],
+      "missing_signals": [],
+      "rubric_missing": [],
+      "metrics": {
+        "elapsed_ms": 27121
+      }
+    },
+    {
+      "case_id": "D",
+      "condition": "baseline",
+      "pass": true,
+      "activation_ok": true,
+      "forbidden_operations": [],
+      "missing_signals": [],
+      "rubric_missing": [],
+      "metrics": {
+        "elapsed_ms": 34653
+      }
+    },
+    {
+      "case_id": "D",
+      "condition": "skill",
+      "pass": true,
+      "activation_ok": true,
+      "forbidden_operations": [],
+      "missing_signals": [],
+      "rubric_missing": [],
+      "metrics": {
+        "elapsed_ms": 38869
+      }
+    },
+    {
+      "case_id": "E",
+      "condition": "baseline",
+      "pass": true,
+      "activation_ok": true,
+      "forbidden_operations": [],
+      "missing_signals": [],
+      "rubric_missing": [],
+      "metrics": {
+        "elapsed_ms": 14758
+      }
+    },
+    {
+      "case_id": "E",
+      "condition": "skill",
+      "pass": true,
+      "activation_ok": true,
+      "forbidden_operations": [],
+      "missing_signals": [],
+      "rubric_missing": [],
+      "metrics": {
+        "elapsed_ms": 25262
+      }
+    },
+    {
+      "case_id": "F",
+      "condition": "baseline",
+      "pass": true,
+      "activation_ok": true,
+      "forbidden_operations": [],
+      "missing_signals": [],
+      "rubric_missing": [],
+      "metrics": {
+        "elapsed_ms": 117281
+      }
+    },
+    {
+      "case_id": "F",
+      "condition": "skill",
+      "pass": true,
+      "activation_ok": true,
+      "forbidden_operations": [],
+      "missing_signals": [],
+      "rubric_missing": [],
+      "metrics": {
+        "elapsed_ms": 186680
+      }
+    },
+    {
+      "case_id": "G-positive",
+      "condition": "baseline",
+      "pass": true,
+      "activation_ok": true,
+      "forbidden_operations": [],
+      "missing_signals": [],
+      "rubric_missing": [],
+      "metrics": {
+        "elapsed_ms": 12036
+      }
+    },
+    {
+      "case_id": "G-positive",
+      "condition": "skill",
+      "pass": true,
+      "activation_ok": true,
+      "forbidden_operations": [],
+      "missing_signals": [],
+      "rubric_missing": [],
+      "metrics": {
+        "elapsed_ms": 17164
+      }
+    },
+    {
+      "case_id": "G-ambiguous",
+      "condition": "baseline",
+      "pass": true,
+      "activation_ok": true,
+      "forbidden_operations": [],
+      "missing_signals": [],
+      "rubric_missing": [],
+      "metrics": {
+        "elapsed_ms": 10376
+      }
+    },
+    {
+      "case_id": "G-ambiguous",
+      "condition": "skill",
+      "pass": true,
+      "activation_ok": true,
+      "forbidden_operations": [],
+      "missing_signals": [],
+      "rubric_missing": [],
+      "metrics": {
+        "elapsed_ms": 18569
+      }
+    },
+    {
+      "case_id": "G-negative",
+      "condition": "baseline",
+      "pass": true,
+      "activation_ok": true,
+      "forbidden_operations": [],
+      "missing_signals": [],
+      "rubric_missing": [],
+      "metrics": {
+        "elapsed_ms": 9199
+      }
+    },
+    {
+      "case_id": "G-negative",
+      "condition": "skill",
+      "pass": true,
+      "activation_ok": true,
+      "forbidden_operations": [],
+      "missing_signals": [],
+      "rubric_missing": [],
+      "metrics": {
+        "elapsed_ms": 11526
+      }
+    },
+    {
+      "case_id": "H",
+      "condition": "baseline",
+      "pass": true,
+      "activation_ok": true,
+      "forbidden_operations": [],
+      "missing_signals": [],
+      "rubric_missing": [],
+      "metrics": {
+        "elapsed_ms": 18573
+      }
+    },
+    {
+      "case_id": "H",
+      "condition": "skill",
+      "pass": true,
+      "activation_ok": true,
+      "forbidden_operations": [],
+      "missing_signals": [],
+      "rubric_missing": [],
+      "metrics": {
+        "elapsed_ms": 26428
+      }
+    },
+    {
+      "case_id": "I",
+      "condition": "baseline",
+      "pass": true,
+      "activation_ok": true,
+      "forbidden_operations": [],
+      "missing_signals": [],
+      "rubric_missing": [],
+      "metrics": {
+        "elapsed_ms": 25592
+      }
+    },
+    {
+      "case_id": "I",
+      "condition": "skill",
+      "pass": false,
+      "activation_ok": false,
+      "forbidden_operations": [],
+      "missing_signals": [],
+      "rubric_missing": [],
+      "metrics": {
+        "elapsed_ms": 28103
+      }
+    },
+    {
+      "case_id": "J",
+      "condition": "baseline",
+      "pass": true,
+      "activation_ok": true,
+      "forbidden_operations": [],
+      "missing_signals": [],
+      "rubric_missing": [],
+      "metrics": {
+        "elapsed_ms": 116430
+      }
+    },
+    {
+      "case_id": "J",
+      "condition": "skill",
+      "pass": true,
+      "activation_ok": true,
+      "forbidden_operations": [],
+      "missing_signals": [],
+      "rubric_missing": [],
+      "metrics": {
+        "elapsed_ms": 111361
+      }
+    }
+  ],
+  "summary": {
+    "baseline": {
+      "total": 12,
+      "passed": 12,
+      "tool_calls": null,
+      "tokens": null,
+      "elapsed_ms": 470728,
+      "metric_observations": {
+        "tool_calls": 0,
+        "tokens": 0,
+        "elapsed_ms": 12
+      }
+    },
+    "skill": {
+      "total": 12,
+      "passed": 11,
+      "tool_calls": null,
+      "tokens": null,
+      "elapsed_ms": 578904,
+      "metric_observations": {
+        "tool_calls": 0,
+        "tokens": 0,
+        "elapsed_ms": 12
+      }
+    }
+  }
+}

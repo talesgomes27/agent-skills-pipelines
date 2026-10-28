@@ -9,8 +9,8 @@ ROOT = Path(__file__).resolve().parents[1]
 CASES = ROOT / 'evals/cases.json'
 
 
-def load_cases():
-    data = json.loads(CASES.read_text(encoding='utf-8'))
+def load_cases(path=None):
+    data = json.loads((path or CASES).read_text(encoding='utf-8'))
     if (not isinstance(data, dict) or type(data.get('version')) is not int or data['version'] != 1
             or not isinstance(data.get('cases'), list) or not data['cases']):
         raise ValueError('Unsupported eval case format')
@@ -120,9 +120,10 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('command', choices=('validate', 'matrix', 'grade'))
     parser.add_argument('--results', type=Path)
+    parser.add_argument('--cases', type=Path, help='Explicit cohort; defaults to evals/cases.json')
     args = parser.parse_args(argv)
     try:
-        cases = load_cases()
+        cases = load_cases(args.cases)
         if args.command == 'validate':
             counts = {}
             for case in cases:

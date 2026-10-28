@@ -135,6 +135,8 @@ python3 quarto-expert/scripts/doctor.py
 
 O harness contém 34 casos para as oito skills e classifica traces A/B capturados por um executor externo. Ele mede ativação, operações proibidas, sinais esperados e, quando fornecidos, tokens, chamadas de ferramenta e latência. Veja [avaliações comportamentais](docs/evals.md) e [verificação de descoberta](docs/distribution/discovery.md).
 
+A [campanha local A–J da MOD-007](docs/audits/modernization-2026-10-28/mod-007.md) preserva separadamente 12 casos, 24 traces reais em fixtures e custos observados com limitações explícitas. A cobertura é completa; o grader estrito conserva uma reprovação de ativação no cenário documental I.
+
 O workflow de CI repete testes, doctors e instalações temporárias em Linux, Windows e macOS. Validação estrutural não substitui uma execução real no host, renderização dos formatos solicitados ou revisão humana do resultado.
 
 ## Documentação

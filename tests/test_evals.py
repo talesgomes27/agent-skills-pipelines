@@ -26,6 +26,22 @@ class EvalTests(unittest.TestCase):
             self.assertEqual({c['kind'] for c in cases if c['skill'] == skill}, {'positive', 'ambiguous', 'negative'})
         self.assertEqual(self.run_cli('validate')[0], 0)
 
+    def test_explicit_cohort_controls_coverage_without_changing_default(self):
+        cases = cli.load_cases()
+        with tempfile.TemporaryDirectory() as temp:
+            cohort = Path(temp) / 'cases.json'
+            results = Path(temp) / 'results.jsonl'
+            cohort.write_text(json.dumps({'version': 1, 'cases': cases[:1]}), encoding='utf-8')
+            results.write_text('', encoding='utf-8')
+            code, data = self.run_cli('grade', '--cases', str(cohort), '--results', str(results))
+            self.assertEqual(code, 0)
+            self.assertEqual(data['coverage']['expected'], 2)
+            self.assertEqual(data['evaluation'], 'incomplete')
+            self.assertEqual(len(cli.load_cases()), len(cases))
+            self.assertEqual(self.run_cli('validate', '--cases', str(cohort))[1]['cases'], 1)
+            cohort.write_text('{', encoding='utf-8')
+            self.assertEqual(self.run_cli('validate', '--cases', str(cohort))[0], 1)
+
     def test_workflow_cases_reject_forbidden_operations(self):
         cases = cli.load_cases()
         prohibited = {'proportional-simple': 'create_document',

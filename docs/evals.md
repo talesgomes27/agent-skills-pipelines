@@ -10,6 +10,8 @@ O conjunto em `evals/cases.json` contém pelo menos três casos por skill: ativa
 python3 scripts/evals.py validate
 python3 scripts/evals.py matrix
 python3 scripts/evals.py grade --results /caminho/para/results.jsonl
+# Coorte explícita, sem alterar o corpus geral:
+python3 scripts/evals.py grade --cases evals/experiments/mod-007/cases.json --results evals/experiments/mod-007/runs/2026-10-28/results.jsonl
 ```
 
 ## Contrato e resultado do processamento
@@ -25,7 +27,7 @@ O comando `grade` conserva exit **0** quando o lote foi processado, mesmo que ha
 - `evaluation: failed`: pelo menos um resultado reprovou, inclusive em lote parcial.
 - `evaluation: incomplete`: nenhum resultado recebido reprovou, mas faltam pares; inclui lote vazio.
 
-`coverage.expected` é o número de casos do corpus vezes duas condições (`baseline` e `skill`); `observed` conta os pares recebidos, `complete` indica cobertura integral e `missing` lista objetos com `case_id` e `condition` faltantes. IDs desconhecidos e pares duplicados são erros. Para o corpus atual, são esperados 68 pares. O uso diagnóstico de um subconjunto continua permitido, identificado como parcial; não há seleção implícita de corpus pelo conteúdo do lote.
+`coverage.expected` é o número de casos do corpus vezes duas condições (`baseline` e `skill`); `observed` conta os pares recebidos, `complete` indica cobertura integral e `missing` lista objetos com `case_id` e `condition` faltantes. IDs desconhecidos e pares duplicados são erros. Para o corpus geral, são esperados 68 pares. `--cases CAMINHO` seleciona explicitamente uma coorte para qualquer comando, sujeita à mesma validação; sem a opção, o padrão continua `evals/cases.json`. O conteúdo do lote nunca seleciona implicitamente o corpus. Um lote parcial do corpus escolhido continua identificado como incompleto.
 
 Erros de entrada retornam JSON `status: fail`, com `error` e exit **1**. Para aceitar uma avaliação automatizada, confira exit 0, `status == processed`, `coverage.complete == true` e `evaluation == passed`; não use apenas o exit code. O diagnóstico detalhado por resultado e o resumo da MOD-002 permanecem disponíveis. A validação é local e não acrescenta um motor de JSON Schema ou dependência nova.
 
@@ -61,3 +63,11 @@ Exemplo de três resultados recebidos na condição `skill`, com tokens disponí
 Nesse exemplo, `tool_calls: 0` é observado nos três resultados, `tokens: 300` soma apenas dois, e a latência é desconhecida. Consumidores que esperavam sempre um inteiro devem tratar `null` e consultar a cobertura por métrica. O schema `evals/result.schema.json` descreve os traces de entrada; seus campos continuam inalterados.
 
 Casos novos devem representar um comportamento que poderia regredir. Evite casos que apenas repetem uma frase do `SKILL.md`. Para mudanças relevantes de trigger, privilégio ou pipeline, adicione primeiro um caso que falhe pelo motivo esperado e depois ajuste a skill.
+
+## Campanha local A–J da MOD-007
+
+O [protocolo e os instrumentos](../evals/experiments/mod-007/README.md) preservam uma coorte separada de 12 casos e 24 execuções reais sobre fixtures sintéticas. A preparação usa revisões Git fixadas; a captura registra leituras emitidas e tempo por fase; a coleta confere integridade, deriva efeitos e repete testes antes de juntar julgamentos com evidência. Proveniência e leituras ficam em sidecars, sem campos extras no schema dos traces.
+
+O [resultado datado](audits/modernization-2026-10-28/mod-007.md) tem cobertura 24/24 e `evaluation: failed`: em I, ambas as versões selecionaram `writing-pipeline`, enquanto o oráculo fixou auditoria. O contrato do grader ignora ativação na baseline; por isso 12/12 versus 11/12 não prova regressão de versão. Rubricas documentais e preservação foram atendidas, mas a reprovação estrita permanece registrada. Não usar esse lote como exemplo de `evaluation: passed`.
+
+Tokens e chamadas nativas não foram expostos; `elapsed_ms` mede intervalos locais de execução instrumentada, incluindo raciocínio e ferramentas entre start/end. Bytes emitidos não equivalem a tokens ou leitura integral pelo modelo, especialmente quando o host trunca saída. A campanha tem uma observação por caso/condição, contexto compartilhado entre A–I e julgamento pelo integrador, também autor do experimento. Não certifica descoberta nativa, segurança do host, eficácia de todas as oito skills ou portabilidade entre hosts.
