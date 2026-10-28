@@ -1,0 +1,234 @@
+{
+  "task": "MOD-010",
+  "date": "2026-10-28",
+  "base": "e62ced13cab5fa66a902b317b0d46cd6d0fe3d0a",
+  "previous_task_commit": "e62ced1",
+  "interpreter": "/usr/bin/python3",
+  "python": "3.14.4",
+  "pyyaml": "6.0.3",
+  "baseline": "52 tests passed",
+  "final": "53 tests passed locally, no skips",
+  "decision": {
+    "new_optimization": "rejected_no_demonstrated_net_gain",
+    "acceptance_route": "documented_rejection",
+    "existing_policies": "retained, no active changes",
+    "token_or_quota_savings": "not_demonstrated",
+    "human_acceptance": null
+  },
+  "evidence": {
+    "path": "mod-010-evidence.json",
+    "sha256": "a58b0795ac8707d2c5ec43bdf93c3f411932c63a52854e8ad833b47f4810a49d",
+    "sources_hashed": 10,
+    "policy_files_matched": 71,
+    "verifier": "../../../evals/experiments/mod-010/verify.py",
+    "verifier_sha256": "a85d69b574b97279802710c41c90a73af0cd66601fb1d7b9688339445f852934",
+    "replays": 24,
+    "passed": 22,
+    "expected_failures": 2,
+    "grades": "exact originals preserved: MOD-007 failed I activation, MOD-008 failed C-uncertain lexical signal",
+    "new_agent_runs": 0,
+    "metric_units": "local intervals, emitted bytes/files, created Markdown; not native tokens or quota",
+    "native_metrics": "absent remains null; actual zero preserved by reconciliation test"
+  },
+  "checks": [
+    {
+      "command": "/usr/bin/python3 -B -m unittest discover -s tests -v",
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "f4ca3c",
+        "wall_time_seconds": 0.719926501,
+        "exit_code": 0,
+        "original_token_count": 1775,
+        "output": "test_collection_preserves_raw_evidence_and_rejects_provenance_changes (test_eval_capture.CaptureTests.test_collection_preserves_raw_evidence_and_rejects_provenance_changes) ... ok\ntest_paths_and_phase_boundaries (test_eval_capture.CaptureTests.test_paths_and_phase_boundaries) ... ok\ntest_prepare_pins_equal_inputs_and_refuses_existing_destination (test_eval_capture.CaptureTests.test_prepare_pins_equal_inputs_and_refuses_existing_destination) ... ok\ntest_reads_and_elapsed_are_observed_without_native_metrics (test_eval_capture.CaptureTests.test_reads_and_elapsed_are_observed_without_native_metrics) ... ok\ntest_case_identity_types_and_catalog_membership (test_evals.EvalTests.test_case_identity_types_and_catalog_membership) ... ok\ntest_catalog_has_three_kinds_per_skill (test_evals.EvalTests.test_catalog_has_three_kinds_per_skill) ... ok\ntest_coverage_and_evaluation_status_are_separate_from_processing (test_evals.EvalTests.test_coverage_and_evaluation_status_are_separate_from_processing) ... ok\ntest_duplicate_result_is_rejected (test_evals.EvalTests.test_duplicate_result_is_rejected) ... ok\ntest_explicit_cohort_controls_coverage_without_changing_default (test_evals.EvalTests.test_explicit_cohort_controls_coverage_without_changing_default) ... ok\ntest_grade_pass_and_failure (test_evals.EvalTests.test_grade_pass_and_failure) ... ok\ntest_grade_without_metrics_preserves_input_and_quality (test_evals.EvalTests.test_grade_without_metrics_preserves_input_and_quality) ... ok\ntest_invalid_results_return_controlled_errors (test_evals.EvalTests.test_invalid_results_return_controlled_errors) ... ok\ntest_summary_preserves_observed_zero (test_evals.EvalTests.test_summary_preserves_observed_zero) ... ok\ntest_summary_reports_partial_coverage_per_metric_and_condition (test_evals.EvalTests.test_summary_reports_partial_coverage_per_metric_and_condition) ... ok\ntest_workflow_cases_reject_forbidden_operations (test_evals.EvalTests.test_workflow_cases_reject_forbidden_operations) ... ok\ntest_doctor_accepts_valid_index (test_library.LibraryTests.test_doctor_accepts_valid_index) ... ok\ntest_doctor_detects_stale_path (test_library.LibraryTests.test_doctor_detects_stale_path) ... ok\ntest_rebuild_is_reviewable_and_preserves_metadata (test_library.LibraryTests.test_rebuild_is_reviewable_and_preserves_metadata) ... ok\ntest_rebuild_requires_explicit_replace_for_source (test_library.LibraryTests.test_rebuild_requires_explicit_replace_for_source) ... ok\ntest_cohort_rejects_authority_escalation_and_keeps_catalog_identity (test_mod008.Mod008Tests.test_cohort_rejects_authority_escalation_and_keeps_catalog_identity) ... ok\ntest_preparation_has_matched_inputs_and_declared_external_symlink (test_mod008.Mod008Tests.test_preparation_has_matched_inputs_and_declared_external_symlink) ... ok\ntest_reconciliation_counts_emissions_and_preserves_unknown_and_real_zero (test_mod010.Mod010Tests.test_reconciliation_counts_emissions_and_preserves_unknown_and_real_zero) ... ok\ntest_exact_and_search_validate_manifest (test_skill_loader_query.QueryTests.test_exact_and_search_validate_manifest) ... ok\ntest_identity_mismatch_is_rejected (test_skill_loader_query.QueryTests.test_identity_mismatch_is_rejected) ... ok\ntest_installed_copy_works_outside_checkout (test_skill_loader_query.QueryTests.test_installed_copy_works_outside_checkout) ... ok\ntest_invalid_frontmatter_is_rejected_by_exact_and_search (test_skill_loader_query.QueryTests.test_invalid_frontmatter_is_rejected_by_exact_and_search) ... ok\ntest_missing_yaml_dependency_is_reported (test_skill_loader_query.QueryTests.test_missing_yaml_dependency_is_reported) ... ok\ntest_path_and_symlink_escapes_are_rejected (test_skill_loader_query.QueryTests.test_path_and_symlink_escapes_are_rejected) ... ok\ntest_user_configuration_resolves_root (test_skill_loader_query.QueryTests.test_user_configuration_resolves_root) ... ok\ntest_yaml_quoted_and_multiline_values_are_accepted (test_skill_loader_query.QueryTests.test_yaml_quoted_and_multiline_values_are_accepted) ... ok\ntest_agent_project_destinations (test_skills.InstallerTests.test_agent_project_destinations) ... ok\ntest_ambiguous_auto_detection (test_skills.InstallerTests.test_ambiguous_auto_detection) ... ok\ntest_code_examples_and_history_do_not_block_reference_checks (test_skills.InstallerTests.test_code_examples_and_history_do_not_block_reference_checks) ... ok\ntest_conflict_preflight_preserves_unmanaged_and_no_partial_batch (test_skills.InstallerTests.test_conflict_preflight_preserves_unmanaged_and_no_partial_batch) ... ok\ntest_copy_idempotence_and_isolation (test_skills.InstallerTests.test_copy_idempotence_and_isolation) ... ok\ntest_destination_inside_source_rejected (test_skills.InstallerTests.test_destination_inside_source_rejected) ... ok\ntest_doctor_detects_installed_copy_drift (test_skills.InstallerTests.test_doctor_detects_installed_copy_drift) ... ok\ntest_dry_run_no_destination_writes (test_skills.InstallerTests.test_dry_run_no_destination_writes) ... ok\ntest_explicit_selection_and_unknown_name (test_skills.InstallerTests.test_explicit_selection_and_unknown_name) ... ok\ntest_filtered_manifest_has_only_selected_paths (test_skills.InstallerTests.test_filtered_manifest_has_only_selected_paths) ... ok\ntest_invalid_manifest_and_missing_or_escaping_reference (test_skills.InstallerTests.test_invalid_manifest_and_missing_or_escaping_reference) ... ok\ntest_invalid_yaml_resource_blocks_install (test_skills.InstallerTests.test_invalid_yaml_resource_blocks_install) ... ok\ntest_link_and_switch_to_copy (test_skills.InstallerTests.test_link_and_switch_to_copy) ... ok\ntest_malformed_receipt_preserved (test_skills.InstallerTests.test_malformed_receipt_preserved) ... ok\ntest_readme_release_matches_catalog (test_skills.InstallerTests.test_readme_release_matches_catalog) ... ok\ntest_receipt_write_failure_restores_previous_package (test_skills.InstallerTests.test_receipt_write_failure_restores_previous_package) ... ok\ntest_reference_broken_or_escaping_link_blocks_install_and_doctor (test_skills.InstallerTests.test_reference_broken_or_escaping_link_blocks_install_and_doctor) ... ok\ntest_reference_links_are_relative_to_the_reference_and_check_installed_copy (test_skills.InstallerTests.test_reference_links_are_relative_to_the_reference_and_check_installed_copy) ... ok\ntest_release_change_requires_managed_update (test_skills.InstallerTests.test_release_change_requires_managed_update) ... ok\ntest_second_link_receipt_failure_keeps_first_install_and_retry (test_skills.InstallerTests.test_second_link_receipt_failure_keeps_first_install_and_retry) ... ok\ntest_second_receipt_failure_preserves_partial_update_and_retry (test_skills.InstallerTests.test_second_receipt_failure_preserves_partial_update_and_retry) ... ok\ntest_update_requires_flag_and_preserves_local_changes (test_skills.InstallerTests.test_update_requires_flag_and_preserves_local_changes) ... ok\ntest_user_scope_in_isolated_home (test_skills.InstallerTests.test_user_scope_in_isolated_home) ... ok\n\n----------------------------------------------------------------------\nRan 53 tests in 0.554s\n\nOK\n"
+      }
+    },
+    {
+      "command": "/usr/bin/python3 -B scripts/skills.py doctor",
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "50e22e",
+        "wall_time_seconds": 0.116466329,
+        "exit_code": 0,
+        "original_token_count": 360,
+        "output": "{\n  \"root\": \"/home/tales/Documentos/github/antigravity-meta-skills\",\n  \"checks\": [\n    {\n      \"skill\": \"pre-code-pipeline\",\n      \"status\": \"pass\",\n      \"characters\": 11945,\n      \"integrity\": \"structure-only\",\n      \"source_release\": \"1.0.1\"\n    },\n    {\n      \"skill\": \"execution-pipeline\",\n      \"status\": \"pass\",\n      \"characters\": 11117,\n      \"integrity\": \"structure-only\",\n      \"source_release\": \"1.0.1\"\n    },\n    {\n      \"skill\": \"writing-pipeline\",\n      \"status\": \"pass\",\n      \"characters\": 6147,\n      \"integrity\": \"structure-only\",\n      \"source_release\": \"1.0.1\"\n    },\n    {\n      \"skill\": \"audit-and-refactoring-pipeline\",\n      \"status\": \"pass\",\n      \"characters\": 11532,\n      \"integrity\": \"structure-only\",\n      \"source_release\": \"1.0.1\"\n    },\n    {\n      \"skill\": \"release-and-ops-pipeline\",\n      \"status\": \"pass\",\n      \"characters\": 9784,\n      \"integrity\": \"structure-only\",\n      \"source_release\": \"1.0.1\"\n    },\n    {\n      \"skill\": \"quarto-expert\",\n      \"status\": \"pass\",\n      \"characters\": 6857,\n      \"integrity\": \"structure-only\",\n      \"source_release\": \"1.0.1\"\n    },\n    {\n      \"skill\": \"humanizer\",\n      \"status\": \"pass\",\n      \"characters\": 3366,\n      \"integrity\": \"structure-only\",\n      \"source_release\": \"1.0.1\"\n    },\n    {\n      \"skill\": \"skill-loader\",\n      \"status\": \"pass\",\n      \"characters\": 4110,\n      \"integrity\": \"structure-only\",\n      \"source_release\": \"1.0.1\"\n    }\n  ]\n}\n"
+      }
+    },
+    {
+      "command": "/usr/bin/python3 -B scripts/evals.py validate",
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "5de53a",
+        "wall_time_seconds": 0.047740141,
+        "exit_code": 0,
+        "original_token_count": 33,
+        "output": "{\n  \"status\": \"pass\",\n  \"cases\": 34,\n  \"skills\": 8,\n  \"kinds\": {\n    \"positive\": 15,\n    \"ambiguous\": 11,\n    \"negative\": 8\n  }\n}\n"
+      }
+    },
+    {
+      "command": "/usr/bin/python3 -B scripts/evals.py validate --cases evals/experiments/mod-007/cases.json",
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "076f41",
+        "wall_time_seconds": 0.031391802,
+        "exit_code": 0,
+        "original_token_count": 32,
+        "output": "{\n  \"status\": \"pass\",\n  \"cases\": 12,\n  \"skills\": 3,\n  \"kinds\": {\n    \"positive\": 8,\n    \"ambiguous\": 3,\n    \"negative\": 1\n  }\n}\n"
+      }
+    },
+    {
+      "command": "/usr/bin/python3 -B scripts/evals.py validate --cases evals/experiments/mod-008/cases.json",
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "22e4e4",
+        "wall_time_seconds": 0.06918331,
+        "exit_code": 0,
+        "original_token_count": 27,
+        "output": "{\n  \"status\": \"pass\",\n  \"cases\": 6,\n  \"skills\": 3,\n  \"kinds\": {\n    \"positive\": 4,\n    \"ambiguous\": 2\n  }\n}\n"
+      }
+    },
+    {
+      "command": "/usr/bin/python3 -B quarto-expert/scripts/doctor.py",
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "797da3",
+        "wall_time_seconds": 0.113967001,
+        "exit_code": 0,
+        "original_token_count": 1704,
+        "output": "{\n  \"skill\": \"quarto-expert\",\n  \"root\": \"/home/tales/Documentos/github/antigravity-meta-skills/quarto-expert\",\n  \"checks\": [\n    {\n      \"check\": \"manifest\",\n      \"status\": \"pass\",\n      \"detail\": \"/home/tales/Documentos/github/antigravity-meta-skills/quarto-expert/SKILL.md\"\n    },\n    {\n      \"check\": \"resource:references/yaml-front-matter.md\",\n      \"status\": \"pass\",\n      \"detail\": \"/home/tales/Documentos/github/antigravity-meta-skills/quarto-expert/references/yaml-front-matter.md\"\n    },\n    {\n      \"check\": \"resource:references/engines.md\",\n      \"status\": \"pass\",\n      \"detail\": \"/home/tales/Documentos/github/antigravity-meta-skills/quarto-expert/references/engines.md\"\n    },\n    {\n      \"check\": \"resource:references/code-cells.md\",\n      \"status\": \"pass\",\n      \"detail\": \"/home/tales/Documentos/github/antigravity-meta-skills/quarto-expert/references/code-cells.md\"\n    },\n    {\n      \"check\": \"resource:references/cross-references.md\",\n      \"status\": \"pass\",\n      \"detail\": \"/home/tales/Documentos/github/antigravity-meta-skills/quarto-expert/references/cross-references.md\"\n    },\n    {\n      \"check\": \"resource:references/citations.md\",\n      \"status\": \"pass\",\n      \"detail\": \"/home/tales/Documentos/github/antigravity-meta-skills/quarto-expert/references/citations.md\"\n    },\n    {\n      \"check\": \"resource:references/figures.md\",\n      \"status\": \"pass\",\n      \"detail\": \"/home/tales/Documentos/github/antigravity-meta-skills/quarto-expert/references/figures.md\"\n    },\n    {\n      \"check\": \"resource:references/tables.md\",\n      \"status\": \"pass\",\n      \"detail\": \"/home/tales/Documentos/github/antigravity-meta-skills/quarto-expert/references/tables.md\"\n    },\n    {\n      \"check\": \"resource:references/layout.md\",\n      \"status\": \"pass\",\n      \"detail\": \"/home/tales/Documentos/github/antigravity-meta-skills/quarto-expert/references/layout.md\"\n    },\n    {\n      \"check\": \"resource:references/callouts.md\",\n      \"status\": \"pass\",\n      \"detail\": \"/home/tales/Documentos/github/antigravity-meta-skills/quarto-expert/references/callouts.md\"\n    },\n    {\n      \"check\": \"resource:references/diagrams.md\",\n      \"status\": \"pass\",\n      \"detail\": \"/home/tales/Documentos/github/antigravity-meta-skills/quarto-expert/references/diagrams.md\"\n    },\n    {\n      \"check\": \"resource:references/divs-and-spans.md\",\n      \"status\": \"pass\",\n      \"detail\": \"/home/tales/Documentos/github/antigravity-meta-skills/quarto-expert/references/divs-and-spans.md\"\n    },\n    {\n      \"check\": \"resource:references/brand-yml.md\",\n      \"status\": \"pass\",\n      \"detail\": \"/home/tales/Documentos/github/antigravity-meta-skills/quarto-expert/references/brand-yml.md\"\n    },\n    {\n      \"check\": \"resource:references/alt-text.md\",\n      \"status\": \"pass\",\n      \"detail\": \"/home/tales/Documentos/github/antigravity-meta-skills/quarto-expert/references/alt-text.md\"\n    },\n    {\n      \"check\": \"resource:references/typst-and-templates.md\",\n      \"status\": \"pass\",\n      \"detail\": \"/home/tales/Documentos/github/antigravity-meta-skills/quarto-expert/references/typst-and-templates.md\"\n    },\n    {\n      \"check\": \"resource:references/abnt-thesis-guide.md\",\n      \"status\": \"pass\",\n      \"detail\": \"/home/tales/Documentos/github/antigravity-meta-skills/quarto-expert/references/abnt-thesis-guide.md\"\n    },\n    {\n      \"check\": \"resource:references/conversion-rmarkdown.md\",\n      \"status\": \"pass\",\n      \"detail\": \"/home/tales/Documentos/github/antigravity-meta-skills/quarto-expert/references/conversion-rmarkdown.md\"\n    },\n    {\n      \"check\": \"resource:references/conversion-jupyter.md\",\n      \"status\": \"pass\",\n      \"detail\": \"/home/tales/Documentos/github/antigravity-meta-skills/quarto-expert/references/conversion-jupyter.md\"\n    },\n    {\n      \"check\": \"resource:references/conversion-bookdown.md\",\n      \"status\": \"pass\",\n      \"detail\": \"/home/tales/Documentos/github/antigravity-meta-skills/quarto-expert/references/conversion-bookdown.md\"\n    },\n    {\n      \"check\": \"resource:references/conversion-blogdown.md\",\n      \"status\": \"pass\",\n      \"detail\": \"/home/tales/Documentos/github/antigravity-meta-skills/quarto-expert/references/conversion-blogdown.md\"\n    },\n    {\n      \"check\": \"resource:references/conversion-distill.md\",\n      \"status\": \"pass\",\n      \"detail\": \"/home/tales/Documentos/github/antigravity-meta-skills/quarto-expert/references/conversion-distill.md\"\n    },\n    {\n      \"check\": \"resource:references/conversion-xaringan.md\",\n      \"status\": \"pass\",\n      \"detail\": \"/home/tales/Documentos/github/antigravity-meta-skills/quarto-expert/references/conversion-xaringan.md\"\n    },\n    {\n      \"check\": \"resource:references/extensions.md\",\n      \"status\": \"pass\",\n      \"detail\": \"/home/tales/Documentos/github/antigravity-meta-skills/quarto-expert/references/extensions.md\"\n    },\n    {\n      \"check\": \"resource:references/shortcodes.md\",\n      \"status\": \"pass\",\n      \"detail\": \"/home/tales/Documentos/github/antigravity-meta-skills/quarto-expert/references/shortcodes.md\"\n    },\n    {\n      \"check\": \"resource:references/conditional-content.md\",\n      \"status\": \"pass\",\n      \"detail\": \"/home/tales/Documentos/github/antigravity-meta-skills/quarto-expert/references/conditional-content.md\"\n    },\n    {\n      \"check\": \"resource:references/markdown-linting.md\",\n      \"status\": \"pass\",\n      \"detail\": \"/home/tales/Documentos/github/antigravity-meta-skills/quarto-expert/references/markdown-linting.md\"\n    },\n    {\n      \"check\": \"resource:examples/minimal-report/index.qmd\",\n      \"status\": \"pass\",\n      \"detail\": \"/home/tales/Documentos/github/antigravity-meta-skills/quarto-expert/examples/minimal-report/index.qmd\"\n    },\n    {\n      \"check\": \"resource:examples/abnt-thesis-starter/README.md\",\n      \"status\": \"pass\",\n      \"detail\": \"/home/tales/Documentos/github/antigravity-meta-skills/quarto-expert/examples/abnt-thesis-starter/README.md\"\n    },\n    {\n      \"check\": \"resource:examples/manuscript-binder/README.md\",\n      \"status\": \"pass\",\n      \"detail\": \"/home/tales/Documentos/github/antigravity-meta-skills/quarto-expert/examples/manuscript-binder/README.md\"\n    },\n    {\n      \"check\": \"resource:scripts/doctor.py\",\n      \"status\": \"pass\",\n      \"detail\": \"/home/tales/Documentos/github/antigravity-meta-skills/quarto-expert/scripts/doctor.py\"\n    },\n    {\n      \"check\": \"frontmatter\",\n      \"status\": \"pass\",\n      \"detail\": \"Required fields parsed\"\n    },\n    {\n      \"check\": \"yaml:examples/abnt-thesis-starter/_quarto.yml\",\n      \"status\": \"pass\",\n      \"detail\": \"Syntax only\"\n    },\n    {\n      \"check\": \"yaml:examples/manuscript-binder/_quarto.yml\",\n      \"status\": \"pass\",\n      \"detail\": \"Syntax only\"\n    },\n    {\n      \"check\": \"yaml:examples/minimal-report/_quarto.yml\",\n      \"status\": \"pass\",\n      \"detail\": \"Syntax only\"\n    }\n  ],\n  \"exit_code\": 0\n}\n"
+      }
+    },
+    {
+      "command": "git diff --check",
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "3432af",
+        "wall_time_seconds": 2.4934e-05,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      }
+    }
+  ],
+  "installation_smoke": [
+    {
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "scripts/skills.py",
+        "install",
+        "--all",
+        "--destination",
+        "/tmp/mod010-install-wil0nfsx/copy",
+        "--mode",
+        "copy"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"dry_run\": false,\n  \"plan\": [\n    {\n      \"skill\": \"pre-code-pipeline\",\n      \"action\": \"install\",\n      \"destination\": \"/tmp/mod010-install-wil0nfsx/copy/pre-code-pipeline\",\n      \"mode\": \"copy\",\n      \"installed_release\": null,\n      \"source_release\": \"1.0.1\"\n    },\n    {\n      \"skill\": \"execution-pipeline\",\n      \"action\": \"install\",\n      \"destination\": \"/tmp/mod010-install-wil0nfsx/copy/execution-pipeline\",\n      \"mode\": \"copy\",\n      \"installed_release\": null,\n      \"source_release\": \"1.0.1\"\n    },\n    {\n      \"skill\": \"writing-pipeline\",\n      \"action\": \"install\",\n      \"destination\": \"/tmp/mod010-install-wil0nfsx/copy/writing-pipeline\",\n      \"mode\": \"copy\",\n      \"installed_release\": null,\n      \"source_release\": \"1.0.1\"\n    },\n    {\n      \"skill\": \"audit-and-refactoring-pipeline\",\n      \"action\": \"install\",\n      \"destination\": \"/tmp/mod010-install-wil0nfsx/copy/audit-and-refactoring-pipeline\",\n      \"mode\": \"copy\",\n      \"installed_release\": null,\n      \"source_release\": \"1.0.1\"\n    },\n    {\n      \"skill\": \"release-and-ops-pipeline\",\n      \"action\": \"install\",\n      \"destination\": \"/tmp/mod010-install-wil0nfsx/copy/release-and-ops-pipeline\",\n      \"mode\": \"copy\",\n      \"installed_release\": null,\n      \"source_release\": \"1.0.1\"\n    },\n    {\n      \"skill\": \"quarto-expert\",\n      \"action\": \"install\",\n      \"destination\": \"/tmp/mod010-install-wil0nfsx/copy/quarto-expert\",\n      \"mode\": \"copy\",\n      \"installed_release\": null,\n      \"source_release\": \"1.0.1\"\n    },\n    {\n      \"skill\": \"humanizer\",\n      \"action\": \"install\",\n      \"destination\": \"/tmp/mod010-install-wil0nfsx/copy/humanizer\",\n      \"mode\": \"copy\",\n      \"installed_release\": null,\n      \"source_release\": \"1.0.1\"\n    },\n    {\n      \"skill\": \"skill-loader\",\n      \"action\": \"install\",\n      \"destination\": \"/tmp/mod010-install-wil0nfsx/copy/skill-loader\",\n      \"mode\": \"copy\",\n      \"installed_release\": null,\n      \"source_release\": \"1.0.1\"\n    }\n  ]\n}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "scripts/skills.py",
+        "doctor",
+        "--all",
+        "--destination",
+        "/tmp/mod010-install-wil0nfsx/copy"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"root\": \"/tmp/mod010-install-wil0nfsx/copy\",\n  \"checks\": [\n    {\n      \"skill\": \"pre-code-pipeline\",\n      \"status\": \"pass\",\n      \"characters\": 11945,\n      \"integrity\": \"managed-copy\",\n      \"installed_release\": \"1.0.1\",\n      \"source_release\": \"1.0.1\",\n      \"update_available\": false\n    },\n    {\n      \"skill\": \"execution-pipeline\",\n      \"status\": \"pass\",\n      \"characters\": 11117,\n      \"integrity\": \"managed-copy\",\n      \"installed_release\": \"1.0.1\",\n      \"source_release\": \"1.0.1\",\n      \"update_available\": false\n    },\n    {\n      \"skill\": \"writing-pipeline\",\n      \"status\": \"pass\",\n      \"characters\": 6147,\n      \"integrity\": \"managed-copy\",\n      \"installed_release\": \"1.0.1\",\n      \"source_release\": \"1.0.1\",\n      \"update_available\": false\n    },\n    {\n      \"skill\": \"audit-and-refactoring-pipeline\",\n      \"status\": \"pass\",\n      \"characters\": 11532,\n      \"integrity\": \"managed-copy\",\n      \"installed_release\": \"1.0.1\",\n      \"source_release\": \"1.0.1\",\n      \"update_available\": false\n    },\n    {\n      \"skill\": \"release-and-ops-pipeline\",\n      \"status\": \"pass\",\n      \"characters\": 9784,\n      \"integrity\": \"managed-copy\",\n      \"installed_release\": \"1.0.1\",\n      \"source_release\": \"1.0.1\",\n      \"update_available\": false\n    },\n    {\n      \"skill\": \"quarto-expert\",\n      \"status\": \"pass\",\n      \"characters\": 6857,\n      \"integrity\": \"managed-copy\",\n      \"installed_release\": \"1.0.1\",\n      \"source_release\": \"1.0.1\",\n      \"update_available\": false\n    },\n    {\n      \"skill\": \"humanizer\",\n      \"status\": \"pass\",\n      \"characters\": 3366,\n      \"integrity\": \"managed-copy\",\n      \"installed_release\": \"1.0.1\",\n      \"source_release\": \"1.0.1\",\n      \"update_available\": false\n    },\n    {\n      \"skill\": \"skill-loader\",\n      \"status\": \"pass\",\n      \"characters\": 4110,\n      \"integrity\": \"managed-copy\",\n      \"installed_release\": \"1.0.1\",\n      \"source_release\": \"1.0.1\",\n      \"update_available\": false\n    }\n  ]\n}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "scripts/skills.py",
+        "install",
+        "--all",
+        "--destination",
+        "/tmp/mod010-install-wil0nfsx/link",
+        "--mode",
+        "link"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"dry_run\": false,\n  \"plan\": [\n    {\n      \"skill\": \"pre-code-pipeline\",\n      \"action\": \"install\",\n      \"destination\": \"/tmp/mod010-install-wil0nfsx/link/pre-code-pipeline\",\n      \"mode\": \"link\",\n      \"installed_release\": null,\n      \"source_release\": \"1.0.1\"\n    },\n    {\n      \"skill\": \"execution-pipeline\",\n      \"action\": \"install\",\n      \"destination\": \"/tmp/mod010-install-wil0nfsx/link/execution-pipeline\",\n      \"mode\": \"link\",\n      \"installed_release\": null,\n      \"source_release\": \"1.0.1\"\n    },\n    {\n      \"skill\": \"writing-pipeline\",\n      \"action\": \"install\",\n      \"destination\": \"/tmp/mod010-install-wil0nfsx/link/writing-pipeline\",\n      \"mode\": \"link\",\n      \"installed_release\": null,\n      \"source_release\": \"1.0.1\"\n    },\n    {\n      \"skill\": \"audit-and-refactoring-pipeline\",\n      \"action\": \"install\",\n      \"destination\": \"/tmp/mod010-install-wil0nfsx/link/audit-and-refactoring-pipeline\",\n      \"mode\": \"link\",\n      \"installed_release\": null,\n      \"source_release\": \"1.0.1\"\n    },\n    {\n      \"skill\": \"release-and-ops-pipeline\",\n      \"action\": \"install\",\n      \"destination\": \"/tmp/mod010-install-wil0nfsx/link/release-and-ops-pipeline\",\n      \"mode\": \"link\",\n      \"installed_release\": null,\n      \"source_release\": \"1.0.1\"\n    },\n    {\n      \"skill\": \"quarto-expert\",\n      \"action\": \"install\",\n      \"destination\": \"/tmp/mod010-install-wil0nfsx/link/quarto-expert\",\n      \"mode\": \"link\",\n      \"installed_release\": null,\n      \"source_release\": \"1.0.1\"\n    },\n    {\n      \"skill\": \"humanizer\",\n      \"action\": \"install\",\n      \"destination\": \"/tmp/mod010-install-wil0nfsx/link/humanizer\",\n      \"mode\": \"link\",\n      \"installed_release\": null,\n      \"source_release\": \"1.0.1\"\n    },\n    {\n      \"skill\": \"skill-loader\",\n      \"action\": \"install\",\n      \"destination\": \"/tmp/mod010-install-wil0nfsx/link/skill-loader\",\n      \"mode\": \"link\",\n      \"installed_release\": null,\n      \"source_release\": \"1.0.1\"\n    }\n  ]\n}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "scripts/skills.py",
+        "doctor",
+        "--all",
+        "--destination",
+        "/tmp/mod010-install-wil0nfsx/link"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"root\": \"/tmp/mod010-install-wil0nfsx/link\",\n  \"checks\": [\n    {\n      \"skill\": \"pre-code-pipeline\",\n      \"status\": \"pass\",\n      \"characters\": 11945,\n      \"integrity\": \"live-link\",\n      \"installed_release\": \"1.0.1\",\n      \"source_release\": \"1.0.1\",\n      \"update_available\": false\n    },\n    {\n      \"skill\": \"execution-pipeline\",\n      \"status\": \"pass\",\n      \"characters\": 11117,\n      \"integrity\": \"live-link\",\n      \"installed_release\": \"1.0.1\",\n      \"source_release\": \"1.0.1\",\n      \"update_available\": false\n    },\n    {\n      \"skill\": \"writing-pipeline\",\n      \"status\": \"pass\",\n      \"characters\": 6147,\n      \"integrity\": \"live-link\",\n      \"installed_release\": \"1.0.1\",\n      \"source_release\": \"1.0.1\",\n      \"update_available\": false\n    },\n    {\n      \"skill\": \"audit-and-refactoring-pipeline\",\n      \"status\": \"pass\",\n      \"characters\": 11532,\n      \"integrity\": \"live-link\",\n      \"installed_release\": \"1.0.1\",\n      \"source_release\": \"1.0.1\",\n      \"update_available\": false\n    },\n    {\n      \"skill\": \"release-and-ops-pipeline\",\n      \"status\": \"pass\",\n      \"characters\": 9784,\n      \"integrity\": \"live-link\",\n      \"installed_release\": \"1.0.1\",\n      \"source_release\": \"1.0.1\",\n      \"update_available\": false\n    },\n    {\n      \"skill\": \"quarto-expert\",\n      \"status\": \"pass\",\n      \"characters\": 6857,\n      \"integrity\": \"live-link\",\n      \"installed_release\": \"1.0.1\",\n      \"source_release\": \"1.0.1\",\n      \"update_available\": false\n    },\n    {\n      \"skill\": \"humanizer\",\n      \"status\": \"pass\",\n      \"characters\": 3366,\n      \"integrity\": \"live-link\",\n      \"installed_release\": \"1.0.1\",\n      \"source_release\": \"1.0.1\",\n      \"update_available\": false\n    },\n    {\n      \"skill\": \"skill-loader\",\n      \"status\": \"pass\",\n      \"characters\": 4110,\n      \"integrity\": \"live-link\",\n      \"installed_release\": \"1.0.1\",\n      \"source_release\": \"1.0.1\",\n      \"update_available\": false\n    }\n  ]\n}\n",
+      "stderr": ""
+    }
+  ],
+  "production_changes": {
+    "skills": false,
+    "descriptions": false,
+    "catalog": false,
+    "distribution_cli": false,
+    "result_schema": false,
+    "ci": false
+  },
+  "pending": [
+    "Remote CI final jobs when publication/execution authorized",
+    "Native tokens/tool-call/quota measurement",
+    "Other hosts/OS/Python 3.9 and native discovery",
+    "Independent evaluation and controlled repetitions; no claims beyond fixtures"
+  ],
+  "git": {
+    "previous_commit_scope": "MOD-009 only, partial task.md staging excludes DEL sections",
+    "mod010": "uncommitted",
+    "push": false,
+    "parallel_work": "DEL notes/artifacts preserved outside scope"
+  },
+  "delivery_checks": {
+    "local_MOD_document_targets_existing": 83,
+    "historical_sources_hash_and_git_snapshot": "all ten unchanged",
+    "active_packages_catalog_clis_schema_ci": "unchanged from e62ced1",
+    "no_untracked_active_skill_files": true,
+    "metrics_reconciled": "A-I separated from J; absent native metrics null",
+    "historical_policy_files_checked": 71,
+    "fixture_replays": {
+      "total": 24,
+      "passed": 22,
+      "expected_failures": 2
+    },
+    "previous_commit_scope": "no DEL files/independent task sections",
+    "parallel_work": "DEL-001/002/003 preserved in worktree; not included in MOD-009 commit",
+    "index": "empty; MOD-010 uncommitted"
+  },
+  "executive_review": {
+    "date": "2026-10-28",
+    "scoped_tests": {
+      "scope": "tracked MOD tests plus test_mod010; independent untracked DEL tests excluded",
+      "files": [
+        "tests/test_eval_capture.py",
+        "tests/test_evals.py",
+        "tests/test_library.py",
+        "tests/test_mod008.py",
+        "tests/test_skill_loader_query.py",
+        "tests/test_skills.py",
+        "tests/test_mod010.py"
+      ],
+      "tests": 53,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "reconciliation": "sources, metrics, grades and 24 expected replay outcomes match original evidence; original file unchanged",
+    "parallel_work": "untracked DEL tests/notes/artifacts excluded from this delivery",
+    "commit_authorized": true,
+    "push_authorized": false,
+    "local_document_targets_existing": 91
+  }
+}

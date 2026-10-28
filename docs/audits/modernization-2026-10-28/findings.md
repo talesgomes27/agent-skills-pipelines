@@ -62,3 +62,7 @@ Cada item abaixo complementa a matriz com alternativas, benefício esperado, cus
 ## Decisão experimental MOD-008 — 2026-10-28
 
 A [comparação C/D/H](mod-008.md) não demonstrou melhora discriminável para ampliar referências de revisão/debugging/segurança. As duas condições atenderam às 23 rubricas; o grader conservou falha lexical da candidata. Proposta e traces preservados, sem promover novos blocos ou declarar correção de um achado adicional. Esta decisão local evita tratar extensão instrucional como benefício comprovado.
+
+## Encerramento local MOD-010 — 2026-10-28
+
+A [consolidação final](mod-010.md) mantém correções e políticas previamente adotadas e rejeita novas extrações/compactações sem ganho líquido demonstrado. A evidência disponível confirma comportamentos nas fixtures, não economia de tokens/franquia, descoberta nativa ou qualidade universal. Grades com reprovações e pendência de CI remota permanecem explícitos. Não foi promovida otimização adicional nem declarado novo achado corrigido a partir de contagem de caracteres.

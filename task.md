@@ -1,13 +1,13 @@
 # Estado de melhoria do ecossistema
 
-## Estado vigente — MOD-009 / 2026-10-28
+## Estado vigente — MOD-010 / 2026-10-28
 
-- Objetivo/estado/base: actions da CI fixadas por SHA e recuperação após falha tardia verificada; implementação validada localmente, CI remota pendente; base `c8a6e1b`.
-- Escopo/autorização: pedido atual para commitar MOD-008 e seguir somente à MOD-009. MOD-008 commitada em `c8a6e1b`, com candidata rejeitada preservada; sem push. Adendos DEL mantidos no arquivo de trabalho e excluídos do commit.
-- Executor: agente principal via execution-pipeline/release-and-ops-pipeline em preparação local; sem novos subagentes, instalações globais ou execução remota.
-- Artefatos/decisões: [resultado e aceite](docs/audits/modernization-2026-10-28/mod-009.md), [origens oficiais](docs/audits/modernization-2026-10-28/mod-009-actions.json), [recuperação operacional](docs/distribution/architecture.md#falha-tardia-e-retomada-da-instalação). CLI e pacotes ativos inalterados.
-- Checks: baseline 50, final 52 testes locais sem skips; falha de I/O no segundo pacote coberta em cópia/link, recibos e reexecução coerentes; doctors/casos/smoke temporário e diff-check aprovados. YAML confirma somente quatro pins, sem mudança de eventos, matriz, comandos ou privilégios.
-- Restrições/próxima ação: apresentar e parar. MOD-009 permanece sem commit, sem push e sem MOD-010. CI do conteúdo final depende de envio/execução autorizados. Em commit futuro, incluir apenas hunks MOD de task.md; adendos DEL são trabalho paralelo.
+- Objetivo/estado/base: encerramento técnico local do programa; novas otimizações rejeitadas por falta de ganho líquido demonstrado; base `e62ced1`. Aceite humano final não presumido.
+- Escopo/autorização: pedido atual autoriza commit necessário e relatório executivo de encerramento. MOD-009 commitada em `e62ced1`; registro local da MOD-010 e do relatório autorizado, sem push. Somente hunks MOD de task.md podem ser incluídos; registros DEL permanecem fora do commit.
+- Executor: agente principal via execution-pipeline, com reconciliação/replays locais; sem novos subagentes, ensaios com modelos, contas ou publicações.
+- Artefatos/decisões: [relatório executivo e próximos passos](docs/audits/modernization-2026-10-28/executive-summary.md), [decisões EF-01–EF-06](docs/audits/modernization-2026-10-28/mod-010.md), [evidência reconferida](docs/audits/modernization-2026-10-28/mod-010-evidence.json), [verificador](evals/experiments/mod-010/verify.py). Mantidos pacotes autônomos, esforço proporcional e leitura seletiva; sem encurtar descrições ou extrair regras sem evidência.
+- Checks: baseline 52, final 53 testes locais sem skips; 71 arquivos ativos iguais ao snapshot MOD-007; 24 replays, com 22 verdes e duas falhas esperadas de review sem correção. Grades históricos reproduzidos exatamente, incluindo reprovações. Doctors/casos/copy/link/diff-check aprovados.
+- Limites/próxima ação: entregar o relatório e parar após o registro local autorizado. CI remota, descoberta multi-host e telemetria nativa pendentes. Não há ganho de franquia comprovado; recomendações não autorizam execução. Selecionar apenas hunks MOD de task.md; DEL é trabalho paralelo.
 - Os registros abaixo são históricos datados; suas permissões e próximos passos não substituem esta seção.
 
 ## Histórico — melhoria de 2026-10-22
@@ -123,3 +123,20 @@ Commit e push da entrega estão autorizados. Renomeação do repositório será 
 - Validação: baseline 50 testes, instalador 23 e suíte final 52 sem skips; doctors/corpus/coortes/copy/link temporários/diff-check aprovados. YAML sem alteração semântica além dos pins. Cópia atualiza primeiro e restaura segundo; link novo conserva primeiro e remove segundo; recibos e reexecução conferidos.
 - Limites: CI remota do conteúdo final não executada; sem autorização de envio/dispatch. actionlint ausente, usada validação YAML/estrutural. Sem simular todas as falhas de filesystem, sem outros SOs/Python 3.9 local.
 - Evidência: [MOD-009](docs/audits/modernization-2026-10-28/mod-009.md). Próxima ação: apresentar e parar. MOD-009 sem commit, push ou MOD-010. Selecionar apenas hunks MOD de task.md em eventual commit; DEL permanece fora desta fatia.
+
+## Execução MOD-010 — 2026-10-28
+
+- Autorização: commit da MOD-009 e somente MOD-010; sem push. Commit criado `e62ced1`, com seleção parcial de task.md; todos os registros DEL preservados fora do commit.
+- Entrega: reconciliação reproduzível de medições/grades/snapshots e replays das fixtures; decisões EF-01–EF-06 e fontes operacionais sincronizadas sem repetir corpus. Nenhuma mudança ativa de skill, nome, descrição, versão ou política.
+- Resultado: alternativa de aceite por rejeição documentada atendida; não há ganho líquido medido de tokens/franquia que sustente nova compactação, extração compartilhada ou roteamento. Mantidas políticas já adotadas e rejeição da candidata MOD-008.
+- Validação: baseline 52, final 53 testes locais; 71 arquivos de políticas conferidos com MOD-007; 24 suítes de fixtures reexecutadas (22 verdes, duas falhas esperadas de D-review). Grades MOD-007/008 continuam failed originais, sem retocar respostas/oráculos. Doctors/casos/copy/link/diff-check aprovados.
+- Limites: sem novas inferências experimentais de agentes, telemetria nativa, CI remota, perfil real atualizado ou comprovação multi-host. Menos documentos/bytes na amostra não equivale a menor consumo de franquia. Aceite humano não presumido.
+- Evidência: [encerramento MOD-010](docs/audits/modernization-2026-10-28/mod-010.md). Próxima ação: apresentar e parar; nenhuma etapa posterior autorizada, MOD-010 sem commit/push. Eventual commit deve selecionar só hunks MOD do task compartilhado.
+
+## Encerramento executivo MOD — 2026-10-28
+
+- Autorização: usuário pediu relatório executivo e commit das mudanças quando necessário; registro local da MOD-010 e do relatório, sem push ou início das recomendações.
+- Escopo: programa MOD-001–MOD-010. Trabalho DEL e seus testes não rastreados preservados fora desta entrega; selecionar somente hunks MOD deste arquivo compartilhado.
+- Revisão: 53 testes MOD aprovados sem skips; doctors/casos e reconciliação de hashes, medições, grades e 24 replays conferidos. Os resultados anteriores permanecem preservados, incluindo reprovações e falhas esperadas.
+- Entrega: [relatório executivo](docs/audits/modernization-2026-10-28/executive-summary.md). Próximos passos propostos: CI remota autorizada, preparação de release/piloto, revisão versionada dos oráculos e medição nativa antes de otimizar.
+- Estado/próxima ação: commit local autorizado para fechar a entrega; apresentar relatório e parar. Nenhuma publicação, instalação em perfil real ou nova etapa executada. CI remota e economia de franquia continuam sem comprovação.

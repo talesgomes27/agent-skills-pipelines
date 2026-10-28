@@ -23,6 +23,8 @@ Quando código e requisito aprovado divergem, investigue e registre a decisão a
 
 Atualize apenas as fontes afetadas, com finalidade e consumidor claros. Correção local pode usar o contrato existente; mudança de interface exige conferir exemplos e compatibilidade; decisão arquitetural relevante registra alternativas e consequências; experimento preserva método, configuração e proveniência. A MOD-005 permite que contratos equivalentes aprovados satisfaçam gates por referência, com esforço e motivo registrados. Os procedimentos são mantidos nos próprios pacotes de planejamento, execução e auditoria, sem dependência deste guia na instalação. Esforço não amplia autorização nem elimina segurança, teste pertinente, evidência ou recuperação; assistido/contínuo continuam regulando aprovações.
 
+O [encerramento local da MOD-010](../audits/modernization-2026-10-28/mod-010.md) consolida as decisões de eficiência de 2026-10-28: mantidos carregamento seletivo, esforço proporcional e handoff local a cada pacote; rejeitadas novas extrações/compactações sem ganho líquido demonstrado. Menos documentos ou bytes emitidos em uma fixture não comprova economia de tokens/franquia. Os estudos e limites ficam na evidência datada, sem substituir os contratos dos pacotes ou exigir leitura integral do histórico.
+
 Arquive somente com motivo/data, fonte sucessora e consumidor verificados; preserve histórico Git e resultados necessários à reprodução. Não apague cópias históricas por hash, baixa frequência de leitura ou quantidade de linhas. Antes de remover material de valor incerto, obtenha decisão do mantenedor. Não carregue histórico nem referências inteiras por padrão.
 
 ## Handoff e retomada

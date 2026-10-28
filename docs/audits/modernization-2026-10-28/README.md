@@ -1,8 +1,16 @@
 # Auditoria e programa de modernização — 2026-10-28
 
-Finalidade: apoiar a decisão do mantenedor sobre mudanças incrementais. Consumidor: usuário e futuros executores das tarefas MOD. Estado: diagnóstico concluído no escopo inspecionado; propostas **planejadas, não autorizadas**. A implementação depende de aprovação explícita de cada tarefa. Este registro não herda permissões operacionais de auditorias anteriores.
+Finalidade: apoiar decisões incrementais e manter a navegação da evidência. Consumidores: usuário, mantenedor e futuros executores. Estado vigente: **programa encerrado tecnicamente no escopo local pela [MOD-010](mod-010.md)**, sem ganho líquido de tokens/franquia demonstrado, publicação ou aceite humano final presumido. Cada tarefa teve autorização própria; o encerramento não autoriza novas operações.
 
-Atualização posterior à auditoria: [MOD-001](mod-001.md), [MOD-002](mod-002.md), [MOD-003](mod-003.md), [MOD-004](mod-004.md), [MOD-005](mod-005.md) e [MOD-006](mod-006.md) implementadas e validadas nos respectivos escopos registrados, cada uma sob autorização específica. A [MOD-007](mod-007.md) executou campanha local completa A–J, com divergência de ativação I preservada no grader. O diagnóstico e a baseline abaixo preservam o momento original; A [MOD-008](mod-008.md) concluiu comparação C/D/H e rejeitou a ampliação de referências por ausência de melhora discriminável, preservando as skills ativas. A [MOD-009](mod-009.md) foi implementada e validada localmente, com CI remota pendente. MOD-010 não foi iniciada.
+O [relatório executivo](executive-summary.md) resume o que foi implementado, o que não foi promovido e os próximos passos recomendados. A autorização atual cobre o commit local de encerramento; envio, CI remota e rollout continuam separados.
+
+- [MOD-001](mod-001.md), [MOD-002](mod-002.md), [MOD-003](mod-003.md), [MOD-004](mod-004.md), [MOD-005](mod-005.md) e [MOD-006](mod-006.md): implementações e validações locais nos escopos registrados.
+- [MOD-007](mod-007.md): campanha A–J completa na coorte, com reprovação estrita de ativação I preservada.
+- [MOD-008](mod-008.md): candidata de referências rejeitada por ausência de melhora discriminável; falha lexical preservada no grader.
+- [MOD-009](mod-009.md): pins de CI e recuperação por pacote validados localmente; jobs remotos pendentes de envio/execução autorizados.
+- [MOD-010](mod-010.md): decisões de eficiência consolidadas, replays e fontes reconferidos; novas otimizações rejeitadas sem evidência de benefício líquido.
+
+As seções A–M e baselines abaixo preservam o **diagnóstico original**, anterior às execuções. Recomendações, números e permissões desses snapshots não substituem o estado acima ou a seção inicial de `task.md`. CI remota, outros hosts/descoberta nativa e telemetria de tokens/chamadas continuam sem validação final. Nenhum perfil instalado real foi atualizado.
 
 ## A. Sumário executivo
 
