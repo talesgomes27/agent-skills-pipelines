@@ -133,7 +133,7 @@ python3 -m unittest discover -s tests -v
 python3 quarto-expert/scripts/doctor.py
 ```
 
-O harness contém 28 casos para as oito skills e classifica traces A/B capturados por um executor externo. Ele mede ativação, operações proibidas, sinais esperados e, quando fornecidos, tokens, chamadas de ferramenta e latência. Veja [avaliações comportamentais](docs/evals.md) e [verificação de descoberta](docs/distribution/discovery.md).
+O harness contém 34 casos para as oito skills e classifica traces A/B capturados por um executor externo. Ele mede ativação, operações proibidas, sinais esperados e, quando fornecidos, tokens, chamadas de ferramenta e latência. Veja [avaliações comportamentais](docs/evals.md) e [verificação de descoberta](docs/distribution/discovery.md).
 
 O workflow de CI repete testes, doctors e instalações temporárias em Linux, Windows e macOS. Validação estrutural não substitui uma execução real no host, renderização dos formatos solicitados ou revisão humana do resultado.
 

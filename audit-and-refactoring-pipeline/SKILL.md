@@ -71,6 +71,15 @@ Execute os checks obrigatórios da stack e a integração proporcional ao impact
 Sincronize documentação/ADRs afetados; use revisão factual e especialistas quando necessário. Atualize `docs/audit-report.md` com resolvidos, pendentes, aceitos com ressalvas e não confirmados. Mostre o diff e resultados; registre aceite real do Gate 5, sem marcar automaticamente todos os gates como aprovados.
 Para release, prepare handoff à `release-and-ops-pipeline`. Para novas capacidades, encaminhe ao pré-código quando faltar plano aprovado ou à execução quando houver plano e autorização. Preserve metadados e pendências. Handoff não autoriza commit, push, deploy ou alteração de credenciais.
 
+## Handoff e retomada
+
+Quando houver transferência ou retomada, use uma seção datada no estado adotado (`task.md`, índice equivalente ou resposta quando permitida), sem criar planejador paralelo nem copiar planos inteiros:
+- Objetivo, base/revisão e estado; escopo autorizado com origem/data da autorização.
+- Um executor responsável pela próxima fatia; referências verificáveis a artefatos/decisões, com pendências.
+- Checks com comando, resultado e base observada; restrições e próxima ação explicitamente autorizada ou marcada como não autorizada.
+
+Na retomada confira a base, o diff e as referências antes de reutilizar checks/aprovações. Base alterada, sozinha, não revoga autorização: revalide os contratos e checks afetados; mudança material de escopo, artefato ou destino exige resolver a decisão antes da ação dependente. Preserve alterações existentes e evidências históricas. Registre transferência de executor, sem auditoria e execução implementarem simultaneamente a mesma fatia. Handoff preparado não é execução realizada, aprovação de plano não autoriza implementação e autorização de implementação não inclui publicação. Sem autorização da próxima ação, encerre no estado preparado.
+
 ## Contexto, ferramentas e especialistas
 
 Use leitura, busca, diff e verificadores já configurados. Skills de arquitetura, revisão, debugging, dados e escrita são conhecimento sob demanda, não uma lista obrigatória de carregamento. Falta de uma skill não prova falta de runtime. Não instale dependências nem mude a stack por preferência.

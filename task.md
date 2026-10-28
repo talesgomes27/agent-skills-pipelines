@@ -1,13 +1,13 @@
 # Estado de melhoria do ecossistema
 
-## Estado vigente — MOD-005 / 2026-10-28
+## Estado vigente — MOD-006 / 2026-10-28
 
-- Modo: execução somente da MOD-005, autorizada pelo pedido atual, com A/B de agentes isolados autorizado em resposta explícita do usuário.
-- Base: `b9b9469` (MOD-004 commitada nesta sessão, sem push).
-- Gate: MOD-005 implementada e validada no escopo das fixtures, sem aceite humano final presumido.
-- Escopo e critérios: [contrato MOD-005](docs/audits/modernization-2026-10-28/roadmap.md#mod-005--experimentar-esforço-e-documentação-proporcionais).
-- Fonte da propriedade documental: [governança vigente](docs/distribution/architecture.md#governança-documental-vigente); procedimentos são mantidos nos SKILL.md de cada pacote.
-- Próxima ação: apresentar [resultado MOD-005](docs/audits/modernization-2026-10-28/mod-005.md) e parar; MOD-006 e push não autorizados. As mudanças da MOD-005 ficam para revisão, sem commit automático.
+- Objetivo/estado/base: contrato mínimo de handoff, roteamento e retomada; validado no escopo das fixtures; base `10c6951` com mudanças locais desta fatia.
+- Escopo/autorização: somente MOD-006 conforme pedido atual de 2026-10-28; testes com agentes isolados autorizados explicitamente. MOD-005 commitada nesta sessão, sem push.
+- Executor: agente principal via execution-pipeline, único integrador; agentes de teste escreveram apenas fixtures temporárias.
+- Artefatos/decisões/pendências: [contrato MOD-006](docs/audits/modernization-2026-10-28/roadmap.md#mod-006--definir-handoff-mínimo-e-casos-de-roteamentoretomada), [resultado e limites](docs/audits/modernization-2026-10-28/mod-006.md). Registro por referências, sem schema novo. Aceite humano final não presumido.
+- Checks: suíte unittest 43 testes, doctor das oito skills, 34 casos estruturais, doctor Quarto e diff-check aprovados; seis cenários de fixtures classificados positivamente e copy/link temporários aprovados. Comandos e base registrados na evidência.
+- Restrições/próxima ação: apresentar resultado e parar. MOD-007 e push não autorizados. MOD-006 permanece sem commit para revisão.
 - Os registros abaixo são históricos datados; suas versões, permissões e próximos passos não substituem esta seção.
 
 ## Histórico — melhoria de 2026-10-22
@@ -87,3 +87,12 @@ Commit e push da entrega estão autorizados. Renomeação do repositório será 
 - Evidência: [MOD-005](docs/audits/modernization-2026-10-28/mod-005.md). Candidata final atendeu 4/4 casos da amostra; baseline 3/4 por documentação adicional no caso simples. Captura/resumo corrigida de forma simétrica, com resultado original preservado.
 - Limites: cobertura do experimento 8/56 pares; relatório combinado failed inclui falha da baseline. Não há medição de economia de tokens nem validação de ativação automática.
 - Checks: baseline 42 testes, final 43 testes OK; doctors/oito pacotes/28 casos/diff-check OK. Históricos e instalações reais preservados.
+
+## Execução MOD-006 — 2026-10-28
+
+- Autorização: commit da MOD-005 e somente MOD-006; cenários com agentes isolados autorizados explicitamente. Sem push ou avanço à MOD-007.
+- Commit anterior: `10c6951`; nova fatia sem commit para revisão.
+- Resultado: contrato compacto nos quatro pacotes, executor único, referências e revalidação de contexto/checks. Descrições/triggers preservados; nenhum roteador/estado paralelo criado.
+- Evidência: [MOD-006](docs/audits/modernization-2026-10-28/mod-006.md). Seis cenários passaram na amostra, incluindo consumidor em contexto novo e edição textual Quarto sem render/configuração.
+- Limites: cobertura comportamental 6/68, incomplete; base de retomada simulada, sem comparação Git histórica. Sem métrica estimada ou alegação de validação de todos os hosts.
+- Checks: baseline/final 43 testes OK; doctors/oito pacotes/34 casos/copy e link temporários/diff-check OK.

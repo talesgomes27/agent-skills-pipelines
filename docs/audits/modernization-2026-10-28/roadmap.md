@@ -1,6 +1,6 @@
 # Roadmap incremental e estratégia de validação
 
-Finalidade: contratos revisáveis para execução futura, uma tarefa aprovada por vez. Consumidores: mantenedor e implementador. Estado vigente: **MOD-001–MOD-005 validadas no escopo registrado** ([MOD-001](mod-001.md), [MOD-002](mod-002.md), [MOD-003](mod-003.md), [MOD-004](mod-004.md), [MOD-005](mod-005.md)); MOD-006–MOD-010 permanecem **planejadas**, sem autorização de avanço. Diagnóstico não autoriza implementação. Critérios de cada tarefa são cumulativos com os invariantes comuns. A ordem prioriza defeitos observados sobre expansão de capacidades; tarefas independentes podem ser reordenadas por decisão explícita.
+Finalidade: contratos revisáveis para execução futura, uma tarefa aprovada por vez. Consumidores: mantenedor e implementador. Estado vigente: **MOD-001–MOD-006 validadas no escopo registrado** ([MOD-001](mod-001.md), [MOD-002](mod-002.md), [MOD-003](mod-003.md), [MOD-004](mod-004.md), [MOD-005](mod-005.md), [MOD-006](mod-006.md)); MOD-007–MOD-010 permanecem **planejadas**, sem autorização de avanço. Diagnóstico não autoriza implementação. Critérios de cada tarefa são cumulativos com os invariantes comuns. A ordem prioriza defeitos observados sobre expansão de capacidades; tarefas independentes podem ser reordenadas por decisão explícita.
 
 ## Regras comuns dos contratos MOD
 
@@ -8,7 +8,7 @@ Invariantes: preservar nomes/pacotes, limites de autorização, histórico, alte
 
 Rollback comum: reverter somente o patch daquela tarefa e os derivados que ela alterou, preservando trabalho anterior/concorrente e evidência. Sem reset/checkout global, publicação ou exclusão de história. Se houver conflito, preservar diff e pedir resolução concreta. Nenhuma tarefa autoriza commit/push/merge/deploy. Ganhos só serão registrados após medição comparável.
 
-Baseline original da auditoria: testes completos impedidos por PyYAML ausente e tentativa temporária bloqueada por DNS; retomar a verificação com dependência declarada disponível antes de declarar uma mudança validada. A verificação atual usa `/usr/bin/python3` com PyYAML já disponível: MOD-001–MOD-005 têm baseline e validação locais registradas. Os logs originais foram preservados.
+Baseline original da auditoria: testes completos impedidos por PyYAML ausente e tentativa temporária bloqueada por DNS; retomar a verificação com dependência declarada disponível antes de declarar uma mudança validada. A verificação atual usa `/usr/bin/python3` com PyYAML já disponível: MOD-001–MOD-006 têm baseline e validação locais registradas. Os logs originais foram preservados.
 
 ## Ordenação
 
@@ -66,7 +66,7 @@ MOD-009 pode anteceder os experimentos: sua independência evita bloquear reduç
 
 **Problema/evidência:** F10, responsabilidades de execução sobrepostas e contratos textuais sem mínimos comuns. **Objetivo:** preservar autorização e contexto com menos cópia. **Prioridade:** P2. **Escopo:** quatro pipelines principais, `evals/cases.json`, guias de handoff pertinentes. **Dependências:** MOD-004, compatibilidade com MOD-005.
 
-**Mudanças:** objetivo/base/estado/escopo/artefatos/decisões/pendências/checks/restrições/próxima ação, executor único por fatia e referências em task. Refinar descrições só diante de cenário discriminante. **Invariantes:** não iniciar próximo trabalho sem autorização, não duplicar planos, não criar estado paralelo. **Documentação:** exemplo mínimo de seção datada. **Testes:** interromper após plano, retomar com base alterada, handoff sem permissão de execução, auditoria só diagnóstico, bug simples e texto Quarto. **Aceite:** contexto suficiente e nenhuma autoridade inventada, sem depender de host específico. **Riscos:** checklist longo replicado em quatro pacotes. **Rollback:** instruções anteriores com históricos preservados. **Esforço:** médio. **Estado:** planejada.
+**Mudanças:** objetivo/base/estado/escopo/artefatos/decisões/pendências/checks/restrições/próxima ação, executor único por fatia e referências em task. Refinar descrições só diante de cenário discriminante. **Invariantes:** não iniciar próximo trabalho sem autorização, não duplicar planos, não criar estado paralelo. **Documentação:** exemplo mínimo de seção datada. **Testes:** interromper após plano, retomar com base alterada, handoff sem permissão de execução, auditoria só diagnóstico, bug simples e texto Quarto. **Aceite:** contexto suficiente e nenhuma autoridade inventada, sem depender de host específico. **Riscos:** checklist longo replicado em quatro pacotes. **Rollback:** instruções anteriores com históricos preservados. **Esforço:** médio. **Estado:** implementada e validada no escopo das fixtures; [resultado e limites](mod-006.md).
 
 ## MOD-007 — Capturar e avaliar comportamento real A–J
 

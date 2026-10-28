@@ -2,7 +2,7 @@
 
 Fonte operacional do contrato de casos, traces e relatório do harness. Mantida pelo responsável pelas avaliações; consumidores: executor de traces e avaliador. A [matriz de governança](distribution/architecture.md#governança-documental-vigente) define propriedade e precedência; logs datados preservam resultados sem substituir este contrato.
 
-O conjunto em `evals/cases.json` contém pelo menos três casos por skill: ativação positiva, pedido ambíguo e caso negativo. Inclui quatro cenários de proporcionalidade da MOD-005 (E, A, B e H), totalizando 28 casos. Cada caso declara ativação esperada, sinais observáveis da resposta, operações proibidas e critérios que um avaliador deve marcar. O harness não chama um modelo e não atribui qualidade por semelhança textual; ele valida o contrato dos casos e classifica traces capturados por um executor externo.
+O conjunto em `evals/cases.json` contém pelo menos três casos por skill: ativação positiva, pedido ambíguo e caso negativo. Inclui quatro cenários de proporcionalidade da MOD-005 e seis de handoff/retomada/roteamento da MOD-006, totalizando 34 casos. Cada caso declara ativação esperada, sinais observáveis da resposta, operações proibidas e critérios que um avaliador deve marcar. O harness não chama um modelo e não atribui qualidade por semelhança textual; ele valida o contrato dos casos e classifica traces capturados por um executor externo.
 
 ## Fluxo
 
@@ -25,7 +25,7 @@ O comando `grade` conserva exit **0** quando o lote foi processado, mesmo que ha
 - `evaluation: failed`: pelo menos um resultado reprovou, inclusive em lote parcial.
 - `evaluation: incomplete`: nenhum resultado recebido reprovou, mas faltam pares; inclui lote vazio.
 
-`coverage.expected` é o número de casos do corpus vezes duas condições (`baseline` e `skill`); `observed` conta os pares recebidos, `complete` indica cobertura integral e `missing` lista objetos com `case_id` e `condition` faltantes. IDs desconhecidos e pares duplicados são erros. Para o corpus atual, são esperados 56 pares. O uso diagnóstico de um subconjunto continua permitido, identificado como parcial; não há seleção implícita de corpus pelo conteúdo do lote.
+`coverage.expected` é o número de casos do corpus vezes duas condições (`baseline` e `skill`); `observed` conta os pares recebidos, `complete` indica cobertura integral e `missing` lista objetos com `case_id` e `condition` faltantes. IDs desconhecidos e pares duplicados são erros. Para o corpus atual, são esperados 68 pares. O uso diagnóstico de um subconjunto continua permitido, identificado como parcial; não há seleção implícita de corpus pelo conteúdo do lote.
 
 Erros de entrada retornam JSON `status: fail`, com `error` e exit **1**. Para aceitar uma avaliação automatizada, confira exit 0, `status == processed`, `coverage.complete == true` e `evaluation == passed`; não use apenas o exit code. O diagnóstico detalhado por resultado e o resumo da MOD-002 permanecem disponíveis. A validação é local e não acrescenta um motor de JSON Schema ou dependência nova.
 

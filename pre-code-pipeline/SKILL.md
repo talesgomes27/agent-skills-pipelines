@@ -77,6 +77,15 @@ Use comandos compatíveis com a configuração observada; marque validações qu
 Após o aceite, registre os gates aprovados e eventuais dispensas reais, confirme a consistência entre requisitos, arquitetura e plano e prepare o encaminhamento para `execution-pipeline`.
 Inicie implementação somente se o usuário já a tiver autorizado. Se a skill de execução não estiver disponível, entregue o contrato e informe o encaminhamento pendente, sem inventar uma invocação bem-sucedida.
 
+## Handoff e retomada
+
+Quando houver transferência ou retomada, use uma seção datada no estado adotado (`task.md`, índice equivalente ou resposta quando permitida), sem criar planejador paralelo nem copiar planos inteiros:
+- Objetivo, base/revisão e estado; escopo autorizado com origem/data da autorização.
+- Um executor responsável pela próxima fatia; referências verificáveis a artefatos/decisões, com pendências.
+- Checks com comando, resultado e base observada; restrições e próxima ação explicitamente autorizada ou marcada como não autorizada.
+
+Na retomada confira a base, o diff e as referências antes de reutilizar checks/aprovações. Base alterada, sozinha, não revoga autorização: revalide os contratos e checks afetados; mudança material de escopo, artefato ou destino exige resolver a decisão antes da ação dependente. Preserve alterações existentes e evidências históricas. Registre transferência de executor, sem auditoria e execução implementarem simultaneamente a mesma fatia. Handoff preparado não é execução realizada, aprovação de plano não autoriza implementação e autorização de implementação não inclui publicação. Sem autorização da próxima ação, encerre no estado preparado.
+
 ## Dependências sob demanda
 
 O núcleo usa leitura, escrita e raciocínio do agente; não exige MCP nem sub-skills de planejamento. Carregue uma especialista apenas para uma lacuna concreta do gate atual, usando a descoberta de skills do host e informando sua finalidade.

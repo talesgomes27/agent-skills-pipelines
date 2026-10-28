@@ -25,6 +25,22 @@ Atualize apenas as fontes afetadas, com finalidade e consumidor claros. Correç�
 
 Arquive somente com motivo/data, fonte sucessora e consumidor verificados; preserve histórico Git e resultados necessários à reprodução. Não apague cópias históricas por hash, baixa frequência de leitura ou quantidade de linhas. Antes de remover material de valor incerto, obtenha decisão do mantenedor. Não carregue histórico nem referências inteiras por padrão.
 
+## Handoff e retomada
+
+As quatro pipelines principais mantêm o mesmo contrato mínimo em seus próprios pacotes, sem depender de um arquivo externo à instalação. Use uma seção datada no estado já adotado, com um executor por fatia e referências aos artefatos originais. Exemplo ilustrativo, sem alegar execução ou autorização real:
+
+```markdown
+## Handoff — 2026-10-28
+- Objetivo/estado/base: correção do rótulo; preparado; fixture-r1 (revisão simulada).
+- Escopo/autorização: só preparar handoff, conforme pedido de 2026-10-28; implementação não autorizada.
+- Executor da próxima fatia: execution-pipeline, somente para conferir condições de entrada.
+- Fontes/decisões/pendências: contrato em issue.md; API preservada; falta autorização de implementar.
+- Checks: inspeção documental concluída na base declarada; testes de aplicação não executados.
+- Restrições/próxima ação: revisar o handoff e relatar estado; não implementar nem publicar.
+```
+
+O consumidor confere base, diff e referências antes de reutilizar autorização ou resultado de check. Mudança de base não obriga repetir uma aprovação ainda válida, mas exige revalidar o que foi afetado; mudança material de escopo/artefato/destino interrompe a ação dependente. Registre limites quando não houver snapshot para comparar bases; não invente diff histórico. O produtor encerra sua fatia ou registra transferência de responsabilidade, sem auditoria e execução implementarem a mesma tarefa simultaneamente. Um handoff preparado não prova execução, e aprovação de plano não autoriza implementar.
+
 ## Compatibilidade
 
 | Ambiente | Projeto | Usuário | Comportamento adotado |
