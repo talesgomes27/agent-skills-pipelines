@@ -152,6 +152,30 @@ Repetir a mesma instalação e release é idempotente. Mudança de release, atua
 
 Conflitos são verificados em todo o plano antes da gravação. Cada pacote é preparado no filesystem do destino, trocado e registrado com recuperação caso a gravação falhe. A transação é por pacote: falha de I/O em um pacote posterior pode deixar os anteriores instalados e registrados. Reexecute após resolver o erro. Execuções concorrentes no mesmo destino não são suportadas; não rode dois instaladores simultaneamente. Mover/apagar o checkout quebra links e exige reinstalação.
 
+### Falha tardia e retomada da instalação
+
+O preflight confere todo o plano, mas não torna a gravação do lote transacional. Se a troca/gravação do recibo do segundo pacote falhar, o primeiro já concluído permanece instalado e registrado. O pacote que falhou recupera a pasta anterior quando ela existia; numa instalação nova, sua pasta/link e seu registro não permanecem. Uma falha na própria recuperação deve ser tratada pelo estado observado, sem pressupor sucesso.
+
+O teste de falha tardia cobre dois estados: atualização por cópia com `alpha` já em 1.1.0 e `beta` restaurado em 1.0.0, e instalação nova por link com somente `alpha` instalado/registrado. O recibo no disco continua válido; arquivos alheios ao lote são preservados. Isso não garante recuperação de toda falha possível do filesystem. Links apontam para fonte viva: recuperar o link/registro não restaura alterações feitas no conteúdo do checkout.
+
+Para retomar, pare novas tentativas concorrentes e preserve o erro, o recibo `.meta-skills-install.json` e as pastas existentes. Confira os pacotes e o destino com `doctor`, resolva a causa de I/O (por exemplo, espaço/permissão) no escopo autorizado e revise o plano com `--dry-run`. Não apague recibos, destinos homônimos ou edições locais para forçar sucesso. Um `doctor` aprovado para um pacote confirma sua integridade registrada, não a conclusão de todo o lote nem sua atualização à fonte atual.
+
+Exemplo para repetir uma atualização por cópia no mesmo destino e seleção:
+
+```bash
+python3 scripts/skills.py doctor --destination /caminho/skills --all
+python3 scripts/skills.py install --destination /caminho/skills --all --update --dry-run
+python3 scripts/skills.py install --destination /caminho/skills --all --update
+```
+
+Mantenha agente/destino, seleção, modo e fonte/release da operação pretendida. Para link, mantenha `--mode link`; use `--update` quando a mudança de conteúdo, release ou modo o exigir. Pacotes já concluídos ficam `unchanged`; os restantes são instalados/atualizados após resolver a falha. Reexecute `doctor` no conjunto completo. Edição local detectada continua bloqueando a atualização até reconciliação manual.
+
+### Manutenção das dependências da CI
+
+As actions em `.github/workflows/ci.yml` usam SHA completo com versão legível em comentário. Para atualizar, resolva a tag/release desejada no repositório oficial `actions/checkout` ou `actions/setup-python`, confira o commit e o manifest `action.yml` naquela revisão e revise o diff/compatibilidade. Atualize todas as ocorrências da action e registre fonte, versão, SHA e data da verificação. Não copie um SHA sugerido por terceiros sem conferir a origem nem mova a dependência automaticamente com a tag.
+
+Valide YAML, eventos, permissões, matriz e comandos localmente; quando houver autorização de envio/CI, confira os jobs do commit final até o estado terminal. SHA de action não fixa a imagem `*-latest`, downloads de runtime ou todas as dependências transitivas. A [evidência MOD-009](../audits/modernization-2026-10-28/mod-009.md) registra as resoluções oficiais e os limites da validação local.
+
 ## Doctor e evidências
 
 ```bash

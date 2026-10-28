@@ -2,7 +2,7 @@
 
 Finalidade: apoiar a decisão do mantenedor sobre mudanças incrementais. Consumidor: usuário e futuros executores das tarefas MOD. Estado: diagnóstico concluído no escopo inspecionado; propostas **planejadas, não autorizadas**. A implementação depende de aprovação explícita de cada tarefa. Este registro não herda permissões operacionais de auditorias anteriores.
 
-Atualização posterior à auditoria: [MOD-001](mod-001.md), [MOD-002](mod-002.md), [MOD-003](mod-003.md), [MOD-004](mod-004.md), [MOD-005](mod-005.md) e [MOD-006](mod-006.md) implementadas e validadas nos respectivos escopos registrados, cada uma sob autorização específica. A [MOD-007](mod-007.md) executou campanha local completa A–J, com divergência de ativação I preservada no grader. O diagnóstico e a baseline abaixo preservam o momento original; A [MOD-008](mod-008.md) concluiu comparação C/D/H e rejeitou a ampliação de referências por ausência de melhora discriminável, preservando as skills ativas. MOD-009–MOD-010 não foram iniciadas.
+Atualização posterior à auditoria: [MOD-001](mod-001.md), [MOD-002](mod-002.md), [MOD-003](mod-003.md), [MOD-004](mod-004.md), [MOD-005](mod-005.md) e [MOD-006](mod-006.md) implementadas e validadas nos respectivos escopos registrados, cada uma sob autorização específica. A [MOD-007](mod-007.md) executou campanha local completa A–J, com divergência de ativação I preservada no grader. O diagnóstico e a baseline abaixo preservam o momento original; A [MOD-008](mod-008.md) concluiu comparação C/D/H e rejeitou a ampliação de referências por ausência de melhora discriminável, preservando as skills ativas. A [MOD-009](mod-009.md) foi implementada e validada localmente, com CI remota pendente. MOD-010 não foi iniciada.
 
 ## A. Sumário executivo
 

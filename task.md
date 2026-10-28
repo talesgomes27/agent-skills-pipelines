@@ -1,13 +1,13 @@
 # Estado de melhoria do ecossistema
 
-## Estado vigente — MOD-008 / 2026-10-28
+## Estado vigente — MOD-009 / 2026-10-28
 
-- Objetivo/estado/base: experimento C/D/H concluído; candidata de referências rejeitada, pois melhora discriminável não foi demonstrada; base `bc41c7e`. Nenhum aceite humano presumido.
-- Escopo/autorização: pedido atual para commitar MOD-007 e prosseguir somente à MOD-008; dois agentes C/D/H isolados autorizados expressamente. MOD-007 commitada em `bc41c7e`, sem push; resultado failed em I preservado.
-- Executor: agente principal via execution-pipeline, único integrador; workers escreveram somente fixtures temporárias, sem Git de escrita, rede ou publicação.
-- Artefatos/decisões: [resultado e critérios](docs/audits/modernization-2026-10-28/mod-008.md), [protocolo, candidata e lote](evals/experiments/mod-008/README.md). Doze execuções completas, 23/23 rubricas por condição; grader failed por literal ausente em C-uncertain/candidata, preservado. As oito skills ativas voltaram exatamente à base.
-- Checks: 50 testes locais, doctors, corpus geral/coortes, copy/link temporários e diff-check; oito replays finais das fixtures (seis verdes e duas falhas esperadas no review sem correção). Telemetria nativa desconhecida; sem alegação de ganho de eficiência.
-- Restrições/próxima ação: apresentar decisão e parar; MOD-008 sem commit, sem push e sem avanço à MOD-009. Plano de delegação separado preservado fora desta fatia.
+- Objetivo/estado/base: actions da CI fixadas por SHA e recuperação após falha tardia verificada; implementação validada localmente, CI remota pendente; base `c8a6e1b`.
+- Escopo/autorização: pedido atual para commitar MOD-008 e seguir somente à MOD-009. MOD-008 commitada em `c8a6e1b`, com candidata rejeitada preservada; sem push. Adendos DEL mantidos no arquivo de trabalho e excluídos do commit.
+- Executor: agente principal via execution-pipeline/release-and-ops-pipeline em preparação local; sem novos subagentes, instalações globais ou execução remota.
+- Artefatos/decisões: [resultado e aceite](docs/audits/modernization-2026-10-28/mod-009.md), [origens oficiais](docs/audits/modernization-2026-10-28/mod-009-actions.json), [recuperação operacional](docs/distribution/architecture.md#falha-tardia-e-retomada-da-instalação). CLI e pacotes ativos inalterados.
+- Checks: baseline 50, final 52 testes locais sem skips; falha de I/O no segundo pacote coberta em cópia/link, recibos e reexecução coerentes; doctors/casos/smoke temporário e diff-check aprovados. YAML confirma somente quatro pins, sem mudança de eventos, matriz, comandos ou privilégios.
+- Restrições/próxima ação: apresentar e parar. MOD-009 permanece sem commit, sem push e sem MOD-010. CI do conteúdo final depende de envio/execução autorizados. Em commit futuro, incluir apenas hunks MOD de task.md; adendos DEL são trabalho paralelo.
 - Os registros abaixo são históricos datados; suas permissões e próximos passos não substituem esta seção.
 
 ## Histórico — melhoria de 2026-10-22
@@ -115,3 +115,11 @@ Commit e push da entrega estão autorizados. Renomeação do repositório será 
 - Entrega: coorte/fixtures, preparação reproduzível da proposta preservada, coletor com experimento explícito e metadados de symlink sem seguir alvo. Corpus geral/schema inalterados.
 - Checks: baseline 48 e final 50 testes locais; doctors/casos/copy/link/diff-check aprovados; oito replays finais com seis verdes e duas falhas esperadas D-review. Sem CI remota, tokens/chamadas nativas ou validação de host externo.
 - Evidência: [MOD-008](docs/audits/modernization-2026-10-28/mod-008.md). Próxima ação autorizada: apresentar e parar; sem commit desta fatia, push ou MOD-009.
+
+## Execução MOD-009 — 2026-10-28
+
+- Autorização: commit da MOD-008 e somente MOD-009; sem push ou MOD-010. Commit anterior final `c8a6e1b`; adendos DEL paralelos preservados no worktree e excluídos desse commit.
+- Mudança: quatro usos de actions fixados por SHA oficial verificado, mantendo versões v7.0.1 checkout/v7.1.0 setup-python, eventos, matriz e contents:read. Dois testes de falha tardia no segundo pacote e guia de retomada por recibo; CLI inalterada, sem lote transacional.
+- Validação: baseline 50 testes, instalador 23 e suíte final 52 sem skips; doctors/corpus/coortes/copy/link temporários/diff-check aprovados. YAML sem alteração semântica além dos pins. Cópia atualiza primeiro e restaura segundo; link novo conserva primeiro e remove segundo; recibos e reexecução conferidos.
+- Limites: CI remota do conteúdo final não executada; sem autorização de envio/dispatch. actionlint ausente, usada validação YAML/estrutural. Sem simular todas as falhas de filesystem, sem outros SOs/Python 3.9 local.
+- Evidência: [MOD-009](docs/audits/modernization-2026-10-28/mod-009.md). Próxima ação: apresentar e parar. MOD-009 sem commit, push ou MOD-010. Selecionar apenas hunks MOD de task.md em eventual commit; DEL permanece fora desta fatia.
