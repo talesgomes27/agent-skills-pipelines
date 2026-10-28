@@ -2,6 +2,8 @@
 
 A `skill-loader` depende de um índice local que pode ficar divergente do filesystem. O mantenedor `scripts/library.py` trata o índice como cache: valida IDs, caminhos confinados à raiz, presença de `SKILL.md` e identidade do frontmatter.
 
+As consultas com `skill-loader/scripts/library_query.py` requerem Python 3.9+ com PyYAML 6.0.3, já declarado em `distribution/requirements.txt`. O pacote instalado funciona sem o checkout. O [contrato do loader](../skill-loader/SKILL.md#localização) define a validação de frontmatter, os candidatos rejeitados e os códigos de saída. Bibliotecas legadas incompletas podem precisar de correção pelo mantenedor; o loader não as altera.
+
 ```bash
 python3 scripts/library.py doctor --root /caminho/da/biblioteca
 python3 scripts/library.py rebuild --root /caminho/da/biblioteca --output /tmp/skills_index.candidate.json

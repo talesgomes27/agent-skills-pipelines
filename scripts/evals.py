@@ -11,13 +11,20 @@ CASES = ROOT / 'evals/cases.json'
 
 def load_cases():
     data = json.loads(CASES.read_text(encoding='utf-8'))
-    if not isinstance(data, dict) or data.get('version') != 1 or not isinstance(data.get('cases'), list):
+    if (not isinstance(data, dict) or type(data.get('version')) is not int or data['version'] != 1
+            or not isinstance(data.get('cases'), list) or not data['cases']):
         raise ValueError('Unsupported eval case format')
+    skills = json.loads((ROOT / 'distribution/catalog.json').read_text(encoding='utf-8'))['skills']
     required = {'id', 'skill', 'kind', 'prompt', 'expected_activation', 'required_signals', 'forbidden_operations', 'rubric'}
     ids = set()
     for case in data['cases']:
         if not isinstance(case, dict) or set(case) != required:
             raise ValueError('Invalid case fields')
+        for field in ('id', 'skill', 'prompt'):
+            if not isinstance(case[field], str) or not case[field].strip():
+                raise ValueError('Invalid case ' + field)
+        if case['skill'] not in skills:
+            raise ValueError('Unknown case skill: ' + case['skill'])
         if case['id'] in ids:
             raise ValueError('Duplicate case id: ' + case['id'])
         ids.add(case['id'])
@@ -41,13 +48,24 @@ def load_results(path):
         except json.JSONDecodeError as exc:
             raise ValueError(f'Invalid JSONL at line {line_no}') from exc
         required = {'case_id', 'condition', 'selected_skills', 'operations', 'files_changed', 'response', 'rubric'}
-        if not isinstance(item, dict) or not required <= set(item) or item['condition'] not in ('baseline', 'skill'):
+        if (not isinstance(item, dict) or not required <= set(item)
+                or set(item) - required - {'metrics', 'notes'}
+                or not isinstance(item['case_id'], str)
+                or item['condition'] not in ('baseline', 'skill')):
             raise ValueError(f'Invalid result at line {line_no}')
         for field in ('selected_skills', 'operations', 'files_changed'):
             if not isinstance(item[field], list) or any(not isinstance(v, str) for v in item[field]):
                 raise ValueError(f'Invalid {field} at line {line_no}')
+        if len(set(item['selected_skills'])) != len(item['selected_skills']):
+            raise ValueError(f'Duplicate selected_skills at line {line_no}')
         if not isinstance(item['response'], str) or not isinstance(item['rubric'], dict) or any(type(v) is not bool for v in item['rubric'].values()):
             raise ValueError(f'Invalid response/rubric at line {line_no}')
+        if 'notes' in item and not isinstance(item['notes'], str):
+            raise ValueError(f'Invalid notes at line {line_no}')
+        metrics = item.get('metrics', {})
+        if (not isinstance(metrics, dict) or set(metrics) - {'tool_calls', 'tokens', 'elapsed_ms'}
+                or any(type(v) is not int or v < 0 for v in metrics.values())):
+            raise ValueError(f'Invalid metrics at line {line_no}')
         results.append(item)
     return results
 
@@ -84,13 +102,17 @@ def grade(cases, results):
 def summary(graded):
     conditions = {}
     for item in graded:
-        bucket = conditions.setdefault(item['condition'], {'total': 0, 'passed': 0, 'tool_calls': 0, 'tokens': 0, 'elapsed_ms': 0})
+        bucket = conditions.setdefault(item['condition'], {
+            'total': 0, 'passed': 0, 'tool_calls': None, 'tokens': None, 'elapsed_ms': None,
+            'metric_observations': {'tool_calls': 0, 'tokens': 0, 'elapsed_ms': 0},
+        })
         bucket['total'] += 1
         bucket['passed'] += int(item['pass'])
         for metric in ('tool_calls', 'tokens', 'elapsed_ms'):
             value = item['metrics'].get(metric)
             if type(value) is int and value >= 0:
-                bucket[metric] += value
+                bucket[metric] = (bucket[metric] or 0) + value
+                bucket['metric_observations'][metric] += 1
     return conditions
 
 
@@ -112,7 +134,18 @@ def main(argv=None):
             if args.results is None:
                 raise ValueError('--results is required for grade')
             graded = grade(cases, load_results(args.results))
-            output = {'results': graded, 'summary': summary(graded)}
+            observed = {(item['case_id'], item['condition']) for item in graded}
+            missing = [{'case_id': case['id'], 'condition': condition}
+                       for case in cases for condition in ('baseline', 'skill')
+                       if (case['id'], condition) not in observed]
+            evaluation = 'failed' if any(not item['pass'] for item in graded) else (
+                'incomplete' if missing else 'passed')
+            output = {
+                'status': 'processed', 'evaluation': evaluation,
+                'coverage': {'expected': len(cases) * 2, 'observed': len(observed),
+                             'complete': not missing, 'missing': missing},
+                'results': graded, 'summary': summary(graded),
+            }
         print(json.dumps(output, ensure_ascii=False, indent=2))
         return 0
     except (OSError, ValueError, TypeError, KeyError, json.JSONDecodeError) as exc:

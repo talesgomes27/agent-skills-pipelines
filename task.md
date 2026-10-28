@@ -16,3 +16,45 @@
 | 6. Índice da biblioteca fria | concluído | 2.676 entradas reparadas e validadas; configuração persistente criada; busca exata e temática da `skill-loader` verificadas no pacote instalado |
 
 Commit e push da entrega estão autorizados. Renomeação do repositório será executada após a escolha do nome; publicação adicional, alteração de credenciais ou instalação em outros perfis permanecem fora do escopo.
+
+## Auditoria de modernização — 2026-10-28
+
+- Modo: auditoria sem alteração de implementação, autorizada pelo pedido anexado nesta sessão.
+- Base: `main` / `869444d4fd916830b2a8a00ed756134fc031e4ac`; árvore inicialmente limpa.
+- Gates de auditoria 1–2: reconhecimento e diagnóstico realizados; nenhum aceite humano foi presumido.
+- Artefatos e evidências: [índice da auditoria](docs/audits/modernization-2026-10-28/README.md).
+- Baseline: 24 casos estruturalmente válidos; testes/doctors limitados por PyYAML ausente; instalação temporária falhou por DNS. Detalhes no baseline da auditoria.
+- Achados: F01–F10; roadmap MOD-001–MOD-010, todas planejadas.
+- Próxima ação proposta: MOD-001 (frontmatter do loader), aguardando aprovação explícita antes de implementar.
+- As autorizações de commit/push e informações de release na seção anterior pertencem ao registro de 2026-10-22; não autorizam ações nesta missão. Histórico preservado.
+
+## Execução MOD-001 — 2026-10-28
+
+- Autorização: implementar somente MOD-001 e validar o aceite; proibidos avanço de tarefa, commit e push, conforme pedido atual do usuário.
+- Base e alterações preservadas: `869444d`; adendo de auditoria e diretório de auditoria já estavam presentes antes desta execução.
+- Estado: MOD-001 validada tecnicamente; aceite humano final não presumido. Demais MOD permanecem planejadas e não iniciadas.
+- Mudança: frontmatter inicial com PyYAML seguro, chaves únicas, identidade e descrição válidas; erro controlado para dependência ausente. Nenhuma biblioteca externa ou perfil instalado foi alterado.
+- Ambiente: `/usr/bin/python3` 3.14.4 com PyYAML 6.0.3, já disponíveis; sem instalação. A limitação anterior permanece registrada como histórico do Python padrão 3.15.
+- Validação: baseline 27 testes OK; regressões reproduzidas antes da correção; final 32 testes OK, doctor das oito skills, 24 casos estruturais, doctor Quarto e diff-check OK.
+- Evidência e limites: [resultado MOD-001](docs/audits/modernization-2026-10-28/mod-001.md).
+- Próxima ação autorizada: apresentar resultado ao usuário e parar. Sem MOD-002, commit, push ou atualização de instalações reais.
+
+## Execução MOD-002 — 2026-10-28
+
+- Autorização: implementar somente MOD-002, validar e apresentar resultados; sem próxima tarefa, commit ou push.
+- Base: `869444d`; alterações locais da auditoria e da MOD-001 preservadas.
+- Estado: MOD-002 validada tecnicamente; aceite humano final não presumido. MOD-003–MOD-010 não iniciadas.
+- Mudança: totais sem observações agora são null; zero real preservado; metric_observations informa cobertura por métrica/condição. Schema dos traces e julgamento de qualidade inalterados.
+- Validação: baseline 32 testes OK; 4 falhas reproduzidas antes da correção; final 35 testes OK, doctor de oito skills, 24 casos estruturais, doctor Quarto e diff-check OK.
+- Evidência: [resultado MOD-002](docs/audits/modernization-2026-10-28/mod-002.md).
+- Próxima ação autorizada: apresentar o resultado e parar, sem iniciar MOD-003.
+
+## Execução MOD-003 — 2026-10-28
+
+- Autorização: implementar somente MOD-003, validar e apresentar resultados; sem próxima tarefa, commit ou push.
+- Base: `869444d`; auditoria e MOD-001/MOD-002 preservadas no working tree.
+- Estado: MOD-003 validada tecnicamente; aceite humano final não presumido. MOD-004–MOD-010 não iniciadas.
+- Mudança: validação dos traces/casos, vínculo ao catálogo e cobertura por pares; exit 0 de processamento preservado, evaluation separado em passed/failed/incomplete.
+- Validação: baseline 35 testes OK; regressões reproduzidas antes da correção; final 38 testes OK, oito skills/24 casos/doctor Quarto/diff-check OK; smoke da CLI em cinco cenários sem traceback e sem alterar traces.
+- Evidência: [resultado MOD-003](docs/audits/modernization-2026-10-28/mod-003.md).
+- Próxima ação autorizada: apresentar resultado e parar. Sem MOD-004 ou operações Git de escrita.

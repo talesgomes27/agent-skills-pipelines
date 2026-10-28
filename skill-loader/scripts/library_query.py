@@ -46,10 +46,36 @@ def manifest_for(root, entry):
         raise ValueError('entry escapes library root: ' + str(entry.get('id'))) from exc
     if not manifest.is_file():
         raise ValueError('manifest not found: ' + str(entry.get('id')))
-    text = manifest.read_text(encoding='utf-8', errors='replace')
-    match = re.search(r'^name:\s*["\']?([^"\'\n]+)', text, re.M)
-    if not match or match.group(1).strip() != entry.get('id'):
-        raise ValueError('manifest identity mismatch: ' + str(entry.get('id')))
+    try:
+        import yaml
+    except ImportError as exc:
+        raise RuntimeError('PyYAML missing; use an environment with PyYAML 6.0.3') from exc
+    text = manifest.read_text(encoding='utf-8')
+    match = re.match(r'\A---\r?\n(.*?)\r?\n---(?:\r?\n|$)', text, re.S)
+    if not match:
+        raise ValueError('missing YAML frontmatter: ' + str(entry.get('id')))
+
+    class UniqueLoader(yaml.SafeLoader):
+        pass
+
+    def mapping(loader, node):
+        result = {}
+        for key, value in loader.construct_pairs(node):
+            if key in result:
+                raise ValueError('Duplicate YAML key: ' + str(key))
+            result[key] = value
+        return result
+
+    UniqueLoader.add_constructor(yaml.resolver.BaseResolver.DEFAULT_MAPPING_TAG, mapping)
+    try:
+        data = yaml.load(match.group(1), Loader=UniqueLoader)
+    except (yaml.YAMLError, TypeError) as exc:
+        raise ValueError('invalid YAML frontmatter: ' + str(entry.get('id'))) from exc
+    if (not isinstance(data, dict) or data.get('name') != entry.get('id')
+            or not isinstance(data.get('name'), str)
+            or not isinstance(data.get('description'), str)
+            or not 0 < len(data['description'].strip()) <= 1024):
+        raise ValueError('invalid manifest name/description: ' + str(entry.get('id')))
     return manifest
 
 
@@ -121,6 +147,9 @@ def main(argv=None):
             result = exact(root, entries, args.value) if args.command == 'exact' else search(root, entries, args.value, args.limit)
         print(json.dumps(result, ensure_ascii=False, indent=2))
         return 0
+    except RuntimeError as exc:
+        print(json.dumps({'status': 'unavailable', 'error': str(exc)}, ensure_ascii=False))
+        return 2
     except (OSError, ValueError, json.JSONDecodeError) as exc:
         print(json.dumps({'status': 'fail', 'error': str(exc)}, ensure_ascii=False))
         return 1
