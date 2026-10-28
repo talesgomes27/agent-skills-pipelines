@@ -1,14 +1,14 @@
 # Estado de melhoria do ecossistema
 
-## Estado vigente — MOD-007 / 2026-10-28
+## Estado vigente — MOD-008 / 2026-10-28
 
-- Objetivo/estado/base: campanha comportamental A–J executada e validada no escopo local; 24/24 traces, grader estrito failed por ativação em I; base `10b14ad`.
-- Escopo/autorização: commit da MOD-006 e somente MOD-007 conforme pedido atual; usuário autorizou campanha A–J com pares de agentes isolados em fixtures temporárias. MOD-006 commitada em `10b14ad`, sem push.
-- Executor: agente principal via execution-pipeline, único integrador; seis contextos de agentes escreveram somente fixtures temporárias. Sem Git de escrita ou ações externas pelos workers.
-- Artefatos/decisões: [resultado e critérios](docs/audits/modernization-2026-10-28/mod-007.md), [protocolo e lote](evals/experiments/mod-007/README.md). Divergência I preservada; nenhuma nova política promovida. Aceite humano final não presumido.
-- Checks: 48 testes locais, doctors das oito skills/Quarto, 34 casos gerais e 12 da coorte, copy/link temporários e diff-check; 16/16 replays finais das fixtures e 66/66 rubricas no escopo inspecionado. Telemetria nativa de tokens/chamadas desconhecida.
-- Restrições/próxima ação: apresentar resultado e parar antes da MOD-008. Mudanças da MOD-007 permanecem sem commit; push não autorizado.
-- Os registros abaixo são históricos datados; suas versões, permissões e próximos passos não substituem esta seção.
+- Objetivo/estado/base: experimento C/D/H concluído; candidata de referências rejeitada, pois melhora discriminável não foi demonstrada; base `bc41c7e`. Nenhum aceite humano presumido.
+- Escopo/autorização: pedido atual para commitar MOD-007 e prosseguir somente à MOD-008; dois agentes C/D/H isolados autorizados expressamente. MOD-007 commitada em `bc41c7e`, sem push; resultado failed em I preservado.
+- Executor: agente principal via execution-pipeline, único integrador; workers escreveram somente fixtures temporárias, sem Git de escrita, rede ou publicação.
+- Artefatos/decisões: [resultado e critérios](docs/audits/modernization-2026-10-28/mod-008.md), [protocolo, candidata e lote](evals/experiments/mod-008/README.md). Doze execuções completas, 23/23 rubricas por condição; grader failed por literal ausente em C-uncertain/candidata, preservado. As oito skills ativas voltaram exatamente à base.
+- Checks: 50 testes locais, doctors, corpus geral/coortes, copy/link temporários e diff-check; oito replays finais das fixtures (seis verdes e duas falhas esperadas no review sem correção). Telemetria nativa desconhecida; sem alegação de ganho de eficiência.
+- Restrições/próxima ação: apresentar decisão e parar; MOD-008 sem commit, sem push e sem avanço à MOD-009. Plano de delegação separado preservado fora desta fatia.
+- Os registros abaixo são históricos datados; suas permissões e próximos passos não substituem esta seção.
 
 ## Histórico — melhoria de 2026-10-22
 
@@ -105,3 +105,13 @@ Commit e push da entrega estão autorizados. Renomeação do repositório será 
 - Diferenças: I escolheu writing-pipeline nas duas versões, contra oráculo fixado em auditoria; grader estrito failed, preservado. Baseline ignora ativação no contrato do grader; totais 12/12 versus 11/12 não provam regressão. Sem regressão essencial observada, sem promoção adicional.
 - Limites: uma observação por caso/condição, contexto compartilhado A–I, revisão pelo integrador e telemetria nativa indisponível. Não demonstrada economia de tokens/velocidade ou validação multi-host.
 - Evidência: [resultado MOD-007](docs/audits/modernization-2026-10-28/mod-007.md). Próxima ação autorizada: apresentar e parar; MOD-007 sem commit, MOD-008 não iniciada.
+
+## Execução MOD-008 — 2026-10-28
+
+- Autorização: commit da MOD-007 e somente MOD-008; comparação C/D/H em dois agentes isolados autorizada explicitamente. Commit anterior `bc41c7e`, sem push; plano de delegação paralelo preservado fora do commit.
+- Candidata: uma referência nova de debugging, duas referências existentes ampliadas e três pointers condicionais, sem novos nomes/metadados. Fontes fixadas antes do teste e preservadas em candidate.json.
+- Resultado: 12/12 execuções; mesmas 23/23 rubricas atendidas nas duas condições. Melhora discriminável não demonstrada: proposta rejeitada conforme contrato; removidas somente próprias edições nas skills ativas, idênticas à base.
+- Grader: failed em C-uncertain/candidata por ausência do literal normalize_age, com diagnóstico semanticamente correto; sinal e resposta preservados. Não se fabrica aprovação da coorte.
+- Entrega: coorte/fixtures, preparação reproduzível da proposta preservada, coletor com experimento explícito e metadados de symlink sem seguir alvo. Corpus geral/schema inalterados.
+- Checks: baseline 48 e final 50 testes locais; doctors/casos/copy/link/diff-check aprovados; oito replays finais com seis verdes e duas falhas esperadas D-review. Sem CI remota, tokens/chamadas nativas ou validação de host externo.
+- Evidência: [MOD-008](docs/audits/modernization-2026-10-28/mod-008.md). Próxima ação autorizada: apresentar e parar; sem commit desta fatia, push ou MOD-009.

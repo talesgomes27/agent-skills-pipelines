@@ -22,18 +22,19 @@ def replay_tests(work):
     return {'command': command, 'exit_code': result.returncode, 'stdout': result.stdout, 'stderr': result.stderr}
 
 
-def collect(run, judgments):
+def collect(run, judgments, experiment=None):
+    experiment = experiment or HERE
     inputs = json.loads((run / 'inputs.json').read_text(encoding='utf-8'))
-    if inputs['cohort_sha256'] != sha((HERE / 'cases.json').read_bytes()):
+    if inputs['cohort_sha256'] != sha((experiment / 'cases.json').read_bytes()):
         raise ValueError('Cohort changed after preparation')
-    cases = json.loads((HERE / 'cases.json').read_text(encoding='utf-8'))['cases']
+    cases = json.loads((experiment / 'cases.json').read_text(encoding='utf-8'))['cases']
     for name, digest in inputs['input_sha256'].items():
         if '/policy/' in name or name.endswith('/catalog.md'):
             if sha((run / name).read_bytes()) != digest:
                 raise ValueError('Policy/metadata changed: ' + name)
     rows, evidence, initial_tests = [], [], {}
     for case in cases:
-        fixture = HERE / 'fixtures' / case['id']
+        fixture = experiment / 'fixtures' / case['id']
         if (fixture / 'test_app.py').exists():
             with tempfile.TemporaryDirectory() as temp:
                 work = Path(temp) / 'work'
@@ -59,12 +60,20 @@ def collect(run, judgments):
                 journals[phase] = events
             artifacts = {}
             for path in sorted(work.rglob('*')):
-                if path.is_file() and '__pycache__' not in path.parts:
+                if path.is_symlink():
+                    expected = inputs.get('symlinks', {}).get(path.relative_to(run).as_posix())
+                    if expected is None or str(path.readlink()) != expected:
+                        raise ValueError('Undeclared/changed fixture symlink')
+                    artifacts[path.relative_to(work).as_posix()] = {'sha256': sha(expected.encode('utf-8')),
+                        'mtime_ns': path.lstat().st_mtime_ns, 'symlink_target': expected, 'content': ''}
+                elif path.is_file() and '__pycache__' not in path.parts:
                     path.resolve().relative_to(work.resolve())
                     artifacts[path.relative_to(work).as_posix()] = {'sha256': sha(path.read_bytes()),
                                                                   'mtime_ns': path.stat().st_mtime_ns, 'content': path.read_text(encoding='utf-8')}
             prefix = work.relative_to(run).as_posix() + '/'
             initial = {name[len(prefix):]: digest for name, digest in inputs['input_sha256'].items() if name.startswith(prefix)}
+            initial.update({name[len(prefix):]: sha(target.encode('utf-8'))
+                            for name, target in inputs.get('symlinks', {}).items() if name.startswith(prefix)})
             changed = sorted(name for name, value in artifacts.items() if initial.get(name) != value['sha256'])
             deleted = sorted(set(initial) - set(artifacts))
             trace = json.loads(artifacts['trace.json']['content'])
@@ -95,7 +104,7 @@ def collect(run, judgments):
             rows.append({'case_id': case['id'], 'condition': condition, 'selected_skills': selected,
                          'operations': sorted(operations), 'files_changed': sorted(agent_changed + deleted),
                          'response': response + '\n' + delivered, 'rubric': judgment['rubric'],
-                         'metrics': {'elapsed_ms': elapsed}, 'notes': 'MOD-007 evidence.json: ' + key})
+                         'metrics': {'elapsed_ms': elapsed}, 'notes': experiment.name.upper() + ' evidence.json: ' + key})
             evidence.append({'key': key, 'revision': inputs['revisions'][root.name], 'trace_reported': trace,
                              'artifacts': artifacts, 'changed': changed, 'deleted': deleted, 'capture': journals,
                              'observed_reads': {'files': len(reads), 'distinct_paths': len({f['path'] for f in reads}),
@@ -109,8 +118,9 @@ if __name__ == '__main__':
     parser.add_argument('run', type=Path)
     parser.add_argument('judgments', type=Path)
     parser.add_argument('output', type=Path)
+    parser.add_argument('--experiment', type=Path, help='Explicit experiment directory; defaults to MOD-007')
     args = parser.parse_args()
-    rows, evidence = collect(args.run, json.loads(args.judgments.read_text(encoding='utf-8')))
+    rows, evidence = collect(args.run, json.loads(args.judgments.read_text(encoding='utf-8')), args.experiment)
     args.output.mkdir(parents=True, exist_ok=True)
     (args.output / 'results.jsonl').write_text(''.join(json.dumps(row, ensure_ascii=False) + '\n' for row in rows), encoding='utf-8')
     (args.output / 'evidence.json').write_text(json.dumps(evidence, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')

@@ -1,0 +1,1 @@
+Relato de terceiro: normalize_age às vezes devolveu valor errado em job remoto. Não foram preservados entrada, saída, versão, ambiente ou stack. O fornecedor sugere que foi cache, sem evidência adicional.

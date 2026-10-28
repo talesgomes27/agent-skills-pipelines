@@ -58,3 +58,7 @@ Cada item abaixo complementa a matriz com alternativas, benefício esperado, cus
 - `operations` usa comparação exata casefold e `required_signals` substrings; trace normalizado e rubricagem humana são necessários. Não se demonstrou resistência a aliases de comando/injection por esse grader.
 - Ausência local de PyYAML é condição de ambiente, não regressão de produto. Nenhuma execução remota atual foi confirmada.
 - Rejeitados: nova orquestradora, governança como skill independente, MCP/banco obrigatórios, novos agentes permanentes e otimização percentual sem benchmark.
+
+## Decisão experimental MOD-008 — 2026-10-28
+
+A [comparação C/D/H](mod-008.md) não demonstrou melhora discriminável para ampliar referências de revisão/debugging/segurança. As duas condições atenderam às 23 rubricas; o grader conservou falha lexical da candidata. Proposta e traces preservados, sem promover novos blocos ou declarar correção de um achado adicional. Esta decisão local evita tratar extensão instrucional como benefício comprovado.

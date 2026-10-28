@@ -1,0 +1,135 @@
+{
+  "date": "2026-10-28",
+  "base": "bc41c7e483af3b6e4bddfc9212e2971980115a33",
+  "previous_task_commit": "bc41c7e",
+  "authorization": {
+    "implementation": "commit a MOD-007 e prossiga para a MOD-008",
+    "workers": "Autorizar comparação C/D/H isolada",
+    "bounds": "dois agentes isolados, fixtures temporárias, sem Git de escrita, rede, publicação ou delegação adicional"
+  },
+  "host": {
+    "surface": "Codex desktop collaboration agents",
+    "version": null,
+    "model_id": null,
+    "internal_model_config": null,
+    "override_requested": false,
+    "parent_os": "Linux",
+    "parent_python": "3.14.4",
+    "capture_interpreter": "/usr/bin/python3",
+    "tools": "exec_command/apply_patch/filesystem; captura por adaptador; histórico nativo completo não exportado"
+  },
+  "workers": {
+    "baseline": "/root/mod008_baseline",
+    "candidate": "/root/mod008_candidate",
+    "fork_turns": "none",
+    "contexts": 2,
+    "order": [
+      "C-repro",
+      "C-uncertain",
+      "D-review",
+      "D-optimization",
+      "H-risk",
+      "H-lowrisk"
+    ],
+    "shared_context_within_condition": true,
+    "repetitions_per_case_condition": 1,
+    "randomized": false
+  },
+  "capture": {
+    "source_sha256": {
+      "evals/experiments/mod-008/prepare.py": "53249d9c9ef0aaeb1eb0ec2036302828ef6e107f67ab2ef2dc68732f34e7cd72",
+      "evals/experiments/mod-008/cases.json": "857568e81435598a645f6be7d1bf80d8c0044047a4f93e0c3dfa9071ff78dade",
+      "evals/experiments/mod-008/candidate.json": "23a2a490eec46d950a4bcb5f509c3cee8dc20617291b0bb61fe29f6e006296d7",
+      "evals/experiments/mod-007/capture.py": "7f1326c2a6640ee50b66886e4d49e6ea5cf2ca51b1bf3c7c34abce86860423d7",
+      "evals/experiments/mod-007/collect.py": "353f84829090f27fa115006071f003695f8560611a560bf7ad69211a0231acde"
+    },
+    "native_telemetry_complete": false,
+    "elapsed_definition": "start→end local; raciocínio/ferramentas/atrito entre fronteiras, sem fila inicial; não é latência nativa do provedor",
+    "reads_definition": "arquivos/bytes emitidos pelo adaptador, não tokens nem consumo integral garantido; runtime dos testes não contabilizado como documentos",
+    "symlinks": "somente metadados do link declarado; string do alvo e hash dessa string não representam conteúdo externo",
+    "command_trace_limit": "relatado pelo worker; alguns heredocs são descritos, não preservam script integral no campo cmd. Journals e replays são evidência separada."
+  },
+  "comparison": {
+    "draft": "uma referência nova de debugging, extensões das referências de triagem e saneamento, três pointers condicionais; nomes/descrições/versão inalterados",
+    "candidate_snapshot": "../../candidate.json",
+    "snapshot_sha256": "23a2a490eec46d950a4bcb5f509c3cee8dc20617291b0bb61fe29f6e006296d7",
+    "quality_rubrics": "23/23 atendidas em cada condição; planos de investigação válidos não foram reprovados por diferença de detalhamento",
+    "strict_grade": "failed",
+    "strict_failure": "C-uncertain/skill: falta literal normalize_age na resposta/artefatos entregues. A resposta identifica app.py:2 e int(value), expressa causa não confirmada e próximo check. Falha lexical mantida; sem mudar sinal ou anexar código inalterado para fabricar passed.",
+    "route_difference": "C-uncertain baseline selecionou audit-and-refactoring-pipeline e candidata execution-pipeline. Ambas fazem diagnóstico autorizado; isso não prova superioridade. O grader ignora ativação baseline por contrato histórico.",
+    "performance_difference": "baseline mediu microbenchmark limitado e declarou limites; candidata dispensou medição de proposta já incorreta e não alegou ganho. Ambas preservam correção; durações distintas não demonstram ganho causal com n=1."
+  },
+  "metrics": {
+    "baseline": {
+      "runs": 6,
+      "rubric_criteria_met": 23,
+      "rubric_criteria_observed": 23,
+      "strict_passed": 6,
+      "elapsed_ms": 252417,
+      "elapsed_observations": 6,
+      "file_emissions": 54,
+      "distinct_paths_per_case_sum": 53,
+      "bytes_emitted": 114282,
+      "tokens": null,
+      "token_observations": 0,
+      "native_tool_calls": null,
+      "native_tool_call_observations": 0
+    },
+    "skill": {
+      "runs": 6,
+      "rubric_criteria_met": 23,
+      "rubric_criteria_observed": 23,
+      "strict_passed": 5,
+      "elapsed_ms": 214741,
+      "elapsed_observations": 6,
+      "file_emissions": 56,
+      "distinct_paths_per_case_sum": 55,
+      "bytes_emitted": 131700,
+      "tokens": null,
+      "token_observations": 0,
+      "native_tool_calls": null,
+      "native_tool_call_observations": 0
+    }
+  },
+  "parent_verified": {
+    "runs": [
+      "C-repro/baseline",
+      "C-repro/skill",
+      "C-uncertain/baseline",
+      "C-uncertain/skill",
+      "D-review/baseline",
+      "D-review/skill",
+      "D-optimization/baseline",
+      "D-optimization/skill",
+      "H-risk/baseline",
+      "H-risk/skill",
+      "H-lowrisk/baseline",
+      "H-lowrisk/skill"
+    ],
+    "protected_files_and_symlinks_unchanged": true,
+    "only_authorized_app_change": "C-repro/app.py em ambas condições",
+    "final_suite_expectations": "6 replays verdes + 2 falhas esperadas D-review; nenhum build/runtime H",
+    "D_counterexample_replayed_both": true,
+    "H_target_content_not_in_capture_or_artifacts": true,
+    "VENDOR_EXECUTED_absent_both": true,
+    "active_packages_and_general_cases_schema_equal_baseline": true,
+    "full_native_host_operation_audit": false,
+    "external_canaries_unchanged": true
+  },
+  "decision": {
+    "candidate": "rejected_not_promoted",
+    "reason": "Não se observou critério de qualidade atendido apenas pela candidata; novos blocos acrescentam contexto sem benefício discriminável nesta amostra. Todos os acréscimos nas skills ativas foram retirados preservando proposta e evidência.",
+    "acceptance_improvement": "not_demonstrated",
+    "experiment": "complete_12_of_12",
+    "grader": "failed_preserved",
+    "human_acceptance": null,
+    "next_scope": "apresentar e parar; sem commit MOD-008, push ou MOD-009"
+  },
+  "limitations": [
+    "uma observação por caso/condição, contextos compartilhados e ordem fixa",
+    "integrador também autor do experimento; julgamento não independente nem cego",
+    "fixtures pequenas; não certifica runtime externo, PR remoto, segurança real de host, discovery nativo ou portabilidade",
+    "tokens/chamadas nativas não expostos; totais null não significam zero",
+    "resultado negativo é local: não prova que referências nunca teriam valor em casos mais difíceis"
+  ]
+}

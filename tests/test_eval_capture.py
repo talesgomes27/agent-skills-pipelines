@@ -46,6 +46,8 @@ class CaptureTests(unittest.TestCase):
                 self.assertEqual(set(rows[0]['metrics']), {'elapsed_ms'})
                 self.assertEqual(evidence['runs'][0]['observed_reads']['bytes'], 8)
                 self.assertIsNone(evidence['runs'][0]['parent_test_replay'])
+                with patch.object(collect, 'HERE', run / 'missing-default'):
+                    self.assertEqual(len(collect.collect(run, judgments, run)[0]), 2)
                 outside = run / 'outside.txt'
                 outside.write_text('outside')
                 link = run / 'baseline-main/work/G/link'
@@ -55,7 +57,20 @@ class CaptureTests(unittest.TestCase):
                     self.skipTest('Host cannot create symlinks')
                 with self.assertRaises(ValueError):
                     collect.collect(run, judgments)
+                inputs['symlinks'] = {'baseline-main/work/G/link': str(outside)}
+                (run / 'inputs.json').write_text(json.dumps(inputs))
+                _, declared = collect.collect(run, judgments)
+                artifact = declared['runs'][0]['artifacts']['link']
+                self.assertEqual(artifact['content'], '')
+                self.assertEqual(artifact['symlink_target'], str(outside))
+                self.assertNotIn('link', declared['runs'][0]['changed'])
                 link.unlink()
+                link.symlink_to(run / 'different-target')
+                with self.assertRaises(ValueError):
+                    collect.collect(run, judgments)
+                link.unlink()
+                inputs.pop('symlinks')
+                (run / 'inputs.json').write_text(json.dumps(inputs))
                 journal = run / 'baseline-main/.capture/G-main.jsonl'
                 original = journal.read_text(encoding='utf-8')
                 journal.write_text('\n'.join(original.splitlines()[:-1]) + '\n')
