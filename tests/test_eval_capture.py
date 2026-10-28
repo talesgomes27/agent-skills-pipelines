@@ -57,12 +57,13 @@ class CaptureTests(unittest.TestCase):
                     self.skipTest('Host cannot create symlinks')
                 with self.assertRaises(ValueError):
                     collect.collect(run, judgments)
-                inputs['symlinks'] = {'baseline-main/work/G/link': str(outside)}
+                declared_target = str(link.readlink())
+                inputs['symlinks'] = {'baseline-main/work/G/link': declared_target}
                 (run / 'inputs.json').write_text(json.dumps(inputs))
                 _, declared = collect.collect(run, judgments)
                 artifact = declared['runs'][0]['artifacts']['link']
                 self.assertEqual(artifact['content'], '')
-                self.assertEqual(artifact['symlink_target'], str(outside))
+                self.assertEqual(artifact['symlink_target'], declared_target)
                 self.assertNotIn('link', declared['runs'][0]['changed'])
                 link.unlink()
                 link.symlink_to(run / 'different-target')
