@@ -1,0 +1,516 @@
+{
+  "baseline": {
+    "commit": "e4a57a2427748450d511bdbd6a27b169525c8008",
+    "manifest_sha256": "7053347b4debf81d5f81fa81d8b587f84a31c835f9f1906e364c54b48df90790",
+    "selection_sha256": "087d2a1d525678e4522af349d24c9aefd014da83bf4d35e003c26a9a1d75ce0c",
+    "tar_sha256": "3452ee7c91c8b742f04503bad46def4cb7d14b9ef30c20b3fc15ef696df81feb"
+  },
+  "derived": {
+    "README.md": {
+      "bytes": 543,
+      "mode": "0o644",
+      "sha256": "7d7a38f0e789ba4278a674520e523f56dabb9ff9c80a4ba7816b3ca710184c4a",
+      "template": "ci/PAYLOAD-README.md"
+    },
+    "payload-manifest.json": {
+      "digest": "external delivery record; no self hash",
+      "mode": "0o644"
+    }
+  },
+  "format": "meta-skills-ci-selection-v1",
+  "mode_policy": "Preserve 82 source modes 0664; two derived 0644. Group-write risk accepted only as existing baseline; no chmod of source.",
+  "sources": [
+    {
+      "bytes": 1069,
+      "mode": "0o664",
+      "path": "LICENSE",
+      "sha256": "1b9091b75245cd5e89a0339272ffe9a17712094457bcbe82df73b9c8c6df187d"
+    },
+    {
+      "bytes": 11995,
+      "mode": "0o664",
+      "path": "audit-and-refactoring-pipeline/SKILL.md",
+      "sha256": "005f0eb854c4f772de9f8049f1ad096a12e99d5ea0bf941bcb56874673709352"
+    },
+    {
+      "bytes": 2662,
+      "mode": "0o664",
+      "path": "audit-and-refactoring-pipeline/references/archetype-a-analytics-audit.md",
+      "sha256": "09efd0237ba4cfdb50d5a0c902e6e3143fb9a86887c656c56e2ec4d2838c4422"
+    },
+    {
+      "bytes": 3921,
+      "mode": "0o664",
+      "path": "audit-and-refactoring-pipeline/references/characterization-tests.md",
+      "sha256": "714cbc3b133cb671f5e4e9feb3411c6a462c783eb83532e98a975ff8cf60d411"
+    },
+    {
+      "bytes": 2841,
+      "mode": "0o664",
+      "path": "audit-and-refactoring-pipeline/references/refactoring-patterns-abc.md",
+      "sha256": "a66a73f46ad918bee9a57306ac6906e1416254e1ec79bec46a6a66d7150e7491"
+    },
+    {
+      "bytes": 2709,
+      "mode": "0o664",
+      "path": "audit-and-refactoring-pipeline/references/severity-matrix-and-triage.md",
+      "sha256": "381e779524624b1dd50da0f57696427f8dbe04370877ae8b593e5d7bf06ef1a8"
+    },
+    {
+      "bytes": 754,
+      "mode": "0o664",
+      "path": "distribution/catalog.json",
+      "sha256": "ef7d0aaf74d6b0db08ec1c704afc2c34878aec058325bff4e690b18a1beba8d6"
+    },
+    {
+      "bytes": 736,
+      "mode": "0o664",
+      "path": "distribution/catalog.schema.json",
+      "sha256": "8e1781ca21de93762d3b7ef0d2043f1885fa4c1d884e0089d136e5a723f988db"
+    },
+    {
+      "bytes": 14,
+      "mode": "0o664",
+      "path": "distribution/requirements.txt",
+      "sha256": "0969da99a0bc2a1b71ed50584560f4588a37567ac63af3ddbaf3c4617ca5621a"
+    },
+    {
+      "bytes": 18055,
+      "mode": "0o664",
+      "path": "evals/cases.json",
+      "sha256": "0473ba43007e7886277f23936b69f7a366a121886750bfa596c467c86b264cbf"
+    },
+    {
+      "bytes": 992,
+      "mode": "0o664",
+      "path": "evals/result.schema.json",
+      "sha256": "2987e4c09eb1423bf16c862940a41996dbe33be5186bfe564e2cee9fa9466987"
+    },
+    {
+      "bytes": 11528,
+      "mode": "0o664",
+      "path": "execution-pipeline/SKILL.md",
+      "sha256": "e68b5b64a6a8f8c3d3cf18182d92111fef601aa1bb66f5c2e07fadee3bb91c95"
+    },
+    {
+      "bytes": 3983,
+      "mode": "0o664",
+      "path": "execution-pipeline/references/archetype-a.md",
+      "sha256": "b3fd8539747e7443274499da50430123cc0db3f8de671f6f745d657479acc3a9"
+    },
+    {
+      "bytes": 2123,
+      "mode": "0o664",
+      "path": "execution-pipeline/references/archetype-b.md",
+      "sha256": "28f67182638fb3ca9e1ca37afc7739ff7d356cc09005540e03bd6f622da79f05"
+    },
+    {
+      "bytes": 1681,
+      "mode": "0o664",
+      "path": "execution-pipeline/references/archetype-c.md",
+      "sha256": "bb7c44d3cffef0528feec345d61f1cf72db581640d153a5a2012b98eb108130e"
+    },
+    {
+      "bytes": 3506,
+      "mode": "0o664",
+      "path": "humanizer/SKILL.md",
+      "sha256": "2a76270187bfcfddfb157d309c09ab12f40d9db3742102875bfa783477af67a0"
+    },
+    {
+      "bytes": 12365,
+      "mode": "0o664",
+      "path": "pre-code-pipeline/SKILL.md",
+      "sha256": "217b6cdb44457d8885b5a5a76e489d2f88f4ab769e7b8f2f2e0c5bd48a53fecd"
+    },
+    {
+      "bytes": 6354,
+      "mode": "0o664",
+      "path": "pre-code-pipeline/references/quarto-quality-checklist.md",
+      "sha256": "caf5574ec9d277e5f970be984ff8adb2331613e9a16d37d6e6db356225e5aaf4"
+    },
+    {
+      "bytes": 200,
+      "mode": "0o664",
+      "path": "quarto-expert/.gitignore",
+      "sha256": "45f5052fdc2e435238551923382a9e7aa6ff9f5fc56a3565bd32fe28cf9eb5f5"
+    },
+    {
+      "bytes": 7539,
+      "mode": "0o664",
+      "path": "quarto-expert/SKILL.md",
+      "sha256": "28b0bc06bc82a243fcbb51bd6e1924624125284f746314d3e7a314a76350a0bf"
+    },
+    {
+      "bytes": 16,
+      "mode": "0o664",
+      "path": "quarto-expert/examples/abnt-thesis-starter/01-introducao.qmd",
+      "sha256": "a8e6b8b2d92f73c00912694ce7d3c6feaca6544019db89c8b655d7233a23a6ff"
+    },
+    {
+      "bytes": 17,
+      "mode": "0o664",
+      "path": "quarto-expert/examples/abnt-thesis-starter/02-metodologia.qmd",
+      "sha256": "3bb1eca20e9d18f694e57ec6aa19a8c61865edda12640930cbb8cc461b4b1a69"
+    },
+    {
+      "bytes": 16,
+      "mode": "0o664",
+      "path": "quarto-expert/examples/abnt-thesis-starter/03-resultados.qmd",
+      "sha256": "50291bfdc2dd5fc97b8872e5b5c9e40f60ac092784956382cd723653dfa53c20"
+    },
+    {
+      "bytes": 15,
+      "mode": "0o664",
+      "path": "quarto-expert/examples/abnt-thesis-starter/04-conclusao.qmd",
+      "sha256": "c86b678b3f59331cc6d70cd47145c869d091ac134ef04454a1ce8dcb086b89ab"
+    },
+    {
+      "bytes": 389,
+      "mode": "0o664",
+      "path": "quarto-expert/examples/abnt-thesis-starter/README.md",
+      "sha256": "183c0337e09a175c3613d76f806b496cb22774ae0c1479fd1beed3d1a77d7215"
+    },
+    {
+      "bytes": 472,
+      "mode": "0o664",
+      "path": "quarto-expert/examples/abnt-thesis-starter/_quarto.yml",
+      "sha256": "bd6a1302c90166cae5a64303450ccbdbd283b6ac1436bbabc093d34c753f6ca1"
+    },
+    {
+      "bytes": 226,
+      "mode": "0o664",
+      "path": "quarto-expert/examples/abnt-thesis-starter/index.qmd",
+      "sha256": "17368874fc33654f66af54b0b223f875021cd410b4ea7a5f6964e8cb84b16239"
+    },
+    {
+      "bytes": 0,
+      "mode": "0o664",
+      "path": "quarto-expert/examples/abnt-thesis-starter/references.bib",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 13,
+      "mode": "0o664",
+      "path": "quarto-expert/examples/abnt-thesis-starter/references.qmd",
+      "sha256": "a7adc037f193aba8062a59c534a96d16661bed5715e67b11687c323fe4cd5a0b"
+    },
+    {
+      "bytes": 439,
+      "mode": "0o664",
+      "path": "quarto-expert/examples/manuscript-binder/README.md",
+      "sha256": "ea733387bee6857db151ef5dc3005903b40c6d0182ac04a7f697ec0030b02feb"
+    },
+    {
+      "bytes": 283,
+      "mode": "0o664",
+      "path": "quarto-expert/examples/manuscript-binder/_quarto.yml",
+      "sha256": "803c50de0da14f038ce99430181c9651f88f634841cb2e92ca8bc99ad77ee9e1"
+    },
+    {
+      "bytes": 265,
+      "mode": "0o664",
+      "path": "quarto-expert/examples/manuscript-binder/index.qmd",
+      "sha256": "74fdef3677547028b6d0cd50f495c50bf48a7c7bcbcdecba7dc8a1100f790c53"
+    },
+    {
+      "bytes": 498,
+      "mode": "0o664",
+      "path": "quarto-expert/examples/manuscript-binder/notebooks/01-analise.qmd",
+      "sha256": "ce81c39069ac6c3198e7d44aa884957d78b172b21635c3ecff1de0837df5c06f"
+    },
+    {
+      "bytes": 0,
+      "mode": "0o664",
+      "path": "quarto-expert/examples/manuscript-binder/references.bib",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 17,
+      "mode": "0o664",
+      "path": "quarto-expert/examples/manuscript-binder/requirements.txt",
+      "sha256": "6d4cdf924e8b6fe2cf827f647ca740148e2e8b4c44ea31578dbea46cbd403417"
+    },
+    {
+      "bytes": 28,
+      "mode": "0o664",
+      "path": "quarto-expert/examples/minimal-report/.gitignore",
+      "sha256": "a2c42d7579873fcc1885712af8e33d47a2d84452ca1214383e92b03ed98321c4"
+    },
+    {
+      "bytes": 180,
+      "mode": "0o664",
+      "path": "quarto-expert/examples/minimal-report/_quarto.yml",
+      "sha256": "a9aa01955ddb364c47e93a5591b9ee4278b16a68c6a5aa0c032f6053a0e06fd2"
+    },
+    {
+      "bytes": 597,
+      "mode": "0o664",
+      "path": "quarto-expert/examples/minimal-report/index.qmd",
+      "sha256": "a7df67273cdc0226887d296edf963fef906470930774f39b28ee6fe2b60ddddf"
+    },
+    {
+      "bytes": 947,
+      "mode": "0o664",
+      "path": "quarto-expert/references/abnt-thesis-guide.md",
+      "sha256": "dc66f4260a3edae9c47c8bb978a44974a566fdab110708be07448326c35250f0"
+    },
+    {
+      "bytes": 1846,
+      "mode": "0o664",
+      "path": "quarto-expert/references/alt-text.md",
+      "sha256": "a59ba84a250ebc8250e41bb85729969dd7a688d09aedf57bbf503d2faec7f854"
+    },
+    {
+      "bytes": 8844,
+      "mode": "0o664",
+      "path": "quarto-expert/references/brand-yml.md",
+      "sha256": "81427cd4b7154faa638d5e5e56a569239cca83d13f3a208bbf2d20f43e29d30e"
+    },
+    {
+      "bytes": 3391,
+      "mode": "0o664",
+      "path": "quarto-expert/references/callouts.md",
+      "sha256": "863479912da38686199abe2485d4e9267d4c6a4bc0aa814fb1304b1de3d84a8a"
+    },
+    {
+      "bytes": 5019,
+      "mode": "0o664",
+      "path": "quarto-expert/references/citations.md",
+      "sha256": "b6edaa85f830ff4fd5cad09cea0f7f32bfebb9a377cc584bee764359b642c766"
+    },
+    {
+      "bytes": 7917,
+      "mode": "0o664",
+      "path": "quarto-expert/references/code-cells.md",
+      "sha256": "4a8d72a1bdf769be4c572a9b0ed27e0117e2865fa8cba3d607d783d012114f49"
+    },
+    {
+      "bytes": 4788,
+      "mode": "0o664",
+      "path": "quarto-expert/references/conditional-content.md",
+      "sha256": "f7d65df97e7e33d21b702d8a8fb6d3457140842aaa38ae16c346a4ce89cab788"
+    },
+    {
+      "bytes": 6700,
+      "mode": "0o664",
+      "path": "quarto-expert/references/conversion-blogdown.md",
+      "sha256": "cecab8b02794115038d3f43a242c7f0cd1636275e3bcf928b102e32d7856bd3f"
+    },
+    {
+      "bytes": 5289,
+      "mode": "0o664",
+      "path": "quarto-expert/references/conversion-bookdown.md",
+      "sha256": "d994073b9c95094608e899ffef9188ea01b1beb69e84ccd00f77f18480a3dc6e"
+    },
+    {
+      "bytes": 5830,
+      "mode": "0o664",
+      "path": "quarto-expert/references/conversion-distill.md",
+      "sha256": "69039bbcd6662732140e3e063f334c8260f59dd6dc4373e16771e5b0f760b656"
+    },
+    {
+      "bytes": 1330,
+      "mode": "0o664",
+      "path": "quarto-expert/references/conversion-jupyter.md",
+      "sha256": "e6fc800e301efa4bf51d0479606717dd83338fd2eec8dd43b5603ddbe1520a15"
+    },
+    {
+      "bytes": 5664,
+      "mode": "0o664",
+      "path": "quarto-expert/references/conversion-rmarkdown.md",
+      "sha256": "aee6105ef6be251597579a7272b64a6f6fa2e57aa42eab588f13d50dbaa363b0"
+    },
+    {
+      "bytes": 5548,
+      "mode": "0o664",
+      "path": "quarto-expert/references/conversion-xaringan.md",
+      "sha256": "d74d20d93204c525a1b5de0fc78e7517018cb1b9c21fbb1d67e837c033e73a89"
+    },
+    {
+      "bytes": 5937,
+      "mode": "0o664",
+      "path": "quarto-expert/references/cross-references.md",
+      "sha256": "57a585e11dce835277b83f6298bdbaf2e8174fef922007ea4015bad997221be7"
+    },
+    {
+      "bytes": 4913,
+      "mode": "0o664",
+      "path": "quarto-expert/references/diagrams.md",
+      "sha256": "c3d9252d2b976596fda58318cd5b652e1392aa57d03c4016f101134f219a00b3"
+    },
+    {
+      "bytes": 4113,
+      "mode": "0o664",
+      "path": "quarto-expert/references/divs-and-spans.md",
+      "sha256": "3acbf9269262c56c18e9767dd76c1c540bfdaadfa2c97a787b16e22252683bcb"
+    },
+    {
+      "bytes": 1764,
+      "mode": "0o664",
+      "path": "quarto-expert/references/engines.md",
+      "sha256": "5140d4116732694cc63f2f5d0ad6e2fc110f465d3e21805680fb147d1b1d02c2"
+    },
+    {
+      "bytes": 5661,
+      "mode": "0o664",
+      "path": "quarto-expert/references/extensions.md",
+      "sha256": "7560b3bd1cf2c5a714bc86983730caccf69c2e3a9065f6eef32cedb284bc653d"
+    },
+    {
+      "bytes": 5275,
+      "mode": "0o664",
+      "path": "quarto-expert/references/figures.md",
+      "sha256": "ae91b395c8230872101d330e97e6ff53aa6e084901fac674a31a59d9a2c2bec9"
+    },
+    {
+      "bytes": 9094,
+      "mode": "0o664",
+      "path": "quarto-expert/references/graphify-integration.md",
+      "sha256": "f948888d3db0310b84ee6ca69ec38b80394c26dae7b286882b12932ac7dda335"
+    },
+    {
+      "bytes": 6218,
+      "mode": "0o664",
+      "path": "quarto-expert/references/layout.md",
+      "sha256": "5653a57e9f93bf62ae2d01f2a9efec81072c516f969598b4566ef59dc092404b"
+    },
+    {
+      "bytes": 1936,
+      "mode": "0o664",
+      "path": "quarto-expert/references/markdown-linting.md",
+      "sha256": "aa755c5ff3f8945102eb077b35011cbc2c08f833fbf1fbf402eba9e08737b447"
+    },
+    {
+      "bytes": 2320,
+      "mode": "0o664",
+      "path": "quarto-expert/references/offline-diagnostics.md",
+      "sha256": "8ade7a12feb7e41327da6298fe6e5ba25df17edd259e211dfd990d9f88c2e30a"
+    },
+    {
+      "bytes": 1854,
+      "mode": "0o664",
+      "path": "quarto-expert/references/rmd-to-quarto-migration.md",
+      "sha256": "468a0b71db47f1252874ef0ca3b71c0cd3d9c88a846705e5eb47d967c67c1fd7"
+    },
+    {
+      "bytes": 5305,
+      "mode": "0o664",
+      "path": "quarto-expert/references/shortcodes.md",
+      "sha256": "3dd7acd7ac4091664c76e7d45abc92d6595d17332cbc93e545bb6d21276e852b"
+    },
+    {
+      "bytes": 6366,
+      "mode": "0o664",
+      "path": "quarto-expert/references/tables.md",
+      "sha256": "5c4f680fd6cbe784af5f7c10fd32b863305913f20b698b9352d2cae47ea08991"
+    },
+    {
+      "bytes": 793,
+      "mode": "0o664",
+      "path": "quarto-expert/references/typst-and-templates.md",
+      "sha256": "d6ac760a70459d0d2eeb9a7d42b06f40293323c50bf5363f245f749ee3dba2aa"
+    },
+    {
+      "bytes": 6627,
+      "mode": "0o664",
+      "path": "quarto-expert/references/yaml-front-matter.md",
+      "sha256": "f02718e10b56faf777921f0a01414e6534d771b83db1ae2f7dc435e776f74233"
+    },
+    {
+      "bytes": 5311,
+      "mode": "0o664",
+      "path": "quarto-expert/scripts/doctor.py",
+      "sha256": "8333c500d9297255b9570c101207acb3a2037400c300847d9e4e8f90276e3bdc"
+    },
+    {
+      "bytes": 2861,
+      "mode": "0o664",
+      "path": "quarto-expert/scripts/offline_probe.py",
+      "sha256": "a0d237b85af2b85f6f72f52822b6dff036dc97231d748dc73b9b91f08d8c8a4c"
+    },
+    {
+      "bytes": 10159,
+      "mode": "0o664",
+      "path": "release-and-ops-pipeline/SKILL.md",
+      "sha256": "a64ed7a722ab51e6380140c8bd8621459586b19e1850dc9b1c14494787cefd88"
+    },
+    {
+      "bytes": 2917,
+      "mode": "0o664",
+      "path": "release-and-ops-pipeline/references/archetype-a-ghpages.md",
+      "sha256": "afe039bfcf471b63c9724fd85b6a083ed1241d6ddf164a2567a780fa0818d56d"
+    },
+    {
+      "bytes": 2887,
+      "mode": "0o664",
+      "path": "release-and-ops-pipeline/references/ci-and-artifacts.md",
+      "sha256": "5a123bc9a29a130b1ecec73898bb4160ade28b36dfe9317617942a40cd200577"
+    },
+    {
+      "bytes": 2969,
+      "mode": "0o664",
+      "path": "release-and-ops-pipeline/references/pre-push-sanitation.md",
+      "sha256": "2ef7776f67e054054180a03e6d7459d8d8e6fc97c3bbe2c99e27dec70e835657"
+    },
+    {
+      "bytes": 3753,
+      "mode": "0o664",
+      "path": "release-and-ops-pipeline/references/smoke-and-healthcheck.md",
+      "sha256": "4847ca0b004dfd27bc8392fc7151f4ec940e5220726a386d6610ff1f4916673e"
+    },
+    {
+      "bytes": 8071,
+      "mode": "0o664",
+      "path": "scripts/evals.py",
+      "sha256": "36b06a9924b328213562b16940b8ef54b615b91f705427838df229b0425942c7"
+    },
+    {
+      "bytes": 5939,
+      "mode": "0o664",
+      "path": "scripts/library.py",
+      "sha256": "46ee3c8ee11394baa07e4fcc1e4491db875e42e94a6d0d11eef10799d5ad0f22"
+    },
+    {
+      "bytes": 16071,
+      "mode": "0o664",
+      "path": "scripts/skills.py",
+      "sha256": "0b7c3be2196189fd4dbef9e33a3085105bcb6cda820b4cf0cd0826262004ff7c"
+    },
+    {
+      "bytes": 4223,
+      "mode": "0o664",
+      "path": "skill-loader/SKILL.md",
+      "sha256": "0e5dbdbdd213e8bd3526087c9142ac2a6723bfe71dea41ee656e635280d45c18"
+    },
+    {
+      "bytes": 6535,
+      "mode": "0o664",
+      "path": "skill-loader/scripts/library_query.py",
+      "sha256": "a2539ff3445ccd7419293b64a6433c4c85ccaaa7aa3804c958952d371470f1c3"
+    },
+    {
+      "bytes": 6373,
+      "mode": "0o664",
+      "path": "writing-pipeline/SKILL.md",
+      "sha256": "29f85917cf83bbd5daf2670c1daeaf1cf3cd7957527a5e63f74edff74ba8ee4a"
+    },
+    {
+      "bytes": 3381,
+      "mode": "0o664",
+      "path": "writing-pipeline/references/citations-and-evidence.md",
+      "sha256": "2b6d4be4a09fd56334405038f4f63af6db090ac4fe0dcf5e611846a8a6a2f9d9"
+    },
+    {
+      "bytes": 3031,
+      "mode": "0o664",
+      "path": "writing-pipeline/references/document-types.md",
+      "sha256": "bf4e3d0d33ade636b398592d8bc49a915fa7b4609952a4f5ef907cd5aa794de7"
+    },
+    {
+      "bytes": 1942,
+      "mode": "0o664",
+      "path": "writing-pipeline/references/review-protocol.md",
+      "sha256": "2e4d95ddc54c6301956755111504186f889e26a2d39d87b8d2f3540c406d4650"
+    }
+  ]
+}

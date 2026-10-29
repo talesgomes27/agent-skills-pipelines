@@ -2,13 +2,13 @@
 
 [![CI](https://github.com/talesgomes27/agent-skills-pipelines/actions/workflows/ci.yml/badge.svg)](https://github.com/talesgomes27/agent-skills-pipelines/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Release](https://img.shields.io/badge/release-2.0.0-blue.svg)](distribution/catalog.json)
+[![Candidate](https://img.shields.io/badge/candidate-2.0.0-blue.svg)](distribution/catalog.json)
 [![Python](https://img.shields.io/badge/Python-3.9%2B-3776AB.svg?logo=python&logoColor=white)](https://www.python.org/)
 [![Agent Skills](https://img.shields.io/badge/Agent%20Skills-Codex%20%7C%20Claude%20Code%20%7C%20Antigravity-6f42c1.svg)](docs/distribution/architecture.md)
 
 Ecossistema modular de Agent Skills para planejar, implementar, auditar, documentar e entregar projetos com agentes de IA. Os mesmos pacotes podem ser distribuídos para OpenAI Codex, Claude Code, Google Antigravity e adaptadores customizados sem carregar toda a biblioteca no contexto.
 
-Release atual: **2.0.0**.
+Candidata: **2.0.0**, ainda não publicada. A preparação técnica e seus limites estão em [CI híbrida](ci/README.md).
 
 ## O que o projeto oferece
 
@@ -137,7 +137,7 @@ O harness contém 34 casos para as oito skills e classifica traces A/B capturado
 
 A [campanha local A–J da MOD-007](docs/audits/modernization-2026-10-28/mod-007.md) preserva separadamente 12 casos, 24 traces reais em fixtures e custos observados com limitações explícitas. A cobertura é completa; o grader estrito conserva uma reprovação de ativação no cenário documental I.
 
-O workflow de CI repete testes, doctors e instalações temporárias em Linux, Windows e macOS. Validação estrutural não substitui uma execução real no host, renderização dos formatos solicitados ou revisão humana do resultado.
+O [workflow de CI híbrida](.github/workflows/ci.yml) define um produtor e sete consumidores para Linux, Windows e macOS. A execução remota dessa candidata permanece pendente; veja [escopo e evidências locais](ci/README.md). Validação estrutural não substitui uma execução real no host, renderização dos formatos solicitados ou revisão humana do resultado.
 
 ## Documentação
 
