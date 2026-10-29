@@ -33,7 +33,7 @@ class PayloadTests(unittest.TestCase):
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()
         self.addCleanup(self.tmp.cleanup)
-        self.work = Path(self.tmp.name)
+        self.work = Path(self.tmp.name).resolve()
         self.source = self.work/'source'
         selected = json.loads((ROOT/'ci/payload.json').read_text(encoding='utf-8'))
         self.paths = [e['path'] for e in selected['sources']]
@@ -257,6 +257,12 @@ class PayloadTests(unittest.TestCase):
         with self.assertRaises(FileExistsError):
             self.verify()
         self.assertEqual(list(dest.iterdir()), [dest/'user'])
+        self.assertEqual((dest/'user').read_bytes(), b'preserve')
+        alias = self.work/'untrusted-parent'
+        alias.symlink_to(self.work, target_is_directory=True)
+        with self.assertRaisesRegex(ValueError, r'^Extraction parent symlink$'):
+            self.verify(extract=alias/'not-created')
+        self.assertFalse((self.work/'not-created').exists())
         self.assertEqual((dest/'user').read_bytes(), b'preserve')
 
     def test_missing_q17(self):

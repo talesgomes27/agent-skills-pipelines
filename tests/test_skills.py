@@ -286,8 +286,8 @@ class InstallerTests(unittest.TestCase):
         repo = Path(__file__).resolve().parents[1]
         release = cli.read_json(repo / 'distribution/catalog.json')['release']
         readme = (repo / 'README.md').read_text(encoding='utf-8')
-        self.assertIn('Release atual: **' + release + '**.', readme)
-        self.assertIn('release-' + release + '-blue.svg', readme)
+        self.assertIn('Candidata: **' + release + '**, ainda não publicada.', readme)
+        self.assertIn('candidate-' + release + '-blue.svg', readme)
 
 
 if __name__ == '__main__':
