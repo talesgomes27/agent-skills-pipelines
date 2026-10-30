@@ -1,0 +1,13 @@
+# Segurança da candidata — verificação atual
+
+Consultas em 28/10/2026 (instante UTC exato e respostas em security.json). A única dependência direta de runtime é PyYAML==6.0.3. Metadados oficiais da versão no PyPI declaram Python>=3.8, licença MIT e nenhum Requires-Dist: não há dependência transitiva de runtime declarada pelo pacote. PyYAML não é vendorizada. jsonschema da preparação foi ferramenta local, não requisito distribuído/CI; sua cadeia não integra o runtime candidato.
+
+OSV foi consultada por pacote PyPI/PyYAML versão 6.0.3 e respondeu sem vulnerabilidades; GitHub Advisory Database, filtro pip/PyYAML@6.0.3, devolveu lista vazia; PyPI também não listou vulnerabilidades da versão. São resultados atuais dessas bases, não prova de ausência universal. Fontes: https://api.osv.dev/v1/query ; https://api.github.com/advisories?ecosystem=pip&affects=PyYAML%406.0.3 ; https://pypi.org/pypi/PyYAML/6.0.3/json . Não atualizar dependência automaticamente.
+
+O sdist oficial foi baixado para memória, teve SHA-256 conferido contra PyPI e LICENSE/pyproject.toml inspecionados sem execução. Licença MIT confirmada no pacote oficial. Isso não atesta os arquivos previamente copiados do cache local nem todos os wheels que a CI escolherá. Build a partir de sdist usa setuptools e Cython declarados no pyproject; intervalos/ausência de lock não garantem ambiente de build transitivo reproduzível. Preferir evidenciar o arquivo realmente obtido no log de instalação da CI; não instalar nem atualizar ferramentas globais.
+
+As actions fixadas por SHA foram consultadas em suas fontes oficiais e ambas declaram Node24. O workflow usa runners GitHub-hosted latest, contents:read e nenhuma referência a secrets, produção, registries, deploy ou publicação. Componentes JavaScript embutidos nas actions e imagem completa de runner não receberam auditoria/SBOM independente. Não ampliar permissões.
+
+Inspeção local anterior: manifests/SHA-256, allowlist do payload, ausência de symlinks/cache/Git/DEL e quatro padrões de segredo de alta especificidade. A nova etapa revisa também todo o intervalo de blobs que será enviado e o staging explícito. Busca por padrões não certifica ausência de todo segredo. LICENSE MIT da raiz permanece; proveniência jurídica independente de cada referência externa não foi certificada. Exemplos e fixtures de risco são dados de teste preservados, não comandos de publicação a executar.
+
+Pendências antes de publicar: aceitar essas limitações, revalidar artefato final por sua identidade, decidir campanha v2 e autorização própria de release. Ausência de advisory aplicável nas consultas atuais não equivale a segurança integral.

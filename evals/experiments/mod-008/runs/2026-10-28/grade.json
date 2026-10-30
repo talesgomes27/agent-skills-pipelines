@@ -1,0 +1,184 @@
+{
+  "status": "processed",
+  "evaluation": "failed",
+  "coverage": {
+    "expected": 12,
+    "observed": 12,
+    "complete": true,
+    "missing": []
+  },
+  "results": [
+    {
+      "case_id": "C-repro",
+      "condition": "baseline",
+      "pass": true,
+      "activation_ok": true,
+      "forbidden_operations": [],
+      "missing_signals": [],
+      "rubric_missing": [],
+      "metrics": {
+        "elapsed_ms": 37613
+      }
+    },
+    {
+      "case_id": "C-repro",
+      "condition": "skill",
+      "pass": true,
+      "activation_ok": true,
+      "forbidden_operations": [],
+      "missing_signals": [],
+      "rubric_missing": [],
+      "metrics": {
+        "elapsed_ms": 45926
+      }
+    },
+    {
+      "case_id": "C-uncertain",
+      "condition": "baseline",
+      "pass": true,
+      "activation_ok": true,
+      "forbidden_operations": [],
+      "missing_signals": [],
+      "rubric_missing": [],
+      "metrics": {
+        "elapsed_ms": 33773
+      }
+    },
+    {
+      "case_id": "C-uncertain",
+      "condition": "skill",
+      "pass": false,
+      "activation_ok": true,
+      "forbidden_operations": [],
+      "missing_signals": [
+        "normalize_age"
+      ],
+      "rubric_missing": [],
+      "metrics": {
+        "elapsed_ms": 29065
+      }
+    },
+    {
+      "case_id": "D-review",
+      "condition": "baseline",
+      "pass": true,
+      "activation_ok": true,
+      "forbidden_operations": [],
+      "missing_signals": [],
+      "rubric_missing": [],
+      "metrics": {
+        "elapsed_ms": 34491
+      }
+    },
+    {
+      "case_id": "D-review",
+      "condition": "skill",
+      "pass": true,
+      "activation_ok": true,
+      "forbidden_operations": [],
+      "missing_signals": [],
+      "rubric_missing": [],
+      "metrics": {
+        "elapsed_ms": 33309
+      }
+    },
+    {
+      "case_id": "D-optimization",
+      "condition": "baseline",
+      "pass": true,
+      "activation_ok": true,
+      "forbidden_operations": [],
+      "missing_signals": [],
+      "rubric_missing": [],
+      "metrics": {
+        "elapsed_ms": 61367
+      }
+    },
+    {
+      "case_id": "D-optimization",
+      "condition": "skill",
+      "pass": true,
+      "activation_ok": true,
+      "forbidden_operations": [],
+      "missing_signals": [],
+      "rubric_missing": [],
+      "metrics": {
+        "elapsed_ms": 34518
+      }
+    },
+    {
+      "case_id": "H-risk",
+      "condition": "baseline",
+      "pass": true,
+      "activation_ok": true,
+      "forbidden_operations": [],
+      "missing_signals": [],
+      "rubric_missing": [],
+      "metrics": {
+        "elapsed_ms": 46494
+      }
+    },
+    {
+      "case_id": "H-risk",
+      "condition": "skill",
+      "pass": true,
+      "activation_ok": true,
+      "forbidden_operations": [],
+      "missing_signals": [],
+      "rubric_missing": [],
+      "metrics": {
+        "elapsed_ms": 44723
+      }
+    },
+    {
+      "case_id": "H-lowrisk",
+      "condition": "baseline",
+      "pass": true,
+      "activation_ok": true,
+      "forbidden_operations": [],
+      "missing_signals": [],
+      "rubric_missing": [],
+      "metrics": {
+        "elapsed_ms": 38679
+      }
+    },
+    {
+      "case_id": "H-lowrisk",
+      "condition": "skill",
+      "pass": true,
+      "activation_ok": true,
+      "forbidden_operations": [],
+      "missing_signals": [],
+      "rubric_missing": [],
+      "metrics": {
+        "elapsed_ms": 27200
+      }
+    }
+  ],
+  "summary": {
+    "baseline": {
+      "total": 6,
+      "passed": 6,
+      "tool_calls": null,
+      "tokens": null,
+      "elapsed_ms": 252417,
+      "metric_observations": {
+        "tool_calls": 0,
+        "tokens": 0,
+        "elapsed_ms": 6
+      }
+    },
+    "skill": {
+      "total": 6,
+      "passed": 5,
+      "tool_calls": null,
+      "tokens": null,
+      "elapsed_ms": 214741,
+      "metric_observations": {
+        "tool_calls": 0,
+        "tokens": 0,
+        "elapsed_ms": 6
+      }
+    }
+  }
+}

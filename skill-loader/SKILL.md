@@ -16,6 +16,8 @@ Use primeiro a skill já disponível no catálogo do agente. Este adaptador aten
 
 Quando execução local estiver disponível, prefira o utilitário empacotado para limitar a saída: `python3 <raiz-da-skill-loader>/scripts/library_query.py exact <id>` ou `search "<termos>" --limit 8`. O comando valida confinamento, existência e identidade do manifesto antes de retornar o caminho. Leia o arquivo retornado com a ferramenta de filesystem do host; o utilitário não executa a skill localizada.
 
+O utilitário requer Python 3.9+ e PyYAML 6.0.3 no interpretador usado para `exact` e `search`; não instala dependências. Valida o bloco YAML inicial com parser seguro, rejeita chaves duplicadas e exige `name` igual ao ID e `description` textual não vazia de até 1.024 caracteres. Um `name` no corpo não identifica a skill. Na busca temática, manifests inválidos aparecem em `skipped_invalid`. Saídas JSON: 0 = consulta concluída, 1 = entrada/manifesto inválido, 2 = dependência indisponível; busca concluída pode retornar zero candidatos.
+
 ## Carregamento e aplicação
 
 - Leia o `SKILL.md` selecionado com o leitor de arquivos disponível. Confirme frontmatter `name` e `description`, identidade e pertinência; divergências de identidade ou origem exigem esclarecimento antes de aplicar.

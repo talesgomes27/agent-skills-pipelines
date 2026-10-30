@@ -1,0 +1,105 @@
+{
+  "task": "MOD-009",
+  "checked_date": "2026-10-28",
+  "timezone": "America/Belem",
+  "queried_at_utc": "2026-10-28 14:10:46 UTC",
+  "source": "Official public GitHub repositories via GitHub connector GET only",
+  "actions": [
+    {
+      "repository": "actions/checkout",
+      "previous_ref": "v7",
+      "version": "v7.0.1",
+      "commit": "3d3c42e5aac5ba805825da76410c181273ba90b1",
+      "reference_url": "https://api.github.com/repos/actions/checkout/git/refs/tags/v7",
+      "matching_refs_url": "https://api.github.com/repos/actions/checkout/git/matching-refs/tags/v7",
+      "matching_refs": [
+        {
+          "ref": "refs/tags/v7",
+          "object": {
+            "sha": "3d3c42e5aac5ba805825da76410c181273ba90b1",
+            "type": "commit",
+            "url": "https://api.github.com/repos/actions/checkout/git/commits/3d3c42e5aac5ba805825da76410c181273ba90b1"
+          }
+        },
+        {
+          "ref": "refs/tags/v7.0.0",
+          "object": {
+            "sha": "9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0",
+            "type": "commit",
+            "url": "https://api.github.com/repos/actions/checkout/git/commits/9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0"
+          }
+        },
+        {
+          "ref": "refs/tags/v7.0.1",
+          "object": {
+            "sha": "3d3c42e5aac5ba805825da76410c181273ba90b1",
+            "type": "commit",
+            "url": "https://api.github.com/repos/actions/checkout/git/commits/3d3c42e5aac5ba805825da76410c181273ba90b1"
+          }
+        }
+      ],
+      "commit_url": "https://github.com/actions/checkout/commit/3d3c42e5aac5ba805825da76410c181273ba90b1",
+      "git_commit_api": "https://api.github.com/repos/actions/checkout/git/commits/3d3c42e5aac5ba805825da76410c181273ba90b1",
+      "github_signature_verification": {
+        "verified": true,
+        "reason": "valid"
+      },
+      "manifest": {
+        "url": "https://github.com/actions/checkout/blob/3d3c42e5aac5ba805825da76410c181273ba90b1/action.yml",
+        "blob_sha": "5b0524f730db83f9513c18ab31a6c086c7239076",
+        "runtime": "node24"
+      }
+    },
+    {
+      "repository": "actions/setup-python",
+      "previous_ref": "v7",
+      "version": "v7.1.0",
+      "commit": "6d4fd22b20465ccc0f7354476588e8df7c9ca0e0",
+      "reference_url": "https://api.github.com/repos/actions/setup-python/git/refs/tags/v7",
+      "matching_refs_url": "https://api.github.com/repos/actions/setup-python/git/matching-refs/tags/v7",
+      "matching_refs": [
+        {
+          "ref": "refs/tags/v7",
+          "object": {
+            "sha": "6d4fd22b20465ccc0f7354476588e8df7c9ca0e0",
+            "type": "commit",
+            "url": "https://api.github.com/repos/actions/setup-python/git/commits/6d4fd22b20465ccc0f7354476588e8df7c9ca0e0"
+          }
+        },
+        {
+          "ref": "refs/tags/v7.0.0",
+          "object": {
+            "sha": "5fda3b95a4ea91299a34e894583c3862153e4b97",
+            "type": "commit",
+            "url": "https://api.github.com/repos/actions/setup-python/git/commits/5fda3b95a4ea91299a34e894583c3862153e4b97"
+          }
+        },
+        {
+          "ref": "refs/tags/v7.1.0",
+          "object": {
+            "sha": "6d4fd22b20465ccc0f7354476588e8df7c9ca0e0",
+            "type": "commit",
+            "url": "https://api.github.com/repos/actions/setup-python/git/commits/6d4fd22b20465ccc0f7354476588e8df7c9ca0e0"
+          }
+        }
+      ],
+      "commit_url": "https://github.com/actions/setup-python/commit/6d4fd22b20465ccc0f7354476588e8df7c9ca0e0",
+      "git_commit_api": "https://api.github.com/repos/actions/setup-python/git/commits/6d4fd22b20465ccc0f7354476588e8df7c9ca0e0",
+      "github_signature_verification": {
+        "verified": true,
+        "reason": "valid"
+      },
+      "manifest": {
+        "url": "https://github.com/actions/setup-python/blob/6d4fd22b20465ccc0f7354476588e8df7c9ca0e0/action.yml",
+        "blob_sha": "645de4f5108b28bcc7ed043ee171770b0754cc35",
+        "runtime": "node24"
+      }
+    }
+  ],
+  "limits": [
+    "Snapshot of mutable tags at verification time, not automatic tracking",
+    "Signature verification is GitHub metadata, not independent source-code/security review",
+    "Action SHAs do not pin runner images or all transitive downloads",
+    "No remote CI dispatched; no push authorized"
+  ]
+}

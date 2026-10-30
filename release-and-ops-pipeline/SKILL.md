@@ -63,6 +63,15 @@ Teste status, conteúdo/contrato e jornada mínima pertinente, com timeout e ten
 Se houver falha, interrompa promoção e preserve logs sem segredos. Execute recuperação somente conforme plano/autorização aplicável; se não estiver coberta, apresente o diagnóstico e a ação concreta necessária. Verifique novamente o destino após recuperar.
 Saída: relatório de checks, artefato/destino observado, pendências e estado real. Registre aprovação final apenas quando dada pelo usuário; build/deploy/teste aprovado tecnicamente não fabrica aceite humano.
 
+## Handoff e retomada
+
+Quando houver transferência ou retomada, use uma seção datada no estado adotado (`task.md`, índice equivalente ou resposta quando permitida), sem criar planejador paralelo nem copiar planos inteiros:
+- Objetivo, base/revisão e estado; escopo autorizado com origem/data da autorização.
+- Um executor responsável pela próxima fatia; referências verificáveis a artefatos/decisões, com pendências.
+- Checks com comando, resultado e base observada; restrições e próxima ação explicitamente autorizada ou marcada como não autorizada.
+
+Na retomada confira a base, o diff e as referências antes de reutilizar checks/aprovações. Base alterada, sozinha, não revoga autorização: revalide os contratos e checks afetados; mudança material de escopo, artefato ou destino exige resolver a decisão antes da ação dependente. Preserve alterações existentes e evidências históricas. Registre transferência de executor, sem auditoria e execução implementarem simultaneamente a mesma fatia. Handoff preparado não é execução realizada, aprovação de plano não autoriza implementação e autorização de implementação não inclui publicação. Sem autorização da próxima ação, encerre no estado preparado.
+
 ## Contexto e integração
 
 Núcleo usa Git, filesystem, CLI e conectores do host disponíveis. Especialistas de CI, plataforma, empacotamento e revisão são carregados somente para a lacuna atual. Skill ausente não prova ferramenta ausente; autenticação não amplia autorização.

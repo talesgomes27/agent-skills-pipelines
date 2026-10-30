@@ -7,9 +7,135 @@ name: CI
 permissions:
   contents: read
 
+# Avoid CRLF conversion of pinned source bytes, without editing any global profile.
+env:
+  GIT_CONFIG_COUNT: "1"
+  GIT_CONFIG_KEY_0: core.autocrlf
+  GIT_CONFIG_VALUE_0: "false"
+  PYTHONDONTWRITEBYTECODE: "1"
+  PYTHONUTF8: "1"
+
 jobs:
+  produce:
+    name: Reproducible payload / public JSON Schema
+    runs-on: ubuntu-24.04
+    outputs:
+      tar_sha: ${{ steps.build.outputs.tar_sha256 }}
+      manifest_sha: ${{ steps.build.outputs.manifest_sha256 }}
+      delivery_sha: ${{ steps.build.outputs.delivery_sha256 }}
+      artifact_id: ${{ steps.upload.outputs.artifact-id }}
+      actions_digest: ${{ steps.upload.outputs.artifact-digest }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.14.4"
+          architecture: x64
+          check-latest: false
+      - name: Require exact formal toolchain
+        run: python -I -B -c "import platform, sys; assert sys.version_info[:3] == (3,14,4) and platform.system() == 'Linux' and platform.machine() == 'x86_64'"
+      - name: Build A from committed inputs
+        id: build
+        run: python -I -B ci/build_payload.py --output "${{ runner.temp }}/payload-a"
+      - name: Build B independently
+        run: python -I -B ci/build_payload.py --output "${{ runner.temp }}/payload-b"
+      - name: Compare independent builds byte for byte
+        shell: python
+        env:
+          A: ${{ runner.temp }}/payload-a
+          B: ${{ runner.temp }}/payload-b
+        run: |
+          import os
+          from pathlib import Path
+          a, b = Path(os.environ['A']), Path(os.environ['B'])
+          assert sorted(p.name for p in a.iterdir()) == sorted(p.name for p in b.iterdir())
+          for p in a.iterdir():
+              assert p.read_bytes() == (b / p.name).read_bytes(), p.name
+      - name: Independently verify and extract A
+        run: >-
+          python -I -B ci/verify_payload.py --bundle "${{ runner.temp }}/payload-a"
+          --commit "${{ github.sha }}" --run-id "${{ github.run_id }}" --attempt "${{ github.run_attempt }}"
+          --tar-sha "${{ steps.build.outputs.tar_sha256 }}" --manifest-sha "${{ steps.build.outputs.manifest_sha256 }}"
+          --delivery-sha "${{ steps.build.outputs.delivery_sha256 }}" --extract "${{ runner.temp }}/payload-extracted"
+      - name: Record bootstrap pip version
+        # Acquisition is online; installation/validation below is offline and filtered.
+        # No automatic pip upgrade or infrastructure install.
+        run: >-
+          python -I -B -m pip --version
+      - name: Download pinned formal wheels
+        run: >-
+          python -I -B -m pip --isolated --disable-pip-version-check --no-cache-dir download
+          --index-url https://pypi.org/simple --only-binary=:all: --require-hashes
+          -r ci/requirements-formal.lock --dest "${{ runner.temp }}/formal-wheels"
+      - name: Prepare disposable formal venv
+        run: python -I -B -m venv "${{ runner.temp }}/formal-venv"
+      - name: Install formal wheels offline under verified network denial
+        run: >-
+          python -I -B ci/offline.py --work "${{ runner.temp }}/offline-install" --
+          "${{ runner.temp }}/formal-venv/bin/python" -I -B -m pip install --no-index --no-cache-dir
+          --only-binary=:all: --require-hashes --no-compile
+          --find-links "${{ runner.temp }}/formal-wheels" -r "${{ github.workspace }}/ci/requirements-formal.lock"
+      - name: Check isolated formal dependencies offline
+        run: >-
+          python -I -B ci/offline.py --work "${{ runner.temp }}/offline-pip-check" --
+          "${{ runner.temp }}/formal-venv/bin/python" -I -B -m pip check
+      - name: Validate two public schemas offline on verified payload
+        run: >-
+          python -I -B ci/offline.py --work "${{ runner.temp }}/offline-formal" --
+          "${{ runner.temp }}/formal-venv/bin/python" -I -B "${{ github.workspace }}/ci/formal_schemas.py"
+          --source "${{ runner.temp }}/payload-extracted"
+      - name: Install existing product validation dependency
+        run: python -m pip install -r distribution/requirements.txt
+      - name: Recipe and verifier deterministic tests
+        shell: python
+        run: |
+          import sys, unittest
+          result = unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.discover('tests', pattern='test_payload.py'))
+          sys.exit(not result.wasSuccessful() or bool(result.skipped) or result.testsRun == 0)
+      - name: Real artifact copy recovery
+        run: >-
+          python -I -B ci/check_installation.py --payload "${{ runner.temp }}/payload-extracted"
+          --work "${{ runner.temp }}/artifact-copy-recovery" --mode copy --recovery
+      - name: Real artifact link recovery
+        run: >-
+          python -I -B ci/check_installation.py --payload "${{ runner.temp }}/payload-extracted"
+          --work "${{ runner.temp }}/artifact-link-recovery" --mode link --recovery
+      - name: Share exactly the verified candidate files
+        id: upload
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: meta-skills-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            ${{ runner.temp }}/payload-a/meta-skills-2.0.0-candidate.tar.gz
+            ${{ runner.temp }}/payload-a/payload-manifest.json
+            ${{ runner.temp }}/payload-a/delivery.json
+          if-no-files-found: error
+          overwrite: false
+          retention-days: 14
+          compression-level: 0
+          include-hidden-files: false
+      - name: Record transport identity separately from inner file digests
+        shell: python
+        env:
+          ARTIFACT_ID: ${{ steps.upload.outputs.artifact-id }}
+          ACTIONS_DIGEST: ${{ steps.upload.outputs.artifact-digest }}
+          TAR_SHA: ${{ steps.build.outputs.tar_sha256 }}
+          MANIFEST_SHA: ${{ steps.build.outputs.manifest_sha256 }}
+          DELIVERY_SHA: ${{ steps.build.outputs.delivery_sha256 }}
+        run: |
+          import json, os, re
+          assert os.environ['ARTIFACT_ID'].isdigit()
+          for key in ('ACTIONS_DIGEST', 'TAR_SHA', 'MANIFEST_SHA', 'DELIVERY_SHA'):
+              assert re.fullmatch('[0-9a-f]{64}', os.environ[key]), key
+          row = {k: os.environ[k] for k in ('GITHUB_SHA', 'GITHUB_RUN_ID', 'GITHUB_RUN_ATTEMPT', 'ARTIFACT_ID', 'ACTIONS_DIGEST', 'TAR_SHA', 'MANIFEST_SHA', 'DELIVERY_SHA')}
+          with open(os.environ['GITHUB_STEP_SUMMARY'], 'a', encoding='utf-8') as out:
+              out.write('Candidate transport identity (not release approval):\n\n```json\n' + json.dumps(row, indent=2) + '\n```\n')
+
   validate:
     name: ${{ matrix.os }} / Python ${{ matrix.python }}
+    needs: produce
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -17,31 +143,68 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-latest]
         python: ["3.9", "3.14"]
     steps:
-      - uses: actions/checkout@v7
-      - uses: actions/setup-python@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
         with:
           python-version: ${{ matrix.python }}
           cache: pip
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          artifact-ids: ${{ needs.produce.outputs.artifact_id }}
+          merge-multiple: true
+          path: ${{ runner.temp }}/candidate-bundle
+      - name: Verify producer bytes and identity before extraction
+        run: >-
+          python -I -B ci/verify_payload.py --bundle "${{ runner.temp }}/candidate-bundle"
+          --commit "${{ github.sha }}" --run-id "${{ github.run_id }}" --attempt "${{ github.run_attempt }}"
+          --tar-sha "${{ needs.produce.outputs.tar_sha }}" --manifest-sha "${{ needs.produce.outputs.manifest_sha }}"
+          --delivery-sha "${{ needs.produce.outputs.delivery_sha }}" --extract "${{ runner.temp }}/candidate-payload"
       - name: Install validation dependencies
         run: python -m pip install -r distribution/requirements.txt
-      - name: Run unit tests
-        run: python -m unittest discover -s tests -v
-      - name: Validate catalog and skills
-        run: python scripts/skills.py doctor --agent codex --scope project
-      - name: Validate behavioral eval cases
-        run: python scripts/evals.py validate
-      - name: Exercise copy installation
-        run: python scripts/skills.py install --agent codex --dest "${{ runner.temp }}/skills-copy" --all --exclude humanizer
+      - name: Run complete unit discovery (counts reflect selected revision)
+        shell: python
+        run: |
+          import sys, unittest
+          result = unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.discover('tests'))
+          sys.exit(not result.wasSuccessful() or bool(result.skipped) or result.testsRun == 0)
+      - name: Validate catalog and all eight source skills
+        run: python -B scripts/skills.py doctor --agent codex --scope project
+      - name: Validate source structural cases
+        run: python -B scripts/evals.py validate
+      - name: Validate verified artifact structural cases
+        run: python -B "${{ runner.temp }}/candidate-payload/scripts/evals.py" validate
+      - name: Exercise eight-skill artifact copy, upgrade, idempotence and edit protection
+        run: >-
+          python -I -B ci/check_installation.py --payload "${{ runner.temp }}/candidate-payload"
+          --work "${{ runner.temp }}/copy-integration" --mode copy
 
   link-install:
     name: Linux symbolic-link installation
+    needs: produce
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
-      - uses: actions/setup-python@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
         with:
           python-version: "3.14"
           cache: pip
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          artifact-ids: ${{ needs.produce.outputs.artifact_id }}
+          merge-multiple: true
+          path: ${{ runner.temp }}/candidate-bundle
+      - name: Verify identical producer package before extraction
+        run: >-
+          python -I -B ci/verify_payload.py --bundle "${{ runner.temp }}/candidate-bundle"
+          --commit "${{ github.sha }}" --run-id "${{ github.run_id }}" --attempt "${{ github.run_attempt }}"
+          --tar-sha "${{ needs.produce.outputs.tar_sha }}" --manifest-sha "${{ needs.produce.outputs.manifest_sha }}"
+          --delivery-sha "${{ needs.produce.outputs.delivery_sha }}" --extract "${{ runner.temp }}/candidate-payload"
       - run: python -m pip install -r distribution/requirements.txt
-      - name: Exercise link installation
-        run: python scripts/skills.py install --agent codex --dest "${{ runner.temp }}/skills-link" --all --exclude humanizer --mode link
+      - name: Exercise eight-skill link installation, upgrade, idempotence and conflict protection
+        run: >-
+          python -I -B ci/check_installation.py --payload "${{ runner.temp }}/candidate-payload"
+          --work "${{ runner.temp }}/link-integration" --mode link

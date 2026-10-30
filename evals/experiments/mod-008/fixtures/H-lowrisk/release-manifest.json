@@ -1,0 +1,1 @@
+{"include": ["README.md", "NOTICE.txt"], "destination": "local-review-only", "build": "none"}

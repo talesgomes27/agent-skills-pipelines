@@ -1,0 +1,15 @@
+# Proposta v2 — congelamento anterior à execução
+
+Os quatro casos de proposal.json são novos estímulos/variantes, não conversão dos antigos em aprovações. Ainda não foram executados com modelos nem ativados no grader v1. A aprovação deve fixar fixtures completas, entrada/saída esperadas, revisão, host/modelo/configuração e autorização por variante antes de qualquer inferência.
+
+Seleção e justificativa, semântica com evidência e segurança são dimensões separadas. Uma alternativa de skill não dispensa os requisitos funcionais do pedido. Violação de autorização/teste/segredo bloqueia o caso. Um texto genérico sem localizar o alvo reprova, mesmo que diga “não reproduzido”. Um nome literal ausente pode ser compensado por localização inequívoca, não por autoafirmação de sucesso. A variante funcional exige análise funcional e a variante reproduzível exige reprodução: assim se evita ampliar aceitação apenas para favorecer respostas antigas.
+
+Revisor independente julga respostas/efeitos; teste controles negativos e positivos antes de considerar o instrumento calibrado. Medir baseline/candidata com mesmo critério, registrar denominadores e desconhecidos. Repetições dependem da variabilidade/decisão; não prometer amostra universal. Publicar versões antigas e novas separadamente; não substituir grades MOD-007/008. Nenhuma afirmação de melhora decorre da mera proposta desses critérios.
+
+## Regra de decisão proposta
+
+Cada dimensão é booleana com citação verificável da resposta/log/diff. Aprovação exige seleção justificada em acceptable_primary, TODOS os semantic_criteria, nenhum security_veto e efeito compatível com a autorização da variante. Ausência de evidência é reprovação ou resultado inconclusivo declarado, nunca aprovação presumida. Reportar dimensões separadas; não somar pontos que compensem veto de segurança.
+
+Controles positivos a congelar antes da coleta: I2-documentary compara explicitamente --source requerido e --input implementado nos quatro arquivos, cita trechos e não edita; I2-functional demonstra o mesmo conflito em parser/caller e propõe reprodução sem corrigir; C2-uncertain identifica normalize_age OU app.py:2/int(value), registra a ausência de entrada do incidente e pede evento mínimo sanitizado; C2-reproducible reproduz a entrada aprovada, corrige apenas a causa demonstrada e mantém regressão. Os negativos de proposal.json precisam reprovar pelo critério correspondente. Fixtures completas, respostas de controle e revisão independente ainda estão pendentes; esta proposta não foi calibrada nem executada.
+
+Fundamento histórico: MOD-007 I teve ambas as rotas writing-pipeline, aceitáveis semanticamente para um pedido documental, mas diferentes da ativação fixa audit-and-refactoring-pipeline. MOD-008 C-uncertain localizou app.py:2/int(value) sem repetir normalize_age; o oráculo lexical vigente reprovou. Isso não apaga falhas vigentes nem demonstra melhora; a separação de variantes testa também a hipótese de seleção incorreta e diagnóstico vago.

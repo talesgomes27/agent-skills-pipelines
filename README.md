@@ -2,13 +2,13 @@
 
 [![CI](https://github.com/talesgomes27/agent-skills-pipelines/actions/workflows/ci.yml/badge.svg)](https://github.com/talesgomes27/agent-skills-pipelines/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Release](https://img.shields.io/badge/release-1.0.1-blue.svg)](distribution/catalog.json)
+[![Candidate](https://img.shields.io/badge/candidate-2.0.0-blue.svg)](distribution/catalog.json)
 [![Python](https://img.shields.io/badge/Python-3.9%2B-3776AB.svg?logo=python&logoColor=white)](https://www.python.org/)
 [![Agent Skills](https://img.shields.io/badge/Agent%20Skills-Codex%20%7C%20Claude%20Code%20%7C%20Antigravity-6f42c1.svg)](docs/distribution/architecture.md)
 
 Ecossistema modular de Agent Skills para planejar, implementar, auditar, documentar e entregar projetos com agentes de IA. Os mesmos pacotes podem ser distribuídos para OpenAI Codex, Claude Code, Google Antigravity e adaptadores customizados sem carregar toda a biblioteca no contexto.
 
-Release atual: **1.0.1**.
+Candidata: **2.0.0**, ainda não publicada. A preparação técnica e seus limites estão em [CI híbrida](ci/README.md).
 
 ## O que o projeto oferece
 
@@ -56,6 +56,8 @@ As pipelines classificam o trabalho quando necessário em três arquétipos:
 - **C — CLI, scripts e automação:** comandos, empacotamento e operações locais.
 
 Skills especialistas são carregadas somente quando uma decisão depende delas. Graphify, MCPs e conectores são integrações opcionais; nenhuma delas amplia permissões ou autorização do usuário.
+
+Planejamento, execução e auditoria ajustam esforço e documentação ao risco: leve, padrão ou rigoroso, com motivo registrado e contratos existentes reutilizados por referência. Esses níveis preservam os controles essenciais e não substituem os modos de aprovação assistido/contínuo.
 
 ## Instalação
 
@@ -131,12 +133,15 @@ python3 -m unittest discover -s tests -v
 python3 quarto-expert/scripts/doctor.py
 ```
 
-O harness contém 24 casos para as oito skills e classifica traces A/B capturados por um executor externo. Ele mede ativação, operações proibidas, sinais esperados e, quando fornecidos, tokens, chamadas de ferramenta e latência. Veja [avaliações comportamentais](docs/evals.md) e [verificação de descoberta](docs/distribution/discovery.md).
+O harness contém 34 casos para as oito skills e classifica traces A/B capturados por um executor externo. Ele mede ativação, operações proibidas, sinais esperados e, quando fornecidos, tokens, chamadas de ferramenta e latência. Veja [avaliações comportamentais](docs/evals.md) e [verificação de descoberta](docs/distribution/discovery.md).
 
-O workflow de CI repete testes, doctors e instalações temporárias em Linux, Windows e macOS. Validação estrutural não substitui uma execução real no host, renderização dos formatos solicitados ou revisão humana do resultado.
+A [campanha local A–J da MOD-007](docs/audits/modernization-2026-10-28/mod-007.md) preserva separadamente 12 casos, 24 traces reais em fixtures e custos observados com limitações explícitas. A cobertura é completa; o grader estrito conserva uma reprovação de ativação no cenário documental I.
+
+O [workflow de CI híbrida](.github/workflows/ci.yml) define um produtor e sete consumidores para Linux, Windows e macOS. A execução remota dessa candidata permanece pendente; veja [escopo e evidências locais](ci/README.md). Validação estrutural não substitui uma execução real no host, renderização dos formatos solicitados ou revisão humana do resultado.
 
 ## Documentação
 
+- [Governança documental e fontes canônicas](docs/distribution/architecture.md#governança-documental-vigente)
 - [Arquitetura de distribuição](docs/distribution/architecture.md)
 - [Protocolo de descoberta](docs/distribution/discovery.md)
 - [Validação da distribuição](docs/distribution/validation.md)

@@ -1,0 +1,1004 @@
+[
+  {
+    "path": ".github/workflows/ci.yml",
+    "category": "documentação operacional",
+    "sha256": "ea3af4210e15fd3c4f53d89124b5cf01e98689b25692a3c1a5091b3c7894bdc6",
+    "bytes": 1539
+  },
+  {
+    "path": "README.md",
+    "category": "documentação operacional",
+    "sha256": "e4b1470ea0bc86890104648dd08c0ed341f5131e0ea65c3f77827a25dd46f971",
+    "bytes": 7990
+  },
+  {
+    "path": "audit-and-refactoring-pipeline/SKILL.md",
+    "category": "instrução permanente",
+    "sha256": "7caf4debed8b880deca83ce711144849c5430318c783c4e6aa75dfdaecef3d8e",
+    "bytes": 9776
+  },
+  {
+    "path": "audit-and-refactoring-pipeline/references/archetype-a-analytics-audit.md",
+    "category": "referência técnica",
+    "sha256": "09efd0237ba4cfdb50d5a0c902e6e3143fb9a86887c656c56e2ec4d2838c4422",
+    "bytes": 2662
+  },
+  {
+    "path": "audit-and-refactoring-pipeline/references/characterization-tests.md",
+    "category": "referência técnica",
+    "sha256": "714cbc3b133cb671f5e4e9feb3411c6a462c783eb83532e98a975ff8cf60d411",
+    "bytes": 3921
+  },
+  {
+    "path": "audit-and-refactoring-pipeline/references/refactoring-patterns-abc.md",
+    "category": "referência técnica",
+    "sha256": "a66a73f46ad918bee9a57306ac6906e1416254e1ec79bec46a6a66d7150e7491",
+    "bytes": 2841
+  },
+  {
+    "path": "audit-and-refactoring-pipeline/references/severity-matrix-and-triage.md",
+    "category": "referência técnica",
+    "sha256": "381e779524624b1dd50da0f57696427f8dbe04370877ae8b593e5d7bf06ef1a8",
+    "bytes": 2709
+  },
+  {
+    "path": "distribution/catalog.json",
+    "category": "contrato e avaliação",
+    "sha256": "98a4d19d6e0d64a1a87eb0413ae781f8892fbd03f685fcfc14ed408b360d5e65",
+    "bytes": 610
+  },
+  {
+    "path": "distribution/catalog.schema.json",
+    "category": "contrato e avaliação",
+    "sha256": "8e1781ca21de93762d3b7ef0d2043f1885fa4c1d884e0089d136e5a723f988db",
+    "bytes": 736
+  },
+  {
+    "path": "distribution/mcp-tools.example.json",
+    "category": "contrato e avaliação",
+    "sha256": "428ad1ad37ceb95d4f2112773a22f05e4d9da10c3909fe91d6d633d54c330b0d",
+    "bytes": 849
+  },
+  {
+    "path": "distribution/requirements.txt",
+    "category": "contrato e avaliação",
+    "sha256": "0969da99a0bc2a1b71ed50584560f4588a37567ac63af3ddbaf3c4617ca5621a",
+    "bytes": 14
+  },
+  {
+    "path": "docs/audits/audit-and-refactoring-pipeline.md",
+    "category": "auditoria histórica",
+    "sha256": "e1e0a64ba46f167e8262fd692fd6a816b085548e8d66aa03318fec4b89bc5d76",
+    "bytes": 17766
+  },
+  {
+    "path": "docs/audits/execution-pipeline.md",
+    "category": "auditoria histórica",
+    "sha256": "d18f472c0e617c4c68d4a4d87f34e010a6c7b42dbeedaf8f2537fa78dd6f6328",
+    "bytes": 17514
+  },
+  {
+    "path": "docs/audits/humanizer.md",
+    "category": "auditoria histórica",
+    "sha256": "a33b7e9c91a853a13934ffe5e64cb235869b9181e16474e2df2e7ee1de63e82c",
+    "bytes": 7448
+  },
+  {
+    "path": "docs/audits/legacy/release-and-ops-pipeline/SKILL.md",
+    "category": "histórico arquivado",
+    "sha256": "1f4855bc7c6ed68e125e373b10b139b380743602be93a784f28b8a6cd1424521",
+    "bytes": 14147
+  },
+  {
+    "path": "docs/audits/legacy/release-and-ops-pipeline/references/archetype-a-ghpages.md",
+    "category": "histórico arquivado",
+    "sha256": "0fcb74087e4e21c6b39c6d2bff6038e1f9944be67f3815cff0cb886d829d902c",
+    "bytes": 2724
+  },
+  {
+    "path": "docs/audits/legacy/release-and-ops-pipeline/references/pre-push-sanitation.md",
+    "category": "histórico arquivado",
+    "sha256": "cf55bb8aeb0def003ce76569f28287c9b67bf840a0fa74a26633b21aa4be0b1e",
+    "bytes": 2509
+  },
+  {
+    "path": "docs/audits/legacy/release-and-ops-pipeline/references/smoke-and-healthcheck.md",
+    "category": "histórico arquivado",
+    "sha256": "cdbecdc68a8645efd02cfc2f11aeb12f3e22a40e37717174f68aa80c5e6a8619",
+    "bytes": 2903
+  },
+  {
+    "path": "docs/audits/legacy/skill-loader/SKILL.md",
+    "category": "histórico arquivado",
+    "sha256": "cf445568519715e97360a4b0a322f7bf3feb53d125b5dad3bd205817092fc279",
+    "bytes": 1307
+  },
+  {
+    "path": "docs/audits/legacy/writing-pipeline/references/archetype-a-academic.md",
+    "category": "histórico arquivado",
+    "sha256": "f8683fb4c6fb44eb5ca2a806c5821267972d0bcf253a6a0f59cdcf20175c5e58",
+    "bytes": 1911
+  },
+  {
+    "path": "docs/audits/legacy/writing-pipeline/references/archetype-b-software.md",
+    "category": "histórico arquivado",
+    "sha256": "f393586f74970acc06c786fb88f72dce1cb4e8dd648210daab7d74806db6c82f",
+    "bytes": 1035
+  },
+  {
+    "path": "docs/audits/legacy/writing-pipeline/references/archetype-c-cli.md",
+    "category": "histórico arquivado",
+    "sha256": "fcf8956884565b991286b6ce247136a2b76c36ff5082825ddc1168a4e1631278",
+    "bytes": 878
+  },
+  {
+    "path": "docs/audits/legacy/writing-pipeline/references/before-after-examples.md",
+    "category": "histórico arquivado",
+    "sha256": "d1bea41aa5f5b8deb4c0512fbe38f01644c2a613627e7103ab0b8d507c5afbab",
+    "bytes": 2618
+  },
+  {
+    "path": "docs/audits/legacy/writing-pipeline/references/canonical-sources.md",
+    "category": "histórico arquivado",
+    "sha256": "4eb7a9219bcd566de842bae9a08b261dbefbe045a2ae944d489a2f224dd0e084",
+    "bytes": 2899
+  },
+  {
+    "path": "docs/audits/legacy/writing-pipeline/references/metrics-and-anti-ai.md",
+    "category": "histórico arquivado",
+    "sha256": "c73e5cc429a1b78a0170fd05f83d8dbc8dd70fa56a72ce21f1eab5b8ae78b226",
+    "bytes": 2769
+  },
+  {
+    "path": "docs/audits/legacy/writing-pipeline/references/review-protocol.md",
+    "category": "histórico arquivado",
+    "sha256": "8d730bd65bff8dab21859ae40d6dcc12d17617052c86fb93f9b2202885069eeb",
+    "bytes": 1129
+  },
+  {
+    "path": "docs/audits/pre-code-pipeline.md",
+    "category": "auditoria histórica",
+    "sha256": "4ec8aaa9add8cefaf5b92bdddfed9ffbcf5e4707f1b68118dc76819d819a0b40",
+    "bytes": 17856
+  },
+  {
+    "path": "docs/audits/proposals/audit-and-refactoring-pipeline/SKILL.md",
+    "category": "histórico arquivado",
+    "sha256": "889c73cf493149710c926264e5d4a2782d37909c87609d51bfc8ec3d144324a4",
+    "bytes": 9074
+  },
+  {
+    "path": "docs/audits/proposals/audit-and-refactoring-pipeline/references/archetype-a-analytics-audit.md",
+    "category": "histórico arquivado",
+    "sha256": "09efd0237ba4cfdb50d5a0c902e6e3143fb9a86887c656c56e2ec4d2838c4422",
+    "bytes": 2662
+  },
+  {
+    "path": "docs/audits/proposals/audit-and-refactoring-pipeline/references/characterization-tests.md",
+    "category": "histórico arquivado",
+    "sha256": "714cbc3b133cb671f5e4e9feb3411c6a462c783eb83532e98a975ff8cf60d411",
+    "bytes": 3921
+  },
+  {
+    "path": "docs/audits/proposals/audit-and-refactoring-pipeline/references/refactoring-patterns-abc.md",
+    "category": "histórico arquivado",
+    "sha256": "a66a73f46ad918bee9a57306ac6906e1416254e1ec79bec46a6a66d7150e7491",
+    "bytes": 2841
+  },
+  {
+    "path": "docs/audits/proposals/audit-and-refactoring-pipeline/references/severity-matrix-and-triage.md",
+    "category": "histórico arquivado",
+    "sha256": "381e779524624b1dd50da0f57696427f8dbe04370877ae8b593e5d7bf06ef1a8",
+    "bytes": 2709
+  },
+  {
+    "path": "docs/audits/proposals/execution-pipeline/SKILL.md",
+    "category": "histórico arquivado",
+    "sha256": "7893326afe93b18ff5a9b8e2535771c16bac6f7289ed665047cf27fc29fc3899",
+    "bytes": 8397
+  },
+  {
+    "path": "docs/audits/proposals/execution-pipeline/references/archetype-a.md",
+    "category": "histórico arquivado",
+    "sha256": "b3fd8539747e7443274499da50430123cc0db3f8de671f6f745d657479acc3a9",
+    "bytes": 3983
+  },
+  {
+    "path": "docs/audits/proposals/execution-pipeline/references/archetype-b.md",
+    "category": "histórico arquivado",
+    "sha256": "28f67182638fb3ca9e1ca37afc7739ff7d356cc09005540e03bd6f622da79f05",
+    "bytes": 2123
+  },
+  {
+    "path": "docs/audits/proposals/execution-pipeline/references/archetype-c.md",
+    "category": "histórico arquivado",
+    "sha256": "bb7c44d3cffef0528feec345d61f1cf72db581640d153a5a2012b98eb108130e",
+    "bytes": 1681
+  },
+  {
+    "path": "docs/audits/proposals/humanizer/SKILL.md",
+    "category": "histórico arquivado",
+    "sha256": "2a76270187bfcfddfb157d309c09ab12f40d9db3742102875bfa783477af67a0",
+    "bytes": 3506
+  },
+  {
+    "path": "docs/audits/proposals/quarto-expert/SKILL.md",
+    "category": "histórico arquivado",
+    "sha256": "e187c141452deb8d26dafd19578e5b0a043dddd02223a176a6adbb096df7027f",
+    "bytes": 7044
+  },
+  {
+    "path": "docs/audits/proposals/quarto-expert/examples/abnt-thesis-starter/01-introducao.qmd",
+    "category": "histórico arquivado",
+    "sha256": "a8e6b8b2d92f73c00912694ce7d3c6feaca6544019db89c8b655d7233a23a6ff",
+    "bytes": 16
+  },
+  {
+    "path": "docs/audits/proposals/quarto-expert/examples/abnt-thesis-starter/02-metodologia.qmd",
+    "category": "histórico arquivado",
+    "sha256": "3bb1eca20e9d18f694e57ec6aa19a8c61865edda12640930cbb8cc461b4b1a69",
+    "bytes": 17
+  },
+  {
+    "path": "docs/audits/proposals/quarto-expert/examples/abnt-thesis-starter/03-resultados.qmd",
+    "category": "histórico arquivado",
+    "sha256": "50291bfdc2dd5fc97b8872e5b5c9e40f60ac092784956382cd723653dfa53c20",
+    "bytes": 16
+  },
+  {
+    "path": "docs/audits/proposals/quarto-expert/examples/abnt-thesis-starter/04-conclusao.qmd",
+    "category": "histórico arquivado",
+    "sha256": "c86b678b3f59331cc6d70cd47145c869d091ac134ef04454a1ce8dcb086b89ab",
+    "bytes": 15
+  },
+  {
+    "path": "docs/audits/proposals/quarto-expert/examples/abnt-thesis-starter/README.md",
+    "category": "histórico arquivado",
+    "sha256": "183c0337e09a175c3613d76f806b496cb22774ae0c1479fd1beed3d1a77d7215",
+    "bytes": 389
+  },
+  {
+    "path": "docs/audits/proposals/quarto-expert/examples/abnt-thesis-starter/_quarto.yml",
+    "category": "histórico arquivado",
+    "sha256": "bd6a1302c90166cae5a64303450ccbdbd283b6ac1436bbabc093d34c753f6ca1",
+    "bytes": 472
+  },
+  {
+    "path": "docs/audits/proposals/quarto-expert/examples/abnt-thesis-starter/index.qmd",
+    "category": "histórico arquivado",
+    "sha256": "17368874fc33654f66af54b0b223f875021cd410b4ea7a5f6964e8cb84b16239",
+    "bytes": 226
+  },
+  {
+    "path": "docs/audits/proposals/quarto-expert/examples/abnt-thesis-starter/references.bib",
+    "category": "histórico arquivado",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "docs/audits/proposals/quarto-expert/examples/abnt-thesis-starter/references.qmd",
+    "category": "histórico arquivado",
+    "sha256": "a7adc037f193aba8062a59c534a96d16661bed5715e67b11687c323fe4cd5a0b",
+    "bytes": 13
+  },
+  {
+    "path": "docs/audits/proposals/quarto-expert/examples/manuscript-binder/README.md",
+    "category": "histórico arquivado",
+    "sha256": "ea733387bee6857db151ef5dc3005903b40c6d0182ac04a7f697ec0030b02feb",
+    "bytes": 439
+  },
+  {
+    "path": "docs/audits/proposals/quarto-expert/examples/manuscript-binder/_quarto.yml",
+    "category": "histórico arquivado",
+    "sha256": "803c50de0da14f038ce99430181c9651f88f634841cb2e92ca8bc99ad77ee9e1",
+    "bytes": 283
+  },
+  {
+    "path": "docs/audits/proposals/quarto-expert/examples/manuscript-binder/index.qmd",
+    "category": "histórico arquivado",
+    "sha256": "74fdef3677547028b6d0cd50f495c50bf48a7c7bcbcdecba7dc8a1100f790c53",
+    "bytes": 265
+  },
+  {
+    "path": "docs/audits/proposals/quarto-expert/examples/manuscript-binder/notebooks/01-analise.qmd",
+    "category": "histórico arquivado",
+    "sha256": "ce81c39069ac6c3198e7d44aa884957d78b172b21635c3ecff1de0837df5c06f",
+    "bytes": 498
+  },
+  {
+    "path": "docs/audits/proposals/quarto-expert/examples/manuscript-binder/references.bib",
+    "category": "histórico arquivado",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "docs/audits/proposals/quarto-expert/examples/manuscript-binder/requirements.txt",
+    "category": "histórico arquivado",
+    "sha256": "6d4cdf924e8b6fe2cf827f647ca740148e2e8b4c44ea31578dbea46cbd403417",
+    "bytes": 17
+  },
+  {
+    "path": "docs/audits/proposals/quarto-expert/examples/minimal-report/_quarto.yml",
+    "category": "histórico arquivado",
+    "sha256": "a9aa01955ddb364c47e93a5591b9ee4278b16a68c6a5aa0c032f6053a0e06fd2",
+    "bytes": 180
+  },
+  {
+    "path": "docs/audits/proposals/quarto-expert/examples/minimal-report/index.qmd",
+    "category": "histórico arquivado",
+    "sha256": "a7df67273cdc0226887d296edf963fef906470930774f39b28ee6fe2b60ddddf",
+    "bytes": 597
+  },
+  {
+    "path": "docs/audits/proposals/quarto-expert/references/abnt-thesis-guide.md",
+    "category": "histórico arquivado",
+    "sha256": "dc66f4260a3edae9c47c8bb978a44974a566fdab110708be07448326c35250f0",
+    "bytes": 947
+  },
+  {
+    "path": "docs/audits/proposals/quarto-expert/references/alt-text.md",
+    "category": "histórico arquivado",
+    "sha256": "a59ba84a250ebc8250e41bb85729969dd7a688d09aedf57bbf503d2faec7f854",
+    "bytes": 1846
+  },
+  {
+    "path": "docs/audits/proposals/quarto-expert/references/brand-yml.md",
+    "category": "histórico arquivado",
+    "sha256": "81427cd4b7154faa638d5e5e56a569239cca83d13f3a208bbf2d20f43e29d30e",
+    "bytes": 8844
+  },
+  {
+    "path": "docs/audits/proposals/quarto-expert/references/callouts.md",
+    "category": "histórico arquivado",
+    "sha256": "863479912da38686199abe2485d4e9267d4c6a4bc0aa814fb1304b1de3d84a8a",
+    "bytes": 3391
+  },
+  {
+    "path": "docs/audits/proposals/quarto-expert/references/citations.md",
+    "category": "histórico arquivado",
+    "sha256": "b6edaa85f830ff4fd5cad09cea0f7f32bfebb9a377cc584bee764359b642c766",
+    "bytes": 5019
+  },
+  {
+    "path": "docs/audits/proposals/quarto-expert/references/code-cells.md",
+    "category": "histórico arquivado",
+    "sha256": "4a8d72a1bdf769be4c572a9b0ed27e0117e2865fa8cba3d607d783d012114f49",
+    "bytes": 7917
+  },
+  {
+    "path": "docs/audits/proposals/quarto-expert/references/conditional-content.md",
+    "category": "histórico arquivado",
+    "sha256": "f7d65df97e7e33d21b702d8a8fb6d3457140842aaa38ae16c346a4ce89cab788",
+    "bytes": 4788
+  },
+  {
+    "path": "docs/audits/proposals/quarto-expert/references/conversion-blogdown.md",
+    "category": "histórico arquivado",
+    "sha256": "cecab8b02794115038d3f43a242c7f0cd1636275e3bcf928b102e32d7856bd3f",
+    "bytes": 6700
+  },
+  {
+    "path": "docs/audits/proposals/quarto-expert/references/conversion-bookdown.md",
+    "category": "histórico arquivado",
+    "sha256": "1ed919eab6e7157e1b7ce66cea4335014d69efb128cfa3124c3dba685258215d",
+    "bytes": 5288
+  },
+  {
+    "path": "docs/audits/proposals/quarto-expert/references/conversion-distill.md",
+    "category": "histórico arquivado",
+    "sha256": "d2f3cbfef75a528160d08396a46f8ea297db97059ab12f0d09ee9ca1a179ac84",
+    "bytes": 5829
+  },
+  {
+    "path": "docs/audits/proposals/quarto-expert/references/conversion-jupyter.md",
+    "category": "histórico arquivado",
+    "sha256": "e6fc800e301efa4bf51d0479606717dd83338fd2eec8dd43b5603ddbe1520a15",
+    "bytes": 1330
+  },
+  {
+    "path": "docs/audits/proposals/quarto-expert/references/conversion-rmarkdown.md",
+    "category": "histórico arquivado",
+    "sha256": "b935de13252d4ff6ddc8bfd6ea275e4a9121d17a1c1fc65397ca2eca2449b035",
+    "bytes": 5663
+  },
+  {
+    "path": "docs/audits/proposals/quarto-expert/references/conversion-xaringan.md",
+    "category": "histórico arquivado",
+    "sha256": "d74d20d93204c525a1b5de0fc78e7517018cb1b9c21fbb1d67e837c033e73a89",
+    "bytes": 5548
+  },
+  {
+    "path": "docs/audits/proposals/quarto-expert/references/cross-references.md",
+    "category": "histórico arquivado",
+    "sha256": "57a585e11dce835277b83f6298bdbaf2e8174fef922007ea4015bad997221be7",
+    "bytes": 5937
+  },
+  {
+    "path": "docs/audits/proposals/quarto-expert/references/diagrams.md",
+    "category": "histórico arquivado",
+    "sha256": "aeb7d349788469dd52273b5bfb2ad73e4e4b657bb8aa2f305dbe931e4dadc2e2",
+    "bytes": 4912
+  },
+  {
+    "path": "docs/audits/proposals/quarto-expert/references/divs-and-spans.md",
+    "category": "histórico arquivado",
+    "sha256": "3acbf9269262c56c18e9767dd76c1c540bfdaadfa2c97a787b16e22252683bcb",
+    "bytes": 4113
+  },
+  {
+    "path": "docs/audits/proposals/quarto-expert/references/engines.md",
+    "category": "histórico arquivado",
+    "sha256": "5140d4116732694cc63f2f5d0ad6e2fc110f465d3e21805680fb147d1b1d02c2",
+    "bytes": 1764
+  },
+  {
+    "path": "docs/audits/proposals/quarto-expert/references/extensions.md",
+    "category": "histórico arquivado",
+    "sha256": "9b8bc1f4586b2af8c70b4f4ad5e0399e1faccc7de4c429267bdfedbeb44c61a8",
+    "bytes": 5660
+  },
+  {
+    "path": "docs/audits/proposals/quarto-expert/references/figures.md",
+    "category": "histórico arquivado",
+    "sha256": "ae91b395c8230872101d330e97e6ff53aa6e084901fac674a31a59d9a2c2bec9",
+    "bytes": 5275
+  },
+  {
+    "path": "docs/audits/proposals/quarto-expert/references/graphify-integration.md",
+    "category": "histórico arquivado",
+    "sha256": "f948888d3db0310b84ee6ca69ec38b80394c26dae7b286882b12932ac7dda335",
+    "bytes": 9094
+  },
+  {
+    "path": "docs/audits/proposals/quarto-expert/references/layout.md",
+    "category": "histórico arquivado",
+    "sha256": "5653a57e9f93bf62ae2d01f2a9efec81072c516f969598b4566ef59dc092404b",
+    "bytes": 6218
+  },
+  {
+    "path": "docs/audits/proposals/quarto-expert/references/markdown-linting.md",
+    "category": "histórico arquivado",
+    "sha256": "aa755c5ff3f8945102eb077b35011cbc2c08f833fbf1fbf402eba9e08737b447",
+    "bytes": 1936
+  },
+  {
+    "path": "docs/audits/proposals/quarto-expert/references/rmd-to-quarto-migration.md",
+    "category": "histórico arquivado",
+    "sha256": "468a0b71db47f1252874ef0ca3b71c0cd3d9c88a846705e5eb47d967c67c1fd7",
+    "bytes": 1854
+  },
+  {
+    "path": "docs/audits/proposals/quarto-expert/references/shortcodes.md",
+    "category": "histórico arquivado",
+    "sha256": "a44e3f9242cb2f0315d1d06536aac4e7e1d28e4ae57cc853c0016fbb5d29bb94",
+    "bytes": 5304
+  },
+  {
+    "path": "docs/audits/proposals/quarto-expert/references/tables.md",
+    "category": "histórico arquivado",
+    "sha256": "5c4f680fd6cbe784af5f7c10fd32b863305913f20b698b9352d2cae47ea08991",
+    "bytes": 6366
+  },
+  {
+    "path": "docs/audits/proposals/quarto-expert/references/typst-and-templates.md",
+    "category": "histórico arquivado",
+    "sha256": "d6ac760a70459d0d2eeb9a7d42b06f40293323c50bf5363f245f749ee3dba2aa",
+    "bytes": 793
+  },
+  {
+    "path": "docs/audits/proposals/quarto-expert/references/yaml-front-matter.md",
+    "category": "histórico arquivado",
+    "sha256": "f02718e10b56faf777921f0a01414e6534d771b83db1ae2f7dc435e776f74233",
+    "bytes": 6627
+  },
+  {
+    "path": "docs/audits/proposals/release-and-ops-pipeline/SKILL.md",
+    "category": "histórico arquivado",
+    "sha256": "f7122747268a521a0cf305c08d193d2f66aebbc457d9496f9443056706d22c66",
+    "bytes": 8148
+  },
+  {
+    "path": "docs/audits/proposals/release-and-ops-pipeline/references/archetype-a-ghpages.md",
+    "category": "histórico arquivado",
+    "sha256": "afe039bfcf471b63c9724fd85b6a083ed1241d6ddf164a2567a780fa0818d56d",
+    "bytes": 2917
+  },
+  {
+    "path": "docs/audits/proposals/release-and-ops-pipeline/references/ci-and-artifacts.md",
+    "category": "histórico arquivado",
+    "sha256": "5a123bc9a29a130b1ecec73898bb4160ade28b36dfe9317617942a40cd200577",
+    "bytes": 2887
+  },
+  {
+    "path": "docs/audits/proposals/release-and-ops-pipeline/references/pre-push-sanitation.md",
+    "category": "histórico arquivado",
+    "sha256": "2ef7776f67e054054180a03e6d7459d8d8e6fc97c3bbe2c99e27dec70e835657",
+    "bytes": 2969
+  },
+  {
+    "path": "docs/audits/proposals/release-and-ops-pipeline/references/smoke-and-healthcheck.md",
+    "category": "histórico arquivado",
+    "sha256": "4847ca0b004dfd27bc8392fc7151f4ec940e5220726a386d6610ff1f4916673e",
+    "bytes": 3753
+  },
+  {
+    "path": "docs/audits/proposals/skill-loader/SKILL.md",
+    "category": "histórico arquivado",
+    "sha256": "b37391570db5796c4ed8f3a97c04d24ae73f341c366239f4342f6894ce293980",
+    "bytes": 3146
+  },
+  {
+    "path": "docs/audits/proposals/writing-pipeline/SKILL.md",
+    "category": "histórico arquivado",
+    "sha256": "29f85917cf83bbd5daf2670c1daeaf1cf3cd7957527a5e63f74edff74ba8ee4a",
+    "bytes": 6373
+  },
+  {
+    "path": "docs/audits/proposals/writing-pipeline/references/citations-and-evidence.md",
+    "category": "histórico arquivado",
+    "sha256": "2b6d4be4a09fd56334405038f4f63af6db090ac4fe0dcf5e611846a8a6a2f9d9",
+    "bytes": 3381
+  },
+  {
+    "path": "docs/audits/proposals/writing-pipeline/references/document-types.md",
+    "category": "histórico arquivado",
+    "sha256": "bf4e3d0d33ade636b398592d8bc49a915fa7b4609952a4f5ef907cd5aa794de7",
+    "bytes": 3031
+  },
+  {
+    "path": "docs/audits/proposals/writing-pipeline/references/review-protocol.md",
+    "category": "histórico arquivado",
+    "sha256": "2e4d95ddc54c6301956755111504186f889e26a2d39d87b8d2f3540c406d4650",
+    "bytes": 1942
+  },
+  {
+    "path": "docs/audits/quarto-expert.md",
+    "category": "auditoria histórica",
+    "sha256": "d189f5e1961ecd43981036456b6b99796932e4664212d4a6f8a349d82f376520",
+    "bytes": 17475
+  },
+  {
+    "path": "docs/audits/release-and-ops-pipeline.md",
+    "category": "auditoria histórica",
+    "sha256": "fcfef6119033b30a295d026789c659dcba9598959f891940126e51f8d75b0198",
+    "bytes": 17242
+  },
+  {
+    "path": "docs/audits/skill-loader.md",
+    "category": "auditoria histórica",
+    "sha256": "079c749ce19c2dbab8b9d9ad89cafff67fe5b80d5ee4201e140839230ffba458",
+    "bytes": 8771
+  },
+  {
+    "path": "docs/audits/writing-pipeline.md",
+    "category": "auditoria histórica",
+    "sha256": "ee4759d37f32429629e5f4e34614abd098ce6437c5de549f73c6da3c653ef37a",
+    "bytes": 15557
+  },
+  {
+    "path": "docs/distribution/architecture.md",
+    "category": "documentação operacional",
+    "sha256": "61775e8657db1d6c3dce4d269383508b520f026bdeb99dc49e8a5daa4ef23f50",
+    "bytes": 10951
+  },
+  {
+    "path": "docs/distribution/discovery.md",
+    "category": "documentação operacional",
+    "sha256": "5a60841c6c81d716b4aef5f4f7622cd74a111b28d650fd5d7e5185264c2e7825",
+    "bytes": 1415
+  },
+  {
+    "path": "docs/distribution/validation.md",
+    "category": "documentação operacional",
+    "sha256": "6983827d037aa025fbf552e7b81b55b9f027f387ee3b579f8d647655bc368776",
+    "bytes": 3162
+  },
+  {
+    "path": "docs/evals.md",
+    "category": "documentação operacional",
+    "sha256": "8afb3213b3015e71f95029697591499f1925a70f65a3844cc20f52353e703a49",
+    "bytes": 1761
+  },
+  {
+    "path": "docs/library-maintenance.md",
+    "category": "documentação operacional",
+    "sha256": "1caaefa96116c3cc135a443248f54ff56772e2d97ee47cfae0cefeb7bd806a93",
+    "bytes": 1338
+  },
+  {
+    "path": "docs/refactoring-plan.md",
+    "category": "planejamento e acompanhamento",
+    "sha256": "94721c44f0a586701610fa22e961aead6b211001ce68d1d95290755fcd7ccea7",
+    "bytes": 2097
+  },
+  {
+    "path": "evals/cases.json",
+    "category": "contrato e avaliação",
+    "sha256": "e4b2f315ae50fde44844abc9d3271fdc6676549d3bd3d39a6205d705952d4955",
+    "bytes": 10758
+  },
+  {
+    "path": "evals/result.schema.json",
+    "category": "contrato e avaliação",
+    "sha256": "2987e4c09eb1423bf16c862940a41996dbe33be5186bfe564e2cee9fa9466987",
+    "bytes": 992
+  },
+  {
+    "path": "execution-pipeline/SKILL.md",
+    "category": "instrução permanente",
+    "sha256": "af043dcde19e3797a75a100453df1e76703bb1e71c3d4c77a59cb9e991b6f35e",
+    "bytes": 9142
+  },
+  {
+    "path": "execution-pipeline/references/archetype-a.md",
+    "category": "referência técnica",
+    "sha256": "b3fd8539747e7443274499da50430123cc0db3f8de671f6f745d657479acc3a9",
+    "bytes": 3983
+  },
+  {
+    "path": "execution-pipeline/references/archetype-b.md",
+    "category": "referência técnica",
+    "sha256": "28f67182638fb3ca9e1ca37afc7739ff7d356cc09005540e03bd6f622da79f05",
+    "bytes": 2123
+  },
+  {
+    "path": "execution-pipeline/references/archetype-c.md",
+    "category": "referência técnica",
+    "sha256": "bb7c44d3cffef0528feec345d61f1cf72db581640d153a5a2012b98eb108130e",
+    "bytes": 1681
+  },
+  {
+    "path": "humanizer/SKILL.md",
+    "category": "instrução permanente",
+    "sha256": "2a76270187bfcfddfb157d309c09ab12f40d9db3742102875bfa783477af67a0",
+    "bytes": 3506
+  },
+  {
+    "path": "pre-code-pipeline/SKILL.md",
+    "category": "instrução permanente",
+    "sha256": "8713fea9d9f5767b5922628d8c53610a1f7e881208d775938b97cb413d8b86c6",
+    "bytes": 9202
+  },
+  {
+    "path": "pre-code-pipeline/references/quarto-quality-checklist.md",
+    "category": "referência técnica",
+    "sha256": "caf5574ec9d277e5f970be984ff8adb2331613e9a16d37d6e6db356225e5aaf4",
+    "bytes": 6354
+  },
+  {
+    "path": "quarto-expert/SKILL.md",
+    "category": "instrução permanente",
+    "sha256": "e187c141452deb8d26dafd19578e5b0a043dddd02223a176a6adbb096df7027f",
+    "bytes": 7044
+  },
+  {
+    "path": "quarto-expert/examples/abnt-thesis-starter/01-introducao.qmd",
+    "category": "exemplo reproduzível",
+    "sha256": "a8e6b8b2d92f73c00912694ce7d3c6feaca6544019db89c8b655d7233a23a6ff",
+    "bytes": 16
+  },
+  {
+    "path": "quarto-expert/examples/abnt-thesis-starter/02-metodologia.qmd",
+    "category": "exemplo reproduzível",
+    "sha256": "3bb1eca20e9d18f694e57ec6aa19a8c61865edda12640930cbb8cc461b4b1a69",
+    "bytes": 17
+  },
+  {
+    "path": "quarto-expert/examples/abnt-thesis-starter/03-resultados.qmd",
+    "category": "exemplo reproduzível",
+    "sha256": "50291bfdc2dd5fc97b8872e5b5c9e40f60ac092784956382cd723653dfa53c20",
+    "bytes": 16
+  },
+  {
+    "path": "quarto-expert/examples/abnt-thesis-starter/04-conclusao.qmd",
+    "category": "exemplo reproduzível",
+    "sha256": "c86b678b3f59331cc6d70cd47145c869d091ac134ef04454a1ce8dcb086b89ab",
+    "bytes": 15
+  },
+  {
+    "path": "quarto-expert/examples/abnt-thesis-starter/README.md",
+    "category": "exemplo reproduzível",
+    "sha256": "183c0337e09a175c3613d76f806b496cb22774ae0c1479fd1beed3d1a77d7215",
+    "bytes": 389
+  },
+  {
+    "path": "quarto-expert/examples/abnt-thesis-starter/_quarto.yml",
+    "category": "exemplo reproduzível",
+    "sha256": "bd6a1302c90166cae5a64303450ccbdbd283b6ac1436bbabc093d34c753f6ca1",
+    "bytes": 472
+  },
+  {
+    "path": "quarto-expert/examples/abnt-thesis-starter/index.qmd",
+    "category": "exemplo reproduzível",
+    "sha256": "17368874fc33654f66af54b0b223f875021cd410b4ea7a5f6964e8cb84b16239",
+    "bytes": 226
+  },
+  {
+    "path": "quarto-expert/examples/abnt-thesis-starter/references.bib",
+    "category": "exemplo reproduzível",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "quarto-expert/examples/abnt-thesis-starter/references.qmd",
+    "category": "exemplo reproduzível",
+    "sha256": "a7adc037f193aba8062a59c534a96d16661bed5715e67b11687c323fe4cd5a0b",
+    "bytes": 13
+  },
+  {
+    "path": "quarto-expert/examples/manuscript-binder/README.md",
+    "category": "exemplo reproduzível",
+    "sha256": "ea733387bee6857db151ef5dc3005903b40c6d0182ac04a7f697ec0030b02feb",
+    "bytes": 439
+  },
+  {
+    "path": "quarto-expert/examples/manuscript-binder/_quarto.yml",
+    "category": "exemplo reproduzível",
+    "sha256": "803c50de0da14f038ce99430181c9651f88f634841cb2e92ca8bc99ad77ee9e1",
+    "bytes": 283
+  },
+  {
+    "path": "quarto-expert/examples/manuscript-binder/index.qmd",
+    "category": "exemplo reproduzível",
+    "sha256": "74fdef3677547028b6d0cd50f495c50bf48a7c7bcbcdecba7dc8a1100f790c53",
+    "bytes": 265
+  },
+  {
+    "path": "quarto-expert/examples/manuscript-binder/notebooks/01-analise.qmd",
+    "category": "exemplo reproduzível",
+    "sha256": "ce81c39069ac6c3198e7d44aa884957d78b172b21635c3ecff1de0837df5c06f",
+    "bytes": 498
+  },
+  {
+    "path": "quarto-expert/examples/manuscript-binder/references.bib",
+    "category": "exemplo reproduzível",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "quarto-expert/examples/manuscript-binder/requirements.txt",
+    "category": "exemplo reproduzível",
+    "sha256": "6d4cdf924e8b6fe2cf827f647ca740148e2e8b4c44ea31578dbea46cbd403417",
+    "bytes": 17
+  },
+  {
+    "path": "quarto-expert/examples/minimal-report/_quarto.yml",
+    "category": "exemplo reproduzível",
+    "sha256": "a9aa01955ddb364c47e93a5591b9ee4278b16a68c6a5aa0c032f6053a0e06fd2",
+    "bytes": 180
+  },
+  {
+    "path": "quarto-expert/examples/minimal-report/index.qmd",
+    "category": "exemplo reproduzível",
+    "sha256": "a7df67273cdc0226887d296edf963fef906470930774f39b28ee6fe2b60ddddf",
+    "bytes": 597
+  },
+  {
+    "path": "quarto-expert/references/abnt-thesis-guide.md",
+    "category": "referência técnica",
+    "sha256": "dc66f4260a3edae9c47c8bb978a44974a566fdab110708be07448326c35250f0",
+    "bytes": 947
+  },
+  {
+    "path": "quarto-expert/references/alt-text.md",
+    "category": "referência técnica",
+    "sha256": "a59ba84a250ebc8250e41bb85729969dd7a688d09aedf57bbf503d2faec7f854",
+    "bytes": 1846
+  },
+  {
+    "path": "quarto-expert/references/brand-yml.md",
+    "category": "referência técnica",
+    "sha256": "81427cd4b7154faa638d5e5e56a569239cca83d13f3a208bbf2d20f43e29d30e",
+    "bytes": 8844
+  },
+  {
+    "path": "quarto-expert/references/callouts.md",
+    "category": "referência técnica",
+    "sha256": "863479912da38686199abe2485d4e9267d4c6a4bc0aa814fb1304b1de3d84a8a",
+    "bytes": 3391
+  },
+  {
+    "path": "quarto-expert/references/citations.md",
+    "category": "referência técnica",
+    "sha256": "b6edaa85f830ff4fd5cad09cea0f7f32bfebb9a377cc584bee764359b642c766",
+    "bytes": 5019
+  },
+  {
+    "path": "quarto-expert/references/code-cells.md",
+    "category": "referência técnica",
+    "sha256": "4a8d72a1bdf769be4c572a9b0ed27e0117e2865fa8cba3d607d783d012114f49",
+    "bytes": 7917
+  },
+  {
+    "path": "quarto-expert/references/conditional-content.md",
+    "category": "referência técnica",
+    "sha256": "f7d65df97e7e33d21b702d8a8fb6d3457140842aaa38ae16c346a4ce89cab788",
+    "bytes": 4788
+  },
+  {
+    "path": "quarto-expert/references/conversion-blogdown.md",
+    "category": "referência técnica",
+    "sha256": "cecab8b02794115038d3f43a242c7f0cd1636275e3bcf928b102e32d7856bd3f",
+    "bytes": 6700
+  },
+  {
+    "path": "quarto-expert/references/conversion-bookdown.md",
+    "category": "referência técnica",
+    "sha256": "d994073b9c95094608e899ffef9188ea01b1beb69e84ccd00f77f18480a3dc6e",
+    "bytes": 5289
+  },
+  {
+    "path": "quarto-expert/references/conversion-distill.md",
+    "category": "referência técnica",
+    "sha256": "69039bbcd6662732140e3e063f334c8260f59dd6dc4373e16771e5b0f760b656",
+    "bytes": 5830
+  },
+  {
+    "path": "quarto-expert/references/conversion-jupyter.md",
+    "category": "referência técnica",
+    "sha256": "e6fc800e301efa4bf51d0479606717dd83338fd2eec8dd43b5603ddbe1520a15",
+    "bytes": 1330
+  },
+  {
+    "path": "quarto-expert/references/conversion-rmarkdown.md",
+    "category": "referência técnica",
+    "sha256": "aee6105ef6be251597579a7272b64a6f6fa2e57aa42eab588f13d50dbaa363b0",
+    "bytes": 5664
+  },
+  {
+    "path": "quarto-expert/references/conversion-xaringan.md",
+    "category": "referência técnica",
+    "sha256": "d74d20d93204c525a1b5de0fc78e7517018cb1b9c21fbb1d67e837c033e73a89",
+    "bytes": 5548
+  },
+  {
+    "path": "quarto-expert/references/cross-references.md",
+    "category": "referência técnica",
+    "sha256": "57a585e11dce835277b83f6298bdbaf2e8174fef922007ea4015bad997221be7",
+    "bytes": 5937
+  },
+  {
+    "path": "quarto-expert/references/diagrams.md",
+    "category": "referência técnica",
+    "sha256": "c3d9252d2b976596fda58318cd5b652e1392aa57d03c4016f101134f219a00b3",
+    "bytes": 4913
+  },
+  {
+    "path": "quarto-expert/references/divs-and-spans.md",
+    "category": "referência técnica",
+    "sha256": "3acbf9269262c56c18e9767dd76c1c540bfdaadfa2c97a787b16e22252683bcb",
+    "bytes": 4113
+  },
+  {
+    "path": "quarto-expert/references/engines.md",
+    "category": "referência técnica",
+    "sha256": "5140d4116732694cc63f2f5d0ad6e2fc110f465d3e21805680fb147d1b1d02c2",
+    "bytes": 1764
+  },
+  {
+    "path": "quarto-expert/references/extensions.md",
+    "category": "referência técnica",
+    "sha256": "7560b3bd1cf2c5a714bc86983730caccf69c2e3a9065f6eef32cedb284bc653d",
+    "bytes": 5661
+  },
+  {
+    "path": "quarto-expert/references/figures.md",
+    "category": "referência técnica",
+    "sha256": "ae91b395c8230872101d330e97e6ff53aa6e084901fac674a31a59d9a2c2bec9",
+    "bytes": 5275
+  },
+  {
+    "path": "quarto-expert/references/graphify-integration.md",
+    "category": "referência técnica",
+    "sha256": "f948888d3db0310b84ee6ca69ec38b80394c26dae7b286882b12932ac7dda335",
+    "bytes": 9094
+  },
+  {
+    "path": "quarto-expert/references/layout.md",
+    "category": "referência técnica",
+    "sha256": "5653a57e9f93bf62ae2d01f2a9efec81072c516f969598b4566ef59dc092404b",
+    "bytes": 6218
+  },
+  {
+    "path": "quarto-expert/references/markdown-linting.md",
+    "category": "referência técnica",
+    "sha256": "aa755c5ff3f8945102eb077b35011cbc2c08f833fbf1fbf402eba9e08737b447",
+    "bytes": 1936
+  },
+  {
+    "path": "quarto-expert/references/rmd-to-quarto-migration.md",
+    "category": "referência técnica",
+    "sha256": "468a0b71db47f1252874ef0ca3b71c0cd3d9c88a846705e5eb47d967c67c1fd7",
+    "bytes": 1854
+  },
+  {
+    "path": "quarto-expert/references/shortcodes.md",
+    "category": "referência técnica",
+    "sha256": "3dd7acd7ac4091664c76e7d45abc92d6595d17332cbc93e545bb6d21276e852b",
+    "bytes": 5305
+  },
+  {
+    "path": "quarto-expert/references/tables.md",
+    "category": "referência técnica",
+    "sha256": "5c4f680fd6cbe784af5f7c10fd32b863305913f20b698b9352d2cae47ea08991",
+    "bytes": 6366
+  },
+  {
+    "path": "quarto-expert/references/typst-and-templates.md",
+    "category": "referência técnica",
+    "sha256": "d6ac760a70459d0d2eeb9a7d42b06f40293323c50bf5363f245f749ee3dba2aa",
+    "bytes": 793
+  },
+  {
+    "path": "quarto-expert/references/yaml-front-matter.md",
+    "category": "referência técnica",
+    "sha256": "f02718e10b56faf777921f0a01414e6534d771b83db1ae2f7dc435e776f74233",
+    "bytes": 6627
+  },
+  {
+    "path": "release-and-ops-pipeline/SKILL.md",
+    "category": "instrução permanente",
+    "sha256": "70a3f86894b98d8e246149cccbbcbc2b1e29ff06725a21b0196033086e4bef56",
+    "bytes": 8902
+  },
+  {
+    "path": "release-and-ops-pipeline/references/archetype-a-ghpages.md",
+    "category": "referência técnica",
+    "sha256": "afe039bfcf471b63c9724fd85b6a083ed1241d6ddf164a2567a780fa0818d56d",
+    "bytes": 2917
+  },
+  {
+    "path": "release-and-ops-pipeline/references/ci-and-artifacts.md",
+    "category": "referência técnica",
+    "sha256": "5a123bc9a29a130b1ecec73898bb4160ade28b36dfe9317617942a40cd200577",
+    "bytes": 2887
+  },
+  {
+    "path": "release-and-ops-pipeline/references/pre-push-sanitation.md",
+    "category": "referência técnica",
+    "sha256": "2ef7776f67e054054180a03e6d7459d8d8e6fc97c3bbe2c99e27dec70e835657",
+    "bytes": 2969
+  },
+  {
+    "path": "release-and-ops-pipeline/references/smoke-and-healthcheck.md",
+    "category": "referência técnica",
+    "sha256": "4847ca0b004dfd27bc8392fc7151f4ec940e5220726a386d6610ff1f4916673e",
+    "bytes": 3753
+  },
+  {
+    "path": "skill-loader/SKILL.md",
+    "category": "instrução permanente",
+    "sha256": "e572b636b539c5228e4cd6f7016258c88b109d9267cce96bc453e98d6a86ee47",
+    "bytes": 3669
+  },
+  {
+    "path": "task.md",
+    "category": "planejamento e acompanhamento",
+    "sha256": "21bf634c693f6c0ab8b788747120b9b5367ad2c5cdae8b4ba0ab19945dbeb2f6",
+    "bytes": 1668
+  },
+  {
+    "path": "writing-pipeline/SKILL.md",
+    "category": "instrução permanente",
+    "sha256": "29f85917cf83bbd5daf2670c1daeaf1cf3cd7957527a5e63f74edff74ba8ee4a",
+    "bytes": 6373
+  },
+  {
+    "path": "writing-pipeline/references/citations-and-evidence.md",
+    "category": "referência técnica",
+    "sha256": "2b6d4be4a09fd56334405038f4f63af6db090ac4fe0dcf5e611846a8a6a2f9d9",
+    "bytes": 3381
+  },
+  {
+    "path": "writing-pipeline/references/document-types.md",
+    "category": "referência técnica",
+    "sha256": "bf4e3d0d33ade636b398592d8bc49a915fa7b4609952a4f5ef907cd5aa794de7",
+    "bytes": 3031
+  },
+  {
+    "path": "writing-pipeline/references/review-protocol.md",
+    "category": "referência técnica",
+    "sha256": "2e4d95ddc54c6301956755111504186f889e26a2d39d87b8d2f3540c406d4650",
+    "bytes": 1942
+  }
+]

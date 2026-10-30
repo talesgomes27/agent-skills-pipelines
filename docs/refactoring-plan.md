@@ -1,5 +1,7 @@
 # Plano de melhoria mensurável
 
+Registro histórico de 2026-10-22, preservado como evidência das decisões daquela execução. O [roadmap de modernização](audits/modernization-2026-10-28/roadmap.md) é o sucessor para o programa MOD; o estado e a autorização vigentes estão no início de [task.md](../task.md). Aprovações deste registro não autorizam novas ações.
+
 Data: 2026-10-22. Origem: recomendações aceitas pelo usuário.
 
 ## Objetivo e invariantes

@@ -1,0 +1,124 @@
+{
+  "task": "MOD-003",
+  "date": "2026-10-28",
+  "base": "869444d4fd916830b2a8a00ed756134fc031e4ac",
+  "interpreter": "/usr/bin/python3",
+  "python": "3.14.4",
+  "pyyaml": "6.0.3",
+  "baseline": "35 tests passed before implementation",
+  "red_phase": "9 methods; 19 failures and 3 errors against the implementation before MOD-003",
+  "checks": [
+    {
+      "command": "/usr/bin/python3 -B -m unittest discover -s tests -v",
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "f47dc6",
+        "wall_time_seconds": 0.76392139,
+        "exit_code": 0,
+        "original_token_count": 1187,
+        "output": "test_case_identity_types_and_catalog_membership (test_evals.EvalTests.test_case_identity_types_and_catalog_membership) ... ok\ntest_catalog_has_three_kinds_per_skill (test_evals.EvalTests.test_catalog_has_three_kinds_per_skill) ... ok\ntest_coverage_and_evaluation_status_are_separate_from_processing (test_evals.EvalTests.test_coverage_and_evaluation_status_are_separate_from_processing) ... ok\ntest_duplicate_result_is_rejected (test_evals.EvalTests.test_duplicate_result_is_rejected) ... ok\ntest_grade_pass_and_failure (test_evals.EvalTests.test_grade_pass_and_failure) ... ok\ntest_grade_without_metrics_preserves_input_and_quality (test_evals.EvalTests.test_grade_without_metrics_preserves_input_and_quality) ... ok\ntest_invalid_results_return_controlled_errors (test_evals.EvalTests.test_invalid_results_return_controlled_errors) ... ok\ntest_summary_preserves_observed_zero (test_evals.EvalTests.test_summary_preserves_observed_zero) ... ok\ntest_summary_reports_partial_coverage_per_metric_and_condition (test_evals.EvalTests.test_summary_reports_partial_coverage_per_metric_and_condition) ... ok\ntest_doctor_accepts_valid_index (test_library.LibraryTests.test_doctor_accepts_valid_index) ... ok\ntest_doctor_detects_stale_path (test_library.LibraryTests.test_doctor_detects_stale_path) ... ok\ntest_rebuild_is_reviewable_and_preserves_metadata (test_library.LibraryTests.test_rebuild_is_reviewable_and_preserves_metadata) ... ok\ntest_rebuild_requires_explicit_replace_for_source (test_library.LibraryTests.test_rebuild_requires_explicit_replace_for_source) ... ok\ntest_exact_and_search_validate_manifest (test_skill_loader_query.QueryTests.test_exact_and_search_validate_manifest) ... ok\ntest_identity_mismatch_is_rejected (test_skill_loader_query.QueryTests.test_identity_mismatch_is_rejected) ... ok\ntest_installed_copy_works_outside_checkout (test_skill_loader_query.QueryTests.test_installed_copy_works_outside_checkout) ... ok\ntest_invalid_frontmatter_is_rejected_by_exact_and_search (test_skill_loader_query.QueryTests.test_invalid_frontmatter_is_rejected_by_exact_and_search) ... ok\ntest_missing_yaml_dependency_is_reported (test_skill_loader_query.QueryTests.test_missing_yaml_dependency_is_reported) ... ok\ntest_path_and_symlink_escapes_are_rejected (test_skill_loader_query.QueryTests.test_path_and_symlink_escapes_are_rejected) ... ok\ntest_user_configuration_resolves_root (test_skill_loader_query.QueryTests.test_user_configuration_resolves_root) ... ok\ntest_yaml_quoted_and_multiline_values_are_accepted (test_skill_loader_query.QueryTests.test_yaml_quoted_and_multiline_values_are_accepted) ... ok\ntest_agent_project_destinations (test_skills.InstallerTests.test_agent_project_destinations) ... ok\ntest_ambiguous_auto_detection (test_skills.InstallerTests.test_ambiguous_auto_detection) ... ok\ntest_conflict_preflight_preserves_unmanaged_and_no_partial_batch (test_skills.InstallerTests.test_conflict_preflight_preserves_unmanaged_and_no_partial_batch) ... ok\ntest_copy_idempotence_and_isolation (test_skills.InstallerTests.test_copy_idempotence_and_isolation) ... ok\ntest_destination_inside_source_rejected (test_skills.InstallerTests.test_destination_inside_source_rejected) ... ok\ntest_doctor_detects_installed_copy_drift (test_skills.InstallerTests.test_doctor_detects_installed_copy_drift) ... ok\ntest_dry_run_no_destination_writes (test_skills.InstallerTests.test_dry_run_no_destination_writes) ... ok\ntest_explicit_selection_and_unknown_name (test_skills.InstallerTests.test_explicit_selection_and_unknown_name) ... ok\ntest_filtered_manifest_has_only_selected_paths (test_skills.InstallerTests.test_filtered_manifest_has_only_selected_paths) ... ok\ntest_invalid_manifest_and_missing_or_escaping_reference (test_skills.InstallerTests.test_invalid_manifest_and_missing_or_escaping_reference) ... ok\ntest_invalid_yaml_resource_blocks_install (test_skills.InstallerTests.test_invalid_yaml_resource_blocks_install) ... ok\ntest_link_and_switch_to_copy (test_skills.InstallerTests.test_link_and_switch_to_copy) ... ok\ntest_malformed_receipt_preserved (test_skills.InstallerTests.test_malformed_receipt_preserved) ... ok\ntest_receipt_write_failure_restores_previous_package (test_skills.InstallerTests.test_receipt_write_failure_restores_previous_package) ... ok\ntest_release_change_requires_managed_update (test_skills.InstallerTests.test_release_change_requires_managed_update) ... ok\ntest_update_requires_flag_and_preserves_local_changes (test_skills.InstallerTests.test_update_requires_flag_and_preserves_local_changes) ... ok\ntest_user_scope_in_isolated_home (test_skills.InstallerTests.test_user_scope_in_isolated_home) ... ok\n\n----------------------------------------------------------------------\nRan 38 tests in 0.665s\n\nOK\n"
+      }
+    },
+    {
+      "command": "/usr/bin/python3 -B scripts/skills.py doctor",
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "f4593e",
+        "wall_time_seconds": 0.069443514,
+        "exit_code": 0,
+        "original_token_count": 359,
+        "output": "{\n  \"root\": \"/home/tales/Documentos/github/antigravity-meta-skills\",\n  \"checks\": [\n    {\n      \"skill\": \"pre-code-pipeline\",\n      \"status\": \"pass\",\n      \"characters\": 8913,\n      \"integrity\": \"structure-only\",\n      \"source_release\": \"1.0.1\"\n    },\n    {\n      \"skill\": \"execution-pipeline\",\n      \"status\": \"pass\",\n      \"characters\": 8834,\n      \"integrity\": \"structure-only\",\n      \"source_release\": \"1.0.1\"\n    },\n    {\n      \"skill\": \"writing-pipeline\",\n      \"status\": \"pass\",\n      \"characters\": 6147,\n      \"integrity\": \"structure-only\",\n      \"source_release\": \"1.0.1\"\n    },\n    {\n      \"skill\": \"audit-and-refactoring-pipeline\",\n      \"status\": \"pass\",\n      \"characters\": 9417,\n      \"integrity\": \"structure-only\",\n      \"source_release\": \"1.0.1\"\n    },\n    {\n      \"skill\": \"release-and-ops-pipeline\",\n      \"status\": \"pass\",\n      \"characters\": 8584,\n      \"integrity\": \"structure-only\",\n      \"source_release\": \"1.0.1\"\n    },\n    {\n      \"skill\": \"quarto-expert\",\n      \"status\": \"pass\",\n      \"characters\": 6857,\n      \"integrity\": \"structure-only\",\n      \"source_release\": \"1.0.1\"\n    },\n    {\n      \"skill\": \"humanizer\",\n      \"status\": \"pass\",\n      \"characters\": 3366,\n      \"integrity\": \"structure-only\",\n      \"source_release\": \"1.0.1\"\n    },\n    {\n      \"skill\": \"skill-loader\",\n      \"status\": \"pass\",\n      \"characters\": 4110,\n      \"integrity\": \"structure-only\",\n      \"source_release\": \"1.0.1\"\n    }\n  ]\n}\n"
+      }
+    },
+    {
+      "command": "/usr/bin/python3 -B scripts/evals.py validate",
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "609968",
+        "wall_time_seconds": 0.012979918,
+        "exit_code": 0,
+        "original_token_count": 32,
+        "output": "{\n  \"status\": \"pass\",\n  \"cases\": 24,\n  \"skills\": 8,\n  \"kinds\": {\n    \"positive\": 8,\n    \"ambiguous\": 8,\n    \"negative\": 8\n  }\n}\n"
+      }
+    },
+    {
+      "command": "/usr/bin/python3 -B quarto-expert/scripts/doctor.py",
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "d5fcd4",
+        "wall_time_seconds": 0.050445007,
+        "exit_code": 0,
+        "original_token_count": 1704,
+        "output": "{\n  \"skill\": \"quarto-expert\",\n  \"root\": \"/home/tales/Documentos/github/antigravity-meta-skills/quarto-expert\",\n  \"checks\": [\n    {\n      \"check\": \"manifest\",\n      \"status\": \"pass\",\n      \"detail\": \"/home/tales/Documentos/github/antigravity-meta-skills/quarto-expert/SKILL.md\"\n    },\n    {\n      \"check\": \"resource:references/yaml-front-matter.md\",\n      \"status\": \"pass\",\n      \"detail\": \"/home/tales/Documentos/github/antigravity-meta-skills/quarto-expert/references/yaml-front-matter.md\"\n    },\n    {\n      \"check\": \"resource:references/engines.md\",\n      \"status\": \"pass\",\n      \"detail\": \"/home/tales/Documentos/github/antigravity-meta-skills/quarto-expert/references/engines.md\"\n    },\n    {\n      \"check\": \"resource:references/code-cells.md\",\n      \"status\": \"pass\",\n      \"detail\": \"/home/tales/Documentos/github/antigravity-meta-skills/quarto-expert/references/code-cells.md\"\n    },\n    {\n      \"check\": \"resource:references/cross-references.md\",\n      \"status\": \"pass\",\n      \"detail\": \"/home/tales/Documentos/github/antigravity-meta-skills/quarto-expert/references/cross-references.md\"\n    },\n    {\n      \"check\": \"resource:references/citations.md\",\n      \"status\": \"pass\",\n      \"detail\": \"/home/tales/Documentos/github/antigravity-meta-skills/quarto-expert/references/citations.md\"\n    },\n    {\n      \"check\": \"resource:references/figures.md\",\n      \"status\": \"pass\",\n      \"detail\": \"/home/tales/Documentos/github/antigravity-meta-skills/quarto-expert/references/figures.md\"\n    },\n    {\n      \"check\": \"resource:references/tables.md\",\n      \"status\": \"pass\",\n      \"detail\": \"/home/tales/Documentos/github/antigravity-meta-skills/quarto-expert/references/tables.md\"\n    },\n    {\n      \"check\": \"resource:references/layout.md\",\n      \"status\": \"pass\",\n      \"detail\": \"/home/tales/Documentos/github/antigravity-meta-skills/quarto-expert/references/layout.md\"\n    },\n    {\n      \"check\": \"resource:references/callouts.md\",\n      \"status\": \"pass\",\n      \"detail\": \"/home/tales/Documentos/github/antigravity-meta-skills/quarto-expert/references/callouts.md\"\n    },\n    {\n      \"check\": \"resource:references/diagrams.md\",\n      \"status\": \"pass\",\n      \"detail\": \"/home/tales/Documentos/github/antigravity-meta-skills/quarto-expert/references/diagrams.md\"\n    },\n    {\n      \"check\": \"resource:references/divs-and-spans.md\",\n      \"status\": \"pass\",\n      \"detail\": \"/home/tales/Documentos/github/antigravity-meta-skills/quarto-expert/references/divs-and-spans.md\"\n    },\n    {\n      \"check\": \"resource:references/brand-yml.md\",\n      \"status\": \"pass\",\n      \"detail\": \"/home/tales/Documentos/github/antigravity-meta-skills/quarto-expert/references/brand-yml.md\"\n    },\n    {\n      \"check\": \"resource:references/alt-text.md\",\n      \"status\": \"pass\",\n      \"detail\": \"/home/tales/Documentos/github/antigravity-meta-skills/quarto-expert/references/alt-text.md\"\n    },\n    {\n      \"check\": \"resource:references/typst-and-templates.md\",\n      \"status\": \"pass\",\n      \"detail\": \"/home/tales/Documentos/github/antigravity-meta-skills/quarto-expert/references/typst-and-templates.md\"\n    },\n    {\n      \"check\": \"resource:references/abnt-thesis-guide.md\",\n      \"status\": \"pass\",\n      \"detail\": \"/home/tales/Documentos/github/antigravity-meta-skills/quarto-expert/references/abnt-thesis-guide.md\"\n    },\n    {\n      \"check\": \"resource:references/conversion-rmarkdown.md\",\n      \"status\": \"pass\",\n      \"detail\": \"/home/tales/Documentos/github/antigravity-meta-skills/quarto-expert/references/conversion-rmarkdown.md\"\n    },\n    {\n      \"check\": \"resource:references/conversion-jupyter.md\",\n      \"status\": \"pass\",\n      \"detail\": \"/home/tales/Documentos/github/antigravity-meta-skills/quarto-expert/references/conversion-jupyter.md\"\n    },\n    {\n      \"check\": \"resource:references/conversion-bookdown.md\",\n      \"status\": \"pass\",\n      \"detail\": \"/home/tales/Documentos/github/antigravity-meta-skills/quarto-expert/references/conversion-bookdown.md\"\n    },\n    {\n      \"check\": \"resource:references/conversion-blogdown.md\",\n      \"status\": \"pass\",\n      \"detail\": \"/home/tales/Documentos/github/antigravity-meta-skills/quarto-expert/references/conversion-blogdown.md\"\n    },\n    {\n      \"check\": \"resource:references/conversion-distill.md\",\n      \"status\": \"pass\",\n      \"detail\": \"/home/tales/Documentos/github/antigravity-meta-skills/quarto-expert/references/conversion-distill.md\"\n    },\n    {\n      \"check\": \"resource:references/conversion-xaringan.md\",\n      \"status\": \"pass\",\n      \"detail\": \"/home/tales/Documentos/github/antigravity-meta-skills/quarto-expert/references/conversion-xaringan.md\"\n    },\n    {\n      \"check\": \"resource:references/extensions.md\",\n      \"status\": \"pass\",\n      \"detail\": \"/home/tales/Documentos/github/antigravity-meta-skills/quarto-expert/references/extensions.md\"\n    },\n    {\n      \"check\": \"resource:references/shortcodes.md\",\n      \"status\": \"pass\",\n      \"detail\": \"/home/tales/Documentos/github/antigravity-meta-skills/quarto-expert/references/shortcodes.md\"\n    },\n    {\n      \"check\": \"resource:references/conditional-content.md\",\n      \"status\": \"pass\",\n      \"detail\": \"/home/tales/Documentos/github/antigravity-meta-skills/quarto-expert/references/conditional-content.md\"\n    },\n    {\n      \"check\": \"resource:references/markdown-linting.md\",\n      \"status\": \"pass\",\n      \"detail\": \"/home/tales/Documentos/github/antigravity-meta-skills/quarto-expert/references/markdown-linting.md\"\n    },\n    {\n      \"check\": \"resource:examples/minimal-report/index.qmd\",\n      \"status\": \"pass\",\n      \"detail\": \"/home/tales/Documentos/github/antigravity-meta-skills/quarto-expert/examples/minimal-report/index.qmd\"\n    },\n    {\n      \"check\": \"resource:examples/abnt-thesis-starter/README.md\",\n      \"status\": \"pass\",\n      \"detail\": \"/home/tales/Documentos/github/antigravity-meta-skills/quarto-expert/examples/abnt-thesis-starter/README.md\"\n    },\n    {\n      \"check\": \"resource:examples/manuscript-binder/README.md\",\n      \"status\": \"pass\",\n      \"detail\": \"/home/tales/Documentos/github/antigravity-meta-skills/quarto-expert/examples/manuscript-binder/README.md\"\n    },\n    {\n      \"check\": \"resource:scripts/doctor.py\",\n      \"status\": \"pass\",\n      \"detail\": \"/home/tales/Documentos/github/antigravity-meta-skills/quarto-expert/scripts/doctor.py\"\n    },\n    {\n      \"check\": \"frontmatter\",\n      \"status\": \"pass\",\n      \"detail\": \"Required fields parsed\"\n    },\n    {\n      \"check\": \"yaml:examples/abnt-thesis-starter/_quarto.yml\",\n      \"status\": \"pass\",\n      \"detail\": \"Syntax only\"\n    },\n    {\n      \"check\": \"yaml:examples/manuscript-binder/_quarto.yml\",\n      \"status\": \"pass\",\n      \"detail\": \"Syntax only\"\n    },\n    {\n      \"check\": \"yaml:examples/minimal-report/_quarto.yml\",\n      \"status\": \"pass\",\n      \"detail\": \"Syntax only\"\n    }\n  ],\n  \"exit_code\": 0\n}\n"
+      }
+    },
+    {
+      "command": "git diff --check",
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "8ede1f",
+        "wall_time_seconds": 2.7308e-05,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      }
+    }
+  ],
+  "cli_smoke": [
+    {
+      "scenario": "empty",
+      "exit": 0,
+      "status": "processed",
+      "evaluation": "incomplete",
+      "expected": 48,
+      "observed": 0,
+      "complete": false,
+      "stderr": "",
+      "input_preserved": true
+    },
+    {
+      "scenario": "partial",
+      "exit": 0,
+      "status": "processed",
+      "evaluation": "incomplete",
+      "expected": 48,
+      "observed": 1,
+      "complete": false,
+      "stderr": "",
+      "input_preserved": true
+    },
+    {
+      "scenario": "complete",
+      "exit": 0,
+      "status": "processed",
+      "evaluation": "passed",
+      "expected": 48,
+      "observed": 48,
+      "complete": true,
+      "stderr": "",
+      "input_preserved": true
+    },
+    {
+      "scenario": "failed",
+      "exit": 0,
+      "status": "processed",
+      "evaluation": "failed",
+      "expected": 48,
+      "observed": 48,
+      "complete": true,
+      "stderr": "",
+      "input_preserved": true
+    },
+    {
+      "scenario": "invalid",
+      "exit": 1,
+      "status": "fail",
+      "evaluation": null,
+      "expected": null,
+      "observed": null,
+      "complete": null,
+      "stderr": "",
+      "input_preserved": true
+    }
+  ]
+}

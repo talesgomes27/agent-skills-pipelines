@@ -10,7 +10,8 @@ Produza o formato solicitado preservando conteúdo, resultados, estrutura e ambi
 ## Entrada e diagnóstico
 
 - Identifique alvo, idioma, tipo de projeto, formatos e operação: autoria, configuração, erro ou migração. Leia instruções locais e conteúdo existente antes de editar.
-- Descubra Quarto no PATH ou caminho explicitamente configurado e registre `quarto --version`. Não adote um perfil pessoal nem instale runtimes globais para iniciar a inspeção.
+- Descubra Quarto no PATH ou caminho explicitamente configurado. Quando a execução estiver autorizada, registre `quarto --version`; a presença do arquivo não comprova funcionamento. Preserve perfis e runtimes globais.
+- Sem autorização de rede, comece com o inventário [offline](references/offline-diagnostics.md): `python3 <raiz-da-skill>/scripts/offline_probe.py`. Ele apenas consulta arquivos locais. `quarto tools` consulta versões remotas, mesmo sem instalar; exige autorização de rede. Para executar diagnóstico ou render sob proibição de rede, use contenção técnica previamente validada e registro de tentativas; DNS indisponível não é contenção.
 - Leia configuração, perfis, `_metadata.yml`, YAML do documento, extensões e manifests pertinentes. Use `quarto inspect <alvo>` quando disponível para conferir configuração/engine efetivos; inspeção não comprova renderização.
 - Antes de executar, examine células, filtros e scripts pré/pós-render. Render/preview pode executar código, escrever caches e acessar rede. Preserve fontes brutas e alterações do usuário; use ambiente/destino controlados no escopo autorizado.
 - Pergunte apenas se faltar formato, requisito ou autorização indispensável. HTML não exige PDF adicional; corrigir sintaxe não autoriza migrar ambiente, instalar hooks ou publicar.

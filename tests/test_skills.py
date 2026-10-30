@@ -135,6 +135,89 @@ class InstallerTests(unittest.TestCase):
             self.assertEqual(self.install('--skill', 'alpha', '--update')[0], 1)
         self.assertEqual((self.dest / 'alpha/references/guide.md').read_text(), before)
 
+    def test_second_receipt_failure_preserves_partial_update_and_retry(self):
+        self.assertEqual(self.install('--all')[0], 0)
+        before = cli.state_at(self.dest)
+        marker = self.dest / 'user.txt'
+        marker.write_text('preserve user data')
+        catalog = self.repo / 'distribution/catalog.json'
+        data = json.loads(catalog.read_text())
+        data['release'] = '1.1.0'
+        catalog.write_text(json.dumps(data))
+        for name in self.names:
+            (self.repo / name / 'references/guide.md').write_text('Updated ' + name)
+        replace = cli.os.replace
+        writes = []
+
+        def fail_second_receipt(source, destination):
+            if Path(destination) == self.dest / cli.STATE:
+                writes.append(destination)
+                if len(writes) == 2:
+                    raise OSError('second receipt disk failure')
+            return replace(source, destination)
+
+        with patch.object(cli.os, 'replace', side_effect=fail_second_receipt):
+            code, result = self.install('--all', '--update')
+        self.assertEqual(code, 1)
+        self.assertIn('second receipt disk failure', result['error'])
+        self.assertEqual(len(writes), 2)
+        partial = cli.state_at(self.dest)
+        self.assertEqual(partial['skills']['alpha']['release'], '1.1.0')
+        self.assertEqual(partial['skills']['alpha']['files'], cli.fingerprint(self.dest / 'alpha'))
+        self.assertEqual(partial['skills']['beta'], before['skills']['beta'])
+        self.assertEqual(partial['skills']['beta']['files'], cli.fingerprint(self.dest / 'beta'))
+        self.assertEqual((self.dest / 'alpha/references/guide.md').read_text(), 'Updated alpha')
+        self.assertEqual((self.dest / 'beta/references/guide.md').read_text(), 'Useful detail\n')
+        self.assertEqual(marker.read_text(), 'preserve user data')
+        self.assertFalse(list(self.dest.glob('.meta-skills-stage-*')))
+        self.assertFalse(list(self.dest.glob('.meta-skills-state-*')))
+        code, diagnosis = self.run_cli('doctor', '--destination', str(self.dest), '--all')
+        self.assertEqual(code, 0)
+        self.assertEqual([c['update_available'] for c in diagnosis['checks']], [False, True])
+        code, retried = self.install('--all', '--update')
+        self.assertEqual(code, 0)
+        self.assertEqual([p['action'] for p in retried['plan']], ['unchanged', 'update'])
+        for name in self.names:
+            receipt = cli.state_at(self.dest)['skills'][name]
+            self.assertEqual(receipt['release'], '1.1.0')
+            self.assertEqual(receipt['files'], cli.fingerprint(self.dest / name))
+            self.assertEqual((self.dest / name / 'references/guide.md').read_text(), 'Updated ' + name)
+        self.assertEqual(marker.read_text(), 'preserve user data')
+
+    def test_second_link_receipt_failure_keeps_first_install_and_retry(self):
+        try:
+            (self.root / 'probe').symlink_to(self.repo, target_is_directory=True)
+        except OSError:
+            self.skipTest('Host cannot create symlinks')
+        replace = cli.os.replace
+        writes = []
+
+        def fail_second_receipt(source, destination):
+            writes.append(destination)
+            if len(writes) == 2:
+                raise OSError('second link receipt disk failure')
+            return replace(source, destination)
+
+        with patch.object(cli.os, 'replace', side_effect=fail_second_receipt):
+            self.assertEqual(self.install('--all', '--mode', 'link')[0], 1)
+        self.assertEqual(len(writes), 2)
+        self.assertTrue((self.dest / 'alpha').is_symlink())
+        self.assertEqual((self.dest / 'alpha').resolve(), (self.repo / 'alpha').resolve())
+        self.assertFalse((self.dest / 'beta').exists())
+        self.assertFalse((self.dest / 'beta').is_symlink())
+        self.assertEqual(set(cli.state_at(self.dest)['skills']), {'alpha'})
+        self.assertFalse(list(self.dest.glob('.meta-skills-stage-*')))
+        self.assertFalse(list(self.dest.glob('.meta-skills-state-*')))
+        self.assertEqual(self.run_cli('doctor', '--destination', str(self.dest), '--skill', 'alpha')[0], 0)
+        code, retried = self.install('--all', '--mode', 'link')
+        self.assertEqual(code, 0)
+        self.assertEqual([p['action'] for p in retried['plan']], ['unchanged', 'install'])
+        self.assertEqual(set(cli.state_at(self.dest)['skills']), set(self.names))
+        for name in self.names:
+            self.assertTrue((self.dest / name).is_symlink())
+            self.assertEqual((self.dest / name).resolve(), (self.repo / name).resolve())
+        self.assertEqual(self.run_cli('doctor', '--destination', str(self.dest), '--all')[0], 0)
+
     def test_doctor_detects_installed_copy_drift(self):
         self.assertEqual(self.install('--skill', 'alpha')[0], 0)
         (self.dest / 'alpha/references/guide.md').write_text('Modified after install')
@@ -165,6 +248,46 @@ class InstallerTests(unittest.TestCase):
         (self.dest / cli.STATE).write_text('[]')
         self.assertEqual(self.install('--skill', 'alpha')[0], 1)
         self.assertEqual((self.dest / cli.STATE).read_text(), '[]')
+
+    def test_reference_links_are_relative_to_the_reference_and_check_installed_copy(self):
+        refs = self.repo / 'alpha/references'
+        (refs / 'nested').mkdir()
+        (refs / 'guide.md').write_text('[Details](nested/detail.md#section)\n[Local](#section)\n')
+        (refs / 'nested/detail.md').write_text('# Section\n[Back](../guide.md)\n')
+        self.assertEqual(self.install('--skill', 'alpha')[0], 0)
+        self.assertEqual(self.run_cli('doctor', '--destination', str(self.dest), '--skill', 'alpha')[0], 0)
+        (refs / 'nested/detail.md').write_text('[Missing](missing.md)\n')
+        self.assertEqual(self.install('--skill', 'alpha', '--update')[0], 1)
+
+    def test_reference_broken_or_escaping_link_blocks_install_and_doctor(self):
+        guide = self.repo / 'alpha/references/guide.md'
+        for link in ('missing.md', '../../beta/SKILL.md', '%2e%2e/%2e%2e/beta/SKILL.md'):
+            with self.subTest(link=link):
+                guide.write_text('[Broken](' + link + ')\n')
+                self.assertEqual(self.install('--skill', 'alpha')[0], 1)
+                self.assertEqual(self.run_cli('doctor', '--skill', 'alpha')[0], 1)
+                self.assertFalse(self.dest.exists())
+
+    def test_code_examples_and_history_do_not_block_reference_checks(self):
+        guide = self.repo / 'alpha/references/guide.md'
+        guide.write_text('```md\n[Example](missing.md)\n```\n'
+                         '~~~markdown\n[Example](missing-too.md)\n~~~\n'
+                         '`[Inline](not-a-resource.md)`\n[External](https://example.com)\n')
+        for relative in ('docs/audits/legacy/alpha/SKILL.md',
+                         'docs/audits/proposals/alpha/SKILL.md',
+                         'alpha/examples/README.md'):
+            path = self.repo / relative
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text('[Historical or illustrative](missing.md)\n')
+        self.assertEqual(self.run_cli('doctor', '--skill', 'alpha')[0], 0)
+        self.assertEqual(self.install('--skill', 'alpha')[0], 0)
+
+    def test_readme_release_matches_catalog(self):
+        repo = Path(__file__).resolve().parents[1]
+        release = cli.read_json(repo / 'distribution/catalog.json')['release']
+        readme = (repo / 'README.md').read_text(encoding='utf-8')
+        self.assertIn('Candidata: **' + release + '**, ainda não publicada.', readme)
+        self.assertIn('candidate-' + release + '-blue.svg', readme)
 
 
 if __name__ == '__main__':

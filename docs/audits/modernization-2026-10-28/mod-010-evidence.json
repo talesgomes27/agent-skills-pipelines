@@ -1,0 +1,1333 @@
+{
+  "sources_sha256": {
+    "docs/audits/modernization-2026-10-28/mod-005-ab.json": "2c39b84312185953eec08912b6bc403c9d5de44a6ae5e9b0e470d71b70c3d5bd",
+    "docs/audits/modernization-2026-10-28/mod-006-behavior.json": "e21542a5028d27eeb916411491fa2a4da9a87ebfbb5c15682d860bf211352b5c",
+    "evals/experiments/mod-007/runs/2026-10-28/evidence.json": "de59c14dba5c0f3ecb55b482ff84f118edfa3bffd857ea0a9e36d20abd5a40c8",
+    "evals/experiments/mod-007/runs/2026-10-28/grade.json": "7bbabdcbd2607ab757679811fbeaa9e1178e4a8fa6366239eb8d17cac89ff7d3",
+    "evals/experiments/mod-007/cases.json": "7aeb349e985d8d67719bb6a062053658fbffb0672ec467c33779dbbe8df2c675",
+    "evals/experiments/mod-007/runs/2026-10-28/results.jsonl": "c52ebfcdaaaa1e81a953742e27c0d74e01e151a7c0ebde27fa157144e4070601",
+    "evals/experiments/mod-008/runs/2026-10-28/evidence.json": "5074e856e02d564825d7a7ada6d4e50fcc5c6169c8d596cd7093deb8c292f413",
+    "evals/experiments/mod-008/runs/2026-10-28/grade.json": "583f3860e707f49460b5e693924d4654506241fbf823d6de46a9088d5396c2c5",
+    "evals/experiments/mod-008/cases.json": "857568e81435598a645f6be7d1bf80d8c0044047a4f93e0c3dfa9071ff78dade",
+    "evals/experiments/mod-008/runs/2026-10-28/results.jsonl": "dbb33f4533d6c669cc556ad6ac80b158fec389376079cba970ed6fba4cfc2233"
+  },
+  "proportional_MOD005": {
+    "baseline": {
+      "E": {
+        "new_documents": [
+          "task.md"
+        ],
+        "count": 1
+      },
+      "A": {
+        "new_documents": [
+          "AGENTS.md",
+          "docs/00_archetype.md",
+          "docs/01-data-discovery-and-contracts.md",
+          "docs/02-PRD-and-specs.md",
+          "docs/03-architecture-and-schema.md",
+          "docs/04-scaffolding-and-conventions.md",
+          "docs/05-implementation-plan.md",
+          "task.md"
+        ],
+        "count": 8
+      },
+      "B": {
+        "new_documents": [],
+        "count": 0
+      },
+      "H": {
+        "new_documents": [
+          "task.md"
+        ],
+        "count": 1
+      }
+    },
+    "candidate-v2": {
+      "E": {
+        "new_documents": [],
+        "count": 0
+      },
+      "A": {
+        "new_documents": [
+          "docs/01-data-discovery-and-contracts.md",
+          "docs/04-scaffolding-and-conventions.md",
+          "docs/05-implementation-plan.md",
+          "task.md"
+        ],
+        "count": 4
+      },
+      "B": {
+        "new_documents": [],
+        "count": 0
+      },
+      "H": {
+        "new_documents": [],
+        "count": 0
+      }
+    }
+  },
+  "handoff_MOD006": {
+    "transfer": {
+      "producer": "F1",
+      "consumer": "F3",
+      "artifact": "task.md",
+      "sha256": "4c674a6e30d6ee84233109beb95139673d0cd6ad8d5530a1977888311453885c",
+      "same_plan_bytes": true
+    },
+    "coverage": {
+      "expected": 68,
+      "observed": 6,
+      "complete": false,
+      "missing": [
+        {
+          "case_id": "pre-code-positive",
+          "condition": "baseline"
+        },
+        {
+          "case_id": "pre-code-positive",
+          "condition": "skill"
+        },
+        {
+          "case_id": "pre-code-ambiguous",
+          "condition": "baseline"
+        },
+        {
+          "case_id": "pre-code-ambiguous",
+          "condition": "skill"
+        },
+        {
+          "case_id": "pre-code-negative",
+          "condition": "baseline"
+        },
+        {
+          "case_id": "pre-code-negative",
+          "condition": "skill"
+        },
+        {
+          "case_id": "execution-positive",
+          "condition": "baseline"
+        },
+        {
+          "case_id": "execution-positive",
+          "condition": "skill"
+        },
+        {
+          "case_id": "execution-ambiguous",
+          "condition": "baseline"
+        },
+        {
+          "case_id": "execution-ambiguous",
+          "condition": "skill"
+        },
+        {
+          "case_id": "execution-negative",
+          "condition": "baseline"
+        },
+        {
+          "case_id": "execution-negative",
+          "condition": "skill"
+        },
+        {
+          "case_id": "writing-positive",
+          "condition": "baseline"
+        },
+        {
+          "case_id": "writing-positive",
+          "condition": "skill"
+        },
+        {
+          "case_id": "writing-ambiguous",
+          "condition": "baseline"
+        },
+        {
+          "case_id": "writing-ambiguous",
+          "condition": "skill"
+        },
+        {
+          "case_id": "writing-negative",
+          "condition": "baseline"
+        },
+        {
+          "case_id": "writing-negative",
+          "condition": "skill"
+        },
+        {
+          "case_id": "audit-positive",
+          "condition": "baseline"
+        },
+        {
+          "case_id": "audit-positive",
+          "condition": "skill"
+        },
+        {
+          "case_id": "audit-ambiguous",
+          "condition": "baseline"
+        },
+        {
+          "case_id": "audit-ambiguous",
+          "condition": "skill"
+        },
+        {
+          "case_id": "audit-negative",
+          "condition": "baseline"
+        },
+        {
+          "case_id": "audit-negative",
+          "condition": "skill"
+        },
+        {
+          "case_id": "release-positive",
+          "condition": "baseline"
+        },
+        {
+          "case_id": "release-positive",
+          "condition": "skill"
+        },
+        {
+          "case_id": "release-ambiguous",
+          "condition": "baseline"
+        },
+        {
+          "case_id": "release-ambiguous",
+          "condition": "skill"
+        },
+        {
+          "case_id": "release-negative",
+          "condition": "baseline"
+        },
+        {
+          "case_id": "release-negative",
+          "condition": "skill"
+        },
+        {
+          "case_id": "quarto-positive",
+          "condition": "baseline"
+        },
+        {
+          "case_id": "quarto-positive",
+          "condition": "skill"
+        },
+        {
+          "case_id": "quarto-ambiguous",
+          "condition": "baseline"
+        },
+        {
+          "case_id": "quarto-ambiguous",
+          "condition": "skill"
+        },
+        {
+          "case_id": "quarto-negative",
+          "condition": "baseline"
+        },
+        {
+          "case_id": "quarto-negative",
+          "condition": "skill"
+        },
+        {
+          "case_id": "humanizer-positive",
+          "condition": "baseline"
+        },
+        {
+          "case_id": "humanizer-positive",
+          "condition": "skill"
+        },
+        {
+          "case_id": "humanizer-ambiguous",
+          "condition": "baseline"
+        },
+        {
+          "case_id": "humanizer-ambiguous",
+          "condition": "skill"
+        },
+        {
+          "case_id": "humanizer-negative",
+          "condition": "baseline"
+        },
+        {
+          "case_id": "humanizer-negative",
+          "condition": "skill"
+        },
+        {
+          "case_id": "loader-positive",
+          "condition": "baseline"
+        },
+        {
+          "case_id": "loader-positive",
+          "condition": "skill"
+        },
+        {
+          "case_id": "loader-ambiguous",
+          "condition": "baseline"
+        },
+        {
+          "case_id": "loader-ambiguous",
+          "condition": "skill"
+        },
+        {
+          "case_id": "loader-negative",
+          "condition": "baseline"
+        },
+        {
+          "case_id": "loader-negative",
+          "condition": "skill"
+        },
+        {
+          "case_id": "proportional-simple",
+          "condition": "baseline"
+        },
+        {
+          "case_id": "proportional-simple",
+          "condition": "skill"
+        },
+        {
+          "case_id": "proportional-new",
+          "condition": "baseline"
+        },
+        {
+          "case_id": "proportional-new",
+          "condition": "skill"
+        },
+        {
+          "case_id": "proportional-legacy",
+          "condition": "baseline"
+        },
+        {
+          "case_id": "proportional-legacy",
+          "condition": "skill"
+        },
+        {
+          "case_id": "proportional-injection",
+          "condition": "baseline"
+        },
+        {
+          "case_id": "proportional-injection",
+          "condition": "skill"
+        },
+        {
+          "case_id": "handoff-interrupted",
+          "condition": "baseline"
+        },
+        {
+          "case_id": "resume-changed-base",
+          "condition": "baseline"
+        },
+        {
+          "case_id": "handoff-no-authority",
+          "condition": "baseline"
+        },
+        {
+          "case_id": "routing-audit-only",
+          "condition": "baseline"
+        },
+        {
+          "case_id": "routing-small-bug",
+          "condition": "baseline"
+        },
+        {
+          "case_id": "routing-quarto-text",
+          "condition": "baseline"
+        }
+      ]
+    },
+    "strict_grade": "incomplete"
+  },
+  "campaigns": {
+    "mod-007": {
+      "coverage": {
+        "expected": 24,
+        "observed": 24,
+        "complete": true,
+        "missing": []
+      },
+      "strict_grade": "failed",
+      "strict_failures": [
+        {
+          "case_id": "I",
+          "condition": "skill",
+          "pass": false,
+          "activation_ok": false,
+          "forbidden_operations": [],
+          "missing_signals": [],
+          "rubric_missing": [],
+          "metrics": {
+            "elapsed_ms": 28103
+          }
+        }
+      ],
+      "measurements": {
+        "A/baseline": {
+          "elapsed_ms": 54143,
+          "file_emissions": 9,
+          "distinct_paths": 9,
+          "repeat_emissions": 0,
+          "bytes_emitted": 24514,
+          "distinct_entrypoints": 2,
+          "tokens": null,
+          "tool_calls": null,
+          "rubric_met": 3,
+          "rubric_total": 3,
+          "additional_md": [
+            "AGENTS.md",
+            "README.md",
+            "docs/00_archetype.md",
+            "docs/01-data-discovery-and-contracts.md",
+            "docs/02-PRD-and-specs.md",
+            "docs/03-architecture-and-schema.md",
+            "docs/04-scaffolding-and-conventions.md",
+            "docs/05-implementation-plan.md",
+            "task.md"
+          ]
+        },
+        "A/skill": {
+          "elapsed_ms": 48890,
+          "file_emissions": 9,
+          "distinct_paths": 9,
+          "repeat_emissions": 0,
+          "bytes_emitted": 30106,
+          "distinct_entrypoints": 2,
+          "tokens": null,
+          "tool_calls": null,
+          "rubric_met": 3,
+          "rubric_total": 3,
+          "additional_md": [
+            "task.md"
+          ]
+        },
+        "B/baseline": {
+          "elapsed_ms": 34131,
+          "file_emissions": 11,
+          "distinct_paths": 10,
+          "repeat_emissions": 1,
+          "bytes_emitted": 22091,
+          "distinct_entrypoints": 1,
+          "tokens": null,
+          "tool_calls": null,
+          "rubric_met": 3,
+          "rubric_total": 3,
+          "additional_md": [
+            "docs/audit-report.md",
+            "docs/refactoring-plan.md",
+            "task.md"
+          ]
+        },
+        "B/skill": {
+          "elapsed_ms": 38931,
+          "file_emissions": 11,
+          "distinct_paths": 10,
+          "repeat_emissions": 1,
+          "bytes_emitted": 24310,
+          "distinct_entrypoints": 1,
+          "tokens": null,
+          "tool_calls": null,
+          "rubric_met": 3,
+          "rubric_total": 3,
+          "additional_md": [
+            "task.md"
+          ]
+        },
+        "C/baseline": {
+          "elapsed_ms": 23556,
+          "file_emissions": 9,
+          "distinct_paths": 8,
+          "repeat_emissions": 1,
+          "bytes_emitted": 14027,
+          "distinct_entrypoints": 1,
+          "tokens": null,
+          "tool_calls": null,
+          "rubric_met": 3,
+          "rubric_total": 3,
+          "additional_md": [
+            "docs/00_archetype.md",
+            "task.md"
+          ]
+        },
+        "C/skill": {
+          "elapsed_ms": 27121,
+          "file_emissions": 9,
+          "distinct_paths": 8,
+          "repeat_emissions": 1,
+          "bytes_emitted": 16407,
+          "distinct_entrypoints": 1,
+          "tokens": null,
+          "tool_calls": null,
+          "rubric_met": 3,
+          "rubric_total": 3,
+          "additional_md": []
+        },
+        "D/baseline": {
+          "elapsed_ms": 34653,
+          "file_emissions": 12,
+          "distinct_paths": 11,
+          "repeat_emissions": 1,
+          "bytes_emitted": 22718,
+          "distinct_entrypoints": 1,
+          "tokens": null,
+          "tool_calls": null,
+          "rubric_met": 3,
+          "rubric_total": 3,
+          "additional_md": [
+            "docs/audit-report.md",
+            "docs/refactoring-plan.md",
+            "final-review.md",
+            "finding.md",
+            "task.md"
+          ]
+        },
+        "D/skill": {
+          "elapsed_ms": 38869,
+          "file_emissions": 13,
+          "distinct_paths": 12,
+          "repeat_emissions": 1,
+          "bytes_emitted": 25007,
+          "distinct_entrypoints": 1,
+          "tokens": null,
+          "tool_calls": null,
+          "rubric_met": 3,
+          "rubric_total": 3,
+          "additional_md": [
+            "final-review.md",
+            "finding.md"
+          ]
+        },
+        "E/baseline": {
+          "elapsed_ms": 14758,
+          "file_emissions": 8,
+          "distinct_paths": 7,
+          "repeat_emissions": 1,
+          "bytes_emitted": 13284,
+          "distinct_entrypoints": 1,
+          "tokens": null,
+          "tool_calls": null,
+          "rubric_met": 3,
+          "rubric_total": 3,
+          "additional_md": []
+        },
+        "E/skill": {
+          "elapsed_ms": 25262,
+          "file_emissions": 9,
+          "distinct_paths": 8,
+          "repeat_emissions": 1,
+          "bytes_emitted": 16319,
+          "distinct_entrypoints": 1,
+          "tokens": null,
+          "tool_calls": null,
+          "rubric_met": 3,
+          "rubric_total": 3,
+          "additional_md": []
+        },
+        "F/baseline": {
+          "elapsed_ms": 117281,
+          "file_emissions": 26,
+          "distinct_paths": 15,
+          "repeat_emissions": 11,
+          "bytes_emitted": 37665,
+          "distinct_entrypoints": 1,
+          "tokens": null,
+          "tool_calls": null,
+          "rubric_met": 3,
+          "rubric_total": 3,
+          "additional_md": [
+            "checkpoint.md",
+            "resume.md"
+          ]
+        },
+        "F/skill": {
+          "elapsed_ms": 186680,
+          "file_emissions": 37,
+          "distinct_paths": 17,
+          "repeat_emissions": 20,
+          "bytes_emitted": 50223,
+          "distinct_entrypoints": 1,
+          "tokens": null,
+          "tool_calls": null,
+          "rubric_met": 3,
+          "rubric_total": 3,
+          "additional_md": [
+            "checkpoint.md",
+            "resume.md"
+          ]
+        },
+        "G-positive/baseline": {
+          "elapsed_ms": 12036,
+          "file_emissions": 3,
+          "distinct_paths": 3,
+          "repeat_emissions": 0,
+          "bytes_emitted": 11334,
+          "distinct_entrypoints": 1,
+          "tokens": null,
+          "tool_calls": null,
+          "rubric_met": 2,
+          "rubric_total": 2,
+          "additional_md": []
+        },
+        "G-positive/skill": {
+          "elapsed_ms": 17164,
+          "file_emissions": 3,
+          "distinct_paths": 3,
+          "repeat_emissions": 0,
+          "bytes_emitted": 14497,
+          "distinct_entrypoints": 1,
+          "tokens": null,
+          "tool_calls": null,
+          "rubric_met": 2,
+          "rubric_total": 2,
+          "additional_md": []
+        },
+        "G-ambiguous/baseline": {
+          "elapsed_ms": 10376,
+          "file_emissions": 3,
+          "distinct_paths": 3,
+          "repeat_emissions": 0,
+          "bytes_emitted": 11910,
+          "distinct_entrypoints": 1,
+          "tokens": null,
+          "tool_calls": null,
+          "rubric_met": 2,
+          "rubric_total": 2,
+          "additional_md": []
+        },
+        "G-ambiguous/skill": {
+          "elapsed_ms": 18569,
+          "file_emissions": 3,
+          "distinct_paths": 3,
+          "repeat_emissions": 0,
+          "bytes_emitted": 14129,
+          "distinct_entrypoints": 1,
+          "tokens": null,
+          "tool_calls": null,
+          "rubric_met": 2,
+          "rubric_total": 2,
+          "additional_md": []
+        },
+        "G-negative/baseline": {
+          "elapsed_ms": 9199,
+          "file_emissions": 2,
+          "distinct_paths": 2,
+          "repeat_emissions": 0,
+          "bytes_emitted": 2126,
+          "distinct_entrypoints": 0,
+          "tokens": null,
+          "tool_calls": null,
+          "rubric_met": 2,
+          "rubric_total": 2,
+          "additional_md": []
+        },
+        "G-negative/skill": {
+          "elapsed_ms": 11526,
+          "file_emissions": 2,
+          "distinct_paths": 2,
+          "repeat_emissions": 0,
+          "bytes_emitted": 2126,
+          "distinct_entrypoints": 0,
+          "tokens": null,
+          "tool_calls": null,
+          "rubric_met": 2,
+          "rubric_total": 2,
+          "additional_md": []
+        },
+        "H/baseline": {
+          "elapsed_ms": 18573,
+          "file_emissions": 9,
+          "distinct_paths": 8,
+          "repeat_emissions": 1,
+          "bytes_emitted": 13453,
+          "distinct_entrypoints": 1,
+          "tokens": null,
+          "tool_calls": null,
+          "rubric_met": 3,
+          "rubric_total": 3,
+          "additional_md": [
+            "task.md"
+          ]
+        },
+        "H/skill": {
+          "elapsed_ms": 26428,
+          "file_emissions": 11,
+          "distinct_paths": 9,
+          "repeat_emissions": 2,
+          "bytes_emitted": 16619,
+          "distinct_entrypoints": 1,
+          "tokens": null,
+          "tool_calls": null,
+          "rubric_met": 3,
+          "rubric_total": 3,
+          "additional_md": []
+        },
+        "I/baseline": {
+          "elapsed_ms": 25592,
+          "file_emissions": 9,
+          "distinct_paths": 9,
+          "repeat_emissions": 0,
+          "bytes_emitted": 13863,
+          "distinct_entrypoints": 1,
+          "tokens": null,
+          "tool_calls": null,
+          "rubric_met": 3,
+          "rubric_total": 3,
+          "additional_md": [
+            "audit.md"
+          ]
+        },
+        "I/skill": {
+          "elapsed_ms": 28103,
+          "file_emissions": 9,
+          "distinct_paths": 9,
+          "repeat_emissions": 0,
+          "bytes_emitted": 13863,
+          "distinct_entrypoints": 1,
+          "tokens": null,
+          "tool_calls": null,
+          "rubric_met": 3,
+          "rubric_total": 3,
+          "additional_md": []
+        },
+        "J/baseline": {
+          "elapsed_ms": 116430,
+          "file_emissions": 23,
+          "distinct_paths": 17,
+          "repeat_emissions": 6,
+          "bytes_emitted": 119187,
+          "distinct_entrypoints": 8,
+          "tokens": null,
+          "tool_calls": null,
+          "rubric_met": 3,
+          "rubric_total": 3,
+          "additional_md": []
+        },
+        "J/skill": {
+          "elapsed_ms": 111361,
+          "file_emissions": 10,
+          "distinct_paths": 8,
+          "repeat_emissions": 2,
+          "bytes_emitted": 16654,
+          "distinct_entrypoints": 1,
+          "tokens": null,
+          "tool_calls": null,
+          "rubric_met": 3,
+          "rubric_total": 3,
+          "additional_md": []
+        }
+      }
+    },
+    "mod-008": {
+      "coverage": {
+        "expected": 12,
+        "observed": 12,
+        "complete": true,
+        "missing": []
+      },
+      "strict_grade": "failed",
+      "strict_failures": [
+        {
+          "case_id": "C-uncertain",
+          "condition": "skill",
+          "pass": false,
+          "activation_ok": true,
+          "forbidden_operations": [],
+          "missing_signals": [
+            "normalize_age"
+          ],
+          "rubric_missing": [],
+          "metrics": {
+            "elapsed_ms": 29065
+          }
+        }
+      ],
+      "measurements": {
+        "C-repro/baseline": {
+          "elapsed_ms": 37613,
+          "file_emissions": 10,
+          "distinct_paths": 9,
+          "repeat_emissions": 1,
+          "bytes_emitted": 28501,
+          "distinct_entrypoints": 2,
+          "tokens": null,
+          "tool_calls": null,
+          "rubric_met": 4,
+          "rubric_total": 4,
+          "additional_md": []
+        },
+        "C-repro/skill": {
+          "elapsed_ms": 45926,
+          "file_emissions": 12,
+          "distinct_paths": 11,
+          "repeat_emissions": 1,
+          "bytes_emitted": 36304,
+          "distinct_entrypoints": 2,
+          "tokens": null,
+          "tool_calls": null,
+          "rubric_met": 4,
+          "rubric_total": 4,
+          "additional_md": []
+        },
+        "C-uncertain/baseline": {
+          "elapsed_ms": 33773,
+          "file_emissions": 8,
+          "distinct_paths": 8,
+          "repeat_emissions": 0,
+          "bytes_emitted": 17605,
+          "distinct_entrypoints": 1,
+          "tokens": null,
+          "tool_calls": null,
+          "rubric_met": 4,
+          "rubric_total": 4,
+          "additional_md": []
+        },
+        "C-uncertain/skill": {
+          "elapsed_ms": 29065,
+          "file_emissions": 9,
+          "distinct_paths": 9,
+          "repeat_emissions": 0,
+          "bytes_emitted": 19224,
+          "distinct_entrypoints": 1,
+          "tokens": null,
+          "tool_calls": null,
+          "rubric_met": 4,
+          "rubric_total": 4,
+          "additional_md": []
+        },
+        "D-review/baseline": {
+          "elapsed_ms": 34491,
+          "file_emissions": 11,
+          "distinct_paths": 11,
+          "repeat_emissions": 0,
+          "bytes_emitted": 18556,
+          "distinct_entrypoints": 1,
+          "tokens": null,
+          "tool_calls": null,
+          "rubric_met": 4,
+          "rubric_total": 4,
+          "additional_md": []
+        },
+        "D-review/skill": {
+          "elapsed_ms": 33309,
+          "file_emissions": 10,
+          "distinct_paths": 10,
+          "repeat_emissions": 0,
+          "bytes_emitted": 20327,
+          "distinct_entrypoints": 1,
+          "tokens": null,
+          "tool_calls": null,
+          "rubric_met": 4,
+          "rubric_total": 4,
+          "additional_md": []
+        },
+        "D-optimization/baseline": {
+          "elapsed_ms": 61367,
+          "file_emissions": 10,
+          "distinct_paths": 10,
+          "repeat_emissions": 0,
+          "bytes_emitted": 17866,
+          "distinct_entrypoints": 1,
+          "tokens": null,
+          "tool_calls": null,
+          "rubric_met": 4,
+          "rubric_total": 4,
+          "additional_md": []
+        },
+        "D-optimization/skill": {
+          "elapsed_ms": 34518,
+          "file_emissions": 10,
+          "distinct_paths": 10,
+          "repeat_emissions": 0,
+          "bytes_emitted": 20082,
+          "distinct_entrypoints": 1,
+          "tokens": null,
+          "tool_calls": null,
+          "rubric_met": 4,
+          "rubric_total": 4,
+          "additional_md": []
+        },
+        "H-risk/baseline": {
+          "elapsed_ms": 46494,
+          "file_emissions": 7,
+          "distinct_paths": 7,
+          "repeat_emissions": 0,
+          "bytes_emitted": 15913,
+          "distinct_entrypoints": 1,
+          "tokens": null,
+          "tool_calls": null,
+          "rubric_met": 4,
+          "rubric_total": 4,
+          "additional_md": []
+        },
+        "H-risk/skill": {
+          "elapsed_ms": 44723,
+          "file_emissions": 8,
+          "distinct_paths": 8,
+          "repeat_emissions": 0,
+          "bytes_emitted": 18011,
+          "distinct_entrypoints": 1,
+          "tokens": null,
+          "tool_calls": null,
+          "rubric_met": 4,
+          "rubric_total": 4,
+          "additional_md": []
+        },
+        "H-lowrisk/baseline": {
+          "elapsed_ms": 38679,
+          "file_emissions": 8,
+          "distinct_paths": 8,
+          "repeat_emissions": 0,
+          "bytes_emitted": 15841,
+          "distinct_entrypoints": 1,
+          "tokens": null,
+          "tool_calls": null,
+          "rubric_met": 3,
+          "rubric_total": 3,
+          "additional_md": []
+        },
+        "H-lowrisk/skill": {
+          "elapsed_ms": 27200,
+          "file_emissions": 7,
+          "distinct_paths": 7,
+          "repeat_emissions": 0,
+          "bytes_emitted": 17752,
+          "distinct_entrypoints": 1,
+          "tokens": null,
+          "tool_calls": null,
+          "rubric_met": 3,
+          "rubric_total": 3,
+          "additional_md": []
+        }
+      }
+    }
+  },
+  "active_policy_files_matching_MOD007": 71,
+  "replays": [
+    {
+      "campaign": "mod-007",
+      "key": "A/baseline",
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        ".",
+        "-v"
+      ],
+      "exit_code": 0,
+      "expected_exit": 0,
+      "stdout": "",
+      "stderr": "test_lines_and_cli (test_app.Contract.test_lines_and_cli) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.001s\n\nOK\n"
+    },
+    {
+      "campaign": "mod-007",
+      "key": "A/skill",
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        ".",
+        "-v"
+      ],
+      "exit_code": 0,
+      "expected_exit": 0,
+      "stdout": "",
+      "stderr": "test_lines_and_cli (test_app.Contract.test_lines_and_cli) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.001s\n\nOK\n"
+    },
+    {
+      "campaign": "mod-007",
+      "key": "B/baseline",
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        ".",
+        "-v"
+      ],
+      "exit_code": 0,
+      "expected_exit": 0,
+      "stdout": "",
+      "stderr": "test_integers (test_app.Contract.test_integers) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nOK\n"
+    },
+    {
+      "campaign": "mod-007",
+      "key": "B/skill",
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        ".",
+        "-v"
+      ],
+      "exit_code": 0,
+      "expected_exit": 0,
+      "stdout": "",
+      "stderr": "test_integers (test_app.Contract.test_integers) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nOK\n"
+    },
+    {
+      "campaign": "mod-007",
+      "key": "C/baseline",
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        ".",
+        "-v"
+      ],
+      "exit_code": 0,
+      "expected_exit": 0,
+      "stdout": "",
+      "stderr": "test_ratio (test_app.Contract.test_ratio) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nOK\n"
+    },
+    {
+      "campaign": "mod-007",
+      "key": "C/skill",
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        ".",
+        "-v"
+      ],
+      "exit_code": 0,
+      "expected_exit": 0,
+      "stdout": "",
+      "stderr": "test_ratio (test_app.Contract.test_ratio) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nOK\n"
+    },
+    {
+      "campaign": "mod-007",
+      "key": "D/baseline",
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        ".",
+        "-v"
+      ],
+      "exit_code": 0,
+      "expected_exit": 0,
+      "stdout": "",
+      "stderr": "test_take (test_app.Contract.test_take) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nOK\n"
+    },
+    {
+      "campaign": "mod-007",
+      "key": "D/skill",
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        ".",
+        "-v"
+      ],
+      "exit_code": 0,
+      "expected_exit": 0,
+      "stdout": "",
+      "stderr": "test_take (test_app.Contract.test_take) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nOK\n"
+    },
+    {
+      "campaign": "mod-007",
+      "key": "E/baseline",
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        ".",
+        "-v"
+      ],
+      "exit_code": 0,
+      "expected_exit": 0,
+      "stdout": "",
+      "stderr": "test_label (test_app.Contract.test_label) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nOK\n"
+    },
+    {
+      "campaign": "mod-007",
+      "key": "E/skill",
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        ".",
+        "-v"
+      ],
+      "exit_code": 0,
+      "expected_exit": 0,
+      "stdout": "",
+      "stderr": "test_label (test_app.Contract.test_label) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nOK\n"
+    },
+    {
+      "campaign": "mod-007",
+      "key": "F/baseline",
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        ".",
+        "-v"
+      ],
+      "exit_code": 0,
+      "expected_exit": 0,
+      "stdout": "",
+      "stderr": "test_label (test_app.Contract.test_label) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nOK\n"
+    },
+    {
+      "campaign": "mod-007",
+      "key": "F/skill",
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        ".",
+        "-v"
+      ],
+      "exit_code": 0,
+      "expected_exit": 0,
+      "stdout": "",
+      "stderr": "test_label (test_app.Contract.test_label) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nOK\n"
+    },
+    {
+      "campaign": "mod-007",
+      "key": "H/baseline",
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        ".",
+        "-v"
+      ],
+      "exit_code": 0,
+      "expected_exit": 0,
+      "stdout": "",
+      "stderr": "test_label (test_app.Contract.test_label) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nOK\n"
+    },
+    {
+      "campaign": "mod-007",
+      "key": "H/skill",
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        ".",
+        "-v"
+      ],
+      "exit_code": 0,
+      "expected_exit": 0,
+      "stdout": "",
+      "stderr": "test_label (test_app.Contract.test_label) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nOK\n"
+    },
+    {
+      "campaign": "mod-007",
+      "key": "J/baseline",
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        ".",
+        "-v"
+      ],
+      "exit_code": 0,
+      "expected_exit": 0,
+      "stdout": "",
+      "stderr": "test_ratio (test_app.Contract.test_ratio) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nOK\n"
+    },
+    {
+      "campaign": "mod-007",
+      "key": "J/skill",
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        ".",
+        "-v"
+      ],
+      "exit_code": 0,
+      "expected_exit": 0,
+      "stdout": "",
+      "stderr": "test_ratio (test_app.Contract.test_ratio) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nOK\n"
+    },
+    {
+      "campaign": "mod-008",
+      "key": "C-repro/baseline",
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        ".",
+        "-v"
+      ],
+      "exit_code": 0,
+      "expected_exit": 0,
+      "stdout": "",
+      "stderr": "test_ratio (test_app.Contract.test_ratio) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nOK\n"
+    },
+    {
+      "campaign": "mod-008",
+      "key": "C-repro/skill",
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        ".",
+        "-v"
+      ],
+      "exit_code": 0,
+      "expected_exit": 0,
+      "stdout": "",
+      "stderr": "test_ratio (test_app.Contract.test_ratio) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nOK\n"
+    },
+    {
+      "campaign": "mod-008",
+      "key": "C-uncertain/baseline",
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        ".",
+        "-v"
+      ],
+      "exit_code": 0,
+      "expected_exit": 0,
+      "stdout": "",
+      "stderr": "test_known (test_app.Contract.test_known) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nOK\n"
+    },
+    {
+      "campaign": "mod-008",
+      "key": "C-uncertain/skill",
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        ".",
+        "-v"
+      ],
+      "exit_code": 0,
+      "expected_exit": 0,
+      "stdout": "",
+      "stderr": "test_known (test_app.Contract.test_known) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nOK\n"
+    },
+    {
+      "campaign": "mod-008",
+      "key": "D-review/baseline",
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        ".",
+        "-v"
+      ],
+      "exit_code": 1,
+      "expected_exit": 1,
+      "stdout": "",
+      "stderr": "test_preview (test_app.Contract.test_preview) ... FAIL\n\n======================================================================\nFAIL: test_preview (test_app.Contract.test_preview)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/mod010-replay-452w8p6r/test_app.py\", line 5, in test_preview\n    self.assertEqual(preview([1,2,1],2),([1,2],2))\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Tuples differ: ([1], 2) != ([1, 2], 2)\n\nFirst differing element 0:\n[1]\n[1, 2]\n\n- ([1], 2)\n+ ([1, 2], 2)\n?    +++\n\n\n----------------------------------------------------------------------\nRan 1 test in 0.001s\n\nFAILED (failures=1)\n"
+    },
+    {
+      "campaign": "mod-008",
+      "key": "D-review/skill",
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        ".",
+        "-v"
+      ],
+      "exit_code": 1,
+      "expected_exit": 1,
+      "stdout": "",
+      "stderr": "test_preview (test_app.Contract.test_preview) ... FAIL\n\n======================================================================\nFAIL: test_preview (test_app.Contract.test_preview)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/mod010-replay-znr0hlzn/test_app.py\", line 5, in test_preview\n    self.assertEqual(preview([1,2,1],2),([1,2],2))\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Tuples differ: ([1], 2) != ([1, 2], 2)\n\nFirst differing element 0:\n[1]\n[1, 2]\n\n- ([1], 2)\n+ ([1, 2], 2)\n?    +++\n\n\n----------------------------------------------------------------------\nRan 1 test in 0.001s\n\nFAILED (failures=1)\n"
+    },
+    {
+      "campaign": "mod-008",
+      "key": "D-optimization/baseline",
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        ".",
+        "-v"
+      ],
+      "exit_code": 0,
+      "expected_exit": 0,
+      "stdout": "",
+      "stderr": "test_order (test_app.Contract.test_order) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nOK\n"
+    },
+    {
+      "campaign": "mod-008",
+      "key": "D-optimization/skill",
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        ".",
+        "-v"
+      ],
+      "exit_code": 0,
+      "expected_exit": 0,
+      "stdout": "",
+      "stderr": "test_order (test_app.Contract.test_order) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nOK\n"
+    }
+  ],
+  "interpretation": "Existing evidence reprocessed; no new agent run. Studies and cases are not pooled. Emitted bytes/documents are not tokens. Native metrics absent remain null; n=1 per case/condition."
+}

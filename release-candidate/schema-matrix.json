@@ -1,0 +1,170 @@
+{
+  "validator": "jsonschema 4.26.0 Draft202012Validator",
+  "network": false,
+  "rows": [
+    {
+      "contract": "result",
+      "case": "int",
+      "schema_accepts": true,
+      "cli_accepts": true
+    },
+    {
+      "contract": "result",
+      "case": "float_integer",
+      "schema_accepts": true,
+      "cli_accepts": false
+    },
+    {
+      "contract": "result",
+      "case": "bool",
+      "schema_accepts": false,
+      "cli_accepts": false
+    },
+    {
+      "contract": "result",
+      "case": "negative",
+      "schema_accepts": false,
+      "cli_accepts": false
+    },
+    {
+      "contract": "result",
+      "case": "null",
+      "schema_accepts": false,
+      "cli_accepts": false
+    },
+    {
+      "contract": "result",
+      "case": "extra_metric",
+      "schema_accepts": false,
+      "cli_accepts": false
+    },
+    {
+      "contract": "result",
+      "case": "omitted",
+      "schema_accepts": true,
+      "cli_accepts": true
+    },
+    {
+      "contract": "result",
+      "case": "zero",
+      "schema_accepts": true,
+      "cli_accepts": true
+    },
+    {
+      "contract": "catalog",
+      "case": "original",
+      "schema_accepts": true,
+      "cli_accepts": true
+    },
+    {
+      "contract": "catalog",
+      "case": "float_version",
+      "schema_accepts": true,
+      "cli_accepts": false
+    },
+    {
+      "contract": "catalog",
+      "case": "unknown_bundle_member",
+      "schema_accepts": true,
+      "cli_accepts": false
+    },
+    {
+      "contract": "catalog",
+      "case": "duplicate_skill",
+      "schema_accepts": false,
+      "cli_accepts": false
+    }
+  ],
+  "historical_grade_schema": [
+    {
+      "cohort": "mod-007",
+      "evaluation": "failed",
+      "summary": {
+        "baseline": {
+          "total": 12,
+          "passed": 12,
+          "tool_calls": null,
+          "tokens": null,
+          "elapsed_ms": 470728,
+          "metric_observations": {
+            "tool_calls": 0,
+            "tokens": 0,
+            "elapsed_ms": 12
+          }
+        },
+        "skill": {
+          "total": 12,
+          "passed": 11,
+          "tool_calls": null,
+          "tokens": null,
+          "elapsed_ms": 578904,
+          "metric_observations": {
+            "tool_calls": 0,
+            "tokens": 0,
+            "elapsed_ms": 12
+          }
+        }
+      },
+      "failed": [
+        {
+          "case_id": "I",
+          "condition": "skill",
+          "pass": false,
+          "activation_ok": false,
+          "forbidden_operations": [],
+          "missing_signals": [],
+          "rubric_missing": [],
+          "metrics": {
+            "elapsed_ms": 28103
+          }
+        }
+      ]
+    },
+    {
+      "cohort": "mod-008",
+      "evaluation": "failed",
+      "summary": {
+        "baseline": {
+          "total": 6,
+          "passed": 6,
+          "tool_calls": null,
+          "tokens": null,
+          "elapsed_ms": 252417,
+          "metric_observations": {
+            "tool_calls": 0,
+            "tokens": 0,
+            "elapsed_ms": 6
+          }
+        },
+        "skill": {
+          "total": 6,
+          "passed": 5,
+          "tool_calls": null,
+          "tokens": null,
+          "elapsed_ms": 214741,
+          "metric_observations": {
+            "tool_calls": 0,
+            "tokens": 0,
+            "elapsed_ms": 6
+          }
+        }
+      },
+      "failed": [
+        {
+          "case_id": "C-uncertain",
+          "condition": "skill",
+          "pass": false,
+          "activation_ok": true,
+          "forbidden_operations": [],
+          "missing_signals": [
+            "normalize_age"
+          ],
+          "rubric_missing": [],
+          "metrics": {
+            "elapsed_ms": 29065
+          }
+        }
+      ]
+    }
+  ]
+}
