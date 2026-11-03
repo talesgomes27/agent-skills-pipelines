@@ -6,17 +6,23 @@ Implementado em 2026-10-22 após aprovação e consolidação das oito auditoria
 
 Política adotada na MOD-004 (2026-10-28). Consumidores: mantenedor, autores de skills, revisores e operadores de distribuição. Este guia mantém a propriedade da informação; os documentos apontados mantêm seu conteúdo, sem cópia obrigatória entre pipelines.
 
+**Pragmatic Engineering Principles:** Modern KISS (simples, explícito e evolutivo), YAGNI e Pragmatic Clean Code orientam a menor solução sustentável para os requisitos atuais. Reutilize recursos existentes; preserve clareza, coesão, testabilidade e tratamento explícito de erros. Justifique dependências, abstrações e padrões; prefira mudanças pequenas e reversíveis. Correção, segurança, compatibilidade, proveniência e rastreabilidade permanecem obrigatórias.
+
+**No new document by default.** Examine instrução, workflow, artefato, consumidor e necessidade de persistência. Prefira não persistir informação transitória, responder no chat, atualizar uma fonte canônica ou acrescentar seção existente, nessa ordem. Crie arquivo somente por contrato obrigatório, consumidor com necessidade persistente, handoff durável, evidência exigida, operação/manutenção ou decisão técnica relevante ainda não documentada. Preserve recibos, hashes, registros de segurança e proveniência e demais evidências obrigatórias. Entre diffs semelhantes, prefira evitar novo arquivo; entre opções de mesmo tamanho documental, prefira o menor diff.
+
+Leia apenas os trechos pertinentes e reutilize contexto disponível. Evite relatórios duplicados, releituras, delegações e repetições de validação sem motivo; mantenha as verificações essenciais. Escreva textos sucintos, diretos, explicativos e tecnicamente precisos. Os pacotes mantêm as instruções operacionais necessárias sem depender deste guia ou reproduzir sua política integral.
+
 | Informação | Fonte canônica | Mantenedor / consumidor | Quando conferir |
 |---|---|---|---|
 | Escopo e autorização | Pedido atual e contrato aprovado da tarefa | Usuário / executor | Antes de agir; autorização histórica não amplia tarefa nova |
-| Comportamento requerido | Contrato aprovado, referenciado no task | Responsável pelo requisito / implementador e revisor | Mudança de requisito ou discrepância com código |
+| Comportamento requerido | Contrato aprovado, referenciado no estado adotado | Responsável pelo requisito / implementador e revisor | Mudança de requisito ou discrepância com código |
 | Comportamento observado | Código, testes e saídas com base identificada | Autor da mudança / revisor | Mudança funcional e validação |
 | Seleção, bundles e release | `distribution/catalog.json` | Mantenedor da distribuição / CLI e operador | Alteração de pacote ou release; conferir derivados no README |
 | Identidade e procedimento da skill | Frontmatter e corpo do `SKILL.md` ativo | Autor da skill / host e chamador | Alteração do contrato; referências especializadas sob demanda |
 | Instalação e comandos | CLI e este guia; biblioteca em `docs/library-maintenance.md`; evals em `docs/evals.md` | Mantenedor do componente / operador | Mudança de interface, dependência ou recuperação |
-| Estado vigente | Seção inicial de `task.md`, com base, autorização e próxima ação | Executor / retomada | Por tarefa ou check; registros anteriores permanecem históricos |
+| Estado vigente | Estado adotado: `task.md`, índice equivalente ou resposta quando não houver persistência exigida; com base, autorização e próxima ação | Executor / retomada | Por tarefa ou check; registros anteriores permanecem históricos |
 | Decisões duráveis | ADR aprovado, quando necessário | Responsável pela decisão / futuros autores | Mudança arquitetural relevante; nenhum ADR obrigatório por tarefa |
-| Resultado verificado | Log/artefato datado com comando, ambiente, base e limites | Executor / avaliador | Nova execução; não substituir resultado anterior |
+| Resultado verificado | Registro com comando, ambiente, base e limites no estado adotado; log/artefato datado quando houver retenção exigida | Executor / avaliador | Nova execução; preservar evidências obrigatórias e não substituir resultado anterior |
 | História e propostas | Auditorias datadas, `legacy/`, `proposals/` e planos anteriores | Mantenedor como custodiante / auditor | Consulta explícita; não são procedimento ativo nem autorização |
 
 Quando código e requisito aprovado divergem, investigue e registre a decisão antes de alterar qualquer fonte. Documentação de uso deriva do contrato e da evidência; código não é autoridade absoluta sobre comportamento esperado. Conteúdo sem consumidor conhecido recebe investigação, não exclusão automática.
