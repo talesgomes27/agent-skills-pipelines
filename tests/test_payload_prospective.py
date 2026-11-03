@@ -234,7 +234,7 @@ class ProspectiveTests(unittest.TestCase):
             ['git', '--no-optional-locks', '--no-replace-objects', '--no-lazy-fetch',
              'rev-parse', '--path-format=absolute', '--git-path', 'objects'],
             cwd=historical.ROOT, text=True).strip()
-        (meta/'objects/info/alternates').write_text(objects+'\n')
+        (meta/'objects/info/alternates').write_bytes((objects+'\n').encode('utf-8'))
         (meta/'refs').mkdir()
         (meta/'HEAD').write_text(historical.HISTORICAL_REVISION+'\n')
         (meta/'config').write_text('[core]\n\tbare = false\n')

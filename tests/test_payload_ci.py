@@ -82,8 +82,9 @@ class CIIntegrationTests(unittest.TestCase):
         return cls.git(root, 'rev-parse', 'HEAD').decode().strip()
 
     def setUp(self):
-        self.work = Path(tempfile.mkdtemp(dir=self.temp.name)).resolve()
-        self.addCleanup(shutil.rmtree, self.work)
+        directory = tempfile.TemporaryDirectory(dir=self.temp.name)
+        self.addCleanup(directory.cleanup)
+        self.work = Path(directory.name).resolve()
         self.repo = self.work/'repo'
         subprocess.run(['git', 'clone', '--local', '--no-hardlinks', '--quiet', str(self.template), str(self.repo)],
                        check=True, capture_output=True)
