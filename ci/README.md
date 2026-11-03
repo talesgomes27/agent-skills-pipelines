@@ -2,8 +2,9 @@
 
 ## Seleções e limite de confiança
 
-Sem opt-in, o fluxo continua histórico. Para PRs e pushes em branches diferentes de
-`main`, o workflow habilita explicitamente `CI_PROSPECTIVE_VALIDATION=true`: o adaptador
+Os comandos diretos, sem seleção explícita, mantêm o fluxo histórico. Para PRs e
+pushes de branches, incluindo `push/main`, o workflow habilita explicitamente
+`CI_PROSPECTIVE_VALIDATION=true` para validação não privilegiada: o adaptador
 monta uma seleção de teste determinística a partir dos 82 caminhos congelados e dos
 blobs do SHA efetivamente executado. O digest calculado identifica essa proposta;
 não é H autorizado nem substitui o futuro manifesto versionado B/P. A seleção é

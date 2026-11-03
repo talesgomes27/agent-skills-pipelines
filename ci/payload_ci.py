@@ -41,8 +41,8 @@ def run(operation, arguments, source, context):
     if proposal_validation:
         need(not proposed, 'Cannot combine generated proposal validation with a versioned selection')
         ref = context.get('GITHUB_REF', '')
-        need(event == 'pull_request' or (event == 'push' and ref.startswith('refs/heads/')
-             and ref != 'refs/heads/main'), 'Proposal bootstrap requires an unprivileged PR/branch event')
+        need(event == 'pull_request' or (event == 'push' and ref.startswith('refs/heads/')),
+             'Proposal bootstrap requires an unprivileged PR/branch event')
         # This digest identifies test inputs; it never authorizes delivery.
         frozen = commit + ':ci/payload.json'
         need(int(query('cat-file', '-s', frozen)) <= 2000000, 'Oversized historical selection')

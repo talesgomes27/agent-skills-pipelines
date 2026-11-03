@@ -28,7 +28,7 @@ env:
   CI_SOURCE_COMMIT: ${{ github.sha }}
   CI_PR_HEAD_COMMIT: ${{ github.event.pull_request.head.sha }}
   CI_PR_BASE_COMMIT: ${{ github.event.pull_request.base.sha }}
-  CI_PROSPECTIVE_VALIDATION: ${{ github.event_name == 'pull_request' || (github.event_name == 'push' && startsWith(github.ref, 'refs/heads/') && github.ref != 'refs/heads/main') }}
+  CI_PROSPECTIVE_VALIDATION: ${{ github.event_name == 'pull_request' || (github.event_name == 'push' && startsWith(github.ref, 'refs/heads/')) }}
   CI_SELECTION_COMMIT: ${{ inputs.selection_commit }}
   CI_SELECTION_PATH: ${{ inputs.selection_path }}
   CI_SELECTION_SHA: ${{ inputs.selection_sha }}

@@ -274,7 +274,7 @@ class CIIntegrationTests(unittest.TestCase):
 
     def test_proposal_bootstrap_cannot_override_selection_or_use_privileged_context(self):
         for event, ref in [('local', ''), ('workflow_dispatch', 'refs/heads/codex/pragmatic-prospective'),
-                           ('push', 'refs/heads/main'), ('push', 'refs/tags/proposed'),
+                           ('push', 'refs/tags/proposed'),
                            ('pull_request_target', 'refs/heads/main'), ('workflow_run', 'refs/heads/main')]:
             context = dict(GITHUB_EVENT_NAME=event, GITHUB_REF=ref, CI_PROSPECTIVE_VALIDATION='true',
                            CI_SOURCE_COMMIT=self.source_commit, GITHUB_SHA=self.source_commit)
@@ -314,3 +314,21 @@ class CIIntegrationTests(unittest.TestCase):
             self.build(context=context)
         self.assertEqual(rejected.exception.cmd[0], 'git')
         self.assertFalse((self.work/'bundle').exists())
+
+    def test_main_push_proposal_is_deterministic_and_unapproved(self):
+        context = dict(GITHUB_EVENT_NAME='push', GITHUB_REF='refs/heads/main',
+                       CI_SOURCE_COMMIT=self.source_commit, GITHUB_SHA=self.source_commit,
+                       CI_PROSPECTIVE_VALIDATION='true', GITHUB_RUN_ID='123', GITHUB_RUN_ATTEMPT='1')
+        a = self.build('main-a', context=context)
+        self.build('main-b', context=context)
+        self.assertEqual(a['source_commit'], self.source_commit)
+        self.assertEqual(a['selection_sha256'], self.selection_sha)
+        self.assertIn('unpublished', a['status'])
+        for name in (historical.verifier.ARCHIVE, 'payload-manifest.json', 'delivery.json'):
+            self.assertEqual((self.work/'main-a'/name).read_bytes(),
+                             (self.work/'main-b'/name).read_bytes())
+        self.assertEqual(self.verify('main-a', context=context, extract='main-extracted')['files'], 84)
+        self.assertEqual((self.work/'main-extracted/LICENSE').read_bytes(),
+                         b'synthetic CI prospective content\n')
+        with self.assertRaisesRegex(ValueError, 'Validation operations only'):
+            adapter.run('publish', [], self.repo, context)
