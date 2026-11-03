@@ -9,10 +9,10 @@ Entregue o artefato aprovado no destino autorizado, com evidência de identidade
 
 ## Entrada e estado
 
-- Leia instruções de release do projeto, handoff, `task.md`, `docs/00_archetype.md` e evidências de implementação/auditoria. Preserve classificação e proveniência. Se não houver arquétipo, use declaração explícita dos contratos/pedido; esclareça apenas se a lacuna impedir escolher o artefato correto.
+- Leia instruções de release do projeto, handoff, estado existente, `docs/00_archetype.md` quando adotado e evidências de implementação/auditoria. Preserve classificação e proveniência. Se não houver arquétipo, use declaração explícita dos contratos/pedido; esclareça apenas se a lacuna impedir escolher o artefato correto.
 - Identifique escopo, commit/base, arquivos staged/unstaged/não rastreados relevantes, versão pretendida, artefato e destino. Preserve trabalho do usuário; não faça staging de tudo nem exija árvore limpa apagando arquivos.
 - Registre o modo: preparar, publicar preview, publicar release ou implantar produção. Confirme conta/projeto, repositório/registry, branch/tag, ambiente e efeitos indiretos conhecidos. Push pode acionar produção via CI.
-- Mantenha seção de release em `task.md`, sem sobrescrever fases anteriores: gate, identidade do artefato/commit, destino, checks, autorizações e resultado. Diferencie preparado, aguardando autorização, submetido, em execução, concluído e falhou/parcial.
+- No new document by default. Para preparação pontual sem persistência exigida, registre estado e evidências na resposta. Quando contrato, consumidor, handoff durável, evidência exigida ou operação requerer retenção, use seção de release em `task.md` ou fonte canônica existente; crie arquivo apenas se estas forem insuficientes. Preserve fases anteriores, recibos, hashes e registros obrigatórios de segurança/proveniência. Registre gate, identidade do artefato/commit, destino, checks, autorizações e resultado. Diferencie preparado, aguardando autorização, submetido, em execução, concluído e falhou/parcial.
 - Aprovação de gate valida os artefatos dessa etapa. Para ações externas, use a autorização já concedida quando cobrir o destino e o efeito; se faltar, apresente primeiro o resultado concreto a publicar e peça a autorização final. Mudança material de artefato/destino invalida a aprovação correspondente.
 
 ## Modo de condução

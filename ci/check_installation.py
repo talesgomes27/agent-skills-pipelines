@@ -33,8 +33,9 @@ def run(source, payload, work, mode, recovery=False):
     journal = []
     def save():
         (work/'results.json').write_text(json.dumps(journal, indent=2)+'\n', encoding='utf-8')
-    def call(repo, command, dest=None, update=False, code=0):
-        argv = [sys.executable, '-I', '-B', str(repo/'scripts/skills.py'), command, '--agent', 'codex', '--all']
+    def call(repo, command, dest=None, update=False, code=0, skill=None):
+        argv = [sys.executable, '-I', '-B', str(repo/'scripts/skills.py'), command, '--agent', 'codex']
+        argv += ['--skill', skill] if skill else ['--all']
         if dest is not None:
             argv += ['--destination', str(dest), '--mode', mode]
         if update:
@@ -51,10 +52,11 @@ def run(source, payload, work, mode, recovery=False):
     spec = importlib.util.spec_from_file_location('artifact_installer', payload/'scripts/skills.py')
     cli = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(cli)
-    def installed(dest, repo, release):
+    def installed(dest, repo, release, skill=None):
+        chosen = [skill] if skill else names
         state = json.loads((dest/cli.STATE).read_text(encoding='utf-8'))
-        need(state['version'] == 1 and set(state['skills']) == set(names), 'Receipt membership')
-        for n in names:
+        need(state['version'] == 1 and set(state['skills']) == set(chosen), 'Receipt membership')
+        for n in chosen:
             rec = state['skills'][n]
             expected = {rel:value for rel,value in cli.fingerprint(repo/n).items()
                         if Path(rel).parts[0] in cli.COMPONENTS}
@@ -67,8 +69,8 @@ def run(source, payload, work, mode, recovery=False):
             need((dest/n).is_symlink() == (mode == 'link'), 'Installation mode')
             if mode == 'link':
                 need((dest/n).resolve() == (repo/n).resolve(), 'Wrong link target')
-        checks = call(payload, 'doctor', dest)['checks']
-        need(len(checks) == 8 and all(c['status'] == 'pass' for c in checks), 'Doctor failed')
+        checks = call(payload, 'doctor', dest, skill=skill)['checks']
+        need(len(checks) == len(chosen) and all(c['status'] == 'pass' for c in checks), 'Doctor failed')
     def unchanged(dest, repo, update=False):
         before = fingerprint(dest)
         need(all(p['action'] == 'unchanged' for p in call(repo, 'install', dest, update)['plan']), 'Not idempotent')
@@ -102,6 +104,10 @@ def run(source, payload, work, mode, recovery=False):
     call(payload, 'install', dest)
     installed(dest, payload, '2.0.0')
     unchanged(dest, payload)
+    dest = work/'selective'
+    call(payload, 'install', dest, skill=names[0])
+    installed(dest, payload, '2.0.0', skill=names[0])
+    need(not any((dest/name).exists() for name in names[1:]), 'Unselected skill installed')
     listing = subprocess.check_output(['git', 'ls-tree', '-r', '--name-only', OLD], cwd=source, text=True).splitlines()
     paths = sorted(set(listing) & {e['path'] for e in json.loads((source/'ci/payload.json').read_text())['sources']})
     need(len(paths) == 80, 'Unexpected historical source selection')

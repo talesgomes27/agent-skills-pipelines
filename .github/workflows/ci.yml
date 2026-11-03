@@ -3,6 +3,17 @@ name: CI
 "on":
   push:
   pull_request:
+  workflow_dispatch:
+    inputs:
+      selection_commit:
+        description: 'Commit containing the proposed selection; this is not delivery approval'
+        default: ''
+      selection_path:
+        description: 'Versioned path of the proposed selection'
+        default: ''
+      selection_sha:
+        description: 'Expected SHA-256 for proposal validation, never publication authority'
+        default: ''
 
 permissions:
   contents: read
@@ -14,6 +25,13 @@ env:
   GIT_CONFIG_VALUE_0: "false"
   PYTHONDONTWRITEBYTECODE: "1"
   PYTHONUTF8: "1"
+  CI_SOURCE_COMMIT: ${{ github.sha }}
+  CI_PR_HEAD_COMMIT: ${{ github.event.pull_request.head.sha }}
+  CI_PR_BASE_COMMIT: ${{ github.event.pull_request.base.sha }}
+  CI_PROSPECTIVE_VALIDATION: ${{ github.event_name == 'pull_request' || (github.event_name == 'push' && startsWith(github.ref, 'refs/heads/')) }}
+  CI_SELECTION_COMMIT: ${{ inputs.selection_commit }}
+  CI_SELECTION_PATH: ${{ inputs.selection_path }}
+  CI_SELECTION_SHA: ${{ inputs.selection_sha }}
 
 jobs:
   produce:
@@ -29,6 +47,8 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
+          persist-credentials: false
+          ref: ${{ github.sha }}
       - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
         with:
           python-version: "3.14.4"
@@ -38,9 +58,9 @@ jobs:
         run: python -I -B -c "import platform, sys; assert sys.version_info[:3] == (3,14,4) and platform.system() == 'Linux' and platform.machine() == 'x86_64'"
       - name: Build A from committed inputs
         id: build
-        run: python -I -B ci/build_payload.py --output "${{ runner.temp }}/payload-a"
+        run: python -I -B ci/payload_ci.py build --output "${{ runner.temp }}/payload-a"
       - name: Build B independently
-        run: python -I -B ci/build_payload.py --output "${{ runner.temp }}/payload-b"
+        run: python -I -B ci/payload_ci.py build --output "${{ runner.temp }}/payload-b"
       - name: Compare independent builds byte for byte
         shell: python
         env:
@@ -55,8 +75,8 @@ jobs:
               assert p.read_bytes() == (b / p.name).read_bytes(), p.name
       - name: Independently verify and extract A
         run: >-
-          python -I -B ci/verify_payload.py --bundle "${{ runner.temp }}/payload-a"
-          --commit "${{ github.sha }}" --run-id "${{ github.run_id }}" --attempt "${{ github.run_attempt }}"
+          python -I -B ci/payload_ci.py verify --bundle "${{ runner.temp }}/payload-a"
+          --run-id "${{ github.run_id }}" --attempt "${{ github.run_attempt }}"
           --tar-sha "${{ steps.build.outputs.tar_sha256 }}" --manifest-sha "${{ steps.build.outputs.manifest_sha256 }}"
           --delivery-sha "${{ steps.build.outputs.delivery_sha256 }}" --extract "${{ runner.temp }}/payload-extracted"
       - name: Record bootstrap pip version
@@ -92,7 +112,7 @@ jobs:
         shell: python
         run: |
           import sys, unittest
-          result = unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.discover('tests', pattern='test_payload.py'))
+          result = unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.discover('tests', pattern='test_payload*.py'))
           sys.exit(not result.wasSuccessful() or bool(result.skipped) or result.testsRun == 0)
       - name: Real artifact copy recovery
         run: >-
@@ -126,10 +146,13 @@ jobs:
           DELIVERY_SHA: ${{ steps.build.outputs.delivery_sha256 }}
         run: |
           import json, os, re
+          from pathlib import Path
           assert os.environ['ARTIFACT_ID'].isdigit()
           for key in ('ACTIONS_DIGEST', 'TAR_SHA', 'MANIFEST_SHA', 'DELIVERY_SHA'):
               assert re.fullmatch('[0-9a-f]{64}', os.environ[key]), key
-          row = {k: os.environ[k] for k in ('GITHUB_SHA', 'GITHUB_RUN_ID', 'GITHUB_RUN_ATTEMPT', 'ARTIFACT_ID', 'ACTIONS_DIGEST', 'TAR_SHA', 'MANIFEST_SHA', 'DELIVERY_SHA')}
+          row = {k: os.environ[k] for k in ('GITHUB_SHA', 'GITHUB_REF', 'GITHUB_EVENT_NAME', 'GITHUB_RUN_ID', 'GITHUB_RUN_ATTEMPT', 'CI_SOURCE_COMMIT', 'CI_PR_HEAD_COMMIT', 'CI_PR_BASE_COMMIT', 'CI_PROSPECTIVE_VALIDATION', 'CI_SELECTION_COMMIT', 'CI_SELECTION_PATH', 'CI_SELECTION_SHA', 'ARTIFACT_ID', 'ACTIONS_DIGEST', 'TAR_SHA', 'MANIFEST_SHA', 'DELIVERY_SHA')}
+          row['tested_selection_sha256'] = json.loads((Path(os.environ['RUNNER_TEMP'])/'payload-a/delivery.json').read_bytes())['selection_sha256']
+          row['authorization'] = 'validation only; trusted delivery blocked pending protected approval/digest provenance'
           with open(os.environ['GITHUB_STEP_SUMMARY'], 'a', encoding='utf-8') as out:
               out.write('Candidate transport identity (not release approval):\n\n```json\n' + json.dumps(row, indent=2) + '\n```\n')
 
@@ -146,6 +169,8 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
+          persist-credentials: false
+          ref: ${{ github.sha }}
       - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
         with:
           python-version: ${{ matrix.python }}
@@ -157,8 +182,8 @@ jobs:
           path: ${{ runner.temp }}/candidate-bundle
       - name: Verify producer bytes and identity before extraction
         run: >-
-          python -I -B ci/verify_payload.py --bundle "${{ runner.temp }}/candidate-bundle"
-          --commit "${{ github.sha }}" --run-id "${{ github.run_id }}" --attempt "${{ github.run_attempt }}"
+          python -I -B ci/payload_ci.py verify --bundle "${{ runner.temp }}/candidate-bundle"
+          --run-id "${{ github.run_id }}" --attempt "${{ github.run_attempt }}"
           --tar-sha "${{ needs.produce.outputs.tar_sha }}" --manifest-sha "${{ needs.produce.outputs.manifest_sha }}"
           --delivery-sha "${{ needs.produce.outputs.delivery_sha }}" --extract "${{ runner.temp }}/candidate-payload"
       - name: Install validation dependencies
@@ -188,6 +213,8 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
+          persist-credentials: false
+          ref: ${{ github.sha }}
       - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
         with:
           python-version: "3.14"
@@ -199,8 +226,8 @@ jobs:
           path: ${{ runner.temp }}/candidate-bundle
       - name: Verify identical producer package before extraction
         run: >-
-          python -I -B ci/verify_payload.py --bundle "${{ runner.temp }}/candidate-bundle"
-          --commit "${{ github.sha }}" --run-id "${{ github.run_id }}" --attempt "${{ github.run_attempt }}"
+          python -I -B ci/payload_ci.py verify --bundle "${{ runner.temp }}/candidate-bundle"
+          --run-id "${{ github.run_id }}" --attempt "${{ github.run_attempt }}"
           --tar-sha "${{ needs.produce.outputs.tar_sha }}" --manifest-sha "${{ needs.produce.outputs.manifest_sha }}"
           --delivery-sha "${{ needs.produce.outputs.delivery_sha }}" --extract "${{ runner.temp }}/candidate-payload"
       - run: python -m pip install -r distribution/requirements.txt

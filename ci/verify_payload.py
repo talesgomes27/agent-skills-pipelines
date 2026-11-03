@@ -63,17 +63,70 @@ def regular(root, name, limit=2000000):
     return p.read_bytes()
 
 
-def verify(source, bundle, commit, run_id, attempt, tar_sha, manifest_sha, delivery_sha, extract=None):
+def selected_bytes(source, commit, selection_path, selection_sha):
+    # The digest's provenance and approval must be established outside this verifier.
+    if selection_path is None:
+        need(selection_sha is None, 'Selection and expected digest are required together')
+        data = regular(source, 'ci/payload.json')
+        value = decode(data)
+        need('profile' not in value and 'source_commit' not in value, 'Prospective selection requires explicit opt-in')
+        return data
+    need(isinstance(selection_sha, str) and re.fullmatch(r'[0-9a-f]{64}', selection_sha),
+         'Expected selection digest is required')
+    path = Path(selection_path).absolute()
+    data = regular(Path(path.anchor), path.relative_to(path.anchor).as_posix())
+    need(sha(data) == selection_sha, 'Selection digest mismatch')
+    value = decode(data)
+    frozen_bytes = regular(source, 'ci/payload.json')
+    need(sha(frozen_bytes) == HISTORICAL_SELECTION_SHA, 'Historical selection changed')
+    frozen = decode(frozen_bytes)
+    need(isinstance(value, dict) and set(value) == set(frozen) | {'profile', 'source_commit'}, 'Selection fields')
+    need(value['profile'] == 'prospective' and value['source_commit'] == commit, 'Selection profile/source identity')
+    for key in ('format', 'baseline', 'derived', 'mode_policy'):
+        need(canonical(value[key]) == canonical(frozen[key]), 'Incompatible selection ' + key)
+    entries = value['sources']
+    need(isinstance(entries, list) and len(entries) == 82, 'Source composition')
+    for entry in entries:
+        need(isinstance(entry, dict) and set(entry) == {'path', 'bytes', 'sha256', 'mode'}, 'Source record')
+        path_ok(entry['path'])
+        need(type(entry['bytes']) is int and 0 <= entry['bytes'] <= 2000000
+             and isinstance(entry['sha256'], str) and re.fullmatch(r'[0-9a-f]{64}', entry['sha256'])
+             and entry['mode'] == '0o664', 'Source size/digest/mode')
+    need(len({e['path'].casefold() for e in entries}) == 82
+         and {e['path'] for e in entries} == {e['path'] for e in frozen['sources']}, 'Source composition/collision')
+    return data
+
+
+def committed_inputs(source, commit, names):
+    git = ['git', '--no-optional-locks', '--no-replace-objects', '--no-lazy-fetch']
+    need(subprocess.check_output(git + ['cat-file', '-t', commit], cwd=source) == b'commit\n', 'Expected a source commit')
+    tree = subprocess.check_output(git + ['ls-tree', '-rz', commit, '--', *names], cwd=source)
+    entries = {}
+    for row in tree.split(b'\0'):
+        if row:
+            meta, name = row.split(b'\t', 1)
+            mode, kind, oid = meta.split()
+            need(mode in (b'100644', b'100755') and kind == b'blob', 'Non-regular committed input')
+            entries[name.decode('utf-8')] = oid.decode('ascii')
+    need(set(entries) == set(names), 'Missing committed input')
+    for name, oid in entries.items():
+        need(regular(source, name) == subprocess.check_output(git + ['cat-file', 'blob', oid], cwd=source),
+             'Uncommitted input: ' + name)
+
+
+def verify(source, bundle, commit, run_id, attempt, tar_sha, manifest_sha, delivery_sha, extract=None,
+           *, selection_path=None, selection_sha=None):
     source, bundle = Path(source).resolve(), Path(bundle)
     need(re.fullmatch(r'[0-9a-f]{40}', commit) is not None, 'Invalid expected commit')
     for value in (tar_sha, manifest_sha, delivery_sha):
         need(re.fullmatch(r'[0-9a-f]{64}', value) is not None, 'Invalid expected digest')
     need({p.name for p in bundle.iterdir()} == {ARCHIVE, 'payload-manifest.json', 'delivery.json'}, 'Incomplete/extra artifact files')
-    selection_bytes = regular(source, 'ci/payload.json')
+    selection_bytes = selected_bytes(source, commit, selection_path, selection_sha)
     selection = decode(selection_bytes)
     need(selection['format'] == 'meta-skills-ci-selection-v1', 'Selection format')
     entries = selection['sources']
-    need(sha(canonical(entries)) == BASELINE_RECORDS_SHA, 'Baseline/mode/allowlist changed')
+    if selection_path is None:
+        need(sha(canonical(entries)) == BASELINE_RECORDS_SHA, 'Baseline/mode/allowlist changed')
     expected = {e['path']: e for e in entries}
     need(len(entries) == len(expected) == 82 and Q17 in expected, 'Missing Q17/source')
     need({n.split('/')[0] for n in expected if n.endswith('/SKILL.md')} == SKILLS, 'Eight skills required')
@@ -107,11 +160,11 @@ def verify(source, bundle, commit, run_id, attempt, tar_sha, manifest_sha, deliv
     generator_sha = sha(regular(source, 'ci/build_payload.py'))
     need(delivery['generator_sha256'] == generator_sha, 'Wrong recipe identity')
     manifest = decode(manifest_data)
-    need(manifest == {'format': 'meta-skills-ci-payload-v1', 'source_commit': commit,
+    need(manifest_data == canonical({'format': 'meta-skills-ci-payload-v1', 'source_commit': commit,
          'selection_sha256': sha(selection_bytes), 'generator_sha256': generator_sha,
          'baseline': selection['baseline'], 'sources': entries,
          'readme': {k: readme_entry[k] for k in ('sha256', 'bytes', 'mode')},
-         'manifest': {'path': 'payload-manifest.json', 'mode': '0o644', 'digest': 'external'}}, 'Incompatible manifest')
+         'manifest': {'path': 'payload-manifest.json', 'mode': '0o644', 'digest': 'external'}}), 'Incompatible manifest')
     need(canonical(manifest) == manifest_data, 'Noncanonical manifest')
     expected['README.md'] = {'bytes': len(readme), 'sha256': sha(readme), 'mode': '0o644'}
     expected['payload-manifest.json'] = {'bytes': len(manifest_data), 'sha256': manifest_sha, 'mode': '0o644'}
@@ -170,11 +223,23 @@ def main():
     p.add_argument('--manifest-sha', required=True)
     p.add_argument('--delivery-sha', required=True)
     p.add_argument('--extract', type=Path)
+    p.add_argument('--selection', type=Path, help='Explicit prospective selection; requires --selection-sha')
+    p.add_argument('--selection-sha', help='Expected selection digest from independently trusted context; not approval by itself')
     args = p.parse_args()
-    need(subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=args.source, text=True).strip() == args.commit, 'Checkout commit mismatch')
+    need((args.selection is None) == (args.selection_sha is None), 'Selection and expected digest are required together')
+    git = ['git', '--no-optional-locks', '--no-replace-objects', '--no-lazy-fetch'] if args.selection is not None else ['git']
+    need(subprocess.check_output(git + ['rev-parse', 'HEAD'], cwd=args.source, text=True).strip() == args.commit, 'Checkout commit mismatch')
+    if args.selection is not None:
+        selected_bytes(args.source.resolve(), args.commit, args.selection, args.selection_sha)
+        frozen = decode(regular(args.source, 'ci/payload.json'))
+        inputs = ['ci/payload.json', 'ci/PAYLOAD-README.md', 'ci/build_payload.py'] + [e['path'] for e in frozen['sources']]
+        committed_inputs(args.source, args.commit, inputs)
     print(json.dumps(verify(args.source, args.bundle, args.commit, args.run_id, args.attempt,
-                            args.tar_sha, args.manifest_sha, args.delivery_sha, args.extract), indent=2))
+                            args.tar_sha, args.manifest_sha, args.delivery_sha, args.extract,
+                            selection_path=args.selection, selection_sha=args.selection_sha), indent=2))
 
+
+HISTORICAL_SELECTION_SHA = '35e6d9bfba253cfde3ee91e96810933dbc9d9c994fcfbf30b30ced3773331a2d'
 
 if __name__ == '__main__':
     main()

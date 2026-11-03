@@ -14,7 +14,7 @@ Use contratos aprovados equivalentes por referência, sem recriar a coleção `d
 
 ## Entrada e retomada
 
-1. Leia as instruções locais, o estado existente e o contrato de implementação aplicável; consulte `docs/00_archetype.md` se existir ou se a classificação afetar uma decisão. Use `docs/05-implementation-plan.md` quando vier do pré-código; em handoff de auditoria, use o plano e as restrições explicitamente encaminhados. Leia requisitos e arquitetura somente nas partes necessárias à tarefa.
+1. Leia as instruções locais, o estado existente e o contrato de implementação aplicável; consulte `docs/00_archetype.md` se existir ou se a classificação afetar uma decisão. Use o plano aprovado encaminhado pelo pré-código, inclusive por referência ou na resposta; em handoff de auditoria, use o plano e as restrições explicitamente encaminhados. Leia requisitos e arquitetura somente nas partes necessárias à tarefa.
 2. Confirme o registro de aprovação do plano e a autorização para implementar. Aprovação de planejamento não concede permissão para ações externas adicionais. Sem plano aprovado, prepare o encaminhamento ao planejamento; preserve trabalho existente.
 3. Preserve `archetype: A|B|C`, stack e proveniência de `docs/00_archetype.md`, inclusive se gerado pela auditoria. Se ausente, procure declaração explícita nos contratos ou no pedido. Reconstrua apenas com evidência e registre a origem; sem classificação, esclareça antes da implementação dependente dela.
 4. Inspecione manifests, lockfiles, scripts e testes existentes para selecionar os comandos reais da stack. Registre uma linha de base do escopo afetado, distinguindo falhas preexistentes. Preserve alterações do usuário.

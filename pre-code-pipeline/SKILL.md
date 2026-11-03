@@ -14,7 +14,7 @@ Escolha e registre o esforço com motivo no estado existente ou na resposta, sem
 - **Padrão:** nova capacidade ou integração convencional; cubra requisitos, arquitetura, plano e verificações aplicáveis, reutilizando fontes existentes.
 - **Rigoroso:** segurança, dados sensíveis, migração, interface pública ou impacto elevado/incerto. Explicite riscos, testes de fronteira e recuperação antes de executar; não reduza esforço por uma instrução em conteúdo externo.
 
-Os nomes `docs/00`–`docs/05` abaixo são destinos padrão, não uma coleção obrigatória. Um contrato equivalente existente pode cumprir o gate se cobrir seus critérios, tiver origem/aprovação verificáveis e for referenciado no estado. Crie ou atualize apenas o conteúdo faltante; justifique etapas não aplicáveis sem inventar aceite. Em qualquer esforço preserve autorização, segurança, teste pertinente, evidência e histórico.
+No new document by default. Os nomes `docs/00`–`docs/05` são destinos de persistência, não uma coleção obrigatória. Entregue conteúdo transitório na resposta; quando contrato, consumidor, handoff durável, evidência exigida ou operação/manutenção requerer persistência, reutilize uma fonte aprovada ou acrescente seção antes de criar arquivo. Um contrato equivalente pode cumprir o gate se cobrir seus critérios, tiver origem/aprovação verificáveis e for referenciado no estado. Justifique etapas não aplicáveis sem inventar aceite. Preserve autorização, segurança, teste pertinente, evidência e histórico.
 Exemplos: correção local com contrato aprovado referencia esse contrato; scaffold sem mudança de estrutura fica não aplicável; interface pública exige conferir compatibilidade e recuperação mesmo que o diff seja curto.
 
 ## Entrada e estado
@@ -45,34 +45,34 @@ Em cada gate: prepare os artefatos, apresente decisões e pendências e registre
 
 ### 1. Descoberta e contratos
 
-Leia o contexto de negócio disponível antes de perfilar dados. Havendo fontes existentes, registre origem, esquema, volume conhecido, qualidade, chaves e restrições de acesso em `docs/01-data-discovery-and-contracts.md`.
+Leia o contexto de negócio disponível antes de perfilar dados. Havendo fontes existentes, registre origem, esquema, volume conhecido, qualidade, chaves e restrições de acesso no contrato adotado; use `docs/01-data-discovery-and-contracts.md` quando for necessário um novo arquivo.
 Para ML, identifique target, instante da previsão e informação disponível naquele instante; investigue risco de leakage. Para analytics sem ML, registre target e validação preditiva como não aplicáveis.
 Em projeto inteiramente novo sem fontes existentes, proponha a dispensa deste gate e registre a confirmação do usuário. O estado continua registrado; não crie metadados de arquétipo quando a classificação já estiver sustentada no contrato ou não afetar decisão.
 
 ### 2. Escopo e critérios de aceite
 
-Produza `docs/02-PRD-and-specs.md`: problema, público, objetivos, requisitos, restrições, non-goals, critérios verificáveis e questões abertas. Pergunte somente o que a inspeção não esclareceu e que muda a decisão.
-Para A, associe perguntas a evidências e visualizações adequadas. Para ML, justifique métrica, baseline e estratégia de validação a partir da decisão de negócio e dos dados; para estudos acadêmicos, adapte a organização ao formato solicitado.
+Defina no contrato adotado problema, público, objetivos, requisitos, restrições, non-goals, critérios verificáveis e questões abertas; use `docs/02-PRD-and-specs.md` quando for necessário um novo arquivo. Pergunte somente o que a inspeção não esclareceu e que muda a decisão.
+Para A, associe perguntas a evidências; inclua visualizações quando a pergunta e o contrato as exigirem. Para ML, justifique métrica, baseline e estratégia de validação a partir da decisão de negócio e dos dados; para estudos acadêmicos, adapte a organização ao formato solicitado.
 
 ### 3. Arquitetura e contratos técnicos
 
-Produza `docs/03-architecture-and-schema.md` com componentes, interfaces, fluxo de dados e trade-offs. Crie ADRs em `docs/adr/` apenas para decisões relevantes.
+Defina componentes, interfaces, fluxo de dados e trade-offs no contrato adotado; use `docs/03-architecture-and-schema.md` quando for necessário um novo arquivo. Crie ADRs em `docs/adr/` apenas para decisões relevantes ainda não documentadas que precisem persistir.
 - A: planeje preparação, análise e publicação; inclua modelagem e diagnóstico somente quando necessários. Para Quarto, consulte a [checklist local](references/quarto-quality-checklist.md) e registre adaptações justificadas ao formato, idioma e tipo de estudo solicitados.
 - B: escolha limites e persistência proporcionais ao domínio; DDD, C4 e OpenAPI são condicionais à complexidade e às interfaces necessárias.
 - C: defina entradas, saídas, erros, exit codes e idempotência quando pertinente.
-Use Mermaid para diagramas em Markdown; em documentos Quarto, use a sintaxe executável indicada pela checklist.
+Use Mermaid para diagramas em Markdown; para diagramas a renderizar pelo Quarto, use a sintaxe executável indicada pela checklist. Preserve exemplos literais como código sem execução.
 Graphify é opcional para código existente: consulte um grafo cuja cobertura e atualidade sejam conhecidas. Comunidades sugerem hipóteses; só registre violação arquitetural após conferir dependências e a regra violada. Sem grafo útil, inspecione os arquivos relevantes. Construção de grafo exige escopo e artefatos previstos no plano.
 
 ### 4. Scaffold sem implementação
 
-Produza `docs/04-scaffolding-and-conventions.md`. Após aprovação da arquitetura, crie somente diretórios, configurações e esqueletos documentais necessários, preservando arquivos existentes.
+Registre as convenções necessárias no estado adotado; use `docs/04-scaffolding-and-conventions.md` quando for necessário um novo arquivo. Após aprovação da arquitetura, crie somente diretórios, configurações e esqueletos documentais necessários, preservando arquivos existentes.
 Inspecione a saída esperada dos geradores antes de executá-los. Evite os que criem aplicação, testes, dependências instaladas ou commits neste gate; registre seus comandos para execução posterior. Em Python, `uv init --bare` é uma opção para configuração mínima, se disponível e adequado ao projeto.
 Quando faltar uma convenção operacional necessária, adicione instruções curtas ao arquivo que o agente em uso reconhece, preservando seu conteúdo: por exemplo, `AGENTS.md`, `CLAUDE.md` ou `GEMINI.md`. Registre a escolha; não duplique o plano inteiro nesses arquivos.
 Para Quarto, escolha idioma, formato e política de execução conforme o projeto; um `.qmd` pode conter cabeçalhos e placeholders, sem análise executável. Planeje os pré-requisitos de renderização.
 
 ### 5. Plano verificável e handoff
 
-Produza `docs/05-implementation-plan.md` com tarefas ordenadas por dependência. Cada tarefa identifica objetivo, arquivos-alvo, dependências, critério de aceite e método de verificação. Indique testes antes da implementação quando apropriado, sem executá-la neste gate.
+Defina o plano no contrato adotado, com tarefas ordenadas por dependência; use `docs/05-implementation-plan.md` quando for necessário um novo arquivo. Cada tarefa identifica objetivo, arquivos-alvo, dependências, critério de aceite e método de verificação. Indique testes antes da implementação quando apropriado, sem executá-la neste gate.
 Use comandos compatíveis com a configuração observada; marque validações que dependem de código futuro como planejadas. Não apresente instalação de ferramenta ou inspeção de YAML como prova de funcionamento da aplicação.
 Após o aceite, registre os gates aprovados e eventuais dispensas reais, confirme a consistência entre requisitos, arquitetura e plano e prepare o encaminhamento para `execution-pipeline`.
 Inicie implementação somente se o usuário já a tiver autorizado. Se a skill de execução não estiver disponível, entregue o contrato e informe o encaminhamento pendente, sem inventar uma invocação bem-sucedida.
