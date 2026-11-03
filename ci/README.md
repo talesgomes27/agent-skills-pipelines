@@ -1,5 +1,44 @@
 # CI híbrida da candidata 2.0.0
 
+## Seleções e limite de confiança
+
+Sem opt-in, o fluxo continua histórico. Para PRs e pushes em branches diferentes de
+`main`, o workflow habilita explicitamente `CI_PROSPECTIVE_VALIDATION=true`: o adaptador
+monta uma seleção de teste determinística a partir dos 82 caminhos congelados e dos
+blobs do SHA efetivamente executado. O digest calculado identifica essa proposta;
+não é H autorizado nem substitui o futuro manifesto versionado B/P. A seleção é
+recalculada pelos verificadores a partir do mesmo commit. Esse modo rejeita a
+combinação com parâmetros de seleção versionada e não aceita dispatch ou eventos
+privilegiados. O resumo distingue head/base do PR, SHA executado e digest testado.
+No PR, o SHA executado é o merge de teste, não o head isolado.
+
+`workflow_dispatch` pode validar uma proposta
+com `selection_commit`, `selection_path` e `selection_sha`. A fonte é sempre
+`github.sha`, a revisão da ref do evento, e deve conter este adaptador e a receita.
+Não se executa outro SHA proposto no contexto de credenciais/cache da ref do dispatch.
+O commit da seleção é separado do commit-fonte: um manifesto versionado pode apontar
+para uma revisão anterior sem tentar incluir o próprio SHA no seu conteúdo.
+[payload_ci.py](payload_ci.py) obtém o manifesto diretamente do objeto Git regular
+na revisão indicada, confere o digest esperado e encaminha os mesmos parâmetros à
+receita e aos três pontos de verificação. Bytes transportados pelo pacote ou arquivos
+locais alterados não substituem essa seleção. O adaptador apenas chama os mecanismos
+existentes; não constrói nem verifica outro formato de payload.
+
+Este workflow oferece **validação**, inclusive quando iniciado manualmente. Os
+parâmetros de dispatch são propostas, não aprovação independente. Integridade do
+digest, identidade dos commits, autorização e proveniência do valor esperado são
+condições distintas. Não há caminho autorizado de entrega/publicação: sem proteção
+e revisão efetivas verificadas, ele permanece bloqueado. Uma seleção e seu digest
+alterados no mesmo PR não passam a constituir autoridade de publicação.
+
+A futura entrega confiável depende de decisão do mantenedor sobre referência
+protegida, revisão da seleção e origem independente do digest, e de sua comprovação
+efetiva. `contents: read`, checkout sem credenciais persistidas e a ausência de
+`pull_request_target`/`workflow_run`, secrets e jobs de publicação limitam o caminho
+atual. Nenhum teste local homologa controles remotos ou substitui os gates R1–R8/R7.
+
+## Mecanismos existentes
+
 A candidata não está publicada. Este conjunto versiona a receita e os controles de CI;
 a execução remota e a aprovação da release continuam pendentes. O produto distribui
 oito skills e utilitários, sem DEL/Subagent-Optimation ou runtime próprio de agentes.
@@ -59,10 +98,11 @@ as oito skills incluindo humanizer, verifica copy/link, upgrade do snapshot loca
 controladas de recibo e retomada por pacote, sem transação do lote ou queda de energia.
 Links acompanham a fonte viva. Não utilizar perfis reais como destino de testes.
 
-A descoberta selecionada passa a conter **87 testes**: 62 oficiais anteriores mais
-25 de [test_payload.py](../tests/test_payload.py). Essa contagem não inclui o teste
+A descoberta preserva os **107 testes** anteriores e acrescenta os controles de
+[integração CI](../tests/test_payload_ci.py). O produtor executa `test_payload*.py`;
+os consumidores executam a suíte completa. Essa contagem não inclui o teste
 local experimental test_v3_isolation.py, que permanece fora da seleção. Os consumidores
-executarão a descoberta completa sem skips; o produtor executará os 25 de payload.
+executarão a descoberta completa sem skips; os 25 controles históricos permanecem intactos.
 Doctor/casos estruturais e integrações de fonte/artefato complementam os testes.
 
 ## Evidências locais reutilizadas e pendências
