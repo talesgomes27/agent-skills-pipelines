@@ -10,12 +10,20 @@ import importlib.util
 import io
 import json
 from pathlib import Path
-import shutil
+import subprocess
 import tarfile
 import tempfile
 import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
+# This revision contains the frozen sources and their historical CI inputs.
+HISTORICAL_REVISION = '66c5966ed66103275fa29a0c8ed1e6a2c1b8a383'
+
+
+def historical_bytes(path):
+    return subprocess.check_output(
+        ['git', '--no-optional-locks', '--no-replace-objects', '--no-lazy-fetch',
+         'show', HISTORICAL_REVISION + ':' + path], cwd=ROOT)
 
 
 def load(name):
@@ -35,12 +43,12 @@ class PayloadTests(unittest.TestCase):
         self.addCleanup(self.tmp.cleanup)
         self.work = Path(self.tmp.name).resolve()
         self.source = self.work/'source'
-        selected = json.loads((ROOT/'ci/payload.json').read_text(encoding='utf-8'))
+        selected = json.loads(historical_bytes('ci/payload.json'))
         self.paths = [e['path'] for e in selected['sources']]
         for rel in self.paths + ['ci/payload.json', 'ci/PAYLOAD-README.md', 'ci/build_payload.py']:
             dst = self.source/rel
             dst.parent.mkdir(parents=True, exist_ok=True)
-            shutil.copyfile(ROOT/rel, dst)
+            dst.write_bytes(historical_bytes(rel))
         self.bundle = self.work/'bundle'
         self.commit = '1'*40
         self.delivery = builder.build(self.source, self.bundle, self.commit, '123', '1')
@@ -96,7 +104,7 @@ class PayloadTests(unittest.TestCase):
         for name in (verifier.ARCHIVE, 'payload-manifest.json', 'delivery.json'):
             self.assertEqual((self.bundle/name).read_bytes(), (other/name).read_bytes())
         self.assertEqual(self.verify()['files'], 84)
-        self.assertEqual((self.work/'extract'/verifier.Q17).read_bytes(), (ROOT/verifier.Q17).read_bytes())
+        self.assertEqual((self.work/'extract'/verifier.Q17).read_bytes(), historical_bytes(verifier.Q17))
 
     def test_package_digest_mismatch(self):
         with (self.bundle/verifier.ARCHIVE).open('ab') as out:
