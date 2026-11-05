@@ -55,7 +55,7 @@ class HomologationTests(unittest.TestCase):
             data = (cls.template/entry['path']).read_bytes()
             entry.update(bytes=len(data), sha256=hashlib.sha256(data).hexdigest())
         selected = cls.template/P
-        selected.parent.mkdir(parents=True)
+        selected.parent.mkdir(parents=True, exist_ok=True)
         selected.write_bytes(encoded(cls.selection))
         cls.b = cls.commit(cls.template, 'Synthetic selection B')
         for rel in ['ci/homologation.py', '.github/workflows/homologacao.yml',
