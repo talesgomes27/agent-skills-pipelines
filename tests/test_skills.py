@@ -310,6 +310,30 @@ class InstallerTests(unittest.TestCase):
         text = 'Veja [doc](https://a.test/x), e https://b.test/y. Wiki (https://w.test/Foo_(bar)). `https://example.com/z` http://localhost:8000/'
         self.assertEqual(mod.extract(text), ['https://a.test/x', 'https://b.test/y', 'https://w.test/Foo_(bar)'])
 
+    def test_contract_copies_match_source(self):
+        repo = Path(__file__).resolve().parents[1]
+        expected = cli.CONTRACT_HEADER + (repo / 'shared/common-contract.md').read_text(encoding='utf-8')
+        for name in cli.PIPELINES:
+            with self.subTest(pipeline=name):
+                self.assertEqual((repo / name / cli.CONTRACT_COPY).read_text(encoding='utf-8'), expected)
+
+    def test_doctor_fails_on_divergent_contract_copy(self):
+        (self.repo / 'shared').mkdir()
+        (self.repo / 'shared/common-contract.md').write_text('# Contrato\n', encoding='utf-8')
+        with patch.object(cli, 'PIPELINES', ('alpha',)):
+            self.assertEqual(self.run_cli('doctor', '--skill', 'alpha')[0], 1)
+            self.assertEqual(cli.sync_shared()['written'], ['alpha/references/common-contract.md'])
+            self.assertEqual(self.run_cli('doctor', '--skill', 'alpha')[0], 0)
+            (self.repo / 'alpha/references/common-contract.md').write_text('editado', encoding='utf-8')
+            self.assertEqual(self.run_cli('doctor', '--skill', 'alpha')[0], 1)
+
+    def test_text_warnings(self):
+        long = ' '.join(['palavra'] * 31) + '.'
+        warnings = cli.text_warnings('---\nname: a\ndescription: b\n---\n' + long + ' Curta.\n')
+        self.assertEqual(warnings, ['1 sentence(s) with more than 30 words'])
+        self.assertTrue(any('9000' in w for w in cli.text_warnings('---\n---\n' + 'x ' * 4600)))
+        self.assertEqual(cli.text_warnings('---\n---\n```\n' + long + '\n```\n'), [])
+
     def test_skill_size_limit_boundary(self):
         self.assertEqual(cli.MAX_SKILL_CHARS, 10000)
         head = '---\nname: alpha\ndescription: Edit a selected document.\n---\n'
