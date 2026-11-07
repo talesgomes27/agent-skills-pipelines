@@ -10,7 +10,7 @@
       "name": "pre-code-pipeline",
       "source": "./",
       "description": "Descoberta, requisitos, arquitetura, scaffold documental e plano verificável.",
-      "version": "3.2.0",
+      "version": "3.3.0",
       "author": {
         "name": "Tales Wilhame Gomes da Silva"
       },
@@ -23,7 +23,7 @@
       "name": "execution-pipeline",
       "source": "./",
       "description": "Implementação de um plano aprovado e validação proporcional à stack.",
-      "version": "3.2.0",
+      "version": "3.3.0",
       "author": {
         "name": "Tales Wilhame Gomes da Silva"
       },
@@ -36,7 +36,7 @@
       "name": "writing-pipeline",
       "source": "./",
       "description": "Redação e revisão técnica com preservação de fatos, fontes e formato.",
-      "version": "3.2.0",
+      "version": "3.3.0",
       "author": {
         "name": "Tales Wilhame Gomes da Silva"
       },
@@ -49,7 +49,7 @@
       "name": "audit-and-refactoring-pipeline",
       "source": "./",
       "description": "Reconhecimento, diagnóstico, caracterização e refatoração incremental.",
-      "version": "3.2.0",
+      "version": "3.3.0",
       "author": {
         "name": "Tales Wilhame Gomes da Silva"
       },
@@ -62,7 +62,7 @@
       "name": "release-and-ops-pipeline",
       "source": "./",
       "description": "Saneamento, versão, artefatos, publicação autorizada e smoke tests.",
-      "version": "3.2.0",
+      "version": "3.3.0",
       "author": {
         "name": "Tales Wilhame Gomes da Silva"
       },
@@ -75,7 +75,7 @@
       "name": "scheduled-automation",
       "source": "./",
       "description": "Contrato de jobs agendados, ETL recorrente e retreino: estado, idempotência, falhas, alertas e primeira execução.",
-      "version": "3.2.0",
+      "version": "3.3.0",
       "author": {
         "name": "Tales Wilhame Gomes da Silva"
       },
@@ -88,7 +88,7 @@
       "name": "personal-data",
       "source": "./",
       "description": "Dados pessoais em análises, apps, listas e coletas: inventário, minimização, saídas agregadas, envio a terceiros e vazamento, com base na LGPD.",
-      "version": "3.2.0",
+      "version": "3.3.0",
       "author": {
         "name": "Tales Wilhame Gomes da Silva"
       },
@@ -101,7 +101,7 @@
       "name": "quarto-expert",
       "source": "./",
       "description": "Ambiente e render de projetos Quarto, teses em ABNT e manuscritos com Binder.",
-      "version": "3.2.0",
+      "version": "3.3.0",
       "author": {
         "name": "Tales Wilhame Gomes da Silva"
       },
@@ -114,7 +114,7 @@
       "name": "skill-loader",
       "source": "./",
       "description": "Descoberta e carregamento limitado de skills em biblioteca externa.",
-      "version": "3.2.0",
+      "version": "3.3.0",
       "author": {
         "name": "Tales Wilhame Gomes da Silva"
       },
