@@ -1,80 +1,45 @@
 ---
 name: release-and-ops-pipeline
-description: "Prepara e verifica releases após implementação ou auditoria aprovadas: saneamento, versão, CI, publicação autorizada e smoke tests vinculados ao artefato e destino."
+description: "Use quando o usuário pedir para preparar, versionar, publicar ou implantar uma release, ou para verificar um deploy, depois de uma implementação ou auditoria aprovada."
 ---
 
-# Preparação, publicação e verificação de releases
+# Releases e operações
 
-Entregue o artefato aprovado no destino autorizado, com evidência de identidade, execução e recuperação. O pedido pode autorizar apenas preparação local; não o amplie para commit, push, publicação de pacote ou produção.
+Entregue o artefato aprovado no destino autorizado, com evidência de identidade, execução e recuperação. Se o pedido autoriza só preparar localmente, não o amplie para commit, push, publicação de pacote ou produção.
 
-## Entrada e estado
+## Antes de começar
 
-- Leia instruções de release do projeto, handoff, `task.md`, `docs/00_archetype.md` e evidências de implementação/auditoria. Preserve classificação e proveniência. Se não houver arquétipo, use declaração explícita dos contratos/pedido; esclareça apenas se a lacuna impedir escolher o artefato correto.
-- Identifique escopo, commit/base, arquivos staged/unstaged/não rastreados relevantes, versão pretendida, artefato e destino. Preserve trabalho do usuário; não faça staging de tudo nem exija árvore limpa apagando arquivos.
-- Registre o modo: preparar, publicar preview, publicar release ou implantar produção. Confirme conta/projeto, repositório/registry, branch/tag, ambiente e efeitos indiretos conhecidos. Push pode acionar produção via CI.
-- Mantenha seção de release em `task.md`, sem sobrescrever fases anteriores: gate, identidade do artefato/commit, destino, checks, autorizações e resultado. Diferencie preparado, aguardando autorização, submetido, em execução, concluído e falhou/parcial.
-- Aprovação de gate valida os artefatos dessa etapa. Para ações externas, use a autorização já concedida quando cobrir o destino e o efeito; se faltar, apresente primeiro o resultado concreto a publicar e peça a autorização final. Mudança material de artefato/destino invalida a aprovação correspondente.
+1. Leia as instruções de release do projeto, o handoff, o estado, `docs/00_archetype.md` e as evidências da implementação ou auditoria. Sem arquétipo registrado, use o que os contratos ou o pedido dizem; pergunte só se isso impedir escolher o artefato certo.
+2. Identifique escopo, commit base, arquivos staged, unstaged e não rastreados relevantes, versão pretendida, artefato e destino. Preserve o trabalho do usuário: não faça staging de tudo nem apague arquivos para limpar a árvore.
+3. Defina o modo: **preparar**, **publicar preview**, **publicar release** ou **implantar em produção**. Confirme conta ou projeto, repositório ou registry, branch ou tag, ambiente e efeitos indiretos; um push pode acionar produção pela CI.
+4. Registre a release onde o projeto já registra estado, ou na própria resposta, sem apagar o que outras pipelines registraram: gate, artefato e commit, destino, checks, autorizações e resultado, com os estados `preparado`, `aguardando autorização`, `submetido`, `em execução`, `concluído` ou `falhou/parcial`.
 
-## Modo de condução
+## Autorização e modo
 
-- **Assistido:** quando o usuário aprova gate a gate, finalize cada gate em `aguardando_aprovacao` e espere o aceite explícito.
-- **Contínuo:** quando o usuário autoriza uma sequência concreta de preparação e operações, avance pelos gates cobertos e registre qual autorização sustentou cada ação.
-- Pare diante de mudança material do artefato ou destino, decisão bloqueante, risco de perda, falha que altere a estratégia ou ação externa fora do alcance autorizado.
-- Uma autorização para preparar localmente não autoriza commit, push, publicação ou deploy. Autorizações externas devem identificar com clareza o efeito e o destino.
+Aprovar um gate valida os artefatos daquele gate. Uma ação externa usa a autorização já dada só quando ela cobre o destino e o efeito; senão, mostre o que será publicado e peça a autorização final. Mudança material no artefato ou no destino invalida a aprovação correspondente. Preparar localmente não autoriza commit, push, publicação ou deploy, e estar autenticado não amplia a autorização.
+
+- **Assistido** (padrão): ao fim de cada gate, marque `aguardando_aprovacao` e espere o aceite.
+- **Contínuo**: se o usuário autorizou uma sequência concreta de preparação e operações, avance pelas ações cobertas e registre qual autorização sustentou cada uma. Pare diante de mudança material no artefato ou destino, decisão bloqueante, risco de perda, falha que mude a estratégia ou ação externa fora do autorizado.
 
 ## Gates
 
-Ao concluir cada gate aplicável, apresente resultado e pendências e registre o aceite real. No modo assistido, espere aprovação explícita antes de avançar. No modo contínuo, prossiga pelas ações já autorizadas. Não repita confirmações concedidas para a mesma ação. Uma etapa não executada ou dispensada não recebe sucesso fictício.
+Em cada gate, apresente resultado e pendências e registre o aceite real, sem repetir confirmação já dada para a mesma ação. Etapa não executada ou dispensada não recebe sucesso fictício.
 
-### 1. Saneamento e prontidão do conjunto de release
+1. **Saneamento.** Siga [saneamento e dados](references/pre-push-sanitation.md). Revise o que realmente será enviado, os lockfiles e as evidências dos checks; não refatore a aplicação nem migre a stack aqui. Use as ferramentas de segredos e dependências que o projeto já tem e registre escopo, versão, resultado e limites. Falha da ferramenta não significa ausência de achado, e o relatório nunca mostra o valor de um segredo. Confira os pré-requisitos do build, sem instalação global implícita.
+2. **Versão, notas e plano.** Preserve a política de versões do projeto; sem política declarada, use SemVer. Identifique a API pública e as incompatibilidades antes de propor PATCH, MINOR ou MAJOR, sem deduzir só pelo prefixo dos commits; em 0.x, quebra de compatibilidade sobe o MINOR. Atualize de forma consistente os metadados de versão autorizados, como manifest, changelog e badges. Escreva as notas a partir das mudanças reais do intervalo certo, com a `writing-pipeline` se preciso. Não recrie tag publicada nem reescreva histórico remoto. O plano define os arquivos do commit, a branch ou tag, os comandos do fluxo de release do projeto, os efeitos do push e a recuperação; commit e tag só com autorização. Se a versão muda o conteúdo do pacote, o build valida o conteúdo final.
+3. **CI e artefato.** Siga [CI e identidade de artefatos](references/ci-and-artifacts.md). Reuse os workflows e comandos do projeto; CI de teste, de publicação e de deploy são autorizações diferentes. YAML válido ou actionlint não provam que um job rodou: com execução remota autorizada, acompanhe o run do commit certo até o resultado final. Construa o artefato final e registre origem, versão, checks e digest; não troque o artefato testado por outro build sem revalidar. Mantenha separado o que foi verificado localmente e o que foi verificado na CI. No modo preparar, entregue plano e artefatos e marque as verificações remotas como pendentes.
+4. **Publicação.** Confirme que os checks obrigatórios correspondem ao conteúdo final e que a autorização cobre artefato, conta, destino e efeito. Peça a autorização da recuperação junto com a da publicação, antes da mudança externa, e use o fluxo de release do projeto em vez de um push genérico.
+   - A: [Quarto e páginas estáticas](references/archetype-a-ghpages.md) quando esse for o destino; HTML, PDF, MECA e Binder só se o contrato pedir.
+   - B: imagem, site ou serviço na plataforma escolhida, registrando o digest e o rollout real; preview não autoriza produção. Migração de banco tem plano próprio, e rollback da aplicação não desfaz dados.
+   - C: o pacote real da linguagem; em Python, confira wheel, sdist e entrypoints. GitHub Release, PyPI e outro registry são ações distintas; use identidade de menor privilégio, como trusted publishing já configurado.
 
-Consulte [saneamento e dados](references/pre-push-sanitation.md). Revise arquivos e artefatos que realmente serão enviados, lockfiles e evidências de checks. Não refatore a aplicação nem migre stack como parte de uma inspeção pré-push.
-Use ferramentas existentes para segredos e dependências quando aplicáveis, registrando escopo, versão, resultado e limitações. Falha de ferramenta não equivale a ausência de achados. Não exponha valores secretos no relatório.
-Verifique pré-requisitos do build necessário; ausência de browser/engine deve ser resolvida conforme escopo e permissões, sem instalação global implícita.
-Saída: conjunto de release delimitado, checks de prontidão e bloqueios identificados.
+   Comando aceito, URL emitida ou job iniciado não provam conclusão: registre o ID e acompanhe até o estado final, ou declare pendente. Não repita uma publicação ambígua sem verificar se ela já aconteceu.
+5. **Smoke e aceite.** Siga [smoke tests e recuperação](references/smoke-and-healthcheck.md). Confira o destino publicado e a versão do artefato, não só se uma URL responde. Teste status, conteúdo e a jornada mínima, com timeout e tentativas limitadas, sem tocar em dados reais nem em contas de usuários; smoke que escreve dados precisa de escopo e limpeza autorizados. Build ou diagnóstico local não é smoke nem deploy remoto. Com falha, interrompa a promoção, guarde logs sem segredos e recupere só conforme o plano autorizado; fora dele, apresente o diagnóstico e a ação necessária. Depois de recuperar, verifique o destino de novo. O aceite final é do usuário: build, deploy ou teste aprovados não o substituem.
 
-### 2. Versão, notas e plano de publicação
+## Estado e retomada
 
-Preserve a política de versões do projeto. Para SemVer, identifique API/contrato público e incompatibilidades antes de propor PATCH/MINOR/MAJOR; não deduza apenas do prefixo de commit.
-Prepare changelog/notas a partir das mudanças reais e do intervalo correto, usando `writing-pipeline` quando necessário. Atualize metadados locais autorizados de modo consistente; não recrie tag publicada ou reescreva histórico remoto.
-Defina arquivos do commit, branch/tag e comandos do fluxo de release existente. Commit/tag só são criados se autorizados; preparar uma proposta não exige fazê-los. Se a versão alterar o conteúdo do pacote, o build/check pertinente deve validar o conteúdo final.
-Saída: versão/notas revisáveis e plano com artefato, destino, efeitos de push e estratégia de recuperação.
+Ao parar ou transferir, deixe objetivo, modo, gate, artefato e destino, o que foi autorizado e quando, os checks e IDs reais, as pendências e o próximo passo autorizado. Ao retomar, confira base, artefato e destino antes de reaproveitar checks ou aprovações. Se o pedido termina na preparação, entregue o que está pronto e a ação pendente; não publique para completar a esteira. Sem resposta do usuário a um pedido de autorização, pare no estado atual com a ação pendente registrada.
 
-### 3. CI e artefatos verificáveis
+## Especialistas e ferramentas
 
-Consulte [CI e identidade de artefatos](references/ci-and-artifacts.md). Reutilize workflows e comandos reais da stack, com jobs e permissões proporcionais. CI de teste, publicação e deploy não são a mesma autorização.
-Valide sintaxe e semântica possíveis localmente; YAML válido ou actionlint não provam que um job executou. Quando houver execução remota autorizada, confira o run/check correspondente ao commit correto e espere resultado terminal com observação limitada.
-Construa e identifique o artefato final, registrando origem, versão, checks e digest/revisão quando aplicáveis. Não substitua o artefato testado por rebuild diferente sem revalidação pertinente.
-Saída: configuração revisada e evidências locais/remotas claramente separadas. No modo preparar, entregue o plano/artefatos e marque verificações remotas pendentes, sem disparar publicação.
-
-### 4. Publicação ou implantação autorizada
-
-Antes de agir, confirme que os checks obrigatórios correspondem ao conteúdo final e que a autorização cobre artefato, conta, destino e efeito. Prepare um procedimento de recuperação e sua autorização antes da mudança externa. Não use ferramenta genérica de push quando o projeto tem fluxo de release próprio.
-- **A:** use [publicação Quarto/Pages](references/archetype-a-ghpages.md) se esse for o destino escolhido. HTML, PDF, MECA e Binder são entregáveis condicionais, não um pacote obrigatório.
-- **B:** publique a imagem/site/serviço na plataforma escolhida; preview não autoriza produção. Registre revisão/digest e rollout real. Migração de banco exige plano de compatibilidade próprio; rollback de aplicação não desfaz dados.
-- **C:** construa o pacote/binário da linguagem real. Para Python, verifique wheel/sdist e entrypoints do artefato; publicar GitHub Release, PyPI e outro registry são ações distintas. Use identidade de menor privilégio, como trusted publishing quando já configurado e adequado.
-Comando aceito, URL emitida e job iniciado não comprovam conclusão. Registre ID do deployment/release e acompanhe até estado final ou devolva explicitamente pendente/bloqueado. Não execute novamente publicação ambígua sem verificar se ela já ocorreu.
-Saída: publicação confirmada ou estado parcial verificável, sem alegar deploy a partir de build local.
-
-### 5. Smoke tests e aceite
-
-Consulte [smoke tests e recuperação](references/smoke-and-healthcheck.md). Confira o destino realmente publicado e sua identidade de versão/artefato, não apenas disponibilidade de uma URL antiga.
-Teste status, conteúdo/contrato e jornada mínima pertinente, com timeout e tentativas limitadas. Preserve dados reais e contas de usuários; smoke com escrita exige escopo e limpeza autorizados. Diagnóstico local de engine não é smoke remoto.
-Se houver falha, interrompa promoção e preserve logs sem segredos. Execute recuperação somente conforme plano/autorização aplicável; se não estiver coberta, apresente o diagnóstico e a ação concreta necessária. Verifique novamente o destino após recuperar.
-Saída: relatório de checks, artefato/destino observado, pendências e estado real. Registre aprovação final apenas quando dada pelo usuário; build/deploy/teste aprovado tecnicamente não fabrica aceite humano.
-
-## Handoff e retomada
-
-Quando houver transferência ou retomada, use uma seção datada no estado adotado (`task.md`, índice equivalente ou resposta quando permitida), sem criar planejador paralelo nem copiar planos inteiros:
-- Objetivo, base/revisão e estado; escopo autorizado com origem/data da autorização.
-- Um executor responsável pela próxima fatia; referências verificáveis a artefatos/decisões, com pendências.
-- Checks com comando, resultado e base observada; restrições e próxima ação explicitamente autorizada ou marcada como não autorizada.
-
-Na retomada confira a base, o diff e as referências antes de reutilizar checks/aprovações. Base alterada, sozinha, não revoga autorização: revalide os contratos e checks afetados; mudança material de escopo, artefato ou destino exige resolver a decisão antes da ação dependente. Preserve alterações existentes e evidências históricas. Registre transferência de executor, sem auditoria e execução implementarem simultaneamente a mesma fatia. Handoff preparado não é execução realizada, aprovação de plano não autoriza implementação e autorização de implementação não inclui publicação. Sem autorização da próxima ação, encerre no estado preparado.
-
-## Contexto e integração
-
-Núcleo usa Git, filesystem, CLI e conectores do host disponíveis. Especialistas de CI, plataforma, empacotamento e revisão são carregados somente para a lacuna atual. Skill ausente não prova ferramenta ausente; autenticação não amplia autorização.
-Não carregue uma cadeia editorial para todo commit nem um checklist de lançamento de produto para um pacote local simples. O escopo do projeto e suas verificações obrigatórias prevalecem.
-Graphify é opcional para documentação arquitetural solicitada. Não construa ou publique grafo só porque o executável está disponível; confira cobertura, atualidade e conteúdo interno antes de expor artefatos.
-MCP/conector pode consultar runs e deployments ou executar ação já autorizada, sem servidor novo obrigatório. Registre IDs e resultados reais. Se o pedido acabar na preparação, entregue o que está pronto e a ação pendente; não publique para “completar” a esteira.
+Carregue especialistas de CI, plataforma, empacotamento ou revisão só para a lacuna atual; skill ausente não significa ferramenta ausente. Não use cadeia editorial em todo commit nem checklist de lançamento de produto num pacote local simples. Conectores podem consultar runs e deployments ou executar uma ação já autorizada. Graphify é opcional e só para documentação arquitetural pedida: não construa nem publique grafo só porque o executável existe, e confira o conteúdo interno antes de expô-lo.
