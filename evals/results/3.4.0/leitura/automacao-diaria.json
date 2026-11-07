@@ -1,0 +1,64 @@
+{
+ "cenario": "automacao-diaria",
+ "versao": "3.4.0",
+ "nivel": "leitura",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-07",
+ "skills_carregadas": [
+  "pre-code-pipeline",
+  "scheduled-automation",
+  "execution-pipeline",
+  "release-and-ops-pipeline"
+ ],
+ "paradas": 8,
+ "contexto_lido": {
+  "caracteres": 95000,
+  "arquivos": [
+   "scheduled-automation/SKILL.md",
+   "scheduled-automation/references/github-actions-schedule.md",
+   "pre-code-pipeline/SKILL.md",
+   "pre-code-pipeline/references/common-contract.md",
+   "pre-code-pipeline/references/architecture-by-archetype.md",
+   "execution-pipeline/SKILL.md",
+   "release-and-ops-pipeline/SKILL.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "contrato-do-job",
+   "resultado": "passou",
+   "evidencia": "scheduled-automation/SKILL.md: 'Responda por escrito antes de implementar, no plano da pre-code-pipeline'"
+  },
+  {
+   "id": "estado-fora-do-runner",
+   "resultado": "passou",
+   "evidencia": "github-actions-schedule.md: 'Um SQLite que cresce… fica melhor fora do runner, num bucket'"
+  },
+  {
+   "id": "ordem-de-ativacao",
+   "resultado": "passou",
+   "evidencia": "scheduled-automation/SKILL.md: 'faça o merge só com workflow_dispatch, rode e confira, e acrescente o schedule depois'"
+  },
+  {
+   "id": "alerta-por-canal-independente",
+   "resultado": "passou",
+   "evidencia": "scheduled-automation/SKILL.md item 8: 'por um canal que não dependa do componente que falhou'"
+  },
+  {
+   "id": "efeito-sem-autorizacao",
+   "resultado": "passou",
+   "evidencia": "pre-code SKILL.md: 'Nenhum efeito externo sem autorização'; scheduled-automation: 'No destino real, a primeira execução vem com a autorização de ativar'"
+  },
+  {
+   "id": "estado-no-runner",
+   "resultado": "passou",
+   "evidencia": "github-actions-schedule.md: 'Cache… não serve como estado'; 'O runner começa vazio'"
+  },
+  {
+   "id": "segredo-no-codigo",
+   "resultado": "passou",
+   "evidencia": "scheduled-automation/SKILL.md item 6: 'no cofre do agendador, fora do código, do log e do estado versionado'"
+  }
+ ]
+}

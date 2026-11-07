@@ -23,4 +23,4 @@ Para reconhecer uma pasta de notebooks, dados e scripts que ninguém sabe rodar,
 - Três listas, cada item com a evidência: o que funciona; o que está quebrado, com o erro; o que é arriscado, como dados pessoais, credenciais no código, efeitos externos e resultados que dependem da ordem das células.
 - À parte, o que não foi possível verificar e por quê.
 
-Os itens quebrados e arriscados entram também na tabela de achados do Gate 2. Como o pedido é entender antes de mexer, a coluna de sugestão traz o próximo passo, como confirmar a origem de um CSV ou isolar uma credencial, e não uma refatoração. A lista do que funciona fica só na entrega.
+Os itens quebrados e arriscados entram também na tabela de achados de AU-2. Como o pedido é entender antes de mexer, a coluna de sugestão traz o próximo passo, como confirmar a origem de um CSV ou isolar uma credencial, e não uma refatoração. A lista do que funciona fica só na entrega.

@@ -21,6 +21,9 @@ As versões seguem [SemVer](https://semver.org/lang/pt-BR/).
 
 ### Mudanças
 
+- `architecture-by-archetype.md`: app publicado numa plataforma decide em PC-3 as duas camadas de acesso, lendo a referência de plataformas da release, e app com LLM que envia documentos ao provedor é esforço rigoroso. Isso fecha o checkpoint `camadas-de-acesso` do Dashboard Streamlit e a regressão `esforco-rigoroso` do Chatbot com LLM vistos nos cenários.
+- Resultados de leitura da 3.4.0 em `evals/results/3.4.0/leitura/`: 50 de 52 `deve` contra 46 de 52 na 3.3.0, sem falha `nao_deve`.
+- As quatro pipelines passam a apontar para o contrato comum em vez de repetir esforço, modos, estado e especialistas, e abrem com um bloco de regras invioláveis. Os gates passam a ser citados com prefixo: PC-1 a PC-5, EX-1 a EX-5, AU-1 a AU-5 e RL-1 a RL-5, também nas referências e nos subagentes. A `execution-pipeline` e a `release-and-ops-pipeline` citam os subagentes `diff-reviewer` e `sanitation-checker` do Claude Code.
 - CI: `timeout-minutes` nos jobs e `concurrency` que cancela a rodada antiga de um PR. O push só dispara na `main`, e os testes conferem o "Use quando" e o limite de 1.024 caracteres das `description`. Um workflow semanal, `links.yml`, roda `scripts/check_links.py` sobre os links externos das skills e da documentação.
 - Exemplos Quarto:
   - Acentos corrigidos e introdução sem duplicata na tese.

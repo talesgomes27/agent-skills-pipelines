@@ -1,0 +1,41 @@
+{
+ "cenario": "tese-sem-rede",
+ "versao": "3.4.0",
+ "nivel": "leitura",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-07",
+ "skills_carregadas": [
+  "quarto-expert"
+ ],
+ "paradas": 0,
+ "contexto_lido": {
+  "caracteres": 18000,
+  "arquivos": [
+   "quarto-expert/SKILL.md",
+   "quarto-expert/references/offline-diagnostics.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "carrega-quarto-expert-ambiente",
+   "resultado": "passou",
+   "evidencia": "quarto-expert description: 'máquina sem rede… tese ou trabalho acadêmico em ABNT'"
+  },
+  {
+   "id": "ordem-de-busca-do-python",
+   "resultado": "passou",
+   "evidencia": "quarto-expert SKILL.md: 'Procure nesta ordem: QUARTO_PYTHON… jupyter: ou kernelspec… ambiente virtual do projeto e o python3 do PATH'"
+  },
+  {
+   "id": "o-que-precisa-estar-na-maquina",
+   "resultado": "passou",
+   "evidencia": "quarto-expert SKILL.md: 'a distribuição LaTeX… _extensions/, as fontes, o arquivo CSL e a bibliografia. Liste o que falta'"
+  },
+  {
+   "id": "instala-sem-aceite",
+   "resultado": "passou",
+   "evidencia": "offline-diagnostics.md: 'Instalação… exige autorização própria'; quarto-expert: 'Não instale hooks'; 'informe o comando de instalação, que fica a critério do usuário'"
+  }
+ ]
+}

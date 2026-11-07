@@ -1,0 +1,28 @@
+{
+ "cenario": "callout-e-tabela",
+ "versao": "3.4.0",
+ "nivel": "leitura",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-07",
+ "skills_carregadas": [],
+ "paradas": 0,
+ "contexto_lido": {
+  "caracteres": 8000,
+  "arquivos": [
+   "quarto-expert/SKILL.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "so-a-quarto-authoring",
+   "resultado": "passou",
+   "evidencia": "quarto-expert/SKILL.md: 'Para autoria e sintaxe (callouts, tabelas…) use a quarto-authoring da Posit'; a description não cobre autoria"
+  },
+  {
+   "id": "carrega-quarto-expert",
+   "resultado": "passou",
+   "evidencia": "quarto-expert description: 'diagnóstico de ambiente ou de render… tese… Binder', sem autoria"
+  }
+ ]
+}

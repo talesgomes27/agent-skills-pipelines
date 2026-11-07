@@ -1,0 +1,63 @@
+{
+ "cenario": "api-com-migracao",
+ "versao": "3.4.0",
+ "nivel": "leitura",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-07",
+ "skills_carregadas": [
+  "pre-code-pipeline",
+  "execution-pipeline",
+  "release-and-ops-pipeline"
+ ],
+ "paradas": 5,
+ "contexto_lido": {
+  "caracteres": 55000,
+  "arquivos": [
+   "pre-code-pipeline/SKILL.md",
+   "pre-code-pipeline/references/common-contract.md",
+   "pre-code-pipeline/references/architecture-by-archetype.md",
+   "execution-pipeline/SKILL.md",
+   "execution-pipeline/references/archetype-b.md",
+   "release-and-ops-pipeline/SKILL.md",
+   "release-and-ops-pipeline/references/db-migrations.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "referencia-de-migracoes",
+   "resultado": "passou",
+   "evidencia": "architecture-by-archetype.md: 'a release-and-ops-pipeline tem a referência de migrações'; archetype-b.md aponta o mesmo"
+  },
+  {
+   "id": "etapas-compativeis",
+   "resultado": "passou",
+   "evidencia": "db-migrations.md: 'Mudança em etapas compatíveis... Expandir'"
+  },
+  {
+   "id": "backup-testado",
+   "resultado": "passou",
+   "evidencia": "db-migrations.md: 'Faça backup e teste a restauração antes da mudança'"
+  },
+  {
+   "id": "autorizacao-separada",
+   "resultado": "passou",
+   "evidencia": "db-migrations.md: 'autorização própria, separada da autorização do deploy'"
+  },
+  {
+   "id": "efeito-sem-autorizacao",
+   "resultado": "passou",
+   "evidencia": "common-contract.md: 'Nenhum efeito externo sem autorização... migração'"
+  },
+  {
+   "id": "migra-sem-backup-ou-aceite",
+   "resultado": "passou",
+   "evidencia": "archetype-b.md: 'Aplicar em produção é release'; db-migrations.md pede backup e a autorização de quem roda"
+  },
+  {
+   "id": "senha-sem-hash",
+   "resultado": "passou",
+   "evidencia": "archetype-b.md: 'senha com hash de uma biblioteca mantida (Argon2 ou bcrypt)'"
+  }
+ ]
+}

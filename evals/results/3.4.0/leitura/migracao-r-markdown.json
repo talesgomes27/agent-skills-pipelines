@@ -1,0 +1,37 @@
+{
+ "cenario": "migracao-r-markdown",
+ "versao": "3.4.0",
+ "nivel": "leitura",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-07",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 0,
+ "contexto_lido": {
+  "caracteres": 18000,
+  "arquivos": [
+   "execution-pipeline/SKILL.md",
+   "execution-pipeline/references/archetype-a.md",
+   "pre-code-pipeline/references/common-contract.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "quarto-authoring-da-posit",
+   "resultado": "passou",
+   "evidencia": "execution-pipeline/references/archetype-a.md: 'consulte... a `quarto-authoring` da Posit, para autoria'; a skill está indisponível, mas o apontamento é claro"
+  },
+  {
+   "id": "conferencia-de-equivalencia",
+   "resultado": "passou",
+   "evidencia": "archetype-a.md: 'compare código, resultados, bibliografia, labels, navegação e assets... renomear arquivo... não prova equivalência'"
+  },
+  {
+   "id": "efeito-sem-autorizacao",
+   "resultado": "passou",
+   "evidencia": "execution-pipeline/SKILL.md: 'Implementar não inclui commit, push, publicação ou deploy'"
+  }
+ ]
+}

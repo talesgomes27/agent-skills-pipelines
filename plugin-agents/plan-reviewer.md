@@ -1,6 +1,6 @@
 ---
 name: plan-reviewer
-description: Use quando a pre-code-pipeline chega ao Gate 5 e o plano de implementação está pronto para o aceite do usuário. Use proativamente antes de pedir esse aceite e espere o relatório antes de pedi-lo. Só lê e relata.
+description: Use quando a pre-code-pipeline chega ao PC-5 e o plano de implementação está pronto para o aceite do usuário. Use proativamente antes de pedir esse aceite e espere o relatório antes de pedi-lo. Só lê e relata.
 tools: Read, Grep, Glob
 ---
 
