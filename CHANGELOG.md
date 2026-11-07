@@ -6,6 +6,7 @@ As versões seguem [SemVer](https://semver.org/lang/pt-BR/).
 
 ### Novo
 
+- Pasta `evals/` com o formato de cenários, gatilhos e resultados por versão, e `tests/test_evals.py` conferindo esse formato sem chamar modelo. O `AGENTS.md` passa a permitir avaliações nessa pasta, sem framework nem dependência nova.
 - Três subagentes de revisão do Claude Code, que só leem e relatam, declarados nas entradas do marketplace e chamados pela descrição: `pre-code-pipeline:plan-reviewer` no Gate 5 do planejamento, `execution-pipeline:diff-reviewer` no Gate 5 da execução e `release-and-ops-pipeline:sanitation-checker` no saneamento da release. Eles relatam sem editar e não substituem o aceite do usuário.
 
 ### Mudanças

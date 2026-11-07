@@ -1,9 +1,10 @@
 """Confere os links externos das skills e da documentação.
 
 Uso: python scripts/check_links.py [--timeout 15]
-Sai com 1 quando algum link responde 404 ou 410 ou o domínio não resolve.
-Respostas 401, 403 e 429, conexão recusada e tempo esgotado são comuns em
-sites que recusam robôs e só geram aviso.
+Sai com 1 quando algum link responde 4xx fora de 401, 403, 405 e 429, ou
+quando o domínio não resolve. Respostas 401, 403, 405, 429 e 5xx, conexão
+recusada e tempo esgotado só geram aviso: são comuns em sites que recusam
+robôs ou estão fora do ar por pouco tempo. Domínios de exemplo são ignorados.
 """
 import argparse
 import re
@@ -29,9 +30,9 @@ def sources():
 def extract(text):
     out = []
     for url in URL.findall(text):
-        url = url.rstrip('.,;:')
+        url = url.rstrip('.,;:*_')
         while url.endswith(')') and url.count(')') > url.count('('):
-            url = url[:-1].rstrip('.,;:')
+            url = url[:-1].rstrip('.,;:*_')
         if not SKIP_HOSTS.match(url):
             out.append(url)
     return out
@@ -72,7 +73,7 @@ def main():
         code = status(url, args.timeout)
         if isinstance(code, int) and code < 400:
             continue
-        soft = code in SOFT or (isinstance(code, str) and code.startswith('rede'))
+        soft = code in SOFT or (isinstance(code, int) and code >= 500) or (isinstance(code, str) and code.startswith('rede'))
         broken += not soft
         print(('AVISO' if soft else 'QUEBRADO'), code, url, '(' + str(where) + ')')
     print(str(broken) + ' link(s) quebrado(s)')
