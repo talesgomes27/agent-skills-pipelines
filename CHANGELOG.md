@@ -2,6 +2,13 @@
 
 As versões seguem [SemVer](https://semver.org/lang/pt-BR/).
 
+## [Não publicado]
+
+### Mudanças
+
+- `scheduled-automation`: o agente propõe ao usuário um minuto fora da hora cheia em vez de escolher sozinho, e a referência do GitHub Actions ganha a receita do SQLite num bucket: baixar dentro do `concurrency`, gerar a cópia com `VACUUM INTO`, conferir com `integrity_check`, subir com nome datado e manter as versões anteriores. O aviso de falha do próprio GitHub conta como alerta independente quando chega ao usuário.
+- A arquitetura de A na `pre-code-pipeline` passa a definir, para previsão de séries, validação por origem móvel, baseline ingênuo sazonal e erro escalado como o MASE. Quando a diferença entre modelos não se sustenta, o agente recomenda o mais simples. O retreino em `model-in-production.md` usa o mesmo protocolo.
+
 ## [3.1.0] - 2026-11-07
 
 Comparada com a 3.0.0 (`1c26256`). Acrescenta a skill `personal-data`, ajustes de processo e conteúdo técnico para web, apps com LLM, modelo em produção e notebooks herdados, sem quebra de compatibilidade.
