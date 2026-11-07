@@ -2,7 +2,9 @@
 
 As versões seguem [SemVer](https://semver.org/lang/pt-BR/).
 
-## [Não publicado]
+## [2.1.0] - 2026-11-07
+
+Comparada com a 2.0.0 (`014ec10`). Adapta as pipelines a ciência de dados, dashboards em Streamlit e Shiny e automações, sem quebra de compatibilidade.
 
 ### Mudanças
 
@@ -17,6 +19,12 @@ As versões seguem [SemVer](https://semver.org/lang/pt-BR/).
 ### Novo
 
 - `release-and-ops-pipeline/references/data-app-platforms.md`, para publicar no Streamlit Community Cloud e no shinyapps.io: dependências, segredos, acesso privado, hibernação e smoke de app privado. O Posit Connect fica com a skill `deploy-to-connect` da Posit.
+
+### Como atualizar
+
+- No Claude Code, rode `claude plugin marketplace update agent-skills-pipelines` e depois `claude plugin update <plugin>` para cada plugin instalado.
+- Instalações feitas com `scripts/skills.py` recebem a 2.1.0 com `--update`. Cópias editadas à mão continuam protegidas.
+- As skills oficiais do Streamlit, do Shiny e da Posit não vêm com este repositório; a seção "Skills oficiais de frameworks" do README mostra como instalá-las.
 
 ## [2.0.0] - 2026-11-07
 
