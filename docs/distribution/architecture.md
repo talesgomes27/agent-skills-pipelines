@@ -20,7 +20,7 @@ No Windows, use `py -3 -m venv .venv` e `.venv\Scripts\python.exe`; a CLI não p
 |---|---|---|---|
 | Codex | `.agents/skills/` | `~/.agents/skills/` | `--agent codex` |
 | Claude Code | `.claude/skills/` | `~/.claude/skills/` | `--agent claude` |
-| Claude Code, pelo marketplace | — | Cache de plugins | `.claude-plugin/marketplace.json`, um plugin por skill |
+| Claude Code, pelo marketplace | — | Cache de plugins | `.claude-plugin/marketplace.json`, um plugin por skill e os pacotes `essencial` e `completo` |
 | Antigravity App/IDE | `.agents/skills/` | `~/.gemini/config/skills/` | `--agent antigravity` |
 | Antigravity CLI | `.agents/skills/` | `~/.gemini/antigravity-cli/skills/` | `--agent antigravity-cli` |
 | Outro framework | Pasta explícita | Pasta explícita | `--destination PATH` |
@@ -40,7 +40,7 @@ O padrão é a pasta do projeto atual; `--scope user` instala no perfil. Os cami
 | `release` | `release-and-ops-pipeline` |
 | `library` | `skill-loader` |
 
-Bundles agrupam skills e mais nada; ferramentas e MCPs que uma skill cite você instala à parte. Dá para repetir `--bundle` e `--skill`, combiná-los e tirar nomes com `--exclude`. Instalar tudo exige `--all`.
+Os pacotes `essencial` (pre-code, execution e release, mais a `personal-data`) e `completo` valem só para o marketplace do Claude Code; o instalador usa os bundles desta tabela. Bundles agrupam skills e mais nada; ferramentas e MCPs que uma skill cite você instala à parte. Dá para repetir `--bundle` e `--skill`, combiná-los e tirar nomes com `--exclude`. Instalar tudo exige `--all`.
 
 ```bash
 # Ver o plano sem gravar nada

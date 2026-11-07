@@ -131,6 +131,45 @@
       "skills": [
         "./skill-loader"
       ]
+    },
+    {
+      "name": "essencial",
+      "source": "./",
+      "description": "Pacote com as pipelines de planejamento, execução e release e a skill de dados pessoais. Instala esses quatro plugins como dependências.",
+      "version": "3.3.0",
+      "author": {
+        "name": "Tales Wilhame Gomes da Silva"
+      },
+      "license": "MIT",
+      "skills": [],
+      "dependencies": [
+        "pre-code-pipeline",
+        "execution-pipeline",
+        "release-and-ops-pipeline",
+        "personal-data"
+      ]
+    },
+    {
+      "name": "completo",
+      "source": "./",
+      "description": "Pacote com todas as skills da biblioteca. Instala cada uma como dependência.",
+      "version": "3.3.0",
+      "author": {
+        "name": "Tales Wilhame Gomes da Silva"
+      },
+      "license": "MIT",
+      "skills": [],
+      "dependencies": [
+        "pre-code-pipeline",
+        "execution-pipeline",
+        "writing-pipeline",
+        "audit-and-refactoring-pipeline",
+        "release-and-ops-pipeline",
+        "scheduled-automation",
+        "personal-data",
+        "quarto-expert",
+        "skill-loader"
+      ]
     }
   ]
 }

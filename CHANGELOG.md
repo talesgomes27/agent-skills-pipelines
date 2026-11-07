@@ -6,6 +6,7 @@ As versões seguem [SemVer](https://semver.org/lang/pt-BR/).
 
 ### Novo
 
+- Pacotes `essencial` (pipelines de planejamento, execução e release, mais a `personal-data`) e `completo` (as nove skills) no marketplace do Claude Code. Eles instalam os plugins das skills pela chave `dependencies`, e o README passa a instalar o `essencial`.
 - Branch `stable`, que só avança por fast-forward na release. O README instala o marketplace com `@stable` e clona a `stable`, e um teste impede voltar a apontar para a `main`. O `/preparar-release` avança a `stable` depois da tag e confere no smoke.
 - Skill de terceiro é código: o contrato comum pede origem oficial, versão fixada e leitura dos scripts antes de rodar, e o `exact` da `skill-loader` lista os scripts da skill encontrada.
 - Bloco de handoff em YAML no contrato comum (pipeline, gate, estado, esforço, aprovações com evidência, autorizações vigentes, próximo passo e pendências), no topo do `task.md` ou na issue. Uma linha sem evidência não autoriza nada.

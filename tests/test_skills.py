@@ -363,9 +363,23 @@ class InstallerTests(unittest.TestCase):
         repo = Path(__file__).resolve().parents[1]
         c = cli.read_json(repo / 'distribution/catalog.json')
         plugins = cli.read_json(repo / '.claude-plugin/marketplace.json')['plugins']
-        self.assertEqual([p['name'] for p in plugins], c['skills'])
-        for p in plugins:
+        bundles = [p for p in plugins if p['name'] in ('essencial', 'completo')]
+        skills = [p for p in plugins if p not in bundles]
+        self.assertEqual([p['name'] for p in skills], c['skills'])
+        for p in skills:
             self.assertEqual((p['source'], p['skills'], p['version']), ('./', ['./' + p['name']], c['release']))
+        self.assertEqual([p['name'] for p in bundles], ['essencial', 'completo'])
+        for p in bundles:
+            self.assertEqual((p['source'], p['version']), ('./', c['release']))
+            self.assertTrue(p['dependencies'])
+            self.assertLessEqual(set(p['dependencies']), set(c['skills']))
+            self.assertEqual(set(p), {'name', 'source', 'description', 'version', 'author', 'license', 'skills', 'dependencies'})
+            self.assertEqual(p['skills'], [])
+            self.assertEqual(len(p['dependencies']), len(set(p['dependencies'])))
+        self.assertEqual(bundles[0]['dependencies'], ['pre-code-pipeline', 'execution-pipeline', 'release-and-ops-pipeline', 'personal-data'])
+        self.assertEqual(set(bundles[1]['dependencies']), set(c['skills']))
+        for folder in ('skills', 'agents', 'commands', 'hooks'):
+            self.assertFalse((repo / folder).exists(), 'pasta na raiz seria carregada pelos pacotes: ' + folder)
 
 
 if __name__ == '__main__':
