@@ -6,6 +6,8 @@ As versões seguem [SemVer](https://semver.org/lang/pt-BR/).
 
 ### Novo
 
+- Contrato comum das pipelines em `shared/common-contract.md`: regras invioláveis, escala única de esforço (com a regra nova de que vale o maior esforço declarado), tabela de quando implementar está autorizado, modos, estado e retomada, e especialistas. `scripts/skills.py sync-shared` gera a cópia em `references/common-contract.md` de cada pipeline, e o doctor falha quando ela difere da fonte.
+- O doctor avisa, sem falhar, acima de 9.000 caracteres no `SKILL.md` e em frases com mais de 30 palavras.
 - Formulário de issue "A skill errou" (`.github/ISSUE_TEMPLATE/skill-errou.yml`). O `AGENTS.md` pede que cada issue aceita vire primeiro um cenário que falha, no mesmo PR da correção.
 - Linha de base da 3.3.0 em `evals/results/3.3.0/`, com o claude-sonnet-5-5 no Claude Code:
   - no nível de leitura, os 17 cenários e os 37 gatilhos: 46 de 52 checkpoints `deve` aprovados, nenhuma falha `nao_deve` e todos os gatilhos como esperado;

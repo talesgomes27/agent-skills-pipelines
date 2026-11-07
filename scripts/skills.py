@@ -18,6 +18,45 @@ COMPONENTS = ('SKILL.md', 'references', 'scripts', 'examples', 'assets', 'agents
 IGNORE = shutil.ignore_patterns('__pycache__', '*.pyc', '.quarto', '_site', '.git', '.venv')
 # Cerca de 4 mil tokens: abaixo dos 5 mil recomendados pela especificação e recolocados pelo Claude Code após a compactação (docs/maintainers.md).
 MAX_SKILL_CHARS = 10000
+WARN_SKILL_CHARS = 9000
+LONG_SENTENCE_WORDS = 30
+CONTRACT_COPY = 'references/common-contract.md'
+CONTRACT_HEADER = '<!-- Gerado de shared/common-contract.md por `scripts/skills.py sync-shared`; não edite aqui. -->\n\n'
+PIPELINES = ('pre-code-pipeline', 'execution-pipeline', 'audit-and-refactoring-pipeline', 'release-and-ops-pipeline')
+
+
+def shared_contract():
+    return REPO / 'shared/common-contract.md'
+
+
+def contract_text():
+    return CONTRACT_HEADER + shared_contract().read_text(encoding='utf-8')
+
+
+def sync_shared():
+    text, written = contract_text(), []
+    for name in PIPELINES:
+        target = REPO / name / CONTRACT_COPY
+        if not target.exists() or target.read_text(encoding='utf-8') != text:
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_text(text, encoding='utf-8')
+            written.append(str(target.relative_to(REPO)))
+    return {'source': 'shared/common-contract.md', 'written': written}
+
+
+def text_warnings(text):
+    warnings = []
+    if len(text) > WARN_SKILL_CHARS:
+        warnings.append('SKILL.md has %d characters; warning above %d' % (len(text), WARN_SKILL_CHARS))
+    body = re.sub(r'(?ms)^[ \t]*(`{3,}|~{3,})[^\n]*\n.*?^[ \t]*\1[ \t]*(?:\n|$)', '', text.split('---', 2)[-1])
+    long = 0
+    for line in body.splitlines():
+        for sentence in re.split(r'(?<=[.!?])\s+', line):
+            if len(sentence.split()) > LONG_SENTENCE_WORDS:
+                long += 1
+    if long:
+        warnings.append('%d sentence(s) with more than %d words' % (long, LONG_SENTENCE_WORDS))
+    return warnings
 
 
 def read_json(path):
@@ -267,7 +306,7 @@ def install(args, names, release):
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('command', choices=('list', 'detect', 'manifest', 'install', 'doctor'))
+    parser.add_argument('command', choices=('list', 'detect', 'manifest', 'install', 'doctor', 'sync-shared'))
     parser.add_argument('--skill', action='append')
     parser.add_argument('--bundle', action='append')
     parser.add_argument('--all', action='store_true')
@@ -284,6 +323,8 @@ def main(argv=None):
         c = catalog()
         if args.command == 'list':
             result = c
+        elif args.command == 'sync-shared':
+            result = sync_shared()
         elif args.command == 'detect':
             result = {'candidates': detect(), 'executables': {a: shutil.which(exe) for a, exe in [('codex', 'codex'), ('claude', 'claude'), ('antigravity-cli', 'agy')]}}
         else:
@@ -301,6 +342,14 @@ def main(argv=None):
                 for n in names:
                     try:
                         check = validate_skill(root / n, n)
+                        if not args.destination:
+                            if n in PIPELINES and shared_contract().exists():
+                                copy = root / n / CONTRACT_COPY
+                                if not copy.exists() or copy.read_text(encoding='utf-8') != contract_text():
+                                    raise ValueError(n + ': ' + CONTRACT_COPY + ' differs from shared/common-contract.md; run scripts/skills.py sync-shared')
+                            warnings = text_warnings((root / n / 'SKILL.md').read_text(encoding='utf-8'))
+                            if warnings:
+                                check['warnings'] = warnings
                         receipt = state['skills'].get(n)
                         if receipt:
                             folder = root / n

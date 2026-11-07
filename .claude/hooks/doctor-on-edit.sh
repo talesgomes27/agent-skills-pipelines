@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
-# PostToolUse: depois de editar um SKILL.md ou uma referência, roda o doctor e devolve a falha ao Claude.
+# PostToolUse: depois de editar um SKILL.md, uma referência ou o contrato comum, roda o doctor e devolve a falha ao Claude.
 file=$(jq -r '.tool_input.file_path // empty')
 case "$file" in
   */.claude/*) exit 0 ;;  # skills do próprio projeto: o doctor não as confere
+  */shared/*.md) /usr/bin/python3 "${CLAUDE_PROJECT_DIR:-$(pwd)}/scripts/skills.py" sync-shared >/dev/null ;;  # gera as cópias antes do doctor
   */SKILL.md|*/references/*.md) ;;
   *) exit 0 ;;
 esac
