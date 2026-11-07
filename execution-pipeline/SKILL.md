@@ -10,8 +10,8 @@ Implemente o plano em fatias pequenas e verificáveis, com evidência de que fun
 ## Antes de começar
 
 1. Leia as instruções locais (`AGENTS.md`, `CLAUDE.md`, `GEMINI.md`), o estado do projeto e o plano aprovado: `docs/05-implementation-plan.md` ou o plano aprovado na conversa, vindos do pré-código, ou o plano e as restrições encaminhados por uma auditoria. Leia requisitos e arquitetura só nas partes que a tarefa usa.
-2. Confirme que o plano foi aprovado e que implementar está autorizado. Vale a aprovação registrada no estado do projeto ou dada pelo usuário na conversa. Sem plano aprovado, pare e encaminhe para `pre-code-pipeline`.
-3. Use o arquétipo registrado em `docs/00_archetype.md` ou no contrato: A = dados/Quarto, B = software/APIs, C = CLI/automação. Sem registro, infira pelo contexto quando for óbvio (um script de linha de comando é C) e diga que inferiu; pergunte só quando a escolha muda uma decisão.
+2. Confirme que o plano foi aprovado e que implementar está autorizado. Vale a aprovação registrada no estado do projeto ou dada pelo usuário na conversa. Sem plano aprovado, pare e encaminhe para `pre-code-pipeline`, exceto numa tarefa pequena: local (arquivos do projeto ou os que o usuário apontou), reversível, sem efeito externo (rede, contas, mensagens, produção) e sem mudar interface que outro sistema usa. Nela o pedido é o plano: diga em poucas linhas o que vai fazer e como vai verificar, implemente e verifique sem abrir os gates. Se ela mexe em arquivos do usuário, mostre antes o que vai mudar, não sobrescreva nada e deixe como desfazer.
+3. Use o arquétipo registrado em `docs/00_archetype.md` ou no contrato: A = análise e modelos, B = aplicações (site, API, dashboard), C = automações (script, CLI, job agendado, ETL). Sem registro, infira pelo contexto quando for óbvio (um script de linha de comando é C) e diga que inferiu; pergunte só quando a escolha muda uma decisão.
 4. Descubra os comandos reais em manifests, lockfiles, scripts e CI. Rode os checks afetados antes de mudar qualquer coisa e anote o que já falhava. Falha preexistente fora do escopo não bloqueia a entrega, mas aparece no relatório separada das falhas novas.
 5. Preserve as alterações do usuário que já estão na árvore.
 
@@ -26,7 +26,8 @@ Diga qual escolheu e por quê: **leve** para correção local sem mudar interfac
 - Não enfraqueça testes nem troque dados reais por sintéticos para mostrar sucesso.
 - Valide com as ferramentas do projeto, por exemplo `uv run pytest` e `uv run ruff check .`. Comece pelos checks afetados e amplie conforme o risco.
 - Mantenha a stack exigida: não troque biblioteca, framework, estimador ou formato por conveniência. Se faltar algo indispensável, bloqueie só a tarefa afetada e explique o que falta.
-- Testes, migrações, notebooks e builds executam código. Rode em ambiente de desenvolvimento ou teste, nunca contra produção, e não instale nada globalmente.
+- Testes, migrações, notebooks e builds executam código. Rode em ambiente de desenvolvimento ou teste, nunca contra produção salvo a leitura do item seguinte, e não instale nada globalmente.
+- Ler dados reais com uma credencial só de leitura que o usuário autorizou vale quando o plano prevê; o que for para testes, logs ou relatórios segue a política de dados. Escrever, enviar mensagem, cobrar ou publicar usa o recurso de teste do plano (banco, pasta, chat ou conta) ou uma autorização específica para aquela execução.
 
 ## Modo
 
@@ -37,7 +38,7 @@ Implementar não inclui commit, push, publicação ou deploy. Faça essas açõe
 
 ## Gates
 
-Leia só a referência do arquétipo confirmado: [A](references/archetype-a.md), [B](references/archetype-b.md) ou [C](references/archetype-c.md). Em projeto híbrido, leia a segunda apenas para a interface que a exige.
+Leia só a referência do arquétipo confirmado: [A](references/archetype-a.md), [B](references/archetype-b.md) ou [C](references/archetype-c.md). Em projeto híbrido, leia também a do domínio secundário, só nas partes que ele usa.
 
 1. **Núcleo e contratos.** A menor fatia de lógica do plano, na estrutura e na linguagem existentes, com testes de contratos, limites e falhas relevantes.
 2. **Integração.** Ligue a lógica à fonte de dados, API, notebook, serviço ou CLI prevista e rode o fluxo principal em ambiente controlado, incluindo as falhas de fronteira importantes.
@@ -55,7 +56,7 @@ Ao retomar, confira a base e o diff antes de reaproveitar checks anteriores e re
 
 ## Especialistas e ferramentas
 
-Carregue outra skill só para uma lacuna concreta da tarefa: `quarto-expert` para Quarto, `writing-pipeline` para revisão editorial. Skill ausente não significa ferramenta ausente; consulte a documentação oficial da versão em uso. Graphify, MCPs e conectores são opcionais, e o que eles sugerirem precisa ser confirmado no código.
+Carregue outra skill só para uma lacuna concreta da tarefa: `quarto-expert` para Quarto, `writing-pipeline` para revisão editorial, a skill oficial do framework quando instalada, como `developing-with-streamlit` ou `shiny-for-python`. A especialista diz como fazer; escopo, gates e autorizações continuam os desta skill. Skill ausente não significa ferramenta ausente; consulte a documentação oficial da versão em uso. Graphify, MCPs e conectores são opcionais, e o que eles sugerirem precisa ser confirmado no código.
 
 ## Entrega
 

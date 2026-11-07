@@ -9,16 +9,17 @@ Vetorização ou troca de biblioteca pode alterar precisão, ordenação, tratam
 Leakage, split, seed, estimador e métrica são decisões metodológicas que podem mudar resultados. Faça correção aprovada com critérios próprios, sem chamá-la de refatoração equivalente.
 Reorganização de relatório, idioma, política de cache, estética, DPI e formato dependem do destino e pedido. Não introduza SHAP/modelos em análise descritiva nem migre R Markdown/ambiente só por preferência. Mudança de engine ou dependências é migração separada, com paridade avaliada.
 
-## B: serviços, APIs e interfaces
+## B: aplicações, APIs e dashboards
 
 Extraia serviços/repositórios apenas quando separar responsabilidade ou reduzir acoplamento real; não crie camadas para todo controlador.
 Preserve schema, status, erros, autorização, transações, concorrência e compatibilidade dos consumidores. Otimizações SQL precisam preservar resultados, ordenação contratada e garantias transacionais. Índice/migração pode ter custo e efeitos operacionais, além do diff de código.
+Em dashboard, separar consulta, transformação e interface costuma ser a primeira fatia. Para diagnosticar lentidão, use a skill oficial quando instalada (`shiny-r-optimize`, `shiny-py-optimize` ou a referência de desempenho do Streamlit), sem aplicar correções fora do modo autorizado. Ganho de desempenho só vale medido: registre o tempo da interação lenta antes e depois, com os mesmos dados, e trate cache novo como mudança de comportamento quando ele pode mostrar dado antigo.
 Renomeações e codemods devem considerar imports, configuração, serialização, referências dinâmicas e chamados externos; parser/IDE ajuda, mas testes e revisão continuam necessários.
 
-## C: CLI e automação
+## C: automações e CLI
 
 Separar parser e lógica pode facilitar testes. Transformar um comando existente em subcomandos ou trocar dependências pode quebrar flags, códigos de saída, mensagens e pipelines; precisa de contrato de compatibilidade e autorização.
-Confira stdout/stderr, quoting, ambiente, arquivos, interrupções e idempotência pertinentes. Uma nova mensagem de erro não é apenas estilo quando integrações a consomem.
+Confira stdout/stderr, quoting, ambiente, arquivos, interrupções e idempotência pertinentes. Uma nova mensagem de erro não é apenas estilo quando integrações a consomem. Em job agendado, preserve horário, fuso, chave de idempotência e o estado entre execuções.
 
 ## Aplicação e integração
 

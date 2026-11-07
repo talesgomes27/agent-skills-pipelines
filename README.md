@@ -50,9 +50,9 @@ flowchart LR
 
 As pipelines classificam o trabalho quando necessário em três arquétipos:
 
-- **A — dados, análise e publicação:** notebooks, ML, relatórios e Quarto.
-- **B — software, APIs e interfaces:** serviços, aplicações e frontends.
-- **C — CLI, scripts e automação:** comandos, empacotamento e operações locais.
+- **A — análise e modelos:** notebooks, ML, relatórios e Quarto.
+- **B — aplicações:** sites, APIs, frontends e dashboards em Streamlit ou Shiny.
+- **C — automações:** scripts, CLI, jobs agendados, ETL e empacotamento.
 
 Skills especialistas são carregadas somente quando uma decisão depende delas. Graphify, MCPs e conectores são integrações opcionais; nenhuma delas amplia permissões ou autorização do usuário.
 
@@ -109,6 +109,18 @@ python3 scripts/skills.py install --destination /caminho/skills --bundle researc
 ```
 
 A CLI não sobrescreve pacote homônimo sem recibo nem cópia gerenciada que tenha sido alterada localmente. Mudanças de release exigem `--update`. Consulte a [arquitetura de distribuição](docs/distribution/architecture.md) para bundles, manifests, recuperação e integração customizada.
+
+### Skills oficiais de frameworks
+
+Para dashboards, instale também as skills que os próprios frameworks mantêm. As do Streamlit e do Shiny para Python vêm dentro da biblioteca e acompanham a versão instalada. As pipelines as usam como especialistas e mantêm seus gates e autorizações.
+
+| Framework | Skills | Instalação |
+|---|---|---|
+| Streamlit 1.58 ou mais novo | `developing-with-streamlit` | `streamlit skills` na pasta do projeto, ou `streamlit skills --global` |
+| Shiny para Python | `shiny-for-python` | Na pasta do app, com o `shiny` no ambiente do projeto: `uvx library-skills --claude` no Claude Code, `uvx library-skills` nos outros hosts |
+| Shiny em R e Posit Connect | `shiny-bslib`, `shiny-r-optimize`, `deploy-to-connect` e outras | `claude plugin marketplace add posit-dev/skills`, depois `claude plugin install shiny@posit-dev-skills` e `connect@posit-dev-skills`; nos outros hosts, `npx skills add posit-dev/skills` |
+
+O `library-skills` descobre o projeto pelo ambiente Python. Numa pasta sem ambiente próprio, ele pode adotar a pasta pessoal como projeto e copiar a própria skill para `~/.claude/skills` e `~/.agents/skills`.
 
 ## Bundles
 

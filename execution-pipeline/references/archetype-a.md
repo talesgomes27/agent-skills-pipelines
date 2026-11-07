@@ -1,4 +1,4 @@
-# A: dados, análise e publicação
+# A: análise, modelos e publicação
 
 Use o tipo de estudo, dados, stack e formatos aprovados. Analytics descritivo não exige estimador, SHAP ou resíduos de regressão; Python, R, `.ipynb` e `.qmd` são escolhas do contrato.
 
