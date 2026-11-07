@@ -18,3 +18,6 @@ graphify-out/
 # IDEs
 .vscode/
 .idea/
+
+# Claude Code: permissões e ajustes locais de cada máquina
+.claude/settings.local.json
