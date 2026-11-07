@@ -2,20 +2,30 @@
 
 As versões seguem [SemVer](https://semver.org/lang/pt-BR/).
 
-## [Não publicado]
+## [3.0.0] - 2026-11-07
+
+Comparada com a 2.1.0 (`88f9b04`). É uma MAJOR porque a `quarto-expert` deixou de cobrir autoria, sintaxe e migração de Quarto.
+
+### Quebra de compatibilidade
+
+- A `quarto-expert` passa a cobrir só ambiente e render de projetos Quarto, teses em ABNT e manuscritos com Binder. Saíram 23 referências: 20 eram cópias idênticas das da `quarto-authoring` da Posit, `alt-text.md` e `brand-yml.md` eram versões das skills de mesmo nome da Posit, e `rmd-to-quarto-migration.md` repetia a `conversion-rmarkdown` dela, com regras conflitantes. Quem usava a `quarto-expert` para autoria, sintaxe ou migração deve instalar o plugin `quarto@posit-dev-skills`.
 
 ### Novo
 
-- `NOTICE.md` com o aviso da licença MIT da Posit para os arquivos de `posit-dev/skills` que a `quarto-expert` distribuiu na 2.0.0 e na 2.1.0 sem esse aviso.
-
 - Skill `scheduled-automation`, para jobs que rodam sem ninguém olhando: script ou workflow agendado, ETL recorrente, bot que envia mensagens e retreino de modelo. Ela define o contrato do job (gatilho e fuso, janela, estado, idempotência, falhas, segredos, alertas e execução que não rodou), dry-run, testes e primeira execução, com referências para o GitHub Actions como agendador e para retreino agendado. Entra no bundle `development`.
+- `NOTICE.md` com o aviso da licença MIT da Posit para os arquivos de `posit-dev/skills` que a `quarto-expert` distribuiu na 2.0.0 e na 2.1.0 sem esse aviso.
 
 ### Mudanças
 
-- `pre-code-pipeline`, `execution-pipeline` e a referência C da execution apontam para a `scheduled-automation`.
-- A `quarto-expert` passa a cobrir só ambiente e render de projetos Quarto, teses em ABNT e manuscritos com Binder. Saíram 23 referências: 20 eram cópias idênticas das da `quarto-authoring` da Posit, `alt-text.md` e `brand-yml.md` eram versões das skills de mesmo nome da Posit, e `rmd-to-quarto-migration.md` repetia a `conversion-rmarkdown` dela, com regras conflitantes. Quem usava a `quarto-expert` para autoria, sintaxe ou migração deve instalar o plugin `quarto@posit-dev-skills`.
-- `execution-pipeline`, a referência A dela, a `writing-pipeline` e o README separam a `quarto-authoring`, para autoria, da `quarto-expert`, para ambiente, render e ABNT.
 - No modo assistido, as pipelines esperam o aceite só nos marcos com decisão: `pre-code-pipeline` e `audit-and-refactoring-pipeline` nos Gates 2, 3 e 5, `execution-pipeline` nos Gates 3 e 5 e `release-and-ops-pipeline` nos Gates 2, 4 e 5. Os outros gates são apresentados e entram no aceite seguinte; as paradas por mudança de escopo, decisão bloqueante, conflito e risco de perda continuam.
+- `pre-code-pipeline`, `execution-pipeline` e a referência C da execution apontam para a `scheduled-automation`.
+- `execution-pipeline`, a referência A dela, a `writing-pipeline` e o README separam a `quarto-authoring`, para autoria, da `quarto-expert`, para ambiente, render e ABNT.
+
+### Como atualizar
+
+- No Claude Code, rode `claude plugin marketplace update agent-skills-pipelines` e `claude plugin update <plugin>` para cada plugin instalado. A `scheduled-automation` é um plugin novo: `claude plugin install scheduled-automation@agent-skills-pipelines`.
+- Instalações feitas com `scripts/skills.py` recebem a 3.0.0 com `--update`, e a `quarto-expert` copiada perde as referências removidas. Repetir a instalação do bundle `development` com `--update` também instala a `scheduled-automation`. Cópias editadas à mão continuam protegidas.
+- Para autoria, sintaxe e migração de Quarto, instale o plugin `quarto@posit-dev-skills` ou, fora do Claude Code, `npx skills add posit-dev/skills --skill quarto-authoring`.
 
 ## [2.1.0] - 2026-11-07
 
