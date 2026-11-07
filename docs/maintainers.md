@@ -55,4 +55,4 @@ Não copie um SHA sugerido por terceiros sem conferir a origem, nem deixe a depe
 
 ## Histórico
 
-Auditorias, experimentos e o harness de avaliações até a MOD-010 estão na tag `archive/mod-2026-10`, fora da árvore atual.
+Auditorias, experimentos e o harness de avaliações até a MOD-010 estão na tag `archive/mod-2026-10`, fora da árvore atual. As avaliações atuais ficam em `evals/`, só com cenários e resultados declarativos.
