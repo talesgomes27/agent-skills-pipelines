@@ -10,6 +10,7 @@ As versões seguem [SemVer](https://semver.org/lang/pt-BR/).
 
 ### Mudanças
 
+- O limite do `SKILL.md` no doctor sobe de 8.000 para 10.000 caracteres, cerca de 4 mil tokens. Fica abaixo dos 5 mil que a especificação recomenda e que o Claude Code recoloca de cada skill depois de uma compactação. Os cortes para caber em 8.000 estavam criando ambiguidade.
 - Um app novo que a `pre-code-pipeline` aprovou como leve continua leve na `execution-pipeline`. O pedido de construí-lo já autoriza implementar depois do aceite do plano. O único aceite que falta é o do fim do Gate 5, e as paradas do modo contínuo continuam valendo.
 - O teste que outra skill pede, como a ponytail, entra no plano sem substituir nem reduzir os testes dele, e vem antes do código como eles.
 - Num app novo leve, com um só aceite pelos Gates 2, 3 e 5, a restrição do destino que muda a arquitetura vai no início da resposta, antes do escopo.

@@ -16,8 +16,8 @@ STATE = '.meta-skills-install.json'
 AGENTS = ('codex', 'claude', 'antigravity', 'antigravity-cli')
 COMPONENTS = ('SKILL.md', 'references', 'scripts', 'examples', 'assets', 'agents')
 IGNORE = shutil.ignore_patterns('__pycache__', '*.pyc', '.quarto', '_site', '.git', '.venv')
-# Teto logo acima da maior skill depois da reescrita, para que nenhuma volte a crescer.
-MAX_SKILL_CHARS = 8000
+# Cerca de 4 mil tokens: abaixo dos 5 mil recomendados pela especificação e recolocados pelo Claude Code após a compactação (docs/maintainers.md).
+MAX_SKILL_CHARS = 10000
 
 
 def read_json(path):

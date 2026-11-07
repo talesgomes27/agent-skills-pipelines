@@ -10,7 +10,7 @@ Este repositório é uma biblioteca de Agent Skills em português, distribuída 
 
 ## Regras das skills
 
-- Um `SKILL.md` tem no máximo 8.000 caracteres, e o doctor recusa acima disso. Detalhe vai para `references/` sem perder regra; confira com o subagente `rule-keeper` antes de commitar.
+- Um `SKILL.md` tem no máximo 10.000 caracteres, e o doctor recusa acima disso. Detalhe vai para `references/` sem perder regra; confira com o subagente `rule-keeper` antes de commitar.
 - A `description` diz só quando usar a skill e começa por "Use quando".
 - Antes de escrever conhecimento de uma ferramenta, procure a skill oficial do fabricante e aponte para ela. Escreva só o que nenhuma cobre.
 - Fato de terceiros (plataforma, biblioteca, lei) é conferido na documentação oficial, com o link na referência.
