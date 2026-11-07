@@ -87,7 +87,7 @@
     {
       "name": "quarto-expert",
       "source": "./",
-      "description": "Autoria, configuração, depuração e migração de projetos Quarto.",
+      "description": "Ambiente e render de projetos Quarto, teses em ABNT e manuscritos com Binder.",
       "version": "2.1.0",
       "author": {
         "name": "Tales Wilhame Gomes da Silva"

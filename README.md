@@ -30,7 +30,7 @@ Release atual: **2.1.0**.
 | [`release-and-ops-pipeline`](release-and-ops-pipeline/SKILL.md) | Saneamento, versão, artefatos, publicação autorizada e smoke tests. |
 | [`scheduled-automation`](scheduled-automation/SKILL.md) | Contrato de jobs agendados, ETL recorrente e retreino: estado, idempotência, falhas, alertas e primeira execução. |
 | [`writing-pipeline`](writing-pipeline/SKILL.md) | Redação e revisão técnica com preservação de fatos, fontes e formato. |
-| [`quarto-expert`](quarto-expert/SKILL.md) | Autoria, configuração, depuração e migração de projetos Quarto. |
+| [`quarto-expert`](quarto-expert/SKILL.md) | Ambiente e render de projetos Quarto, teses em ABNT e manuscritos com Binder. Para autoria e migração, use a `quarto-authoring` da Posit. |
 | [`skill-loader`](skill-loader/SKILL.md) | Descoberta e carregamento limitado de skills em biblioteca externa. |
 
 ## Arquitetura operacional
@@ -113,13 +113,14 @@ A CLI não sobrescreve pacote homônimo sem recibo nem cópia gerenciada que ten
 
 ### Skills oficiais de frameworks
 
-Para dashboards, instale também as skills que os próprios frameworks mantêm. As do Streamlit e do Shiny para Python vêm dentro da biblioteca e acompanham a versão instalada. As pipelines as usam como especialistas e mantêm seus gates e autorizações.
+Para dashboards e documentos Quarto, instale também as skills que os próprios frameworks mantêm. As do Streamlit e do Shiny para Python vêm dentro da biblioteca e acompanham a versão instalada. As pipelines as usam como especialistas e mantêm seus gates e autorizações.
 
 | Framework | Skills | Instalação |
 |---|---|---|
 | Streamlit 1.58 ou mais novo | `developing-with-streamlit` | `streamlit skills` na pasta do projeto, ou `streamlit skills --global` |
 | Shiny para Python | `shiny-for-python` | Na pasta do app, com o `shiny` no ambiente do projeto: `uvx library-skills --claude` no Claude Code, `uvx library-skills` nos outros hosts |
 | Shiny em R e Posit Connect | `shiny-bslib`, `shiny-r-optimize`, `deploy-to-connect` e outras | `claude plugin marketplace add posit-dev/skills`, depois `claude plugin install shiny@posit-dev-skills` e `connect@posit-dev-skills`; nos outros hosts, `npx skills add posit-dev/skills` |
+| Quarto (autoria e migração) | `quarto-authoring`, `brand-yml`, `alt-text` | Com o marketplace da Posit, `claude plugin install quarto@posit-dev-skills`; nos outros hosts, `npx skills add posit-dev/skills --skill quarto-authoring` |
 
 O `library-skills` descobre o projeto pelo ambiente Python. Numa pasta sem ambiente próprio, ele pode adotar a pasta pessoal como projeto e copiar a própria skill para `~/.claude/skills` e `~/.agents/skills`.
 
@@ -162,6 +163,7 @@ O doctor valida estrutura, frontmatter, identidade e links das skills. A CI repe
 ## Documentação
 
 - [Changelog](CHANGELOG.md)
+- [Avisos de terceiros](NOTICE.md)
 - [Arquitetura de distribuição](docs/distribution/architecture.md)
 - [Verificação de descoberta](docs/distribution/discovery.md)
 - [Manutenção da biblioteca fria](docs/library-maintenance.md)
