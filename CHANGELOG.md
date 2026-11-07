@@ -2,6 +2,12 @@
 
 As versões seguem [SemVer](https://semver.org/lang/pt-BR/).
 
+## [Não publicado]
+
+### Mudanças
+
+- Documentação reescrita para quem chega ao projeto: o README diz o que é uma skill, mostra um pedido do começo à publicação, separa pipelines de especialistas e indica o que instalar primeiro. `docs/distribution/architecture.md` vira o guia de instalação, e os contratos do doctor, a transação por skill e a manutenção da CI vão para `docs/maintainers.md`. A biblioteca fria passa a se chamar biblioteca externa.
+
 ## [3.2.0] - 2026-11-07
 
 Comparada com a 3.1.0 (`9755dd5`). Acrescenta regras de agendamento e de previsão de séries, sem quebra de compatibilidade.

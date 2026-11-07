@@ -7,12 +7,13 @@ Ter a skill instalada em disco não prova que o agente a encontra. Depois de ins
 3. Confira no catálogo do host o nome, a descrição e o caminho das skills instaladas.
 4. Envie prompts da tabela abaixo, pelo menos um "deve ativar" e um "não deve ativar" por skill, e veja se o host carregou a skill esperada.
 
-## Estado observado em 2026-10-22
+## Estado observado
 
 | Host | Destino | Evidência | Estado |
 |---|---|---|---|
-| Codex Desktop | `~/.agents/skills/` | O catálogo da sessão exibiu as skills instaladas do repositório | verificado para descoberta |
-| Claude Code | `~/.claude/skills/` | Nenhuma sessão compatível foi usada | pendente |
+| Codex Desktop | `~/.agents/skills/` | Em 2026-10-22, o catálogo da sessão exibiu as skills instaladas do repositório | verificado para descoberta |
+| Claude Code, pelo marketplace | Cache de plugins | Em 2026-11-07, uma sessão nova listou as oito skills instaladas, todas menos a `skill-loader`, com o prefixo do plugin, como `pre-code-pipeline:pre-code-pipeline` | verificado para descoberta |
+| Claude Code, pelo instalador | `~/.claude/skills/` | Nenhuma sessão compatível foi usada | pendente |
 | Antigravity App/IDE | `~/.gemini/config/skills/` | Nenhuma sessão compatível foi usada | pendente |
 | Antigravity CLI | `~/.gemini/antigravity-cli/skills/` | Nenhuma sessão compatível foi usada | pendente |
 
