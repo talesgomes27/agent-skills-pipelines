@@ -334,6 +334,16 @@ class InstallerTests(unittest.TestCase):
         self.assertTrue(any('9000' in w for w in cli.text_warnings('---\n---\n' + 'x ' * 4600)))
         self.assertEqual(cli.text_warnings('---\n---\n```\n' + long + '\n```\n'), [])
 
+    def test_readme_installs_only_published_versions(self):
+        import re
+        readme = (Path(__file__).resolve().parents[1] / 'README.md').read_text(encoding='utf-8')
+        adds = re.findall(r'marketplace add talesgomes27/agent-skills-pipelines(\S*)', readme)
+        self.assertTrue(adds)
+        for suffix in adds:
+            self.assertRegex(suffix, r'^@(stable|v\d+\.\d+\.\d+)$')
+        for clone in re.findall(r'git clone (.*agent-skills-pipelines\S*)', readme):
+            self.assertRegex(clone, r'--branch (stable|v\d+\.\d+\.\d+) ')
+
     def test_skill_size_limit_boundary(self):
         self.assertEqual(cli.MAX_SKILL_CHARS, 10000)
         head = '---\nname: alpha\ndescription: Edit a selected document.\n---\n'

@@ -56,7 +56,7 @@ Especialistas, que as pipelines chamam quando o assunto aparece:
 O repositório é um marketplace de plugins, com um plugin por skill. Para o fluxo do exemplo acima, instale as três pipelines:
 
 ```bash
-claude plugin marketplace add talesgomes27/agent-skills-pipelines
+claude plugin marketplace add talesgomes27/agent-skills-pipelines@stable
 claude plugin install pre-code-pipeline@agent-skills-pipelines
 claude plugin install execution-pipeline@agent-skills-pipelines
 claude plugin install release-and-ops-pipeline@agent-skills-pipelines
@@ -64,14 +64,14 @@ claude plugin install release-and-ops-pipeline@agent-skills-pipelines
 
 Cada uma dessas três pipelines traz um subagente de revisão que o Claude Code pode chamar sozinho nesse ponto, ou que você chama pelo nome, como `@agent-pre-code-pipeline:plan-reviewer`: `plan-reviewer` revisa o plano antes do seu aceite, `diff-reviewer` revisa o diff no fim da implementação e `sanitation-checker` confere segredos, dados pessoais e arquivos grandes antes de publicar. Eles relatam e não editam.
 
-Acrescente as outras da tabela conforme o trabalho, com o mesmo `install`. Abra uma sessão nova para o Claude Code encontrá-las. No Claude Code, prefira o marketplace ao instalador abaixo: ele atualiza com `claude plugin update`.
+Acrescente as outras da tabela conforme o trabalho, com o mesmo `install`. A branch `stable` só avança quando sai uma release, então você recebe só versões publicadas; para fixar uma versão exata, use uma tag, como `@v3.3.0`, no lugar de `@stable`. Sem o `@`, o marketplace acompanha a `main`, que muda a cada PR. Abra uma sessão nova para o Claude Code encontrá-las. No Claude Code, prefira o marketplace ao instalador abaixo: ele atualiza com `claude plugin update`.
 
 ### Codex, Antigravity e outros hosts
 
 O instalador instala grupos de skills, os bundles. O `development` traz planejamento, execução, auditoria, automações e dados pessoais; o `research` troca a auditoria e as automações por escrita e Quarto. Com Python 3.9 ou mais novo:
 
 ```bash
-git clone https://github.com/talesgomes27/agent-skills-pipelines.git
+git clone --branch stable https://github.com/talesgomes27/agent-skills-pipelines.git
 cd agent-skills-pipelines
 python3 -m venv .venv
 .venv/bin/python -m pip install -r distribution/requirements.txt
