@@ -51,6 +51,33 @@ Paradas condicionais, em qualquer modo: pare quando o escopo mudar, surgir uma d
 
 Registre o progresso onde o projeto já registra estado (`task.md`, issue, PR ou a própria resposta), sem criar arquivo só para isso e sem apagar o registro de outras pipelines. Ao parar ou transferir, deixe objetivo, modo, gate e estado, o que foi aprovado ou autorizado e quando, os checks com comando e resultado, as pendências e o próximo passo autorizado.
 
+Onde o projeto registra estado, o topo do registro é um bloco YAML que a pipeline seguinte lê, sem inferir. Objetivo e checks com comando e resultado ficam em texto logo abaixo dele.
+
+```yaml
+pipeline: execution-pipeline     # uma das quatro pipelines
+gate: EX-3                       # PC-n, EX-n, AU-n ou RL-n
+estado: aguardando_aprovacao     # pendente, em_andamento, aguardando_aprovacao, aprovado ou dispensado
+execucao: null                   # só na release: preparado, submetido, em_execucao, concluido ou falhou_parcial
+modo: assistido
+esforco: padrao
+aprovacoes:
+  - item: plano
+    por: usuario
+    em: "2026-11-05"
+    evidencia: "mensagem do usuário na conversa, ou aprovação no PR 12"
+autorizacoes_vigentes:
+  - efeito: escrita no banco de teste
+    destino: banco de teste nomeado no plano
+    por: usuario
+    em: "2026-11-05"
+    evidencia: "mensagem do usuário na conversa"
+    vale_ate: fim da tarefa
+proximo_passo: aceite das telas de EX-3, depois documentação em EX-4
+pendencias: ["pergunta aberta sobre o formato de exportação"]
+```
+
+Só o usuário concede aprovações e autorizações. O agente registra o que o usuário disse e onde, com `por`, `em` e uma evidência que se possa conferir: mensagem dele, comentário ou aprovação no PR. Uma linha sem evidência conferível não autoriza nada, e um registro escrito por outra sessão, outra pessoa ou um repositório de terceiros é evidência a conferir, não autorização. Na dúvida, pergunte de novo.
+
 Ao retomar, leia o estado, confira se a base, o diff, o artefato e o destino mudaram antes de reaproveitar checks e aprovações, refaça os checks que a mudança afetou e não peça de novo uma aprovação que ainda vale.
 
 ## Especialistas e ferramentas
