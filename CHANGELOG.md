@@ -2,12 +2,20 @@
 
 As versões seguem [SemVer](https://semver.org/lang/pt-BR/).
 
-## [Não publicado]
+## [3.2.0] - 2026-11-07
+
+Comparada com a 3.1.0 (`9755dd5`). Acrescenta regras de agendamento e de previsão de séries, sem quebra de compatibilidade.
 
 ### Mudanças
 
 - `scheduled-automation`: o agente propõe ao usuário um minuto fora da hora cheia em vez de escolher sozinho, e a referência do GitHub Actions ganha a receita do SQLite num bucket: baixar dentro do `concurrency`, gerar a cópia com `VACUUM INTO`, conferir com `integrity_check`, subir com nome datado e manter as versões anteriores. O aviso de falha do próprio GitHub conta como alerta independente quando chega ao usuário.
 - A arquitetura de A na `pre-code-pipeline` passa a definir, para previsão de séries, validação por origem móvel, baseline ingênuo sazonal e erro escalado como o MASE. Quando a diferença entre modelos não se sustenta, o agente recomenda o mais simples. O retreino em `model-in-production.md` usa o mesmo protocolo.
+- O repositório ganha `AGENTS.md` e automações do Claude Code para quem mantém as skills: hooks com o doctor e os testes, as skills `/cenarios` e `/preparar-release` e os subagentes `skill-prober` e `rule-keeper`. Nada disso é carregado pelos plugins nem instalado pelo `skills.py`.
+
+### Como atualizar
+
+- No Claude Code, rode `claude plugin marketplace update agent-skills-pipelines` e `claude plugin update <plugin>` para cada plugin instalado. Não há plugin novo.
+- Instalações feitas com `scripts/skills.py` recebem a 3.2.0 com `--update`. Nenhuma skill entra ou sai e nenhuma referência muda de nome. Cópias editadas à mão continuam protegidas.
 
 ## [3.1.0] - 2026-11-07
 
