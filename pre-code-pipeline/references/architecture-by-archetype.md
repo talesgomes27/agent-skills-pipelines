@@ -1,6 +1,6 @@
 # Arquitetura por arquétipo
 
-Em B e C, as restrições do destino que costumam mudar a arquitetura são autenticação, hibernação, limites, custo e armazenamento.
+Em B e C, as restrições do destino que costumam mudar a arquitetura são autenticação, hibernação, limites, custo e armazenamento. Num app novo leve, com um só aceite pelos Gates 2, 3 e 5, a restrição do destino que muda a arquitetura vai no início da resposta, antes do escopo, para o usuário não aceitar sem vê-la.
 
 Leia só a parte do arquétipo registrado e, em projeto híbrido, a do domínio secundário nas partes que ele usa. Com dados de pessoas, em qualquer arquétipo, a arquitetura diz onde eles ficam, quem os vê e o que sai do ambiente, seguindo a skill `personal-data`.
 
@@ -16,6 +16,8 @@ Leia só a parte do arquétipo registrado e, em projeto híbrido, a do domínio 
 - Limites e persistência proporcionais ao domínio, com DDD, C4 ou OpenAPI só quando a complexidade pede.
 - Site ou app web define no plano as metas de SEO, acessibilidade e desempenho, o destino do formulário e onde o site é publicado; a referência B da `execution-pipeline` tem o mínimo de cada um.
 - App com LLM decide na arquitetura provedor e modelo, onde fica a chave, quem acessa, o que vai para o provedor e como as respostas serão avaliadas; a `execution-pipeline` tem a referência de apps com LLM.
+- App que grava dados, mesmo no esforço leve, diz onde eles ficam e como copiar e restaurar.
+- Pedido com login decide no Gate 2 quem cria as contas (cadastro aberto, convite ou administrador) e como se recupera a senha, porque isso muda telas, e-mails enviados e o mínimo de segurança da referência B da `execution-pipeline`. Login com senha tira o app do esforço leve.
 - Mudança de esquema num banco que já tem dados de produção entra na arquitetura como plano de migração, com backup, etapas compatíveis e volta; a `release-and-ops-pipeline` tem a referência de migrações.
 
 ## C: automações

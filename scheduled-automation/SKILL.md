@@ -5,7 +5,7 @@ description: "Use quando o trabalho envolve um job que roda sem ninguém olhando
 
 # Automações agendadas
 
-Um job agendado roda sem ninguém olhando, então o erro dele aparece depois e às vezes se repete a cada execução. Esta skill dá o contrato que o job precisa ter antes de ser agendado. Ela informa as pipelines: gates, escopo e autorizações continuam os delas. Sem pipeline ativa, valem as mesmas regras: nenhum efeito externo, conta ou agendamento sem autorização do usuário. Num job pequeno e pessoal, cada item do contrato pode ter uma linha, na própria resposta.
+Um job agendado roda sem ninguém olhando, então o erro dele aparece depois e às vezes se repete a cada execução. Esta skill dá o contrato que o job precisa ter antes de ser agendado. Ela informa as pipelines: gates, escopo e autorizações continuam os delas. Sem pipeline ativa, valem as mesmas regras: nenhum efeito externo, conta ou agendamento sem autorização do usuário. Num job pequeno e pessoal, cada item do contrato pode ter uma linha, na própria resposta. Job novo com credencial ou efeito externo, como gravar num destino real ou enviar mensagem, não é esforço leve. Regras de brevidade de outra skill encurtam a redação do contrato sem tirar itens. Alerta, estado e idempotência ficam, assim como a decisão de falha parcial e, num job importante, o sinal de vida; um item que não se aplica fica dito, com o motivo.
 
 ## Contrato do job
 
