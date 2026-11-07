@@ -40,7 +40,7 @@ def sync_shared():
         if not target.exists() or target.read_text(encoding='utf-8') != text:
             target.parent.mkdir(parents=True, exist_ok=True)
             target.write_text(text, encoding='utf-8')
-            written.append(str(target.relative_to(REPO)))
+            written.append(target.relative_to(REPO).as_posix())
     return {'source': 'shared/common-contract.md', 'written': written}
 
 
