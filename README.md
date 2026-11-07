@@ -100,7 +100,7 @@ As do Streamlit e do Shiny para Python vêm dentro da biblioteca e acompanham a 
 
 ## Documentação
 
-- [Guia de instalação](docs/distribution/architecture.md): destinos, bundles, atualização e recuperação.
+- [Guia de instalação](docs/distribution/architecture.md): destinos, bundles, atualização, recuperação e confirmação antes de publicar no Claude Code.
 - [Verificação de descoberta](docs/distribution/discovery.md): como confirmar que o host encontra as skills.
 - [Biblioteca externa](docs/library-maintenance.md): a `skill-loader` e a manutenção do índice.
 - [Notas de manutenção](docs/maintainers.md): validação, contratos do doctor e CI.

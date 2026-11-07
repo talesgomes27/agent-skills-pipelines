@@ -14,6 +14,7 @@ As versões seguem [SemVer](https://semver.org/lang/pt-BR/).
 - Pedido com login decide no Gate 2 quem cria as contas e como se recupera a senha, e login com senha tira o app do esforço leve. App que grava dados diz, mesmo no leve, como copiar e restaurar.
 - A referência de migrações diz o que fazer sem ambiente de ensaio: ensaiar no backup restaurado num banco temporário protegido. Se nem isso der, dizer ao usuário que a migração vai sem ensaio e com backup não testado, e pedir a autorização sabendo disso.
 - Ajustes de redação na `pre-code-pipeline` para caber no limite de 8.000 caracteres, sem mudar regras.
+- O guia de instalação ganha a seção "Claude Code: confirmação antes de publicar", com regras `ask` de permissão para push, merge, release, disparo de workflow e deploy. Ela explica a precedência entre deny, ask e allow e os limites de uma regra que compara texto de comando. As skills não mudam.
 
 ## [3.3.0] - 2026-11-07
 
