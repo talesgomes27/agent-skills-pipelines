@@ -21,6 +21,7 @@ Este repositório é uma biblioteca de Agent Skills em português, distribuída 
 
 - Uma branch por mudança. Commit, push, PR e merge só com o aceite do usuário.
 - O merge usa `gh pr merge --merge --match-head-commit <commit testado>`, depois que os checks obrigatórios do ruleset passam. Não acompanhe a CI em loop.
+- Uma issue "A skill errou" aceita vira primeiro um cenário em `evals/scenarios/`, rodado pelo `/cenarios` para mostrar a falha na versão atual. O cenário e a correção entram no mesmo PR.
 - Release segue a skill `/preparar-release`. Pelo SemVer, remover skill ou cortar o escopo de uma é MAJOR; skill, regra ou referência nova é MINOR; correção é PATCH.
 
 ## Ferramentas do Claude Code neste repositório

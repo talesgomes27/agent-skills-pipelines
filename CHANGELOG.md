@@ -6,6 +6,7 @@ As versões seguem [SemVer](https://semver.org/lang/pt-BR/).
 
 ### Novo
 
+- Formulário de issue "A skill errou" (`.github/ISSUE_TEMPLATE/skill-errou.yml`). O `AGENTS.md` pede que cada issue aceita vire primeiro um cenário que falha, no mesmo PR da correção.
 - Linha de base da 3.3.0 em `evals/results/3.3.0/`, com o claude-sonnet-5-5 no Claude Code:
   - no nível de leitura, os 17 cenários e os 37 gatilhos: 46 de 52 checkpoints `deve` aprovados, nenhuma falha `nao_deve` e todos os gatilhos como esperado;
   - no nível de execução, quatro cenários em sessões reais (`claude -p`): 6 de 15 `deve` e nenhuma falha `nao_deve`. Em duas rodadas, API com migração e Script de fotos, nenhuma skill do repositório foi carregada.
