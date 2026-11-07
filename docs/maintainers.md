@@ -17,7 +17,7 @@ Mudança de comportamento numa skill se testa com os cenários de [verificação
 
 ## Contratos
 
-- **Skill.** Cada pasta tem um `SKILL.md` com frontmatter YAML `name` e `description`, conforme a [especificação de Agent Skills](https://agentskills.io/specification). Links para recursos são relativos ao arquivo que os contém e ficam dentro da pasta da skill. Um `SKILL.md` tem no máximo 8.000 caracteres.
+- **Skill.** Cada pasta tem um `SKILL.md` com frontmatter YAML `name` e `description`, conforme a [especificação de Agent Skills](https://agentskills.io/specification). Links para recursos são relativos ao arquivo que os contém e ficam dentro da pasta da skill. Um `SKILL.md` tem no máximo 10.000 caracteres, cerca de 4 mil tokens em português. Isso fica abaixo dos 5 mil tokens que a especificação recomenda para o corpo da skill e dos 5 mil que o Claude Code recoloca de cada skill depois de uma compactação ([skills](https://code.claude.com/docs/en/skills)). Não suba o limite sem conferir essas duas referências.
 - **Catálogo.** `distribution/catalog.json` usa o schema versão 1, publicado em `distribution/catalog.schema.json`, e a release em SemVer. A CLI confere campos, tipos, versão, unicidade e se os membros dos bundles existem, sem depender de um validador genérico de JSON Schema.
 - **Subagentes do Claude Code.** Ficam em `plugin-agents/` e entram pela chave `agents` da entrada do plugin no marketplace, nunca numa pasta `agents/` na raiz, que todos os plugins com `source: "./"` veriam. O `plan-reviewer` só tem ferramentas de leitura. O `diff-reviewer` e o `sanitation-checker` têm Bash, limitado à leitura só pelo texto; a proteção real são as regras `ask` e `deny` da sessão, descritas no guia de instalação. Os três são autocontidos, sem ler arquivos fora do projeto do usuário, e não chegam aos outros hosts pelo instalador. No Claude Code 2.1.319, `claude plugin details` mostra "Agents (0)" para eles, embora carreguem na sessão; confira com uma sessão.
 - **`agents/openai.yaml`** é opcional, para interface, política e ferramentas no Codex. Nenhuma skill exige MCP nem bloqueia a invocação implícita.
@@ -27,7 +27,7 @@ Mudança de comportamento numa skill se testa com os cenários de [verificação
 - Sintaxe YAML e chaves duplicadas no frontmatter e nos arquivos `.yml` e `.yaml` da skill; nome igual ao da pasta; descrição e metadata como texto.
 - Links Markdown inline no `SKILL.md` e em `references/**/*.md`: o destino existe e fica dentro da skill. Ignora código, URLs externas e âncoras; em `arquivo.md#seção`, confere o arquivo, não a seção. Não lê links por definição nem em HTML.
 - `examples/` fica fora da varredura de links, mas os arquivos YAML e as regras de symlink continuam valendo.
-- O limite de 8.000 caracteres do `SKILL.md`.
+- O limite de 10.000 caracteres do `SKILL.md`.
 - No destino de uma instalação, a integridade de cada cópia gerenciada pelo SHA-256 registrado. Um link é verificado só na estrutura, porque o conteúdo é o do checkout vivo. Uma skill sem registro recebe só a verificação estrutural.
 
 A mesma validação roda antes de `manifest` e `install`, sem rede e sem executar snippets. Não é um validador completo de Markdown nem das extensões de cada host.

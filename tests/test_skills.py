@@ -289,6 +289,15 @@ class InstallerTests(unittest.TestCase):
         self.assertIn('Release atual: **' + release + '**.', readme)
         self.assertIn('release-' + release + '-blue.svg', readme)
 
+    def test_skill_size_limit_boundary(self):
+        self.assertEqual(cli.MAX_SKILL_CHARS, 10000)
+        head = '---\nname: alpha\ndescription: Edit a selected document.\n---\n'
+        path = self.repo / 'alpha/SKILL.md'
+        path.write_text(head + 'x' * (cli.MAX_SKILL_CHARS - len(head)), encoding='utf-8')
+        self.assertEqual(self.run_cli('doctor', '--skill', 'alpha')[0], 0)
+        path.write_text(head + 'x' * (cli.MAX_SKILL_CHARS - len(head) + 1), encoding='utf-8')
+        self.assertEqual(self.run_cli('doctor', '--skill', 'alpha')[0], 1)
+
     def test_oversized_skill_blocks_doctor_and_install(self):
         (self.repo / 'alpha/SKILL.md').write_text('---\nname: alpha\ndescription: Edit a selected document.\n---\n' + 'x' * cli.MAX_SKILL_CHARS)
         self.assertEqual(self.run_cli('doctor', '--skill', 'alpha')[0], 1)
