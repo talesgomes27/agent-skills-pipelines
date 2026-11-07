@@ -2,7 +2,9 @@
 
 As versões seguem [SemVer](https://semver.org/lang/pt-BR/).
 
-## Não publicado
+## [3.4.0] - 2026-11-07
+
+Comparada com a 3.3.0 (`c0f125c`). Traz as avaliações em `evals/`, o contrato comum das pipelines, o handoff em YAML, a branch `stable` e os pacotes `essencial` e `completo`, sem quebra de compatibilidade.
 
 ### Novo
 
@@ -26,7 +28,7 @@ As versões seguem [SemVer](https://semver.org/lang/pt-BR/).
 ### Mudanças
 
 - `architecture-by-archetype.md`: app publicado numa plataforma decide em PC-3 as duas camadas de acesso, lendo a referência de plataformas da release, e app com LLM que envia documentos ao provedor é esforço rigoroso. Isso fecha o checkpoint `camadas-de-acesso` do Dashboard Streamlit e a regressão `esforco-rigoroso` do Chatbot com LLM vistos nos cenários.
-- Resultados de leitura da 3.4.0 em `evals/results/3.4.0/leitura/`: 50 de 52 `deve` contra 46 de 52 na 3.3.0, sem falha `nao_deve`.
+- Resultados de leitura da 3.4.0 em `evals/results/3.4.0/leitura/`: 51 de 52 `deve` contra 46 de 52 na 3.3.0, sem falha `nao_deve` e sem regressão. O cenário do chatbot foi refeito depois da correção do esforço rigoroso. O nível de execução não foi refeito nesta versão.
 - As quatro pipelines passam a apontar para o contrato comum em vez de repetir esforço, modos, estado e especialistas, e abrem com um bloco de regras invioláveis. Os gates passam a ser citados com prefixo: PC-1 a PC-5, EX-1 a EX-5, AU-1 a AU-5 e RL-1 a RL-5, também nas referências e nos subagentes. A `execution-pipeline` e a `release-and-ops-pipeline` citam os subagentes `diff-reviewer` e `sanitation-checker` do Claude Code.
 - CI: `timeout-minutes` nos jobs e `concurrency` que cancela a rodada antiga de um PR. O push só dispara na `main`, e os testes conferem o "Use quando" e o limite de 1.024 caracteres das `description`. Um workflow semanal, `links.yml`, roda `scripts/check_links.py` sobre os links externos das skills e da documentação.
 - Exemplos Quarto:
@@ -44,6 +46,11 @@ As versões seguem [SemVer](https://semver.org/lang/pt-BR/).
 - A referência de migrações diz o que fazer sem ambiente de ensaio: ensaiar no backup restaurado num banco temporário protegido. Se nem isso der, dizer ao usuário que a migração vai sem ensaio e com backup não testado, e pedir a autorização sabendo disso.
 - Ajustes de redação na `pre-code-pipeline` para caber no limite de 8.000 caracteres, sem mudar regras.
 - O guia de instalação ganha a seção "Claude Code: confirmação antes de publicar", com regras `ask` de permissão para push, merge, release, disparo de workflow e deploy. Ela explica a precedência entre deny, ask e allow e os limites de uma regra que compara texto de comando. As skills não mudam.
+
+### Como atualizar
+
+- No Claude Code, rode `claude plugin marketplace update agent-skills-pipelines` e `claude plugin update <plugin>` para cada plugin instalado. Os pacotes são plugins novos e opcionais: `claude plugin install essencial@agent-skills-pipelines` ou `completo@agent-skills-pipelines`. Para acompanhar só as releases, adicione o marketplace com `@stable`, como no README.
+- Instalações feitas com `scripts/skills.py` recebem a 3.4.0 com `--update`. Nenhuma skill entra ou sai, e cada pipeline ganha `references/common-contract.md`. Cópias editadas à mão continuam protegidas.
 
 ## [3.3.0] - 2026-11-07
 
