@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "release": "2.0.0",
+  "release": "2.1.0",
   "skills": ["pre-code-pipeline", "execution-pipeline", "writing-pipeline", "audit-and-refactoring-pipeline", "release-and-ops-pipeline", "quarto-expert", "skill-loader"],
   "bundles": {
     "planning": ["pre-code-pipeline"],
