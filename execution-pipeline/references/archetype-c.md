@@ -1,4 +1,4 @@
-# C: CLI, scripts e automação
+# C: automações, scripts e CLI
 
 Preserve linguagem e interfaces aprovadas. Um script shell não exige `src/`, Python, uv ou pytest por padrão.
 
@@ -11,6 +11,20 @@ Use diretórios temporários e dados de teste para validar efeitos no filesystem
 
 Mantenha stdout adequado a consumo por outras ferramentas. Direcione logs/progresso para stderr quando necessário; desative controles de terminal em saída redirecionada. JSON ou outro modo estruturado só é obrigatório se estiver no contrato.
 Não adicione barra de progresso a toda execução; use-a quando duração e interação justificarem. Preserve modos verbose/debug se definidos, sem traceback ruidoso na experiência normal.
+
+## Job agendado
+
+Um job agendado (cron, `schedule` do GitHub Actions, agendador da plataforma) segue o mesmo contrato de entradas, saídas e erros, sem terminal para acompanhar. Antes de agendar, o plano responde:
+
+- horário e fuso do agendador, e o que acontece com atraso ou execução perdida;
+- onde o estado sobrevive entre execuções (banco, arquivos, marca da última execução), já que runners de CI são descartados;
+- qual chave torna a reexecução idempotente, inclusive para reprocessar um dia passado;
+- o que acontece com falha parcial e quantas novas tentativas, com espera crescente;
+- quem é avisado quando falha, e por qual canal.
+
+Ofereça dry-run e disparo manual do mesmo job, e teste com o recurso de teste do plano (pasta, banco, chat). Logs não mostram segredos nem dados pessoais.
+
+Retreino de modelo é um job sobre um modelo de A. O plano define se o modelo novo substitui o anterior sozinho, por qual critério comparado com o atual, e onde fica a versão anterior para voltar.
 
 ## Gates 4 e 5
 

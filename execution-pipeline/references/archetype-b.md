@@ -1,4 +1,4 @@
-# B: software, APIs e interfaces
+# B: aplicações, APIs e dashboards
 
 Use a linguagem, framework e gerenciador aprovados. Não introduza FastAPI, React ou Tailwind apenas por constarem de uma biblioteca de skills.
 
@@ -7,6 +7,10 @@ Use a linguagem, framework e gerenciador aprovados. Não introduza FastAPI, Reac
 Implemente contratos e testes na estrutura real do projeto, com tipos suportados pela linguagem. Para Python, use comandos configurados no projeto; para TS/JS, consulte scripts de `package.json`, lockfile e runner antes de escolher teste, lint, formato, typecheck e build. Não crie um ambiente Python para validar aplicação TS.
 Valide fronteiras relevantes: autenticação/autorização, payloads inválidos, erros de serviços, persistência e transações conforme o escopo. Clientes falsos e mocks devem representar fronteiras identificadas, sem substituir a integração exigida no plano.
 Crie migrações como arquivos revisáveis. Aplicação fica limitada à base de desenvolvimento/teste autorizada, com destino e efeitos conhecidos. Credenciais, MCP e uma ferramenta disponível não concedem autorização de produção.
+
+## Dashboards e apps de dados
+
+Streamlit, Shiny, Dash e similares são B com dados de A. Separe consulta e transformação da interface para testá-las sem a UI, e confira os números exibidos com as regras de A: filtros, unidades, totais e nulos. Teste a interação pelo runner do framework se o projeto já usa um, ou por navegador, com asserção sobre um valor exibido depois de mudar um filtro. Cache e estado de sessão mudam o que cada usuário vê: confira a invalidação quando os dados mudam. Exportação de tabela é saída de dados e segue a política de acesso aprovada. Antes de otimizar, meça o tempo da interação lenta e repita a mesma medida depois.
 
 ## Gate 3
 

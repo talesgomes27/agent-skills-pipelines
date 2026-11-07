@@ -16,6 +16,11 @@ Considere propagação de deploy/CDN na janela definida, sem retries indefinidos
 Use readiness/jornada mínima pertinente. `/docs` ou `/openapi.json` podem responder enquanto dependências essenciais falham; não os trate como saúde universal. Um 200 também pode ser a página de login ou uma versão anterior.
 Compare corpo/contrato e versão quando disponíveis. Latência aceitável vem do requisito/ambiente, não de um limite universal de dois segundos; confirme o que foi medido e por qual duração.
 Para UI, valide estado observável da jornada crítica, recursos e erros relevantes; elemento raiz sozinho não comprova funcionamento. Use assertions/locators do runner, não espera fixa ou `networkidle` como condição universal.
+Apps que montam a página por websocket, como Streamlit e Shiny, respondem 200 antes de funcionar: confira por navegador um valor exibido depois de uma interação. Plataformas que hibernam o app podem exigir uma primeira visita dentro da janela de tentativas.
+
+## Job agendado
+
+O smoke é uma execução: dispare manualmente o job publicado, com dry-run se existir, e confira saída, estado gravado e alerta. Execução que envia mensagem ou grava em dado real precisa de autorização para esse efeito ou do destino de teste do plano. Depois, confira a primeira execução no horário previsto, com o fuso do agendador. Até ela acontecer, a release fica `em execução`, com o horário esperado e como conferir; se esse horário está distante, o usuário pode aceitar com base na execução manual, e a agendada fica como pendência.
 
 ## C: pacote ou binário
 

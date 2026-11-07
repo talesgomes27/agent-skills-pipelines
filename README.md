@@ -50,9 +50,9 @@ flowchart LR
 
 As pipelines classificam o trabalho quando necessário em três arquétipos:
 
-- **A — dados, análise e publicação:** notebooks, ML, relatórios e Quarto.
-- **B — software, APIs e interfaces:** serviços, aplicações e frontends.
-- **C — CLI, scripts e automação:** comandos, empacotamento e operações locais.
+- **A — análise e modelos:** notebooks, ML, relatórios e Quarto.
+- **B — aplicações:** sites, APIs, frontends e dashboards em Streamlit ou Shiny.
+- **C — automações:** scripts, CLI, jobs agendados, ETL e empacotamento.
 
 Skills especialistas são carregadas somente quando uma decisão depende delas. Graphify, MCPs e conectores são integrações opcionais; nenhuma delas amplia permissões ou autorização do usuário.
 

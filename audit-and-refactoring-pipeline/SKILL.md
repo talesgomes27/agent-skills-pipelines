@@ -11,7 +11,7 @@ Inspecione o escopo pedido, registre achados com evidência e só altere a aplic
 
 1. Leia as instruções locais, o pedido, manifests, a documentação relevante e o estado do Git, incluindo mudanças staged, unstaged e arquivos não rastreados. Registre a base e o que é do usuário; não exija árvore limpa nem descarte mudanças.
 2. Defina o modo pelo pedido: **reconhecimento** (mapa e linha de base), **auditoria sem edição** (até o diagnóstico; "investigue" e "revise" ficam aqui) ou **auditoria com execução autorizada** (até as mudanças dos Gates 3 a 5). Pergunte só o escopo ou a autorização que faltar.
-3. Preserve `docs/00_archetype.md` se existir. Para classificar, use a evidência: A = dados/Quarto, B = software/APIs, C = CLI/automação; um notebook ou Dockerfile isolado não decide. Em projeto híbrido, indique o escopo principal e as interfaces secundárias. Ao gravar, use `archetype`, `stack`, `project_name`, `gerado_por: audit-and-refactoring-pipeline` e `data` (ISO 8601); sem permissão de escrita, sugira a classificação no parecer.
+3. Preserve `docs/00_archetype.md` se existir. Para classificar, use a evidência: A = análise e modelos, B = aplicações e dashboards, C = automações e CLI; um notebook ou Dockerfile isolado não decide. Em projeto híbrido, indique o escopo principal e as interfaces secundárias. Ao gravar, use `archetype`, `stack`, `project_name`, `gerado_por: audit-and-refactoring-pipeline` e `data` (ISO 8601); sem permissão de escrita, sugira a classificação no parecer.
 4. Registre modo, gate, achados, fatias e aceites onde o projeto já registra estado (`task.md`, issue ou o próprio parecer), sem apagar o que outras pipelines registraram ali.
 
 ## Esforço e documentos
@@ -48,4 +48,4 @@ Ao parar ou transferir, deixe objetivo, modo, gate, o que foi autorizado e quand
 
 ## Especialistas e ferramentas
 
-Skills especialistas, scanners e CLIs são consultas sob demanda e dão candidatos, não certificação; sem uma delas, siga com o núcleo. Graphify é opcional, e centralidade ou ciclo só viram achado depois de confirmados no código; construir ou atualizar o grafo grava arquivos, então só com escopo e destino autorizados. Evidência remota, só por conector já configurado e autorizado, com o menor conjunto de ferramentas. Delegue só com capacidade e autorização, e com dono claro para cada arquivo.
+Skills especialistas, scanners e CLIs são consultas sob demanda e dão candidatos, não certificação; sem uma delas, siga com o núcleo. Graphify é opcional: centralidade ou ciclo só viram achado confirmados no código, e construir ou atualizar o grafo grava arquivos, então só com escopo e destino autorizados. Evidência remota, só por conector já configurado e autorizado, com o menor conjunto de ferramentas. Delegue só com capacidade e autorização, e com dono claro para cada arquivo.
