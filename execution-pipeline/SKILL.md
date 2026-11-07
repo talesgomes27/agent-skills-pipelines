@@ -31,7 +31,7 @@ Diga qual escolheu e por quê: **leve** para correção local sem mudar interfac
 
 ## Modo
 
-- **Assistido** (padrão): ao fim de cada gate, mostre o resultado e espere o aceite.
+- **Assistido** (padrão): mostre o resultado e espere o aceite ao fim dos Gates 3 e 5. Nos outros, apresente e siga, com as paradas do modo contínuo; eles entram no aceite seguinte.
 - **Contínuo**: se o usuário autorizou o plano de ponta a ponta, avance pelos gates sem pedir de novo. Pare quando o escopo mudar, surgir uma decisão bloqueante, houver conflito com trabalho existente ou risco de perda.
 
 Implementar não inclui commit, push, publicação ou deploy. Faça essas ações só quando o usuário pedir.
@@ -56,7 +56,7 @@ Ao retomar, confira a base e o diff antes de reaproveitar checks anteriores e re
 
 ## Especialistas e ferramentas
 
-Carregue outra skill só para uma lacuna concreta da tarefa: `quarto-expert` para Quarto, `writing-pipeline` para revisão editorial, a skill oficial do framework quando instalada, como `developing-with-streamlit` ou `shiny-for-python`. A especialista diz como fazer; escopo, gates e autorizações continuam os desta skill. Skill ausente não significa ferramenta ausente; consulte a documentação oficial da versão em uso. Graphify, MCPs e conectores são opcionais, e o que eles sugerirem precisa ser confirmado no código.
+Carregue outra skill só para uma lacuna concreta da tarefa: `quarto-expert` para Quarto, `writing-pipeline` para revisão editorial, `scheduled-automation` para job agendado, a skill oficial do framework quando instalada, como `developing-with-streamlit` ou `shiny-for-python`. A especialista diz como fazer; escopo, gates e autorizações continuam os desta skill. Skill ausente não significa ferramenta ausente; consulte a documentação oficial da versão em uso. Graphify, MCPs e conectores são opcionais, e o que eles sugerirem precisa ser confirmado no código.
 
 ## Entrega
 

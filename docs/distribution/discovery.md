@@ -42,6 +42,9 @@ Os casos ambíguos testam a fronteira entre skills. Quando um prompt ativar a sk
 | `quarto-expert` | deve ativar | Migre este relatório R Markdown para Quarto HTML preservando referências e execução. |
 | `quarto-expert` | ambíguo, deve ativar | Gere um PDF Quarto; não sei se o ambiente tem LaTeX ou Typst. |
 | `quarto-expert` | não deve ativar | Explique a diferença entre HTTP 404 e 500. |
+| `scheduled-automation` | deve ativar | Quero que este script rode todo dia às 7h no GitHub Actions e me avise no Telegram se falhar. |
+| `scheduled-automation` | ambíguo, deve ativar | Este ETL roda por cron no servidor e às vezes duplica linhas quando é reexecutado. |
+| `scheduled-automation` | não deve ativar | Converta esta data de dd/mm/aaaa para ISO 8601. |
 | `skill-loader` | deve ativar | Use a skill externa complexity-cuts disponível na biblioteca configurada para esta etapa. |
 | `skill-loader` | ambíguo, deve ativar | Encontre uma skill de migração na biblioteca; existem vários candidatos parecidos. |
 | `skill-loader` | não deve ativar | Use a skill quarto-expert que já está disponível no catálogo desta sessão. |

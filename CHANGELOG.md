@@ -2,6 +2,17 @@
 
 As versões seguem [SemVer](https://semver.org/lang/pt-BR/).
 
+## [Não publicado]
+
+### Novo
+
+- Skill `scheduled-automation`, para jobs que rodam sem ninguém olhando: script ou workflow agendado, ETL recorrente, bot que envia mensagens e retreino de modelo. Ela define o contrato do job (gatilho e fuso, janela, estado, idempotência, falhas, segredos, alertas e execução que não rodou), dry-run, testes e primeira execução, com referências para o GitHub Actions como agendador e para retreino agendado. Entra no bundle `development`.
+
+### Mudanças
+
+- `pre-code-pipeline`, `execution-pipeline` e a referência C da execution apontam para a `scheduled-automation`.
+- No modo assistido, as pipelines esperam o aceite só nos marcos com decisão: `pre-code-pipeline` e `audit-and-refactoring-pipeline` nos Gates 2, 3 e 5, `execution-pipeline` nos Gates 3 e 5 e `release-and-ops-pipeline` nos Gates 2, 4 e 5. Os outros gates são apresentados e entram no aceite seguinte; as paradas por mudança de escopo, decisão bloqueante, conflito e risco de perda continuam.
+
 ## [2.1.0] - 2026-11-07
 
 Comparada com a 2.0.0 (`014ec10`). Adapta as pipelines a ciência de dados, dashboards em Streamlit e Shiny e automações, sem quebra de compatibilidade.

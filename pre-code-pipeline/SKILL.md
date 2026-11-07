@@ -31,7 +31,7 @@ Os arquivos `docs/01` a `docs/05` citados nos gates são destinos padrão, não 
 
 ## Modo
 
-- **Assistido** (padrão): ao fim de cada gate, marque `aguardando_aprovacao` e espere o aceite.
+- **Assistido** (padrão): espere o aceite, com `aguardando_aprovacao`, ao fim dos Gates 2, 3 e 5. Nos outros, apresente o resultado e siga, com as paradas do modo contínuo; eles ficam `aprovado` com o aceite seguinte.
 - **Contínuo**: se o usuário aprovou a sequência completa, avance pelos gates e registre que o aceite veio dessa aprovação. Pare quando o escopo mudar, surgir uma decisão bloqueante, houver conflito com trabalho existente ou risco de perda.
 
 Nenhum dos modos autoriza commit, push, publicação ou deploy.
@@ -54,4 +54,4 @@ Ao parar ou transferir, deixe objetivo, gate e estado, o que foi aprovado e quan
 
 ## Especialistas e ferramentas
 
-Carregue `quarto-expert`, `writing-pipeline` ou um especialista de dados ou domínio só para uma lacuna concreta do gate atual; elas informam, sem mudar gates, escopo nem autorizações. Sem a especialista, siga com o núcleo e bloqueie só a decisão que depende dela. Fonte remota, só por conector já configurado, com menor privilégio e sem ferramenta de escrita. Graphify é opcional, e o que ele sugerir precisa ser confirmado no código.
+Carregue `quarto-expert`, `writing-pipeline`, `scheduled-automation` ou um especialista de dados ou domínio só para uma lacuna concreta do gate atual; elas informam, sem mudar gates, escopo nem autorizações. Sem a especialista, siga com o núcleo e bloqueie só a decisão que depende dela. Fonte remota, só por conector já configurado, com menor privilégio e sem ferramenta de escrita. Graphify é opcional, e o que ele sugerir precisa ser confirmado no código.

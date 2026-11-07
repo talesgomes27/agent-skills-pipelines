@@ -14,7 +14,7 @@ Não adicione barra de progresso a toda execução; use-a quando duração e int
 
 ## Job agendado
 
-Um job agendado (cron, `schedule` do GitHub Actions, agendador da plataforma) segue o mesmo contrato de entradas, saídas e erros, sem terminal para acompanhar. Antes de agendar, o plano responde:
+Um job agendado (cron, `schedule` do GitHub Actions, agendador da plataforma) segue o mesmo contrato de entradas, saídas e erros, sem terminal para acompanhar. A skill `scheduled-automation` traz o contrato completo, as opções de estado e os alertas. Sem ela instalada, o mínimo que o plano responde antes de agendar é:
 
 - horário e fuso do agendador, e o que acontece com atraso ou execução perdida;
 - onde o estado sobrevive entre execuções (banco, arquivos, marca da última execução), já que runners de CI são descartados;
