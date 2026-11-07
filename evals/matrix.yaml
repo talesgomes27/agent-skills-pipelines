@@ -1,0 +1,10 @@
+# Combinações de host e modelo em que as avaliações rodam.
+# O report.py mostra só as combinações que têm resultado gravado.
+combinacoes:
+  - {host: claude-code, modelo: claude-opus-5-5}
+  - {host: claude-code, modelo: claude-sonnet-5-5}
+  - {host: claude-code, modelo: claude-haiku-5-5}
+  - {host: codex, modelo: padrao-do-host}
+  - {host: antigravity-cli, modelo: padrao-do-host}
+niveis: [leitura, execucao]
+cenarios: afetados   # ou: todos, antes de uma MAJOR

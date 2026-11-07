@@ -6,6 +6,9 @@ As versões seguem [SemVer](https://semver.org/lang/pt-BR/).
 
 ### Novo
 
+- `/cenarios` lê `evals/scenarios/`, roda nos níveis de leitura ou de execução e grava os resultados em `evals/results/<versão>/`, e o `skill-prober` devolve o resultado em JSON.
+- O `/preparar-release` exige resultados da versão nova para as skills alteradas, e uma regressão bloqueia a release salvo justificativa no CHANGELOG. `evals/matrix.yaml` declara as combinações de host e modelo, `evals/report.py` gera a tabela dos resultados, e `tests/test_evals.py` confere os dois.
+- Os 17 cenários de comportamento e os 37 prompts de gatilho saem das tabelas de `docs/distribution/discovery.md` para `evals/scenarios/` e `evals/triggers.yaml`, cada cenário com checkpoints `deve` e `nao_deve`.
 - Pasta `evals/` com o formato de cenários, gatilhos e resultados por versão, e `tests/test_evals.py` conferindo esse formato sem chamar modelo. O `AGENTS.md` passa a permitir avaliações nessa pasta, sem framework nem dependência nova.
 - Três subagentes de revisão do Claude Code, que só leem e relatam, declarados nas entradas do marketplace e chamados pela descrição: `pre-code-pipeline:plan-reviewer` no Gate 5 do planejamento, `execution-pipeline:diff-reviewer` no Gate 5 da execução e `release-and-ops-pipeline:sanitation-checker` no saneamento da release. Eles relatam sem editar e não substituem o aceite do usuário.
 

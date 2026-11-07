@@ -13,7 +13,7 @@ claude plugin validate --strict .
 
 A CI repete os testes, o doctor e instalações temporárias em Linux, Windows e macOS. Ela não executa workflows de release, não consulta fontes externas, não inicia MCPs e não certifica a conformidade normativa dos documentos. O doctor da `quarto-expert` tem verificações próprias de ambiente e de render.
 
-Mudança de comportamento numa skill se testa com os cenários de [verificação de descoberta](distribution/discovery.md#cenários-de-comportamento), antes e depois.
+Mudança de comportamento numa skill se testa com os cenários de [`evals/`](../evals/README.md), antes e depois, e os resultados ficam guardados por versão.
 
 ## Contratos
 

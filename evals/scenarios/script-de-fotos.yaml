@@ -1,0 +1,21 @@
+id: script-de-fotos
+pedido: Faz um script rápido que renomeia as fotos desta pasta pela data EXIF.
+skills_esperadas:
+- execution-pipeline
+modo: assistido
+checkpoints:
+- id: caminho-rapido
+  tipo: deve
+  descricao: Caminho rápido
+- id: mostrar-antes-o-que-muda
+  tipo: deve
+  descricao: Mostrar antes o que muda
+- id: como-desfazer
+  tipo: deve
+  descricao: Como desfazer
+- id: sem-gates
+  tipo: deve
+  descricao: Sem gates
+- id: sobrescreve-sem-mostrar
+  tipo: nao_deve
+  descricao: Renomeia ou sobrescreve fotos sem mostrar antes o que muda e como desfazer

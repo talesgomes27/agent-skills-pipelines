@@ -9,6 +9,8 @@ evals/
   scenarios/<id>.yaml          um cenário de comportamento por arquivo
   triggers.yaml                os prompts de gatilho
   fixtures/<id>/               arquivos mínimos que um cenário precisa (opcional)
+  matrix.yaml                  combinações de host e modelo em que as avaliações rodam
+  report.py                    tabela Markdown dos resultados, só com a biblioteca padrão
   results/<versão>/<id>.json   resultado de um cenário numa rodada
   results/<versão>/triggers-<destino>.json
 ```

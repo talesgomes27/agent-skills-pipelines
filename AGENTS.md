@@ -15,7 +15,7 @@ Este repositório é uma biblioteca de Agent Skills em português, distribuída 
 - Antes de escrever conhecimento de uma ferramenta, procure a skill oficial do fabricante e aponte para ela. Escreva só o que nenhuma cobre.
 - Fato de terceiros (plataforma, biblioteca, lei) é conferido na documentação oficial, com o link na referência.
 - Não reintroduza registros de estado nem auditorias no repositório. Avaliações ficam em `evals/`, como cenários declarativos e resultados por versão; nada de framework próprio nem dependência nova.
-- Mudança de comportamento é testada com os cenários de `docs/distribution/discovery.md`, antes e depois, pela skill `/cenarios`.
+- Mudança de comportamento é testada com os cenários de `evals/scenarios/`, antes e depois, pela skill `/cenarios`.
 
 ## Fluxo de trabalho
 
