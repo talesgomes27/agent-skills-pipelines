@@ -4,6 +4,10 @@ As versões seguem [SemVer](https://semver.org/lang/pt-BR/).
 
 ## Não publicado
 
+### Novo
+
+- Três subagentes de revisão do Claude Code, que só leem e relatam, declarados nas entradas do marketplace e chamados pela descrição: `pre-code-pipeline:plan-reviewer` no Gate 5 do planejamento, `execution-pipeline:diff-reviewer` no Gate 5 da execução e `release-and-ops-pipeline:sanitation-checker` no saneamento da release. Eles relatam sem editar e não substituem o aceite do usuário.
+
 ### Mudanças
 
 - Um app novo que a `pre-code-pipeline` aprovou como leve continua leve na `execution-pipeline`. O pedido de construí-lo já autoriza implementar depois do aceite do plano. O único aceite que falta é o do fim do Gate 5, e as paradas do modo contínuo continuam valendo.
