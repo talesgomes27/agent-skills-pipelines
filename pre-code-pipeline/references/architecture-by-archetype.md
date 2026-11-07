@@ -11,10 +11,13 @@ Leia só a parte do arquétipo registrado e, em projeto híbrido, a do domínio 
 ## B: aplicações
 
 - Limites e persistência proporcionais ao domínio, com DDD, C4 ou OpenAPI só quando a complexidade pede.
+- Site ou app web define no plano as metas de SEO, acessibilidade e desempenho, o destino do formulário e onde o site é publicado; a referência B da `execution-pipeline` tem o mínimo de cada um.
+- App com LLM decide na arquitetura provedor e modelo, onde fica a chave, quem acessa, o que vai para o provedor e como as respostas serão avaliadas; a `execution-pipeline` tem a referência de apps com LLM.
 - Mudança de esquema num banco que já tem dados de produção entra na arquitetura como plano de migração, com backup, etapas compatíveis e volta; a `release-and-ops-pipeline` tem a referência de migrações.
 
 ## C: automações
 
 - Entradas, saídas, erros, exit codes e idempotência.
 - Num job agendado, também horário e fuso, onde o estado fica entre execuções, nova tentativa e quem recebe o alerta de falha.
+- Modelo pontuado ou retreinado de forma recorrente segue a referência de modelo em produção da skill `scheduled-automation`.
 - Coleta em sites ou APIs de terceiros declara a fonte, os termos de uso e o robots.txt que valem, o ritmo das requisições e o que fazer diante de login ou CAPTCHA.

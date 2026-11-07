@@ -13,7 +13,7 @@ Use quando o destino é Vercel, Netlify, Streamlit Community Cloud, shinyapps.io
 
 ## Vercel
 
-A Vercel tem um plugin oficial para agentes (`npx plugins add vercel/vercel-plugin`, citado na documentação); use-o como especialista quando estiver instalado. Em Netlify ou Cloudflare Pages, confira na documentação o equivalente de cada item abaixo.
+A Vercel tem um plugin oficial para agentes (`npx plugins add vercel/vercel-plugin`), com skills de deploy, domínios, variáveis de ambiente e autenticação, e a coleção `vercel-labs/agent-skills`, com a `deploy-to-vercel`; use-os como especialistas quando estiverem instalados. Em Netlify ou Cloudflare Pages, confira na documentação o equivalente de cada item abaixo.
 
 - Com a integração Git, push ou merge na branch de produção (em geral `main`) gera deploy de produção; outras branches, pull requests e `vercel` sem `--prod` geram preview. O primeiro deploy de um projeto novo é sempre de produção, mesmo vindo de outra branch: peça a autorização dele como produção. Sem domínio próprio ligado, ele fica só no endereço `vercel.app`; ligue o domínio depois de conferir.
 - Cada deploy tem URL própria. Para conferir com a configuração de produção antes de liberar o domínio, desligue a atribuição automática dos domínios de produção e promova manualmente; esse deploy usa variáveis e dados de produção.
@@ -31,6 +31,7 @@ Fontes: [ambientes](https://vercel.com/docs/deployments/environments), [Instant 
 - A versão do Python é escolhida nas configurações avançadas do deploy; desenvolva na mesma.
 - Segredos: o conteúdo do `secrets.toml` vai no campo Secrets das configurações do app, e o código lê com `st.secrets`. `.streamlit/secrets.toml` fica no `.gitignore`.
 - O app dorme depois de 12 horas sem tráfego, e uma visita o acorda. Os limites de CPU e memória são pequenos.
+- O acesso privado é por convite a e-mails, sem ligação com o diretório da empresa: grupos e desligamentos não chegam sozinhos à lista. Para dados internos que exigem SSO, use outra plataforma, como o Posit Connect com o login da empresa ou hospedagem própria atrás dele.
 - A documentação não publica IPs de saída, e a equipe do Streamlit disse no fórum que a lista de IPs permitidos foi descontinuada. Um banco protegido por lista de IPs pode recusar o app; decida isso na arquitetura, por exemplo com uma API na frente dos dados ou outro destino.
 
 Fontes: [dependências](https://docs.streamlit.io/deploy/streamlit-community-cloud/deploy-your-app/app-dependencies), [segredos](https://docs.streamlit.io/deploy/streamlit-community-cloud/deploy-your-app/secrets-management), [compartilhamento](https://docs.streamlit.io/deploy/streamlit-community-cloud/share-your-app), [gestão do app](https://docs.streamlit.io/deploy/streamlit-community-cloud/manage-your-app), [fórum sobre IPs](https://discuss.streamlit.io/t/security-what-ip-address-range-can-i-whitelist-for-my-db-connection/55865).
@@ -44,6 +45,16 @@ Fontes: [dependências](https://docs.streamlit.io/deploy/streamlit-community-clo
 - A instância padrão é `large` (1 GB), ajustável com `rsconnect::configureApp()`, e dorme depois de 15 minutos ociosa. Os logs saem com `rsconnect::showLogs()`.
 
 Fontes: [primeiros passos](https://docs.posit.co/shinyapps.io/guide/getting_started/), [autenticação](https://docs.posit.co/shinyapps.io/guide/authentication_and_user_management/), [aplicações](https://docs.posit.co/shinyapps.io/guide/applications/).
+
+## API em contêiner ou PaaS
+
+Para uma API como a de FastAPI em Render, Fly.io, Railway, Cloud Run ou equivalente, confira na documentação da plataforma:
+
+- o endpoint de saúde que a plataforma usa para decidir se a versão nova entra no ar;
+- a ordem entre a migração do banco e o deploy, como manda a [referência de migrações](db-migrations.md);
+- variáveis de ambiente e segredos por ambiente;
+- a conexão com o Postgres: SSL, limite de conexões e pool;
+- como a imagem ou o commit publicado é identificado e como voltar ao anterior.
 
 ## Posit Connect
 

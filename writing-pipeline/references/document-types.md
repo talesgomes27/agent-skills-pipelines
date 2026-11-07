@@ -25,6 +25,18 @@ Estruture por pergunta, método, evidência, limitações e decisão. IMRAD, CRI
 Norma de citação e formatação vem do requisito institucional/editorial, não apenas do idioma. Preserve a voz e pessoa gramatical apropriadas. Não invente conteúdo de norma não consultada.
 Em Quarto, preserve bibliografia e estilo configurados. Diagramas renderizáveis em `.qmd` usam células do motor correspondente; exemplos literais de sintaxe e Markdown comum podem usar code fences. Verifique somente os formatos solicitados. Não presuma um formato de imagem ou interatividade igual em HTML, PDF e Typst.
 
+### Relatório executivo
+
+Para diretoria ou gestão, a partir de uma análise ou de um modelo:
+
+- Pergunte no início o formato (docx, PDF, Quarto, slides) e o tamanho. Para docx, PDF ou pptx, use as skills de documentos da Anthropic (`document-skills`) quando estiverem instaladas; sem elas, entregue o rascunho em Markdown e diga como gerar o formato pedido.
+- Comece pela conclusão e pela recomendação; a evidência vem depois.
+- Traduza cada métrica no efeito para o negócio. Em vez de AUC, diga quantos dos clientes em risco a lista acerta entre os primeiros nomes e o que errar significa para o negócio. Sem custo informado, não invente valor: peça ao usuário ou descreva o efeito sem número. A métrica técnica vai para uma nota ou para o anexo à parte.
+- Diga a incerteza e o que o relatório não afirma: o período e os dados que valem, que uma estimativa pode errar e que associação não prova causa.
+- Um gráfico por mensagem, com um título que diz a conclusão.
+- Monte uma tabela que liga cada número do texto à célula ou saída de onde ele veio, e confira os números nessas saídas. Essa tabela e o anexo técnico acompanham o relatório à parte, ou ficam na resposta, sem contar no limite de páginas. Se as saídas podem estar desatualizadas, diga isso ou rode de novo com autorização.
+- Dados de pessoas aparecem só agregados, como pede a skill `personal-data`.
+
 ## Release notes, changelog, PR e commit
 
 Descreva mudanças efetivamente implementadas e seus efeitos. Separe novidades, correções e incompatibilidades conforme a convenção do projeto. Preserve rastreabilidade e divulgações exigidas; não proíba menções a ferramentas ou assistência quando forem relevantes ou requeridas.

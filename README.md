@@ -114,13 +114,16 @@ A CLI não sobrescreve pacote homônimo sem recibo nem cópia gerenciada que ten
 
 ### Skills oficiais de frameworks
 
-Para dashboards e documentos Quarto, instale também as skills que os próprios frameworks mantêm. As do Streamlit e do Shiny para Python vêm dentro da biblioteca e acompanham a versão instalada. As pipelines as usam como especialistas e mantêm seus gates e autorizações.
+Para dashboards, sites, apps com LLM e documentos, instale também as skills que os próprios fabricantes mantêm. As do Streamlit e do Shiny para Python vêm dentro da biblioteca e acompanham a versão instalada. As pipelines as usam como especialistas e mantêm seus gates e autorizações.
 
 | Framework | Skills | Instalação |
 |---|---|---|
 | Streamlit 1.58 ou mais novo | `developing-with-streamlit` | `streamlit skills` na pasta do projeto, ou `streamlit skills --global` |
 | Shiny para Python | `shiny-for-python` | Na pasta do app, com o `shiny` no ambiente do projeto: `uvx library-skills --claude` no Claude Code, `uvx library-skills` nos outros hosts |
 | Shiny em R e Posit Connect | `shiny-bslib`, `shiny-r-optimize`, `deploy-to-connect` e outras | `claude plugin marketplace add posit-dev/skills`, depois `claude plugin install shiny@posit-dev-skills` e `connect@posit-dev-skills`; nos outros hosts, `npx skills add posit-dev/skills` |
+| Sites e apps na Vercel | `vercel-react-best-practices`, `web-design-guidelines`, `deploy-to-vercel` | `npx skills add vercel-labs/agent-skills` |
+| Plataforma da Vercel | `auth`, `domains`, `env-vars`, `deployments-cicd`, `ai-sdk` e outras | `npx plugins add vercel/vercel-plugin` |
+| Claude API e documentos | `claude-api`, `docx`, `pdf`, `pptx`, `xlsx` | `claude plugin marketplace add anthropics/skills`, depois `claude plugin install claude-api@anthropic-agent-skills` e `document-skills@anthropic-agent-skills` |
 | Quarto (autoria e migração) | `quarto-authoring`, `brand-yml`, `alt-text` | Com o marketplace da Posit, `claude plugin install quarto@posit-dev-skills`; nos outros hosts, `npx skills add posit-dev/skills --skill quarto-authoring` |
 
 O `library-skills` descobre o projeto pelo ambiente Python. Numa pasta sem ambiente próprio, ele pode adotar a pasta pessoal como projeto e copiar a própria skill para `~/.claude/skills` e `~/.agents/skills`.
