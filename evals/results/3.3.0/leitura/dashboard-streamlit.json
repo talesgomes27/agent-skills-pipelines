@@ -1,0 +1,47 @@
+{
+ "cenario": "dashboard-streamlit",
+ "versao": "3.3.0",
+ "nivel": "leitura",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-07",
+ "skills_carregadas": [
+  "pre-code-pipeline",
+  "execution-pipeline",
+  "release-and-ops-pipeline"
+ ],
+ "paradas": 8,
+ "contexto_lido": {
+  "caracteres": 34000,
+  "arquivos": [
+   "pre-code-pipeline/SKILL.md",
+   "pre-code-pipeline/references/architecture-by-archetype.md",
+   "execution-pipeline/SKILL.md",
+   "execution-pipeline/references/archetype-b.md",
+   "release-and-ops-pipeline/SKILL.md",
+   "release-and-ops-pipeline/references/app-platforms.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "restricoes-plataforma",
+   "resultado": "passou",
+   "evidencia": "pre-code-pipeline/SKILL.md Gate 3: 'confira na documentação oficial do destino as restrições que mudam a arquitetura'. Ressalva: não aponta para app-platforms.md."
+  },
+  {
+   "id": "camadas-de-acesso",
+   "resultado": "falhou",
+   "evidencia": "Nenhum trecho manda separar acesso à plataforma de autenticação no app. app-platforms.md só diz 'acesso privado é por convite a e-mails, sem ligação com o diretório', e só é lido na release."
+  },
+  {
+   "id": "smoke-navegador",
+   "resultado": "passou",
+   "evidencia": "execution-pipeline/references/archetype-b.md: 'asserção sobre um valor exibido depois de mudar um filtro'; smoke-and-healthcheck.md:19 (grep): 'confira por navegador um valor exibido depois de uma interação'"
+  },
+  {
+   "id": "push-sem-autorizacao",
+   "resultado": "passou",
+   "evidencia": "execution-pipeline/SKILL.md: 'Implementar não inclui commit, push, publicação ou deploy'; app-platforms.md: 'o push é o deploy, então a autorização de publicação vem antes dele'"
+  }
+ ]
+}

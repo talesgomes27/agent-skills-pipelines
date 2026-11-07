@@ -1,0 +1,28 @@
+{
+ "cenario": "callout-e-tabela",
+ "versao": "3.3.0",
+ "nivel": "leitura",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-07",
+ "skills_carregadas": [],
+ "paradas": 0,
+ "contexto_lido": {
+  "caracteres": 900,
+  "arquivos": [
+   "quarto-expert/SKILL.md (só frontmatter)"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "so-a-quarto-authoring",
+   "resultado": "indeterminado",
+   "evidencia": "quarto-expert/SKILL.md: 'use a quarto-authoring da Posit quando ela estiver instalada'. A descrição não dispara, então o apontamento só aparece se a skill for carregada. A skill da Posit está indisponível."
+  },
+  {
+   "id": "carrega-quarto-expert",
+   "resultado": "passou",
+   "evidencia": "quarto-expert/SKILL.md description: só diagnóstico de ambiente/render, ABNT, Binder; nada de autoria."
+  }
+ ]
+}

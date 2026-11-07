@@ -92,7 +92,8 @@ class ResultFormat(unittest.TestCase):
         for path in sorted((EVALS / 'results').rglob('*.json')):
             data = json.loads(path.read_text(encoding='utf-8'))
             with self.subTest(resultado=str(path.relative_to(EVALS))):
-                self.assertEqual(data['versao'], path.parent.name)
+                self.assertEqual(path.parent.name, data['nivel'])
+                self.assertEqual(data['versao'], path.parent.parent.name)
                 self.assertRegex(data['versao'], r'^\d+\.\d+\.\d+(-[0-9A-Za-z.]+)?$')
                 self.assertIn(data['nivel'], ('leitura', 'execucao'))
                 self.assertTrue(data['host'] and data['modelo'])
@@ -106,7 +107,8 @@ class ResultFormat(unittest.TestCase):
                 self.assertEqual(data['cenario'], path.stem)
                 scenario = found[data['cenario']]
                 self.assertIsInstance(data['skills_carregadas'], list)
-                self.assertLessEqual(set(data['skills_carregadas']), SKILLS)
+                # skills de outros plugins vêm com prefixo, como superpowers:brainstorming
+                self.assertLessEqual({s for s in data['skills_carregadas'] if ':' not in s}, SKILLS)
                 self.assertIs(type(data['paradas']), int)
                 self.assertIs(type(data['contexto_lido']['caracteres']), int)
                 self.assertIsInstance(data['contexto_lido']['arquivos'], list)

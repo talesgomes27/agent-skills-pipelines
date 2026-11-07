@@ -1,0 +1,42 @@
+{
+ "cenario": "tese-sem-rede",
+ "versao": "3.3.0",
+ "nivel": "leitura",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-07",
+ "skills_carregadas": [
+  "quarto-expert"
+ ],
+ "paradas": 0,
+ "contexto_lido": {
+  "caracteres": 11500,
+  "arquivos": [
+   "quarto-expert/SKILL.md",
+   "quarto-expert/references/offline-diagnostics.md",
+   "quarto-expert/references/engines.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "carrega-quarto-expert-ambiente",
+   "resultado": "passou",
+   "evidencia": "quarto-expert/SKILL.md description: 'máquina sem rede', 'tese ou trabalho acadêmico em ABNT'."
+  },
+  {
+   "id": "ordem-de-busca-do-python",
+   "resultado": "passou",
+   "evidencia": "quarto-expert/SKILL.md, Diagnóstico: 'Procure nesta ordem: QUARTO_PYTHON no ambiente, jupyter: ou kernelspec no YAML, um ambiente virtual do projeto e o python3 do PATH'."
+  },
+  {
+   "id": "o-que-precisa-estar-na-maquina",
+   "resultado": "passou",
+   "evidencia": "quarto-expert/SKILL.md, Trabalhos acadêmicos: 'a distribuição LaTeX com os pacotes do template (ou o Typst embutido), o formato ou a extensão ABNT em _extensions/, as fontes, o arquivo CSL e a bibliografia'."
+  },
+  {
+   "id": "instala-sem-aceite",
+   "resultado": "passou",
+   "evidencia": "references/offline-diagnostics.md: 'Instalação … exige autorização própria'; `quarto tools` consulta o remoto e exige autorização de rede; SKILL.md: 'Liste o que falta … antes de tentar o render'."
+  }
+ ]
+}

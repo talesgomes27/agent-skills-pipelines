@@ -12,7 +12,7 @@ A `release-and-ops-pipeline` dá os gates e as autorizações; esta skill dá os
 ## 1. Antes
 
 - `git fetch` e `main` igual à `origin/main`. As notas vêm da seção "Não publicado" do CHANGELOG; sem ela, de `git log <tag anterior>..main`.
-- Uma release por vez. Os cenários das skills que mudaram desde a tag anterior precisam de resultados da versão nova em `evals/results/<versão>/`, rodados pelo `/cenarios`. Um checkpoint que passava na versão anterior e agora falha bloqueia a release, salvo justificativa escrita no CHANGELOG.
+- Uma release por vez. Os cenários das skills que mudaram desde a tag anterior precisam de resultados da versão nova em `evals/results/<versão>/<nível>/`, rodados pelo `/cenarios`. Um checkpoint que passava na versão anterior e agora falha bloqueia a release, salvo justificativa escrita no CHANGELOG.
 - Proponha a versão pelo SemVer, olhando essas notas: skill removida ou escopo cortado é MAJOR; skill, regra ou referência nova é MINOR; correção é PATCH. Confirme com o usuário.
 
 ## 2. Preparar

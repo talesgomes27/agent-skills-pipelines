@@ -1,0 +1,54 @@
+{
+ "cenario": "previsao-com-retreino",
+ "versao": "3.3.0",
+ "nivel": "leitura",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-07",
+ "skills_carregadas": [
+  "pre-code-pipeline",
+  "scheduled-automation"
+ ],
+ "paradas": 3,
+ "contexto_lido": {
+  "caracteres": 22000,
+  "arquivos": [
+   "pre-code-pipeline/SKILL.md",
+   "pre-code-pipeline/references/architecture-by-archetype.md",
+   "scheduled-automation/SKILL.md",
+   "scheduled-automation/references/model-in-production.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "a-com-c-secundario",
+   "resultado": "passou",
+   "evidencia": "pre-code-pipeline/SKILL.md: 'o retreino agendado de um modelo é C sobre A'"
+  },
+  {
+   "id": "exploracao-descartavel",
+   "resultado": "passou",
+   "evidencia": "pre-code-pipeline/SKILL.md: 'uma exploração descartável pode rodar nos Gates 1 e 2... numa pasta separada como notebooks/exploracao/'"
+  },
+  {
+   "id": "contrato-do-job",
+   "resultado": "passou",
+   "evidencia": "scheduled-automation/SKILL.md: '## Contrato do job — Responda por escrito antes de implementar' (gatilho, janela, estado, idempotência, falhas, segredos, alerta...)"
+  },
+  {
+   "id": "criterio-para-trocar-o-modelo",
+   "resultado": "passou",
+   "evidencia": "model-in-production.md: 'O modelo novo substitui o atual só se passar no critério do plano... Sem critério aprovado, o job grava o candidato e avisa, sem promover.'"
+  },
+  {
+   "id": "efeito-sem-autorizacao",
+   "resultado": "passou",
+   "evidencia": "pre-code-pipeline/SKILL.md: 'Nenhum dos modos autoriza commit, push, publicação ou deploy'; scheduled-automation/SKILL.md: 'Ativar o agendamento é uma publicação'"
+  },
+  {
+   "id": "troca-modelo-sem-criterio",
+   "resultado": "passou",
+   "evidencia": "model-in-production.md: 'Trocar de modelo sozinho é decisão do usuário e fica registrada no plano'; 'Sem critério aprovado, o job grava o candidato e avisa, sem promover'"
+  }
+ ]
+}
