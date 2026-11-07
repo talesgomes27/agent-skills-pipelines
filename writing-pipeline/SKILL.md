@@ -36,7 +36,7 @@ Entregue texto adequado ao leitor, ao documento e às evidências disponíveis. 
 
 Bibliografia e estilo de citação pertencem ao projeto/documento. Resolva chaves nos arquivos e metadados configurados, usando o parser/motor adequado quando disponível. Um catálogo editorial da skill pode sugerir leituras; não autoriza citações nem substitui a bibliografia efetiva.
 Links devem apontar à fonte que sustenta a afirmação. Metadados confirmam identidade bibliográfica, não sustentação de conteúdo. Cite somente o que foi consultado ou marque a verificação pendente, sem fingir leitura do texto integral.
-Para Quarto, preserve formato, bibliografia e referências cruzadas existentes; use `quarto-expert` quando a tarefa exigir conhecimento específico de configuração/renderização. Criar `.qmd` não autoriza reexecutar análises custosas ou publicar.
+Para Quarto, preserve formato, bibliografia e referências cruzadas existentes; use a `quarto-authoring` da Posit para sintaxe e a `quarto-expert` para configuração e renderização. Criar `.qmd` não autoriza reexecutar análises custosas ou publicar.
 Use `humanizer` apenas quando disponível e útil à revisão de estilo solicitada, preservando estas restrições de significado e evidência. Não carregue uma segunda cadeia editorial para cada docstring. Conectores/MCP existentes podem acessar fontes privadas autorizadas; não instale servidor ou conecte conta para uma edição local simples.
 Se um relatório Graphify for pertinente ao documento, confira escopo, cobertura e atualidade antes de citar. Não acrescente uma seção arquitetural apenas porque o arquivo existe; métrica do grafo não prova qualidade do projeto.
 

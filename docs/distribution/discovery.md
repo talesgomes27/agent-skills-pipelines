@@ -39,9 +39,9 @@ Os casos ambíguos testam a fronteira entre skills. Quando um prompt ativar a sk
 | `release-and-ops-pipeline` | deve ativar | Prepare a release 1.4.0 para revisão, sem publicar nem criar tag. |
 | `release-and-ops-pipeline` | ambíguo, deve ativar | Faça o push da release; esse push pode acionar produção e o destino não foi informado. |
 | `release-and-ops-pipeline` | não deve ativar | Mostre o status local do Git, sem preparar release. |
-| `quarto-expert` | deve ativar | Migre este relatório R Markdown para Quarto HTML preservando referências e execução. |
+| `quarto-expert` | deve ativar | O PDF Quarto da tese não renderiza nesta máquina sem internet; descubra o que falta e qual Python ele usa. |
 | `quarto-expert` | ambíguo, deve ativar | Gere um PDF Quarto; não sei se o ambiente tem LaTeX ou Typst. |
-| `quarto-expert` | não deve ativar | Explique a diferença entre HTTP 404 e 500. |
+| `quarto-expert` | não deve ativar | Adicione um callout de aviso e uma tabela com legenda neste .qmd. |
 | `scheduled-automation` | deve ativar | Quero que este script rode todo dia às 7h no GitHub Actions e me avise no Telegram se falhar. |
 | `scheduled-automation` | ambíguo, deve ativar | Este ETL roda por cron no servidor e às vezes duplica linhas quando é reexecutado. |
 | `scheduled-automation` | não deve ativar | Converta esta data de dd/mm/aaaa para ISO 8601. |
