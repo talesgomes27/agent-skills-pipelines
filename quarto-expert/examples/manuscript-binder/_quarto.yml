@@ -8,7 +8,7 @@ manuscript:
     - binder
   notebooks:
     - notebook: notebooks/01-analise.qmd
-      title: Analise Estatistica
+      title: Análise Estatística
 
 bibliography: references.bib
 

@@ -1,1 +1,3 @@
-# 01-introducao
+# Introdução {#sec-intro}
+
+Texto da introdução, com uma citação de exemplo [@exemplo2024].

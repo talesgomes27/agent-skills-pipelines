@@ -1,0 +1,27 @@
+name: Links externos
+
+"on":
+  schedule:
+    # Segunda-feira, 9h17 UTC (6h17 em Brasília); minuto fora da hora cheia.
+    - cron: "17 9 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: links
+  cancel-in-progress: true
+
+jobs:
+  links:
+    name: Conferir links externos
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.14"
+      - name: Check links
+        run: python scripts/check_links.py
