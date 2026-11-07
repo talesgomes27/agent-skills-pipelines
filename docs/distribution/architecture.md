@@ -1,47 +1,6 @@
 # Distribuição multiagente
 
-Implementado em 2026-10-22 após aprovação e consolidação das oito auditorias. Fonte única: oito pacotes na raiz; catálogo versionado em `distribution/catalog.json`; CLI em `scripts/skills.py`. Arquivos históricos e propostas não são pacotes distribuíveis.
-
-## Governança documental vigente
-
-Política adotada na MOD-004 (2026-10-28). Consumidores: mantenedor, autores de skills, revisores e operadores de distribuição. Este guia mantém a propriedade da informação; os documentos apontados mantêm seu conteúdo, sem cópia obrigatória entre pipelines.
-
-| Informação | Fonte canônica | Mantenedor / consumidor | Quando conferir |
-|---|---|---|---|
-| Escopo e autorização | Pedido atual e contrato aprovado da tarefa | Usuário / executor | Antes de agir; autorização histórica não amplia tarefa nova |
-| Comportamento requerido | Contrato aprovado, referenciado no task | Responsável pelo requisito / implementador e revisor | Mudança de requisito ou discrepância com código |
-| Comportamento observado | Código, testes e saídas com base identificada | Autor da mudança / revisor | Mudança funcional e validação |
-| Seleção, bundles e release | `distribution/catalog.json` | Mantenedor da distribuição / CLI e operador | Alteração de pacote ou release; conferir derivados no README |
-| Identidade e procedimento da skill | Frontmatter e corpo do `SKILL.md` ativo | Autor da skill / host e chamador | Alteração do contrato; referências especializadas sob demanda |
-| Instalação e comandos | CLI e este guia; biblioteca em `docs/library-maintenance.md`; evals em `docs/evals.md` | Mantenedor do componente / operador | Mudança de interface, dependência ou recuperação |
-| Estado vigente | Seção inicial de `task.md`, com base, autorização e próxima ação | Executor / retomada | Por tarefa ou check; registros anteriores permanecem históricos |
-| Decisões duráveis | ADR aprovado, quando necessário | Responsável pela decisão / futuros autores | Mudança arquitetural relevante; nenhum ADR obrigatório por tarefa |
-| Resultado verificado | Log/artefato datado com comando, ambiente, base e limites | Executor / avaliador | Nova execução; não substituir resultado anterior |
-| História e propostas | Auditorias datadas, `legacy/`, `proposals/` e planos anteriores | Mantenedor como custodiante / auditor | Consulta explícita; não são procedimento ativo nem autorização |
-
-Quando código e requisito aprovado divergem, investigue e registre a decisão antes de alterar qualquer fonte. Documentação de uso deriva do contrato e da evidência; código não é autoridade absoluta sobre comportamento esperado. Conteúdo sem consumidor conhecido recebe investigação, não exclusão automática.
-
-Atualize apenas as fontes afetadas, com finalidade e consumidor claros. Correção local pode usar o contrato existente; mudança de interface exige conferir exemplos e compatibilidade; decisão arquitetural relevante registra alternativas e consequências; experimento preserva método, configuração e proveniência. A MOD-005 permite que contratos equivalentes aprovados satisfaçam gates por referência, com esforço e motivo registrados. Os procedimentos são mantidos nos próprios pacotes de planejamento, execução e auditoria, sem dependência deste guia na instalação. Esforço não amplia autorização nem elimina segurança, teste pertinente, evidência ou recuperação; assistido/contínuo continuam regulando aprovações.
-
-O [encerramento local da MOD-010](../audits/modernization-2026-10-28/mod-010.md) consolida as decisões de eficiência de 2026-10-28: mantidos carregamento seletivo, esforço proporcional e handoff local a cada pacote; rejeitadas novas extrações/compactações sem ganho líquido demonstrado. Menos documentos ou bytes emitidos em uma fixture não comprova economia de tokens/franquia. Os estudos e limites ficam na evidência datada, sem substituir os contratos dos pacotes ou exigir leitura integral do histórico.
-
-Arquive somente com motivo/data, fonte sucessora e consumidor verificados; preserve histórico Git e resultados necessários à reprodução. Não apague cópias históricas por hash, baixa frequência de leitura ou quantidade de linhas. Antes de remover material de valor incerto, obtenha decisão do mantenedor. Não carregue histórico nem referências inteiras por padrão.
-
-## Handoff e retomada
-
-As quatro pipelines principais mantêm o mesmo contrato mínimo em seus próprios pacotes, sem depender de um arquivo externo à instalação. Use uma seção datada no estado já adotado, com um executor por fatia e referências aos artefatos originais. Exemplo ilustrativo, sem alegar execução ou autorização real:
-
-```markdown
-## Handoff — 2026-10-28
-- Objetivo/estado/base: correção do rótulo; preparado; fixture-r1 (revisão simulada).
-- Escopo/autorização: só preparar handoff, conforme pedido de 2026-10-28; implementação não autorizada.
-- Executor da próxima fatia: execution-pipeline, somente para conferir condições de entrada.
-- Fontes/decisões/pendências: contrato em issue.md; API preservada; falta autorização de implementar.
-- Checks: inspeção documental concluída na base declarada; testes de aplicação não executados.
-- Restrições/próxima ação: revisar o handoff e relatar estado; não implementar nem publicar.
-```
-
-O consumidor confere base, diff e referências antes de reutilizar autorização ou resultado de check. Mudança de base não obriga repetir uma aprovação ainda válida, mas exige revalidar o que foi afetado; mudança material de escopo/artefato/destino interrompe a ação dependente. Registre limites quando não houver snapshot para comparar bases; não invente diff histórico. O produtor encerra sua fatia ou registra transferência de responsabilidade, sem auditoria e execução implementarem a mesma tarefa simultaneamente. Um handoff preparado não prova execução, e aprovação de plano não autoriza implementar.
+Fonte única: os pacotes listados no catálogo, cada um numa pasta da raiz; catálogo versionado em `distribution/catalog.json`; CLI em `scripts/skills.py`.
 
 ## Compatibilidade
 
@@ -72,11 +31,10 @@ flowchart LR
     I[Biblioteca externa] --> J[skill-loader sob demanda]
 ```
 
-Três níveis operacionais, sem inventar um enum nativo de discoverability:
+Dois níveis operacionais, sem inventar um enum nativo de discoverability:
 
 1. **Ativo:** somente as skills selecionadas são expostas ao catálogo nativo. Seu nome/descrição podem ocupar contexto inicial.
 2. **Biblioteca externa:** demais skills permanecem fora dos diretórios de descoberta; `skill-loader` recebe uma raiz configurada e localiza recursos pontualmente.
-3. **Histórico:** `docs/audits/legacy/` e propostas não devem ser registrados como raízes de skills.
 
 Nenhum orçamento universal de 20.000 tokens ou contagem fixa por skill é presumido. A configuração e os limites variam por host. Remover uma skill do catálogo não apaga instruções já lidas em uma conversa.
 
@@ -98,7 +56,7 @@ O instalador aplica `--exclude` antes de gerar entradas; não depende de semânt
 - O catálogo usa schema JSON versão 1 e release SemVer; `distribution/catalog.schema.json` publica o contrato declarativo. A CLI valida campos, versão, release, tipos, unicidade e pertencimento de membros aos nomes do catálogo com verificações locais; não depende de um motor genérico de JSON Schema.
 - `doctor` valida sintaxe YAML e chaves duplicadas do frontmatter e dos recursos `.yml`/`.yaml`, identidade de nome, descrição e metadata string/string. Verifica existência e confinamento dos destinos de links Markdown inline no entrypoint e em `references/**/*.md`, relativos ao arquivo que contém o link. Ignora código cercado por backticks/tis e código inline, URLs externas e fragmentos sem arquivo; para `arquivo.md#seção`, confere o arquivo, sem certificar a âncora. Links por definição/HTML e títulos opcionais em links não fazem parte deste checker. `examples/` e históricos fora dos pacotes ativos ficam fora da varredura documental, mas YAML e restrições de symlinks do pacote continuam verificados. A mesma validação precede `manifest`/`install`, sem buscar rede ou executar snippets. Não é um validador completo de Markdown, de todas as extensões dos hosts ou dos schemas Quarto.
 - As cópias são registradas por caminho relativo e SHA-256 dos arquivos. O doctor detecta divergências em cópias gerenciadas. Links são fontes vivas: verifica destino e estrutura, sem afirmar imutabilidade do conteúdo.
-- `agents/openai.yaml` é opcional no Codex para interface, política e ferramentas. Nenhum dos oito pacotes exige MCP ou bloqueio de invocação implícita por padrão. Não foram adicionadas dependências fictícias ou políticas globais.
+- `agents/openai.yaml` é opcional no Codex para interface, política e ferramentas. Nenhum pacote exige MCP ou bloqueio de invocação implícita por padrão. Não foram adicionadas dependências fictícias ou políticas globais.
 
 ### Integração MCP/customizada
 
@@ -176,7 +134,7 @@ Mantenha agente/destino, seleção, modo e fonte/release da operação pretendid
 
 As actions em `.github/workflows/ci.yml` usam SHA completo com versão legível em comentário. Para atualizar, resolva a tag/release desejada no repositório oficial `actions/checkout` ou `actions/setup-python`, confira o commit e o manifest `action.yml` naquela revisão e revise o diff/compatibilidade. Atualize todas as ocorrências da action e registre fonte, versão, SHA e data da verificação. Não copie um SHA sugerido por terceiros sem conferir a origem nem mova a dependência automaticamente com a tag.
 
-Valide YAML, eventos, permissões, matriz e comandos localmente; quando houver autorização de envio/CI, confira os jobs do commit final até o estado terminal. SHA de action não fixa a imagem `*-latest`, downloads de runtime ou todas as dependências transitivas. A [evidência MOD-009](../audits/modernization-2026-10-28/mod-009.md) registra as resoluções oficiais e os limites da validação local.
+Valide YAML, eventos, permissões, matriz e comandos localmente; quando houver autorização de envio/CI, confira os jobs do commit final até o estado terminal. SHA de action não fixa a imagem `*-latest`, downloads de runtime ou todas as dependências transitivas.
 
 ## Doctor e evidências
 
@@ -188,4 +146,4 @@ python3 quarto-expert/scripts/doctor.py
 
 Sem destino, `doctor` verifica os pacotes fonte. Com `--destination`, verifica pacotes selecionados do destino e integridade quando houver registro. Um pacote não gerenciado recebe apenas verificação estrutural. Saídas da CLI são JSON: código 0 para êxito, 1 para erro, 2 para dependência indisponível. Falta de PyYAML não é sucesso.
 
-A validação não executa workflows de release, pesquisa fontes externas, inicia MCPs ou certifica conformidade normativa dos documentos. O doctor da Quarto oferece runtime e render smoke separados. Instalação no filesystem não comprova que uma aplicação já carregou a skill; siga o [protocolo de descoberta](discovery.md) depois de recarregar o host. Casos e traces comportamentais estão descritos em [avaliações](../evals.md).
+A validação não executa workflows de release, pesquisa fontes externas, inicia MCPs ou certifica conformidade normativa dos documentos. O doctor da Quarto oferece runtime e render smoke separados. Instalação no filesystem não comprova que uma aplicação já carregou a skill; siga o [protocolo de descoberta](discovery.md) depois de recarregar o host.

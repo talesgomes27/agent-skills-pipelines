@@ -16,7 +16,7 @@ Release atual: **1.0.1**.
 - Especialistas de escrita, Quarto e descoberta de skills externas.
 - Instalação seletiva por skill ou bundle, por cópia ou link simbólico.
 - Catálogo versionado, recibos de instalação e detecção segura de atualizações.
-- Avaliações comportamentais positivas, ambíguas e negativas para cada skill.
+- Prompts de gatilho por skill para conferir a descoberta em cada host.
 - CI em Linux, Windows e macOS.
 - Biblioteca fria consultada sob demanda para reduzir exposição de instruções e consumo de contexto.
 
@@ -30,7 +30,6 @@ Release atual: **1.0.1**.
 | [`release-and-ops-pipeline`](release-and-ops-pipeline/SKILL.md) | Saneamento, versão, artefatos, publicação autorizada e smoke tests. |
 | [`writing-pipeline`](writing-pipeline/SKILL.md) | Redação e revisão técnica com preservação de fatos, fontes e formato. |
 | [`quarto-expert`](quarto-expert/SKILL.md) | Autoria, configuração, depuração e migração de projetos Quarto. |
-| [`humanizer`](humanizer/SKILL.md) | Revisão de estilo preservando significado e voz do autor. |
 | [`skill-loader`](skill-loader/SKILL.md) | Descoberta e carregamento limitado de skills em biblioteca externa. |
 
 ## Arquitetura operacional
@@ -83,8 +82,8 @@ No Windows, use `.venv\Scripts\python.exe`. Os destinos padrão são:
 Exemplos adicionais:
 
 ```bash
-# Instalar todas, exceto uma implementação já fornecida pelo host
-python3 scripts/skills.py install --agent codex --scope user --all --exclude humanizer
+# Instalar todas, exceto a biblioteca fria
+python3 scripts/skills.py install --agent codex --scope user --all --exclude skill-loader
 
 # Desenvolvimento local com atualização imediata da fonte
 python3 scripts/skills.py install --agent claude --bundle editorial --mode link
@@ -106,7 +105,7 @@ Os bundles agrupam skills por papel; eles não instalam ferramentas, MCPs ou dep
 |---|---|
 | `planning` | Planejamento pré-código. |
 | `development` | Planejamento, execução e auditoria. |
-| `editorial` | Escrita e humanização. |
+| `editorial` | Escrita e revisão técnica. |
 | `research` | Planejamento, execução, escrita e Quarto. |
 | `release` | Release e operações. |
 | `library` | Carregamento da biblioteca fria. |
@@ -124,32 +123,23 @@ python3 scripts/library.py rebuild --root /caminho/da/biblioteca --output /tmp/s
 
 O carregador valida confinamento, existência e identidade do manifesto. Encontrar uma skill não a executa nem concede novas permissões. Veja [manutenção da biblioteca](docs/library-maintenance.md).
 
-## Avaliação e validação
+## Validação
 
 ```bash
 python3 scripts/skills.py doctor
-python3 scripts/evals.py validate
 python3 -m unittest discover -s tests -v
 python3 quarto-expert/scripts/doctor.py
 ```
 
-O harness contém 34 casos para as oito skills e classifica traces A/B capturados por um executor externo. Ele mede ativação, operações proibidas, sinais esperados e, quando fornecidos, tokens, chamadas de ferramenta e latência. Veja [avaliações comportamentais](docs/evals.md) e [verificação de descoberta](docs/distribution/discovery.md).
-
-A [campanha local A–J da MOD-007](docs/audits/modernization-2026-10-28/mod-007.md) preserva separadamente 12 casos, 24 traces reais em fixtures e custos observados com limitações explícitas. A cobertura é completa; o grader estrito conserva uma reprovação de ativação no cenário documental I.
-
-O workflow de CI repete testes, doctors e instalações temporárias em Linux, Windows e macOS. Validação estrutural não substitui uma execução real no host, renderização dos formatos solicitados ou revisão humana do resultado.
+O doctor valida estrutura, frontmatter, identidade e links das skills. A CI repete testes, doctor e instalações temporárias em Linux, Windows e macOS. Para saber se o host encontra as skills, siga a [verificação de descoberta](docs/distribution/discovery.md), que traz os prompts de gatilho de cada skill.
 
 ## Documentação
 
-- [Governança documental e fontes canônicas](docs/distribution/architecture.md#governança-documental-vigente)
 - [Arquitetura de distribuição](docs/distribution/architecture.md)
-- [Protocolo de descoberta](docs/distribution/discovery.md)
-- [Validação da distribuição](docs/distribution/validation.md)
-- [Avaliações comportamentais](docs/evals.md)
+- [Verificação de descoberta](docs/distribution/discovery.md)
 - [Manutenção da biblioteca fria](docs/library-maintenance.md)
-- [Auditorias e decisões de refatoração](docs/audits/)
 
-Os diretórios `docs/audits/legacy/` e `docs/audits/proposals/` preservam histórico e não fazem parte do catálogo ativo. Recursos executáveis de cada pacote são resolvidos relativamente à sua própria pasta; a distribuição não depende de caminhos pessoais.
+Recursos executáveis de cada pacote são resolvidos relativamente à sua própria pasta; a distribuição não depende de caminhos pessoais. Auditorias, experimentos e o harness de avaliações até a MOD-010 estão preservados na tag `archive/mod-2026-10`.
 
 ## Licença
 

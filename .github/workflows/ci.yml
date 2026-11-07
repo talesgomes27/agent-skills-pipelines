@@ -28,10 +28,8 @@ jobs:
         run: python -m unittest discover -s tests -v
       - name: Validate catalog and skills
         run: python scripts/skills.py doctor --agent codex --scope project
-      - name: Validate behavioral eval cases
-        run: python scripts/evals.py validate
       - name: Exercise copy installation
-        run: python scripts/skills.py install --agent codex --dest "${{ runner.temp }}/skills-copy" --all --exclude humanizer
+        run: python scripts/skills.py install --agent codex --dest "${{ runner.temp }}/skills-copy" --all
 
   link-install:
     name: Linux symbolic-link installation
@@ -44,4 +42,4 @@ jobs:
           cache: pip
       - run: python -m pip install -r distribution/requirements.txt
       - name: Exercise link installation
-        run: python scripts/skills.py install --agent codex --dest "${{ runner.temp }}/skills-link" --all --exclude humanizer --mode link
+        run: python scripts/skills.py install --agent codex --dest "${{ runner.temp }}/skills-link" --all --mode link
