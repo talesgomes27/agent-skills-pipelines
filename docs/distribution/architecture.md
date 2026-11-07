@@ -105,6 +105,34 @@ python3 scripts/skills.py manifest --bundle research --exclude execution-pipelin
 
 O formato de `entries[].path` segue o [exemplo do Chromium](https://chromium.googlesource.com/experimental/chromium/src/+/HEAD/agents/skills/README.md); o [changelog do Antigravity CLI](https://github.com/google-antigravity/antigravity-cli/blob/main/CHANGELOG.md) registra o suporte a exclusões. O `--exclude` é aplicado antes de gerar as entradas. O comando não mescla nem sobrescreve configurações existentes, e os caminhos são absolutos para a máquina atual: gere de novo ao trocar de máquina ou de clone. Não registre a mesma fonte por dois mecanismos.
 
+## Claude Code: confirmação antes de publicar
+
+As pipelines pedem o seu aceite antes de publicar, e essa regra fica no texto da skill. Para que o próprio Claude Code pare e pergunte, acrescente regras `ask` ao seu `~/.claude/settings.json`, que valem em todos os projetos. Num projeto, `.claude/settings.json` é versionado e vale para a equipe, e `.claude/settings.local.json` fica só com você. Se o arquivo já existe, junte a lista `ask` ao `permissions` que ele tem:
+
+```json
+{
+  "permissions": {
+    "ask": [
+      "Bash(git push *)",
+      "Bash(gh pr merge *)",
+      "Bash(gh release create *)",
+      "Bash(gh workflow run *)",
+      "Bash(vercel *)",
+      "Bash(npx vercel *)",
+      "Bash(quarto publish *)",
+      "Bash(rsconnect *)",
+      "Bash(Rscript *rsconnect*)"
+    ]
+  }
+}
+```
+
+Troque ou acrescente os comandos de deploy que você usa, como `npm publish`. Deploy ou merge feito por uma ferramenta MCP, como as da Vercel ou do GitHub, precisa de regra própria no mesmo `ask`, no formato `mcp__<servidor>__<ferramenta>`. Pela [documentação de permissões](https://code.claude.com/docs/en/permissions):
+
+- As regras são avaliadas na ordem deny, ask e allow. Uma regra `allow` mais ampla, como `Bash(git *)`, não dispensa a pergunta.
+- Uma regra `ask` vale também para o comando dentro de um comando composto, como `cd app && git push`. Ela vale também nos modos auto e bypassPermissions; no modo dontAsk, o comando é negado em vez de perguntado.
+- A regra compara o texto do comando, então não é uma barreira de segurança. `git -C . push`, `git -c push.default=current push` e `gh api` escapam de `Bash(git push *)` e das regras do `gh`. Para um limite que não depende do texto, use o [sandbox](https://code.claude.com/docs/en/sandboxing) ou um [hook `PreToolUse`](https://code.claude.com/docs/en/hooks#pretooluse-decision-control).
+
 ## Depois de instalar
 
 Rode o doctor no destino, abra uma sessão nova no host e siga a [verificação de descoberta](discovery.md): estar no disco não prova que o host carregou a skill.
