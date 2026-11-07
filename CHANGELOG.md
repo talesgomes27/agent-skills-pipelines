@@ -2,6 +2,19 @@
 
 As versões seguem [SemVer](https://semver.org/lang/pt-BR/).
 
+## Não publicado
+
+### Mudanças
+
+- Um app novo que a `pre-code-pipeline` aprovou como leve continua leve na `execution-pipeline`. O pedido de construí-lo já autoriza implementar depois do aceite do plano. O único aceite que falta é o do fim do Gate 5, e as paradas do modo contínuo continuam valendo.
+- O teste que outra skill pede, como a ponytail, entra no plano sem substituir nem reduzir os testes dele, e vem antes do código como eles.
+- Num app novo leve, com um só aceite pelos Gates 2, 3 e 5, a restrição do destino que muda a arquitetura vai no início da resposta, antes do escopo.
+- A `scheduled-automation` diz que um job novo com credencial ou efeito externo não é leve. Regras de brevidade não tiram itens do contrato: alerta, estado, idempotência e a decisão de falha parcial ficam, e o sinal de vida também, num job importante.
+- `refactoring-patterns-abc.md` ganha um roteiro para app Shiny em R num único `app.R`. Primeiro, caracterizar com `testServer()` e `shinytest2`. Depois, medir pela `shiny-r-optimize` ou com `profvis`, deixando o `reactlog` para o usuário. Por fim, modularizar e só então otimizar, repetindo a medida a cada fatia. Instalar `shinytest2`, o Chrome ou `profvis` pede aceite.
+- Pedido com login decide no Gate 2 quem cria as contas e como se recupera a senha, e login com senha tira o app do esforço leve. App que grava dados diz, mesmo no leve, como copiar e restaurar.
+- A referência de migrações diz o que fazer sem ambiente de ensaio: ensaiar no backup restaurado num banco temporário protegido. Se nem isso der, dizer ao usuário que a migração vai sem ensaio e com backup não testado, e pedir a autorização sabendo disso.
+- Ajustes de redação na `pre-code-pipeline` para caber no limite de 8.000 caracteres, sem mudar regras.
+
 ## [3.3.0] - 2026-11-07
 
 Comparada com a 3.2.0 (`e133b8e`). Acrescenta a regra de precedência sobre skills de brevidade e o esforço leve para app novo pequeno, e reescreve a documentação, sem quebra de compatibilidade.

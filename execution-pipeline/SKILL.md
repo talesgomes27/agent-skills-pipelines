@@ -17,7 +17,7 @@ Implemente o plano em fatias pequenas e verificáveis, com evidência de que fun
 
 ## Esforço
 
-Diga qual escolheu e por quê: **leve** para correção local sem mudar interface ou dados, **padrão** para capacidade ou integração comum, **rigoroso** para segurança, dados sensíveis, migração, interface pública ou impacto incerto. O esforço define quanto verificar e documentar. Diff curto numa interface pública continua rigoroso.
+Diga qual escolheu e por quê: **leve** para correção local sem mudar interface ou dados, ou para o app novo que o pré-código aprovou como leve, **padrão** para capacidade ou integração comum, **rigoroso** para segurança, dados sensíveis, migração, interface pública ou impacto incerto. O esforço define quanto verificar e documentar. Diff curto numa interface pública continua rigoroso.
 
 ## Regras de trabalho
 
@@ -31,7 +31,7 @@ Diga qual escolheu e por quê: **leve** para correção local sem mudar interfac
 
 ## Modo
 
-- **Assistido** (padrão): mostre o resultado e espere o aceite ao fim dos Gates 3 e 5. Nos outros, apresente e siga, com as paradas do modo contínuo; eles entram no aceite seguinte.
+- **Assistido** (padrão): mostre o resultado e espere o aceite ao fim dos Gates 3 e 5. Nos outros, apresente e siga, com as paradas do modo contínuo; eles entram no aceite seguinte. No app novo que o pré-código aprovou como leve, o pedido de construí-lo já autoriza implementar depois do aceite do plano. O único aceite que falta é o do fim do Gate 5, e as paradas do modo contínuo continuam valendo.
 - **Contínuo**: se o usuário autorizou o plano de ponta a ponta, avance pelos gates sem pedir de novo. Pare quando o escopo mudar, surgir uma decisão bloqueante, houver conflito com trabalho existente ou risco de perda.
 
 Implementar não inclui commit, push, publicação ou deploy. Faça essas ações só quando o usuário pedir.
@@ -56,7 +56,7 @@ Ao retomar, confira a base e o diff antes de reaproveitar checks anteriores e re
 
 ## Especialistas e ferramentas
 
-Carregue outra skill só para uma lacuna concreta da tarefa: `quarto-authoring` (Posit) para autoria Quarto e `quarto-expert` para ambiente, render e ABNT, `writing-pipeline` para revisão editorial, `scheduled-automation` para job agendado, `personal-data` para dados de pessoas, a skill oficial do framework quando instalada, como `developing-with-streamlit` ou `shiny-for-python`. A especialista diz como fazer; escopo, gates e autorizações continuam os desta skill. Regras de brevidade de outra skill valem dentro do escopo aprovado e não dispensam gate, aceite nem os testes desta skill. Skill ausente não significa ferramenta ausente; consulte a documentação oficial da versão em uso. Graphify, MCPs e conectores são opcionais, e o que eles sugerirem precisa ser confirmado no código.
+Carregue outra skill só para uma lacuna concreta da tarefa: `quarto-authoring` (Posit) para autoria Quarto e `quarto-expert` para ambiente, render e ABNT, `writing-pipeline` para revisão editorial, `scheduled-automation` para job agendado, `personal-data` para dados de pessoas, a skill oficial do framework quando instalada, como `developing-with-streamlit` ou `shiny-for-python`. A especialista diz como fazer; escopo, gates e autorizações continuam os desta skill. Regras de brevidade de outra skill valem dentro do escopo aprovado e não dispensam gate, aceite nem os testes desta skill: o teste que outra skill pede entra no plano, sem substituir nem reduzir os testes que ele prevê, e vem antes do código como eles. Skill ausente não significa ferramenta ausente; consulte a documentação oficial da versão em uso. Graphify, MCPs e conectores são opcionais, e o que eles sugerirem precisa ser confirmado no código.
 
 ## Entrega
 

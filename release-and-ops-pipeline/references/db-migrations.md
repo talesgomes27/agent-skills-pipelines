@@ -6,7 +6,7 @@ Mudança de esquema ou de dados num banco com dados reais é uma publicação co
 
 - Use a ferramenta de migração do projeto (Alembic, Django, Prisma, Flyway ou equivalente) e revise o SQL que ela gera. Com Alembic, `alembic upgrade head --sql` mostra o SQL sem aplicar, o autogenerate não detecta tudo (renomeações, por exemplo) e, num banco que já existia sem migrações, `alembic stamp` marca a versão atual antes da primeira migração.
 - Faça backup e teste a restauração antes da mudança: backup que nunca foi restaurado não é recuperação.
-- Ensaie a migração numa cópia com volume parecido e meça duração e travas.
+- Ensaie a migração numa cópia com volume parecido e meça duração e travas. Sem ambiente de ensaio, restaure o backup num banco temporário, com a proteção da cópia de ensaio descrita abaixo, e ensaie nele: o mesmo passo testa a restauração. Se nem isso é possível, a migração vai sem ensaio e com um backup que nunca foi restaurado. Diga as duas coisas ao usuário e peça a autorização sabendo disso.
 - Defina a janela, quem é avisado e o critério para abortar.
 - O plano diz quem roda o comando contra produção, de onde e com qual credencial; a credencial fica com o usuário ou no cofre da CI, fora do chat.
 - Cópia de produção para ensaio carrega os mesmos dados pessoais: guarde-a com a mesma proteção e apague-a depois, ou use uma cópia com esses campos mascarados.
