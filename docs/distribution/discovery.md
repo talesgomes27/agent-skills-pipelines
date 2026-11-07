@@ -45,6 +45,9 @@ Os casos ambíguos testam a fronteira entre skills. Quando um prompt ativar a sk
 | `scheduled-automation` | deve ativar | Quero que este script rode todo dia às 7h no GitHub Actions e me avise no Telegram se falhar. |
 | `scheduled-automation` | ambíguo, deve ativar | Este ETL roda por cron no servidor e às vezes duplica linhas quando é reexecutado. |
 | `scheduled-automation` | não deve ativar | Converta esta data de dd/mm/aaaa para ISO 8601. |
+| `personal-data` | deve ativar | Tenho uma planilha de clientes com CPF e e-mail e quero gráficos do perfil deles para a diretoria. |
+| `personal-data` | ambíguo, deve ativar | Mande os PDFs de política interna para a API do LLM indexar. |
+| `personal-data` | não deve ativar | Calcule a média mensal desta série de vendas por loja. |
 | `skill-loader` | deve ativar | Use a skill externa complexity-cuts disponível na biblioteca configurada para esta etapa. |
 | `skill-loader` | ambíguo, deve ativar | Encontre uma skill de migração na biblioteca; existem vários candidatos parecidos. |
 | `skill-loader` | não deve ativar | Use a skill quarto-expert que já está disponível no catálogo desta sessão. |
@@ -76,7 +79,7 @@ Os prompts de gatilho conferem só a descoberta. Para conferir o comportamento d
 | Callout e tabela | Adicione um callout de aviso e uma tabela com legenda neste .qmd. | Só a `quarto-authoring`, sem a `quarto-expert` |
 | Site na Vercel | Quero um site de portfólio com blog, em Astro ou Next.js, com formulário de contato, bom SEO e publicado na Vercel com domínio próprio. | B, plataforma Vercel, preview e produção, DNS, rollback |
 | API com migração | Preciso de uma API em FastAPI com Postgres, login por e-mail e senha, e uma tabela nova de pedidos que exige migração do banco que já está em produção. | Referência de migrações, etapas compatíveis, backup testado, autorização separada |
-| Análise com CPF | Tenho uma planilha de 200 mil linhas com dados de clientes, incluindo CPF, e-mail e cidade. Quero uma análise exploratória com limpeza, perfil dos clientes e gráficos para apresentar na reunião de sexta. Não precisa de modelo. | Entrega pontual com um aceite, dados pessoais fora das saídas |
+| Análise com CPF | Tenho uma planilha de 200 mil linhas com dados de clientes, incluindo CPF, e-mail e cidade. Quero uma análise exploratória com limpeza, perfil dos clientes e gráficos para apresentar na reunião de sexta. Não precisa de modelo. | Entrega pontual com um aceite, `personal-data`, CPF fora da análise ou pseudonimizado com chave, só agregados nos slides |
 | Modelo em produção | Já treinei um modelo de churn num notebook. Quero colocá-lo em produção: o time de CRM precisa de uma lista semanal dos clientes com maior risco, e talvez depois uma API. | Job semanal, versão do modelo, entrega da lista |
 | Scraper pontual | Faz um script que coleta os preços de um produto em três sites de e-commerce e me entrega uma planilha. É só uma vez, para eu comparar. | Caminho rápido com coleta externa, termos de uso e robots.txt, parar diante de CAPTCHA |
 | Notebooks herdados | Vou herdar o projeto de um colega que saiu: uma pasta com 30 notebooks Jupyter, alguns CSVs e um script que gera um relatório mensal. Ninguém sabe a ordem certa de rodar. Me diga o que está lá, o que está quebrado e o que é arriscado, antes de eu mexer. | Auditoria sem edição, execução só em ambiente isolado autorizado |

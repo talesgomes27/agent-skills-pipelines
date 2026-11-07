@@ -85,6 +85,19 @@
       ]
     },
     {
+      "name": "personal-data",
+      "source": "./",
+      "description": "Dados pessoais em análises, apps, listas e coletas: inventário, minimização, saídas agregadas, envio a terceiros e vazamento, com base na LGPD.",
+      "version": "3.0.0",
+      "author": {
+        "name": "Tales Wilhame Gomes da Silva"
+      },
+      "license": "MIT",
+      "skills": [
+        "./personal-data"
+      ]
+    },
+    {
       "name": "quarto-expert",
       "source": "./",
       "description": "Ambiente e render de projetos Quarto, teses em ABNT e manuscritos com Binder.",

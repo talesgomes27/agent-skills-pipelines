@@ -1,12 +1,12 @@
 {
   "version": 1,
   "release": "3.0.0",
-  "skills": ["pre-code-pipeline", "execution-pipeline", "writing-pipeline", "audit-and-refactoring-pipeline", "release-and-ops-pipeline", "scheduled-automation", "quarto-expert", "skill-loader"],
+  "skills": ["pre-code-pipeline", "execution-pipeline", "writing-pipeline", "audit-and-refactoring-pipeline", "release-and-ops-pipeline", "scheduled-automation", "personal-data", "quarto-expert", "skill-loader"],
   "bundles": {
     "planning": ["pre-code-pipeline"],
-    "development": ["pre-code-pipeline", "execution-pipeline", "audit-and-refactoring-pipeline", "scheduled-automation"],
+    "development": ["pre-code-pipeline", "execution-pipeline", "audit-and-refactoring-pipeline", "scheduled-automation", "personal-data"],
     "editorial": ["writing-pipeline"],
-    "research": ["pre-code-pipeline", "execution-pipeline", "writing-pipeline", "quarto-expert"],
+    "research": ["pre-code-pipeline", "execution-pipeline", "writing-pipeline", "quarto-expert", "personal-data"],
     "release": ["release-and-ops-pipeline"],
     "library": ["skill-loader"]
   }

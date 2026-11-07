@@ -8,7 +8,7 @@ Separe transformação reutilizável de apresentação quando isso ajudar os tes
 
 ## Gate 2: execução e rigor analítico
 
-- Preserve fontes brutas e a política de acesso. Identifique versão/snapshot dos dados, ambiente, parâmetros e orçamento computacional. Use amostra somente quando apropriada e registre sua cobertura.
+- Preserve fontes brutas e a política de acesso. Com dados de pessoas, siga a skill `personal-data`: identificadores fora da análise quando não forem necessários e saídas só com agregados. Identifique versão/snapshot dos dados, ambiente, parâmetros e orçamento computacional. Use amostra somente quando apropriada e registre sua cobertura.
 - Execute notebook em kernel limpo ou documento no motor configurado; não dependa da ordem interativa de células. Para execução de `.ipynb`, nbclient ou nbconvert são opções se disponíveis. Um `.qmd` executável não exige notebook adicional.
 - Para ML, mantenha split temporal/por grupo quando o problema exigir, baseline, métrica e protocolo aprovados. Ajuste imputação, seleção, escala e estimadores apenas no treino de cada fold; teste não participa da seleção. Não troque modelos sem decisão registrada.
 - Controle aleatoriedade e registre limites de determinismo, versões e backend; seed isolada não prova reprodução idêntica.

@@ -9,7 +9,7 @@ Confira tamanho no conjunto enviado e, quando necessário, no intervalo de hist�
 ## Segredos, notebooks e saídas
 
 Use scanner já configurado ou inspeção delimitada, sem imprimir valores de credenciais, e registre escopo, versão, resultado e limites. Diferencie achado, ausência de achados no escopo e falha de execução: falha da ferramenta não significa ausência de achado. Um grep por nomes de variáveis não certifica ausência de segredo e pode imprimir o próprio segredo.
-Inclua diffs, arquivos rastreados pertinentes, outputs de notebooks, HTML, bundles JS, logs e caches exportados, conforme o artefato. Dados brutos ignorados podem reaparecer em uma tabela ou snapshot renderizado.
+Inclua diffs, arquivos rastreados pertinentes, outputs de notebooks, HTML, bundles JS, logs e caches exportados, conforme o artefato. Dados brutos ignorados podem reaparecer em uma tabela ou snapshot renderizado. Dados pessoais seguem a skill `personal-data`: o que vai publicado mostra só agregados, sem linhas nem identificadores.
 Se houver credencial exposta, bloqueie sua publicação e informe o local sem o valor. Rotação e limpeza de histórico requerem plano e autorização próprios; remover uma linha não invalida um token já divulgado.
 
 ## Lockfiles e build
