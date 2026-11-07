@@ -2,17 +2,17 @@
 
 As versões seguem [SemVer](https://semver.org/lang/pt-BR/).
 
-## [Não publicado]
+## [3.1.0] - 2026-11-07
+
+Comparada com a 3.0.0 (`1c26256`). Acrescenta a skill `personal-data`, ajustes de processo e conteúdo técnico para web, apps com LLM, modelo em produção e notebooks herdados, sem quebra de compatibilidade.
 
 ### Novo
 
+- Skill `personal-data`, para trabalho com dados de pessoas: inventário dos campos pessoais e sensíveis, minimização e pseudonimização com chave (hash simples de CPF é reversível), saídas só com agregados e grupos pequenos omitidos, onde os dados ficam, envio a provedores externos como decisão do usuário, coleta e vazamento. A referência `lgpd-basics.md` traz os pontos da Lei 13.709/2018 que a skill usa. Entra nos bundles `development` e `research`.
 - `execution-pipeline/references/llm-apps.md`: apps com LLM, com provedor e modelo fixados, chave no cofre e limite de gasto, login corporativo, respostas que citam a origem e dizem quando não sabem, texto dos documentos como entrada não confiável, conjunto de avaliação rodado a cada mudança e operação.
 - `audit-and-refactoring-pipeline/references/inherited-notebooks.md`: reconhecimento de uma pasta de notebooks herdada, com mapa de entradas e saídas sem executar, execução só numa cópia isolada e entrega em três listas.
 - Seção "Sites e APIs" em `execution-pipeline/references/archetype-b.md`: segurança mínima, acessibilidade, desempenho, SEO e formulário, com apontamentos para as skills oficiais da Vercel e para o `/security-review` do host.
 - Receita de relatório executivo em `writing-pipeline/references/document-types.md`.
-
-- Skill `personal-data`, para trabalho com dados de pessoas: inventário dos campos pessoais e sensíveis, minimização e pseudonimização com chave (hash simples de CPF é reversível), saídas só com agregados e grupos pequenos omitidos, onde os dados ficam, envio a provedores externos como decisão do usuário, coleta e vazamento. A referência `lgpd-basics.md` traz os pontos da Lei 13.709/2018 que a skill usa. Entra nos bundles `development` e `research`.
-
 - `release-and-ops-pipeline/references/db-migrations.md`: migração de banco em produção com backup testado, ensaio, etapas compatíveis (expandir, publicar, migrar, contrair), travas e como voltar. A release e a referência B da execution apontam para ela.
 - Seção da Vercel em `release-and-ops-pipeline/references/app-platforms.md` (antes `data-app-platforms.md`): preview e produção, primeiro deploy, variáveis por ambiente, domínio e DNS, Instant Rollback.
 - Regras de coleta externa em `execution-pipeline/references/archetype-c.md`: API oficial antes de raspar, termos de uso e robots.txt, ritmo, parar diante de login ou CAPTCHA, fixtures para os seletores.
@@ -29,6 +29,12 @@ As versões seguem [SemVer](https://semver.org/lang/pt-BR/).
 - `writing-pipeline` e `skill-loader` ganham descrições que dizem só quando usá-las, como as outras skills.
 - A `execution-pipeline`, a `scheduled-automation` e as referências de arquitetura, de A, de auditoria analítica e de saneamento apontam para a `personal-data`.
 - Para abrir espaço, detalhes de saneamento e de recuperação de fatias saíram da release e da audit para as referências que já os tinham.
+
+### Como atualizar
+
+- No Claude Code, rode `claude plugin marketplace update agent-skills-pipelines` e `claude plugin update <plugin>` para cada plugin instalado. A `personal-data` é um plugin novo: `claude plugin install personal-data@agent-skills-pipelines`.
+- Instalações feitas com `scripts/skills.py` recebem a 3.1.0 com `--update`. Repetir a instalação dos bundles `development` ou `research` com `--update` também instala a `personal-data`. As cópias perdem `data-app-platforms.md` e `model-retraining.md`, que mudaram de nome, e ganham as referências novas. Cópias editadas à mão continuam protegidas.
+- As skills oficiais da Vercel e da Anthropic são opcionais; a seção "Skills oficiais de frameworks" do README mostra como instalá-las.
 
 ## [3.0.0] - 2026-11-07
 
