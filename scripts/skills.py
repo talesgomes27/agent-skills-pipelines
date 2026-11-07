@@ -16,6 +16,8 @@ STATE = '.meta-skills-install.json'
 AGENTS = ('codex', 'claude', 'antigravity', 'antigravity-cli')
 COMPONENTS = ('SKILL.md', 'references', 'scripts', 'examples', 'assets', 'agents')
 IGNORE = shutil.ignore_patterns('__pycache__', '*.pyc', '.quarto', '_site', '.git', '.venv')
+# shortcut: teto acima das pipelines ainda não reescritas; baixar para 6000 quando as quatro estiverem enxutas.
+MAX_SKILL_CHARS = 12000
 
 
 def read_json(path):
@@ -95,6 +97,8 @@ def validate_skill(folder, expected):
     except ImportError as exc:
         raise RuntimeError('PyYAML missing; install distribution/requirements.txt in a virtualenv') from exc
     text = (folder / 'SKILL.md').read_text(encoding='utf-8')
+    if len(text) > MAX_SKILL_CHARS:
+        raise ValueError(str(folder) + ': SKILL.md has ' + str(len(text)) + ' characters; limit is ' + str(MAX_SKILL_CHARS))
     match = re.match(r'\A---\r?\n(.*?)\r?\n---(?:\r?\n|$)', text, re.S)
     if not match:
         raise ValueError(str(folder) + ': missing YAML frontmatter')

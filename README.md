@@ -60,6 +60,19 @@ Planejamento, execução e auditoria ajustam esforço e documentação ao risco:
 
 ## Instalação
 
+### Claude Code
+
+O repositório é um marketplace de plugins, com um plugin por skill:
+
+```bash
+claude plugin marketplace add talesgomes27/agent-skills-pipelines
+claude plugin install execution-pipeline@agent-skills-pipelines
+```
+
+Troque `execution-pipeline` pelo nome de qualquer skill da tabela acima. As skills ficam com o prefixo do plugin, por exemplo `execution-pipeline:execution-pipeline`.
+
+### Codex, Antigravity e outros hosts
+
 Requisitos: Python 3.9 ou superior e PyYAML.
 
 ```bash
