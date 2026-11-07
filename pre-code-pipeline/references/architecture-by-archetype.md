@@ -1,6 +1,6 @@
 # Arquitetura por arquétipo
 
-Leia só a parte do arquétipo registrado e, em projeto híbrido, a do domínio secundário nas partes que ele usa.
+Leia só a parte do arquétipo registrado e, em projeto híbrido, a do domínio secundário nas partes que ele usa. Com dados de pessoas, em qualquer arquétipo, a arquitetura diz onde eles ficam, quem os vê e o que sai do ambiente, seguindo a skill `personal-data`.
 
 ## A: análise e modelos
 

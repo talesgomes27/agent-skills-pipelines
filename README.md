@@ -29,6 +29,7 @@ Release atual: **3.0.0**.
 | [`audit-and-refactoring-pipeline`](audit-and-refactoring-pipeline/SKILL.md) | Reconhecimento, diagnóstico, caracterização e refatoração incremental. |
 | [`release-and-ops-pipeline`](release-and-ops-pipeline/SKILL.md) | Saneamento, versão, artefatos, publicação autorizada e smoke tests. |
 | [`scheduled-automation`](scheduled-automation/SKILL.md) | Contrato de jobs agendados, ETL recorrente e retreino: estado, idempotência, falhas, alertas e primeira execução. |
+| [`personal-data`](personal-data/SKILL.md) | Dados pessoais em análises, apps, listas e coletas: inventário, minimização, saídas agregadas, envio a terceiros e vazamento, com base na LGPD. |
 | [`writing-pipeline`](writing-pipeline/SKILL.md) | Redação e revisão técnica com preservação de fatos, fontes e formato. |
 | [`quarto-expert`](quarto-expert/SKILL.md) | Ambiente e render de projetos Quarto, teses em ABNT e manuscritos com Binder. Para autoria e migração, use a `quarto-authoring` da Posit. |
 | [`skill-loader`](skill-loader/SKILL.md) | Descoberta e carregamento limitado de skills em biblioteca externa. |
@@ -131,9 +132,9 @@ Os bundles agrupam skills por papel; eles não instalam ferramentas, MCPs ou dep
 | Bundle | Finalidade |
 |---|---|
 | `planning` | Planejamento pré-código. |
-| `development` | Planejamento, execução, auditoria e automações agendadas. |
+| `development` | Planejamento, execução, auditoria, automações agendadas e dados pessoais. |
 | `editorial` | Escrita e revisão técnica. |
-| `research` | Planejamento, execução, escrita e Quarto. |
+| `research` | Planejamento, execução, escrita, Quarto e dados pessoais. |
 | `release` | Release e operações. |
 | `library` | Carregamento da biblioteca fria. |
 
