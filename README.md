@@ -28,6 +28,7 @@ Release atual: **2.1.0**.
 | [`execution-pipeline`](execution-pipeline/SKILL.md) | Implementação de um plano aprovado e validação proporcional à stack. |
 | [`audit-and-refactoring-pipeline`](audit-and-refactoring-pipeline/SKILL.md) | Reconhecimento, diagnóstico, caracterização e refatoração incremental. |
 | [`release-and-ops-pipeline`](release-and-ops-pipeline/SKILL.md) | Saneamento, versão, artefatos, publicação autorizada e smoke tests. |
+| [`scheduled-automation`](scheduled-automation/SKILL.md) | Contrato de jobs agendados, ETL recorrente e retreino: estado, idempotência, falhas, alertas e primeira execução. |
 | [`writing-pipeline`](writing-pipeline/SKILL.md) | Redação e revisão técnica com preservação de fatos, fontes e formato. |
 | [`quarto-expert`](quarto-expert/SKILL.md) | Autoria, configuração, depuração e migração de projetos Quarto. |
 | [`skill-loader`](skill-loader/SKILL.md) | Descoberta e carregamento limitado de skills em biblioteca externa. |
@@ -129,7 +130,7 @@ Os bundles agrupam skills por papel; eles não instalam ferramentas, MCPs ou dep
 | Bundle | Finalidade |
 |---|---|
 | `planning` | Planejamento pré-código. |
-| `development` | Planejamento, execução e auditoria. |
+| `development` | Planejamento, execução, auditoria e automações agendadas. |
 | `editorial` | Escrita e revisão técnica. |
 | `research` | Planejamento, execução, escrita e Quarto. |
 | `release` | Release e operações. |

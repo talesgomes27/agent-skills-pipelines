@@ -72,6 +72,19 @@
       ]
     },
     {
+      "name": "scheduled-automation",
+      "source": "./",
+      "description": "Contrato de jobs agendados, ETL recorrente e retreino: estado, idempotência, falhas, alertas e primeira execução.",
+      "version": "2.1.0",
+      "author": {
+        "name": "Tales Wilhame Gomes da Silva"
+      },
+      "license": "MIT",
+      "skills": [
+        "./scheduled-automation"
+      ]
+    },
+    {
       "name": "quarto-expert",
       "source": "./",
       "description": "Autoria, configuração, depuração e migração de projetos Quarto.",
