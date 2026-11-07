@@ -21,10 +21,10 @@ Toda alteração intencional precisa dessa distinção, seja P0, P1 ou outra pri
 
 ## Verify, recuperar, parar
 
-1. Antes da fatia, identifique base, arquivos e estado staged/unstaged/não rastreado. Registre patch/backup ou use isolamento apropriado sem sobrescrever trabalho prévio. Não faça stash, reset ou checkout geral para obter árvore limpa.
+1. Antes da fatia, identifique base, arquivos e estado staged/unstaged/não rastreado. Registre patch/backup fora do repositório ou use isolamento apropriado sem sobrescrever trabalho prévio. Correção aprovada atualiza o resultado esperado com evidência própria; não regrave snapshot para esconder regressão. Não faça stash, reset ou checkout geral para obter árvore limpa.
 2. Verifique os testes afetados e as dependências da fatia; execute checks integrados obrigatórios no fechamento e quando o risco exigir. Registre os resultados observados, sem esconder falhas preexistentes.
-3. Havendo diferença não autorizada, interrompa novas fatias. Se diagnóstico indicar reversão, remova apenas suas edições, preservando alterações anteriores e posteriores de outros autores. Snapshot de arquivo inteiro só é seguro sem edições concorrentes naquele arquivo desde a captura.
+3. Havendo diferença não autorizada, interrompa novas fatias e compare com a base. Se diagnóstico indicar reversão, remova apenas suas edições, preservando alterações anteriores e posteriores de outros autores; se isso não for possível sem apagar trabalho de outros, preserve o diff, bloqueie a fatia e peça uma decisão. Snapshot de arquivo inteiro só é seguro sem edições concorrentes naquele arquivo desde a captura.
 4. Não use `git checkout -- <arquivos>` como desfazer universal: ele restaura o índice e pode descartar alterações unstaged que já existiam antes da fatia. Se a aplicação inversa não for segura, preserve evidências/diff e resolva o conflito antes de prosseguir.
-5. Confirme a recuperação com checks relevantes. Repetição de falha sem nova evidência exige replanejamento, não tentativas ilimitadas ou alteração do oráculo.
+5. Confirme a recuperação com checks relevantes; falha indispensável pendente bloqueia a fatia. Repetição de falha sem nova evidência exige replanejamento, não tentativas ilimitadas ou alteração do oráculo.
 
 Falha de ambiente, requisito conhecido não atendido e regressão introduzida são estados diferentes; todos devem aparecer no relatório quando limitarem o aceite.

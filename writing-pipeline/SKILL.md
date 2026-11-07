@@ -1,6 +1,6 @@
 ---
 name: writing-pipeline
-description: "Redige, edita e revisa documentos técnicos com preservação de fatos e fontes. Use para PRDs, ADRs, relatórios, READMEs, manuais e revisões editoriais em tabela."
+description: "Use quando o usuário pedir para redigir, editar ou revisar um documento técnico ou de negócio, como PRD, ADR, relatório, README, manual ou artigo, preservando fatos, fontes e formato, ou para uma revisão editorial em tabela."
 ---
 
 # Escrita e revisão técnica

@@ -2,6 +2,24 @@
 
 As versões seguem [SemVer](https://semver.org/lang/pt-BR/).
 
+## [Não publicado]
+
+### Novo
+
+- `release-and-ops-pipeline/references/db-migrations.md`: migração de banco em produção com backup testado, ensaio, etapas compatíveis (expandir, publicar, migrar, contrair), travas e como voltar. A release e a referência B da execution apontam para ela.
+- Seção da Vercel em `release-and-ops-pipeline/references/app-platforms.md` (antes `data-app-platforms.md`): preview e produção, primeiro deploy, variáveis por ambiente, domínio e DNS, Instant Rollback.
+- Regras de coleta externa em `execution-pipeline/references/archetype-c.md`: API oficial antes de raspar, termos de uso e robots.txt, ritmo, parar diante de login ou CAPTCHA, fixtures para os seletores.
+- `pre-code-pipeline/references/architecture-by-archetype.md`, com o detalhe do Gate 3 por arquétipo.
+- Cenários de comportamento em `docs/distribution/discovery.md`, para repetir com agentes depois de cada mudança.
+
+### Mudanças
+
+- `pre-code-pipeline` ganha a entrega pontual: análise, script ou documento entregue uma vez é planejado numa só resposta, com um aceite, e entregue pela `execution-pipeline`.
+- O caminho rápido da `execution-pipeline` passa a aceitar leitura de páginas ou APIs públicas, com as regras de coleta externa.
+- Na `release-and-ops-pipeline`, site estático só vai para a referência de GitHub Pages quando o destino é o GitHub Pages; Vercel e Netlify entram em app ou serviço.
+- `writing-pipeline` e `skill-loader` ganham descrições que dizem só quando usá-las, como as outras skills.
+- Para abrir espaço, detalhes de saneamento e de recuperação de fatias saíram da release e da audit para as referências que já os tinham.
+
 ## [3.0.0] - 2026-11-07
 
 Comparada com a 2.1.0 (`88f9b04`). É uma MAJOR porque a `quarto-expert` deixou de cobrir autoria, sintaxe e migração de Quarto.
