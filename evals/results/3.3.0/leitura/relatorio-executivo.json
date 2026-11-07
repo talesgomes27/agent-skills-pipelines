@@ -1,0 +1,36 @@
+{
+ "cenario": "relatorio-executivo",
+ "versao": "3.3.0",
+ "nivel": "leitura",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-07",
+ "skills_carregadas": [
+  "writing-pipeline"
+ ],
+ "paradas": 0,
+ "contexto_lido": {
+  "caracteres": 9000,
+  "arquivos": [
+   "writing-pipeline/SKILL.md",
+   "writing-pipeline/references/citations-and-evidence.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "carrega-writing-pipeline",
+   "resultado": "passou",
+   "evidencia": "writing-pipeline/SKILL.md description: 'redigir... relatório... preservando fatos, fontes e formato'"
+  },
+  {
+   "id": "numeros-conferidos",
+   "resultado": "passou",
+   "evidencia": "writing-pipeline/SKILL.md Fluxo 2: 'Confira as afirmações materiais em código, configurações, saídas ou fontes fornecidas'; citations-and-evidence.md: 'use dados/saídas com versão, recorte, unidade'"
+  },
+  {
+   "id": "numero-sem-fonte",
+   "resultado": "passou",
+   "evidencia": "writing-pipeline/SKILL.md Preservação: 'Não substitua um valor desconhecido por um número plausível'; 'registre a lacuna fora do texto final'"
+  }
+ ]
+}

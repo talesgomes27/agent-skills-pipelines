@@ -6,6 +6,10 @@ As versões seguem [SemVer](https://semver.org/lang/pt-BR/).
 
 ### Novo
 
+- Linha de base da 3.3.0 em `evals/results/3.3.0/`, com o claude-sonnet-5-5 no Claude Code:
+  - no nível de leitura, os 17 cenários e os 37 gatilhos: 46 de 52 checkpoints `deve` aprovados, nenhuma falha `nao_deve` e todos os gatilhos como esperado;
+  - no nível de execução, quatro cenários em sessões reais (`claude -p`): 6 de 15 `deve` e nenhuma falha `nao_deve`. Em duas rodadas, API com migração e Script de fotos, nenhuma skill do repositório foi carregada.
+  - Os resultados ficam em pastas por nível, `evals/results/<versão>/<nível>/`.
 - `/cenarios` lê `evals/scenarios/`, roda nos níveis de leitura ou de execução e grava os resultados em `evals/results/<versão>/`, e o `skill-prober` devolve o resultado em JSON.
 - O `/preparar-release` exige resultados da versão nova para as skills alteradas, e uma regressão bloqueia a release salvo justificativa no CHANGELOG. `evals/matrix.yaml` declara as combinações de host e modelo, `evals/report.py` gera a tabela dos resultados, e `tests/test_evals.py` confere os dois.
 - Os 17 cenários de comportamento e os 37 prompts de gatilho saem das tabelas de `docs/distribution/discovery.md` para `evals/scenarios/` e `evals/triggers.yaml`, cada cenário com checkpoints `deve` e `nao_deve`.

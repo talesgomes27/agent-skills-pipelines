@@ -31,7 +31,7 @@ Testa se as skills deste repositório levam um agente ao comportamento esperado 
 
 ## Gravar e comparar
 
-- Grave um JSON por cenário em `evals/results/<versão>/<id>.json`, no formato do README, com host, modelo exato, data, paradas, contexto lido e a evidência de cada checkpoint. A versão é a das skills avaliadas: a da tag, ou a que vai ser publicada.
+- Grave um JSON por cenário em `evals/results/<versão>/<nível>/<id>.json`, no formato do README, com host, modelo exato, data, paradas, contexto lido e a evidência de cada checkpoint. A versão é a das skills avaliadas: a da tag, ou a que vai ser publicada.
 - Rode `/usr/bin/python3 -m unittest tests.test_evals` para conferir o formato.
 - Compare com a última versão publicada em `evals/results/`: um checkpoint que passava e agora falha é regressão. Rode `/usr/bin/python3 evals/report.py` para a tabela.
 - Confira você mesmo, no texto atual, cada falha antes de propor uma correção: o agente pode ter lido errado.

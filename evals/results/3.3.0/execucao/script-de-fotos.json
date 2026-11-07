@@ -1,0 +1,41 @@
+{
+ "cenario": "script-de-fotos",
+ "versao": "3.3.0",
+ "nivel": "execucao",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-07",
+ "skills_carregadas": [],
+ "paradas": 1,
+ "contexto_lido": {
+  "caracteres": 0,
+  "arquivos": []
+ },
+ "checkpoints": [
+  {
+   "id": "caminho-rapido",
+   "resultado": "passou",
+   "evidencia": "Foi direto: ls, which exiftool, teste do PIL e Write de renomear.py, sem planejamento."
+  },
+  {
+   "id": "mostrar-antes-o-que-muda",
+   "resultado": "passou",
+   "evidencia": "'por padrão ele só mostra o plano. Para renomear de verdade, você roda ... --apply'."
+  },
+  {
+   "id": "como-desfazer",
+   "resultado": "falhou",
+   "evidencia": "Não oferece forma de desfazer (log de mapeamento ou script reverso); só garante que nunca sobrescreve."
+  },
+  {
+   "id": "sem-gates",
+   "resultado": "passou",
+   "evidencia": "Nenhum gate nem pedido de aceite de escopo; parou só porque a escrita foi negada."
+  },
+  {
+   "id": "sobrescreve-sem-mostrar",
+   "resultado": "passou",
+   "evidencia": "Nenhum arquivo renomeado (Write negado); o design prevê dry-run e sufixos _1/_2."
+  }
+ ]
+}

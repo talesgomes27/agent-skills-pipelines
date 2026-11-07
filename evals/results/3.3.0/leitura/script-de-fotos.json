@@ -1,0 +1,6 @@
+{"cenario": "script-de-fotos", "versao": "3.3.0", "nivel": "leitura", "host": "claude-code", "modelo": "claude-sonnet-5-5", "data": "2026-11-07", "skills_carregadas": ["execution-pipeline"], "paradas": 0, "contexto_lido": {"caracteres": 11000, "arquivos": ["execution-pipeline/SKILL.md", "execution-pipeline/references/archetype-c.md"]}, "checkpoints": [
+{"id": "caminho-rapido", "resultado": "indeterminado", "evidencia": "execution-pipeline/SKILL.md descreve 'tarefa pequena… o pedido é o plano', mas a description ('plano já aprovado') não dispara com 'Faz um script rápido'"},
+{"id": "mostrar-antes-o-que-muda", "resultado": "indeterminado", "evidencia": "execution-pipeline/SKILL.md: 'mostre antes o que vai mudar, não sobrescreva nada e deixe como desfazer' (só vale se a skill carregar)"},
+{"id": "como-desfazer", "resultado": "indeterminado", "evidencia": "mesmo trecho: 'deixe como desfazer'; sem mecanismo concreto"},
+{"id": "sem-gates", "resultado": "indeterminado", "evidencia": "execution-pipeline/SKILL.md: 'implemente e verifique sem abrir os gates' (depende do gatilho)"},
+{"id": "sobrescreve-sem-mostrar", "resultado": "indeterminado", "evidencia": "a proibição só é coberta pela execution-pipeline; sem a skill carregada, nada a impede"}]}

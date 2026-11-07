@@ -11,8 +11,8 @@ evals/
   fixtures/<id>/               arquivos mínimos que um cenário precisa (opcional)
   matrix.yaml                  combinações de host e modelo em que as avaliações rodam
   report.py                    tabela Markdown dos resultados, só com a biblioteca padrão
-  results/<versão>/<id>.json   resultado de um cenário numa rodada
-  results/<versão>/triggers-<destino>.json
+  results/<versão>/<nível>/<id>.json        resultado de um cenário (nível leitura ou execucao)
+  results/<versão>/<nível>/triggers-<destino>.json
 ```
 
 ## Cenário
@@ -62,11 +62,12 @@ Todo cenário tem ao menos um checkpoint `deve` e um `nao_deve`.
 ```
 
 - `nivel`: `leitura`, quando o `skill-prober` só lê as skills e simula o agente; ou `execucao`, quando um agente real roda o pedido numa cópia descartável da fixture, sem credenciais nem destinos reais.
+- `skills_carregadas`: as skills deste repositório pelo nome; as de outros plugins com o prefixo, como `superpowers:brainstorming`.
 - `resultado`: `passou`, `falhou` ou `indeterminado`, sempre com a evidência.
 
 Um resultado pode cobrir só parte dos checkpoints; os que ficaram de fora não contam como aprovados.
 
-Resultado de gatilhos, em `triggers-<destino>.json`:
+Resultado de gatilhos, em `<nível>/triggers-<destino>.json`:
 
 ```json
 {
