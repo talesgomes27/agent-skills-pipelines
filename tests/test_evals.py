@@ -119,5 +119,15 @@ class ResultFormat(unittest.TestCase):
                     self.assertTrue(c['evidencia'].strip())
 
 
+@unittest.skipIf(yaml is None, 'PyYAML ausente')
+class IssueForm(unittest.TestCase):
+    def test_skill_errou_lists_every_skill(self):
+        form = yaml.safe_load((REPO / '.github/ISSUE_TEMPLATE/skill-errou.yml').read_text(encoding='utf-8'))
+        fields = [b for b in form['body'] if b.get('id') == 'skill']
+        self.assertEqual(len(fields), 1)
+        options = fields[0]['attributes']['options']
+        self.assertLessEqual(SKILLS, set(options))
+
+
 if __name__ == '__main__':
     unittest.main()

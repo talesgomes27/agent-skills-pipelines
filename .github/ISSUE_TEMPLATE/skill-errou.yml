@@ -1,0 +1,53 @@
+name: A skill errou
+description: O agente seguiu uma skill e fez algo errado, ou deixou de fazer algo que ela pede.
+title: "[Skill errou] "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        A issue é pública. Não inclua dados pessoais, segredos nem nada que não possa ser publicado.
+  - type: dropdown
+    id: skill
+    attributes:
+      label: Skill envolvida
+      options:
+        - pre-code-pipeline
+        - execution-pipeline
+        - audit-and-refactoring-pipeline
+        - release-and-ops-pipeline
+        - writing-pipeline
+        - scheduled-automation
+        - personal-data
+        - quarto-expert
+        - skill-loader
+        - Não sei
+    validations:
+      required: true
+  - type: input
+    id: host
+    attributes:
+      label: Host, modelo e versão das skills
+      placeholder: "Claude Code 2.1.x, claude-sonnet-5-5, skills 3.4.0"
+    validations:
+      required: true
+  - type: textarea
+    id: pedido
+    attributes:
+      label: Pedido feito ao agente
+      description: O texto que você mandou, sem dados reais.
+    validations:
+      required: true
+  - type: textarea
+    id: fez
+    attributes:
+      label: O que o agente fez
+    validations:
+      required: true
+  - type: textarea
+    id: esperado
+    attributes:
+      label: O que deveria ter feito
+      description: Se souber, cite o trecho da skill que pede isso.
+    validations:
+      required: true
