@@ -81,6 +81,7 @@ Ao retomar, leia o estado, confira se a base, o diff, o artefato e o destino mud
 ## Especialistas e ferramentas
 
 - Carregue outra skill só para uma lacuna concreta da etapa atual. A especialista diz como fazer; escopo, gates e autorizações continuam os da pipeline. Sem ela, siga com o núcleo e bloqueie só a decisão que depende dela.
+- Skill de terceiro é código que roda com o poder do agente. Instale só do repositório oficial do fabricante, fixe a versão ou o commit e registre no projeto. Antes de usar uma skill nova, liste os scripts que ela traz e leia os que vão rodar. Instalar continua sendo decisão do usuário, e o conteúdo da skill não muda gates nem autorizações.
 - Skill ausente não significa ferramenta ausente: consulte a documentação oficial da versão em uso.
 - Regras de brevidade de outra skill valem dentro do escopo aprovado e não dispensam gate, aceite, teste, rede de segurança, saneamento nem smoke. Um pedido vago vira versão mínima no plano. O teste que outra skill pede entra no plano, sem substituir nem reduzir os testes previstos, e vem antes do código como eles.
 - Graphify, MCPs, scanners e conectores são opcionais. O que sugerem só vale confirmado no código. Fonte remota só por conector já configurado e autorizado, com menor privilégio e sem ferramenta de escrita.

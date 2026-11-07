@@ -95,7 +95,12 @@ def exact(root, entries, skill_id):
     if len(matches) != 1:
         raise ValueError('skill id not found or duplicated: ' + skill_id)
     manifest = manifest_for(root, matches[0])
-    return {'status': 'pass', 'root': str(root), 'result': compact(matches[0], manifest)}
+    result = compact(matches[0], manifest)
+    folder = Path(manifest).parent
+    # Tudo que não é Markdown pode rodar; links aparecem marcados, sem seguir o alvo.
+    result['scripts'] = sorted(p.relative_to(folder).as_posix() + (' (link)' if p.is_symlink() else '')
+                               for p in folder.rglob('*') if (p.is_file() or p.is_symlink()) and p.suffix.lower() != '.md')
+    return {'status': 'pass', 'root': str(root), 'result': result}
 
 
 def search(root, entries, query, limit):

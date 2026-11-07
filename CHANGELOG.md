@@ -6,6 +6,8 @@ As versões seguem [SemVer](https://semver.org/lang/pt-BR/).
 
 ### Novo
 
+- Branch `stable`, que só avança por fast-forward na release. O README instala o marketplace com `@stable` e clona a `stable`, e um teste impede voltar a apontar para a `main`. O `/preparar-release` avança a `stable` depois da tag e confere no smoke.
+- Skill de terceiro é código: o contrato comum pede origem oficial, versão fixada e leitura dos scripts antes de rodar, e o `exact` da `skill-loader` lista os scripts da skill encontrada.
 - Bloco de handoff em YAML no contrato comum (pipeline, gate, estado, esforço, aprovações com evidência, autorizações vigentes, próximo passo e pendências), no topo do `task.md` ou na issue. Uma linha sem evidência não autoriza nada.
 - Contrato comum das pipelines em `shared/common-contract.md`: regras invioláveis, escala única de esforço (com a regra nova de que vale o maior esforço declarado), tabela de quando implementar está autorizado, modos, estado e retomada, e especialistas. `scripts/skills.py sync-shared` gera a cópia em `references/common-contract.md` de cada pipeline, e o doctor falha quando ela difere da fonte.
 - O doctor avisa, sem falhar, acima de 9.000 caracteres no `SKILL.md` e em frases com mais de 30 palavras.
