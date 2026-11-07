@@ -1,73 +1,10 @@
-# Distribuição multiagente
+# Guia de instalação
 
-Fonte única: os pacotes listados no catálogo, cada um numa pasta da raiz; catálogo versionado em `distribution/catalog.json`; CLI em `scripts/skills.py`.
+As skills ficam cada uma numa pasta da raiz do repositório. O catálogo em `distribution/catalog.json` diz quais existem, a release e os bundles, e o instalador `scripts/skills.py` copia ou liga as escolhidas na pasta que o host lê. No Claude Code, o caminho mais simples é o marketplace de plugins, descrito no [README](../../README.md#claude-code).
 
-## Compatibilidade
+## Requisitos
 
-| Ambiente | Projeto | Usuário | Comportamento adotado |
-|---|---|---|---|
-| Antigravity App/IDE | `.agents/skills/` | `~/.gemini/config/skills/` | `--agent antigravity` |
-| Antigravity CLI | `.agents/skills/` | `~/.gemini/antigravity-cli/skills/` | `--agent antigravity-cli` |
-| Claude Code local | `.claude/skills/` | `~/.claude/skills/` | `--agent claude` |
-| Claude Code (marketplace) | — | Cache de plugins do Claude Code | `.claude-plugin/marketplace.json`, um plugin por skill |
-| Codex | `.agents/skills/` | `~/.agents/skills/` | `--agent codex` |
-| Framework customizado | Diretório explícito | Diretório explícito | `--destination PATH`; consumidor implementa descoberta |
-
-Os caminhos refletem documentação consultada nessa data, não um teste de descoberta em todas as aplicações. A pasta de usuário do Codex aqui segue a documentação atual; instalações legadas em `~/.codex/skills` não são migradas nem removidas. Antigravity mantém compatibilidade com `.agent/skills`, mas o instalador usa `.agents/skills`. Gemini CLI é um produto distinto e não é um alias de Antigravity neste instalador.
-
-Fontes: [Antigravity](https://antigravity.google/docs/skills/), [Claude Code](https://code.claude.com/docs/en/skills), [OpenAI](https://learn.chatgpt.com/docs/build-skills).
-
-## Descoberta e controle de contexto
-
-```mermaid
-flowchart LR
-    A[Pacotes canônicos] --> B[Catálogo e bundles]
-    B --> C[Seleção explícita e exclusões]
-    C --> D[Cópias ou links por agente]
-    C --> E[Manifesto Antigravity opcional]
-    D --> F[Descoberta de nome e descrição]
-    E --> F
-    F --> G[SKILL.md quando necessário]
-    G --> H[Referências da etapa atual]
-    I[Biblioteca externa] --> J[skill-loader sob demanda]
-```
-
-Dois níveis operacionais, sem inventar um enum nativo de discoverability:
-
-1. **Ativo:** somente as skills selecionadas são expostas ao catálogo nativo. Seu nome/descrição podem ocupar contexto inicial.
-2. **Biblioteca externa:** demais skills permanecem fora dos diretórios de descoberta; `skill-loader` recebe uma raiz configurada e localiza recursos pontualmente.
-
-Nenhum orçamento universal de 20.000 tokens ou contagem fixa por skill é presumido. A configuração e os limites variam por host. Remover uma skill do catálogo não apaga instruções já lidas em uma conversa.
-
-### Antigravity e skills.json
-
-O comando `manifest` gera JSON com `entries[].path` para cada skill selecionada. O formato de entradas individuais é demonstrado pelo [projeto Chromium mantido no Google](https://chromium.googlesource.com/experimental/chromium/src/+/HEAD/agents/skills/README.md). O [changelog oficial](https://github.com/google-antigravity/antigravity-cli/blob/main/CHANGELOG.md) também registra suporte a exclusões e filtros.
-
-Não é necessário usar `skills.json` quando os pacotes já estão nas pastas padrão. Para registrar fontes externas, gere o manifesto, revise-o e incorpore as entradas ao `.agents/skills.json` do workspace ou ao manifesto global compatível com sua versão. Não registre as mesmas fontes por múltiplos mecanismos sem necessidade.
-
-```bash
-python3 scripts/skills.py manifest --bundle research --exclude execution-pipeline
-```
-
-O instalador aplica `--exclude` antes de gerar entradas; não depende de semântica não validada de padrões nativos de exclusão. Ele não sobrescreve nem mescla automaticamente configurações existentes. Não foram confirmados enums públicos universais de discoverability; campos assim não são emitidos. Os caminhos gerados são absolutos para a máquina atual: regenere ao mudar de máquina ou checkout.
-
-## Contratos e schemas
-
-- Cada pacote usa YAML frontmatter em `SKILL.md` com `name` e `description`, seguindo [Agent Skills](https://agentskills.io/specification). Referências de recursos são relativas ao arquivo que as contém, dentro do pacote; o entrypoint parte da raiz da skill.
-- O catálogo usa schema JSON versão 1 e release SemVer; `distribution/catalog.schema.json` publica o contrato declarativo. A CLI valida campos, versão, release, tipos, unicidade e pertencimento de membros aos nomes do catálogo com verificações locais; não depende de um motor genérico de JSON Schema.
-- `doctor` valida sintaxe YAML e chaves duplicadas do frontmatter e dos recursos `.yml`/`.yaml`, identidade de nome, descrição e metadata string/string. Verifica existência e confinamento dos destinos de links Markdown inline no entrypoint e em `references/**/*.md`, relativos ao arquivo que contém o link. Ignora código cercado por backticks/tis e código inline, URLs externas e fragmentos sem arquivo; para `arquivo.md#seção`, confere o arquivo, sem certificar a âncora. Links por definição/HTML e títulos opcionais em links não fazem parte deste checker. `examples/` e históricos fora dos pacotes ativos ficam fora da varredura documental, mas YAML e restrições de symlinks do pacote continuam verificados. A mesma validação precede `manifest`/`install`, sem buscar rede ou executar snippets. Não é um validador completo de Markdown, de todas as extensões dos hosts ou dos schemas Quarto. Também recusa `SKILL.md` com mais de 8.000 caracteres, teto logo acima da maior skill atual.
-- As cópias são registradas por caminho relativo e SHA-256 dos arquivos. O doctor detecta divergências em cópias gerenciadas. Links são fontes vivas: verifica destino e estrutura, sem afirmar imutabilidade do conteúdo.
-- `agents/openai.yaml` é opcional no Codex para interface, política e ferramentas. Nenhum pacote exige MCP ou bloqueio de invocação implícita por padrão. Não foram adicionadas dependências fictícias ou políticas globais.
-
-### Integração MCP/customizada
-
-MCP conecta ferramentas e dados; a distribuição de uma pasta de skill não inicia um servidor. Um framework pode indexar apenas frontmatter do conjunto selecionado e disponibilizar busca e leitura pontuais, preservando instruções do host e escopo do pedido.
-
-Para catálogo local pequeno, o filesystem nativo já atende; MCP só se justifica quando há necessidade de acesso remoto ou compartilhado.
-
-## Seleção e instalação
-
-Python 3.9+ e PyYAML 6.0.3. O instalador não baixa dependências nem executa scripts das skills. Crie um ambiente isolado conforme seu sistema:
+Python 3.9 ou mais novo e PyYAML 6.0.3. O instalador não baixa nada da rede e não executa scripts das skills.
 
 ```bash
 python3 -m venv .venv
@@ -75,53 +12,80 @@ python3 -m venv .venv
 .venv/bin/python scripts/skills.py list
 ```
 
-Nos exemplos seguintes, `python3` representa o interpretador com PyYAML instalado; use `.venv/bin/python` ou ative esse ambiente.
+No Windows, use `py -3 -m venv .venv` e `.venv\Scripts\python.exe`; a CLI não precisa de bash. Nos exemplos abaixo, `python3` é o interpretador com PyYAML.
 
-Windows: use `py -3 -m venv .venv` e `.venv\Scripts\python.exe` nos comandos seguintes. A CLI usa pathlib e não exige bash. Cópia é o padrão multiplataforma; links dependem de suporte/permissões do sistema e não têm fallback silencioso.
+## Onde cada host procura as skills
+
+| Host | Projeto | Usuário | Opção |
+|---|---|---|---|
+| Codex | `.agents/skills/` | `~/.agents/skills/` | `--agent codex` |
+| Claude Code | `.claude/skills/` | `~/.claude/skills/` | `--agent claude` |
+| Claude Code, pelo marketplace | — | Cache de plugins | `.claude-plugin/marketplace.json`, um plugin por skill |
+| Antigravity App/IDE | `.agents/skills/` | `~/.gemini/config/skills/` | `--agent antigravity` |
+| Antigravity CLI | `.agents/skills/` | `~/.gemini/antigravity-cli/skills/` | `--agent antigravity-cli` |
+| Outro framework | Pasta explícita | Pasta explícita | `--destination PATH` |
+
+O padrão é a pasta do projeto atual; `--scope user` instala no perfil. Os caminhos seguem a documentação de cada host: [Antigravity](https://antigravity.google/docs/skills/), [Claude Code](https://code.claude.com/docs/en/skills) e [OpenAI](https://learn.chatgpt.com/docs/build-skills). Instalações antigas do Codex em `~/.codex/skills` não são migradas nem apagadas. O Antigravity ainda aceita `.agent/skills`, mas o instalador usa `.agents/skills`. O Gemini CLI é outro produto e não tem opção aqui.
+
+`--agent auto` tenta reconhecer a sessão do Codex ou do Claude Code e depois os executáveis `codex`, `claude` e `agy`. É uma estimativa, não prova de qual agente está ativo. Se encontrar mais de um candidato, ou nenhum, ele para antes de gravar e pede `--agent`. O Antigravity App/IDE nunca é detectado: use `--agent antigravity`. `detect` mostra o que ele encontrou. `--destination` ignora `--agent` e `--scope`.
+
+## Escolher o que instalar
+
+| Bundle | Skills |
+|---|---|
+| `planning` | `pre-code-pipeline` |
+| `development` | `pre-code-pipeline`, `execution-pipeline`, `audit-and-refactoring-pipeline`, `scheduled-automation`, `personal-data` |
+| `research` | `pre-code-pipeline`, `execution-pipeline`, `writing-pipeline`, `quarto-expert`, `personal-data` |
+| `editorial` | `writing-pipeline` |
+| `release` | `release-and-ops-pipeline` |
+| `library` | `skill-loader` |
+
+Bundles agrupam skills e mais nada; ferramentas e MCPs que uma skill cite você instala à parte. Dá para repetir `--bundle` e `--skill`, combiná-los e tirar nomes com `--exclude`. Instalar tudo exige `--all`.
 
 ```bash
-# Planejar uma instalação no projeto sem gravar no destino
+# Ver o plano sem gravar nada
 python3 scripts/skills.py install --agent codex --bundle development --dry-run
 
-# Disponibilizar somente o pacote editorial no projeto atual
-python3 scripts/skills.py install --agent claude --bundle editorial
+# Todas as skills no perfil do usuário, menos a skill-loader
+python3 scripts/skills.py install --agent codex --scope user --all --exclude skill-loader
 
-# Desenvolvimento local com atualização imediata da fonte
+# Por link, para quem edita as skills e quer ver a mudança na hora
 python3 scripts/skills.py install --agent antigravity --skill quarto-expert --mode link
 
-# Copiar para perfil do usuário explicitamente selecionado
-python3 scripts/skills.py install --agent codex --scope user --skill skill-loader
-
-# Destino customizado ou teste isolado
-python3 scripts/skills.py install --destination /tmp/selected-skills --bundle research
-python3 scripts/skills.py doctor --destination /tmp/selected-skills --bundle research
+# Pasta de outro framework, conferida pelo doctor
+python3 scripts/skills.py install --destination /caminho/skills --bundle research
+python3 scripts/skills.py doctor --destination /caminho/skills --bundle research
 ```
 
-Bundles são agrupamentos por papel, não grafos de dependência obrigatória. `planning`, `development`, `editorial`, `research`, `release` e `library` estão no catálogo. É possível repetir `--bundle` e `--skill`, combinar seleções e excluir nomes exatos. Instalar tudo exige `--all`; não existe promoção automática da biblioteca fria.
+A cópia é o modo padrão e funciona em qualquer sistema. O link depende do suporte do sistema e não volta para cópia em silêncio. Um link expõe a pasta inteira do checkout vivo: mover ou apagar o clone quebra a instalação, e é preciso instalar de novo.
 
-`--agent auto` dá preferência a indícios de sessão Codex/Claude, depois verifica executáveis. Detecção é heurística, não prova de autenticação ou agente ativo. Se houver múltiplos candidatos sem evidência de sessão, falha antes de escrever e pede `--agent`. `detect` mostra o diagnóstico; `--destination` ignora agente/escopo para destinos customizados.
+Cada skill instalada aparece com nome e descrição no catálogo do host, e o `SKILL.md` e as referências só são lidos quando a tarefa pede. Quanto isso ocupa de contexto depende do host, e tirar uma skill do catálogo não apaga o que o agente já leu numa conversa. Para manter uma coleção grande fora do catálogo, use a [biblioteca externa](../library-maintenance.md).
 
-## Atualização e preservação de trabalho
-
-O arquivo `.meta-skills-install.json` no destino registra somente pacotes gerenciados, incluindo a release do catálogo usada na instalação. Um destino homônimo sem registro é preservado e causa erro. As cópias incluem `SKILL.md`, `references`, `scripts`, `examples`, `assets` e `agents`; excluem caches, propostas e arquivos da raiz do repositório. Links expõem a pasta fonte viva inteira, incluindo arquivos adicionais que ela eventualmente contenha; o agente só deve carregar os recursos necessários.
+## Atualizar
 
 ```bash
 python3 scripts/skills.py install --agent claude --bundle editorial --update
 ```
 
-Repetir a mesma instalação e release é idempotente. Mudança de release, atualização de conteúdo ou troca de cópia/link exige `--update`; cópias com alteração local são preservadas mesmo com essa opção. Faça a reconciliação manual antes de repetir. Selecionar um bundle menor não remove pacotes instalados anteriormente. Não há remoção automática nem migração dos perfis antigos.
+O arquivo `.meta-skills-install.json` no destino registra as skills que o instalador gerencia, com a release e o SHA-256 de cada arquivo. Com isso:
 
-Conflitos são verificados em todo o plano antes da gravação. Cada pacote é preparado no filesystem do destino, trocado e registrado com recuperação caso a gravação falhe. A transação é por pacote: falha de I/O em um pacote posterior pode deixar os anteriores instalados e registrados. Reexecute após resolver o erro. Execuções concorrentes no mesmo destino não são suportadas; não rode dois instaladores simultaneamente. Mover/apagar o checkout quebra links e exige reinstalação.
+- Repetir a mesma instalação não muda nada.
+- Release nova, conteúdo novo ou troca entre cópia e link exigem `--update`.
+- Uma cópia que você editou à mão não é sobrescrita, nem com `--update`. Reconcilie a edição e repita.
+- Uma pasta com o mesmo nome e sem registro, criada por outro meio, nunca é sobrescrita: a instalação para com erro.
+- Escolher um bundle menor não remove o que já estava instalado. Não há comando de remoção.
 
-### Falha tardia e retomada da instalação
+As cópias levam `SKILL.md`, `references`, `scripts`, `examples`, `assets` e `agents`, sem caches nem arquivos da raiz do repositório.
 
-O preflight confere todo o plano, mas não torna a gravação do lote transacional. Se a troca/gravação do recibo do segundo pacote falhar, o primeiro já concluído permanece instalado e registrado. O pacote que falhou recupera a pasta anterior quando ela existia; numa instalação nova, sua pasta/link e seu registro não permanecem. Uma falha na própria recuperação deve ser tratada pelo estado observado, sem pressupor sucesso.
+## Quando uma instalação falha
 
-O teste de falha tardia cobre dois estados: atualização por cópia com `alpha` já em 1.1.0 e `beta` restaurado em 1.0.0, e instalação nova por link com somente `alpha` instalado/registrado. O recibo no disco continua válido; arquivos alheios ao lote são preservados. Isso não garante recuperação de toda falha possível do filesystem. Links apontam para fonte viva: recuperar o link/registro não restaura alterações feitas no conteúdo do checkout.
+O instalador confere todo o plano antes de gravar e instala uma skill por vez. Se a gravação falhar no meio do lote, as skills anteriores ficam instaladas e registradas, e a que falhou volta à versão anterior, ou some se era nova. Não rode dois instaladores no mesmo destino ao mesmo tempo.
 
-Para retomar, pare novas tentativas concorrentes e preserve o erro, o recibo `.meta-skills-install.json` e as pastas existentes. Confira os pacotes e o destino com `doctor`, resolva a causa de I/O (por exemplo, espaço/permissão) no escopo autorizado e revise o plano com `--dry-run`. Não apague recibos, destinos homônimos ou edições locais para forçar sucesso. Um `doctor` aprovado para um pacote confirma sua integridade registrada, não a conclusão de todo o lote nem sua atualização à fonte atual.
+Para retomar:
 
-Exemplo para repetir uma atualização por cópia no mesmo destino e seleção:
+1. Guarde a mensagem de erro, o `.meta-skills-install.json` e as pastas como estão. Não apague recibos nem edições para forçar o sucesso.
+2. Resolva a causa, como falta de espaço ou de permissão.
+3. Confira e repita com a mesma seleção e o mesmo modo:
 
 ```bash
 python3 scripts/skills.py doctor --destination /caminho/skills --all
@@ -129,22 +93,18 @@ python3 scripts/skills.py install --destination /caminho/skills --all --update -
 python3 scripts/skills.py install --destination /caminho/skills --all --update
 ```
 
-Mantenha agente/destino, seleção, modo e fonte/release da operação pretendida. Para link, mantenha `--mode link`; use `--update` quando a mudança de conteúdo, release ou modo o exigir. Pacotes já concluídos ficam `unchanged`; os restantes são instalados/atualizados após resolver a falha. Reexecute `doctor` no conjunto completo. Edição local detectada continua bloqueando a atualização até reconciliação manual.
+As skills que já tinham terminado aparecem como `unchanged`. Rode o doctor de novo no conjunto todo: o doctor aprovado numa skill confirma a integridade dela, não que o lote inteiro terminou.
 
-### Manutenção das dependências da CI
+## Antigravity e skills.json
 
-As actions em `.github/workflows/ci.yml` usam SHA completo com versão legível em comentário. Para atualizar, resolva a tag/release desejada no repositório oficial `actions/checkout` ou `actions/setup-python`, confira o commit e o manifest `action.yml` naquela revisão e revise o diff/compatibilidade. Atualize todas as ocorrências da action e registre fonte, versão, SHA e data da verificação. Não copie um SHA sugerido por terceiros sem conferir a origem nem mova a dependência automaticamente com a tag.
-
-Valide YAML, eventos, permissões, matriz e comandos localmente; quando houver autorização de envio/CI, confira os jobs do commit final até o estado terminal. SHA de action não fixa a imagem `*-latest`, downloads de runtime ou todas as dependências transitivas.
-
-## Doctor e evidências
+Com as skills nas pastas padrão, o `skills.json` não é necessário. Para registrar uma fonte externa, gere as entradas, revise e incorpore ao `.agents/skills.json` do workspace ou ao manifesto global da sua versão:
 
 ```bash
-python3 scripts/skills.py doctor
-python3 -m unittest discover -s tests -v
-python3 quarto-expert/scripts/doctor.py
+python3 scripts/skills.py manifest --bundle research --exclude execution-pipeline
 ```
 
-Sem destino, `doctor` verifica os pacotes fonte. Com `--destination`, verifica pacotes selecionados do destino e integridade quando houver registro. Um pacote não gerenciado recebe apenas verificação estrutural. Saídas da CLI são JSON: código 0 para êxito, 1 para erro, 2 para dependência indisponível. Falta de PyYAML não é sucesso.
+O formato de `entries[].path` segue o [exemplo do Chromium](https://chromium.googlesource.com/experimental/chromium/src/+/HEAD/agents/skills/README.md); o [changelog do Antigravity CLI](https://github.com/google-antigravity/antigravity-cli/blob/main/CHANGELOG.md) registra o suporte a exclusões. O `--exclude` é aplicado antes de gerar as entradas. O comando não mescla nem sobrescreve configurações existentes, e os caminhos são absolutos para a máquina atual: gere de novo ao trocar de máquina ou de clone. Não registre a mesma fonte por dois mecanismos.
 
-A validação não executa workflows de release, pesquisa fontes externas, inicia MCPs ou certifica conformidade normativa dos documentos. O doctor da Quarto oferece runtime e render smoke separados. Instalação no filesystem não comprova que uma aplicação já carregou a skill; siga o [protocolo de descoberta](discovery.md) depois de recarregar o host.
+## Depois de instalar
+
+Rode o doctor no destino, abra uma sessão nova no host e siga a [verificação de descoberta](discovery.md): estar no disco não prova que o host carregou a skill.
