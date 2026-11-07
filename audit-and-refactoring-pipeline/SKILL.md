@@ -48,4 +48,4 @@ Ao parar ou transferir, deixe objetivo, modo, gate, o que foi autorizado e quand
 
 ## Especialistas e ferramentas
 
-Skills especialistas, scanners e CLIs são consultas sob demanda e dão candidatos, não certificação; sem uma delas, siga com o núcleo. Graphify é opcional: centralidade ou ciclo só viram achado confirmados no código, e construir ou atualizar o grafo grava arquivos, então só com escopo e destino autorizados. Evidência remota, só por conector já configurado e autorizado, com o menor conjunto de ferramentas. Delegue só com capacidade e autorização, e com dono claro para cada arquivo.
+Skills especialistas, scanners e CLIs são consultas sob demanda: dão candidatos, não certificação, e não ampliam modo nem autorização; sem uma delas, siga com o núcleo. Graphify é opcional: centralidade ou ciclo só viram achado confirmados no código, e construir ou atualizar o grafo grava arquivos, então só com escopo e destino autorizados. Evidência remota só por conector configurado e autorizado, com o mínimo de ferramentas. Delegue só com capacidade, autorização e dono claro para cada arquivo.

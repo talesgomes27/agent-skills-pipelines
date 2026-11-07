@@ -1,0 +1,48 @@
+# Plataformas de apps de dados
+
+Use quando o destino é Streamlit Community Cloud, shinyapps.io ou Posit Connect. Os detalhes valem para a documentação oficial de novembro de 2026. Limites e planos mudam sem aviso, então confira a página da plataforma antes de depender de um deles.
+
+## Em qualquer plataforma
+
+- Defina a restrição de acesso na arquitetura: confirme no plano contratado que o app pode ficar privado e como os usuários entram, e confira de novo antes de publicar.
+- Restringir quem abre o app na plataforma e autenticar dentro do app, como com `st.login`, são camadas diferentes; o plano diz qual delas atende ao requisito de acesso.
+- Segredos ficam no recurso da plataforma ou no cofre da CI, nunca no Git. Se o app só lê o banco, a credencial dele é só de leitura.
+- O banco precisa ser alcançável da plataforma: confira rede, SSL e lista de IPs permitidos. Abrir o banco para a internet é decisão do usuário.
+- A identidade da release é o commit ou o bundle publicado, com o horário ou ID do deploy que a plataforma mostra.
+- Recuperar é publicar de novo o commit ou bundle anterior, com autorização. Dados que o app gravou não voltam com ele.
+
+## Streamlit Community Cloud
+
+- Publica de um repositório GitHub e reflete cada push quase na hora: o push é o deploy, então a autorização de publicação vem antes dele.
+- O app herda a visibilidade do repositório: de repositório público, nasce público; de privado, nasce visível só para os desenvolvedores do workspace. Para restringir, em Sharing escolha "Only specific people can view this app" e convide por e-mail; quem entra usa Google ou um link enviado por e-mail. A documentação permite um app privado por vez.
+- Dependências: vale o primeiro arquivo reconhecido entre `uv.lock`, `Pipfile`, `environment.yml`, `requirements.txt` e `pyproject.toml` (poetry), procurado na pasta do entrypoint e depois na raiz. Use um só. Pacotes de sistema vão em `packages.txt` na raiz.
+- A versão do Python é escolhida nas configurações avançadas do deploy; desenvolva na mesma.
+- Segredos: o conteúdo do `secrets.toml` vai no campo Secrets das configurações do app, e o código lê com `st.secrets`. `.streamlit/secrets.toml` fica no `.gitignore`.
+- O app dorme depois de 12 horas sem tráfego, e uma visita o acorda. Os limites de CPU e memória são pequenos.
+- A documentação não publica IPs de saída, e a equipe do Streamlit disse no fórum que a lista de IPs permitidos foi descontinuada. Um banco protegido por lista de IPs pode recusar o app; decida isso na arquitetura, por exemplo com uma API na frente dos dados ou outro destino.
+
+Fontes: [dependências](https://docs.streamlit.io/deploy/streamlit-community-cloud/deploy-your-app/app-dependencies), [segredos](https://docs.streamlit.io/deploy/streamlit-community-cloud/deploy-your-app/secrets-management), [compartilhamento](https://docs.streamlit.io/deploy/streamlit-community-cloud/share-your-app), [gestão do app](https://docs.streamlit.io/deploy/streamlit-community-cloud/manage-your-app), [fórum sobre IPs](https://discuss.streamlit.io/t/security-what-ip-address-range-can-i-whitelist-for-my-db-connection/55865).
+
+## shinyapps.io
+
+- A conta é configurada com o token e o segredo da página Tokens, por `rsconnect::setAccountInfo()` em R ou `rsconnect add` em Python. Eles dão acesso à conta inteira: o usuário os configura na máquina dele ou no cofre da CI, fora do chat, de scripts versionados e de logs.
+- Deploy com `rsconnect::deployApp()` em R ou `rsconnect deploy shiny <pasta>` em Python. Em R, o rsconnect varre o código e registra as versões dos pacotes instalados na máquina que publica, junto com a versão do R; a documentação cita as chamadas `library()`, e o app não chama `install.packages()`. São aceitos CRAN, GitHub e Bioconductor.
+- App privado existe só nos planos Standard e Professional: em Users, Application Visibility passa a Private, e os usuários são convidados por e-mail. Entram com Google, GitHub ou conta do shinyapps.io. Mudar a visibilidade reinicia o app.
+- A documentação não descreve um cofre de variáveis para o app. Se a credencial viaja no bundle, confira o que o deploy envia e mantenha o arquivo fora do Git. O app publicado recebe `R_CONFIG_ACTIVE=shinyapps`, que o pacote `config` usa para escolher a seção do `config.yml`.
+- A instância padrão é `large` (1 GB), ajustável com `rsconnect::configureApp()`, e dorme depois de 15 minutos ociosa. Os logs saem com `rsconnect::showLogs()`.
+
+Fontes: [primeiros passos](https://docs.posit.co/shinyapps.io/guide/getting_started/), [autenticação](https://docs.posit.co/shinyapps.io/guide/authentication_and_user_management/), [aplicações](https://docs.posit.co/shinyapps.io/guide/applications/).
+
+## Posit Connect
+
+Use a skill `deploy-to-connect` da Posit quando ela estiver instalada; sem ela, informe o comando de instalação (`claude plugin install connect@posit-dev-skills` ou `npx skills add posit-dev/skills`) e siga a documentação do rsconnect. A skill diz como publicar; os gates e as autorizações da release continuam valendo.
+
+- O servidor e a conta vêm do usuário. Não publique no único servidor salvo só porque ele é o único.
+- `deployApp()` e `posit connect deploy` levam todos os arquivos da pasta: no saneamento, confira o que vai junto e restrinja a seleção quando houver dado, `.env` ou arquivo que o app não usa.
+- Conteúdo Python precisa de `requirements.txt`. Gerar um com `--force-generate` roda `pip freeze` e pode fixar versões demais, então criar esse arquivo também pede o aceite do usuário.
+- Instalar a CLI, entrar na conta ou criar uma chave de API entram no mesmo pedido de autorização da publicação.
+
+## Smoke
+
+- Abra o endereço publicado no navegador e confira um valor exibido depois de uma interação. A primeira visita pode só acordar o app.
+- Em app privado, o smoke roda numa sessão em que o usuário já entrou, ou o próprio usuário confere e relata. Não guarde senha, cookie ou link de convite, e não torne o app público para testar.

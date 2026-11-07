@@ -54,4 +54,4 @@ Ao parar ou transferir, deixe objetivo, gate e estado, o que foi aprovado e quan
 
 ## Especialistas e ferramentas
 
-Carregue `quarto-expert`, `writing-pipeline` ou um especialista de dados ou domínio só para uma lacuna concreta do gate atual; elas informam, sem mudar gates nem escopo. Sem a especialista, siga com o núcleo e bloqueie só a decisão que depende dela. Fonte remota, só por conector já configurado, com menor privilégio e sem ferramenta de escrita. Graphify é opcional, e o que ele sugerir precisa ser confirmado no código.
+Carregue `quarto-expert`, `writing-pipeline` ou um especialista de dados ou domínio só para uma lacuna concreta do gate atual; elas informam, sem mudar gates, escopo nem autorizações. Sem a especialista, siga com o núcleo e bloqueie só a decisão que depende dela. Fonte remota, só por conector já configurado, com menor privilégio e sem ferramenta de escrita. Graphify é opcional, e o que ele sugerir precisa ser confirmado no código.

@@ -13,7 +13,7 @@ Reorganização de relatório, idioma, política de cache, estética, DPI e form
 
 Extraia serviços/repositórios apenas quando separar responsabilidade ou reduzir acoplamento real; não crie camadas para todo controlador.
 Preserve schema, status, erros, autorização, transações, concorrência e compatibilidade dos consumidores. Otimizações SQL precisam preservar resultados, ordenação contratada e garantias transacionais. Índice/migração pode ter custo e efeitos operacionais, além do diff de código.
-Em dashboard, separar consulta, transformação e interface costuma ser a primeira fatia. Ganho de desempenho só vale medido: registre o tempo da interação lenta antes e depois, com os mesmos dados, e trate cache novo como mudança de comportamento quando ele pode mostrar dado antigo.
+Em dashboard, separar consulta, transformação e interface costuma ser a primeira fatia. Para diagnosticar lentidão, use a skill oficial quando instalada (`shiny-r-optimize`, `shiny-py-optimize` ou a referência de desempenho do Streamlit), sem aplicar correções fora do modo autorizado. Ganho de desempenho só vale medido: registre o tempo da interação lenta antes e depois, com os mesmos dados, e trate cache novo como mudança de comportamento quando ele pode mostrar dado antigo.
 Renomeações e codemods devem considerar imports, configuração, serialização, referências dinâmicas e chamados externos; parser/IDE ajuda, mas testes e revisão continuam necessários.
 
 ## C: automações e CLI
