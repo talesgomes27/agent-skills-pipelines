@@ -1,5 +1,7 @@
 # Arquitetura por arquétipo
 
+Em B e C, as restrições do destino que costumam mudar a arquitetura são autenticação, hibernação, limites, custo e armazenamento.
+
 Leia só a parte do arquétipo registrado e, em projeto híbrido, a do domínio secundário nas partes que ele usa. Com dados de pessoas, em qualquer arquétipo, a arquitetura diz onde eles ficam, quem os vê e o que sai do ambiente, seguindo a skill `personal-data`.
 
 ## A: análise e modelos
@@ -22,3 +24,11 @@ Leia só a parte do arquétipo registrado e, em projeto híbrido, a do domínio 
 - Num job agendado, também horário e fuso, onde o estado fica entre execuções, nova tentativa e quem recebe o alerta de falha.
 - Modelo pontuado ou retreinado de forma recorrente segue a referência de modelo em produção da skill `scheduled-automation`.
 - Coleta em sites ou APIs de terceiros declara a fonte, os termos de uso e o robots.txt que valem, o ritmo das requisições e o que fazer diante de login ou CAPTCHA.
+
+## Registro do arquétipo
+
+`docs/00_archetype.md` registra em YAML `archetype`, `stack`, `project_name`, `gerado_por: pre-code-pipeline` e `data` (ISO 8601). Stack indefinida fica explícita; não invente versões.
+
+## Onde a verificação roda
+
+O plano diz onde cada verificação roda: dados de teste, cópia ou acesso só de leitura aos dados reais, e banco, pasta, chat ou conta de teste para efeitos externos.

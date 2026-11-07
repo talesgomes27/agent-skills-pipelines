@@ -5,7 +5,7 @@ description: "Use quando o usuário pedir para preparar, versionar, publicar ou 
 
 # Releases e operações
 
-Entregue o artefato aprovado no destino autorizado, com evidência de identidade, execução e recuperação. Se o pedido autoriza só preparar localmente, não o amplie para commit, push, publicação de pacote ou produção.
+Entregue o artefato aprovado no destino autorizado, com evidência de identidade, execução e recuperação.
 
 ## Antes de começar
 
@@ -43,4 +43,4 @@ Ao parar ou transferir, deixe objetivo, modo, gate, artefato e destino, o que fo
 
 ## Especialistas e ferramentas
 
-Carregue especialistas de CI, plataforma, empacotamento ou revisão só para a lacuna atual: eles dizem como fazer, sem mudar gates nem autorizações. Skill ausente não significa ferramenta ausente. Não use cadeia editorial em todo commit nem checklist de lançamento num pacote local simples. Conectores consultam runs e deployments ou executam uma ação já autorizada. Graphify é opcional: não construa nem publique grafo sem pedido, e confira o conteúdo interno antes de expô-lo.
+Carregue especialistas de CI, plataforma, empacotamento ou revisão só para a lacuna atual: eles dizem como fazer, sem mudar gates nem autorizações. Regras de brevidade de outra skill valem dentro do escopo aprovado e não dispensam gate, aceite, saneamento nem smoke. Skill ausente não significa ferramenta ausente. Não use cadeia editorial em todo commit nem checklist de lançamento num pacote local simples. Conectores consultam runs e deployments ou executam uma ação já autorizada. Graphify é opcional: não construa nem publique grafo sem pedido, e confira o conteúdo interno antes de expô-lo.
