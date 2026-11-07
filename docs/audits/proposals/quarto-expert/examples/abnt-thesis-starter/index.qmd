@@ -1,8 +1,0 @@
----
-title: "Titulo da Dissertacao"
----
-
-# Introducao {#sec-intro}
-
-Texto introdutorio. Confira o manual institucional e os elementos exigidos antes de completar
-o documento. Este exemplo não certifica conformidade normativa.

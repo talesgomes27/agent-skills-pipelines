@@ -286,8 +286,22 @@ class InstallerTests(unittest.TestCase):
         repo = Path(__file__).resolve().parents[1]
         release = cli.read_json(repo / 'distribution/catalog.json')['release']
         readme = (repo / 'README.md').read_text(encoding='utf-8')
-        self.assertIn('Candidata: **' + release + '**, ainda não publicada.', readme)
-        self.assertIn('candidate-' + release + '-blue.svg', readme)
+        self.assertIn('Release atual: **' + release + '**.', readme)
+        self.assertIn('release-' + release + '-blue.svg', readme)
+
+    def test_oversized_skill_blocks_doctor_and_install(self):
+        (self.repo / 'alpha/SKILL.md').write_text('---\nname: alpha\ndescription: Edit a selected document.\n---\n' + 'x' * cli.MAX_SKILL_CHARS)
+        self.assertEqual(self.run_cli('doctor', '--skill', 'alpha')[0], 1)
+        self.assertEqual(self.install('--skill', 'alpha')[0], 1)
+        self.assertFalse(self.dest.exists())
+
+    def test_marketplace_matches_catalog(self):
+        repo = Path(__file__).resolve().parents[1]
+        c = cli.read_json(repo / 'distribution/catalog.json')
+        plugins = cli.read_json(repo / '.claude-plugin/marketplace.json')['plugins']
+        self.assertEqual([p['name'] for p in plugins], c['skills'])
+        for p in plugins:
+            self.assertEqual((p['source'], p['skills'], p['version']), ('./', ['./' + p['name']], c['release']))
 
 
 if __name__ == '__main__':

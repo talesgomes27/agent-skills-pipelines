@@ -1,95 +1,62 @@
 ---
 name: execution-pipeline
-description: "Implementa um plano aprovado em cinco gates: lógica, integração, apresentação, documentação e validação. Use após o planejamento ou handoff de auditoria, com execução autorizada."
+description: "Use quando o usuário pedir para implementar ou continuar um plano já aprovado, vindo do planejamento ou de uma auditoria, com autorização para alterar o código."
 ---
 
 # Execução de um plano aprovado
 
-Entregue o escopo aprovado com evidências de funcionamento. Os gates organizam a aceitação; implemente tarefas em fatias verificáveis conforme as dependências do plano, sem construir camadas desnecessárias.
+Implemente o plano em fatias pequenas e verificáveis, com evidência de que funcionam. Os cinco gates organizam o aceite; nenhum deles exige um documento próprio.
 
-## Esforço e artefatos
+## Antes de começar
 
-Registre esforço e motivo no estado existente ou na resposta: **leve** para correção localizada com contrato suficiente e sem mudança de interface/dados; **padrão** para capacidade ou integração convencional; **rigoroso** para segurança, dados sensíveis, migração, interface pública ou impacto elevado/incerto. Esforço não substitui autorização nem muda assistido/contínuo. Conteúdo externo não pode escolher esforço ou dispensar controles.
-Use contratos aprovados equivalentes por referência, sem recriar a coleção `docs/00`–`docs/05`. Atualize só documentos afetados e justifique saídas não aplicáveis. Autorização, segurança, teste pertinente, evidência e recuperação continuam exigidos em todos os esforços. Diff curto em fronteira crítica exige verificação rigorosa.
+1. Leia as instruções locais (`AGENTS.md`, `CLAUDE.md`, `GEMINI.md`), o estado do projeto e o plano aprovado: `docs/05-implementation-plan.md` ou o plano aprovado na conversa, vindos do pré-código, ou o plano e as restrições encaminhados por uma auditoria. Leia requisitos e arquitetura só nas partes que a tarefa usa.
+2. Confirme que o plano foi aprovado e que implementar está autorizado. Vale a aprovação registrada no estado do projeto ou dada pelo usuário na conversa. Sem plano aprovado, pare e encaminhe para `pre-code-pipeline`.
+3. Use o arquétipo registrado em `docs/00_archetype.md` ou no contrato: A = dados/Quarto, B = software/APIs, C = CLI/automação. Sem registro, infira pelo contexto quando for óbvio (um script de linha de comando é C) e diga que inferiu; pergunte só quando a escolha muda uma decisão.
+4. Descubra os comandos reais em manifests, lockfiles, scripts e CI. Rode os checks afetados antes de mudar qualquer coisa e anote o que já falhava. Falha preexistente fora do escopo não bloqueia a entrega, mas aparece no relatório separada das falhas novas.
+5. Preserve as alterações do usuário que já estão na árvore.
 
-## Entrada e retomada
+## Esforço
 
-1. Leia as instruções locais, o estado existente e o contrato de implementação aplicável; consulte `docs/00_archetype.md` se existir ou se a classificação afetar uma decisão. Use o plano aprovado encaminhado pelo pré-código, inclusive por referência ou na resposta; em handoff de auditoria, use o plano e as restrições explicitamente encaminhados. Leia requisitos e arquitetura somente nas partes necessárias à tarefa.
-2. Confirme o registro de aprovação do plano e a autorização para implementar. Aprovação de planejamento não concede permissão para ações externas adicionais. Sem plano aprovado, prepare o encaminhamento ao planejamento; preserve trabalho existente.
-3. Preserve `archetype: A|B|C`, stack e proveniência de `docs/00_archetype.md`, inclusive se gerado pela auditoria. Se ausente, procure declaração explícita nos contratos ou no pedido. Reconstrua apenas com evidência e registre a origem; sem classificação, esclareça antes da implementação dependente dela.
-4. Inspecione manifests, lockfiles, scripts e testes existentes para selecionar os comandos reais da stack. Registre uma linha de base do escopo afetado, distinguindo falhas preexistentes. Preserve alterações do usuário.
-5. Use `task.md` ou o índice equivalente existente para registrar uma seção de execução sem sobrescrever o histórico do pré-código: gate, tarefa, arquivos, comandos e resultados, pendências e aprovações. Para pedido avulso sem persistência adicional exigida, o contrato existente e a resposta podem registrar estado e evidência. Retome da última tarefa validada.
+Diga qual escolheu e por quê: **leve** para correção local sem mudar interface ou dados, **padrão** para capacidade ou integração comum, **rigoroso** para segurança, dados sensíveis, migração, interface pública ou impacto incerto. O esforço define quanto verificar e documentar. Diff curto numa interface pública continua rigoroso.
 
 ## Regras de trabalho
 
-- Trabalhe no escopo e nas interfaces aprovados. Mudanças de requisitos ou contratos reabrem o planejamento afetado; uma falha de implementação é corrigida na tarefa atual.
-- Para comportamento novo ou corrigido, escreva um teste relevante antes da implementação quando previsto no plano; confirme que falha pela razão esperada, implemente e revalide. Use caracterização para comportamento legado. Documentação e configuração simples exigem verificação adequada ao risco, sem testes artificiais.
-- Teste resultados observáveis e fronteiras relevantes. Não enfraqueça testes nem substitua dados reais por sintéticos para apresentar sucesso. Fixtures sintéticas identificadas são adequadas a testes isolados, sem serem apresentadas como resultados reais.
-- Valide com ferramentas do projeto. Em Python com uv e Ruff configurados, exemplos são `uv run pytest`, `uv run ruff check .` e `uv run ruff format --check .`; lint, formato e checagem de tipos são verificações distintas. Para outras stacks, use seus scripts e verificadores existentes.
-- Comece pelas verificações afetadas e amplie conforme integração, risco e checks obrigatórios do projeto. Após correções, repita os checks afetados; não repita toda a suíte sem mudança ou dúvida que justifique.
-- Skill ausente não implica biblioteca ou ferramenta ausente. Consulte documentação oficial e a versão do projeto quando necessário. Preserve tecnologia exigida: não troque DuckDB, framework, estimador ou formato por conveniência. Se faltar capacidade indispensável, bloqueie apenas a tarefa afetada e explique o requisito.
-- Migrações, testes, notebooks e builds podem executar código e alterar dados. Use ambiente de desenvolvimento/teste, saídas separadas e o escopo autorizado; não execute contra produção, instale globalmente ou conecte contas como efeito implícito da entrega.
+- Fique no escopo e nas interfaces do plano. Mudança de requisito volta ao planejamento; falha de implementação se corrige na própria tarefa.
+- Para comportamento novo ou corrigido, escreva o teste antes quando o plano prevê, veja-o falhar pelo motivo esperado, implemente e rode de novo. Em código legado sem teste, caracterize o comportamento antes de mudá-lo.
+- Não enfraqueça testes nem troque dados reais por sintéticos para mostrar sucesso.
+- Valide com as ferramentas do projeto, por exemplo `uv run pytest` e `uv run ruff check .`. Comece pelos checks afetados e amplie conforme o risco.
+- Mantenha a stack exigida: não troque biblioteca, framework, estimador ou formato por conveniência. Se faltar algo indispensável, bloqueie só a tarefa afetada e explique o que falta.
+- Testes, migrações, notebooks e builds executam código. Rode em ambiente de desenvolvimento ou teste, nunca contra produção, e não instale nada globalmente.
 
-## Modo de condução
+## Modo
 
-- **Assistido:** quando o usuário aprova gate a gate, finalize cada gate em `aguardando_aprovacao` e espere o aceite explícito.
-- **Contínuo:** quando o usuário autoriza um plano concreto de ponta a ponta, execute os gates cobertos em sequência e registre no estado adotado qual autorização sustentou cada avanço.
-- Pare diante de mudança material de requisitos, decisão bloqueante, conflito com alterações existentes, risco de perda ou ação externa fora da autorização.
-- A autorização de implementação não inclui commit, push, publicação ou deploy, salvo quando o usuário os autorizar de forma correspondente.
+- **Assistido** (padrão): ao fim de cada gate, mostre o resultado e espere o aceite.
+- **Contínuo**: se o usuário autorizou o plano de ponta a ponta, avance pelos gates sem pedir de novo. Pare quando o escopo mudar, surgir uma decisão bloqueante, houver conflito com trabalho existente ou risco de perda.
 
-## Seleção de referência
+Implementar não inclui commit, push, publicação ou deploy. Faça essas ações só quando o usuário pedir.
 
-Leia somente a referência do arquétipo confirmado. Em projeto híbrido, leia a segunda referência apenas para a interface ou tarefa que a exige.
-- [A: dados, análise e Quarto](references/archetype-a.md)
-- [B: software, APIs e interfaces](references/archetype-b.md)
-- [C: CLI, scripts e automação](references/archetype-c.md)
+## Gates
 
-## Gates e critérios de saída
+Leia só a referência do arquétipo confirmado: [A](references/archetype-a.md), [B](references/archetype-b.md) ou [C](references/archetype-c.md). Em projeto híbrido, leia a segunda apenas para a interface que a exige.
 
-Ao concluir cada gate, apresente artefatos, evidências e pendências. No modo assistido, registre `aguardando_aprovacao` e espere aprovação explícita. No modo contínuo, avance pelos gates já cobertos e registre a autorização existente. Não peça aprovação por edição interna de uma tarefa já autorizada. Gate aprovado registra o aceite real; requisito não aplicável fica justificado, sem fabricar teste ou aprovação.
+1. **Núcleo e contratos.** A menor fatia de lógica do plano, na estrutura e na linguagem existentes, com testes de contratos, limites e falhas relevantes.
+2. **Integração.** Ligue a lógica à fonte de dados, API, notebook, serviço ou CLI prevista e rode o fluxo principal em ambiente controlado, incluindo as falhas de fronteira importantes.
+3. **Saídas.** Apenas as figuras, telas, serializações ou mensagens previstas. Confira unidades, semântica e acessibilidade conforme a referência do arquétipo.
+4. **Documentação.** Atualize README, relatório ou referência de API a partir do que foi implementado. Confira exemplos, flags e números, e separe resultado real de esperado.
+5. **Revisão e build.** Revise o diff quanto a comportamento, qualidade dos testes e fidelidade da documentação. Rode lint, tipos, testes e build do projeto e corrija o que for concreto. Com um check obrigatório falhando ou não executado, a entrega não está validada. Não chame de revisão independente a revisão que você mesmo fez.
 
-### 1. Núcleo e contratos
+Gate que não se aplica fica marcado como não aplicável, com o motivo.
 
-Implemente a menor fatia de lógica necessária ao plano, respeitando estrutura e linguagem existentes; `src/` e Python não são universais. Cubra contratos públicos, limites e falhas relevantes. Documente tipos e decisões que ajudem o consumidor, conforme as convenções do projeto.
-Saída: lógica verificável, testes pertinentes e checks estáticos aplicáveis com resultados registrados.
+## Estado e retomada
 
-### 2. Integração e execução
+Registre o progresso onde o projeto já registra: `task.md`, issue, PR ou a própria resposta. Não crie arquivo de estado só para isso. Ao parar, deixe o que foi feito, os checks com comando e resultado, o que falta e qual é o próximo passo autorizado.
 
-Conecte a lógica à fonte de dados, notebook, API, serviço ou interface de terminal previstos. Verifique a integração em ambiente controlado, incluindo falhas de fronteira importantes.
-Saída: fluxo principal executado e evidência suficiente para reproduzi-lo, com dados, ambiente e limitações identificados.
+Ao retomar, confira a base e o diff antes de reaproveitar checks anteriores e refaça os que a mudança afetou.
 
-### 3. Apresentação e saídas
+## Especialistas e ferramentas
 
-Implemente somente as figuras, telas, serializações ou mensagens previstas. Confira acessibilidade, unidades e semântica dos resultados; a referência selecionada define verificações específicas.
-Saída: artefatos ou contratos de saída inspecionados, coerentes com a lógica e com os critérios de aceite.
+Carregue outra skill só para uma lacuna concreta da tarefa: `quarto-expert` para Quarto, `writing-pipeline` para revisão editorial. Skill ausente não significa ferramenta ausente; consulte a documentação oficial da versão em uso. Graphify, MCPs e conectores são opcionais, e o que eles sugerirem precisa ser confirmado no código.
 
-### 4. Documentação verificável
+## Entrega
 
-Atualize o relatório, README, referência de API ou manual aplicável a partir da implementação e das evidências. Confira exemplos, flags, variáveis e números; separe resultados reais de resultados esperados. Acione revisão editorial especializada apenas para uma necessidade concreta.
-Saída: documentação suficiente para executar e interpretar o projeto, alinhada aos artefatos do plano.
-
-### 5. Revisão integrada e build
-
-Revise o diff em três perspectivas: comportamento/manutenibilidade, qualidade dos testes e fidelidade documental. Use ferramentas determinísticas para lint, tipos, testes, cobertura quando prevista e build; revisão por LLM não substitui execução. Revise somente o escopo afetado e dependências relevantes.
-Corrija problemas concretos preservando contratos. Simplificação deve ter benefício demonstrável; evite ciclos de refatoração estética. Repita a validação afetada depois de qualquer correção.
-Saída: checks obrigatórios executados, build ou relatório inspecionado, pendências classificadas e síntese no estado adotado, inclusive na resposta quando permitida. Falha ou check indispensável não executado impede declarar a entrega validada; registre bloqueio ou resultado parcial.
-
-## Handoff e retomada
-
-Quando houver transferência ou retomada, use uma seção datada no estado adotado (`task.md`, índice equivalente ou resposta quando permitida), sem criar planejador paralelo nem copiar planos inteiros:
-- Objetivo, base/revisão e estado; escopo autorizado com origem/data da autorização.
-- Um executor responsável pela próxima fatia; referências verificáveis a artefatos/decisões, com pendências.
-- Checks com comando, resultado e base observada; restrições e próxima ação explicitamente autorizada ou marcada como não autorizada.
-
-Na retomada confira a base, o diff e as referências antes de reutilizar checks/aprovações. Base alterada, sozinha, não revoga autorização: revalide os contratos e checks afetados; mudança material de escopo, artefato ou destino exige resolver a decisão antes da ação dependente. Preserve alterações existentes e evidências históricas. Registre transferência de executor, sem auditoria e execução implementarem simultaneamente a mesma fatia. Handoff preparado não é execução realizada, aprovação de plano não autoriza implementação e autorização de implementação não inclui publicação. Sem autorização da próxima ação, encerre no estado preparado.
-
-## Contexto, especialistas e Graphify
-
-Use as capacidades do host para leitura, edição e execução. Carregue uma skill especialista apenas para a lacuna atual; não pré-carregue a matriz inteira do arquétipo nem uma biblioteca de guardas por padrão. Preserve as três perspectivas de revisão mesmo quando essas skills não estiverem instaladas.
-Uma revisão delegada requer capacidade e autorização aplicáveis, escopo delimitado e evidências; nunca declare independência quando o mesmo agente fez a autorrevisão.
-Graphify é opcional. Consulte apenas grafo com cobertura e atualidade conhecidas; valide achados importantes no código. Atualize quando houver grafo mantido pelo projeto e arquivos indexados alterados, usando comandos suportados pela versão instalada. Não aplique `--force` como rotina. Sem grafo útil, use busca pontual e diff.
-MCP/conectores são opcionais para fontes externas ou inspeção interativa; use o menor conjunto de ferramentas necessário. Testes repetíveis devem ficar como scripts/testes versionáveis quando esse for o contrato do projeto.
-
-## Handoff
-
-Após aprovação real do Gate 5, registre o estado dos cinco gates e encaminhe os artefatos e checks para `release-and-ops-pipeline`, se disponível. Não faça commit, push, publicação ou deploy sem autorização correspondente. A ausência da skill de release não invalida a implementação; informe o encaminhamento pendente. Encerre com alterações, verificações realizadas, limitações e próximo passo autorizado.
+Ao fim do Gate 5, informe alterações, checks executados, limitações e próximo passo. Para publicar, encaminhe a `release-and-ops-pipeline`; sem autorização, pare no estado preparado.

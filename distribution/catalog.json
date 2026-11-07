@@ -1,40 +1,13 @@
 {
   "version": 1,
   "release": "2.0.0",
-  "skills": [
-    "pre-code-pipeline",
-    "execution-pipeline",
-    "writing-pipeline",
-    "audit-and-refactoring-pipeline",
-    "release-and-ops-pipeline",
-    "quarto-expert",
-    "humanizer",
-    "skill-loader"
-  ],
+  "skills": ["pre-code-pipeline", "execution-pipeline", "writing-pipeline", "audit-and-refactoring-pipeline", "release-and-ops-pipeline", "quarto-expert", "skill-loader"],
   "bundles": {
-    "planning": [
-      "pre-code-pipeline"
-    ],
-    "development": [
-      "pre-code-pipeline",
-      "execution-pipeline",
-      "audit-and-refactoring-pipeline"
-    ],
-    "editorial": [
-      "writing-pipeline",
-      "humanizer"
-    ],
-    "research": [
-      "pre-code-pipeline",
-      "execution-pipeline",
-      "writing-pipeline",
-      "quarto-expert"
-    ],
-    "release": [
-      "release-and-ops-pipeline"
-    ],
-    "library": [
-      "skill-loader"
-    ]
+    "planning": ["pre-code-pipeline"],
+    "development": ["pre-code-pipeline", "execution-pipeline", "audit-and-refactoring-pipeline"],
+    "editorial": ["writing-pipeline"],
+    "research": ["pre-code-pipeline", "execution-pipeline", "writing-pipeline", "quarto-expert"],
+    "release": ["release-and-ops-pipeline"],
+    "library": ["skill-loader"]
   }
 }

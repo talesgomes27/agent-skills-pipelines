@@ -2,21 +2,21 @@
 
 [![CI](https://github.com/talesgomes27/agent-skills-pipelines/actions/workflows/ci.yml/badge.svg)](https://github.com/talesgomes27/agent-skills-pipelines/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Candidate](https://img.shields.io/badge/candidate-2.0.0-blue.svg)](distribution/catalog.json)
+[![Release](https://img.shields.io/badge/release-2.0.0-blue.svg)](distribution/catalog.json)
 [![Python](https://img.shields.io/badge/Python-3.9%2B-3776AB.svg?logo=python&logoColor=white)](https://www.python.org/)
 [![Agent Skills](https://img.shields.io/badge/Agent%20Skills-Codex%20%7C%20Claude%20Code%20%7C%20Antigravity-6f42c1.svg)](docs/distribution/architecture.md)
 
 Ecossistema modular de Agent Skills para planejar, implementar, auditar, documentar e entregar projetos com agentes de IA. Os mesmos pacotes podem ser distribuídos para OpenAI Codex, Claude Code, Google Antigravity e adaptadores customizados sem carregar toda a biblioteca no contexto.
 
-Candidata: **2.0.0**, ainda não publicada. A preparação técnica e seus limites estão em [CI híbrida](ci/README.md).
+Release atual: **2.0.0**.
 
 ## O que o projeto oferece
 
-- Cinco pipelines com gates verificáveis, retomada de estado e modos assistido ou contínuo.
+- Quatro pipelines com gates verificáveis, retomada de estado e modos assistido ou contínuo.
 - Especialistas de escrita, Quarto e descoberta de skills externas.
 - Instalação seletiva por skill ou bundle, por cópia ou link simbólico.
 - Catálogo versionado, recibos de instalação e detecção segura de atualizações.
-- Avaliações comportamentais positivas, ambíguas e negativas para cada skill.
+- Prompts de gatilho por skill para conferir a descoberta em cada host.
 - CI em Linux, Windows e macOS.
 - Biblioteca fria consultada sob demanda para reduzir exposição de instruções e consumo de contexto.
 
@@ -30,7 +30,6 @@ Candidata: **2.0.0**, ainda não publicada. A preparação técnica e seus limit
 | [`release-and-ops-pipeline`](release-and-ops-pipeline/SKILL.md) | Saneamento, versão, artefatos, publicação autorizada e smoke tests. |
 | [`writing-pipeline`](writing-pipeline/SKILL.md) | Redação e revisão técnica com preservação de fatos, fontes e formato. |
 | [`quarto-expert`](quarto-expert/SKILL.md) | Autoria, configuração, depuração e migração de projetos Quarto. |
-| [`humanizer`](humanizer/SKILL.md) | Revisão de estilo preservando significado e voz do autor. |
 | [`skill-loader`](skill-loader/SKILL.md) | Descoberta e carregamento limitado de skills em biblioteca externa. |
 
 ## Arquitetura operacional
@@ -61,6 +60,19 @@ Planejamento, execução e auditoria ajustam esforço e documentação ao risco:
 
 ## Instalação
 
+### Claude Code
+
+O repositório é um marketplace de plugins, com um plugin por skill:
+
+```bash
+claude plugin marketplace add talesgomes27/agent-skills-pipelines
+claude plugin install execution-pipeline@agent-skills-pipelines
+```
+
+Troque `execution-pipeline` pelo nome de qualquer skill da tabela acima. As skills ficam com o prefixo do plugin, por exemplo `execution-pipeline:execution-pipeline`.
+
+### Codex, Antigravity e outros hosts
+
 Requisitos: Python 3.9 ou superior e PyYAML.
 
 ```bash
@@ -83,8 +95,8 @@ No Windows, use `.venv\Scripts\python.exe`. Os destinos padrão são:
 Exemplos adicionais:
 
 ```bash
-# Instalar todas, exceto uma implementação já fornecida pelo host
-python3 scripts/skills.py install --agent codex --scope user --all --exclude humanizer
+# Instalar todas, exceto a biblioteca fria
+python3 scripts/skills.py install --agent codex --scope user --all --exclude skill-loader
 
 # Desenvolvimento local com atualização imediata da fonte
 python3 scripts/skills.py install --agent claude --bundle editorial --mode link
@@ -106,7 +118,7 @@ Os bundles agrupam skills por papel; eles não instalam ferramentas, MCPs ou dep
 |---|---|
 | `planning` | Planejamento pré-código. |
 | `development` | Planejamento, execução e auditoria. |
-| `editorial` | Escrita e humanização. |
+| `editorial` | Escrita e revisão técnica. |
 | `research` | Planejamento, execução, escrita e Quarto. |
 | `release` | Release e operações. |
 | `library` | Carregamento da biblioteca fria. |
@@ -124,32 +136,24 @@ python3 scripts/library.py rebuild --root /caminho/da/biblioteca --output /tmp/s
 
 O carregador valida confinamento, existência e identidade do manifesto. Encontrar uma skill não a executa nem concede novas permissões. Veja [manutenção da biblioteca](docs/library-maintenance.md).
 
-## Avaliação e validação
+## Validação
 
 ```bash
 python3 scripts/skills.py doctor
-python3 scripts/evals.py validate
 python3 -m unittest discover -s tests -v
 python3 quarto-expert/scripts/doctor.py
 ```
 
-O harness contém 34 casos para as oito skills e classifica traces A/B capturados por um executor externo. Ele mede ativação, operações proibidas, sinais esperados e, quando fornecidos, tokens, chamadas de ferramenta e latência. Veja [avaliações comportamentais](docs/evals.md) e [verificação de descoberta](docs/distribution/discovery.md).
-
-A [campanha local A–J da MOD-007](docs/audits/modernization-2026-10-28/mod-007.md) preserva separadamente 12 casos, 24 traces reais em fixtures e custos observados com limitações explícitas. A cobertura é completa; o grader estrito conserva uma reprovação de ativação no cenário documental I.
-
-O [workflow de CI híbrida](.github/workflows/ci.yml) define um produtor e sete consumidores para Linux, Windows e macOS. A execução remota dessa candidata permanece pendente; veja [escopo e evidências locais](ci/README.md). Validação estrutural não substitui uma execução real no host, renderização dos formatos solicitados ou revisão humana do resultado.
+O doctor valida estrutura, frontmatter, identidade e links das skills. A CI repete testes, doctor e instalações temporárias em Linux, Windows e macOS. Para saber se o host encontra as skills, siga a [verificação de descoberta](docs/distribution/discovery.md), que traz os prompts de gatilho de cada skill.
 
 ## Documentação
 
-- [Governança documental e fontes canônicas](docs/distribution/architecture.md#governança-documental-vigente)
+- [Changelog](CHANGELOG.md)
 - [Arquitetura de distribuição](docs/distribution/architecture.md)
-- [Protocolo de descoberta](docs/distribution/discovery.md)
-- [Validação da distribuição](docs/distribution/validation.md)
-- [Avaliações comportamentais](docs/evals.md)
+- [Verificação de descoberta](docs/distribution/discovery.md)
 - [Manutenção da biblioteca fria](docs/library-maintenance.md)
-- [Auditorias e decisões de refatoração](docs/audits/)
 
-Os diretórios `docs/audits/legacy/` e `docs/audits/proposals/` preservam histórico e não fazem parte do catálogo ativo. Recursos executáveis de cada pacote são resolvidos relativamente à sua própria pasta; a distribuição não depende de caminhos pessoais.
+Recursos executáveis de cada pacote são resolvidos relativamente à sua própria pasta; a distribuição não depende de caminhos pessoais. Auditorias, experimentos e o harness de avaliações até a MOD-010 estão preservados na tag `archive/mod-2026-10`.
 
 ## Licença
 

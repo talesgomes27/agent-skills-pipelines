@@ -55,5 +55,5 @@ Não instale hooks, substitua `.git/hooks`, altere perfil global ou apague backu
 
 ## Integração
 
-Use `writing-pipeline` quando necessária à revisão textual. Graphify é independente da autoria/renderização e não deve ser requisito para editar `.qmd`. Seu guia compartilhado é passivo e precisa ser conferido para a versão em uso em tarefas explícitas de grafo.
+Use `writing-pipeline` quando necessária à revisão textual. Graphify é independente da autoria/renderização e não deve ser requisito para editar `.qmd`.
 MCP não é obrigatório: CLI Quarto e verificadores locais atendem à configuração/renderização; conectores existentes podem recuperar fontes autorizadas quando necessário. Devolva artefatos, evidências e pendências, sem marcar aprovação humana ou publicar como efeito da compilação.

@@ -1,0 +1,101 @@
+{
+  "name": "agent-skills-pipelines",
+  "description": "Pipelines de planejamento, execução, auditoria e release, e especialistas de escrita e Quarto.",
+  "owner": {
+    "name": "Tales Wilhame Gomes da Silva",
+    "url": "https://github.com/talesgomes27"
+  },
+  "plugins": [
+    {
+      "name": "pre-code-pipeline",
+      "source": "./",
+      "description": "Descoberta, requisitos, arquitetura, scaffold documental e plano verificável.",
+      "version": "2.0.0",
+      "author": {
+        "name": "Tales Wilhame Gomes da Silva"
+      },
+      "license": "MIT",
+      "skills": [
+        "./pre-code-pipeline"
+      ]
+    },
+    {
+      "name": "execution-pipeline",
+      "source": "./",
+      "description": "Implementação de um plano aprovado e validação proporcional à stack.",
+      "version": "2.0.0",
+      "author": {
+        "name": "Tales Wilhame Gomes da Silva"
+      },
+      "license": "MIT",
+      "skills": [
+        "./execution-pipeline"
+      ]
+    },
+    {
+      "name": "writing-pipeline",
+      "source": "./",
+      "description": "Redação e revisão técnica com preservação de fatos, fontes e formato.",
+      "version": "2.0.0",
+      "author": {
+        "name": "Tales Wilhame Gomes da Silva"
+      },
+      "license": "MIT",
+      "skills": [
+        "./writing-pipeline"
+      ]
+    },
+    {
+      "name": "audit-and-refactoring-pipeline",
+      "source": "./",
+      "description": "Reconhecimento, diagnóstico, caracterização e refatoração incremental.",
+      "version": "2.0.0",
+      "author": {
+        "name": "Tales Wilhame Gomes da Silva"
+      },
+      "license": "MIT",
+      "skills": [
+        "./audit-and-refactoring-pipeline"
+      ]
+    },
+    {
+      "name": "release-and-ops-pipeline",
+      "source": "./",
+      "description": "Saneamento, versão, artefatos, publicação autorizada e smoke tests.",
+      "version": "2.0.0",
+      "author": {
+        "name": "Tales Wilhame Gomes da Silva"
+      },
+      "license": "MIT",
+      "skills": [
+        "./release-and-ops-pipeline"
+      ]
+    },
+    {
+      "name": "quarto-expert",
+      "source": "./",
+      "description": "Autoria, configuração, depuração e migração de projetos Quarto.",
+      "version": "2.0.0",
+      "author": {
+        "name": "Tales Wilhame Gomes da Silva"
+      },
+      "license": "MIT",
+      "skills": [
+        "./quarto-expert"
+      ]
+    },
+    {
+      "name": "skill-loader",
+      "source": "./",
+      "description": "Descoberta e carregamento limitado de skills em biblioteca externa.",
+      "version": "2.0.0",
+      "author": {
+        "name": "Tales Wilhame Gomes da Silva"
+      },
+      "license": "MIT",
+      "skills": [
+        "./skill-loader"
+      ]
+    }
+  ]
+}
