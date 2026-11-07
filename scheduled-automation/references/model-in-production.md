@@ -33,7 +33,7 @@ Vale para pontuar um modelo de forma recorrente (uma lista semanal, um score di�
 
 - Defina de onde chegam os dados de cada rodada, como eles são validados antes do treino (esquema, faixa de valores, volume) e o que o job faz se o período novo não chegou.
 - Defina o que é retreinado: só os parâmetros do mesmo modelo, ou também a escolha do modelo e dos hiperparâmetros. Trocar de modelo sozinho é decisão do usuário e fica registrada no plano.
-- O modelo novo substitui o atual só se passar no critério do plano, medido no mesmo período de validação e contra o baseline. Um exemplo de critério: erro agregado não pior que o atual e um limite para a piora nos grupos que importam, como as maiores lojas. Com séries curtas, um critério por loja oscila demais.
+- O modelo novo substitui o atual só se passar no critério do plano, medido com o mesmo protocolo de validação do plano, como as mesmas origens numa série temporal, e contra o baseline. Um exemplo de critério: erro agregado não pior que o atual e um limite para a piora nos grupos que importam, como as maiores lojas. Com séries curtas, um critério por loja oscila demais.
 - Sem critério aprovado, o job grava o candidato e avisa, sem promover.
 - Mantenha a versão anterior pronta e diga como voltar a ela.
 

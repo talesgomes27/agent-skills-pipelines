@@ -6,6 +6,7 @@ Leia só a parte do arquétipo registrado e, em projeto híbrido, a do domínio 
 
 - Separe preparação, análise e publicação, e registre de onde vem cada dado e onde cada resultado é gerado.
 - Em estudo acadêmico, siga a organização do formato pedido.
+- Previsão de séries define no plano a validação por origem móvel: em cada origem, o modelo treina só com o passado e é avaliado no horizonte pedido, como os 3 meses seguintes. O baseline é o ingênuo sazonal, que repete o valor do mesmo mês do ano anterior, e um modelo que não o supera nessa validação não é recomendado. Para comparar séries de escalas diferentes, como lojas grandes e pequenas, use um erro escalado como o MASE; o MAPE fica infinito com venda zero e extremo perto de zero. Diga ao usuário quantas origens a validação usou, porque com poucos anos de dados a diferença entre modelos pode ser ruído. Quando a diferença não se sustenta nessas origens, recomende o modelo mais simples e declare a limitação. Fontes: [validação de séries](https://otexts.com/fpp3/tscv.html), [métodos simples](https://otexts.com/fpp3/simple-methods.html) e [erros escalados](https://otexts.com/fpp3/accuracy.html), do livro *Forecasting: Principles and Practice*.
 - Em Quarto, siga a [checklist](quarto-quality-checklist.md) e defina no Gate 4 idioma, formato, política de execução e pré-requisitos de renderização; o `.qmd` pode ter só cabeçalhos e placeholders.
 
 ## B: aplicações
