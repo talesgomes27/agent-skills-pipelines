@@ -62,7 +62,7 @@ O instalador aplica `--exclude` antes de gerar entradas; não depende de semânt
 
 MCP conecta ferramentas e dados; a distribuição de uma pasta de skill não inicia um servidor. Um framework pode indexar apenas frontmatter do conjunto selecionado e disponibilizar busca e leitura pontuais, preservando instruções do host e escopo do pedido.
 
-`distribution/mcp-tools.example.json` contém definições ilustrativas de ferramentas para esse adaptador. **Não existe servidor implementado ou registrado por esta entrega.** Uma implementação precisa validar IDs contra catálogo, fixar raízes permitidas, limitar resposta e proteger leitura de referências. O corpo da skill não deve virar instrução de sistema nem concessão de permissões. Scripts continuam sujeitos ao executor e às permissões do host. Para catálogo local pequeno, o filesystem nativo já atende; MCP só se justifica quando há necessidade de acesso remoto ou compartilhado.
+Para catálogo local pequeno, o filesystem nativo já atende; MCP só se justifica quando há necessidade de acesso remoto ou compartilhado.
 
 ## Seleção e instalação
 

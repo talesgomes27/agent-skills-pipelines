@@ -12,7 +12,7 @@ Release atual: **1.0.1**.
 
 ## O que o projeto oferece
 
-- Cinco pipelines com gates verificáveis, retomada de estado e modos assistido ou contínuo.
+- Quatro pipelines com gates verificáveis, retomada de estado e modos assistido ou contínuo.
 - Especialistas de escrita, Quarto e descoberta de skills externas.
 - Instalação seletiva por skill ou bundle, por cópia ou link simbólico.
 - Catálogo versionado, recibos de instalação e detecção segura de atualizações.
