@@ -1,6 +1,6 @@
-# Plataformas de apps de dados
+# Plataformas de apps e sites
 
-Use quando o destino é Streamlit Community Cloud, shinyapps.io ou Posit Connect. Os detalhes valem para a documentação oficial de novembro de 2026. Limites e planos mudam sem aviso, então confira a página da plataforma antes de depender de um deles.
+Use quando o destino é Vercel, Netlify, Streamlit Community Cloud, shinyapps.io ou Posit Connect. Os detalhes valem para a documentação oficial de novembro de 2026. Limites e planos mudam sem aviso, então confira a página da plataforma antes de depender de um deles.
 
 ## Em qualquer plataforma
 
@@ -10,6 +10,18 @@ Use quando o destino é Streamlit Community Cloud, shinyapps.io ou Posit Connect
 - O banco precisa ser alcançável da plataforma: confira rede, SSL e lista de IPs permitidos. Abrir o banco para a internet é decisão do usuário.
 - A identidade da release é o commit ou o bundle publicado, com o horário ou ID do deploy que a plataforma mostra.
 - Recuperar é publicar de novo o commit ou bundle anterior, com autorização. Dados que o app gravou não voltam com ele.
+
+## Vercel
+
+A Vercel tem um plugin oficial para agentes (`npx plugins add vercel/vercel-plugin`, citado na documentação); use-o como especialista quando estiver instalado. Em Netlify ou Cloudflare Pages, confira na documentação o equivalente de cada item abaixo.
+
+- Com a integração Git, push ou merge na branch de produção (em geral `main`) gera deploy de produção; outras branches, pull requests e `vercel` sem `--prod` geram preview. O primeiro deploy de um projeto novo é sempre de produção, mesmo vindo de outra branch: peça a autorização dele como produção. Sem domínio próprio ligado, ele fica só no endereço `vercel.app`; ligue o domínio depois de conferir.
+- Cada deploy tem URL própria. Para conferir com a configuração de produção antes de liberar o domínio, desligue a atribuição automática dos domínios de produção e promova manualmente; esse deploy usa variáveis e dados de produção.
+- As variáveis de ambiente são separadas por ambiente (Production, Preview e local), e mudar uma pede novo deploy. O primeiro deploy usa as de Production.
+- Domínio próprio: o domínio raiz usa registro A, o subdomínio usa o CNAME que o painel mostra para o projeto, ou o domínio inteiro passa para os nameservers da Vercel. Antes de trocar os nameservers, copie os registros existentes, como o MX do e-mail. A propagação do DNS leva tempo, e o smoke espera dentro da janela definida.
+- O Instant Rollback aponta os domínios para um deploy de produção anterior, sem restaurar variáveis de ambiente, e desliga a atribuição automática: os pushes seguintes não vão ao ar até desfazer o rollback ou promover outro deploy. No plano Hobby, ele só volta para o deploy imediatamente anterior.
+
+Fontes: [ambientes](https://vercel.com/docs/deployments/environments), [Instant Rollback](https://vercel.com/docs/instant-rollback), [domínio próprio](https://vercel.com/docs/domains/working-with-domains/add-a-domain).
 
 ## Streamlit Community Cloud
 

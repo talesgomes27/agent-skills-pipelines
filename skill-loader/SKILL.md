@@ -1,6 +1,6 @@
 ---
 name: skill-loader
-description: "Localize e carregue uma skill de biblioteca local externa quando solicitada ou necessária a uma etapa autorizada e ainda indisponível no catálogo do agente."
+description: "Use quando o usuário pedir uma skill de uma biblioteca local externa, ou quando uma etapa autorizada precisar de uma skill que não está no catálogo do agente."
 ---
 
 # Skill loader

@@ -6,7 +6,7 @@ Use a linguagem, framework e gerenciador aprovados. Não introduza FastAPI, Reac
 
 Implemente contratos e testes na estrutura real do projeto, com tipos suportados pela linguagem. Para Python, use comandos configurados no projeto; para TS/JS, consulte scripts de `package.json`, lockfile e runner antes de escolher teste, lint, formato, typecheck e build. Não crie um ambiente Python para validar aplicação TS.
 Valide fronteiras relevantes: autenticação/autorização, payloads inválidos, erros de serviços, persistência e transações conforme o escopo. Clientes falsos e mocks devem representar fronteiras identificadas, sem substituir a integração exigida no plano.
-Crie migrações como arquivos revisáveis. Aplicação fica limitada à base de desenvolvimento/teste autorizada, com destino e efeitos conhecidos. Credenciais, MCP e uma ferramenta disponível não concedem autorização de produção.
+Crie migrações como arquivos revisáveis. Aplicação fica limitada à base de desenvolvimento/teste autorizada, com destino e efeitos conhecidos. Aplicar em produção é release e segue a referência de migrações da `release-and-ops-pipeline`. Credenciais, MCP e uma ferramenta disponível não concedem autorização de produção.
 
 ## Dashboards e apps de dados
 
