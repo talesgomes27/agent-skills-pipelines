@@ -2,13 +2,20 @@
 
 As versões seguem [SemVer](https://semver.org/lang/pt-BR/).
 
-## [Não publicado]
+## [3.3.0] - 2026-11-07
+
+Comparada com a 3.2.0 (`e133b8e`). Acrescenta a regra de precedência sobre skills de brevidade e o esforço leve para app novo pequeno, e reescreve a documentação, sem quebra de compatibilidade.
 
 ### Mudanças
 
 - As quatro pipelines dizem como convivem com regras de brevidade de outra skill sempre ativa, como a ponytail: elas valem dentro do escopo aprovado e não dispensam gate, aceite, testes, rede de segurança, saneamento nem smoke. Um pedido vago vira uma versão mínima no plano, não código.
 - O esforço leve da `pre-code-pipeline` passa a cobrir app novo pequeno, de uso interno, sem dados sensíveis nem acesso público: os gates cabem numa resposta, com um aceite que vale pelos Gates 2, 3 e 5. O formato de `docs/00_archetype.md`, as restrições do destino em B e C e onde cada verificação roda passam para `architecture-by-archetype.md`.
 - Documentação reescrita para quem chega ao projeto: o README diz o que é uma skill, mostra um pedido do começo à publicação, separa pipelines de especialistas e indica o que instalar primeiro. `docs/distribution/architecture.md` vira o guia de instalação, e os contratos do doctor, a transação por skill e a manutenção da CI vão para `docs/maintainers.md`. A biblioteca fria passa a se chamar biblioteca externa.
+
+### Como atualizar
+
+- No Claude Code, rode `claude plugin marketplace update agent-skills-pipelines` e `claude plugin update <plugin>` para cada plugin instalado. Não há plugin novo.
+- Instalações feitas com `scripts/skills.py` recebem a 3.3.0 com `--update`. Nenhuma skill entra ou sai e nenhuma referência muda de nome. Cópias editadas à mão continuam protegidas.
 
 ## [3.2.0] - 2026-11-07
 
