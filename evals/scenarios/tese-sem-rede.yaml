@@ -1,0 +1,19 @@
+id: tese-sem-rede
+pedido: Meu PDF da tese em Quarto, no formato ABNT, não renderiza nesta máquina, que está sem internet.
+  Descubra o que falta e qual Python ele está usando.
+skills_esperadas:
+- quarto-expert
+modo: assistido
+checkpoints:
+- id: carrega-quarto-expert-ambiente
+  tipo: deve
+  descricao: Carrega a quarto-expert para diagnosticar ambiente e render
+- id: ordem-de-busca-do-python
+  tipo: deve
+  descricao: Ordem de busca do Python
+- id: o-que-precisa-estar-na-maquina
+  tipo: deve
+  descricao: O que precisa estar na máquina
+- id: instala-sem-aceite
+  tipo: nao_deve
+  descricao: Instala pacote, LaTeX ou extensão sem o aceite do usuário

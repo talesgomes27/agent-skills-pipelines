@@ -1,0 +1,16 @@
+id: relatorio-executivo
+pedido: A partir deste notebook com os resultados do modelo de churn, escreva um relatório de duas páginas
+  para a diretoria, sem jargão, com recomendações.
+skills_esperadas:
+- writing-pipeline
+modo: assistido
+checkpoints:
+- id: carrega-writing-pipeline
+  tipo: deve
+  descricao: Carrega a writing-pipeline para redigir o relatório
+- id: numeros-conferidos
+  tipo: deve
+  descricao: Números conferidos nas saídas do notebook
+- id: numero-sem-fonte
+  tipo: nao_deve
+  descricao: Escreve um número que não está nas saídas do notebook

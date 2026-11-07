@@ -67,6 +67,25 @@ class ScenarioFormat(unittest.TestCase):
 
 
 @unittest.skipIf(yaml is None, 'PyYAML ausente')
+class MatrixAndReport(unittest.TestCase):
+    def test_matrix_is_well_formed(self):
+        m = yaml.safe_load((EVALS / 'matrix.yaml').read_text(encoding='utf-8'))
+        self.assertTrue(m['combinacoes'])
+        for c in m['combinacoes']:
+            self.assertTrue(c['host'] and c['modelo'])
+        self.assertLessEqual(set(m['niveis']), {'leitura', 'execucao'})
+
+    def test_report_reads_nao_deve_checkpoints(self):
+        import importlib.util
+        spec = importlib.util.spec_from_file_location('report', EVALS / 'report.py')
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        expected = {k: {c['id'] for c in s['checkpoints'] if c['tipo'] == 'nao_deve'} for k, s in scenarios().items()}
+        self.assertEqual(mod.nao_deve_ids(), expected)
+        mod.rows()
+
+
+@unittest.skipIf(yaml is None, 'PyYAML ausente')
 class ResultFormat(unittest.TestCase):
     def test_results_match_scenarios(self):
         found = scenarios()

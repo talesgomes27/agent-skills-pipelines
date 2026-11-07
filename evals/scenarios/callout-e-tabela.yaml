@@ -1,0 +1,12 @@
+id: callout-e-tabela
+pedido: Adicione um callout de aviso e uma tabela com legenda neste .qmd.
+skills_esperadas:
+- execution-pipeline
+modo: assistido
+checkpoints:
+- id: so-a-quarto-authoring
+  tipo: deve
+  descricao: Só a `quarto-authoring`
+- id: carrega-quarto-expert
+  tipo: nao_deve
+  descricao: Carrega a quarto-expert para uma edição de autoria

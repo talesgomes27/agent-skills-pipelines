@@ -26,4 +26,11 @@ Responda em português, em até 700 palavras, com estas partes:
 5. Etapas desproporcionais para o tamanho do pedido.
 6. As três melhorias de maior efeito, concretas.
 
+Quando receber os checkpoints de um cenário, termine com um bloco JSON, em ```json, no formato de resultado de `evals/README.md`:
+
+- `nivel` "leitura", `host` "claude-code", o modelo que você é e a data de hoje;
+- as skills que carregou e as paradas para aceite que o fluxo teria;
+- `contexto_lido`: a soma de caracteres e a lista dos arquivos que leu;
+- um item por checkpoint, com `passou`, `falhou` ou `indeterminado` e a evidência (arquivo e trecho).
+
 Cite arquivo e trecho em toda afirmação sobre as skills. Seja crítico e não elogie por elogiar. Diga quais arquivos leu e quais não leu.

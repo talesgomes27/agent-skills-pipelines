@@ -12,6 +12,7 @@ A `release-and-ops-pipeline` dá os gates e as autorizações; esta skill dá os
 ## 1. Antes
 
 - `git fetch` e `main` igual à `origin/main`. As notas vêm da seção "Não publicado" do CHANGELOG; sem ela, de `git log <tag anterior>..main`.
+- Uma release por vez. Os cenários das skills que mudaram desde a tag anterior precisam de resultados da versão nova em `evals/results/<versão>/`, rodados pelo `/cenarios`. Um checkpoint que passava na versão anterior e agora falha bloqueia a release, salvo justificativa escrita no CHANGELOG.
 - Proponha a versão pelo SemVer, olhando essas notas: skill removida ou escopo cortado é MAJOR; skill, regra ou referência nova é MINOR; correção é PATCH. Confirme com o usuário.
 
 ## 2. Preparar
@@ -23,6 +24,7 @@ A `release-and-ops-pipeline` dá os gates e as autorizações; esta skill dá os
 ## 3. Validar
 
 - Os testes, o doctor e `claude plugin validate --strict .`.
+- `/usr/bin/python3 evals/report.py` e a tabela dele nas notas da versão.
 - Instalação de todas as skills por cópia e por link numa pasta temporária, com o doctor no destino.
 - Atualização real: `git archive <tag anterior>` numa pasta temporária, instale os bundles `development` e `research` com o `skills.py` antigo e atualize com o atual usando `--update`. Confira os recibos na versão nova, as skills que entraram e as referências renomeadas, e rode o doctor no destino.
 - Procure no diff token, chave, senha, caminho pessoal e número com formato de CPF.
