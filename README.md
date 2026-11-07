@@ -62,6 +62,8 @@ claude plugin install execution-pipeline@agent-skills-pipelines
 claude plugin install release-and-ops-pipeline@agent-skills-pipelines
 ```
 
+Cada uma dessas três pipelines traz um subagente de revisão que o Claude Code pode chamar sozinho nesse ponto, ou que você chama pelo nome, como `@agent-pre-code-pipeline:plan-reviewer`: `plan-reviewer` revisa o plano antes do seu aceite, `diff-reviewer` revisa o diff no fim da implementação e `sanitation-checker` confere segredos, dados pessoais e arquivos grandes antes de publicar. Eles relatam e não editam.
+
 Acrescente as outras da tabela conforme o trabalho, com o mesmo `install`. Abra uma sessão nova para o Claude Code encontrá-las. No Claude Code, prefira o marketplace ao instalador abaixo: ele atualiza com `claude plugin update`.
 
 ### Codex, Antigravity e outros hosts

@@ -19,6 +19,7 @@ Mudança de comportamento numa skill se testa com os cenários de [verificação
 
 - **Skill.** Cada pasta tem um `SKILL.md` com frontmatter YAML `name` e `description`, conforme a [especificação de Agent Skills](https://agentskills.io/specification). Links para recursos são relativos ao arquivo que os contém e ficam dentro da pasta da skill. Um `SKILL.md` tem no máximo 8.000 caracteres.
 - **Catálogo.** `distribution/catalog.json` usa o schema versão 1, publicado em `distribution/catalog.schema.json`, e a release em SemVer. A CLI confere campos, tipos, versão, unicidade e se os membros dos bundles existem, sem depender de um validador genérico de JSON Schema.
+- **Subagentes do Claude Code.** Ficam em `plugin-agents/` e entram pela chave `agents` da entrada do plugin no marketplace, nunca numa pasta `agents/` na raiz, que todos os plugins com `source: "./"` veriam. O `plan-reviewer` só tem ferramentas de leitura. O `diff-reviewer` e o `sanitation-checker` têm Bash, limitado à leitura só pelo texto; a proteção real são as regras `ask` e `deny` da sessão, descritas no guia de instalação. Os três são autocontidos, sem ler arquivos fora do projeto do usuário, e não chegam aos outros hosts pelo instalador. No Claude Code 2.1.319, `claude plugin details` mostra "Agents (0)" para eles, embora carreguem na sessão; confira com uma sessão.
 - **`agents/openai.yaml`** é opcional, para interface, política e ferramentas no Codex. Nenhuma skill exige MCP nem bloqueia a invocação implícita.
 
 ## O que o doctor confere
