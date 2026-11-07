@@ -9,7 +9,7 @@ Implemente o plano em fatias pequenas e verificáveis, com evidência de que fun
 
 ## Antes de começar
 
-1. Leia as instruções locais (`AGENTS.md`, `CLAUDE.md`, `GEMINI.md`), o estado do projeto e o plano aprovado: `docs/05-implementation-plan.md` vindo do pré-código, ou o plano e as restrições encaminhados por uma auditoria. Leia requisitos e arquitetura só nas partes que a tarefa usa.
+1. Leia as instruções locais (`AGENTS.md`, `CLAUDE.md`, `GEMINI.md`), o estado do projeto e o plano aprovado: `docs/05-implementation-plan.md` ou o plano aprovado na conversa, vindos do pré-código, ou o plano e as restrições encaminhados por uma auditoria. Leia requisitos e arquitetura só nas partes que a tarefa usa.
 2. Confirme que o plano foi aprovado e que implementar está autorizado. Vale a aprovação registrada no estado do projeto ou dada pelo usuário na conversa. Sem plano aprovado, pare e encaminhe para `pre-code-pipeline`.
 3. Use o arquétipo registrado em `docs/00_archetype.md` ou no contrato: A = dados/Quarto, B = software/APIs, C = CLI/automação. Sem registro, infira pelo contexto quando for óbvio (um script de linha de comando é C) e diga que inferiu; pergunte só quando a escolha muda uma decisão.
 4. Descubra os comandos reais em manifests, lockfiles, scripts e CI. Rode os checks afetados antes de mudar qualquer coisa e anote o que já falhava. Falha preexistente fora do escopo não bloqueia a entrega, mas aparece no relatório separada das falhas novas.
