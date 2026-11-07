@@ -1,6 +1,6 @@
 ---
 name: scheduled-automation
-description: "Use quando o trabalho envolve um job que roda sem ninguém olhando: script ou workflow agendado (cron, schedule do GitHub Actions, agendador de nuvem ou do servidor), ETL recorrente, bot que envia mensagens ou retreino periódico de modelo."
+description: "Use quando o trabalho envolve um job que roda sem ninguém olhando: script ou workflow agendado (cron, schedule do GitHub Actions, agendador de nuvem ou do servidor), ETL recorrente, bot que envia mensagens, pontuação ou retreino periódico de modelo."
 ---
 
 # Automações agendadas
@@ -35,9 +35,9 @@ Responda por escrito antes de implementar, no plano da `pre-code-pipeline` ou na
 - Depois, confira a primeira execução no horário previsto, no fuso do agendador. Se ela está distante, o usuário pode aceitar pela execução manual, e a agendada fica como pendência com o horário esperado e como conferir.
 - Deixe escrito como pausar o agendamento sem apagar o estado e como voltar à versão anterior do job.
 
-## Retreino de modelo
+## Modelo em produção
 
-Retreino é um job sobre um modelo de análise. Siga também [retreino agendado](references/model-retraining.md).
+Pontuar um modelo de forma recorrente, servi-lo ou retreiná-lo é um job sobre um modelo de análise. Siga também [modelo em produção](references/model-in-production.md).
 
 ## Servidor próprio
 

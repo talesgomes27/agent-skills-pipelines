@@ -4,7 +4,7 @@ Mudança de esquema ou de dados num banco com dados reais é uma publicação co
 
 ## Antes
 
-- Use a ferramenta de migração do projeto (Alembic, Django, Prisma, Flyway ou equivalente) e revise o SQL que ela gera.
+- Use a ferramenta de migração do projeto (Alembic, Django, Prisma, Flyway ou equivalente) e revise o SQL que ela gera. Com Alembic, `alembic upgrade head --sql` mostra o SQL sem aplicar, o autogenerate não detecta tudo (renomeações, por exemplo) e, num banco que já existia sem migrações, `alembic stamp` marca a versão atual antes da primeira migração.
 - Faça backup e teste a restauração antes da mudança: backup que nunca foi restaurado não é recuperação.
 - Ensaie a migração numa cópia com volume parecido e meça duração e travas.
 - Defina a janela, quem é avisado e o critério para abortar.
@@ -25,6 +25,7 @@ Uma tabela nova que nada usa ainda é o caso simples: a etapa 1 basta.
 ## Travas e tempo
 
 - Mudança que reescreve a tabela ou cria índice pode travar leituras e escritas. No Postgres, `CREATE INDEX CONCURRENTLY` evita bloquear escritas, mas não roda dentro de uma transação, e `lock_timeout` faz a migração desistir em vez de esperar sem limite.
+- Uma chave estrangeira nova também trava a tabela referenciada. No Postgres, criá-la com `NOT VALID` e depois rodar `VALIDATE CONSTRAINT` reduz a trava.
 - Confira na documentação da versão do banco quais operações reescrevem a tabela.
 
 Na release, a migração de expandir roda antes do deploy do código que depende dela, e a de contrair só depois que nenhuma versão no ar usa o antigo.

@@ -42,7 +42,7 @@ Dado pessoal é qualquer informação ligada a uma pessoa identificada ou identi
 - Mande só o necessário e, quando der, sem identificadores. Num app com LLM, os documentos e as perguntas dos usuários também são dados enviados ao provedor.
 - Documento interno pode não ter dados pessoais e ainda ser confidencial. O envio a terceiros pede a decisão do usuário nos dois casos; pergunte também se os documentos têm dados de pessoas.
 - Perguntas que um app guarda são dados de quem pergunta. O plano define se ficam, por quanto tempo, quem as lê e como os usuários são avisados.
-- Uma lista operacional com dados pessoais, como os clientes que o CRM vai contatar, vai por um canal de acesso restrito e só com os campos que quem recebe usa. O plano diz quem recebe e por quanto tempo a lista vale. Contato direto com as pessoas da lista respeita as preferências que elas já registraram, como pedir para não ser contatadas; confirme com o usuário de onde vêm essas preferências.
+- Uma lista operacional com dados pessoais, como os clientes que o CRM vai contatar, vai por um canal de acesso restrito, como o próprio CRM ou uma pasta com acesso controlado, em vez de anexo de e-mail, e só com os campos que quem recebe usa. O plano diz quem recebe e por quanto tempo a lista vale. Contato direto com as pessoas da lista respeita as preferências que elas já registraram, como pedir para não ser contatadas; confirme com o usuário de onde vêm essas preferências.
 
 ## Coleta
 

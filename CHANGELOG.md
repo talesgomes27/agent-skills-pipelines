@@ -6,6 +6,11 @@ As versões seguem [SemVer](https://semver.org/lang/pt-BR/).
 
 ### Novo
 
+- `execution-pipeline/references/llm-apps.md`: apps com LLM, com provedor e modelo fixados, chave no cofre e limite de gasto, login corporativo, respostas que citam a origem e dizem quando não sabem, texto dos documentos como entrada não confiável, conjunto de avaliação rodado a cada mudança e operação.
+- `audit-and-refactoring-pipeline/references/inherited-notebooks.md`: reconhecimento de uma pasta de notebooks herdada, com mapa de entradas e saídas sem executar, execução só numa cópia isolada e entrega em três listas.
+- Seção "Sites e APIs" em `execution-pipeline/references/archetype-b.md`: segurança mínima, acessibilidade, desempenho, SEO e formulário, com apontamentos para as skills oficiais da Vercel e para o `/security-review` do host.
+- Receita de relatório executivo em `writing-pipeline/references/document-types.md`.
+
 - Skill `personal-data`, para trabalho com dados de pessoas: inventário dos campos pessoais e sensíveis, minimização e pseudonimização com chave (hash simples de CPF é reversível), saídas só com agregados e grupos pequenos omitidos, onde os dados ficam, envio a provedores externos como decisão do usuário, coleta e vazamento. A referência `lgpd-basics.md` traz os pontos da Lei 13.709/2018 que a skill usa. Entra nos bundles `development` e `research`.
 
 - `release-and-ops-pipeline/references/db-migrations.md`: migração de banco em produção com backup testado, ensaio, etapas compatíveis (expandir, publicar, migrar, contrair), travas e como voltar. A release e a referência B da execution apontam para ela.
@@ -16,6 +21,8 @@ As versões seguem [SemVer](https://semver.org/lang/pt-BR/).
 
 ### Mudanças
 
+- `scheduled-automation/references/model-retraining.md` vira `model-in-production.md` e passa a cobrir a passagem do notebook para o pipeline, o mesmo código de features no treino e na pontuação, artefato e versões, lote ou API, e limiar e entrega da lista, além do retreino. A descrição da skill passa a citar a pontuação periódica.
+- O README lista as skills oficiais da Vercel e da Anthropic, com os comandos de instalação.
 - `pre-code-pipeline` ganha a entrega pontual: análise, script ou documento entregue uma vez é planejado numa só resposta, com um aceite, e entregue pela `execution-pipeline`.
 - O caminho rápido da `execution-pipeline` passa a aceitar leitura de páginas ou APIs públicas, com as regras de coleta externa.
 - Na `release-and-ops-pipeline`, site estático só vai para a referência de GitHub Pages quando o destino é o GitHub Pages; Vercel e Netlify entram em app ou serviço.
