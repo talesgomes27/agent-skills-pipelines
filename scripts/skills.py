@@ -16,8 +16,8 @@ STATE = '.meta-skills-install.json'
 AGENTS = ('codex', 'claude', 'antigravity', 'antigravity-cli')
 COMPONENTS = ('SKILL.md', 'references', 'scripts', 'examples', 'assets', 'agents')
 IGNORE = shutil.ignore_patterns('__pycache__', '*.pyc', '.quarto', '_site', '.git', '.venv')
-# shortcut: teto acima das pipelines ainda não reescritas; baixar para 6000 quando as quatro estiverem enxutas.
-MAX_SKILL_CHARS = 12000
+# Teto logo acima da maior skill depois da reescrita, para que nenhuma volte a crescer.
+MAX_SKILL_CHARS = 8000
 
 
 def read_json(path):
