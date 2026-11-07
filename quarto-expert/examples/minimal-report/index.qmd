@@ -1,19 +1,19 @@
 ---
-title: "Relatorio Minimo Exemplo"
+title: "Relatório Mínimo de Exemplo"
 author: "Tales Gomes"
 date: last-modified
 ---
 
-## Introducao {#sec-intro}
+## Introdução {#sec-intro}
 
-Este e um relatorio minimo funcional. A referencia @sec-intro demonstra
-referencia cruzada nativa do Quarto.
+Este é um relatório mínimo funcional. A referência @sec-intro demonstra
+a referência cruzada nativa do Quarto.
 
-## Analise {#sec-analise}
+## Análise {#sec-analise}
 
 ```{python}
 #| label: fig-exemplo
-#| fig-cap: "Grafico de dispersao sintetico."
+#| fig-cap: "Gráfico de dispersão sintético."
 #| fig-alt: "Três pontos sintéticos crescentes, sem dados de estudo real."
 #| echo: false
 import matplotlib.pyplot as plt
@@ -23,4 +23,4 @@ ax.plot([1, 2, 3], [4, 5, 6], marker='o')
 plt.show()
 ```
 
-Conforme @fig-exemplo, a tendencia e linear.
+Conforme @fig-exemplo, os pontos crescem de forma linear.

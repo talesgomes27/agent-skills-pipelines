@@ -5,7 +5,7 @@ project:
 lang: pt-BR
 
 book:
-  title: "Titulo da Dissertacao"
+  title: "Título da Dissertação"
   author: "Nome do Autor"
   date: last-modified
   chapters:
@@ -17,6 +17,7 @@ book:
     - references.qmd
 
 bibliography: references.bib
+csl: associacao-brasileira-de-normas-tecnicas.csl
 
 format:
   typst:

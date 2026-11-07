@@ -289,6 +289,27 @@ class InstallerTests(unittest.TestCase):
         self.assertIn('Release atual: **' + release + '**.', readme)
         self.assertIn('release-' + release + '-blue.svg', readme)
 
+    def test_repo_descriptions_follow_house_rules(self):
+        import yaml
+        repo = Path(__file__).resolve().parents[1]
+        for name in cli.read_json(repo / 'distribution/catalog.json')['skills']:
+            text = (repo / name / 'SKILL.md').read_text(encoding='utf-8')
+            data = yaml.safe_load(text.split('---', 2)[1])
+            with self.subTest(skill=name):
+                self.assertTrue(data['description'].startswith('Use quando '))
+                self.assertLessEqual(len(data['description']), 1024)
+
+    def test_description_over_1024_characters_blocks_doctor(self):
+        (self.repo / 'alpha/SKILL.md').write_text('---\nname: alpha\ndescription: ' + 'x' * 1025 + '\n---\nBody\n', encoding='utf-8')
+        self.assertEqual(self.run_cli('doctor', '--skill', 'alpha')[0], 1)
+
+    def test_link_checker_extracts_clean_urls(self):
+        spec = importlib.util.spec_from_file_location('check_links', Path(__file__).resolve().parents[1] / 'scripts/check_links.py')
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        text = 'Veja [doc](https://a.test/x), e https://b.test/y. Wiki (https://w.test/Foo_(bar)). `https://example.com/z` http://localhost:8000/'
+        self.assertEqual(mod.extract(text), ['https://a.test/x', 'https://b.test/y', 'https://w.test/Foo_(bar)'])
+
     def test_skill_size_limit_boundary(self):
         self.assertEqual(cli.MAX_SKILL_CHARS, 10000)
         head = '---\nname: alpha\ndescription: Edit a selected document.\n---\n'

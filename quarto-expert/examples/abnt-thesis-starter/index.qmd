@@ -1,8 +1,8 @@
 ---
-title: "Titulo da Dissertacao"
+title: "Título da Dissertação"
 ---
 
-# Introducao {#sec-intro}
+# Apresentação {.unnumbered}
 
-Texto introdutorio. Confira o manual institucional e os elementos exigidos antes de completar
+Texto de apresentação. Confira o manual institucional e os elementos exigidos antes de completar
 o documento. Este exemplo não certifica conformidade normativa.

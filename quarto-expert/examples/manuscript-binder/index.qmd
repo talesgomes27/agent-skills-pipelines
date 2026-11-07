@@ -1,11 +1,11 @@
 ---
-title: "Artigo Cientifico Reprodutivel"
+title: "Artigo Científico Reprodutível"
 author: "Nome do Autor"
 ---
 
-## Introducao
+## Introdução
 
-Texto principal do artigo.
+Texto principal do artigo, com uma citação de exemplo [@exemplo2024].
 
 ## Resultados
 
@@ -13,6 +13,6 @@ Conforme @fig-roc:
 
 {{< embed notebooks/01-analise.qmd#fig-roc >}}
 
-## Metodos
+## Métodos
 
-Detalhes reproduziveis em `notebooks/01-analise.qmd`.
+Detalhes reproduzíveis em `notebooks/01-analise.qmd`.

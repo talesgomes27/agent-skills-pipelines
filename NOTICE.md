@@ -27,3 +27,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
+
+## citation-style-language/styles
+
+`quarto-expert/examples/abnt-thesis-starter/associacao-brasileira-de-normas-tecnicas.csl` é cópia sem alterações do arquivo de mesmo nome no repositório [citation-style-language/styles](https://github.com/citation-style-language/styles), no commit `af0aea3fffd44fe798cce9285598d0d5cf62ef23` (conferido em 7 de novembro de 2026). Ele é distribuído sob a licença [Creative Commons Attribution-ShareAlike 3.0](https://creativecommons.org/licenses/by-sa/3.0/), declarada no próprio arquivo, com os créditos dos autores no bloco `<info>`.
