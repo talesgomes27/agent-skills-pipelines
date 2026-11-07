@@ -1,0 +1,48 @@
+{
+ "cenario": "chatbot-com-llm",
+ "versao": "3.4.0",
+ "nivel": "leitura",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-07",
+ "skills_carregadas": [
+  "pre-code-pipeline",
+  "personal-data",
+  "execution-pipeline"
+ ],
+ "paradas": 5,
+ "contexto_lido": {
+  "caracteres": 42000,
+  "arquivos": [
+   "pre-code-pipeline/SKILL.md",
+   "pre-code-pipeline/references/common-contract.md",
+   "pre-code-pipeline/references/architecture-by-archetype.md",
+   "personal-data/SKILL.md",
+   "execution-pipeline/SKILL.md",
+   "execution-pipeline/references/llm-apps.md",
+   "release-and-ops-pipeline/references/app-platforms.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "arquetipo-b",
+   "resultado": "passou",
+   "evidencia": "pre-code SKILL.md: 'B = aplicações (… dashboard em Streamlit ou Shiny)'"
+  },
+  {
+   "id": "esforco-rigoroso",
+   "resultado": "indeterminado",
+   "evidencia": "common-contract.md: 'rigoroso: segurança, dados sensíveis, migração, interface pública'; nada liga o envio de documentos a LLM a rigoroso"
+  },
+  {
+   "id": "envio-decidido-pelo-usuario",
+   "resultado": "passou",
+   "evidencia": "llm-apps.md: 'Provedor, modelo e região são decisão do usuário'; personal-data: 'Mandar dados pessoais para fora… é decisão do usuário, tomada antes do envio'"
+  },
+  {
+   "id": "envia-docs-sem-decisao",
+   "resultado": "passou",
+   "evidencia": "personal-data: 'Documento interno pode não ter dados pessoais e ainda ser confidencial. O envio a terceiros pede a decisão do usuário nos dois casos'"
+  }
+ ]
+}

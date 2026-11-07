@@ -43,7 +43,7 @@ Só um executor por fatia: auditoria e execução não implementam a mesma fatia
 - **Assistido** (padrão): a pipeline para, com `aguardando_aprovacao`, nos gates que ela marca para aceite; nos outros, apresenta e segue, e eles ficam `aprovado` com o aceite seguinte.
 - **Contínuo**: com a sequência autorizada de ponta a ponta, a pipeline avança sem pedir de novo e registra de qual aprovação veio cada passo.
 
-Em qualquer modo, pare quando o escopo mudar, surgir uma decisão bloqueante, houver conflito com trabalho existente, risco de perda ou um efeito externo fora do autorizado. Nenhum modo autoriza commit, push, publicação ou deploy.
+Paradas condicionais, em qualquer modo: pare quando o escopo mudar, surgir uma decisão bloqueante, houver conflito com trabalho existente, risco de perda ou um efeito externo fora do autorizado. Nenhum modo autoriza commit, push, publicação ou deploy; na `release-and-ops-pipeline`, cada um desses efeitos tem autorização própria, por ação.
 
 ## Estado e retomada
 

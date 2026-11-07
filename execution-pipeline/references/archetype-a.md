@@ -2,11 +2,11 @@
 
 Use o tipo de estudo, dados, stack e formatos aprovados. Analytics descritivo não exige estimador, SHAP ou resíduos de regressão; Python, R, `.ipynb` e `.qmd` são escolhas do contrato.
 
-## Gate 1: núcleo testável
+## EX-1: núcleo testável
 
 Separe transformação reutilizável de apresentação quando isso ajudar os testes. Preserve esquemas, unidades, chaves e tratamento de nulos/outliers aprovado. Não crie wrappers sem propósito; mantenha estruturas nativas que garantam contratos, inclusive `sklearn.pipeline.Pipeline` e transformers quando necessários à validação.
 
-## Gate 2: execução e rigor analítico
+## EX-2: execução e rigor analítico
 
 - Preserve fontes brutas e a política de acesso. Com dados de pessoas, siga a skill `personal-data`: identificadores fora da análise quando não forem necessários e saídas só com agregados. Identifique versão/snapshot dos dados, ambiente, parâmetros e orçamento computacional. Use amostra somente quando apropriada e registre sua cobertura.
 - Execute notebook em kernel limpo ou documento no motor configurado; não dependa da ordem interativa de células. Para execução de `.ipynb`, nbclient ou nbconvert são opções se disponíveis. Um `.qmd` executável não exige notebook adicional.
@@ -15,13 +15,13 @@ Separe transformação reutilizável de apresentação quando isso ajudar os tes
 - Preserve verificação de pressupostos e diagnóstico adequados ao método. Use SHAP, resíduos ou outra explicabilidade somente quando responderem a uma questão do estudo.
 - Contratos podem ser verificados por código, SQL ou biblioteca apropriada existente. Pandera/Patito não são instalações obrigatórias para toda análise.
 
-## Gate 3: visualizações
+## EX-3: visualizações
 
 Use a biblioteca aprovada e confira valores, unidades, ordenação, legenda e consistência narrativa. Não substitua Seaborn/Plotly exigidos por outra biblioteca devido à ausência de uma skill.
 Exportações raster de publicação usam resolução prevista, frequentemente 300 DPI; formatos vetoriais seguem o destino. DPI não é critério universal de gráfico interativo. Aspecto, grid e bordas dependem do tipo de figura, sem impor eixo quadrado a toda curva.
 Confira texto alternativo, contraste e legibilidade. Salve em `reports/figures/` se esse for o contrato; não versione dados ou saídas sensíveis automaticamente.
 
-## Gates 4 e 5: relatório e reprodução
+## EX-4 e EX-5: relatório e reprodução
 
 Estruture o relatório conforme perguntas, evidências e decisões aprovadas; use CRISP-ML(Q), IMRAD ou outro formato solicitado sem inserir etapas de ML que não se apliquem. Idioma e destino de publicação vêm do projeto.
 Para Quarto, use configuração e sintaxe suportadas pelo formato; quando necessário, consulte pela descoberta do host a `quarto-authoring` da Posit, para autoria, ou a `quarto-expert`, para ambiente, render e ABNT, sem depender de paths de outra instalação. Em migração para Quarto, preserve o original e compare código, resultados, bibliografia, labels, navegação e assets no formato novo; renomear arquivo ou converter notebook não prova equivalência. Para diagramas executáveis em `.qmd`, use `{mermaid}`/`{dot}` e as opções do motor, labels e legendas quando houver referências cruzadas.

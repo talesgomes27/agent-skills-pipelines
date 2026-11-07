@@ -1,0 +1,35 @@
+{
+ "cenario": "relatorio-executivo",
+ "versao": "3.4.0",
+ "nivel": "leitura",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-07",
+ "skills_carregadas": [
+  "writing-pipeline"
+ ],
+ "paradas": 0,
+ "contexto_lido": {
+  "caracteres": 6000,
+  "arquivos": [
+   "writing-pipeline/SKILL.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "carrega-writing-pipeline",
+   "resultado": "passou",
+   "evidencia": "writing-pipeline/SKILL.md description: 'redigir... um documento técnico ou de negócio, como... relatório'"
+  },
+  {
+   "id": "numeros-conferidos",
+   "resultado": "passou",
+   "evidencia": "writing-pipeline/SKILL.md Fluxo 2: 'Confira as afirmações materiais em código, configurações, saídas ou fontes fornecidas'"
+  },
+  {
+   "id": "numero-sem-fonte",
+   "resultado": "passou",
+   "evidencia": "writing-pipeline/SKILL.md: 'Não substitua um valor desconhecido por um número plausível'"
+  }
+ ]
+}

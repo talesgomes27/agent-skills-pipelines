@@ -1,6 +1,6 @@
 # Checklist de Qualidade: Relatórios Quarto & Data Storytelling (v2.1)
 
-Consulte esta checklist nos Gates 3 e 4 e na revisão final quando houver Quarto no projeto do **Arquétipo A (Data Science, Analytics & ML)**. Aplique os itens pertinentes ao idioma, gênero, análise e formatos aprovados. Requisitos institucionais, contratos, acessibilidade e verificações técnicas necessárias continuam obrigatórios; não acrescente seções, modelos, figuras ou configurações apenas para cumprir um exemplo.
+Consulte esta checklist em PC-3 e PC-4 e na revisão final quando houver Quarto no projeto do **Arquétipo A (Data Science, Analytics & ML)**. Aplique os itens pertinentes ao idioma, gênero, análise e formatos aprovados. Requisitos institucionais, contratos, acessibilidade e verificações técnicas necessárias continuam obrigatórios; não acrescente seções, modelos, figuras ou configurações apenas para cumprir um exemplo.
 
 ## 1. Configuração de Documento e Metadados (`_quarto.yml`)
 - **Idioma:** Defina `lang` conforme o idioma do projeto; use `lang: pt-BR` quando português brasileiro for requerido, preservando traduções e rótulos aplicáveis.

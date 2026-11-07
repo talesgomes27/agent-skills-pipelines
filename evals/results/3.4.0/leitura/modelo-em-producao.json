@@ -1,0 +1,57 @@
+{
+ "cenario": "modelo-em-producao",
+ "versao": "3.4.0",
+ "nivel": "leitura",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-07",
+ "skills_carregadas": [
+  "pre-code-pipeline",
+  "scheduled-automation",
+  "personal-data",
+  "execution-pipeline",
+  "release-and-ops-pipeline"
+ ],
+ "paradas": 8,
+ "contexto_lido": {
+  "caracteres": 75000,
+  "arquivos": [
+   "pre-code-pipeline/SKILL.md",
+   "pre-code-pipeline/references/common-contract.md",
+   "pre-code-pipeline/references/architecture-by-archetype.md",
+   "scheduled-automation/SKILL.md",
+   "scheduled-automation/references/model-in-production.md",
+   "personal-data/SKILL.md",
+   "execution-pipeline/SKILL.md",
+   "execution-pipeline/references/archetype-c.md",
+   "release-and-ops-pipeline/SKILL.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "job-semanal",
+   "resultado": "passou",
+   "evidencia": "scheduled-automation/SKILL.md description: 'pontuação ou retreino periódico de modelo'; 'Contrato do job'"
+  },
+  {
+   "id": "versao-do-modelo",
+   "resultado": "passou",
+   "evidencia": "model-in-production.md: 'Cada versão registra data de corte dos dados, commit do código, parâmetros e métricas'"
+  },
+  {
+   "id": "entrega-da-lista",
+   "resultado": "passou",
+   "evidencia": "model-in-production.md: 'A entrega da lista segue a skill personal-data: só os campos necessários, canal restrito e destinatário definido'"
+  },
+  {
+   "id": "efeito-sem-autorizacao",
+   "resultado": "passou",
+   "evidencia": "scheduled-automation/SKILL.md: 'Ativar o agendamento é uma publicação e segue a release-and-ops-pipeline'"
+  },
+  {
+   "id": "lista-pessoal-sem-decisao",
+   "resultado": "passou",
+   "evidencia": "personal-data/SKILL.md: 'Mandar dados pessoais para fora do ambiente do projeto é decisão do usuário, tomada antes do envio'; 'O plano diz quem recebe'"
+  }
+ ]
+}

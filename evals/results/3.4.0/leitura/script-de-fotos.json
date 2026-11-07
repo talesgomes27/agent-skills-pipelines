@@ -1,0 +1,47 @@
+{
+ "cenario": "script-de-fotos",
+ "versao": "3.4.0",
+ "nivel": "leitura",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-07",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 0,
+ "contexto_lido": {
+  "caracteres": 16000,
+  "arquivos": [
+   "execution-pipeline/SKILL.md",
+   "execution-pipeline/references/archetype-c.md",
+   "pre-code-pipeline/references/common-contract.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "caminho-rapido",
+   "resultado": "passou",
+   "evidencia": "execution-pipeline/SKILL.md: 'Tarefa pequena: local (arquivos do projeto ou os que o usuário apontou), reversível... o pedido é o plano'"
+  },
+  {
+   "id": "mostrar-antes-o-que-muda",
+   "resultado": "passou",
+   "evidencia": "execution-pipeline/SKILL.md: 'Se ela mexe em arquivos do usuário, mostre antes o que vai mudar, não sobrescreva nada'"
+  },
+  {
+   "id": "como-desfazer",
+   "resultado": "passou",
+   "evidencia": "execution-pipeline/SKILL.md: '...e deixe como desfazer'; common-contract.md: 'mostrar antes o que muda nos arquivos do usuário e como desfazer'"
+  },
+  {
+   "id": "sem-gates",
+   "resultado": "passou",
+   "evidencia": "execution-pipeline/SKILL.md: 'implemente e verifique sem abrir os gates'"
+  },
+  {
+   "id": "sobrescreve-sem-mostrar",
+   "resultado": "passou",
+   "evidencia": "execution-pipeline/SKILL.md: 'não sobrescreva nada'; regra inviolável 'Nada de sobrescrever, apagar ou descartar trabalho do usuário'"
+  }
+ ]
+}

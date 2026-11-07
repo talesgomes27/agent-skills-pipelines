@@ -1,0 +1,48 @@
+{
+ "cenario": "dashboard-streamlit",
+ "versao": "3.4.0",
+ "nivel": "leitura",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-07",
+ "skills_carregadas": [
+  "pre-code-pipeline",
+  "execution-pipeline",
+  "release-and-ops-pipeline"
+ ],
+ "paradas": 8,
+ "contexto_lido": {
+  "caracteres": 60000,
+  "arquivos": [
+   "pre-code-pipeline/SKILL.md",
+   "pre-code-pipeline/references/common-contract.md",
+   "pre-code-pipeline/references/architecture-by-archetype.md",
+   "execution-pipeline/SKILL.md",
+   "execution-pipeline/references/archetype-b.md",
+   "release-and-ops-pipeline/SKILL.md",
+   "release-and-ops-pipeline/references/app-platforms.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "restricoes-plataforma",
+   "resultado": "passou",
+   "evidencia": "pre-code-pipeline/SKILL.md PC-3: 'confira na documentação oficial do destino as restrições que mudam a arquitetura'; os IPs só estão em release-and-ops-pipeline/references/app-platforms.md, sem apontamento do pre-code"
+  },
+  {
+   "id": "camadas-de-acesso",
+   "resultado": "indeterminado",
+   "evidencia": "release-and-ops-pipeline/references/app-platforms.md: 'Restringir quem abre o app na plataforma e autenticar dentro do app... são camadas diferentes'; o pre-code não manda lê-lo"
+  },
+  {
+   "id": "smoke-navegador",
+   "resultado": "passou",
+   "evidencia": "execution-pipeline/references/archetype-b.md: 'asserção sobre um valor exibido depois de mudar um filtro'; app-platforms.md Smoke"
+  },
+  {
+   "id": "push-sem-autorizacao",
+   "resultado": "passou",
+   "evidencia": "execution-pipeline/SKILL.md: 'Implementar não inclui commit, push, publicação ou deploy'; app-platforms.md: 'o push é o deploy, então a autorização de publicação vem antes'"
+  }
+ ]
+}

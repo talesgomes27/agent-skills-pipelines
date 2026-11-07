@@ -2,7 +2,7 @@
 
 Use a linguagem, framework e gerenciador aprovados. Não introduza FastAPI, React ou Tailwind apenas por constarem de uma biblioteca de skills.
 
-## Gates 1 e 2
+## EX-1 e EX-2
 
 Implemente contratos e testes na estrutura real do projeto, com tipos suportados pela linguagem. Para Python, use comandos configurados no projeto; para TS/JS, consulte scripts de `package.json`, lockfile e runner antes de escolher teste, lint, formato, typecheck e build. Não crie um ambiente Python para validar aplicação TS.
 Valide fronteiras relevantes: autenticação/autorização, payloads inválidos, erros de serviços, persistência e transações conforme o escopo. Clientes falsos e mocks devem representar fronteiras identificadas, sem substituir a integração exigida no plano.
@@ -24,13 +24,13 @@ Sem a skill citada em cada item, os itens desta seção são o mínimo, junto co
 
 Streamlit, Shiny, Dash e similares são B com dados de A. Use a skill oficial do framework quando instalada: `developing-with-streamlit` para Streamlit, `shiny-for-python` para Shiny em Python e, para Shiny em R, as da Posit (`shiny-bslib` para layout, `shiny-r-optimize` para desempenho). Elas cobrem estrutura, cache, reatividade e testes do framework; esta referência só acrescenta o que a pipeline exige. Sem a skill, informe o comando de instalação (`streamlit skills`, `uvx library-skills` ou o marketplace `posit-dev/skills`); instalar fica a critério do usuário. Atualizar o framework ou adotar a ferramenta nova que uma skill oficial recomenda é mudança de dependência e pede o aceite do usuário. Shiny em R não tem skill oficial de testes: `testServer()` testa a lógica dos módulos e `shinytest2` a interação. Separe consulta e transformação da interface para testá-las sem a UI, e confira os números exibidos com as regras de A: filtros, unidades, totais e nulos. Teste a interação pelo runner do framework se o projeto já usa um, ou por navegador, com asserção sobre um valor exibido depois de mudar um filtro. Cache e estado de sessão mudam o que cada usuário vê: confira a invalidação quando os dados mudam. Exportação de tabela é saída de dados e segue a política de acesso aprovada. Antes de otimizar, meça o tempo da interação lenta e repita a mesma medida depois.
 
-## Gate 3
+## EX-3
 
 - Com UI: preserve design system e framework, confira navegação, teclado, estados de erro/carregamento e responsividade do escopo alterado.
 - Sem UI: valide status codes, serialização, erros e contratos de API; OpenAPI/Swagger somente quando aplicáveis ao protocolo.
 - Para navegador, aproveite o runner existente; use locators e asserções que aguardam o estado esperado. Não use pausa fixa ou `networkidle` como comprovação genérica de prontidão.
 
-## Gates 4 e 5
+## EX-4 e EX-5
 
 Documente setup realista, configuração, uso e limites operacionais. Exemplos de API devem corresponder ao contrato implementado, sem tokens reais.
 Execute os checks obrigatórios da stack, integrações e build. Cobertura ajuda a identificar lacunas quando prevista, mas percentual ou mocks não provam requisitos atendidos. E2E cobre jornadas críticas afetadas; não gere uma suíte web para serviço sem tela.
