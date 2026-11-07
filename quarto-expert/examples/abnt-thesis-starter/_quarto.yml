@@ -21,6 +21,7 @@ csl: associacao-brasileira-de-normas-tecnicas.csl
 
 format:
   typst:
+    citeproc: true
     papersize: a4
     margin:
       top: 3cm
