@@ -48,7 +48,7 @@ O modo padrão é o por efeito a partir da 4.0.0; antes dela, era o assistido, e
 
 ## Gatilhos
 
-`triggers.yaml` é uma lista de `{id, skill, esperado, prompt}`, com `esperado` igual a `deve`, `ambiguo_deve` ou `nao_deve`.
+`triggers.yaml` é uma lista de `{id, skill, esperado, prompt}`, com `esperado` igual a `deve`, `ambiguo_deve` ou `nao_deve`. O campo opcional `fixture` aponta para uma pasta em `fixtures/` quando o prompt cita arquivos do projeto; no nível de execução, o `/cenarios` copia essa pasta antes de rodar o gatilho, e sem ela o gatilho roda numa pasta vazia.
 
 ## Resultado
 

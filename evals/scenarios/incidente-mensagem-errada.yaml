@@ -8,6 +8,7 @@ arquetipo_esperado:
   principal: C
 modo: assistido
 esforco_esperado: rigoroso
+aceite_simulado: Aceito o plano. Pode seguir.
 checkpoints:
 - id: classifica-o-impacto
   tipo: deve

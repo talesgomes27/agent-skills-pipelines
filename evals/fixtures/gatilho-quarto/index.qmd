@@ -1,0 +1,12 @@
+---
+title: "Guia de instalação"
+format: html
+---
+
+## Instalaçao
+
+A Instalaçao leva poucos minutos.
+
+```{python}
+print("Instalaçao concluida")
+```

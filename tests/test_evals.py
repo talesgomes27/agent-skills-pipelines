@@ -75,6 +75,10 @@ class ScenarioFormat(unittest.TestCase):
                 self.assertIn(t['skill'], SKILLS)
                 self.assertIn(t['esperado'], ('deve', 'ambiguo_deve', 'nao_deve'))
                 self.assertTrue(t['prompt'].strip())
+                if 'fixture' in t:
+                    self.assertTrue(t['fixture'].startswith('fixtures/'))
+                    self.assertTrue(any(p.is_file() for p in (EVALS / t['fixture']).rglob('*')))
+                self.assertLessEqual(set(t), {'id', 'skill', 'esperado', 'prompt', 'fixture'})
 
 
 @unittest.skipIf(yaml is None, 'PyYAML ausente')
