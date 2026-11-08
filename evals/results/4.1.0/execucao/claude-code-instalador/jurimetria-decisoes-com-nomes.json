@@ -1,0 +1,58 @@
+{
+ "cenario": "jurimetria-decisoes-com-nomes",
+ "versao": "4.1.0",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "destino": "claude-code-instalador",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "jurimetria",
+  "personal-data"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Script de classificação negado; terminou com três perguntas (aprovação, onde estão as 300 sentenças, tratamento de parcial)"
+ ],
+ "contexto_lido": {
+  "caracteres": 16000,
+  "arquivos": [
+   "README.md",
+   "sentencas/ (amostra)",
+   "jurimetria/scripts/numero_cnj.py"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "carrega-personal-data",
+   "resultado": "passou",
+   "evidencia": "Skill {\"skill\": \"personal-data\"} chamada após a jurimetria, ao ver nomes de partes."
+  },
+  {
+   "id": "nomes-fora-da-analise",
+   "resultado": "indeterminado",
+   "evidencia": "Texto final: 'Só agregados: nenhum nome, endereço ou número de processo aparece na saída'; é plano, o script foi negado e nada foi gerado."
+  },
+  {
+   "id": "amostra-para-leitura-manual",
+   "resultado": "indeterminado",
+   "evidencia": "Texto final: 'é preciso ler à mão uma amostra aleatória e registrar a taxa de acerto' antes de usar a classificação; só plano."
+  },
+  {
+   "id": "denominador-certo",
+   "resultado": "indeterminado",
+   "evidencia": "Texto final: procedência 'sobre sentenças de mérito', parcial em categoria separada; só plano, nada calculado."
+  },
+  {
+   "id": "comparacao-justa",
+   "resultado": "indeterminado",
+   "evidencia": "Texto final prevê a ressalva de que não controla tipo de ação nem volume; o relatório não foi produzido."
+  },
+  {
+   "id": "nome-de-parte-nas-saidas",
+   "resultado": "passou",
+   "evidencia": "Nenhuma saída exibe nome, CPF ou endereço; o texto final só traz nomes de comarca e contagens."
+  }
+ ]
+}

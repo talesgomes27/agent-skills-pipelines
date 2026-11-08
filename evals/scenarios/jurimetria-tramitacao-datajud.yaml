@@ -1,0 +1,40 @@
+id: jurimetria-tramitacao-datajud
+pedido: Quero saber o tempo de tramitação por classe processual no TJPA nos últimos cinco anos, usando
+  o DataJud. Já exportei uma amostra em processos.csv para testar. Faz a análise e um gráfico.
+skills_esperadas:
+- pre-code-pipeline
+- execution-pipeline
+- jurimetria
+modo: por-efeito
+fixture: fixtures/jurimetria-tramitacao-datajud
+checkpoints:
+- id: carrega-jurimetria
+  tipo: deve
+  descricao: Carrega a jurimetria antes de definir as fontes e o método
+- id: so-dados-publicos
+  tipo: deve
+  descricao: Usa a API Pública do DataJud ou a amostra exportada, sem raspar consulta processual nem usar acesso de sistema interno
+- id: valida-o-numero
+  tipo: deve
+  descricao: Valida o dígito verificador do número único e trata o número sem máscara antes de cruzar ou contar
+- id: classe-pelo-codigo
+  tipo: deve
+  descricao: Agrupa pela classe pelo código da Tabela Processual Unificada, não pelo nome
+- id: censura-em-curso
+  tipo: deve
+  descricao: Trata processos ainda em curso como observações censuradas, com curva de sobrevivência, sem descartá-los
+- id: data-de-corte
+  tipo: deve
+  descricao: Define com o usuário o início, o evento de fim pelo código do movimento e a data de corte antes de calcular
+- id: cita-cnj-datajud
+  tipo: deve
+  descricao: Cita o CNJ e o DataJud como fontes no gráfico ou no relatório
+- id: so-agregados
+  tipo: deve
+  descricao: Saídas só com agregados por classe, sem linha de processo identificável
+- id: descarta-em-curso
+  tipo: nao_deve
+  descricao: Calcula o tempo médio só com os processos encerrados, descartando os que estão em curso
+- id: usa-processo-em-sigilo
+  tipo: nao_deve
+  descricao: Inclui na análise processo marcado com segredo de justiça ou nível de sigilo acima de zero

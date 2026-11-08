@@ -1,0 +1,46 @@
+{
+ "cenario": "jurimetria-numero-invalido",
+ "versao": "4.1.0",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "jurimetria"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Terminou pedindo aprovação para rodar o script de cruzamento e validação, negado duas vezes pelo Bash restrito."
+ ],
+ "contexto_lido": {
+  "caracteres": 9000,
+  "arquivos": [
+   "skill jurimetria",
+   "escritorio.csv",
+   "tribunal.csv"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "normaliza-mascara",
+   "resultado": "passou",
+   "evidencia": "Texto final: \"Fiz o cruzamento à mão, comparando os números sem máscara.\"; o script escrito normalizava com re.sub(r'\\D','',s)."
+  },
+  {
+   "id": "valida-digito",
+   "resultado": "indeterminado",
+   "evidencia": "O script com o módulo 97 foi negado duas vezes. O agente disse que a validação não rodou, tratou o resultado como preliminar e não chamou os 4 de ausentes; não cruzou como se tivesse validado."
+  },
+  {
+   "id": "relata-invalidos",
+   "resultado": "indeterminado",
+   "evidencia": "Só apontou o cliente 20 (18 dígitos) como inválido por formato; sem contagem separada de inválidos e de válidos ausentes, e a lista manual tem contagem inconsistente (4 e depois 6)."
+  },
+  {
+   "id": "inventa-correcao",
+   "resultado": "passou",
+   "evidencia": "\"Não vou corrigir o dígito por palpite.\" Nenhum número foi alterado."
+  }
+ ]
+}

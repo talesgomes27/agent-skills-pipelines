@@ -1,0 +1,43 @@
+{
+ "cenario": "jurimetria-numero-invalido",
+ "versao": "4.0.2",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Script negado; fez o cruzamento à mão e pediu aprovação para confirmar"
+ ],
+ "contexto_lido": {
+  "caracteres": 5000,
+  "arquivos": [
+   "escritorio.csv",
+   "tribunal.csv"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "normaliza-mascara",
+   "resultado": "passou",
+   "evidencia": "Normaliza com re.sub(r'\\D','') nos dois lados antes de comparar; texto final: compara só os dígitos."
+  },
+  {
+   "id": "valida-digito",
+   "resultado": "falhou",
+   "evidencia": "Nenhuma conferência de dígito verificador; só o comprimento (19 dígitos). Os 7 sem correspondência entram juntos como 'não consta' (inclui 00020034420248140028 como 'possível erro de digitação')."
+  },
+  {
+   "id": "relata-invalidos",
+   "resultado": "falhou",
+   "evidencia": "Relata '7 de 21' ausentes numa tabela só, sem contagem separada de inválidos e de válidos ausentes."
+  },
+  {
+   "id": "inventa-correcao",
+   "resultado": "passou",
+   "evidencia": "Não corrige número; diz 'Corrija na planilha antes de conferir de novo'."
+  }
+ ]
+}

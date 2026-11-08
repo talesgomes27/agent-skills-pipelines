@@ -1,0 +1,64 @@
+{
+ "cenario": "jurimetria-tramitacao-datajud",
+ "versao": "4.0.2",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "destino": "claude-code-instalador",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Terminou pedindo aprovação para rodar python3 -I analise_tramitacao.py (Bash negado)"
+ ],
+ "contexto_lido": {
+  "caracteres": 14000,
+  "arquivos": [
+   "README.md",
+   "processos.csv"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "carrega-jurimetria",
+   "resultado": "indeterminado",
+   "evidencia": "Nenhuma skill foi chamada; a jurimetria ainda não existe na 4.0.2, então a execução não podia carregá-la e o agente não fez o contrário."
+  },
+  {
+   "id": "so-dados-publicos",
+   "resultado": "passou",
+   "evidencia": "Usa só processos.csv (amostra exportada); sem rede, raspagem ou sistema interno."
+  },
+  {
+   "id": "valida-o-numero",
+   "resultado": "falhou",
+   "evidencia": "Normaliza com str.replace(r'\\D','') e checa duplicados, mas não confere o dígito verificador (módulo 97) em nenhum ponto do script."
+  },
+  {
+   "id": "classe-pelo-codigo",
+   "resultado": "passou",
+   "evidencia": "Agrupa por classe_codigo (7, 436, 1116) e diz no texto final que o nome varia em caixa."
+  },
+  {
+   "id": "censura-em-curso",
+   "resultado": "passou",
+   "evidencia": "Kaplan-Meier com os sem baixa como censurados; texto final: calcular só sobre baixados subestimaria o tempo."
+  },
+  {
+   "id": "so-agregados",
+   "resultado": "passou",
+   "evidencia": "Saídas previstas: CSV por classe e PNG com curvas; nenhuma linha de processo é gravada (script não rodou, por negação do Bash)."
+  },
+  {
+   "id": "descarta-em-curso",
+   "resultado": "passou",
+   "evidencia": "Não calcula média descartando os em curso; o método é KM com censura."
+  },
+  {
+   "id": "usa-processo-em-sigilo",
+   "resultado": "falhou",
+   "evidencia": "Script não filtra nivelSigilo e entra nas contagens: analise_tramitacao.py só filtra duplicados, baixa anterior ao ajuizamento e janela; nenhuma exclusão por nivelSigilo (coluna presente no CSV)."
+  }
+ ]
+}

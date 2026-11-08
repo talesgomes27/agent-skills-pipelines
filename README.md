@@ -2,13 +2,13 @@
 
 [![CI](https://github.com/talesgomes27/agent-skills-pipelines/actions/workflows/ci.yml/badge.svg)](https://github.com/talesgomes27/agent-skills-pipelines/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Release](https://img.shields.io/badge/release-4.0.2-blue.svg)](distribution/catalog.json)
+[![Release](https://img.shields.io/badge/release-4.1.0-blue.svg)](distribution/catalog.json)
 [![Python](https://img.shields.io/badge/Python-3.9%2B-3776AB.svg?logo=python&logoColor=white)](https://www.python.org/)
 [![Agent Skills](https://img.shields.io/badge/Agent%20Skills-Codex%20%7C%20Claude%20Code%20%7C%20Antigravity-6f42c1.svg)](docs/distribution/architecture.md)
 
 Uma skill é uma pasta de instruções que um agente de IA, como o Claude Code, o Codex ou o Antigravity, lê quando a tarefa pede. Estas skills, em português, dão ao agente um processo de trabalho: planejar antes de programar, implementar em etapas verificadas, auditar código herdado e publicar só com a sua autorização. Foram pensadas para ciência de dados, sites e dashboards em Streamlit ou Shiny, e automações.
 
-Release atual: **4.0.2**.
+Release atual: **4.1.0**.
 
 ## Como é na prática
 
@@ -59,6 +59,7 @@ Especialistas, que as pipelines chamam quando o assunto aparece:
 |---|---|
 | [`scheduled-automation`](scheduled-automation/SKILL.md) | Jobs agendados, ETL recorrente e retreino de modelo: estado, falhas, alertas e primeira execução. |
 | [`personal-data`](personal-data/SKILL.md) | Dados de pessoas em análises, apps e listas, com base na LGPD. |
+| [`jurimetria`](jurimetria/SKILL.md) | Dados de processos judiciais: número único do CNJ, DataJud, tabelas processuais, tempo de tramitação e sigilo. |
 | [`quarto-expert`](quarto-expert/SKILL.md) | Ambiente e render de projetos Quarto, teses em ABNT e manuscritos com Binder. |
 | [`skill-loader`](skill-loader/SKILL.md) | Buscar uma skill numa biblioteca externa grande, sem carregar tudo. Veja [biblioteca externa](docs/library-maintenance.md). |
 
@@ -73,15 +74,15 @@ claude plugin marketplace add talesgomes27/agent-skills-pipelines@stable
 claude plugin install essencial@agent-skills-pipelines
 ```
 
-O pacote `completo` instala as nove skills e o plugin [`pipeline-guardrails`](pipeline-guardrails/README.md), que pede a sua confirmação antes de push, tag, PR, deploy, migração e instalação de dependência, mesmo quando o agente esqueceria o A2. Ele também se instala sozinho, com `claude plugin install pipeline-guardrails@agent-skills-pipelines`. Os pacotes não têm conteúdo próprio: eles instalam os plugins das skills como dependências. Ao desinstalar um pacote, o Claude Code mantém essas dependências e sugere `claude plugin prune`, que remove só as que ele instalou automaticamente, não as que você instalou à mão.
+O pacote `completo` instala as dez skills e o plugin [`pipeline-guardrails`](pipeline-guardrails/README.md), que pede a sua confirmação antes de push, tag, PR, deploy, migração e instalação de dependência, mesmo quando o agente esqueceria o A2. Ele também se instala sozinho, com `claude plugin install pipeline-guardrails@agent-skills-pipelines`. Os pacotes não têm conteúdo próprio: eles instalam os plugins das skills como dependências. Ao desinstalar um pacote, o Claude Code mantém essas dependências e sugere `claude plugin prune`, que remove só as que ele instalou automaticamente, não as que você instalou à mão.
 
 Cada uma dessas três pipelines traz um subagente de revisão que o Claude Code pode chamar sozinho nesse ponto, ou que você chama pelo nome, como `@agent-pre-code-pipeline:plan-reviewer`: `plan-reviewer` revisa o plano antes do seu aceite, `diff-reviewer` revisa o diff no fim da implementação e `sanitation-checker` confere segredos, dados pessoais e arquivos grandes antes de publicar. Eles relatam e não editam.
 
-Acrescente as outras skills da tabela uma a uma, com `claude plugin install <skill>@agent-skills-pipelines`. A branch `stable` só avança quando sai uma release, então você recebe só versões publicadas; para fixar uma versão exata, use uma tag, como `@v4.0.2`, no lugar de `@stable`. Sem o `@`, o marketplace acompanha a `main`, que muda a cada PR. Abra uma sessão nova para o Claude Code encontrá-las. No Claude Code, prefira o marketplace ao instalador abaixo: ele atualiza com `claude plugin update`.
+Acrescente as outras skills da tabela uma a uma, com `claude plugin install <skill>@agent-skills-pipelines`. A branch `stable` só avança quando sai uma release, então você recebe só versões publicadas; para fixar uma versão exata, use uma tag, como `@v4.1.0`, no lugar de `@stable`. Sem o `@`, o marketplace acompanha a `main`, que muda a cada PR. Abra uma sessão nova para o Claude Code encontrá-las. No Claude Code, prefira o marketplace ao instalador abaixo: ele atualiza com `claude plugin update`.
 
 ### Codex, Antigravity e outros hosts
 
-O instalador instala grupos de skills, os bundles. O `development` traz planejamento, execução, auditoria, automações e dados pessoais; o `research` troca a auditoria e as automações por escrita e Quarto. Com Python 3.9 ou mais novo:
+O instalador instala grupos de skills, os bundles. O `development` traz planejamento, execução, auditoria, automações, dados pessoais e jurimetria; o `research` troca a auditoria e as automações por escrita e Quarto. Com Python 3.9 ou mais novo:
 
 ```bash
 git clone --branch stable https://github.com/talesgomes27/agent-skills-pipelines.git

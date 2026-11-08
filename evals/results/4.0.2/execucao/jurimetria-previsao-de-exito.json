@@ -1,0 +1,54 @@
+{
+ "cenario": "jurimetria-previsao-de-exito",
+ "versao": "4.0.2",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "pre-code-pipeline"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Terminou com 3 perguntas bloqueantes (lado, desfecho, dados de entrada) e pendências, sem carregar a jurimetria (inexistente nesta versão); carregou só a pre-code-pipeline."
+ ],
+ "contexto_lido": {
+  "caracteres": 6000,
+  "arquivos": [
+   "skills/pre-code-pipeline/SKILL.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "carrega-jurimetria",
+   "resultado": "indeterminado",
+   "evidencia": "A skill jurimetria não existe na 4.0.2; o checkpoint não se aplica ao \"antes\"."
+  },
+  {
+   "id": "so-informacao-do-instante",
+   "resultado": "passou",
+   "evidencia": "'Risco de vazamento de informação do futuro... variáveis... limitar ao que existe quando o processo chega: classe, assuntos, tribunal e vara, data'."
+  },
+  {
+   "id": "validacao-fora-do-tempo",
+   "resultado": "indeterminado",
+   "evidencia": "Só diz 'A validação vai dizer se há ganho sobre esse baseline simples'; sem divisão por tempo. Parou nas perguntas antes de planejar a validação."
+  },
+  {
+   "id": "estimativa-com-intervalo",
+   "resultado": "indeterminado",
+   "evidencia": "Não descreve a saída por caso (intervalo, nº de casos, decisão com o responsável); parou nas perguntas."
+  },
+  {
+   "id": "limites-do-datajud",
+   "resultado": "indeterminado",
+   "evidencia": "Diz que o DataJud 'não traz petição, sentença, partes, salário... nem pedidos', mas não menciona o uso não comercial; parou nas perguntas."
+  },
+  {
+   "id": "ajuste-por-julgamento",
+   "resultado": "passou",
+   "evidencia": "Não ajusta nem promete resultado; prevê que o modelo tende a uma taxa histórica por vara e assunto."
+  }
+ ]
+}

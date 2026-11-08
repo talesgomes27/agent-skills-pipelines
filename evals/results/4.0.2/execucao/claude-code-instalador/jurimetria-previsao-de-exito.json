@@ -1,0 +1,55 @@
+{
+ "cenario": "jurimetria-previsao-de-exito",
+ "versao": "4.0.2",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "destino": "claude-code-instalador",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "pre-code-pipeline"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Parou com quatro perguntas bloqueantes antes do PC-1"
+ ],
+ "contexto_lido": {
+  "caracteres": 8000,
+  "arquivos": [
+   "pre-code-pipeline/references/ (via sed)"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "carrega-jurimetria",
+   "resultado": "indeterminado",
+   "evidencia": "A skill jurimetria não existe na 4.0.2; o checkpoint não se aplica ao \"antes\"."
+  },
+  {
+   "id": "so-informacao-do-instante",
+   "resultado": "indeterminado",
+   "evidencia": "Não menciona restringir variáveis ao instante da previsão nem movimentos posteriores; parou antes do PC-1."
+  },
+  {
+   "id": "validacao-fora-do-tempo",
+   "resultado": "indeterminado",
+   "evidencia": "Nenhuma menção à validação treinando no antigo e testando no recente; parou antes do desenho."
+  },
+  {
+   "id": "estimativa-com-intervalo",
+   "resultado": "indeterminado",
+   "evidencia": "Diz 'estima uma taxa-base' e que não diz se o caso é forte ou fraco, mas não cita intervalo, nº de casos semelhantes nem a decisão com quem responde."
+  },
+  {
+   "id": "limites-do-datajud",
+   "resultado": "indeterminado",
+   "evidencia": "Diz 'Provavelmente não traz' texto da sentença nem quem é reclamante, como hipótese; não menciona uso não comercial."
+  },
+  {
+   "id": "ajuste-por-julgamento",
+   "resultado": "passou",
+   "evidencia": "Texto final: 'Prometer mais que isso seria enganoso'; sem ajuste próprio nem promessa."
+  }
+ ]
+}

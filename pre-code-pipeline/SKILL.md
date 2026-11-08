@@ -62,4 +62,4 @@ Siga o estado e a retomada do contrato comum. Ao retomar, leia também os contra
 
 ## Especialistas e ferramentas
 
-Carregue `quarto-expert`, `writing-pipeline`, `scheduled-automation` ou um especialista de dados ou domínio só para uma lacuna concreta do gate atual, com as regras de especialistas do contrato comum. Pedido vago vira versão mínima no plano.
+Carregue `quarto-expert`, `writing-pipeline`, `scheduled-automation`, `jurimetria` ou um especialista de dados ou domínio só para uma lacuna concreta do gate atual, com as regras de especialistas do contrato comum. Pedido vago vira versão mínima no plano.

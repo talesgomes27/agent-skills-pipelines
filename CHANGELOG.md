@@ -2,6 +2,34 @@
 
 As versões seguem [SemVer](https://semver.org/lang/pt-BR/).
 
+## [4.1.0] - 2026-11-08
+
+Comparada com a 4.0.2 (`a33606e`). Uma skill nova, a `jurimetria`, sem mudar nenhuma regra das outras. Por isso a versão é MINOR.
+
+### Novo
+
+- Skill `jurimetria`, especialista no molde da `personal-data`: informa as pipelines sobre dados de processos judiciais brasileiros, sem mudar gates nem autorizações.
+  - Número único de processo (Resolução CNJ 65/2008): normalizar para 20 dígitos, validar o dígito verificador e separar os inválidos, sem adivinhar correção. O script `jurimetria/scripts/numero_cnj.py`, só com a biblioteca padrão, segue o Anexo VIII da resolução, com testes em `tests/test_numero_cnj.py`.
+  - Fontes na ordem: API Pública do DataJud, dados abertos e consulta pública por último, com as regras de coleta externa. Termos de uso do DataJud: fins não comerciais, até 120 requisições por minuto e citação obrigatória do CNJ e do DataJud como fontes (Portaria CNJ 160/2020, com a redação da Portaria 374/2026).
+  - Classes, assuntos e movimentos pelo código das Tabelas Processuais Unificadas (Resolução CNJ 46/2007), com a versão do SGT registrada.
+  - Tempo de tramitação por análise de sobrevivência, com os processos em curso como censurados; comparações entre unidades com o denominador certo e controle de classe e volume; previsões só com informação do instante da previsão; classificação de decisões validada numa amostra lida à mão.
+  - Sigilo: processo em segredo de justiça fica fora por padrão e só entra quando o usuário é parte ou procurador e decide com finalidade registrada; partes e nomes seguem a `personal-data`.
+  - Referências `numero-cnj.md`, `datajud.md` e `metodos.md`, com cada fato conferido na fonte oficial em 08/11/2026.
+- A skill entra no catálogo, no marketplace como plugin próprio, nos bundles `development`, `research` e `completo`, no formulário "A skill errou" e na lista de especialistas da `pre-code-pipeline`.
+- Antes de escrever, duas skills de jurimetria de terceiros foram avaliadas: uma tem licença proprietária que proíbe reaproveitar trechos, e a outra, Apache-2.0, exigiria levar a atribuição. Nenhum texto delas foi usado; as ideias que serviram foram reescritas e conferidas na fonte oficial.
+
+### Avaliações
+
+- Quatro cenários novos com fixtures sintéticas: `jurimetria-tramitacao-datajud`, `jurimetria-numero-invalido`, `jurimetria-decisoes-com-nomes` e `jurimetria-previsao-de-exito`, e quatro gatilhos (`jurimetria-1` a `jurimetria-4`).
+- Antes, na 4.0.2, sem a skill (`evals/results/4.0.2/execucao/`): nos dois destinos do Claude Code, nenhum agente conferiu o dígito verificador, e os dois processos com sigilo da amostra entraram nas contagens da tramitação.
+- Depois, na 4.1.0 (`evals/results/4.1.0/execucao/`), nos dois destinos: nenhuma falha nos quatro cenários. A `jurimetria-previsao-de-exito` passa em todos os checkpoints nos dois. A maior parte do resto fica indeterminada porque o ambiente de teste só libera `pytest`, e o script e os cálculos não puderam rodar. A description foi ampliada para "validar, cruzar ou contar números de processo" depois que o cruzamento não carregou a skill na primeira rodada; na segunda, carregou nos dois destinos.
+- Gatilhos em execução real, nos dois destinos, com a skill nova: marketplace 44 de 48 e instalador 46 de 48, nenhum "não deve" disparado, e a `jurimetria` não carregou em pedido de outra skill. Os que falharam são `cenario-*` que citam arquivos ausentes da pasta do teste: num controle com o plugin da 4.0.2, sem a skill, os mesmos cinco gatilhos também não carregaram nenhuma skill (0 de 10 nas duas versões).
+
+### Como atualizar
+
+- No Claude Code, rode `claude plugin marketplace update agent-skills-pipelines`, `claude plugin update <plugin>` para cada plugin instalado e `claude plugin install jurimetria@agent-skills-pipelines` para a skill nova (o pacote `completo` já a inclui).
+- Instalações feitas com `scripts/skills.py` recebem a 4.1.0 com `--update`; a `jurimetria` entra com `--skill jurimetria` ou pelos bundles `development` e `research`.
+
 ## [4.0.2] - 2026-11-08
 
 Comparada com a 4.0.1 (`b68ed94`). Trabalho sobre as metas da proposta da 4.0.0 que não tinham sido atingidas, sem mudar regra, modo nem aceite. Por isso a versão é PATCH.
