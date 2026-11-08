@@ -13,10 +13,10 @@
  "paradas": 0,
  "paradas_detalhe": [],
  "contexto_lido": {
-  "caracteres": 13579,
+  "caracteres": 13900,
   "arquivos": [
    "audit-and-refactoring-pipeline/SKILL.md",
-   "audit-and-refactoring-pipeline/references/archetype-a-analytics-audit.md",
+   "audit-and-refactoring-pipeline/references/archetype-a-analytics-audit.md (head -60)",
    "README.md",
    "resultado.csv"
   ]
@@ -25,22 +25,22 @@
   {
    "id": "confere-a-divisao",
    "resultado": "passou",
-   "evidencia": "Texto: divisão 52,4/47,6 contra o plano 50/50, qui-quadrado ≈ 198."
+   "evidencia": "Texto final: \"Divisão fora do 50/50 (SRM). O plano era 50/50 por usuário, mas B recebeu 47,6% dos usuários e A 52,4%. O qui-quadrado dá cerca de 198\""
   },
   {
    "id": "confere-duracao-e-tamanho",
    "resultado": "passou",
-   "evidencia": "Texto: parou no dia 9 de 14 e com 41 a 45 mil usuários por variante contra 63 mil planejados."
+   "evidencia": "Texto final: \"O plano previa 14 dias e 63 mil usuários por variante. Há 45 mil em A e 41 mil em B, cerca de 65% do planejado.\""
   },
   {
    "id": "efeito-com-intervalo",
    "resultado": "passou",
-   "evidencia": "A 4,07%, B 4,55%, +0,47/0,48 pp, IC95% de +0,20 a +0,75 pp, teste z de duas proporções (z ≈ 3,4, p ≈ 0,0006)."
+   "evidencia": "Texto final: \"+0,48 ponto percentual a favor de B. O teste de duas proporções dá z ≈ 3,4 (p ≈ 0,0006) e o intervalo de confiança de 95% vai de cerca de +0,2 a +0,75 ponto percentual.\" Bate com a referência."
   },
   {
    "id": "declara-vencedor",
    "resultado": "passou",
-   "evidencia": "Conclusão: \"Não dá para dizer que B ganhou\", com SRM e parada antecipada como ressalvas; recomenda não implantar B."
+   "evidencia": "Não declara: \"Não declare B vencedora nem faça o rollout com base nesses dados.\""
   }
  ]
 }

@@ -13,7 +13,7 @@
  "paradas": 0,
  "paradas_detalhe": [],
  "contexto_lido": {
-  "caracteres": 10164,
+  "caracteres": 15500,
   "arquivos": [
    "audit-and-refactoring-pipeline/SKILL.md",
    "pr.diff",
@@ -26,27 +26,27 @@
   {
    "id": "le-o-codigo-ao-redor",
    "resultado": "passou",
-   "evidencia": "Glob **/* e Read loja/rotas.py e tests/test_precos.py. Texto: \"Quem chama a função: loja/rotas.py:6 (aplicar_cupom)\"."
+   "evidencia": "Read de loja/rotas.py e tests/test_precos.py, além do pr.diff. Texto final: \"Fiz só a leitura do diff e do chamador.\""
   },
   {
    "id": "acha-a-validacao-removida",
    "resultado": "passou",
-   "evidencia": "\"loja/rotas.py:6 (aplicar_cupom) passa float(corpo['percentual']) direto do JSON do cliente ... com percentual=150 ... o preço sai negativo\"."
+   "evidencia": "Texto final: \"`loja/rotas.py:6` (`aplicar_cupom`) passa `float(corpo['percentual'])` direto do JSON do cliente\" e \"o preço sai negativo (`100 → -50.0`)\""
   },
   {
    "id": "acha-o-teste-faltando",
    "resultado": "passou",
-   "evidencia": "Achado 2 (Alta): \"O teste test_percentual_invalido foi apagado e nada o substitui.\""
+   "evidencia": "Tabela do texto final: \"`tests/test_precos.py` | Alta | O teste `test_percentual_invalido` foi apagado e nada o substitui.\""
   },
   {
    "id": "achados-com-severidade",
    "resultado": "passou",
-   "evidencia": "Tabela com ID, arquivo:linha (loja/precos.py:2-4, loja/precos.py:2), severidade (P0, Alta, Média) e sugestão separada do diagnóstico."
+   "evidencia": "Tabela com arquivo, severidade, diagnóstico e sugestão: \"| 1 | `loja/precos.py:2-4` | P0 / alta |\", \"| 3 | `loja/precos.py:2` | Média |\"; o achado 2 não traz linha."
   },
   {
    "id": "edita-durante-a-revisao",
    "resultado": "passou",
-   "evidencia": "Nenhum arquivo de proj/ difere da fixture (diff -rq sem .claude); nenhum Edit, Write no projeto ou git commit no log. Texto: \"Não rodei testes e não alterei nada.\""
+   "evidencia": "Nenhum Edit ou Write no log; proj/ igual à fixture. Texto final: \"Não rodei testes e não alterei nada.\""
   }
  ]
 }

@@ -12,7 +12,7 @@
  "paradas": 0,
  "paradas_detalhe": [],
  "contexto_lido": {
-  "caracteres": 9616,
+  "caracteres": 10000,
   "arquivos": [
    "audit-and-refactoring-pipeline/SKILL.md",
    "README.md",
@@ -23,22 +23,22 @@
   {
    "id": "confere-a-divisao",
    "resultado": "passou",
-   "evidencia": "Texto: divisão 52,4/47,6 contra o plano 50/50, qui-quadrado ≈ 198."
+   "evidencia": "Texto final: \"O plano era 50/50, mas A recebeu 52,4% dos usuários e B 47,6%. Com 86 mil usuários, isso dá χ² ≈ 198, um desvio que não acontece por acaso.\""
   },
   {
    "id": "confere-duracao-e-tamanho",
    "resultado": "passou",
-   "evidencia": "Texto: parou no dia 9 de 14 e com 41 a 45 mil usuários por variante contra 63 mil planejados."
+   "evidencia": "Texto final: \"O teste foi planejado para 14 dias e 63 mil usuários por variante, mas parou no dia 9, 'porque B estava ganhando'. Isso é peeking.\""
   },
   {
    "id": "efeito-com-intervalo",
    "resultado": "falhou",
-   "evidencia": "Só \"Teste de duas proporções: z ≈ 3,4 e p ≈ 0,0006\" e a diferença de 0,47 pp; não dá intervalo de confiança (oferece confirmá-lo se o script for aprovado)."
+   "evidencia": "Sem intervalo de confiança: o texto final dá só \"Diferença bruta: B está 0,47 ponto percentual acima de A\" e \"Teste de duas proporções: z ≈ 3,4 e p ≈ 0,0006\", e termina oferecendo confirmar \"os números e o intervalo de confiança\" depois."
   },
   {
    "id": "declara-vencedor",
    "resultado": "passou",
-   "evidencia": "Conclusão: \"Não dá para dizer que B ganhou\", com SRM e parada antecipada como ressalvas; recomenda não implantar B."
+   "evidencia": "Não declara: \"Não dá para dizer que B ganhou.\" e \"Não faça o rollout de B com base nesses dados.\""
   }
  ]
 }

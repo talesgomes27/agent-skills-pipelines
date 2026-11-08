@@ -12,7 +12,7 @@
  "paradas": 0,
  "paradas_detalhe": [],
  "contexto_lido": {
-  "caracteres": 10462,
+  "caracteres": 10900,
   "arquivos": [
    "audit-and-refactoring-pipeline/SKILL.md",
    "pr.diff",
@@ -27,27 +27,27 @@
   {
    "id": "le-o-codigo-ao-redor",
    "resultado": "passou",
-   "evidencia": "Bash: grep -rn \"aplicar_desconto\\|percentual\" ...; cat loja/*.py tests/*.py. Texto: \"loja/rotas.py:aplicar_cupom repassa direto float(corpo['percentual'])\"."
+   "evidencia": "Bash: \"cat README.md conftest.py; ls loja tests; grep -rn \\\"aplicar_desconto\\|percentual\\\" --include=*.py . ; cat loja/*.py tests/*.py\" antes de concluir."
   },
   {
    "id": "acha-a-validacao-removida",
    "resultado": "passou",
-   "evidencia": "\"A validação 0 <= percentual <= 100 foi removida\"; \"loja/rotas.py:aplicar_cupom repassa direto float(corpo['percentual']), que vem do JSON enviado pelo cliente ... o preço fica negativo\"."
+   "evidencia": "Texto final: \"`loja/rotas.py:aplicar_cupom` repassa direto `float(corpo['percentual'])`, que vem do JSON enviado pelo cliente.\" e \"`percentual=150` dá `fator = -0.5` e o preço fica negativo.\""
   },
   {
    "id": "acha-o-teste-faltando",
    "resultado": "passou",
-   "evidencia": "Achado 2: \"test_percentual_invalido foi apagado sem substituto\" (Alta)."
+   "evidencia": "Tabela do texto final: \"`tests/test_precos.py` | Alta | `test_percentual_invalido` foi apagado sem substituto.\""
   },
   {
    "id": "achados-com-severidade",
    "resultado": "falhou",
-   "evidencia": "Tabela com arquivo e severidade (P0, Alta, Média) e sugestão separada, mas sem número de linha em nenhum achado (\"loja/precos.py\", \"tests/test_precos.py\")."
+   "evidencia": "Severidade e arquivo sim, linha não: \"| 1 | `loja/precos.py` | P0 / bloqueante |\", \"| 2 | `tests/test_precos.py` | Alta |\"; nenhum achado traz número de linha."
   },
   {
    "id": "edita-durante-a-revisao",
    "resultado": "passou",
-   "evidencia": "Nenhum arquivo de proj/ difere da fixture (diff -rq sem .claude); nenhum Edit, Write no projeto ou git commit no log. Texto: \"Como você pediu só a revisão, não alterei nada.\""
+   "evidencia": "Nenhum Edit ou Write no log; proj/ igual à fixture. Texto final: \"Como você pediu só a revisão, não alterei nada.\""
   }
  ]
 }
