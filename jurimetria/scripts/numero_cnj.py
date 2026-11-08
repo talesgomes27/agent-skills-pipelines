@@ -17,7 +17,7 @@ import re
 import sys
 
 # Sequencial sem os zeros à esquerda (art. 1º, § 1º), separado por espaço, ponto ou hífen
-MASCARA = re.compile(r'^(\d{1,7})[\s.-]+(\d{2})[\s.-]+(\d{4})[\s.-]+(\d)[\s.-]*(\d{2})[\s.-]+(\d{4})$')
+MASCARA = re.compile(r'^(\d{1,7})[\s.-]+(\d{2})[\s.-]+(\d{4})[\s.-]+(\d)[\s.-]*(\d{2})[\s.-]+(\d{4})$', re.ASCII)
 
 
 def digito(n, a, j, tr, o):
@@ -33,8 +33,8 @@ def normalizar(numero):
     if m:
         n, d, a, j, tr, o = m.groups()
         return n.zfill(7) + d + a + j + tr + o
-    digitos = re.sub(r'\D', '', s)
-    return digitos if len(digitos) == 20 and not re.search(r'[^\d\s.\-]', s) else None
+    digitos = re.sub(r'\D', '', s, flags=re.ASCII)
+    return digitos if len(digitos) == 20 and not re.search(r'[^\d\s.\-]', s, re.ASCII) else None
 
 
 def partes(numero):
@@ -65,6 +65,8 @@ def main(argv=None):
         return 2
     if args.coluna:
         leitor = csv.DictReader(sys.stdin)
+        if leitor.fieldnames:
+            leitor.fieldnames[0] = leitor.fieldnames[0].lstrip('\ufeff')  # CSV exportado pelo Excel
         if args.coluna not in (leitor.fieldnames or []):
             print('coluna não encontrada: %s' % args.coluna, file=sys.stderr)
             return 2
@@ -72,14 +74,15 @@ def main(argv=None):
     else:
         entradas = (linha.rstrip('\n') for linha in sys.stdin)
     algum_invalido = False
+    saida = csv.writer(sys.stdout, lineterminator='\n')
     for e in entradas:
         if not e.strip():
             continue
         if valido(e):
-            print('%s,valido' % normalizar(e))
+            saida.writerow([normalizar(e), 'valido'])
         else:
             algum_invalido = True
-            print('%s,invalido' % e.strip())
+            saida.writerow([e.strip(), 'invalido'])
     return 1 if algum_invalido else 0
 
 

@@ -9,7 +9,7 @@ Comparada com a 4.0.2 (`a33606e`). Uma skill nova, a `jurimetria`, sem mudar nen
 ### Novo
 
 - Skill `jurimetria`, especialista no molde da `personal-data`: informa as pipelines sobre dados de processos judiciais brasileiros, sem mudar gates nem autorizações.
-  - Número único de processo (Resolução CNJ 65/2008): normalizar para 20 dígitos, validar o dígito verificador e separar os inválidos, sem adivinhar correção. O script `jurimetria/scripts/numero_cnj.py`, só com a biblioteca padrão, segue o Anexo VIII da resolução, com testes em `tests/test_numero_cnj.py`.
+  - Número único de processo (Resolução CNJ 65/2008): normalizar para 20 dígitos, validar o dígito verificador e separar os inválidos, sem adivinhar correção. O script `jurimetria/scripts/numero_cnj.py`, só com a biblioteca padrão, segue o Anexo VIII da resolução, aceita a grafia dos anexos (`2008.814.0000`) e CSV exportado pelo Excel, com testes em `tests/test_numero_cnj.py`.
   - Fontes na ordem: API Pública do DataJud, dados abertos e consulta pública por último, com as regras de coleta externa. Termos de uso do DataJud: fins não comerciais, até 120 requisições por minuto e citação obrigatória do CNJ e do DataJud como fontes (Portaria CNJ 160/2020, com a redação da Portaria 374/2026).
   - Classes, assuntos e movimentos pelo código das Tabelas Processuais Unificadas (Resolução CNJ 46/2007), com a versão do SGT registrada.
   - Tempo de tramitação por análise de sobrevivência, com os processos em curso como censurados; comparações entre unidades com o denominador certo e controle de classe e volume; previsões só com informação do instante da previsão; classificação de decisões validada numa amostra lida à mão.
@@ -21,9 +21,9 @@ Comparada com a 4.0.2 (`a33606e`). Uma skill nova, a `jurimetria`, sem mudar nen
 ### Avaliações
 
 - Quatro cenários novos com fixtures sintéticas: `jurimetria-tramitacao-datajud`, `jurimetria-numero-invalido`, `jurimetria-decisoes-com-nomes` e `jurimetria-previsao-de-exito`, e quatro gatilhos (`jurimetria-1` a `jurimetria-4`).
-- Antes, na 4.0.2, sem a skill (`evals/results/4.0.2/execucao/`): nos dois destinos do Claude Code, nenhum agente conferiu o dígito verificador, e os dois processos com sigilo da amostra entraram nas contagens da tramitação.
+- Antes, na 4.0.2, sem a skill (`evals/results/4.0.2/execucao/`): na tramitação, nos dois destinos do Claude Code, o agente não conferiu o dígito verificador e os dois processos com sigilo da amostra entraram nas contagens; no cruzamento, o do marketplace também não conferiu, e o do instalador tentou e teve o comando negado.
 - Depois, na 4.1.0 (`evals/results/4.1.0/execucao/`), nos dois destinos: nenhuma falha nos quatro cenários. A `jurimetria-previsao-de-exito` passa em todos os checkpoints nos dois. A maior parte do resto fica indeterminada porque o ambiente de teste só libera `pytest`, e o script e os cálculos não puderam rodar. A description foi ampliada para "validar, cruzar ou contar números de processo" depois que o cruzamento não carregou a skill na primeira rodada; na segunda, carregou nos dois destinos.
-- Gatilhos em execução real, nos dois destinos, com a skill nova: marketplace 44 de 48 e instalador 46 de 48, nenhum "não deve" disparado, e a `jurimetria` não carregou em pedido de outra skill. Os que falharam são `cenario-*` que citam arquivos ausentes da pasta do teste: num controle com o plugin da 4.0.2, sem a skill, os mesmos cinco gatilhos também não carregaram nenhuma skill (0 de 10 nas duas versões).
+- Gatilhos em execução real, nos dois destinos, com a skill nova: marketplace 44 de 48 e instalador 46 de 48, nenhum "não deve" disparado, e a `jurimetria` não carregou em pedido de outra skill. Os que falharam são quatro gatilhos `cenario-*` que citam arquivos ausentes da pasta do teste (f1, f5, f6 e h no marketplace; f1 e f6 no instalador). Num controle de cinco desses gatilhos, com duas execuções cada, nenhuma carregou skill, nem com o plugin da 4.0.2, sem a `jurimetria`, nem com o da 4.1.0 (0 de 10 nas duas versões).
 
 ### Como atualizar
 

@@ -65,6 +65,14 @@ class Cli(unittest.TestCase):
         code, out, _ = run(stdin='0801234-84.2023.8.14.0301\n')
         self.assertEqual(code, 0, out)
 
+    def test_csv_com_bom_e_entrada_com_virgula(self):
+        code, out, _ = run('--coluna', 'numero', stdin='\ufeffnumero\n"0000100-14.2008.8.14.0000, ver"\n')
+        self.assertEqual(code, 1)
+        self.assertIn('"0000100-14.2008.8.14.0000, ver",invalido', out)
+
+    def test_recusa_digitos_fora_do_ascii(self):
+        self.assertFalse(nc.valido('\uff10\uff10\uff10\uff10\uff11\uff10\uff10-13.2008.8.14.0000'))
+
     def test_coluna_ausente_sai_com_dois(self):
         code, _, err = run('--coluna', 'processo', stdin='numero\n1\n')
         self.assertEqual(code, 2)
