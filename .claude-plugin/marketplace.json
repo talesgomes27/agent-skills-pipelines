@@ -10,7 +10,7 @@
       "name": "pre-code-pipeline",
       "source": "./",
       "description": "Descoberta, requisitos, arquitetura, scaffold documental e plano verificável.",
-      "version": "4.2.0",
+      "version": "4.3.0",
       "author": {
         "name": "Tales Wilhame Gomes da Silva"
       },
@@ -26,7 +26,7 @@
       "name": "execution-pipeline",
       "source": "./",
       "description": "Implementação de um plano aprovado e validação proporcional à stack.",
-      "version": "4.2.0",
+      "version": "4.3.0",
       "author": {
         "name": "Tales Wilhame Gomes da Silva"
       },
@@ -42,7 +42,7 @@
       "name": "writing-pipeline",
       "source": "./",
       "description": "Redação e revisão técnica com preservação de fatos, fontes e formato.",
-      "version": "4.2.0",
+      "version": "4.3.0",
       "author": {
         "name": "Tales Wilhame Gomes da Silva"
       },
@@ -55,7 +55,7 @@
       "name": "audit-and-refactoring-pipeline",
       "source": "./",
       "description": "Reconhecimento, diagnóstico, caracterização e refatoração incremental.",
-      "version": "4.2.0",
+      "version": "4.3.0",
       "author": {
         "name": "Tales Wilhame Gomes da Silva"
       },
@@ -68,7 +68,7 @@
       "name": "release-and-ops-pipeline",
       "source": "./",
       "description": "Saneamento, versão, artefatos, publicação autorizada e smoke tests.",
-      "version": "4.2.0",
+      "version": "4.3.0",
       "author": {
         "name": "Tales Wilhame Gomes da Silva"
       },
@@ -84,7 +84,7 @@
       "name": "scheduled-automation",
       "source": "./",
       "description": "Contrato de jobs agendados, ETL recorrente e retreino: estado, idempotência, falhas, alertas e primeira execução.",
-      "version": "4.2.0",
+      "version": "4.3.0",
       "author": {
         "name": "Tales Wilhame Gomes da Silva"
       },
@@ -97,7 +97,7 @@
       "name": "personal-data",
       "source": "./",
       "description": "Dados pessoais em análises, apps, listas e coletas: inventário, minimização, saídas agregadas, envio a terceiros e vazamento, com base na LGPD.",
-      "version": "4.2.0",
+      "version": "4.3.0",
       "author": {
         "name": "Tales Wilhame Gomes da Silva"
       },
@@ -110,7 +110,7 @@
       "name": "jurimetria",
       "source": "./",
       "description": "Dados de processos judiciais: número único do CNJ, API Pública do DataJud, tabelas processuais, tempo de tramitação com censura, comparações justas e sigilo.",
-      "version": "4.2.0",
+      "version": "4.3.0",
       "author": {
         "name": "Tales Wilhame Gomes da Silva"
       },
@@ -123,7 +123,7 @@
       "name": "quarto-expert",
       "source": "./",
       "description": "Ambiente e render de projetos Quarto, teses em ABNT e manuscritos com Binder.",
-      "version": "4.2.0",
+      "version": "4.3.0",
       "author": {
         "name": "Tales Wilhame Gomes da Silva"
       },
@@ -136,7 +136,7 @@
       "name": "skill-loader",
       "source": "./",
       "description": "Descoberta e carregamento limitado de skills em biblioteca externa.",
-      "version": "4.2.0",
+      "version": "4.3.0",
       "author": {
         "name": "Tales Wilhame Gomes da Silva"
       },
@@ -149,7 +149,7 @@
       "name": "pipeline-guardrails",
       "source": "./pipeline-guardrails",
       "description": "Hook do Claude Code que pede confirmação antes das formas comuns de push, tag, PR, deploy, migração e instalação de dependência. Só pergunta; nunca libera.",
-      "version": "4.2.0",
+      "version": "4.3.0",
       "author": {
         "name": "Tales Wilhame Gomes da Silva"
       },
@@ -159,7 +159,7 @@
       "name": "essencial",
       "source": "./",
       "description": "Pacote com as pipelines de planejamento, execução e release e a skill de dados pessoais. Instala esses quatro plugins como dependências.",
-      "version": "4.2.0",
+      "version": "4.3.0",
       "author": {
         "name": "Tales Wilhame Gomes da Silva"
       },
@@ -176,7 +176,7 @@
       "name": "completo",
       "source": "./",
       "description": "Pacote com todas as skills da biblioteca. Instala cada uma como dependência.",
-      "version": "4.2.0",
+      "version": "4.3.0",
       "author": {
         "name": "Tales Wilhame Gomes da Silva"
       },

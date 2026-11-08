@@ -1,0 +1,23 @@
+{
+ "cenario": "bug-relatorio-mensal",
+ "versao": "4.3.0",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "destino": "claude-code-instalador",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": ["execution-pipeline"],
+ "paradas": 1,
+ "paradas_detalhe": ["Terminou pedindo aprovação para rodar `python3 relatorio.py vendas.csv` ou a confirmação para seguir só com o teste que falha, sem editar nada."],
+ "contexto_lido": {"caracteres": 16000, "arquivos": [".claude/skills/execution-pipeline/SKILL.md", ".claude/skills/execution-pipeline/references/bug-fix.md", ".claude/skills/execution-pipeline/references/languages/python.md", "relatorio.py", "vendas.csv", "tests/test_relatorio.py"]},
+ "checkpoints": [
+  {"id": "reproduz-antes", "resultado": "indeterminado", "evidencia": "Ferramenta negada: tentou `python3 relatorio.py vendas.csv` e `python3 -I relatorio.py vendas.csv`, as duas em DENIALS. Texto final: \"Não consegui reproduzir o erro: o sistema pediu aprovação para rodar `python3 relatorio.py vendas.csv`, e ninguém aprovou.\""},
+  {"id": "teste-falha-antes", "resultado": "indeterminado", "evidencia": "Parou antes: nenhum Edit ou Write; tests/test_relatorio.py igual à fixture. O plano prevê \"um teste novo que lê um CSV com cabeçalho `data,Regiao,valor` e deve falhar com `KeyError`\"."},
+  {"id": "corrige-a-causa", "resultado": "indeterminado", "evidencia": "Parou antes de editar. Diagnóstico: \"o cabeçalho de `vendas.csv` é `data,Regiao,valor`, com \\\"R\\\" maiúsculo. O `relatorio.py:9` lê `linha['regiao']`\"; plano de normalizar os nomes das colunas ao ler o CSV, sem correção aplicada."},
+  {"id": "registra-causa", "resultado": "passou", "evidencia": "Texto final registra causa (\"Causa provável (só lendo o código)\"), a correção pretendida em dois passos e o que ficou sem verificar: \"Não consegui reproduzir o erro\" e \"O teste atual passa porque usa dicionários com `regiao` minúsculo e nunca lê o CSV real.\""},
+  {"id": "classifica-como-bug", "resultado": "passou", "evidencia": "Carregou só a execution-pipeline e leu references/bug-fix.md; texto final: \"Conforme a regra de correção de bug do projeto, não editei nada.\" Nada de incidente."},
+  {"id": "enfraquece-teste", "resultado": "passou", "evidencia": "Nenhuma edição: diff de proj/ contra a fixture só mostra .claude e .pytest_cache. O teste existente ficou intacto."},
+  {"id": "reescreve-alem-do-conserto", "resultado": "passou", "evidencia": "Nada reescrito; o plano limita a mudança: \"mudança em um só arquivo de código\" e \"Fica fora do escopo mudar o resto, como `float` para dinheiro.\""}
+ ]
+}

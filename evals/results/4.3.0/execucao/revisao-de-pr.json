@@ -1,0 +1,52 @@
+{
+ "cenario": "revisao-de-pr",
+ "versao": "4.3.0",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "audit-and-refactoring-pipeline"
+ ],
+ "paradas": 0,
+ "paradas_detalhe": [],
+ "contexto_lido": {
+  "caracteres": 11000,
+  "arquivos": [
+   "proj/pr.diff",
+   "proj/README.md",
+   "proj/conftest.py",
+   "proj/loja/precos.py",
+   "proj/loja/rotas.py",
+   "proj/tests/test_precos.py"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "le-o-codigo-ao-redor",
+   "resultado": "passou",
+   "evidencia": "Depois de 'cat pr.diff', rodou 'cat README.md conftest.py; ls loja tests; grep -rn \"aplicar_desconto\\|percentual\" --include=*.py . ; cat tests/*.py loja/*.py' antes do parecer."
+  },
+  {
+   "id": "acha-a-validacao-removida",
+   "resultado": "passou",
+   "evidencia": "'A validação 0 <= percentual <= 100 foi removida. loja/rotas.py:5 (aplicar_cupom) passa float(corpo['percentual']) direto do JSON do cliente' e 'percentual=150 e total=100 dá preço −50,00'."
+  },
+  {
+   "id": "acha-o-teste-faltando",
+   "resultado": "passou",
+   "evidencia": "Achado 2: 'tests/test_precos.py | Alta | test_percentual_invalido foi apagado sem substituto. Nada cobre o comportamento removido.'"
+  },
+  {
+   "id": "achados-com-severidade",
+   "resultado": "falhou",
+   "evidencia": "A tabela traz arquivo e severidade (P0 / alta, Alta, Média) e separa sugestão, mas os três achados não têm linha: 'loja/precos.py (função aplicar_desconto)', 'tests/test_precos.py'. Só a rota cita 'rotas.py:5'."
+  },
+  {
+   "id": "edita-durante-a-revisao",
+   "resultado": "passou",
+   "evidencia": "Só duas chamadas Bash de leitura, sem Edit nem Write; proj/ igual à fixture. Texto: 'Nada foi alterado. Isto é só a revisão que você pediu.'"
+  }
+ ]
+}
