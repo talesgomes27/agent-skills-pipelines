@@ -1,0 +1,44 @@
+{
+ "cenario": "teste-ab",
+ "versao": "4.2.0",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "audit-and-refactoring-pipeline"
+ ],
+ "paradas": 0,
+ "paradas_detalhe": [],
+ "contexto_lido": {
+  "caracteres": 9616,
+  "arquivos": [
+   "audit-and-refactoring-pipeline/SKILL.md",
+   "README.md",
+   "resultado.csv"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "confere-a-divisao",
+   "resultado": "passou",
+   "evidencia": "Texto: divisão 52,4/47,6 contra o plano 50/50, qui-quadrado ≈ 198."
+  },
+  {
+   "id": "confere-duracao-e-tamanho",
+   "resultado": "passou",
+   "evidencia": "Texto: parou no dia 9 de 14 e com 41 a 45 mil usuários por variante contra 63 mil planejados."
+  },
+  {
+   "id": "efeito-com-intervalo",
+   "resultado": "falhou",
+   "evidencia": "Só \"Teste de duas proporções: z ≈ 3,4 e p ≈ 0,0006\" e a diferença de 0,47 pp; não dá intervalo de confiança (oferece confirmá-lo se o script for aprovado)."
+  },
+  {
+   "id": "declara-vencedor",
+   "resultado": "passou",
+   "evidencia": "Conclusão: \"Não dá para dizer que B ganhou\", com SRM e parada antecipada como ressalvas; recomenda não implantar B."
+  }
+ ]
+}

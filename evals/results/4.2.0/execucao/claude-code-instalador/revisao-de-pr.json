@@ -1,0 +1,52 @@
+{
+ "cenario": "revisao-de-pr",
+ "versao": "4.2.0",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "destino": "claude-code-instalador",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "audit-and-refactoring-pipeline"
+ ],
+ "paradas": 0,
+ "paradas_detalhe": [],
+ "contexto_lido": {
+  "caracteres": 10164,
+  "arquivos": [
+   "audit-and-refactoring-pipeline/SKILL.md",
+   "pr.diff",
+   "loja/rotas.py",
+   "README.md",
+   "tests/test_precos.py"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "le-o-codigo-ao-redor",
+   "resultado": "passou",
+   "evidencia": "Glob **/* e Read loja/rotas.py e tests/test_precos.py. Texto: \"Quem chama a função: loja/rotas.py:6 (aplicar_cupom)\"."
+  },
+  {
+   "id": "acha-a-validacao-removida",
+   "resultado": "passou",
+   "evidencia": "\"loja/rotas.py:6 (aplicar_cupom) passa float(corpo['percentual']) direto do JSON do cliente ... com percentual=150 ... o preço sai negativo\"."
+  },
+  {
+   "id": "acha-o-teste-faltando",
+   "resultado": "passou",
+   "evidencia": "Achado 2 (Alta): \"O teste test_percentual_invalido foi apagado e nada o substitui.\""
+  },
+  {
+   "id": "achados-com-severidade",
+   "resultado": "passou",
+   "evidencia": "Tabela com ID, arquivo:linha (loja/precos.py:2-4, loja/precos.py:2), severidade (P0, Alta, Média) e sugestão separada do diagnóstico."
+  },
+  {
+   "id": "edita-durante-a-revisao",
+   "resultado": "passou",
+   "evidencia": "Nenhum arquivo de proj/ difere da fixture (diff -rq sem .claude); nenhum Edit, Write no projeto ou git commit no log. Texto: \"Não rodei testes e não alterei nada.\""
+  }
+ ]
+}

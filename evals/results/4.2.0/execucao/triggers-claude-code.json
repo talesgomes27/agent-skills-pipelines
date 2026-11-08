@@ -1,0 +1,37 @@
+{
+ "versao": "4.2.0",
+ "nivel": "execucao",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "resultados": [
+  {
+   "id": "audit-and-refactoring-pipeline-1",
+   "observado": "ativou"
+  },
+  {
+   "id": "audit-and-refactoring-pipeline-2",
+   "observado": "ativou"
+  },
+  {
+   "id": "audit-and-refactoring-pipeline-3",
+   "observado": "nao_ativou"
+  },
+  {
+   "id": "writing-pipeline-1",
+   "observado": "ativou"
+  },
+  {
+   "id": "writing-pipeline-2",
+   "observado": "ativou"
+  },
+  {
+   "id": "writing-pipeline-3",
+   "observado": "nao_ativou"
+  },
+  {
+   "id": "writing-pipeline-notebook",
+   "observado": "nao_ativou"
+  }
+ ]
+}
