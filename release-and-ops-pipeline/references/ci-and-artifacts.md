@@ -11,9 +11,9 @@ Condições e jobs skipped não podem ser apresentados como testes aprovados. Ve
 ## Artefato e evidência
 
 Registre commit, versão, run produtor e identificador/digest do artefato quando disponíveis. A aprovação deve referir-se a esse conteúdo, não a “latest” sem resolução.
-Mudança de versão/arquivo depois do teste exige checks pertinentes do artefato final. Para pacotes, inspecione conteúdo e instale o wheel/binário construído em ambiente temporário fora da árvore de desenvolvimento, sem importação editable do checkout. `uv run` no projeto não comprova essa instalação isolada.
+Construa o artefato final antes de publicar; mudança de versão/arquivo depois do teste exige checks pertinentes desse artefato. Para pacotes, inspecione conteúdo e instale o wheel/binário construído em ambiente temporário fora da árvore de desenvolvimento, sem importação editable do checkout. `uv run` no projeto não comprova essa instalação isolada.
 Para containers, identifique imagem por digest/revisão e confira entrypoint/configuração no destino de teste. Build local e registry push são estados distintos.
-Validador YAML/actionlint verifica propriedades locais; confirmação de CI exige consultar run e conclusão para o commit certo. URL de deployment emitida pode representar fila, erro ou preview: confira status e destino final antes de concluir.
+Validador YAML/actionlint verifica propriedades locais, e YAML válido não prova que o job rodou; confirmação de CI exige consultar run e conclusão para o commit certo. URL de deployment emitida pode representar fila, erro ou preview: confira status e destino final antes de concluir.
 
 ## Pacotes
 

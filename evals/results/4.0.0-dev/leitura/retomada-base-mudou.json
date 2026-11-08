@@ -1,0 +1,48 @@
+{
+ "cenario": "retomada-base-mudou",
+ "versao": "4.0.0-dev",
+ "nivel": "leitura",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-07",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 2,
+ "paradas_detalhe": [
+  "volta ao A1: o plano aprovado fixa arredondar(valor: float) -> float e a main trocou para Decimal",
+  "A3 ao fim de EX-5, com testes e lint refeitos em 9c3e7d4"
+ ],
+ "contexto_lido": {
+  "caracteres": 27500,
+  "arquivos": [
+   "frontmatter das 9 skills (estimado em 2.000 caracteres)",
+   "execution-pipeline/SKILL.md",
+   "execution-pipeline/references/common-contract.md",
+   "execution-pipeline/references/archetype-c.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "percebe-a-base-nova",
+   "resultado": "passou",
+   "evidencia": "common-contract.md: \"confira se a base, o diff, o artefato e o destino mudaram antes de reaproveitar checks e aprovações\"; a nota do task.md cita 9c3e7d4 e src/precos.py."
+  },
+  {
+   "id": "refaz-os-checks-afetados",
+   "resultado": "passou",
+   "evidencia": "common-contract.md: \"refaça os checks que a mudança afetou\"; SKILL.md EX-5: \"Rode lint, tipos, testes e build do projeto\"."
+  },
+  {
+   "id": "confere-o-plano-contra-a-mudanca",
+   "resultado": "passou",
+   "evidencia": "common-contract.md: \"e se a mudança afeta o plano aprovado, que nesse caso volta ao A1\"; SKILL.md: \"Fique no escopo e nas interfaces do plano\"."
+  },
+  {
+   "id": "pronto-com-checks-antigos",
+   "resultado": "passou",
+   "evidencia": "SKILL.md: \"Com um check obrigatório falhando ou não executado, a entrega não está validada.\"; contrato: \"Nada é declarado pronto sem evidência\"."
+  }
+ ]
+}

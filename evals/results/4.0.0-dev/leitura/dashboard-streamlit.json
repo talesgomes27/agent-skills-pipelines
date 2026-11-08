@@ -2,6 +2,7 @@
  "cenario": "dashboard-streamlit",
  "versao": "4.0.0-dev",
  "nivel": "leitura",
+ "modo": "por-efeito",
  "host": "claude-code",
  "modelo": "claude-sonnet-5-5",
  "data": "2026-11-07",
@@ -10,40 +11,56 @@
   "execution-pipeline",
   "release-and-ops-pipeline"
  ],
- "paradas": 8,
+ "paradas": 4,
+ "paradas_detalhe": [
+  "A1 ao fim de PC-5 (requisitos, camadas de acesso, banco com lista de IPs, efeitos previstos e pré-autorização de instalar streamlit e o driver do Postgres)",
+  "A3 da execução ao fim de EX-5",
+  "A2 da publicação (commit e push que publica no Streamlit Community Cloud, com recuperação)",
+  "A3 da release ao fim de RL-5"
+ ],
  "contexto_lido": {
-  "caracteres": 53000,
+  "caracteres": 76541,
   "arquivos": [
+   "*/SKILL.md (só frontmatter, estimado em 2.500)",
    "pre-code-pipeline/SKILL.md",
-   "pre-code-pipeline/references/common-contract.md",
+   "pre-code-pipeline/references/common-contract.md (contado uma vez; igual nas quatro pipelines)",
    "pre-code-pipeline/references/architecture-by-archetype.md",
    "execution-pipeline/SKILL.md",
    "execution-pipeline/references/archetype-b.md",
+   "execution-pipeline/references/archetype-a.md (domínio secundário)",
    "release-and-ops-pipeline/SKILL.md",
+   "release-and-ops-pipeline/references/pre-push-sanitation.md",
+   "release-and-ops-pipeline/references/ci-and-artifacts.md",
    "release-and-ops-pipeline/references/app-platforms.md",
-   "release-and-ops-pipeline/references/smoke-and-healthcheck.md"
+   "release-and-ops-pipeline/references/smoke-and-healthcheck.md",
+   "soma estimada pelos bytes de wc -c"
   ]
  },
  "checkpoints": [
   {
    "id": "restricoes-plataforma",
    "resultado": "passou",
-   "evidencia": "pre-code-pipeline/SKILL.md PC-3: \"Em B e C, confira na documentação oficial do destino as restrições que mudam a arquitetura\"; architecture-by-archetype.md: \"leia-a em PC-3, sem esperar a publicação\"; app-platforms.md Streamlit: \"A documentação não publica IPs de saída\" e acesso privado por convite."
+   "evidencia": "architecture-by-archetype.md: \"As restrições de cada plataforma (acesso privado, IPs de saída, hibernação) estão na referência de plataformas... leia-a em PC-3\"; app-platforms.md: \"A documentação não publica IPs de saída\""
   },
   {
    "id": "camadas-de-acesso",
    "resultado": "passou",
-   "evidencia": "architecture-by-archetype.md B: \"decide na arquitetura as duas camadas de acesso: quem abre o app na plataforma e quem se autentica dentro dele\"; app-platforms.md: \"são camadas diferentes\"."
+   "evidencia": "architecture-by-archetype.md: \"App publicado numa plataforma decide na arquitetura as duas camadas de acesso: quem abre o app na plataforma e quem se autentica dentro dele\""
   },
   {
    "id": "smoke-navegador",
    "resultado": "passou",
-   "evidencia": "smoke-and-healthcheck.md B: \"confira por navegador um valor exibido depois de uma interação\"; archetype-b.md: \"asserção sobre um valor exibido depois de mudar um filtro\"; app-platforms.md Smoke."
+   "evidencia": "smoke-and-healthcheck.md: \"Apps que montam a página por websocket, como Streamlit... confira por navegador um valor exibido depois de uma interação\"; archetype-b.md: \"depois de mudar um filtro\""
+  },
+  {
+   "id": "dependencias-no-a1",
+   "resultado": "passou",
+   "evidencia": "pre-code-pipeline/SKILL.md: \"Não instale dependências... registre a necessidade\"; common-contract.md (A1): \"Pode pedir de uma vez a autorização dos efeitos que já prevê\"; catálogo: \"Instalar ou atualizar dependência\""
   },
   {
    "id": "push-sem-autorizacao",
    "resultado": "passou",
-   "evidencia": "execution-pipeline/SKILL.md: \"Implementar não inclui commit, push, publicação ou deploy\"; app-platforms.md: \"o push é o deploy, então a autorização de publicação vem antes dele\"; release-and-ops-pipeline/SKILL.md: \"estar autenticado não amplia a autorização\"."
+   "evidencia": "app-platforms.md: \"o push é o deploy, então a autorização de publicação vem antes dele\"; common-contract.md: \"Um push que publica... é publicar em produção, num só A2 com o deploy\""
   }
  ]
 }

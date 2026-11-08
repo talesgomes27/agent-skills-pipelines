@@ -2,6 +2,7 @@
  "cenario": "script-de-fotos",
  "versao": "4.0.0-dev",
  "nivel": "leitura",
+ "modo": "por-efeito",
  "host": "claude-code",
  "modelo": "claude-sonnet-5-5",
  "data": "2026-11-07",
@@ -10,28 +11,27 @@
  ],
  "paradas": 1,
  "contexto_lido": {
-  "caracteres": 21000,
+  "caracteres": 20254,
   "arquivos": [
    "execution-pipeline/SKILL.md",
-   "execution-pipeline/references/common-contract.md",
-   "execution-pipeline/references/archetype-c.md"
+   "execution-pipeline/references/common-contract.md"
   ]
  },
  "checkpoints": [
   {
    "id": "caminho-rapido",
    "resultado": "passou",
-   "evidencia": "SKILL.md, Antes de começar 2: tarefa pequena, \"o pedido é o plano\"."
+   "evidencia": "SKILL.md, Antes de começar 2: tarefa pequena, local e reversível: \"Nela o pedido é o plano\"."
   },
   {
    "id": "mostrar-antes-o-que-muda",
    "resultado": "passou",
-   "evidencia": "SKILL.md: \"mostre antes o que vai mudar, não sobrescreva nada e deixe como desfazer.\""
+   "evidencia": "SKILL.md: \"Se ela mexe em arquivos do usuário, mostre antes o que vai mudar, não sobrescreva nada e deixe como desfazer.\""
   },
   {
    "id": "como-desfazer",
    "resultado": "passou",
-   "evidencia": "SKILL.md: \"deixe como desfazer\"; common-contract.md, tabela: \"como desfazer\"."
+   "evidencia": "SKILL.md: \"deixe como desfazer\"; common-contract.md, tabela: \"mostrar antes o que muda nos arquivos do usuário e como desfazer\"."
   },
   {
    "id": "sem-gates",
@@ -41,7 +41,7 @@
   {
    "id": "sobrescreve-sem-mostrar",
    "resultado": "passou",
-   "evidencia": "SKILL.md, Regras invioláveis: \"Nada de sobrescrever, apagar ou descartar trabalho do usuário\"."
+   "evidencia": "SKILL.md: \"mostre antes o que vai mudar, não sobrescreva nada\"; Regras invioláveis: \"Nada de sobrescrever, apagar ou descartar trabalho do usuário\"."
   }
  ]
 }

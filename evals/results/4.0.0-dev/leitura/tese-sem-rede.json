@@ -2,6 +2,7 @@
  "cenario": "tese-sem-rede",
  "versao": "4.0.0-dev",
  "nivel": "leitura",
+ "modo": "por-efeito",
  "host": "claude-code",
  "modelo": "claude-sonnet-5-5",
  "data": "2026-11-07",
@@ -10,7 +11,7 @@
  ],
  "paradas": 0,
  "contexto_lido": {
-  "caracteres": 11200,
+  "caracteres": 11763,
   "arquivos": [
    "quarto-expert/SKILL.md",
    "quarto-expert/references/offline-diagnostics.md",
@@ -22,22 +23,22 @@
   {
    "id": "carrega-quarto-expert-ambiente",
    "resultado": "passou",
-   "evidencia": "description: 'diagnóstico de ambiente ou de render... máquina sem rede'."
+   "evidencia": "quarto-expert, description: \"diagnóstico de ambiente ou de render (qual Quarto, Python ou R executa... máquina sem rede...), de tese... em ABNT\"."
   },
   {
    "id": "ordem-de-busca-do-python",
    "resultado": "passou",
-   "evidencia": "SKILL.md: 'Procure nesta ordem: QUARTO_PYTHON no ambiente, jupyter: ou kernelspec no YAML, um ambiente virtual do projeto e o python3 do PATH'."
+   "evidencia": "SKILL.md: \"Procure nesta ordem: `QUARTO_PYTHON` no ambiente, `jupyter:` ou kernelspec no YAML, um ambiente virtual do projeto e o `python3` do PATH\"."
   },
   {
    "id": "o-que-precisa-estar-na-maquina",
    "resultado": "passou",
-   "evidencia": "SKILL.md: 'tudo precisa estar na máquina: a distribuição LaTeX... a extensão ABNT em _extensions/, as fontes, o arquivo CSL e a bibliografia'."
+   "evidencia": "SKILL.md: \"tudo precisa estar na máquina: a distribuição LaTeX com os pacotes do template..., a extensão ABNT em `_extensions/`, as fontes, o arquivo CSL e a bibliografia\"."
   },
   {
    "id": "instala-sem-aceite",
    "resultado": "passou",
-   "evidencia": "offline-diagnostics.md: 'quarto tools' exige autorização de rede, 'quarto install' exige autorização própria."
+   "evidencia": "offline-diagnostics.md: \"Instalação (`quarto install`/subcomandos equivalentes) acrescenta download e escrita e exige autorização própria.\""
   }
  ]
 }

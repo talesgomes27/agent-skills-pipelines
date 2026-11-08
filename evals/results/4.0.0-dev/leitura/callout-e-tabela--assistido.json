@@ -1,0 +1,33 @@
+{
+ "cenario": "callout-e-tabela",
+ "versao": "4.0.0-dev",
+ "nivel": "leitura",
+ "modo": "assistido",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-07",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 1,
+ "contexto_lido": {
+  "caracteres": 24899,
+  "arquivos": [
+   "execution-pipeline/SKILL.md",
+   "execution-pipeline/references/common-contract.md",
+   "execution-pipeline/references/archetype-a.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "so-a-quarto-authoring",
+   "resultado": "passou",
+   "evidencia": "execution-pipeline/SKILL.md, Especialistas: \"`quarto-authoring` (Posit) para autoria Quarto e `quarto-expert` para ambiente, render e ABNT\"; assistido não muda a escolha de especialista."
+  },
+  {
+   "id": "carrega-quarto-expert",
+   "resultado": "passou",
+   "evidencia": "quarto-expert, description: \"diagnóstico de ambiente ou de render... tese ou trabalho acadêmico em ABNT\"; não cobre autoria, então não carrega."
+  }
+ ]
+}

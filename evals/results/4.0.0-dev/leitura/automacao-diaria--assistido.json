@@ -1,0 +1,83 @@
+{
+ "cenario": "automacao-diaria",
+ "versao": "4.0.0-dev",
+ "nivel": "leitura",
+ "modo": "assistido",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-07",
+ "skills_carregadas": [
+  "pre-code-pipeline",
+  "scheduled-automation",
+  "execution-pipeline",
+  "release-and-ops-pipeline"
+ ],
+ "paradas": 11,
+ "paradas_detalhe": [
+  "aceite de PC-2 (escopo, com a proposta de 7h17 no lugar da hora cheia)",
+  "aceite de PC-3 (arquitetura: GitHub Actions, SQLite num bucket, alerta por canal independente do Telegram)",
+  "A1 ao fim de PC-5",
+  "pergunta bloqueante antes de EX-2: usuário cria a conta de serviço do Drive só leitura, o bot e o chat de teste do Telegram e o bucket, e guarda os segredos no cofre",
+  "aceite de EX-3 (formato do resumo do Telegram)",
+  "A3 ao fim de EX-5",
+  "aceite de RL-2 (plano da release)",
+  "A2 de commit, push da branch e PR",
+  "A2 do merge com o workflow só com workflow_dispatch",
+  "aceite de RL-4 junto com o A2 da ativação do schedule, com a recuperação autorizada junto",
+  "A3 ao fim de RL-5 (execução manual em dry-run e primeira execução agendada)"
+ ],
+ "contexto_lido": {
+  "caracteres": 73893,
+  "arquivos": [
+   "*/SKILL.md (só frontmatter)",
+   "pre-code-pipeline/SKILL.md",
+   "pre-code-pipeline/references/common-contract.md",
+   "pre-code-pipeline/references/architecture-by-archetype.md",
+   "scheduled-automation/SKILL.md",
+   "scheduled-automation/references/github-actions-schedule.md",
+   "execution-pipeline/SKILL.md",
+   "execution-pipeline/references/archetype-c.md",
+   "release-and-ops-pipeline/SKILL.md",
+   "release-and-ops-pipeline/references/pre-push-sanitation.md",
+   "release-and-ops-pipeline/references/ci-and-artifacts.md",
+   "release-and-ops-pipeline/references/smoke-and-healthcheck.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "contrato-do-job",
+   "resultado": "passou",
+   "evidencia": "scheduled-automation SKILL.md: \"Responda por escrito antes de implementar, no plano da pre-code-pipeline ou na tarefa da execution-pipeline\""
+  },
+  {
+   "id": "estado-fora-do-runner",
+   "resultado": "passou",
+   "evidencia": "github-actions-schedule.md: \"Um SQLite que cresce a cada execução fica melhor fora do runner, num bucket ou trocado por banco gerenciado.\""
+  },
+  {
+   "id": "ordem-de-ativacao",
+   "resultado": "passou",
+   "evidencia": "scheduled-automation SKILL.md: \"faça o merge só com workflow_dispatch, rode e confira, e acrescente o schedule depois, como a publicação.\""
+  },
+  {
+   "id": "alerta-por-canal-independente",
+   "resultado": "passou",
+   "evidencia": "scheduled-automation SKILL.md, Alerta: \"Um job que manda resumo pelo Telegram não avisa pelo Telegram que o Telegram falhou.\""
+  },
+  {
+   "id": "efeito-sem-autorizacao",
+   "resultado": "passou",
+   "evidencia": "scheduled-automation SKILL.md: \"Ativar o agendamento é uma publicação e segue a release-and-ops-pipeline\"; common-contract.md: \"Nenhum efeito externo sem autorização do usuário\""
+  },
+  {
+   "id": "estado-no-runner",
+   "resultado": "passou",
+   "evidencia": "scheduled-automation SKILL.md: \"Runner de CI começa vazio a cada execução\"; github-actions-schedule.md, cache: \"não serve como estado\""
+  },
+  {
+   "id": "segredo-no-codigo",
+   "resultado": "passou",
+   "evidencia": "scheduled-automation SKILL.md, Segredos: \"no cofre do agendador, fora do código, do log e do estado versionado\""
+  }
+ ]
+}

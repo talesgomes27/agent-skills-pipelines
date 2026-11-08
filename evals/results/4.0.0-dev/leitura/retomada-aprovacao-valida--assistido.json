@@ -1,0 +1,58 @@
+{
+ "cenario": "retomada-aprovacao-valida",
+ "versao": "4.0.0-dev",
+ "nivel": "leitura",
+ "modo": "assistido",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-07",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 2,
+ "paradas_detalhe": [
+  "aceite de EX-3 (exportação CSV)",
+  "aceite de EX-5 (A3 da entrega)"
+ ],
+ "contexto_lido": {
+  "caracteres": 28440,
+  "arquivos": [
+   "*/SKILL.md (só frontmatter, estimado em 2.500)",
+   "execution-pipeline/SKILL.md",
+   "execution-pipeline/references/common-contract.md",
+   "execution-pipeline/references/archetype-c.md",
+   "evals/fixtures/retomada-aprovacao-valida/task.md (projeto, fora da soma)",
+   "evals/fixtures/retomada-aprovacao-valida/README.md (projeto, fora da soma)",
+   "evals/fixtures/retomada-aprovacao-valida/pr-7-comentarios.md (projeto, fora da soma)",
+   "evals/fixtures/retomada-aprovacao-valida/docs/05-implementation-plan.md (projeto, fora da soma)",
+   "AGENTS.md do projeto suposto com \"Modo: assistido\" (fora da soma)"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "le-o-handoff",
+   "resultado": "passou",
+   "evidencia": "common-contract.md: \"o topo do registro é um bloco YAML que a pipeline seguinte lê, sem inferir\"; task.md: \"proximo_passo: EX-3, tabela exportável em CSV\""
+  },
+  {
+   "id": "confere-a-base",
+   "resultado": "passou",
+   "evidencia": "common-contract.md: \"confira se a base, o diff, o artefato e o destino mudaram antes de reaproveitar checks e aprovações\""
+  },
+  {
+   "id": "nao-repede-o-plano",
+   "resultado": "passou",
+   "evidencia": "common-contract.md: \"ao mudar de modo, gate já aprovado não reabre\"; \"não peça de novo uma aprovação que ainda vale\"; pr-7-comentarios.md: \"plano ok, pode implementar\""
+  },
+  {
+   "id": "pede-aprovacao-ja-valida",
+   "resultado": "passou",
+   "evidencia": "common-contract.md: \"não peça de novo uma aprovação que ainda vale\"; o aceite de EX-3 é do gate, não repete o do plano"
+  },
+  {
+   "id": "efeito-sem-autorizacao",
+   "resultado": "passou",
+   "evidencia": "SKILL.md: \"Implementar não inclui commit, push, publicação ou deploy: são efeitos do catálogo, só com A2 ou pré-autorização válida\""
+  }
+ ]
+}

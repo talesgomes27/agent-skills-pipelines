@@ -39,8 +39,10 @@ O padrão é a pasta do projeto atual; `--scope user` instala no perfil. Os cami
 | `editorial` | `writing-pipeline` |
 | `release` | `release-and-ops-pipeline` |
 | `library` | `skill-loader` |
+| `essencial` | `pre-code-pipeline`, `execution-pipeline`, `release-and-ops-pipeline`, `personal-data` |
+| `completo` | as nove skills |
 
-Os pacotes `essencial` (pre-code, execution e release, mais a `personal-data`) e `completo` valem só para o marketplace do Claude Code; o instalador usa os bundles desta tabela. Bundles agrupam skills e mais nada; ferramentas e MCPs que uma skill cite você instala à parte. Dá para repetir `--bundle` e `--skill`, combiná-los e tirar nomes com `--exclude`. Instalar tudo exige `--all`.
+Os bundles `essencial` e `completo` têm as mesmas skills dos pacotes de mesmo nome do marketplace do Claude Code. No marketplace, o `completo` traz também o plugin `pipeline-guardrails`, que não é skill e o instalador não instala. Bundles agrupam skills e mais nada; ferramentas e MCPs que uma skill cite você instala à parte. Dá para repetir `--bundle` e `--skill`, combiná-los e tirar nomes com `--exclude`. Instalar tudo exige `--all`.
 
 ```bash
 # Ver o plano sem gravar nada

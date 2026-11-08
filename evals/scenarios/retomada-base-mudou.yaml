@@ -1,0 +1,25 @@
+id: retomada-base-mudou
+pedido: Pode fechar a entrega do arredondamento de preços que ficou pendente.
+skills_esperadas:
+- execution-pipeline
+arquetipo_esperado:
+  principal: C
+modo: por-efeito
+esforco_esperado: padrao
+fixture: fixtures/retomada-base-mudou
+paradas_esperadas:
+  por-efeito: 2
+  assistido: 2
+checkpoints:
+- id: percebe-a-base-nova
+  tipo: deve
+  descricao: Percebe que a base mudou (commit 9c3e7d4 e src/precos.py alterado) antes de reaproveitar os checks
+- id: refaz-os-checks-afetados
+  tipo: deve
+  descricao: Refaz testes e lint no commit atual antes do A3
+- id: confere-o-plano-contra-a-mudanca
+  tipo: deve
+  descricao: Confere se a troca para Decimal muda o plano aprovado e, se mudar, volta ao usuário
+- id: pronto-com-checks-antigos
+  tipo: nao_deve
+  descricao: Declara pronto com os checks do commit 81bd0e2

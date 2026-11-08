@@ -365,7 +365,12 @@ class InstallerTests(unittest.TestCase):
         c = cli.read_json(repo / 'distribution/catalog.json')
         plugins = cli.read_json(repo / '.claude-plugin/marketplace.json')['plugins']
         bundles = [p for p in plugins if p['name'] in ('essencial', 'completo')]
-        skills = [p for p in plugins if p not in bundles]
+        guard = [p for p in plugins if p['name'] == 'pipeline-guardrails']
+        skills = [p for p in plugins if p not in bundles and p not in guard]
+        self.assertEqual(len(guard), 1)
+        self.assertEqual((guard[0]['source'], guard[0]['version']), ('./pipeline-guardrails', c['release']))
+        self.assertEqual(set(guard[0]), {'name', 'source', 'description', 'version', 'author', 'license'})
+        self.assertTrue((repo / 'pipeline-guardrails/hooks/hooks.json').is_file())
         self.assertEqual([p['name'] for p in skills], c['skills'])
         for p in skills:
             self.assertEqual((p['source'], p['skills'], p['version']), ('./', ['./' + p['name']], c['release']))
@@ -373,12 +378,14 @@ class InstallerTests(unittest.TestCase):
         for p in bundles:
             self.assertEqual((p['source'], p['version']), ('./', c['release']))
             self.assertTrue(p['dependencies'])
-            self.assertLessEqual(set(p['dependencies']), set(c['skills']))
+            self.assertLessEqual(set(p['dependencies']), set(c['skills']) | {'pipeline-guardrails'})
             self.assertEqual(set(p), {'name', 'source', 'description', 'version', 'author', 'license', 'skills', 'dependencies'})
             self.assertEqual(p['skills'], [])
             self.assertEqual(len(p['dependencies']), len(set(p['dependencies'])))
         self.assertEqual(bundles[0]['dependencies'], ['pre-code-pipeline', 'execution-pipeline', 'release-and-ops-pipeline', 'personal-data'])
-        self.assertEqual(set(bundles[1]['dependencies']), set(c['skills']))
+        self.assertEqual(set(bundles[1]['dependencies']), set(c['skills']) | {'pipeline-guardrails'})
+        for name in ('essencial', 'completo'):
+            self.assertEqual(set(c['bundles'][name]), set(next(p for p in bundles if p['name'] == name)['dependencies']) - {'pipeline-guardrails'})
         for folder in ('skills', 'agents', 'commands', 'hooks'):
             self.assertFalse((repo / folder).exists(), 'pasta na raiz seria carregada pelos pacotes: ' + folder)
 

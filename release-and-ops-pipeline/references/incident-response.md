@@ -1,6 +1,6 @@
 # Incidentes e segredo vazado
 
-Vale quando um defeito teve efeito fora do ambiente de desenvolvimento (atingiu usuários, dados reais ou envios), quando um serviço ou job de produção usado por outras pessoas parou, ou quando um segredo foi exposto. Script ou relatório local que falha sem ter publicado nem enviado nada é bug. O conserto do código segue a correção de bug da `execution-pipeline`, e a nova publicação volta aos gates RL-1 a RL-5.
+É incidente o defeito com efeito fora do desenvolvimento (usuários, dados reais, envios), o serviço ou job de produção usado por outros que parou e o segredo exposto; falha local, sem publicação nem envio, é bug. Na dúvida, pergunte se algo saiu do ambiente local. Num incidente, as paradas são o A2 de cada contenção fora do plano de recuperação já autorizado, envio, reprocessamento ou limpeza de histórico, e o A3 depois da verificação no destino; os gates RL-1 a RL-5 voltam na nova publicação. O conserto do código segue a correção de bug da `execution-pipeline`.
 
 ## Ordem
 
@@ -22,6 +22,6 @@ Apagar a linha não invalida um segredo que já saiu num commit, num push, num l
 4. **Limpar o histórico, só depois de revogar e só se ainda valer a pena.** Reescrever o histórico remoto, com `git-filter-repo` e force push, troca os hashes, afeta clones, forks e PRs abertos, e exige autorização própria. Cópias em forks, clones e caches continuam com o segredo. Em repositório público, trate o segredo como comprometido mesmo depois da limpeza.
 5. **Impedir a repetição.** `.gitignore`, o scanner de segredos que o projeto já usa ou um proposto com aceite, e checagem antes do commit.
 
-Nunca mostre, repita nem teste o segredo vazado, nem para conferir se ele ainda funciona.
+Nunca mostre, repita nem teste o segredo vazado, nem para conferir se ele ainda funciona. Ao mostrar o diff da correção, mascare o valor removido.
 
 Fonte: [Removing sensitive data from a repository](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository), GitHub Docs, conferido em 07/11/2026.

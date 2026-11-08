@@ -2,6 +2,7 @@
  "cenario": "relatorio-executivo",
  "versao": "4.0.0-dev",
  "nivel": "leitura",
+ "modo": "por-efeito",
  "host": "claude-code",
  "modelo": "claude-sonnet-5-5",
  "data": "2026-11-07",
@@ -10,27 +11,28 @@
  ],
  "paradas": 1,
  "contexto_lido": {
-  "caracteres": 11000,
+  "caracteres": 14767,
   "arquivos": [
    "writing-pipeline/SKILL.md",
-   "writing-pipeline/references/document-types.md"
+   "writing-pipeline/references/document-types.md",
+   "writing-pipeline/references/citations-and-evidence.md"
   ]
  },
  "checkpoints": [
   {
    "id": "carrega-writing-pipeline",
    "resultado": "passou",
-   "evidencia": "document-types.md tem \"Relatório executivo\"."
+   "evidencia": "writing-pipeline, description: \"redigir... documento técnico ou de negócio, como... relatório\"; document-types.md tem \"Relatório executivo\"."
   },
   {
    "id": "numeros-conferidos",
    "resultado": "passou",
-   "evidencia": "document-types.md: \"Monte uma tabela que liga cada número do texto à célula ou saída de onde ele veio\"."
+   "evidencia": "document-types.md: \"Monte uma tabela que liga cada número do texto à célula ou saída de onde ele veio, e confira os números nessas saídas.\""
   },
   {
    "id": "numero-sem-fonte",
    "resultado": "passou",
-   "evidencia": "writing-pipeline/SKILL.md: \"Não substitua um valor desconhecido por um número plausível\"."
+   "evidencia": "SKILL.md: \"Não substitua um valor desconhecido por um número plausível\"; document-types.md: \"Sem custo informado, não invente valor\"."
   }
  ]
 }

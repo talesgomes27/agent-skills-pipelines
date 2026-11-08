@@ -40,7 +40,7 @@ Escolha o esforço pela escala do contrato comum e diga por quê: leve para muda
 
 ## Correção de bug
 
-Corrigir um erro, bug ou regressão local e reversível é tarefa pequena. Se o conserto muda interface ou dados, ou toca mais de um arquivo de código além dos testes, mostre o diagnóstico e um plano curto e espere o aceite. É incidente, na `release-and-ops-pipeline`, o defeito que teve efeito fora do desenvolvimento (usuários, dados reais, envios) ou parou um serviço ou job de produção usado por outros. Falha local que não publicou nem enviou nada é bug.
+Corrigir um erro, bug ou regressão local e reversível é tarefa pequena. Se o conserto muda interface ou dados, ou toca mais de um arquivo de código além dos testes, mostre o diagnóstico e um plano curto e espere o aceite. É incidente o defeito com efeito fora do desenvolvimento (usuários, dados reais, envios), o serviço ou job de produção usado por outros que parou e o segredo exposto; falha local, sem publicação nem envio, é bug. Na dúvida, pergunte se algo saiu do ambiente local. Incidente segue a `release-and-ops-pipeline`.
 
 1. Reproduza antes de mudar, com o comando e a saída que mostram o erro.
 2. Escreva o teste que falha pelo motivo certo, com a forma real da entrada que quebrou (cabeçalho, payload, formato), sem dados pessoais; sem teste possível, caracterize o comportamento.
@@ -50,9 +50,9 @@ Corrigir um erro, bug ou regressão local e reversível é tarefa pequena. Se o 
 
 ## Modo
 
-No modo assistido, mostre o resultado e espere o aceite ao fim de EX-3 e EX-5. No app novo que o pré-código aprovou como leve, o pedido de construí-lo já autoriza implementar depois do aceite do plano, e o único aceite que falta é o do fim de EX-5. O modo contínuo segue o contrato comum. As paradas condicionais do contrato comum valem em qualquer modo.
+No modo por efeito, o plano aceito é o A1, os gates mostram uma linha de status cada e a parada é o A3, ao fim de EX-5. No modo assistido, espere o aceite ao fim de EX-3 e de EX-5. No app novo aprovado como leve, vale a linha dele na tabela do contrato comum: um só aceite, ao fim de EX-5. O modo contínuo e as paradas condicionais seguem o contrato comum.
 
-Implementar não inclui commit, push, publicação ou deploy. Faça essas ações só quando o usuário pedir.
+Implementar não inclui commit, push, publicação ou deploy: são efeitos do catálogo, só com A2 ou pré-autorização válida.
 
 ## Gates
 
@@ -68,7 +68,7 @@ Gate que não se aplica fica marcado como não aplicável, com o motivo.
 
 ## Estado e retomada
 
-Siga o estado e a retomada do contrato comum. Ao parar, deixe também o que foi feito e os checks com comando e resultado.
+Siga o estado e a retomada do contrato comum.
 
 ## Especialistas e ferramentas
 

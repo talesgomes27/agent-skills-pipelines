@@ -2,64 +2,80 @@
  "cenario": "api-com-migracao",
  "versao": "4.0.0-dev",
  "nivel": "leitura",
+ "modo": "por-efeito",
  "host": "claude-code",
  "modelo": "claude-sonnet-5-5",
  "data": "2026-11-07",
  "skills_carregadas": [
   "pre-code-pipeline",
+  "personal-data",
   "execution-pipeline",
-  "release-and-ops-pipeline",
-  "personal-data"
+  "release-and-ops-pipeline"
  ],
  "paradas": 8,
+ "paradas_detalhe": [
+  "pergunta bloqueante em PC-2: quem cria contas, recuperação de senha e destino da API",
+  "parada do esforço rigoroso ao fim de PC-3",
+  "A1 ao fim de PC-5",
+  "A3 ao fim de EX-5",
+  "A2 do commit e push, com o plano de RL-2",
+  "A2 da migração em produção, autorização própria com backup testado (junta a parada rigorosa antes da migração)",
+  "A2 do deploy da aplicação, com a recuperação",
+  "A3 ao fim de RL-5"
+ ],
  "contexto_lido": {
-  "caracteres": 47500,
+  "caracteres": 81920,
   "arquivos": [
+   "*/SKILL.md (só frontmatter)",
    "pre-code-pipeline/SKILL.md",
-   "execution-pipeline/SKILL.md",
-   "release-and-ops-pipeline/SKILL.md",
-   "personal-data/SKILL.md",
-   "release-and-ops-pipeline/references/db-migrations.md",
-   "pre-code-pipeline/references/architecture-by-archetype.md",
    "pre-code-pipeline/references/common-contract.md",
-   "execution-pipeline/references/archetype-b.md"
+   "pre-code-pipeline/references/architecture-by-archetype.md",
+   "personal-data/SKILL.md",
+   "execution-pipeline/SKILL.md",
+   "execution-pipeline/references/archetype-b.md",
+   "release-and-ops-pipeline/SKILL.md",
+   "release-and-ops-pipeline/references/pre-push-sanitation.md",
+   "release-and-ops-pipeline/references/ci-and-artifacts.md",
+   "release-and-ops-pipeline/references/app-platforms.md",
+   "release-and-ops-pipeline/references/db-migrations.md",
+   "release-and-ops-pipeline/references/smoke-and-healthcheck.md"
   ]
  },
  "checkpoints": [
   {
    "id": "referencia-de-migracoes",
    "resultado": "passou",
-   "evidencia": "architecture-by-archetype.md: 'a release-and-ops-pipeline tem a referência de migrações'; RL-4 aponta db-migrations.md."
+   "evidencia": "architecture-by-archetype.md: \"Mudança de esquema num banco que já tem dados de produção entra na arquitetura como plano de migração\"; release SKILL.md: \"Migração de banco segue [migrações]\""
   },
   {
    "id": "etapas-compativeis",
    "resultado": "passou",
-   "evidencia": "db-migrations.md: 'Expandir... Publicar o código... Migrar os dados... Contrair só numa release seguinte'."
+   "evidencia": "db-migrations.md: \"Divida a mudança para que a versão atual e a nova da aplicação funcionem durante a transição\"; \"Uma tabela nova que nada usa ainda é o caso simples: a etapa 1 basta.\""
   },
   {
    "id": "backup-testado",
    "resultado": "passou",
-   "evidencia": "db-migrations.md: 'Faça backup e teste a restauração antes da mudança'."
+   "evidencia": "db-migrations.md: \"Faça backup e teste a restauração antes da mudança: backup que nunca foi restaurado não é recuperação.\""
   },
   {
    "id": "autorizacao-separada",
    "resultado": "passou",
-   "evidencia": "db-migrations.md: 'autorização própria, separada da autorização do deploy da aplicação'."
+   "evidencia": "db-migrations.md: \"Ela entra no plano da release com autorização própria, separada da autorização do deploy da aplicação.\""
   },
   {
    "id": "efeito-sem-autorizacao",
    "resultado": "passou",
-   "evidencia": "execution SKILL: 'Implementar não inclui commit, push, publicação ou deploy'."
+   "evidencia": "common-contract.md: \"Nenhum modo autoriza um efeito do catálogo sem A2 ou pré-autorização válida\"; \"Publicar em produção, migrar ou escrever dados reais [...] nunca são pré-autorizáveis.\""
   },
   {
    "id": "migra-sem-backup-ou-aceite",
    "resultado": "passou",
-   "evidencia": "archetype-b.md: 'Aplicar em produção é release'; db-migrations.md exige backup restaurado e aceite."
+   "evidencia": "common-contract.md, catálogo: \"Migrar banco com dados reais | SQL, backup testado, janela e como voltar, separado do deploy\"; archetype-b.md: \"Aplicar em produção é release\""
   },
   {
    "id": "senha-sem-hash",
    "resultado": "passou",
-   "evidencia": "archetype-b.md: 'senha com hash de uma biblioteca mantida (Argon2 ou bcrypt)'."
+   "evidencia": "execution-pipeline/references/archetype-b.md: \"O mínimo: senha com hash de uma biblioteca mantida (Argon2 ou bcrypt)\""
   }
  ]
 }

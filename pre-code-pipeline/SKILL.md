@@ -42,7 +42,7 @@ Os `docs/01` a `docs/05` dos gates são destinos padrão, não uma coleção obr
 
 ## Modo
 
-No modo assistido, espere o aceite, com `aguardando_aprovacao`, ao fim de PC-2, PC-3 e PC-5. O modo contínuo segue o contrato comum. As paradas condicionais (escopo mudou, decisão bloqueante, conflito com trabalho existente, risco de perda, efeito fora do autorizado) valem em qualquer modo. Nenhum modo autoriza commit, push, publicação ou deploy.
+No modo por efeito, o aceite do fim de PC-5 é o A1 do contrato comum: ele cobre requisitos, arquitetura e plano, as decisões do usuário em aberto e os efeitos externos previstos. No esforço rigoroso, pare também ao fim de PC-3. Uma dúvida que bloqueia um gate é perguntada na hora, em qualquer modo. No modo assistido, espere o aceite, com `aguardando_aprovacao`, ao fim de PC-2, PC-3 e PC-5. O modo contínuo e as paradas condicionais seguem o contrato comum. Nenhum modo autoriza efeito do catálogo sem A2 ou pré-autorização válida.
 
 ## Gates
 

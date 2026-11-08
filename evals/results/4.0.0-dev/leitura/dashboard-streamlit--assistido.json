@@ -1,0 +1,70 @@
+{
+ "cenario": "dashboard-streamlit",
+ "versao": "4.0.0-dev",
+ "nivel": "leitura",
+ "modo": "assistido",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-07",
+ "skills_carregadas": [
+  "pre-code-pipeline",
+  "execution-pipeline",
+  "release-and-ops-pipeline"
+ ],
+ "paradas": 8,
+ "paradas_detalhe": [
+  "aceite de PC-2",
+  "aceite de PC-3 (restrições do Streamlit Community Cloud: acesso privado por convite, IPs de saída, hibernação; camadas de acesso)",
+  "aceite de PC-5, com o pedido de instalar streamlit e o driver do Postgres no mesmo aceite (o modo assistido não diz se esse aceite vale como pré-autorização; sem isso seria um A2 a mais)",
+  "aceite de EX-3",
+  "aceite de EX-5",
+  "aceite de RL-2 (versão dispensada, plano com commit, push e recuperação)",
+  "aceite de RL-4, que é o A2 da publicação (o push é o deploy)",
+  "aceite de RL-5, depois do smoke por navegador"
+ ],
+ "contexto_lido": {
+  "caracteres": 76541,
+  "arquivos": [
+   "*/SKILL.md (só frontmatter, estimado em 2.500)",
+   "pre-code-pipeline/SKILL.md",
+   "pre-code-pipeline/references/common-contract.md (contado uma vez; igual nas quatro pipelines)",
+   "pre-code-pipeline/references/architecture-by-archetype.md",
+   "execution-pipeline/SKILL.md",
+   "execution-pipeline/references/archetype-b.md",
+   "execution-pipeline/references/archetype-a.md (domínio secundário)",
+   "release-and-ops-pipeline/SKILL.md",
+   "release-and-ops-pipeline/references/pre-push-sanitation.md",
+   "release-and-ops-pipeline/references/ci-and-artifacts.md",
+   "release-and-ops-pipeline/references/app-platforms.md",
+   "release-and-ops-pipeline/references/smoke-and-healthcheck.md",
+   "soma estimada pelos bytes de wc -c"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "restricoes-plataforma",
+   "resultado": "passou",
+   "evidencia": "pre-code-pipeline/SKILL.md (PC-3): \"Em B e C, confira na documentação oficial do destino as restrições que mudam a arquitetura\"; app-platforms.md: \"a lista de IPs permitidos foi descontinuada\""
+  },
+  {
+   "id": "camadas-de-acesso",
+   "resultado": "passou",
+   "evidencia": "app-platforms.md: \"Restringir quem abre o app na plataforma e autenticar dentro do app, como com st.login, são camadas diferentes\""
+  },
+  {
+   "id": "smoke-navegador",
+   "resultado": "passou",
+   "evidencia": "app-platforms.md (Smoke): \"Abra o endereço publicado no navegador e confira um valor exibido depois de uma interação\"; archetype-b.md: \"asserção sobre um valor exibido depois de mudar um filtro\""
+  },
+  {
+   "id": "dependencias-no-a1",
+   "resultado": "passou",
+   "evidencia": "common-contract.md: \"Nenhum modo autoriza um efeito do catálogo sem A2 ou pré-autorização válida\"; catálogo: \"Instalar ou atualizar dependência | Pacote, versão e onde instala\""
+  },
+  {
+   "id": "push-sem-autorizacao",
+   "resultado": "passou",
+   "evidencia": "release-and-ops-pipeline/SKILL.md: \"Assistido: espere o aceite... ao fim de RL-2, RL-4 e RL-5, e o de RL-4 é o A2 da publicação\""
+  }
+ ]
+}

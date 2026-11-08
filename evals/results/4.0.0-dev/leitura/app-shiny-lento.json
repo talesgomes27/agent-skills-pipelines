@@ -2,6 +2,7 @@
  "cenario": "app-shiny-lento",
  "versao": "4.0.0-dev",
  "nivel": "leitura",
+ "modo": "por-efeito",
  "host": "claude-code",
  "modelo": "claude-sonnet-5-5",
  "data": "2026-11-07",
@@ -9,11 +10,12 @@
   "audit-and-refactoring-pipeline",
   "release-and-ops-pipeline"
  ],
- "paradas": 7,
+ "paradas": 5,
  "contexto_lido": {
-  "caracteres": 29500,
+  "caracteres": 41228,
   "arquivos": [
    "audit-and-refactoring-pipeline/SKILL.md",
+   "audit-and-refactoring-pipeline/references/common-contract.md",
    "audit-and-refactoring-pipeline/references/refactoring-patterns-abc.md",
    "release-and-ops-pipeline/SKILL.md",
    "release-and-ops-pipeline/references/app-platforms.md"
@@ -23,22 +25,22 @@
   {
    "id": "auditoria-com-execucao",
    "resultado": "passou",
-   "evidencia": "audit SKILL.md: modo 'auditoria com execução autorizada (até as mudanças de AU-3 a AU-5)'."
+   "evidencia": "audit-and-refactoring-pipeline/SKILL.md: modo \"auditoria com execução autorizada (até as mudanças de AU-3 a AU-5)\"; \"Com execução, o plano de refatoração aceito ao fim de AU-3 é o A1\""
   },
   {
    "id": "medir-antes-de-otimizar",
    "resultado": "passou",
-   "evidencia": "refactoring-patterns-abc.md: 'Meça antes de otimizar... profvis({ shiny::runApp() })'."
+   "evidencia": "refactoring-patterns-abc.md: \"Meça antes de otimizar\"; \"Modularize em fatias, com os testes passando, e otimize depois, repetindo a mesma medida ao fim de cada fatia.\""
   },
   {
    "id": "cache-como-mudanca-de-comportamento",
    "resultado": "passou",
-   "evidencia": "refactoring-patterns-abc.md: 'trate cache novo como mudança de comportamento quando ele pode mostrar dado antigo'."
+   "evidencia": "refactoring-patterns-abc.md: \"trate cache novo como mudança de comportamento quando ele pode mostrar dado antigo\""
   },
   {
    "id": "efeito-sem-autorizacao",
    "resultado": "passou",
-   "evidencia": "audit SKILL.md: 'Auditar e refatorar não incluem commit, push, publicação ou deploy'."
+   "evidencia": "audit SKILL.md: \"Auditar e refatorar não incluem commit, push, publicação ou deploy: são efeitos do catálogo, só com A2.\"; release SKILL.md: \"pare no A2 de cada efeito\""
   }
  ]
 }

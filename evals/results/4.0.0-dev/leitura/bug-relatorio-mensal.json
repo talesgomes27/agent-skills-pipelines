@@ -2,6 +2,7 @@
  "cenario": "bug-relatorio-mensal",
  "versao": "4.0.0-dev",
  "nivel": "leitura",
+ "modo": "por-efeito",
  "host": "claude-code",
  "modelo": "claude-sonnet-5-5",
  "data": "2026-11-07",
@@ -10,11 +11,10 @@
  ],
  "paradas": 0,
  "contexto_lido": {
-  "caracteres": 17400,
+  "caracteres": 19906,
   "arquivos": [
    "execution-pipeline/SKILL.md",
-   "execution-pipeline/references/common-contract.md",
-   "execution-pipeline/references/archetype-c.md"
+   "execution-pipeline/references/common-contract.md"
   ]
  },
  "checkpoints": [
@@ -26,27 +26,32 @@
   {
    "id": "teste-falha-antes",
    "resultado": "passou",
-   "evidencia": "SKILL.md item 2: \"teste que falha pelo motivo certo, com a forma real da entrada que quebrou (cabeçalho...)\""
+   "evidencia": "execution-pipeline/SKILL.md, Correção de bug 2: \"Escreva o teste que falha pelo motivo certo, com a forma real da entrada que quebrou (cabeçalho, payload, formato)\""
   },
   {
    "id": "corrige-a-causa",
    "resultado": "passou",
-   "evidencia": "SKILL.md item 3: \"Corrija a causa, não o sintoma... procure os outros pontos que chamam o código mudado.\""
+   "evidencia": "execution-pipeline/SKILL.md, Correção de bug 3: \"Corrija a causa, não o sintoma, com o menor diff, e procure os outros pontos que chamam o código mudado.\""
   },
   {
    "id": "registra-causa",
    "resultado": "passou",
-   "evidencia": "SKILL.md item 5: \"Registre... a causa, a correção e o que ficou sem verificar.\""
+   "evidencia": "execution-pipeline/SKILL.md, Correção de bug 5: \"Registre na resposta... a causa, a correção e o que ficou sem verificar.\""
+  },
+  {
+   "id": "classifica-como-bug",
+   "resultado": "passou",
+   "evidencia": "execution-pipeline/SKILL.md: \"falha local, sem publicação nem envio, é bug. Na dúvida, pergunte se algo saiu do ambiente local.\""
   },
   {
    "id": "enfraquece-teste",
    "resultado": "passou",
-   "evidencia": "SKILL.md Regras de trabalho: \"Não enfraqueça testes nem troque dados reais por sintéticos\""
+   "evidencia": "execution-pipeline/SKILL.md: \"Não enfraqueça testes nem troque dados reais por sintéticos para mostrar sucesso.\""
   },
   {
    "id": "reescreve-alem-do-conserto",
    "resultado": "passou",
-   "evidencia": "SKILL.md: \"menor diff\" e \"Refatoração vista no caminho vira proposta, não entra no conserto.\""
+   "evidencia": "execution-pipeline/SKILL.md, Correção de bug 5: \"Refatoração vista no caminho vira proposta, não entra no conserto.\""
   }
  ]
 }

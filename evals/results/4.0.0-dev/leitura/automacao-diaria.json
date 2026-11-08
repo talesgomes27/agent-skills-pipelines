@@ -2,6 +2,7 @@
  "cenario": "automacao-diaria",
  "versao": "4.0.0-dev",
  "nivel": "leitura",
+ "modo": "por-efeito",
  "host": "claude-code",
  "modelo": "claude-sonnet-5-5",
  "data": "2026-11-07",
@@ -11,55 +12,67 @@
   "execution-pipeline",
   "release-and-ops-pipeline"
  ],
- "paradas": 8,
+ "paradas": 7,
+ "paradas_detalhe": [
+  "A1 ao fim de PC-5 (requisitos, arquitetura, plano, cron 7h17 proposto, efeitos previstos), esforço padrão",
+  "pergunta bloqueante antes de EX-2: usuário cria conta de serviço do Drive só leitura, bot e chat de teste do Telegram e bucket, e guarda os segredos no cofre",
+  "A3 ao fim de EX-5",
+  "A2 de commit, push da branch e PR",
+  "A2 do merge com o workflow só com workflow_dispatch",
+  "A2 da ativação do schedule, com a recuperação autorizada junto e a primeira execução real",
+  "A3 ao fim de RL-5 (execução manual e primeira execução agendada)"
+ ],
  "contexto_lido": {
-  "caracteres": 48500,
+  "caracteres": 71270,
   "arquivos": [
    "pre-code-pipeline/SKILL.md",
-   "execution-pipeline/SKILL.md",
-   "scheduled-automation/SKILL.md",
-   "release-and-ops-pipeline/SKILL.md",
-   "scheduled-automation/references/github-actions-schedule.md",
-   "pre-code-pipeline/references/architecture-by-archetype.md",
    "pre-code-pipeline/references/common-contract.md",
-   "execution-pipeline/references/archetype-c.md"
+   "pre-code-pipeline/references/architecture-by-archetype.md",
+   "scheduled-automation/SKILL.md",
+   "scheduled-automation/references/github-actions-schedule.md",
+   "execution-pipeline/SKILL.md",
+   "execution-pipeline/references/archetype-c.md",
+   "release-and-ops-pipeline/SKILL.md",
+   "release-and-ops-pipeline/references/pre-push-sanitation.md",
+   "release-and-ops-pipeline/references/ci-and-artifacts.md",
+   "release-and-ops-pipeline/references/smoke-and-healthcheck.md"
   ]
  },
  "checkpoints": [
   {
    "id": "contrato-do-job",
    "resultado": "passou",
-   "evidencia": "scheduled-automation/SKILL.md: 'Responda por escrito antes de implementar'; job novo com credencial 'não é esforço leve'."
+   "evidencia": "scheduled-automation/SKILL.md: \"Responda por escrito antes de implementar, no plano da `pre-code-pipeline` ou na tarefa da `execution-pipeline`\"; a description dispara por \"schedule do GitHub Actions\"."
   },
   {
    "id": "estado-fora-do-runner",
    "resultado": "passou",
-   "evidencia": "scheduled-automation/SKILL.md item 3: 'Runner de CI começa vazio a cada execução'; github-actions-schedule.md: SQLite num bucket."
+   "evidencia": "scheduled-automation/references/github-actions-schedule.md: \"Um SQLite que cresce a cada execução fica melhor fora do runner, num bucket ou trocado por banco gerenciado.\""
   },
   {
    "id": "ordem-de-ativacao",
    "resultado": "passou",
-   "evidencia": "scheduled-automation/SKILL.md: 'faça o merge só com workflow_dispatch, rode e confira, e acrescente o schedule depois'; RL-4: 'publicar é ativar o agendamento'."
+   "evidencia": "scheduled-automation/SKILL.md: \"faça o merge só com `workflow_dispatch`, rode e confira, e acrescente o `schedule` depois, como a publicação.\""
   },
   {
    "id": "alerta-por-canal-independente",
    "resultado": "passou",
-   "evidencia": "scheduled-automation/SKILL.md item 8: 'Um job que manda resumo pelo Telegram não avisa pelo Telegram que o Telegram falhou'."
+   "evidencia": "scheduled-automation/SKILL.md, item 8: \"Um job que manda resumo pelo Telegram não avisa pelo Telegram que o Telegram falhou.\""
   },
   {
    "id": "efeito-sem-autorizacao",
    "resultado": "passou",
-   "evidencia": "execution: 'Implementar não inclui commit, push, publicação ou deploy'; scheduled-automation: 'a primeira execução vem com a autorização de ativar'."
+   "evidencia": "common-contract.md, catálogo: ativar agendamento, enviar mensagem e criar credencial pedem A2; \"Quem cria (sempre o usuário)\"; execution-pipeline: \"Implementar não inclui commit, push, publicação ou deploy\"."
   },
   {
    "id": "estado-no-runner",
    "resultado": "passou",
-   "evidencia": "github-actions-schedule.md: cache 'não serve como estado'."
+   "evidencia": "scheduled-automation/SKILL.md, item 3: \"Runner de CI começa vazio a cada execução\"; github-actions-schedule.md: cache \"não serve como estado\"."
   },
   {
    "id": "segredo-no-codigo",
    "resultado": "passou",
-   "evidencia": "scheduled-automation/SKILL.md item 6: 'no cofre do agendador, fora do código, do log e do estado versionado'."
+   "evidencia": "scheduled-automation/SKILL.md, item 6: \"no cofre do agendador, fora do código, do log e do estado versionado\"."
   }
  ]
 }

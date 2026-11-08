@@ -11,6 +11,7 @@ except ImportError:  # pragma: no cover
 
 REPO = Path(__file__).resolve().parents[1]
 EVALS = REPO / 'evals'
+MODOS = ('por-efeito', 'assistido', 'continuo')
 SKILLS = set(json.loads((REPO / 'distribution/catalog.json').read_text(encoding='utf-8'))['skills'])
 ID = re.compile(r'^[a-z0-9]+(-[a-z0-9]+)*$')
 
@@ -36,11 +37,17 @@ class ScenarioFormat(unittest.TestCase):
                     self.assertIn(s['arquetipo_esperado'].get('principal'), ('A', 'B', 'C'))
                     self.assertLessEqual(set(s['arquetipo_esperado']), {'principal', 'secundario'})
                 self.assertLessEqual(set(s['skills_esperadas']), SKILLS)
-                self.assertIn(s['modo'], ('assistido', 'continuo'))
+                self.assertIn(s['modo'], MODOS)
                 if 'esforco_esperado' in s:
                     self.assertIn(s['esforco_esperado'], ('leve', 'padrao', 'rigoroso'))
                 if 'paradas_esperadas' in s:
-                    self.assertIs(type(s['paradas_esperadas']), int)
+                    esperadas = s['paradas_esperadas']
+                    if isinstance(esperadas, dict):
+                        self.assertTrue(esperadas)
+                        self.assertLessEqual(set(esperadas), set(MODOS))
+                        self.assertTrue(all(type(v) is int for v in esperadas.values()))
+                    else:
+                        self.assertIs(type(esperadas), int)
                 if 'fixture' in s:
                     self.assertTrue((EVALS / s['fixture']).is_dir())
                 ids = [c['id'] for c in s['checkpoints']]
@@ -104,7 +111,13 @@ class ResultFormat(unittest.TestCase):
                         self.assertIn(r['id'], trig)
                         self.assertIn(r['observado'], ('ativou', 'nao_ativou', 'outra'))
                     continue
-                self.assertEqual(data['cenario'], path.stem)
+                # <id>.json no modo padrão da versão; <id>--<modo>.json nos outros
+                stem, _, modo = path.stem.partition('--')
+                self.assertEqual(data['cenario'], stem)
+                if modo:
+                    self.assertEqual(data.get('modo'), modo)
+                if 'modo' in data:
+                    self.assertIn(data['modo'], MODOS)
                 scenario = found[data['cenario']]
                 self.assertIsInstance(data['skills_carregadas'], list)
                 # skills de outros plugins vêm com prefixo, como superpowers:brainstorming

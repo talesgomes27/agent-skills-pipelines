@@ -37,9 +37,9 @@ Escolha o esforço pela escala do contrato comum e diga por quê: leve para insp
 
 ## Modo
 
-No modo assistido, espere o aceite, com `aguardando_aprovacao`, ao fim de AU-2, AU-3 e AU-5. No modo contínuo, a autorização precisa cobrir uma sequência concreta de auditoria e refatoração; As paradas condicionais (escopo mudou, decisão bloqueante, conflito com trabalho existente, risco de perda, efeito fora do autorizado) valem em qualquer modo.
+No modo por efeito, a auditoria sem edição termina no parecer, que é o seu A3. Com execução, o plano de refatoração aceito ao fim de AU-3 é o A1, e o A3 vem ao fim de AU-5. No modo assistido, espere o aceite, com `aguardando_aprovacao`, ao fim de AU-2, AU-3 e AU-5. No modo contínuo, a autorização precisa cobrir uma sequência concreta de auditoria e refatoração. As paradas condicionais seguem o contrato comum.
 
-Auditar e refatorar não incluem commit, push, publicação ou deploy.
+Auditar e refatorar não incluem commit, push, publicação ou deploy: são efeitos do catálogo, só com A2 ou pré-autorização válida.
 
 ## Gates
 

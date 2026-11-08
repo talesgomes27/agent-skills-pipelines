@@ -8,6 +8,8 @@
     "editorial": ["writing-pipeline"],
     "research": ["pre-code-pipeline", "execution-pipeline", "writing-pipeline", "quarto-expert", "personal-data"],
     "release": ["release-and-ops-pipeline"],
-    "library": ["skill-loader"]
+    "library": ["skill-loader"],
+    "essencial": ["pre-code-pipeline", "execution-pipeline", "release-and-ops-pipeline", "personal-data"],
+    "completo": ["pre-code-pipeline", "execution-pipeline", "writing-pipeline", "audit-and-refactoring-pipeline", "release-and-ops-pipeline", "scheduled-automation", "personal-data", "quarto-expert", "skill-loader"]
   }
 }

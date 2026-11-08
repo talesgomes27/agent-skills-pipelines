@@ -11,7 +11,8 @@ evals/
   fixtures/<id>/               arquivos mínimos que um cenário precisa (opcional)
   matrix.yaml                  combinações de host e modelo em que as avaliações rodam
   report.py                    tabela Markdown dos resultados, só com a biblioteca padrão
-  results/<versão>/<nível>/<id>.json        resultado de um cenário (nível leitura ou execucao)
+  results/<versão>/<nível>/<id>.json        resultado de um cenário no modo padrão da versão
+  results/<versão>/<nível>/<id>--<modo>.json resultado num outro modo, com o campo "modo"
   results/<versão>/<nível>/triggers-<destino>.json
 ```
 
@@ -23,10 +24,10 @@ pedido: >
   Texto do pedido, como o usuário escreveria.
 skills_esperadas: [pre-code-pipeline, execution-pipeline]
 arquetipo_esperado: {principal: B, secundario: A}   # opcional
-modo: assistido                    # assistido ou continuo
+modo: por-efeito                   # por-efeito, assistido ou continuo: o modo para o qual o cenário foi escrito
 esforco_esperado: padrao           # opcional: leve, padrao ou rigoroso
 fixture: fixtures/dashboard-streamlit               # opcional
-paradas_esperadas: 8               # opcional: aceites pedidos ao usuário
+paradas_esperadas: {por-efeito: 4, assistido: 8}   # opcional: aceites pedidos ao usuário, um número ou um por modo
 checkpoints:
   - id: restricoes-plataforma
     tipo: deve                     # comportamento esperado
@@ -37,6 +38,8 @@ checkpoints:
 ```
 
 Todo cenário tem ao menos um checkpoint `deve` e um `nao_deve`.
+
+O modo padrão é o por efeito a partir da 4.0.0; antes dela, era o assistido, e um resultado sem o campo `modo` conta como assistido. O `/cenarios` roda cada cenário nos modos pedidos: para o assistido, o agente simulado lê no `AGENTS.md` do projeto a linha `Modo: assistido`.
 
 ## Gatilhos
 
@@ -54,6 +57,7 @@ Todo cenário tem ao menos um checkpoint `deve` e um `nao_deve`.
   "data": "2026-11-07",
   "skills_carregadas": ["pre-code-pipeline"],
   "paradas": 8,
+  "paradas_detalhe": ["A1 ao fim de PC-5", "A3 ao fim de EX-5"],
   "contexto_lido": {"caracteres": 21000, "arquivos": ["pre-code-pipeline/SKILL.md"]},
   "checkpoints": [
     {"id": "restricoes-plataforma", "resultado": "passou", "evidencia": "trecho ou arquivo:linha"}
@@ -64,6 +68,8 @@ Todo cenário tem ao menos um checkpoint `deve` e um `nao_deve`.
 - `nivel`: `leitura`, quando o `skill-prober` só lê as skills e simula o agente; ou `execucao`, quando um agente real roda o pedido numa cópia descartável da fixture, sem credenciais nem destinos reais.
 - `skills_carregadas`: as skills deste repositório pelo nome; as de outros plugins com o prefixo, como `superpowers:brainstorming`.
 - `resultado`: `passou`, `falhou` ou `indeterminado`, sempre com a evidência.
+- `paradas_detalhe` (opcional): quais aceites ou perguntas o agente pediu, na ordem, para conferir a contagem de `paradas`.
+- `modo` (opcional no modo padrão da versão): `por-efeito`, `assistido` ou `continuo`.
 
 Um resultado pode cobrir só parte dos checkpoints; os que ficaram de fora não contam como aprovados.
 

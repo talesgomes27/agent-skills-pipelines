@@ -133,6 +133,16 @@
       ]
     },
     {
+      "name": "pipeline-guardrails",
+      "source": "./pipeline-guardrails",
+      "description": "Hook do Claude Code que pede confirmação antes das formas comuns de push, tag, PR, deploy, migração e instalação de dependência. Só pergunta; nunca libera.",
+      "version": "3.4.0",
+      "author": {
+        "name": "Tales Wilhame Gomes da Silva"
+      },
+      "license": "MIT"
+    },
+    {
       "name": "essencial",
       "source": "./",
       "description": "Pacote com as pipelines de planejamento, execução e release e a skill de dados pessoais. Instala esses quatro plugins como dependências.",
@@ -168,7 +178,8 @@
         "scheduled-automation",
         "personal-data",
         "quarto-expert",
-        "skill-loader"
+        "skill-loader",
+        "pipeline-guardrails"
       ]
     }
   ]

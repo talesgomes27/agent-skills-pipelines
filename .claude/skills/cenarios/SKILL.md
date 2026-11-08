@@ -13,7 +13,7 @@ Testa se as skills deste repositório levam um agente ao comportamento esperado 
 
 1. Leia `evals/scenarios/*.yaml`.
 2. Com `mudados` ou sem argumento, rode `git diff --name-only main` e `git ls-files --others --exclude-standard` e proponha só os cenários cujas `skills_esperadas` mudaram. Com `todos`, use todos. Com nomes, use esses.
-3. O nível padrão é `leitura`. `execucao` roda um agente real e custa bem mais; use antes de release, nos cenários das skills alteradas.
+3. Rode cada cenário no modo padrão, por efeito, e também no assistido quando a mudança mexe em modos, aceites ou no contrato comum. No assistido, diga ao agente que o `AGENTS.md` do projeto tem `Modo: assistido`. O nível padrão é `leitura`. `execucao` roda um agente real e custa bem mais; use antes de release, nos cenários das skills alteradas.
 4. Mostre a lista, o nível e quantos agentes vão rodar, e espere o aceite.
 
 ## Rodar no nível de leitura
@@ -31,7 +31,7 @@ Testa se as skills deste repositório levam um agente ao comportamento esperado 
 
 ## Gravar e comparar
 
-- Grave um JSON por cenário em `evals/results/<versão>/<nível>/<id>.json`, no formato do README, com host, modelo exato, data, paradas, contexto lido e a evidência de cada checkpoint. A versão é a das skills avaliadas: a da tag, ou a que vai ser publicada.
+- Grave um JSON por cenário e modo em `evals/results/<versão>/<nível>/<id>.json` no modo padrão, ou `<id>--<modo>.json` com o campo `modo` nos outros, no formato do README, com host, modelo exato, data, paradas, contexto lido e a evidência de cada checkpoint. A versão é a das skills avaliadas: a da tag, ou a que vai ser publicada.
 - Rode `/usr/bin/python3 -m unittest tests.test_evals` para conferir o formato.
 - Compare com a última versão publicada em `evals/results/`: um checkpoint que passava e agora falha é regressão. Rode `/usr/bin/python3 evals/report.py` para a tabela.
 - Confira você mesmo, no texto atual, cada falha antes de propor uma correção: o agente pode ter lido errado.
