@@ -23,6 +23,14 @@ Boa-fé e dez princípios: finalidade, adequação, necessidade, livre acesso, q
 - O titular pode pedir a revisão de decisões tomadas só com base em tratamento automatizado que afetem seus interesses, incluídas as que definem seu perfil pessoal, profissional, de consumo ou de crédito (art. 20).
 - Transferir dados pessoais para outro país só é permitido nos casos que a lei lista (art. 33). Usar um provedor de nuvem ou de LLM fora do Brasil é um desses envios, e quem decide se ele se encaixa é o responsável pelos dados.
 
+## Pedidos do titular
+
+- O titular pode pedir ao controlador confirmação do tratamento, acesso, correção, anonimização, bloqueio ou eliminação do desnecessário, portabilidade, eliminação do que foi tratado com consentimento, a lista das entidades com que houve uso compartilhado e a revogação do consentimento (art. 18, I a IX).
+- O pedido é expresso, do titular ou de representante legalmente constituído, e sem custo para ele (art. 18, §§ 3 e 5).
+- Confirmação e acesso saem em formato simplificado, de imediato, ou em declaração completa, com origem, critérios e finalidade, em até 15 dias do pedido (art. 19).
+- Correção, eliminação, anonimização ou bloqueio são informados de imediato a quem recebeu os dados por uso compartilhado, para que repitam o procedimento (art. 18, § 6).
+- A eliminação tem exceções, como cumprir obrigação legal ou regulatória (art. 16): quem decide se uma se aplica é quem responde pelos dados.
+
 ## Segurança e incidentes
 
 - Os agentes de tratamento adotam medidas técnicas e administrativas para proteger os dados de acessos não autorizados e de situações acidentais ou ilícitas (art. 46).
