@@ -50,7 +50,7 @@ Em cada gate, apresente resultado e pendências e registre o aceite real, sem re
 
 ## Incidentes
 
-É incidente o defeito com efeito fora do desenvolvimento (usuários, dados reais, envios), o serviço ou job de produção usado por outros que parou e o segredo exposto; falha local, sem publicação nem envio, é bug. Na dúvida, pergunte se algo saiu do ambiente local. Incidente segue [incidentes e segredo vazado](references/incident-response.md), e segredo vazado se revoga antes de limpar o histórico.
+É incidente o defeito com efeito fora do desenvolvimento (usuários, dados reais, envios), o serviço ou job de produção usado por outros que parou e o segredo exposto; falha local, sem publicação nem envio, é bug. Na dúvida, pergunte se algo saiu do ambiente local. Incidente segue [incidentes e segredo vazado](references/incident-response.md), e o plano já lista o postmortem com linha do tempo, causa e ações com responsável; segredo vazado se revoga antes de limpar o histórico.
 
 ## Estado e retomada
 

@@ -5,7 +5,7 @@ description: "Use quando o trabalho lê, transforma, mostra, guarda ou envia dad
 
 # Dados pessoais
 
-Dado pessoal é qualquer informação ligada a uma pessoa identificada ou identificável (LGPD, art. 5, I). Esta skill dá as regras práticas para tratar esses dados num trabalho técnico. Ela informa as pipelines: escopo, gates e autorizações continuam os delas. Não é aconselhamento jurídico. Base legal, contratos e comunicação de incidente são decisões de quem responde pelos dados na organização; o agente aponta a decisão em vez de tomá-la.
+Dado pessoal é qualquer informação ligada a uma pessoa identificada ou identificável (LGPD, art. 5, I). Esta skill dá as regras práticas para tratar esses dados num trabalho técnico. Ela informa as pipelines: escopo, gates e autorizações continuam os delas, então carregue também a do trabalho, a `pre-code-pipeline` para planejar ou a `execution-pipeline` para implementar, com o plano e as paradas dela. Não é aconselhamento jurídico. Base legal, contratos e comunicação de incidente são decisões de quem responde pelos dados na organização; o agente aponta a decisão em vez de tomá-la.
 
 ## Inventário
 
@@ -43,6 +43,12 @@ Dado pessoal é qualquer informação ligada a uma pessoa identificada ou identi
 - Documento interno pode não ter dados pessoais e ainda ser confidencial. O envio a terceiros pede a decisão do usuário nos dois casos; pergunte também se os documentos têm dados de pessoas.
 - Perguntas que um app guarda são dados de quem pergunta. O plano define se ficam, por quanto tempo, quem as lê e como os usuários são avisados.
 - Uma lista operacional com dados pessoais, como os clientes que o CRM vai contatar, vai por um canal de acesso restrito, como o próprio CRM ou uma pasta com acesso controlado, em vez de anexo de e-mail, e só com os campos que quem recebe usa. O plano diz quem recebe e por quanto tempo a lista vale. Contato direto com as pessoas da lista respeita as preferências que elas já registraram, como pedir para não ser contatadas; confirme com o usuário de onde vêm essas preferências.
+
+## Pedido do titular
+
+- Pedido de acesso, correção ou eliminação vem do titular ou de um representante legal (LGPD, art. 18, § 3). Depois do inventário, consulte só as linhas que batem com algum dado do pedido (nome, e-mail, CPF) e compare o contato do pedido com o do cadastro; se não baterem, a confirmação da identidade é o primeiro passo.
+- Localize o titular por um identificador, como CPF, e-mail confirmado ou número de cliente, nunca por nome, que pode ter homônimo; registro que só bate pelo nome fica fora até o titular confirmar.
+- A resposta de acesso inclui com quem os dados foram compartilhados (art. 18, VII), e a correção ou eliminação é informada a esses destinatários (art. 18, § 6). Prazos e exceções estão nas [noções de LGPD](references/lgpd-basics.md#pedidos-do-titular).
 
 ## Coleta
 

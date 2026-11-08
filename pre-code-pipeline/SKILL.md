@@ -1,6 +1,6 @@
 ---
 name: pre-code-pipeline
-description: "Use quando o usuário quiser planejar ou montar um projeto novo, como um app, um site ou um dashboard (Power BI, Streamlit, Shiny), ou planejar uma mudança relevante antes de implementar, com requisitos, arquitetura ou plano ainda por definir."
+description: "Use quando o usuário quiser planejar ou montar do zero um projeto novo, como um app, um site ou um dashboard no Power BI, ou planejar uma mudança relevante antes de implementar, com requisitos, arquitetura ou plano ainda por definir."
 ---
 
 # Planejamento pré-código
