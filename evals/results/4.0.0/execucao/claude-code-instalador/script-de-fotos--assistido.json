@@ -1,0 +1,52 @@
+{
+ "cenario": "script-de-fotos",
+ "versao": "4.0.0",
+ "nivel": "execucao",
+ "modo": "assistido",
+ "host": "claude-code",
+ "destino": "claude-code-instalador",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "terminou pedindo aprovação para rodar teste.sh, negado pelo ambiente (não é gate da skill); perguntou em qual pasta usar"
+ ],
+ "contexto_lido": {
+  "caracteres": 11000,
+  "arquivos": [
+   ".claude/skills/execution-pipeline/references/common-contract.md",
+   ".claude/skills/execution-pipeline/references/archetype-c.md",
+   ".claude/skills/execution-pipeline/references/languages/python.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "caminho-rapido",
+   "resultado": "passou",
+   "evidencia": "Carregou a execution-pipeline, escreveu direto o script (renomear_por_exif.py) sem plano nem documentos de requisitos."
+  },
+  {
+   "id": "mostrar-antes-o-que-muda",
+   "resultado": "passou",
+   "evidencia": "'Dry-run: por padrão só mostra o que faria e não altera nada. Para renomear de verdade, use --aplicar.'"
+  },
+  {
+   "id": "como-desfazer",
+   "resultado": "passou",
+   "evidencia": "'--aplicar grava o log renomear_desfazer.tsv ... Para reverter, rode --desfazer renomear_desfazer.tsv.'"
+  },
+  {
+   "id": "sem-gates",
+   "resultado": "passou",
+   "evidencia": "Nenhuma parada de gate da skill (A1/A2/A3); a pausa final foi por permissão de execução negada pelo ambiente."
+  },
+  {
+   "id": "sobrescreve-sem-mostrar",
+   "resultado": "passou",
+   "evidencia": "Nunca sobrescreve (sufixo _1, _2 na colisão), dry-run por padrão, e o script não foi executado em nenhuma foto."
+  }
+ ]
+}

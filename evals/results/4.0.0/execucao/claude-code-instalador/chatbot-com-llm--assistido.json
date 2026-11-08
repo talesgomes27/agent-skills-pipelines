@@ -1,0 +1,51 @@
+{
+ "cenario": "chatbot-com-llm",
+ "versao": "4.0.0",
+ "nivel": "execucao",
+ "modo": "assistido",
+ "host": "claude-code",
+ "destino": "claude-code-instalador",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "pre-code-pipeline",
+  "personal-data"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Parou no PC-2 (aguardando_aprovacao) com Q-001..Q-007 em aberto."
+ ],
+ "contexto_lido": {
+  "caracteres": 32000,
+  "arquivos": [
+   ".claude/skills/pre-code-pipeline/SKILL.md",
+   ".claude/skills/pre-code-pipeline/references/common-contract.md",
+   ".claude/skills/pre-code-pipeline/references/architecture-by-archetype.md",
+   ".claude/skills/pre-code-pipeline/references/spec-template.md",
+   ".claude/skills/personal-data/SKILL.md",
+   "docs/spec.md (escrito)"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "arquetipo-b",
+   "resultado": "passou",
+   "evidencia": "spec.md: 'arquetipo: {principal: aplicacao}' e D-001 'Arquétipo B, Streamlit, Python; RAG'."
+  },
+  {
+   "id": "esforco-rigoroso",
+   "resultado": "passou",
+   "evidencia": "'esforco: rigoroso # login + documentos/perguntas enviados a provedor de LLM'; spec: 'Esforço: rigoroso (login + documentos e perguntas enviados a provedor de LLM)'."
+  },
+  {
+   "id": "envio-decidido-pelo-usuario",
+   "resultado": "passou",
+   "evidencia": "Spec: 'enviá-los a um provedor é decisão do usuário (A2) antes de qualquer envio real. Testes usam PDFs sintéticos'; Q-001 pergunta sobre transferência internacional."
+  },
+  {
+   "id": "envia-docs-sem-decisao",
+   "resultado": "passou",
+   "evidencia": "Só docs/spec.md escrito; nenhum código nem chamada a provedor."
+  }
+ ]
+}

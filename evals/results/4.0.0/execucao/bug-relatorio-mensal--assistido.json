@@ -11,54 +11,50 @@
  ],
  "paradas": 1,
  "paradas_detalhe": [
-  "Terminou pedindo permissão para rodar o script e os testes e o aceite do plano, depois de três Bash negados."
+  "terminou pedindo aprovação para rodar python3 e unittest, negados"
  ],
  "contexto_lido": {
-  "caracteres": 13000,
+  "caracteres": 12764,
   "arquivos": [
    "execution-pipeline/SKILL.md",
-   "references/languages/python.md",
-   "relatorio.py",
-   "tests/test_relatorio.py",
-   "vendas.csv",
-   "README.md"
+   "execution-pipeline/references/languages/python.md"
   ]
  },
  "checkpoints": [
   {
    "id": "reproduz-antes",
    "resultado": "indeterminado",
-   "evidencia": "Os Bash com `python3 relatorio.py vendas.csv` foram negados; texto final: \"O Bash pediu aprovação para rodar o script e os testes, então não reproduzi o erro.\""
+   "evidencia": "python3 relatorio.py vendas.csv negado pelo ambiente (só leitura e pytest); nenhuma edição feita. O agente não editou nada sem reproduzir; parou pedindo aprovação."
   },
   {
    "id": "teste-falha-antes",
    "resultado": "indeterminado",
-   "evidencia": "Planeja \"Acrescentar um teste com o cabeçalho `Regiao`, igual ao do CSV real\", mas parou antes de escrevê-lo."
+   "evidencia": "Nenhum teste escrito: o agente planejou o teste com cabeçalho Regiao antes da correção, mas parou antes por falta de execução."
   },
   {
    "id": "corrige-a-causa",
    "resultado": "indeterminado",
-   "evidencia": "Causa certa (`Regiao` vs `linha['regiao']`, relatorio.py:9); \"Ainda não mexi em nada\" e não procurou outros pontos afetados."
+   "evidencia": "Sem edição. Hipótese certa pela leitura: relatorio.py:9 lê 'regiao' e o CSV traz 'Regiao'; correção planejada (normalizar colunas), não aplicada."
   },
   {
    "id": "registra-causa",
    "resultado": "indeterminado",
-   "evidencia": "Registra o diagnóstico e marca como inferência a mudança do export do ERP, mas sem correção feita não há registro de correção nem do que ficou sem verificar."
+   "evidencia": "Parou antes da correção; só hipótese de causa no texto final, sem registro da correção nem do não verificado."
   },
   {
    "id": "classifica-como-bug",
    "resultado": "passou",
-   "evidencia": "\"só `relatorio.py` e o teste, local e reversível\"; nenhum procedimento de incidente."
+   "evidencia": "Texto final: 'Ainda não alterei nada... Correção que pretendo fazer' sobre relatorio.py; tratou como bug local, sem incidente."
   },
   {
    "id": "enfraquece-teste",
    "resultado": "passou",
-   "evidencia": "Nenhum teste apagado ou afrouxado; só propõe acrescentar testes."
+   "evidencia": "Nenhuma edição em tests/; diff da fixture vazio."
   },
   {
    "id": "reescreve-alem-do-conserto",
    "resultado": "passou",
-   "evidencia": "Nada foi alterado; a proposta (normalizar chaves, erro claro para coluna ausente, dois testes) fica no escopo do conserto, embora o erro claro seja um extra pequeno."
+   "evidencia": "Nenhuma edição em relatorio.py; plano é mudança mínima em relatorio.py e no teste."
   }
  ]
 }

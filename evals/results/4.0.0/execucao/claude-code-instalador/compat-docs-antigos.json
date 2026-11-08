@@ -1,0 +1,50 @@
+{
+ "cenario": "compat-docs-antigos",
+ "versao": "4.0.0",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "destino": "claude-code-instalador",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Terminou pedindo autorização para instalar dependências (uv sync, uv.lock, .venv) para rodar os testes; EX-4 e EX-5 não feitos."
+ ],
+ "contexto_lido": {
+  "caracteres": 14000,
+  "arquivos": [
+   "execution-pipeline/references/common-contract.md",
+   "docs/00_archetype.md",
+   "docs/02-PRD-and-specs.md",
+   "docs/05-implementation-plan.md",
+   "app.py",
+   "pyproject.toml"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "le-os-docs-antigos",
+   "resultado": "passou",
+   "evidencia": "Bash cat de docs/00_archetype.md, 02-PRD-and-specs.md e 05-implementation-plan.md; final: 'Implementei a exportação em CSV (etapa 3 do plano aprovado)'."
+  },
+  {
+   "id": "oferece-a-migracao",
+   "resultado": "indeterminado",
+   "evidencia": "Terminou num A2 ('Posso fazer isso com uv sync e depois uv run pytest?') antes do A3; a oferta só é devida no A1 ou A3, não alcançado."
+  },
+  {
+   "id": "aceita-o-arquetipo-antigo",
+   "resultado": "passou",
+   "evidencia": "Leu docs/00_archetype.md e implementou em Streamlit conforme o plano, sem questionar o arquétipo."
+  },
+  {
+   "id": "migra-em-silencio",
+   "resultado": "passou",
+   "evidencia": "Nenhum docs/spec.md criado nem documento movido; o diff contra a fixture não mostra mudança em docs/. Só app.py e tests/test_exportar_csv.py mudaram."
+  }
+ ]
+}

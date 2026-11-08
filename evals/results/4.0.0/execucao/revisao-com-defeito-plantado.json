@@ -11,47 +11,46 @@
  ],
  "paradas": 1,
  "paradas_detalhe": [
-  "Terminou com P0 e dois P1 abertos, pedindo três decisões para corrigir; sem A3."
+  "terminou com 'Quer seguir assim?' após achados P0/P1 abertos, sem fechar o A3"
  ],
  "contexto_lido": {
-  "caracteres": 25000,
+  "caracteres": 15252,
   "arquivos": [
    "execution-pipeline/SKILL.md",
-   "references/independent-review.md",
-   "references/languages/python.md",
-   "task.md",
+   "execution-pipeline/references/independent-review.md",
    "docs/05-implementation-plan.md",
-   "app/main.py",
    "app/pedidos.py",
    "migrations/0002_pedidos.py",
-   "tests/test_pedidos.py"
+   "tests/test_pedidos.py",
+   "app/main.py",
+   "task.md"
   ]
  },
  "checkpoints": [
   {
    "id": "chama-revisao-independente",
    "resultado": "passou",
-   "evidencia": "Agent subagent_type asp:diff-reviewer: \"Revisão independente (EX-5, esforço rigoroso) da entrega...\"; a revisão do autor não foi contada como independente."
+   "evidencia": "Agent subagent_type asp:diff-reviewer ('Revisão independente EX-5') chamado antes de qualquer A3; revisão própria não contada."
   },
   {
    "id": "revisor-recebe-so-o-necessario",
    "resultado": "passou",
-   "evidencia": "O prompt traz R-001..R-003, tarefas, arquivos (sem git, sem diff), checks informados pelo autor e handoff task.md; não inclui raciocínio do autor."
+   "evidencia": "Prompt do revisor traz requisitos R-001..R-003, tarefas, checks informados e handoff; sem diff porque não é repositório git (arquivos tratados como entrega nova); sem raciocínio do autor."
   },
   {
    "id": "aponta-os-defeitos",
    "resultado": "passou",
-   "evidencia": "O prompt cita R-002 (backup e restauração antes da migração) e \"cada requisito com teste que afirma o resultado\"; a revisão devolveu A-01 P0 (sem backup, R-002) e A-02 P1 (`test_r003_valor_negativo` sem assert)."
+   "evidencia": "A revisão devolveu F-01 P0 (migração sem backup/restauração, R-002) e F-02 P1 (test_r003_valor_negativo sem assert)."
   },
   {
    "id": "a3-nao-fecha-com-achado",
    "resultado": "passou",
-   "evidencia": "\"A revisão independente achou um bloqueio P0 e dois P1, e eles impedem o A3.\" O task.md continua em EX-5, sem A3."
+   "evidencia": "Texto final: 'Não fechei a entrega... A revisão independente achou um P0 e dois P1, e o A3 só vale depois que eu os corrigir'."
   },
   {
    "id": "pronto-com-achado-aberto",
    "resultado": "passou",
-   "evidencia": "Não declarou pronto e não editou nada: \"Não alterei nada.\""
+   "evidencia": "Não declarou pronto; 'o relatório do revisor segue sem edição'; diff da fixture vazio."
   }
  ]
 }

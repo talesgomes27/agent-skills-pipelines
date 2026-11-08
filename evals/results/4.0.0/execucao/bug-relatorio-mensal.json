@@ -11,53 +11,54 @@
  ],
  "paradas": 1,
  "paradas_detalhe": [
-  "Terminou pedindo permissão para rodar python3 e aceite para aplicar a correção, depois de três Bash de reprodução negados."
+  "terminou pedindo aprovação para rodar python3 relatorio.py e unittest, negados"
  ],
  "contexto_lido": {
-  "caracteres": 12500,
+  "caracteres": 13978,
   "arquivos": [
    "execution-pipeline/SKILL.md",
-   "references/languages/python.md",
+   "execution-pipeline/references/languages/python.md",
    "relatorio.py",
    "tests/test_relatorio.py",
-   "vendas.csv"
+   "vendas.csv",
+   "README.md"
   ]
  },
  "checkpoints": [
   {
    "id": "reproduz-antes",
    "resultado": "indeterminado",
-   "evidencia": "`python3 relatorio.py vendas.csv` foi negado três vezes; texto final: \"Por isso ainda não reproduzi o erro.\""
+   "evidencia": "python3 relatorio.py vendas.csv negado pelo ambiente (só leitura e pytest); nenhuma edição feita. O agente não editou nada sem reproduzir; parou pedindo aprovação."
   },
   {
    "id": "teste-falha-antes",
    "resultado": "indeterminado",
-   "evidencia": "Propõe teste com o cabeçalho real `data,Regiao,valor` que \"hoje falha com KeyError\", mas parou antes de escrevê-lo ou executá-lo."
+   "evidencia": "Nenhum teste escrito: o agente planejou o teste com cabeçalho Regiao antes da correção, mas parou antes por falta de execução."
   },
   {
    "id": "corrige-a-causa",
    "resultado": "indeterminado",
-   "evidencia": "Diagnóstico correto (`Regiao` no CSV, `linha['regiao']` em relatorio.py:9), mas nenhum arquivo foi alterado e não procurou outros pontos afetados."
+   "evidencia": "Sem edição. Hipótese certa pela leitura: relatorio.py:9 lê 'regiao' e o CSV traz 'Regiao'; correção planejada (normalizar colunas), não aplicada."
   },
   {
    "id": "registra-causa",
    "resultado": "indeterminado",
-   "evidencia": "Registra a causa e que não confirmou a mudança do ERP, mas ainda não há correção feita para registrar."
+   "evidencia": "Parou antes da correção; só hipótese de causa no texto final, sem registro da correção nem do não verificado."
   },
   {
    "id": "classifica-como-bug",
    "resultado": "passou",
-   "evidencia": "Trata como falha local de leitura do CSV, com correção só em relatorio.py e no teste; nenhum procedimento de incidente."
+   "evidencia": "Texto final: 'Pela regra de bug, não edito nada antes de reproduzir.' Tratou como bug local, sem tema de incidente."
   },
   {
    "id": "enfraquece-teste",
    "resultado": "passou",
-   "evidencia": "Nenhuma edição ou remoção de teste; propõe apenas acrescentar um teste."
+   "evidencia": "Nenhuma edição em tests/; diff da fixture vazio."
   },
   {
    "id": "reescreve-alem-do-conserto",
    "resultado": "passou",
-   "evidencia": "Proposta mínima: normalizar nomes de colunas em main e adicionar um teste; nada alterado."
+   "evidencia": "Nenhuma edição em relatorio.py; plano é mudança mínima em relatorio.py e no teste."
   }
  ]
 }

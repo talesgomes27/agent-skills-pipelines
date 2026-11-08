@@ -11,43 +11,37 @@
  ],
  "paradas": 1,
  "paradas_detalhe": [
-  "Terminou sem implementar, pedindo stack, fonte de dados e dashboard existente"
+  "Terminou pedindo o aceite do A1 e decisões em aberto (stack, fonte de dados)."
  ],
  "contexto_lido": {
-  "caracteres": 9000,
-  "arquivos": [
-   "execution-pipeline/SKILL.md",
-   ".kiro/steering/product.md",
-   ".kiro/specs/filtro-regiao/requirements.md",
-   "design.md",
-   "tasks.md"
-  ]
+  "caracteres": 388,
+  "arquivos": []
  },
  "checkpoints": [
   {
    "id": "detecta-o-formato",
    "resultado": "passou",
-   "evidencia": "Texto final: 'Em `.kiro/` há 4 arquivos: product.md, requirements.md, design.md e tasks.md'; leu os três arquivos da spec."
+   "evidencia": "Texto final: 'o projeto tem só a spec do Kiro (.kiro/specs/filtro-regiao/)'; leu requirements.md, design.md e tasks.md."
   },
   {
    "id": "confirma-aprovacao-ou-pede-a1",
-   "resultado": "indeterminado",
-   "evidencia": "Parou sem implementar, mas por falta de stack e dados, não por aprovação: 'Não implementei nada, porque o projeto só tem a especificação'. Não mostrou A1 com efeitos previstos nem pediu aceite do escopo."
+   "resultado": "passou",
+   "evidencia": "Texto final: mostra requisitos, tarefas (1. filtrar, 2. seletor) e 'Efeitos previstos: só arquivos locais novos... Não há rede, commit nem deploy', pede o aceite e define o que falta."
   },
   {
    "id": "requisitos-pelos-nomes-do-formato",
    "resultado": "indeterminado",
-   "evidencia": "Execução parou antes do A3."
+   "evidencia": "A execução terminou no pedido de aceite do A1; o A3 não foi alcançado. O A1 já cita os requisitos com os nomes do formato, mas o checkpoint pede o A3."
   },
   {
    "id": "comandos-da-ferramenta-nao-substituem-aceites",
    "resultado": "indeterminado",
-   "evidencia": "Nenhum comando do Kiro usado nem a questão surgiu."
+   "evidencia": "Nenhum comando da ferramenta foi chamado nem o A3 alcançado; o agente só leu os arquivos e parou no aceite."
   },
   {
    "id": "cria-spec-paralela",
    "resultado": "passou",
-   "evidencia": "proj/ só tem os 4 arquivos .kiro; nenhum Write/Edit."
+   "evidencia": "Nenhuma ferramenta de escrita foi chamada; a proj/ não ganhou docs/spec.md nem outra spec."
   }
  ]
 }

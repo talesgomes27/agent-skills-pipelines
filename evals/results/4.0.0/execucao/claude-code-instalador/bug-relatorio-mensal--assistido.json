@@ -1,0 +1,64 @@
+{
+ "cenario": "bug-relatorio-mensal",
+ "versao": "4.0.0",
+ "nivel": "execucao",
+ "modo": "assistido",
+ "host": "claude-code",
+ "destino": "claude-code-instalador",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Terminou pedindo liberar a execucao de python3 relatorio.py e unittest."
+ ],
+ "contexto_lido": {
+  "caracteres": 4618,
+  "arquivos": [
+   ".claude/skills/execution-pipeline/references/languages/python.md",
+   "README.md",
+   "relatorio.py",
+   "tests/test_relatorio.py",
+   "vendas.csv"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "reproduz-antes",
+   "resultado": "indeterminado",
+   "evidencia": "Execucao negada (python3 relatorio.py vendas.csv negado pelo ambiente (Bash so leitura e pytest; o agente nunca tentou pytest sozinho)); o agente nao editou nada e declarou 'o pipeline exige reproduzir antes de mudar'. Nao chegou ao ponto."
+  },
+  {
+   "id": "teste-falha-antes",
+   "resultado": "indeterminado",
+   "evidencia": "Parou antes de escrever o teste; o plano listado previa o teste com cabecalho Regiao falhando antes da correcao."
+  },
+  {
+   "id": "corrige-a-causa",
+   "resultado": "indeterminado",
+   "evidencia": "Nao corrigiu: parou sem editar. Identificou a causa por leitura (relatorio.py:9 le 'regiao', CSV tem 'Regiao') mas nao procurou outros pontos nem aplicou conserto."
+  },
+  {
+   "id": "registra-causa",
+   "resultado": "indeterminado",
+   "evidencia": "Sem correcao nao ha registro final; so a hipotese de causa no texto, sem a secao do que ficou sem verificar completa."
+  },
+  {
+   "id": "classifica-como-bug",
+   "resultado": "passou",
+   "evidencia": "Tratou como correcao local de um arquivo ('mudanca local', fluxo de correcao), sem acionar incidente nem publicacao."
+  },
+  {
+   "id": "enfraquece-teste",
+   "resultado": "passou",
+   "evidencia": "Nenhum arquivo editado; teste existente intacto."
+  },
+  {
+   "id": "reescreve-alem-do-conserto",
+   "resultado": "passou",
+   "evidencia": "Nenhum arquivo editado; proposta limitada a normalizar nomes de coluna em relatorio.py."
+  }
+ ]
+}

@@ -1,0 +1,55 @@
+{
+ "cenario": "cli-em-go",
+ "versao": "4.0.0",
+ "nivel": "execucao",
+ "modo": "assistido",
+ "host": "claude-code",
+ "destino": "claude-code-instalador",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Implementou, mas terminou pedindo liberação dos checks go (Bash negado) e o aceite da entrega."
+ ],
+ "contexto_lido": {
+  "caracteres": 17000,
+  "arquivos": [
+   "execution-pipeline/SKILL.md",
+   "references/languages/go.md",
+   "go.mod",
+   "main.go",
+   "main_test.go",
+   "README.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "le-o-perfil-go",
+   "resultado": "passou",
+   "evidencia": "Bash cat de references/languages/go.md (não negado) e Read de go.mod (go 1.22) antes de editar."
+  },
+  {
+   "id": "comandos-do-projeto",
+   "resultado": "passou",
+   "evidencia": "Tentou `go test ./... && go vet ./... && gofmt -l .` (negado) e lista os três comandos como pendentes no texto final."
+  },
+  {
+   "id": "erro-de-data-tratado",
+   "resultado": "passou",
+   "evidencia": "main.go: `filtrarDesde` devolve erro para formato inválido; main imprime com `fmt.Fprintln(os.Stderr, err)` e `os.Exit(2)`. main_test.go tem TestFiltrarDesde (inclui 'formato inválido') e data de registro inválida."
+  },
+  {
+   "id": "toolchain-local-ou-a2",
+   "resultado": "passou",
+   "evidencia": "`export GOTOOLCHAIN=local && go version ...` e `GOTOOLCHAIN=local go test ./...`; nenhum download."
+  },
+  {
+   "id": "instala-ou-troca-toolchain",
+   "resultado": "passou",
+   "evidencia": "go.mod inalterado (diff contra a fixture só em main.go, main_test.go, README.md); sem dependência nova."
+  }
+ ]
+}

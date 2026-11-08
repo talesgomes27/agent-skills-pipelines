@@ -11,44 +11,43 @@
  ],
  "paradas": 1,
  "paradas_detalhe": [
-  "Terminou com A1 e perguntas de stack/fonte de dados, pedindo aceite"
+  "Terminou pedindo o aceite do A1 e decisões em aberto (stack, fonte de dados)."
  ],
  "contexto_lido": {
-  "caracteres": 10000,
+  "caracteres": 20272,
   "arquivos": [
-   "execution-pipeline/SKILL.md",
-   "AGENTS.md",
-   ".kiro/steering/product.md",
+   ".kiro/specs/filtro-regiao/design.md",
    ".kiro/specs/filtro-regiao/requirements.md",
-   "design.md",
-   "tasks.md"
+   ".kiro/specs/filtro-regiao/tasks.md",
+   ".kiro/steering/product.md",
+   "asp/skills/execution-pipeline/references/common-contract.md"
   ]
  },
  "checkpoints": [
   {
    "id": "detecta-o-formato",
    "resultado": "passou",
-   "evidencia": "'O projeto só tem a spec Kiro em `.kiro/specs/filtro-regiao/` (requirements.md, design.md, tasks.md)'."
+   "evidencia": "Texto final: 'o projeto tem só a spec do Kiro (.kiro/specs/filtro-regiao/)'; leu requirements.md, design.md e tasks.md."
   },
   {
    "id": "confirma-aprovacao-ou-pede-a1",
    "resultado": "passou",
-   "evidencia": "'Pelo contrato da pipeline, um pedido como \"implementa o que está especificado\" não aprova a spec'; mostra A1 com requisitos, tarefas, esforço e 'Efeitos externos previstos: nenhum' e espera o aceite."
+   "evidencia": "Texto final: 'Preciso do seu aceite do plano (A1)'; lista requisitos de requirements.md, tarefas de tasks.md e efeitos externos previstos (nenhum)."
   },
   {
    "id": "requisitos-pelos-nomes-do-formato",
    "resultado": "indeterminado",
-   "evidencia": "Execução parou no A1; o A1 já usa 'Req 1' e 'Req 2' do Kiro, mas o A3 não foi alcançado."
+   "evidencia": "A execução terminou no pedido de aceite do A1; o A3 não foi alcançado. O A1 já cita os requisitos com os nomes do formato, mas o checkpoint pede o A3."
   },
   {
    "id": "comandos-da-ferramenta-nao-substituem-aceites",
    "resultado": "indeterminado",
-   "evidencia": "Parou antes de qualquer comando da ferramenta."
+   "evidencia": "Nenhum comando da ferramenta foi chamado nem o A3 alcançado; o agente só leu os arquivos e parou no aceite."
   },
   {
    "id": "cria-spec-paralela",
    "resultado": "passou",
-   "evidencia": "Nenhum arquivo criado em proj/."
+   "evidencia": "Nenhuma ferramenta de escrita foi chamada; a proj/ não ganhou docs/spec.md nem outra spec."
   }
  ]
 }

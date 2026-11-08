@@ -1,0 +1,47 @@
+{
+ "cenario": "tese-sem-rede",
+ "versao": "4.0.0",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "destino": "claude-code-instalador",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "quarto-expert"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Terminou pedindo o caminho da tese ou aprovação para rodar offline_probe.py"
+ ],
+ "contexto_lido": {
+  "caracteres": 6000,
+  "arquivos": [
+   "quarto-expert/references/offline-diagnostics.md",
+   "quarto-expert/references/engines.md",
+   "quarto-expert/examples/abnt-thesis-starter/_quarto.yml"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "carrega-quarto-expert-ambiente",
+   "resultado": "passou",
+   "evidencia": "Skill quarto-expert; leu offline-diagnostics.md e engines.md, tentou offline_probe.py (negado)."
+  },
+  {
+   "id": "ordem-de-busca-do-python",
+   "resultado": "passou",
+   "evidencia": "Lista: 'QUARTO_PYTHON; jupyter:/kernelspec no YAML; ambiente virtual do projeto; python3 do PATH'; diz que só 'quarto check jupyter' mostra qual escolhe."
+  },
+  {
+   "id": "o-que-precisa-estar-na-maquina",
+   "resultado": "passou",
+   "evidencia": "Sem a tese real, lista pelo exemplo: Typst ou LaTeX com pacotes do template, CSL ABNT, .bib, fontes, extensão em _extensions/, Python/Jupyter se houver células."
+  },
+  {
+   "id": "instala-sem-aceite",
+   "resultado": "passou",
+   "evidencia": "Nada instalado; recusou rodar quarto tools/render e pediu aprovação para o probe."
+  }
+ ]
+}

@@ -42,7 +42,7 @@ Escolha o esforço pela escala do contrato comum e diga por quê: leve para muda
 
 Corrigir um erro, bug ou regressão local e reversível é tarefa pequena. Se o conserto muda interface ou dados, ou toca mais de um arquivo de código além dos testes, mostre o diagnóstico e um plano curto e espere o aceite. É incidente o defeito com efeito fora do desenvolvimento (usuários, dados reais, envios), o serviço ou job de produção usado por outros que parou e o segredo exposto; falha local, sem publicação nem envio, é bug. Na dúvida, pergunte se algo saiu do ambiente local. Incidente segue a `release-and-ops-pipeline`.
 
-1. Reproduza antes de mudar, com o comando e a saída que mostram o erro.
+1. Reproduza antes de mudar, com o comando e a saída que mostram o erro. Se não conseguir, porque o comando foi negado ou falta o ambiente, não edite: diga o que falta e espere.
 2. Escreva o teste que falha pelo motivo certo, com a forma real da entrada que quebrou (cabeçalho, payload, formato), sem dados pessoais; sem teste possível, caracterize o comportamento.
 3. Corrija a causa, não o sintoma, com o menor diff, e procure os outros pontos que chamam o código mudado.
 4. Rode o teste novo e os checks afetados.
@@ -62,7 +62,7 @@ Leia só a referência do arquétipo confirmado: [A](references/archetype-a.md),
 2. **EX-2 Integração.** Ligue a lógica à fonte de dados, API, notebook, serviço ou CLI prevista e rode o fluxo principal em ambiente controlado, incluindo as falhas de fronteira importantes.
 3. **EX-3 Saídas.** Apenas as figuras, telas, serializações ou mensagens previstas. Confira unidades, semântica e acessibilidade conforme a referência do arquétipo.
 4. **EX-4 Documentação.** Atualize README, relatório ou referência de API a partir do que foi implementado. Confira exemplos, flags e números, e separe resultado real de esperado.
-5. **EX-5 Revisão e build.** Revise o diff quanto a comportamento, qualidade dos testes e fidelidade da documentação. Rode lint, tipos, testes e build do projeto e corrija o que for concreto. Com um check obrigatório falhando ou não executado, a entrega não está validada. A sua revisão nunca conta como independente; no esforço rigoroso, faça a [independente](references/independent-review.md) antes do A3, pelo `diff-reviewer` no Claude Code.
+5. **EX-5 Revisão e build.** Revise o diff quanto a comportamento, qualidade dos testes e fidelidade da documentação. Rode lint, tipos, testes e build do projeto e corrija o que for concreto. Com um check obrigatório falhando ou não executado, a entrega não está validada. A sua revisão nunca conta como independente; no esforço rigoroso, faça a [independente](references/independent-review.md) antes do A3, pelo `diff-reviewer` no Claude Code ou, sem o plugin, por um subagente novo.
 
 Gate sem aplicação fica não aplicável, com o motivo.
 
@@ -72,4 +72,4 @@ Carregue outra skill só para uma lacuna concreta, com as regras de especialista
 
 ## Entrega
 
-Ao fim de EX-5, informe alterações, checks executados, limitações e próximo passo. Para publicar, encaminhe a `release-and-ops-pipeline`; sem autorização, pare no estado preparado.
+Ao fim de EX-5, informe alterações, checks executados, limitações e próximo passo. Num projeto com os `docs/00` a `docs/05` antigos, que você seguiu como estão, ofereça no A3, em uma linha, migrar para a spec viva; só migre se o usuário aceitar. Para publicar, encaminhe a `release-and-ops-pipeline`; sem autorização, pare no estado preparado.

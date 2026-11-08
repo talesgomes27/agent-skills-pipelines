@@ -11,16 +11,14 @@
  ],
  "paradas": 1,
  "paradas_detalhe": [
-  "Terminou com A1 e perguntas, pedindo aceite do escopo, stack e consulta de referência"
+  "Terminou pedindo o aceite do A1 e decisões em aberto (stack, fonte de dados)."
  ],
  "contexto_lido": {
-  "caracteres": 10000,
+  "caracteres": 692,
   "arquivos": [
-   "execution-pipeline/SKILL.md",
-   "AGENTS.md",
    "openspec/changes/filtro-regiao/proposal.md",
-   "tasks.md",
-   "specs/vendas/spec.md",
+   "openspec/changes/filtro-regiao/specs/vendas/spec.md",
+   "openspec/changes/filtro-regiao/tasks.md",
    "openspec/specs/vendas/spec.md"
   ]
  },
@@ -28,27 +26,27 @@
   {
    "id": "detecta-o-formato",
    "resultado": "passou",
-   "evidencia": "'O projeto só tem a spec do OpenSpec'; trabalha com 'openspec/changes/filtro-regiao/' e promete 'atualizar as tarefas do OpenSpec'."
+   "evidencia": "Texto final: 'A spec e as tarefas em openspec/changes/filtro-regiao/'; leu proposal.md, specs/vendas/spec.md e tasks.md."
   },
   {
    "id": "confirma-aprovacao-ou-pede-a1",
    "resultado": "passou",
-   "evidencia": "'pedir para implementar o que está especificado não aprova uma spec'; mostra 'A1: escopo proposto' com requisito, tarefas, esforço e efeitos (sem commit/push/deploy) e pergunta 'Posso considerar esse escopo aprovado?'."
+   "evidencia": "Texto final: 'preciso do seu aceite do plano antes de codar'; A1 com EX-1 a EX-5, tarefas 1.1/1.2 e efeitos externos (nenhum). A skill foi carregada só depois das leituras."
   },
   {
    "id": "requisitos-pelos-nomes-do-formato",
    "resultado": "indeterminado",
-   "evidencia": "Parou no A1, antes do A3."
+   "evidencia": "A execução terminou no pedido de aceite do A1; o A3 não foi alcançado. O A1 já cita os requisitos com os nomes do formato, mas o checkpoint pede o A3."
   },
   {
    "id": "comandos-da-ferramenta-nao-substituem-aceites",
    "resultado": "indeterminado",
-   "evidencia": "Parou antes de qualquer comando da ferramenta."
+   "evidencia": "Nenhum comando da ferramenta foi chamado nem o A3 alcançado; o agente só leu os arquivos e parou no aceite."
   },
   {
    "id": "cria-spec-paralela",
    "resultado": "passou",
-   "evidencia": "Nenhum arquivo criado."
+   "evidencia": "Nenhuma ferramenta de escrita foi chamada; a proj/ não ganhou docs/spec.md nem outra spec."
   }
  ]
 }

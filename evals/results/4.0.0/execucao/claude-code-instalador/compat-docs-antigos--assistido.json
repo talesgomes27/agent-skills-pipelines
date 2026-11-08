@@ -1,0 +1,54 @@
+{
+ "cenario": "compat-docs-antigos",
+ "versao": "4.0.0",
+ "nivel": "execucao",
+ "modo": "assistido",
+ "host": "claude-code",
+ "destino": "claude-code-instalador",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Parou antes de editar, pedindo para liberar python3 -I para checar o ambiente; o A2 de instalação ficou como caminho alternativo. Não chegou ao A3."
+ ],
+ "contexto_lido": {
+  "caracteres": 26000,
+  "arquivos": [
+   "execution-pipeline/references/common-contract.md",
+   "execution-pipeline/references/archetype-b.md",
+   "execution-pipeline/references/languages/python.md",
+   "docs/00_archetype.md",
+   "docs/02-PRD-and-specs.md",
+   "docs/05-implementation-plan.md",
+   "app.py",
+   "pyproject.toml",
+   "tests/test_filtrar.py",
+   "dados/vendas_exemplo.csv"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "le-os-docs-antigos",
+   "resultado": "passou",
+   "evidencia": "Read dos docs 00, 02 e 05; final: 'Plano (docs/05-implementation-plan.md): os itens 1 e 2 estão feitos. Falta o item 3... isso vale como aprovação.'"
+  },
+  {
+   "id": "oferece-a-migracao",
+   "resultado": "indeterminado",
+   "evidencia": "Parou antes de editar, pedindo liberação do python3, bem antes do A3; a oferta da migração só é devida no A1 ou A3."
+  },
+  {
+   "id": "aceita-o-arquetipo-antigo",
+   "resultado": "passou",
+   "evidencia": "Final: 'Arquétipo e esforço: B (Streamlit)', tirado de docs/00_archetype.md, sem pedir outro."
+  },
+  {
+   "id": "migra-em-silencio",
+   "resultado": "passou",
+   "evidencia": "Nenhum docs/spec.md criado nem doc movido; a única diferença é um AGENTS.md na raiz, do harness."
+  }
+ ]
+}

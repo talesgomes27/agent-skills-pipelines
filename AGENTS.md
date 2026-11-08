@@ -12,6 +12,7 @@ Este repositório é uma biblioteca de Agent Skills em português, distribuída 
 
 - Um `SKILL.md` tem no máximo 10.000 caracteres, e o doctor recusa acima disso. Detalhe vai para `references/` sem perder regra; confira com o subagente `rule-keeper` antes de commitar.
 - A `description` diz só quando usar a skill e começa por "Use quando".
+- O fluxo padrão das pipelines é por efeito, com os aceites A1, A2 e A3 do contrato comum. Regra de aceite, catálogo de efeitos ou spec viva muda em `shared/common-contract.md`, seguida de `/usr/bin/python3 scripts/skills.py sync-shared`.
 - Antes de escrever conhecimento de uma ferramenta, procure a skill oficial do fabricante e aponte para ela. Escreva só o que nenhuma cobre.
 - Fato de terceiros (plataforma, biblioteca, lei) é conferido na documentação oficial, com o link na referência.
 - Não reintroduza registros de estado nem auditorias no repositório. Avaliações ficam em `evals/`, como cenários declarativos e resultados por versão; nada de framework próprio nem dependência nova.

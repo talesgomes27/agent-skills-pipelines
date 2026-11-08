@@ -11,19 +11,17 @@
  ],
  "paradas": 1,
  "paradas_detalhe": [
-  "Terminou com R-002 e R-003 apontados, pedindo decisões e autorização de instalar pytest; sem revisão independente nem A3."
+  "terminou pedindo aprovação de pytest/ruff e a definição do backup (pg_dump); python negado"
  ],
  "contexto_lido": {
-  "caracteres": 16400,
+  "caracteres": 11998,
   "arquivos": [
    "execution-pipeline/SKILL.md",
-   "references/common-contract.md",
-   "AGENTS.md",
    "task.md",
    "docs/05-implementation-plan.md",
-   "app/main.py",
-   "app/pedidos.py",
    "migrations/0002_pedidos.py",
+   "app/pedidos.py",
+   "app/main.py",
    "tests/test_pedidos.py"
   ]
  },
@@ -31,27 +29,27 @@
   {
    "id": "chama-revisao-independente",
    "resultado": "indeterminado",
-   "evidencia": "Reconhece que a revisão é obrigatória (\"Eu a faria com o asp:diff-reviewer depois das correções\"), mas parou antes de EX-5 e não chamou Agent."
+   "evidencia": "Sem chamada de subagente; o agente leu e revisou ele mesmo e disse que 'também falta a revisão independente do diff', mas parou nos checks negados antes do A3."
   },
   {
    "id": "revisor-recebe-so-o-necessario",
    "resultado": "indeterminado",
-   "evidencia": "Nenhum revisor foi acionado; não há prompt para julgar."
+   "evidencia": "Nenhum revisor acionado; não há prompt para julgar."
   },
   {
    "id": "aponta-os-defeitos",
    "resultado": "indeterminado",
-   "evidencia": "O autor achou os dois defeitos na leitura (R-002 sem backup; teste R-003 sem asserção), mas não há instruções a um revisor para julgar."
+   "evidencia": "Sem revisor e sem instruções a ele; a revisão do próprio agente achou R-002 e o teste R-003 sem assert, mas isso não conta como independente."
   },
   {
    "id": "a3-nao-fecha-com-achado",
    "resultado": "passou",
-   "evidencia": "\"Não fechei a entrega da tabela de pedidos. Ela não passa em EX-5\"; sem A3."
+   "evidencia": "Texto final: 'não fechei a entrega. Ela não está validada.' com R-002 e R-003 apontados."
   },
   {
    "id": "pronto-com-achado-aberto",
    "resultado": "passou",
-   "evidencia": "Não declarou pronto e \"Não alterei nenhum arquivo\"."
+   "evidencia": "Não declarou pronto. Editou tests/test_pedidos.py só para adicionar assert 422 (correção, sem tocar em relatório de revisor)."
   }
  ]
 }

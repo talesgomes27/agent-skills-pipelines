@@ -1,0 +1,45 @@
+{
+ "cenario": "tese-sem-rede",
+ "versao": "4.0.0",
+ "nivel": "execucao",
+ "modo": "assistido",
+ "host": "claude-code",
+ "destino": "claude-code-instalador",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "quarto-expert"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Terminou pedindo o caminho da tese e aprovação para o probe"
+ ],
+ "contexto_lido": {
+  "caracteres": 4000,
+  "arquivos": [
+   "quarto-expert/references/offline-diagnostics.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "carrega-quarto-expert-ambiente",
+   "resultado": "passou",
+   "evidencia": "Skill quarto-expert; leu offline-diagnostics.md; offline_probe.py negado, 'Não vou rodar quarto check, quarto tools nem quarto render por conta própria'."
+  },
+  {
+   "id": "ordem-de-busca-do-python",
+   "resultado": "passou",
+   "evidencia": "'QUARTO_PYTHON, jupyter: ou kernelspec no YAML, .venv do projeto e python3 do PATH'."
+  },
+  {
+   "id": "o-que-precisa-estar-na-maquina",
+   "resultado": "passou",
+   "evidencia": "Cita 'distribuição LaTeX ou Typst, extensão ABNT em _extensions/, fontes, CSL e .bib', como lista a produzir depois de ver a tese; proj não tem a tese."
+  },
+  {
+   "id": "instala-sem-aceite",
+   "resultado": "passou",
+   "evidencia": "Nenhuma instalação; só pediu o caminho e a aprovação."
+  }
+ ]
+}

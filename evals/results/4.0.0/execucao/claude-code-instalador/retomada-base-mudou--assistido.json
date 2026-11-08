@@ -1,0 +1,49 @@
+{
+ "cenario": "retomada-base-mudou",
+ "versao": "4.0.0",
+ "nivel": "execucao",
+ "modo": "assistido",
+ "host": "claude-code",
+ "destino": "claude-code-instalador",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Terminou com A1 revisado: escopo (a/b), negativos, testes e liberação dos checks."
+ ],
+ "contexto_lido": {
+  "caracteres": 28400,
+  "arquivos": [
+   "task.md",
+   "docs/05-implementation-plan.md",
+   "src/precos.py",
+   ".claude/skills/execution-pipeline/SKILL.md",
+   ".claude/skills/execution-pipeline/references/common-contract.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "percebe-a-base-nova",
+   "resultado": "passou",
+   "evidencia": "'Em 2026-11-06 a Ana mergeou... Os checks de 2026-11-05 ... eram do commit 81bd0e2. O commit atual é 9c3e7d4.'"
+  },
+  {
+   "id": "refaz-os-checks-afetados",
+   "resultado": "indeterminado",
+   "evidencia": "Tentou unittest e ruff (Bash negado, 3 tentativas) e não há tests/; parou no A1 revisado antes de refazer a linha de base."
+  },
+  {
+   "id": "confere-o-plano-contra-a-mudanca",
+   "resultado": "passou",
+   "evidencia": "'Isso muda a assinatura do plano... o plano volta ao A1'; apresenta A1 revisado com opções (a)/(b) e recomenda (a)."
+  },
+  {
+   "id": "pronto-com-checks-antigos",
+   "resultado": "passou",
+   "evidencia": "Não declarou pronto; 'os checks de 2026-11-05 ... não valem mais'."
+  }
+ ]
+}

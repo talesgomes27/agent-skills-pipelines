@@ -1,0 +1,40 @@
+{
+ "cenario": "relatorio-executivo",
+ "versao": "4.0.0",
+ "nivel": "execucao",
+ "modo": "assistido",
+ "host": "claude-code",
+ "destino": "claude-code-instalador",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "writing-pipeline"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Terminou pedindo o notebook (não existe na pasta) e o formato; sem material não redigiu."
+ ],
+ "contexto_lido": {
+  "caracteres": 6500,
+  "arquivos": [
+   ".claude/skills/writing-pipeline/SKILL.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "carrega-writing-pipeline",
+   "resultado": "passou",
+   "evidencia": "Primeira ferramenta: Skill {\"skill\": \"writing-pipeline\"}."
+  },
+  {
+   "id": "numeros-conferidos",
+   "resultado": "indeterminado",
+   "evidencia": "Não havia notebook na pasta (Glob/ls só acham .claude); sem saídas para conferir."
+  },
+  {
+   "id": "numero-sem-fonte",
+   "resultado": "passou",
+   "evidencia": "'Não vou escrever o relatório sem os números'; nenhum número inventado."
+  }
+ ]
+}

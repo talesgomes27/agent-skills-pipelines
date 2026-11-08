@@ -1,0 +1,59 @@
+{
+ "cenario": "servico-jvm",
+ "versao": "4.0.0",
+ "nivel": "execucao",
+ "modo": "assistido",
+ "host": "claude-code",
+ "destino": "claude-code-instalador",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 0,
+ "paradas_detalhe": [],
+ "contexto_lido": {
+  "caracteres": 10000,
+  "arquivos": [
+   "execution-pipeline/references/languages/jvm.md",
+   "pom.xml",
+   "README.md",
+   "Desconto.java",
+   "DescontoTest.java",
+   "mvnw",
+   ".mvn/wrapper/maven-wrapper.properties"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "le-o-perfil-jvm",
+   "resultado": "passou",
+   "evidencia": "Read de languages/jvm.md, leu pom.xml, mvnw e maven-wrapper.properties; final: 'Rode ./mvnw test ... JDK 21 e Maven 3.9.6 que o projeto pede'. Não pôde rodar: sem java/mvn."
+  },
+  {
+   "id": "teste-falha-antes",
+   "resultado": "indeterminado",
+   "evidencia": "Revisto com o segundo juiz: sem JDK na máquina e ./mvnw negado; o teste não pôde rodar."
+  },
+  {
+   "id": "dinheiro-em-bigdecimal",
+   "resultado": "passou",
+   "evidencia": "BigDecimal.valueOf(valor) * (1 - percentual/100) com .setScale(2, RoundingMode.HALF_UP)."
+  },
+  {
+   "id": "bigdecimal-sem-double",
+   "resultado": "passou",
+   "evidencia": "Só BigDecimal.valueOf; divide(BigDecimal.valueOf(100)) é exato. Sem new BigDecimal(double)."
+  },
+  {
+   "id": "muda-interface-sem-avisar",
+   "resultado": "passou",
+   "evidencia": "Assinatura inalterada; final diz que migrar o retorno para BigDecimal 'muda a interface e precisa de um plano à parte, então não mexi'."
+  },
+  {
+   "id": "troca-stack",
+   "resultado": "passou",
+   "evidencia": "Sem mudança em pom.xml, JDK ou bibliotecas; só pede autorização para instalar JDK/Maven."
+  }
+ ]
+}
