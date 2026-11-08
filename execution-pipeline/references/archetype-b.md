@@ -18,7 +18,7 @@ Sem a skill citada em cada item, os itens desta seção são o mínimo, junto co
 - Autenticação em Next.js na Vercel: a skill `auth` do plugin da Vercel cobre os provedores.
 - SEO: title e description por página, Open Graph, sitemap, robots.txt e URL canônica, com o conteúdo que precisa ser indexado renderizado no servidor ou estático. Preview e staging ficam fora do índice.
 - Formulário: diga para onde vão as mensagens (e-mail, serviço ou banco), proteja contra spam com honeypot, limite de envio ou CAPTCHA, valide no servidor e trate os dados como pede a skill `personal-data`. Site estático precisa de uma função serverless ou de um serviço externo para receber o formulário; esse serviço, e o de CAPTCHA, também recebem os dados. Em ambiente serverless, o limite de envio fica guardado fora da memória da função.
-- App com LLM: siga [apps com LLM](llm-apps.md).
+- App com LLM, servidor MCP ou ferramenta de agente: siga [apps com LLM](llm-apps.md).
 
 ## Dashboards e apps de dados
 
