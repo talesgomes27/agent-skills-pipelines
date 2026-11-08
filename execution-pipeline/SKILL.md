@@ -1,6 +1,6 @@
 ---
 name: execution-pipeline
-description: "Use quando o usuário pedir para mudar o comportamento do código ou dos scripts, a configuração ou a estrutura de documentos Quarto e R Markdown de um projeto, ou criar algo pequeno nele, como uma flag, uma coluna ou um script rápido; para implementar, continuar ou terminar um plano aprovado ou uma entrega pendente, vindos do planejamento ou de uma auditoria; ou para corrigir um erro, bug ou regressão."
+description: "Use quando o usuário pedir para mudar o comportamento do código ou dos scripts, a configuração ou a estrutura de documentos Quarto e R Markdown de um projeto, ou criar algo pequeno nele, como uma flag, uma coluna ou um script rápido; para implementar, continuar ou terminar um plano aprovado ou uma entrega pendente, vindos do planejamento ou de uma auditoria; para corrigir um erro, bug ou regressão; ou para atualizar dependências ou o lockfile."
 ---
 
 # Execução de um plano aprovado
@@ -33,7 +33,7 @@ Escolha o esforço pela escala do contrato comum e diga por quê: leve para muda
 - Fique no escopo e nas interfaces do plano. Mudança de requisito volta ao planejamento; falha de implementação se corrige na própria tarefa.
 - Para comportamento novo ou corrigido, escreva o teste antes quando o plano prevê, veja-o falhar pelo motivo esperado, implemente e rode de novo. Em código legado sem teste, caracterize o comportamento antes de mudá-lo.
 - Não enfraqueça testes nem troque dados reais por sintéticos para mostrar sucesso.
-- Valide com as ferramentas e o ambiente do projeto, nos comandos do perfil da linguagem. Em Python, use `uv run --locked --no-python-downloads` só com `uv.lock` já aceito; sem lock o `uv run` instalaria dependências, e se faltar o Python pedido ele falha: peça A2 antes ou use o ambiente que já existe e diga qual. Comece pelos checks afetados e amplie conforme o risco.
+- Valide com as ferramentas e o ambiente do projeto, nos comandos do perfil da linguagem. Comece pelos checks afetados e amplie conforme o risco.
 - Mantenha a stack exigida: não troque biblioteca, framework, estimador ou formato por conveniência. Se faltar algo indispensável, bloqueie só a tarefa afetada e explique o que falta.
 - Testes, migrações, notebooks e builds executam código. Rode em ambiente de desenvolvimento ou teste, nunca contra produção salvo a leitura do item seguinte, e não instale nada globalmente.
 - Ler dados reais com uma credencial só de leitura que o usuário autorizou vale quando o plano prevê; o que for para testes, logs ou relatórios segue a política de dados. Escrever, enviar mensagem, cobrar ou publicar usa o recurso de teste do plano (banco, pasta, chat ou conta) ou uma autorização específica para aquela execução.
@@ -42,11 +42,7 @@ Escolha o esforço pela escala do contrato comum e diga por quê: leve para muda
 
 Corrigir um erro, bug ou regressão local e reversível é tarefa pequena. Se o conserto muda interface ou dados, ou toca mais de um arquivo de código além dos testes, mostre o diagnóstico e um plano curto e espere o aceite. É incidente o defeito com efeito fora do desenvolvimento (usuários, dados reais, envios), o serviço ou job de produção usado por outros que parou e o segredo exposto; falha local, sem publicação nem envio, é bug. Na dúvida, pergunte se algo saiu do ambiente local. Incidente segue a `release-and-ops-pipeline`.
 
-1. Reproduza antes de mudar, com o comando e a saída que mostram o erro. Se não conseguir, porque o comando foi negado ou falta o ambiente, não edite: diga o que falta e espere.
-2. Escreva o teste que falha pelo motivo certo, com a forma real da entrada que quebrou (cabeçalho, payload, formato), sem dados pessoais; sem teste possível, caracterize o comportamento.
-3. Corrija a causa, não o sintoma, com o menor diff, e procure os outros pontos que chamam o código mudado.
-4. Rode o teste novo e os checks afetados.
-5. Registre na resposta, ou onde o projeto já registra estado, a causa, a correção e o que ficou sem verificar. Refatoração vista no caminho vira proposta, não entra no conserto.
+Antes de editar, siga os cinco passos da [correção de bug](references/bug-fix.md): reproduzir, teste que falha, causa com o menor diff, checks e registro. Sem reproduzir, porque o comando foi negado ou falta o ambiente, não edite: diga o que falta e espere.
 
 ## Modo
 
