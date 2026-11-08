@@ -216,7 +216,7 @@ def copied_evidence(root):
                 continue
             key = (data['versao'], data['cenario'], ev)
             if key in seen and seen[key] != path:
-                dup.append((str(seen[key].relative_to(root)), str(path.relative_to(root)), c['id']))
+                dup.append((seen[key].relative_to(root).as_posix(), path.relative_to(root).as_posix(), c["id"]))
             seen.setdefault(key, path)
     return dup
 
