@@ -14,6 +14,8 @@ evals/
   results/<versão>/<nível>/<id>.json        resultado de um cenário no modo padrão da versão
   results/<versão>/<nível>/<id>--<modo>.json resultado num outro modo, com o campo "modo"
   results/<versão>/<nível>/triggers-<destino>.json
+  results/<versão>/<nível>/<destino>/<id>.json   outro destino do mesmo host, com o campo "destino"
+  results/<versão>/<nível>/<destino>/<id>--<modo>.json  o mesmo, num outro modo
 ```
 
 ## Cenário
@@ -70,6 +72,7 @@ O modo padrão é o por efeito a partir da 4.0.0; antes dela, era o assistido, e
 - `resultado`: `passou`, `falhou` ou `indeterminado`, sempre com a evidência.
 - `paradas_detalhe` (opcional): quais aceites ou perguntas o agente pediu, na ordem, para conferir a contagem de `paradas`.
 - `modo` (opcional no modo padrão da versão): `por-efeito`, `assistido` ou `continuo`.
+- `destino` (opcional): o caminho de instalação, quando o mesmo host tem mais de um, como `claude-code-instalador` para as skills instaladas pelo `skills.py` no Claude Code. O resultado fica numa subpasta com esse nome, e o `report.py` mostra uma linha por destino. Sem o campo, vale o destino padrão do host; no Claude Code, o plugin do marketplace.
 
 Um resultado pode cobrir só parte dos checkpoints; os que ficaram de fora não contam como aprovados.
 
@@ -83,6 +86,6 @@ Resultado de gatilhos, em `<nível>/triggers-<destino>.json`:
 }
 ```
 
-`observado` é `ativou`, `nao_ativou` ou `outra` (ativou outra skill), e `id` é o do `triggers.yaml`.
+`observado` é `ativou`, `nao_ativou` ou `outra` (ativou outra skill), e `id` é o do `triggers.yaml`. O `<destino>` do nome do arquivo é o campo `destino`, ou o `host` quando não há destino.
 
 A versão é a das skills avaliadas. Uma rodada sobre a branch em preparo grava na pasta da versão que vai ser publicada.

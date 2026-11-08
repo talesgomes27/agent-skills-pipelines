@@ -1,3 +1,4 @@
+import contextlib
 import datetime
 import json
 import re
@@ -91,21 +92,62 @@ class MatrixAndReport(unittest.TestCase):
         self.assertEqual(mod.nao_deve_ids(), expected)
         mod.rows()
 
+    def test_report_separates_destinations_of_the_same_host(self):
+        import importlib.util
+        import tempfile
+        spec = importlib.util.spec_from_file_location('report', EVALS / 'report.py')
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        base = {'cenario': 'x', 'versao': '9.0.0', 'nivel': 'execucao', 'host': 'claude-code', 'modelo': 'm', 'data': '2026-11-08', 'checkpoints': []}
+        with tempfile.TemporaryDirectory() as t:
+            root = Path(t)
+            (root / '9.0.0/execucao/claude-code-instalador').mkdir(parents=True)
+            (root / '9.0.0/execucao/x.json').write_text(json.dumps(base), encoding='utf-8')
+            (root / '9.0.0/execucao/claude-code-instalador/x.json').write_text(json.dumps(dict(base, destino='claude-code-instalador')), encoding='utf-8')
+            keys = set(mod.rows(root=root))
+        self.assertEqual({k[4] for k in keys}, {'', 'claude-code-instalador'})
+
 
 @unittest.skipIf(yaml is None, 'PyYAML ausente')
 class ResultFormat(unittest.TestCase):
     def test_results_match_scenarios(self):
+        self.check_results(EVALS / 'results')
+
+    def test_destination_subfolder_and_trigger_name(self):
+        import tempfile
+        sid = sorted(scenarios())[0]
+        base = {'cenario': sid, 'versao': '9.0.0', 'nivel': 'execucao', 'host': 'claude-code', 'modelo': 'm', 'data': '2026-11-08',
+                'skills_carregadas': [], 'paradas': 0, 'contexto_lido': {'caracteres': 0, 'arquivos': []}, 'checkpoints': [], 'destino': 'claude-code-instalador'}
+        trig = {'versao': '9.0.0', 'nivel': 'execucao', 'host': 'claude-code', 'modelo': 'm', 'data': '2026-11-08', 'resultados': [], 'destino': 'claude-code-instalador'}
+        with tempfile.TemporaryDirectory() as t:
+            root = Path(t) / 'results'
+            (root / '9.0.0/execucao/claude-code-instalador').mkdir(parents=True)
+            (root / '9.0.0/execucao/claude-code-instalador' / (sid + '.json')).write_text(json.dumps(base), encoding='utf-8')
+            (root / '9.0.0/execucao/triggers-claude-code-instalador.json').write_text(json.dumps(trig), encoding='utf-8')
+            self.check_results(root)
+            (root / '9.0.0/execucao/outra').mkdir()
+            (root / '9.0.0/execucao/outra' / (sid + '.json')).write_text(json.dumps(base), encoding='utf-8')
+            with self.assertRaises(AssertionError):
+                self.check_results(root, sub=False)
+
+    def check_results(self, root, sub=True):
         found = scenarios()
-        for path in sorted((EVALS / 'results').rglob('*.json')):
+        for path in sorted(root.rglob('*.json')):
             data = json.loads(path.read_text(encoding='utf-8'))
-            with self.subTest(resultado=str(path.relative_to(EVALS))):
-                self.assertEqual(path.parent.name, data['nivel'])
-                self.assertEqual(data['versao'], path.parent.parent.name)
+            with (self.subTest(resultado=str(path.relative_to(root))) if sub else contextlib.nullcontext()):
+                # <versão>/<nível>/<arquivo>, ou <versão>/<nível>/<destino>/<arquivo> com o campo destino
+                nivel_dir = path.parent
+                if not path.name.startswith('triggers-') and (path.parent.name not in ('leitura', 'execucao') or 'destino' in data):
+                    self.assertEqual(data.get('destino'), path.parent.name)
+                    nivel_dir = path.parent.parent
+                self.assertEqual(nivel_dir.name, data['nivel'])
+                self.assertEqual(data['versao'], nivel_dir.parent.name)
                 self.assertRegex(data['versao'], r'^\d+\.\d+\.\d+(-[0-9A-Za-z.]+)?$')
                 self.assertIn(data['nivel'], ('leitura', 'execucao'))
                 self.assertTrue(data['host'] and data['modelo'])
                 datetime.date.fromisoformat(data['data'])
                 if path.name.startswith('triggers-'):
+                    self.assertEqual(path.stem[len('triggers-'):], data.get('destino', data['host']))
                     trig = {t['id'] for t in yaml.safe_load((EVALS / 'triggers.yaml').read_text(encoding='utf-8'))}
                     for r in data['resultados']:
                         self.assertIn(r['id'], trig)
