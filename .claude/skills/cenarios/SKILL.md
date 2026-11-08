@@ -38,7 +38,7 @@ O harness é `scripts/execucao.py`, só com a biblioteca padrão. Rode `/usr/bin
   Todo efeito externo é negado e fica visível no registro. Em gatilhos, use `--turnos 8`.
 - Na primeira execução de cada destino, confira na linha INIT do `resumo` que só aparecem as skills do repositório e as do próprio Claude Code. Se aparecerem as do usuário, pare e diga ao usuário.
 - Se o cenário tem `aceite_simulado`, passe `--aceite "<texto>"`. Depois de um primeiro turno terminado com sucesso, o harness retoma a mesma sessão com `--resume` e grava `log2.jsonl`; se o primeiro turno estourou turnos ou orçamento, grava `aceite_pulado` no lugar.
-- Rode até quatro execuções em paralelo, em segundo plano. Mudança de skill usa três amostras por destino, e diferença pequena entre destinos usa dez.
+- Rode até quatro execuções em paralelo, em segundo plano. Uma execução que termina em erro da API, como o limite de uso da conta, grava `erro_api` em vez de `done`; prepare a execução de novo, porque a cópia do projeto pode ter sido editada, e não a conte como `nao_ativou`. Mudança de skill usa três amostras por destino, e diferença pequena entre destinos usa dez.
 - Gatilho: prepare com a `fixture` do gatilho, quando houver, rode com `--turnos 8` e classifique com `gatilho <log> <skill>`, que devolve `ativou`, `nao_ativou` ou `outra`.
 - Julgue com subagentes novos, até quatro cenários por juiz, passando o [roteiro do juiz](roteiro-juiz.md) com a lista de ids, a pasta das execuções, a de saída, a versão e o destino. Um segundo juiz cego revê as falhas.
 

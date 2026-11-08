@@ -1,6 +1,6 @@
 ---
 name: pre-code-pipeline
-description: "Use quando o usuário quiser planejar um projeto novo ou uma mudança relevante antes de implementar, com requisitos, arquitetura ou plano ainda por definir."
+description: "Use quando o usuário quiser planejar ou montar um projeto novo, como um app, um site ou um dashboard (Power BI, Streamlit, Shiny), ou planejar uma mudança relevante antes de implementar, com requisitos, arquitetura ou plano ainda por definir."
 ---
 
 # Planejamento pré-código
@@ -30,7 +30,7 @@ Escolha o esforço pela escala do contrato comum e diga por quê: leve para muda
 
 Os destinos padrão são a spec e `docs/plan.md`; `docs/01` a `docs/05` existentes continuam valendo, com a migração só oferecida, e nenhum é obrigatório. Um contrato existente com aprovação verificável cumpre o gate por referência. No esforço leve o conteúdo pode ficar na resposta; crie arquivo se precisar durar além da conversa. Num app novo leve, os gates cabem numa resposta, com um só aceite por PC-2, PC-3 e PC-5.
 
-**Entrega pontual.** Análise, script ou documento entregue uma vez, sem sistema para manter, não abre os cinco gates: numa só resposta, diga pergunta e público, fontes e cuidados com os dados, regras de limpeza ou coleta, formato, prazo e verificação, e espere esse aceite. Depois entregue pela `execution-pipeline`, no caminho rápido ou nos gates que se aplicam; o pedido já autoriza executar. Até esse aceite valem os limites abaixo; os de dados, segredos e instalação valem também depois.
+**Entrega pontual.** Análise, script ou documento entregue uma vez, sem sistema para manter, não abre os cinco gates: numa só resposta, diga pergunta e público, fontes e cuidados com os dados, regras de limpeza ou coleta, formato, prazo e verificação, e, se a entrega for publicada ou compartilhada, onde, com o efeito e o destino que vão pedir A2 (num dashboard, o workspace; veja a [arquitetura por arquétipo](references/architecture-by-archetype.md)), e espere esse aceite. Depois entregue pela `execution-pipeline`, no caminho rápido ou nos gates que se aplicam; o pedido já autoriza executar. Até esse aceite valem os limites abaixo; os de dados, segredos e instalação valem também depois.
 
 ## Limites
 

@@ -241,6 +241,24 @@ class Harness(unittest.TestCase):
             log.write_text('', encoding='utf-8')
             self.assertEqual(ex.gatilho(log, 'execution-pipeline'), 'nao_ativou')
 
+    def test_api_error_does_not_mark_done(self):
+        import importlib.util
+        import tempfile
+        spec = importlib.util.spec_from_file_location('execucao', REPO / '.claude/skills/cenarios/scripts/execucao.py')
+        ex = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(ex)
+        # o formato real do evento result quando a conta atinge o limite de uso
+        limite = {'type': 'result', 'subtype': 'success', 'is_error': True, 'api_error_status': 429, 'api_error': 'usage_limit_reached', 'session_id': 's'}
+        ok = {'type': 'result', 'subtype': 'success', 'is_error': False, 'api_error_status': None, 'session_id': 's'}
+        with tempfile.TemporaryDirectory() as t:
+            exe = Path(t) / 'e'
+            ex.preparar(exe, 'pedido')
+            for evento, marcador in ((limite, 'erro_api'), (ok, 'done')):
+                ex._claude = lambda proj, texto, log, *a, ev=evento: (Path(log).write_text(json.dumps(ev) + '\n', encoding='utf-8'), 0)[1]
+                ex.rodar(exe, 'claude-code', plugin_dir=t)
+                self.assertTrue((exe / marcador).exists())
+            self.assertFalse((exe / 'erro_api').exists())
+
 
 @unittest.skipIf(yaml is None, 'PyYAML ausente')
 class IssueForm(unittest.TestCase):

@@ -9,6 +9,7 @@ arquetipo_esperado:
   secundario: A
 modo: por-efeito
 fixture: fixtures/dashboard-power-bi
+aceite_simulado: Aceito o plano. Pode seguir.
 checkpoints:
 - id: ambiente-real
   tipo: deve
