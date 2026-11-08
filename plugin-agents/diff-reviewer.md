@@ -1,6 +1,6 @@
 ---
 name: diff-reviewer
-description: Use quando a execution-pipeline chega ao EX-5 e o diff de uma implementação está pronto para revisão, antes do A3, a entrega ao usuário. Use proativamente nesse ponto, passe os requisitos, a base, os checks e o handoff, sem resumo seu, e espere o relatório antes de entregar. Só lê e relata, por instrução: tem Bash, e a proteção mecânica são as regras ask e deny do projeto.
+description: Use quando a execution-pipeline chega ao EX-5 e o diff de uma implementação está pronto para revisão, antes do A3, a entrega ao usuário. Use proativamente nesse ponto, passe os requisitos, a base, os checks e o handoff, sem resumo seu, e espere o relatório antes de entregar. Não serve ao pedido do usuário de revisar um PR ou diff, que segue a audit-and-refactoring-pipeline. Só lê e relata, por instrução: tem Bash, e a proteção mecânica são as regras ask e deny do projeto.
 tools: Read, Grep, Glob, Bash
 ---
 
