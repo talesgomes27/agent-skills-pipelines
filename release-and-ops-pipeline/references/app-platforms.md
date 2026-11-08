@@ -1,6 +1,6 @@
 # Plataformas de apps e sites
 
-Use quando o destino é Vercel, Netlify, Streamlit Community Cloud, shinyapps.io ou Posit Connect. Os detalhes valem para a documentação oficial de novembro de 2026. Limites e planos mudam sem aviso, então confira a página da plataforma antes de depender de um deles.
+Use quando o destino é Vercel, Netlify, Streamlit Community Cloud, shinyapps.io, Posit Connect ou o serviço do Power BI. Os detalhes valem para a documentação oficial de novembro de 2026. Limites e planos mudam sem aviso, então confira a página da plataforma antes de depender de um deles.
 
 ## Em qualquer plataforma
 
@@ -64,6 +64,15 @@ Use a skill `deploy-to-connect` da Posit quando ela estiver instalada; sem ela, 
 - `deployApp()` e `posit connect deploy` levam todos os arquivos da pasta: no saneamento, confira o que vai junto e restrinja a seleção quando houver dado, `.env` ou arquivo que o app não usa.
 - Conteúdo Python precisa de `requirements.txt`. Gerar um com `--force-generate` roda `pip freeze` e pode fixar versões demais, então criar esse arquivo também pede o aceite do usuário.
 - Instalar a CLI, entrar na conta ou criar uma chave de API entram no mesmo pedido de autorização da publicação.
+
+## Power BI
+
+Para autoria de modelo e relatório, a skill oficial é o plugin `powerbi-authoring` da Microsoft, do marketplace `microsoft/skills-for-fabric` ([visão geral](https://learn.microsoft.com/en-us/power-bi/developer/agentic/power-bi-agentic-overview)). Aqui ficam só a publicação e o acesso.
+
+- O Power BI Desktop pede Windows 10 ou Windows Server 2016 ou posterior ([requisitos](https://learn.microsoft.com/en-us/power-bi/fundamentals/desktop-get-the-desktop)). Em outro sistema, entregue os dados, as medidas e o projeto PBIP, e diga o que fica para quem tem o Desktop.
+- Publicar envia ao workspace escolhido o modelo semântico, com os dados, e os relatórios. Republicar substitui o modelo publicado, pode quebrar visuais que usam um campo renomeado ou apagado e dispara a atualização agendada ([publicar do Desktop](https://learn.microsoft.com/en-us/power-bi/create-reports/desktop-upload-desktop-files)). O A2 nomeia o workspace e diz se é a primeira publicação ou uma substituição.
+- Link de compartilhamento, papel no workspace, app, compartilhamento externo e publicar na web são efeitos separados, cada um com seu A2. Quem recebe o relatório tem leitura do modelo inteiro, salvo segurança por linha (RLS) ou por objeto (OLS); esconder coluna, medida ou página não restringe o acesso. Publicar na web deixa o relatório e os dados do modelo públicos, sem autenticação ([compartilhar](https://learn.microsoft.com/en-us/power-bi/collaborate-share/service-share-dashboards)).
+- A identidade da release é o arquivo ou o commit do projeto PBIP, com o horário da publicação. Recuperar é republicar a versão anterior, com autorização.
 
 ## Smoke
 

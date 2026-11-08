@@ -71,6 +71,8 @@ def rodar(exe, destino, plugin_dir=None, turnos=40, aceite=None):
     exe = Path(exe)
     if (exe / 'done').exists():
         return
+    for velho in ('log2.jsonl', 'aceite_pulado', 'erro_api'):
+        (exe / velho).unlink(missing_ok=True)
     proj = exe / 'proj'
     if destino == 'claude-code-instalador':
         # escopo project: não toca o ~/.claude/skills/ do usuário; sem subagentes nem hook do pipeline-guardrails
@@ -86,6 +88,12 @@ def rodar(exe, destino, plugin_dir=None, turnos=40, aceite=None):
         codigo = _claude(proj, aceite, exe / 'log2.jsonl', plugin_dir, turnos, fim[-1]['session_id'])
     elif aceite:
         (exe / 'aceite_pulado').write_text('o primeiro turno não terminou com success')
+    erros = [d for log in ('log.jsonl', 'log2.jsonl') if (exe / log).exists() for d in ler(exe / log)
+             if d.get('type') == 'result' and d.get('api_error')]
+    if erros:
+        # limite de uso ou falha da API não é resultado da skill: sem done, a execução roda de novo
+        (exe / 'erro_api').write_text(str(erros[-1]['api_error']))
+        return
     (exe / 'done').write_text(str(codigo))
 
 
