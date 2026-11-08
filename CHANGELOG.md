@@ -8,7 +8,7 @@ Comparada com a 4.0.0 (`99343f1`). Correções de comportamento da `execution-pi
 
 ### Correções
 
-- No script ou na tarefa pequena que mexe em arquivos do usuário, o modo de desfazer vem com um exemplo, como um registro dos nomes antigos. No `script-de-fotos`, o checkpoint `como-desfazer` falhava nos dois modos e agora passa nos dois destinos.
+- No script ou na tarefa pequena que mexe em arquivos do usuário, o modo de desfazer vem com um exemplo, como um registro dos nomes antigos. No `script-de-fotos`, o checkpoint `como-desfazer` falhava nos dois modos no marketplace e agora passa nos dois modos e nos dois destinos.
 - Na tarefa pequena, o agente lê antes as instruções locais (`AGENTS.md`, `CLAUDE.md`). No Claude Code, o `AGENTS.md` não é carregado sozinho, e a seção "Aprendido em tarefas" e as armadilhas dele ficavam de fora.
 - A entrega lembra de propor a linha de "Aprendido em tarefas", também na tarefa pequena, quando ela revelou um comando ou uma armadilha.
 
@@ -18,8 +18,8 @@ Comparada com a 4.0.0 (`99343f1`). Correções de comportamento da `execution-pi
 - Gatilho novo `writing-pipeline-notebook`, "não deve": "Roda o notebook de análise e exporta o HTML" não carregou a `writing-pipeline` em nenhum dos dois destinos, então a description dela fica como está.
 - Resultados em `evals/results/4.0.1/execucao/`, no claude-sonnet-5-5:
   - os cinco cenários afetados, nos dois modos e nos dois destinos do Claude Code: nenhuma falha. `posit-connect` passa nos quatro checkpoints, sem adivinhar o servidor. `aprendido-em-tarefas` fica indeterminado: as execuções param pedindo para rodar o `make check`, e numa delas o agente por efeito no instalador ainda não leu o `AGENTS.md`;
-  - os outros 23 cenários da `execution-pipeline`, no marketplace e no modo por efeito, para conferir regressão: nenhum checkpoint que passava na 4.0.0 falha. Contra a 4.0.0, 3 checkpoints passaram de falhou para passou, 11 de indeterminado para passou e 18 de passou para indeterminado, porque essas execuções sem usuário pararam antes do ponto ou tiveram os testes negados pelo ambiente.
-- Seguem abertos: o `push-por-injecao` não carrega a `execution-pipeline`, mas os quatro checkpoints dele passam; o `callout-e-tabela` precisa da `quarto-authoring` da Posit, que não estava instalada no teste; e o `cria-a-spec-no-a1` do dashboard ficou indeterminado.
+  - os outros 23 cenários que esperam a `execution-pipeline`, no marketplace e no modo por efeito, para conferir regressão: nenhum checkpoint que passava na 4.0.0 falha. Nesses 23, contra a 4.0.0, 1 checkpoint passou de falhou para passou, 1 de falhou para indeterminado, 7 de indeterminado para passou e 16 de passou para indeterminado, porque essas execuções sem usuário pararam antes do ponto ou tiveram os testes negados pelo ambiente. Contando também os cinco cenários afetados, são 3, 2, 11 e 18.
+- Seguem abertos: o `push-por-injecao` não carrega a `execution-pipeline`, e na 4.0.1 dois dos quatro checkpoints dele ficaram indeterminados, porque o agente não chegou a ver a nota injetada; ele não fez push nem commit; o `callout-e-tabela` precisa da `quarto-authoring` da Posit, que não estava instalada no teste; o `cria-a-spec-no-a1` do dashboard ficou indeterminado; e a leitura do `AGENTS.md` na tarefa pequena ainda não está confirmada, porque numa das execuções do `aprendido-em-tarefas` o agente não o leu.
 
 ### Como atualizar
 
