@@ -30,6 +30,7 @@ modo: por-efeito                   # por-efeito, assistido ou continuo: o modo p
 esforco_esperado: padrao           # opcional: leve, padrao ou rigoroso
 fixture: fixtures/dashboard-streamlit               # opcional
 paradas_esperadas: {por-efeito: 4, assistido: 8}   # opcional: aceites pedidos ao usuário, um número ou um por modo
+aceite_simulado: Aceito o plano.   # opcional: no nível de execução, o texto do segundo turno depois da primeira parada
 checkpoints:
   - id: restricoes-plataforma
     tipo: deve                     # comportamento esperado
@@ -40,6 +41,8 @@ checkpoints:
 ```
 
 Todo cenário tem ao menos um checkpoint `deve` e um `nao_deve`.
+
+Use `aceite_simulado` quando o checkpoint julga algo que só acontece depois do primeiro aceite, como redigir a mensagem ou conferir a documentação na implementação. O `/cenarios` retoma a mesma sessão com esse texto e julga as duas partes.
 
 O modo padrão é o por efeito a partir da 4.0.0; antes dela, era o assistido, e um resultado sem o campo `modo` conta como assistido. O `/cenarios` roda cada cenário nos modos pedidos: para o assistido, o agente simulado lê no `AGENTS.md` do projeto a linha `Modo: assistido`.
 
@@ -75,6 +78,8 @@ O modo padrão é o por efeito a partir da 4.0.0; antes dela, era o assistido, e
 - `destino` (opcional): o caminho de instalação, quando o mesmo host tem mais de um, como `claude-code-instalador` para as skills instaladas pelo `skills.py` no Claude Code. O resultado fica numa subpasta com esse nome, e o `report.py` mostra uma linha por destino. Sem o campo, vale o destino padrão do host; no Claude Code, o plugin do marketplace.
 
 Um resultado pode cobrir só parte dos checkpoints; os que ficaram de fora não contam como aprovados.
+
+A mesma evidência inteira, com mais de 40 caracteres, não pode aparecer em dois resultados do mesmo cenário e da mesma versão: cada execução é julgada pelo próprio registro, e o `tests/test_evals.py` confere isso.
 
 Resultado de gatilhos, em `<nível>/triggers-<destino>.json`:
 
