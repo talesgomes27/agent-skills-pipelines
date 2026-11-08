@@ -51,6 +51,9 @@ class ScenarioFormat(unittest.TestCase):
                         self.assertIs(type(esperadas), int)
                 if 'fixture' in s:
                     self.assertTrue((EVALS / s['fixture']).is_dir())
+                if 'aceite_simulado' in s:
+                    self.assertIsInstance(s['aceite_simulado'], str)
+                    self.assertTrue(s['aceite_simulado'].strip())
                 ids = [c['id'] for c in s['checkpoints']]
                 self.assertEqual(len(ids), len(set(ids)))
                 tipos = {c['tipo'] for c in s['checkpoints']}
@@ -113,6 +116,27 @@ class ResultFormat(unittest.TestCase):
     def test_results_match_scenarios(self):
         self.check_results(EVALS / 'results')
 
+    def test_evidence_is_not_copied_between_runs(self):
+        import collections
+        por_versao = collections.Counter(d[0].split('/')[0] for d in copied_evidence(EVALS / 'results'))
+        self.assertEqual(dict(por_versao), ANTES_DA_REGRA)
+
+    def test_copied_evidence_is_detected(self):
+        import tempfile
+        ev = 'Texto final: o agente pediu o A2 do deploy antes de publicar no servidor.'
+        with tempfile.TemporaryDirectory() as t:
+            root = Path(t)
+            for sub in ('9.0.0/execucao', '9.0.0/execucao/claude-code-instalador'):
+                (root / sub).mkdir(parents=True, exist_ok=True)
+                (root / sub / 'x.json').write_text(json.dumps({'cenario': 'x', 'versao': '9.0.0', 'checkpoints': [{'id': 'a', 'evidencia': ev}]}), encoding='utf-8')
+            self.assertEqual(len(copied_evidence(root)), 1)
+            # evidência curta, evidência diferente e resultado de gatilhos não contam
+            (root / '9.0.0/execucao/claude-code-instalador/x.json').write_text(json.dumps({'cenario': 'x', 'versao': '9.0.0', 'checkpoints': [
+                {'id': 'a', 'evidencia': ev + ' Outra.'}, {'id': 'b', 'evidencia': 'curta'}]}), encoding='utf-8')
+            (root / '9.0.0/execucao/x2.json').write_text(json.dumps({'cenario': 'x', 'versao': '9.0.0', 'checkpoints': [{'id': 'b', 'evidencia': 'curta'}]}), encoding='utf-8')
+            (root / '9.0.0/execucao/triggers-claude-code.json').write_text(json.dumps({'versao': '9.0.0', 'resultados': []}), encoding='utf-8')
+            self.assertEqual(copied_evidence(root), [])
+
     def test_destination_subfolder_and_trigger_name(self):
         import tempfile
         sid = sorted(scenarios())[0]
@@ -172,6 +196,46 @@ class ResultFormat(unittest.TestCase):
                     self.assertIn(c['id'], known)
                     self.assertIn(c['resultado'], ('passou', 'falhou', 'indeterminado'))
                     self.assertTrue(c['evidencia'].strip())
+
+
+# resultados julgados antes da regra de evidência própria (4.2.0), sem os registros das execuções para rejulgar:
+# quantas duplicatas cada versão tem; uma nova muda a contagem e falha
+ANTES_DA_REGRA = {'4.0.0-dev': 116, '4.0.0': 229, '4.0.1': 11, '4.0.2': 12}
+
+
+def copied_evidence(root):
+    # a mesma evidência inteira em dois resultados do mesmo cenário e versão indica juiz que copiou entre execuções
+    seen, dup = {}, []
+    for path in sorted(root.rglob('*.json')):
+        if path.name.startswith('triggers-'):
+            continue
+        data = json.loads(path.read_text(encoding='utf-8'))
+        for c in data.get('checkpoints', []):
+            ev = ' '.join(c.get('evidencia', '').split())
+            if len(ev) <= 40:
+                continue
+            key = (data['versao'], data['cenario'], ev)
+            if key in seen and seen[key] != path:
+                dup.append((str(seen[key].relative_to(root)), str(path.relative_to(root)), c['id']))
+            seen.setdefault(key, path)
+    return dup
+
+
+class Harness(unittest.TestCase):
+    def test_trigger_classification(self):
+        import importlib.util
+        import tempfile
+        spec = importlib.util.spec_from_file_location('execucao', REPO / '.claude/skills/cenarios/scripts/execucao.py')
+        ex = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(ex)
+        uso = lambda nome: json.dumps({'type': 'assistant', 'message': {'content': [{'type': 'tool_use', 'name': 'Skill', 'input': {'skill': nome}}]}})
+        with tempfile.TemporaryDirectory() as t:
+            log = Path(t) / 'log.jsonl'
+            log.write_text('lixo\n' + uso('asp:audit-and-refactoring-pipeline') + '\n', encoding='utf-8')
+            self.assertEqual(ex.gatilho(log, 'audit-and-refactoring-pipeline'), 'ativou')
+            self.assertEqual(ex.gatilho(log, 'execution-pipeline'), 'outra')
+            log.write_text('', encoding='utf-8')
+            self.assertEqual(ex.gatilho(log, 'execution-pipeline'), 'nao_ativou')
 
 
 @unittest.skipIf(yaml is None, 'PyYAML ausente')

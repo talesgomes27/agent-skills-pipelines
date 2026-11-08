@@ -24,11 +24,23 @@ Testa se as skills deste repositório levam um agente ao comportamento esperado 
 
 ## Rodar no nível de execução
 
-- Copie a fixture do cenário, ou uma pasta vazia, para o scratchpad da sessão. Nunca use credenciais, contas nem destinos reais.
-- Carregue as skills sem trocar os plugins do usuário: uma cópia do repositório com o marketplace renomeado, ligada por `claude -p --settings <arquivo>` com `extraKnownMarketplaces` e `enabledPlugins`. Isso grava a entrada do marketplace de teste no registro do usuário; remova-a no fim com `claude plugin marketplace remove <nome>` e confira que os plugins dele continuam iguais.
-- Rode `claude -p` com o cwd na cópia da fixture, o pedido, `--max-turns 40`, `--output-format stream-json --verbose` e permissões padrão, de modo que todo efeito externo seja negado e fique visível no registro.
-- Destino `claude-code-instalador`, as skills instaladas pelo `skills.py` em vez do plugin: na cópia da fixture, rode `/usr/bin/python3 <repo>/scripts/skills.py install --agent claude --scope project --project <cópia> --all --mode copy` e depois `claude -p --setting-sources project` com as mesmas flags e permissões, sem o marketplace de teste. O escopo `project` não toca o `~/.claude/skills/` do usuário. Confira no evento de início do registro que só aparecem as skills do repositório e as do próprio Claude Code; se aparecerem as do usuário, pare e diga ao usuário. Esse destino não tem os subagentes de `plugin-agents/` nem o hook do `pipeline-guardrails`: o que falhar por falta deles é limite do destino, não da skill.
-- Avalie os checkpoints pelo registro: as ferramentas chamadas, o que foi negado e as paradas para aceite.
+O harness é `scripts/execucao.py`, só com a biblioteca padrão. Rode `/usr/bin/python3 .claude/skills/cenarios/scripts/execucao.py` sem argumentos para ver os comandos. Nunca use credenciais, contas nem destinos reais.
+
+- Monte o plugin de teste uma vez por rodada com `plugin <pasta no scratchpad>`. Ele copia todas as skills, os subagentes de `plugin-agents/` e o hook do `pipeline-guardrails` para um plugin `asp`, carregado por `--plugin-dir` sem tocar os plugins do usuário.
+- Para cada execução, rode `preparar <exec> "<pedido>" [<fixture do cenário>]` e depois `rodar <exec> <destino>`:
+  - destino `claude-code`, com `--plugin <pasta>/asp`;
+  - destino `claude-code-instalador`: o harness instala as skills na cópia com `skills.py install --scope project --all --mode copy` e roda sem o plugin. O escopo `project` não toca o `~/.claude/skills/` do usuário. Esse destino não tem os subagentes nem o hook do `pipeline-guardrails`: o que falhar por falta deles é limite do destino, não da skill.
+- Os dois destinos rodam o mesmo `claude -p`:
+  - Sonnet, `--setting-sources project` e `--strict-mcp-config`;
+  - `--permission-mode acceptEdits`, com uma allowlist só de leitura e do pytest;
+  - 40 turnos e teto de US$ 1,50.
+
+  Todo efeito externo é negado e fica visível no registro. Em gatilhos, use `--turnos 8`.
+- Na primeira execução de cada destino, confira na linha INIT do `resumo` que só aparecem as skills do repositório e as do próprio Claude Code. Se aparecerem as do usuário, pare e diga ao usuário.
+- Se o cenário tem `aceite_simulado`, passe `--aceite "<texto>"`. Depois de um primeiro turno terminado com sucesso, o harness retoma a mesma sessão com `--resume` e grava `log2.jsonl`; se o primeiro turno estourou turnos ou orçamento, grava `aceite_pulado` no lugar.
+- Rode até quatro execuções em paralelo, em segundo plano. Mudança de skill usa três amostras por destino, e diferença pequena entre destinos usa dez.
+- Gatilho: `gatilho <log> <skill>` devolve `ativou`, `nao_ativou` ou `outra`.
+- Julgue com subagentes novos, até quatro cenários por juiz, passando o [roteiro do juiz](roteiro-juiz.md) com a lista de ids, a pasta das execuções, a de saída, a versão e o destino. Um segundo juiz cego revê as falhas.
 
 ## Gravar e comparar
 
