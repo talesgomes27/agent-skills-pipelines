@@ -76,6 +76,18 @@
   {
    "id": "release-and-ops-pipeline-desligar-2",
    "observado": "nao_ativou"
+  },
+  {
+   "id": "personal-data-1",
+   "observado": "ativou"
+  },
+  {
+   "id": "personal-data-2",
+   "observado": "ativou"
+  },
+  {
+   "id": "personal-data-3",
+   "observado": "nao_ativou"
   }
  ]
 }
