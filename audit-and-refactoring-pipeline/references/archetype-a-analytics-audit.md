@@ -10,6 +10,14 @@ Leia somente as partes aplicáveis ao escopo: analytics, ML, pesquisa ou publica
 - Modelo que pontua, classifica ou ordena pessoas sem métricas por grupo, ou com diferença entre grupos acima do limite combinado, é achado; a referência de viés de modelo da skill `personal-data` diz o que medir.
 - Diferencie associação, capacidade preditiva e efeito causal. Estilo de relatório não substitui desenho do estudo e validade do método.
 
+## Experimentos e testes A/B
+
+- Antes de comparar as variantes, confira a divisão observada contra a planejada, pela unidade do sorteio (usuário, sessão). A Microsoft ExP usa o qui-quadrado com p < 0,0005 como alarme de sample ratio mismatch (SRM); com SRM, o resultado não vale até a causa ser achada.
+- Confira se o teste cumpriu a duração e o tamanho de amostra do plano. Parar quando uma variante "está ganhando" aumenta o falso positivo; resultado de teste parado antes é achado.
+- Relate a diferença da métrica principal do plano com intervalo de confiança e o teste usado, não só o p-valor, e diga se a conclusão se sustenta com as ressalvas acima. Métrica trocada depois do resultado é achado.
+
+Fonte, conferida em 08/11/2026: Microsoft ExP, "Diagnosing Sample Ratio Mismatch in A/B Testing", https://www.microsoft.com/en-us/research/group/experimentation-platform-exp/articles/diagnosing-sample-ratio-mismatch-in-a-b-testing/
+
 ## Reprodução e execução
 
 - Registre ambiente, dados, parâmetros, sementes e limites de determinismo. Seed sozinha não prova reprodução bit a bit.
