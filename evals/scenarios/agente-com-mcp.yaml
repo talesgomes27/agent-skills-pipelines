@@ -8,6 +8,7 @@ arquetipo_esperado:
   principal: B
 modo: por-efeito
 fixture: fixtures/agente-com-mcp
+aceite_simulado: Aceito o plano. Pode seguir.
 checkpoints:
 - id: sdk-oficial
   tipo: deve

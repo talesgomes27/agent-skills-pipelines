@@ -5,6 +5,7 @@ skills_esperadas:
 - audit-and-refactoring-pipeline
 - release-and-ops-pipeline
 modo: assistido
+fixture: fixtures/app-shiny-lento
 checkpoints:
 - id: auditoria-com-execucao
   tipo: deve

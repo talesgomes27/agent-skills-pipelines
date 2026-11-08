@@ -1,0 +1,501 @@
+cpf,nome,email,cidade,data_cadastro,total_compras
+552.034.093-68,Diego Silva,diego.silva0@exemplo-mail.invalid,São Paulo,2024-06-14,1516
+307.871.616-42,Elisa Souza,elisa.souza1@exemplo-mail.invalid,,2024-03-21,746
+464.460.495-11,Carla Rodrigues,carla.rodrigues2@exemplo-mail.invalid,Porto Alegre,2024-07-01,
+306.261.169-47,Lucas Rodrigues,lucas.rodrigues3@exemplo-mail.invalid,Salvador,2024-08-25,1331
+619.958.225-17,Ana Oliveira,ana.oliveira4@exemplo-mail.invalid,Manaus,2024-03-17,1407
+342.075.096-17,Gabriela Almeida,gabriela.almeida5@exemplo-mail.invalid,Recife,2024-12-20,1819
+729.306.826-49,Gabriela Lima,gabriela.lima6@exemplo-mail.invalid,Salvador,2024-02-05,2023
+516.978.464-42,Inês Silva,inês.silva7@exemplo-mail.invalid, recife ,2024-04-14,
+200.977.379-02,Inês Almeida,inês.almeida8@exemplo-mail.invalid,Goiânia,2024-03-26,3876
+565.178.800-13,Bruno Oliveira,bruno.oliveira9@exemplo-mail.invalid,Belo Horizonte,2024-02-24,2570
+201.913.274-60,Ana Rodrigues,ana.rodrigues10@exemplo-mail.invalid,Belo Horizonte,2024-11-26,
+259.472.487-53,João Pereira,joão.pereira11@exemplo-mail.invalid,Curitiba,2024-10-09,
+326.245.624-29,Fábio Silva,fábio.silva12@exemplo-mail.invalid,Recife,2024-09-02,3711
+486.546.592-99,Inês Souza,inês.souza13@exemplo-mail.invalid,Salvador,2024-06-25,666
+484.495.003-80,Carla Silva,carla.silva14@exemplo-mail.invalid,Belo Horizonte,2024-05-20,3421
+273.900.009-12,Fábio Silva,fábio.silva15@exemplo-mail.invalid,Salvador,2024-05-04,2925
+949.235.972-42,Diego Rodrigues,diego.rodrigues16@exemplo-mail.invalid,Belo Horizonte,2024-01-26,
+246.400.859-25,Bruno Souza,bruno.souza17@exemplo-mail.invalid, recife ,2024-08-20,4240
+008.062.320-58,Carla Silva,carla.silva18@exemplo-mail.invalid,Recife,2024-01-20,4513
+898.692.841-93,Gabriela Lima,gabriela.lima19@exemplo-mail.invalid,Manaus,2024-11-02,3915
+717.231.430-24,Gabriela Rodrigues,gabriela.rodrigues20@exemplo-mail.invalid,Recife,2024-06-24,
+844.318.024-38,Karina Rodrigues,karina.rodrigues21@exemplo-mail.invalid,Curitiba,2024-12-07,1304
+936.877.800-17,Gabriela Costa,gabriela.costa22@exemplo-mail.invalid,Porto Alegre,2024-12-08,4672
+922.001.192-26,Gabriela Souza,gabriela.souza23@exemplo-mail.invalid,Salvador,2024-03-23,235
+101.953.816-47,Carla Silva,carla.silva24@exemplo-mail.invalid,Recife,2024-04-07,1664
+471.213.455-11,Ana Souza,ana.souza25@exemplo-mail.invalid,Porto Alegre,2024-05-01,
+598.749.060-16,Ana Costa,ana.costa26@exemplo-mail.invalid,Porto Alegre,2024-09-25,
+893.194.260-68,Lucas Silva,lucas.silva27@exemplo-mail.invalid,,2024-04-10,
+727.958.492-77,Hugo Souza,hugo.souza28@exemplo-mail.invalid,Manaus,2024-04-23,1896
+781.551.661-14,Bruno Souza,bruno.souza29@exemplo-mail.invalid,Porto Alegre,2024-11-01,
+882.637.289-77,Elisa Rodrigues,elisa.rodrigues30@exemplo-mail.invalid, recife ,2024-11-02,
+785.277.493-96,Inês Oliveira,inês.oliveira31@exemplo-mail.invalid,Belo Horizonte,2024-06-15,1949
+922.359.852-56,Elisa Pereira,elisa.pereira32@exemplo-mail.invalid,Curitiba,2024-06-07,2119
+362.244.643-01,Karina Souza,karina.souza33@exemplo-mail.invalid,Recife,2024-11-04,
+066.384.702-90,Hugo Silva,hugo.silva34@exemplo-mail.invalid,Manaus,2024-10-24,45
+996.393.217-80,Diego Rodrigues,diego.rodrigues35@exemplo-mail.invalid,Porto Alegre,2024-06-09,801
+467.709.682-25,Gabriela Oliveira,gabriela.oliveira36@exemplo-mail.invalid,Salvador,2024-01-13,4012
+238.519.783-00,Elisa Lima,elisa.lima37@exemplo-mail.invalid,Goiânia,2024-09-01,
+326.819.504-16,Gabriela Almeida,gabriela.almeida38@exemplo-mail.invalid,Manaus,2024-07-13,503
+594.134.683-30,Gabriela Rodrigues,gabriela.rodrigues39@exemplo-mail.invalid,Porto Alegre,2024-08-07,1347
+783.256.748-24,Karina Lima,karina.lima40@exemplo-mail.invalid,Belo Horizonte,2024-08-12,2190
+627.045.345-45,Gabriela Pereira,gabriela.pereira41@exemplo-mail.invalid,Goiânia,2024-08-14,699
+019.528.590-60,Elisa Rodrigues,elisa.rodrigues42@exemplo-mail.invalid,São Paulo,2024-04-03,2048
+327.523.682-34,Bruno Oliveira,bruno.oliveira43@exemplo-mail.invalid, recife ,2024-12-20,4493
+738.171.814-79,Elisa Lima,elisa.lima44@exemplo-mail.invalid,Porto Alegre,2024-04-27,
+772.737.289-87,Inês Silva,inês.silva45@exemplo-mail.invalid,São Paulo,2024-03-27,3833
+475.661.250-54,João Almeida,joão.almeida46@exemplo-mail.invalid,São Paulo,2024-10-02,769
+203.625.155-32,Hugo Almeida,hugo.almeida47@exemplo-mail.invalid,Goiânia,2024-09-18,
+480.445.765-94,Fábio Rodrigues,fábio.rodrigues48@exemplo-mail.invalid,,2024-05-28,4148
+153.542.910-13,Karina Almeida,karina.almeida49@exemplo-mail.invalid,Porto Alegre,2024-12-18,4467
+410.037.908-11,Ana Rodrigues,ana.rodrigues50@exemplo-mail.invalid,,2024-10-13,4884
+072.120.610-87,Bruno Lima,bruno.lima51@exemplo-mail.invalid,Salvador,2024-03-26,4604
+260.506.990-80,Elisa Pereira,elisa.pereira52@exemplo-mail.invalid,Goiânia,2024-10-17,
+710.699.276-45,João Rodrigues,joão.rodrigues53@exemplo-mail.invalid,,2024-02-03,3868
+600.113.127-03,Karina Silva,karina.silva54@exemplo-mail.invalid,São Paulo,2024-05-24,
+052.148.774-08,Lucas Oliveira,lucas.oliveira55@exemplo-mail.invalid,São Paulo,2024-12-02,93
+644.927.905-37,Karina Souza,karina.souza56@exemplo-mail.invalid,Salvador,2024-10-24,3848
+152.676.749-17,Carla Oliveira,carla.oliveira57@exemplo-mail.invalid,Salvador,2024-05-09,
+294.963.666-88,João Silva,joão.silva58@exemplo-mail.invalid, recife ,2024-04-26,2320
+446.290.429-13,Ana Costa,ana.costa59@exemplo-mail.invalid,Belo Horizonte,2024-05-28,
+887.633.490-53,Inês Souza,inês.souza60@exemplo-mail.invalid,Porto Alegre,2024-08-23,2086
+781.851.369-90,Ana Rodrigues,ana.rodrigues61@exemplo-mail.invalid,,2024-05-27,
+333.124.599-33,Inês Lima,inês.lima62@exemplo-mail.invalid,Salvador,2024-07-25,4237
+515.712.590-00,Ana Almeida,ana.almeida63@exemplo-mail.invalid,Salvador,2024-05-17,4973
+979.934.461-22,Ana Lima,ana.lima64@exemplo-mail.invalid,Goiânia,2024-10-27,
+326.100.085-72,Ana Costa,ana.costa65@exemplo-mail.invalid,Goiânia,2024-08-28,4899
+145.931.862-60,Gabriela Souza,gabriela.souza66@exemplo-mail.invalid,Goiânia,2024-03-12,1926
+508.004.870-11,Ana Pereira,ana.pereira67@exemplo-mail.invalid,Recife,2024-03-11,1629
+997.175.546-86,Lucas Pereira,lucas.pereira68@exemplo-mail.invalid,Recife,2024-06-16,
+073.023.195-12,Diego Oliveira,diego.oliveira69@exemplo-mail.invalid,Belo Horizonte,2024-08-04,178
+553.715.253-45,Bruno Almeida,bruno.almeida70@exemplo-mail.invalid,São Paulo,2024-03-23,3697
+466.320.494-61,Hugo Oliveira,hugo.oliveira71@exemplo-mail.invalid,Salvador,2024-03-09,
+128.038.741-74,Hugo Almeida,hugo.almeida72@exemplo-mail.invalid,Manaus,2024-04-12,3539
+646.204.207-04,Diego Souza,diego.souza73@exemplo-mail.invalid,,2024-06-17,1148
+256.063.492-09,Inês Pereira,inês.pereira74@exemplo-mail.invalid,Belo Horizonte,2024-03-17,1887
+197.423.293-13,João Souza,joão.souza75@exemplo-mail.invalid, recife ,2024-05-07,538
+085.547.106-00,Lucas Rodrigues,lucas.rodrigues76@exemplo-mail.invalid,Goiânia,2024-03-28,2181
+025.990.587-01,João Costa,joão.costa77@exemplo-mail.invalid,,2024-02-04,
+904.177.808-10,Lucas Rodrigues,lucas.rodrigues78@exemplo-mail.invalid,,2024-03-01,1995
+214.480.013-92,João Oliveira,joão.oliveira79@exemplo-mail.invalid,Manaus,2024-01-27,
+715.120.417-60,Inês Lima,inês.lima80@exemplo-mail.invalid,Goiânia,2024-10-17,2290
+289.332.976-52,Bruno Rodrigues,bruno.rodrigues81@exemplo-mail.invalid,Belo Horizonte,2024-01-21,3444
+605.563.569-10,João Silva,joão.silva82@exemplo-mail.invalid,Salvador,2024-07-28,
+536.051.821-04,Inês Oliveira,inês.oliveira83@exemplo-mail.invalid,Salvador,2024-07-07,4135
+670.009.494-24,Carla Rodrigues,carla.rodrigues84@exemplo-mail.invalid,,2024-01-20,823
+630.414.521-80,Inês Silva,inês.silva85@exemplo-mail.invalid,São Paulo,2024-10-17,
+718.246.944-92,João Oliveira,joão.oliveira86@exemplo-mail.invalid,Curitiba,2024-12-03,
+638.578.497-64,João Lima,joão.lima87@exemplo-mail.invalid,Goiânia,2024-05-01,1984
+960.523.585-58,Diego Rodrigues,diego.rodrigues88@exemplo-mail.invalid,Goiânia,2024-05-10,1770
+819.570.867-79,Ana Oliveira,ana.oliveira89@exemplo-mail.invalid,Salvador,2024-12-25,894
+655.239.948-14,Karina Oliveira,karina.oliveira90@exemplo-mail.invalid,Recife,2024-12-28,2201
+610.689.176-20,Lucas Oliveira,lucas.oliveira91@exemplo-mail.invalid, recife ,2024-03-14,2288
+745.456.889-10,Gabriela Almeida,gabriela.almeida92@exemplo-mail.invalid,Porto Alegre,2024-11-11,
+284.269.693-15,Hugo Pereira,hugo.pereira93@exemplo-mail.invalid,Recife,2024-06-11,
+000.497.484-18,Diego Rodrigues,diego.rodrigues94@exemplo-mail.invalid,,2024-10-14,4237
+675.095.701-41,Karina Rodrigues,karina.rodrigues95@exemplo-mail.invalid,,2024-04-04,3067
+367.679.958-61,Gabriela Oliveira,gabriela.oliveira96@exemplo-mail.invalid,Recife,2024-03-12,2605
+145.862.848-64,Elisa Oliveira,elisa.oliveira97@exemplo-mail.invalid,Curitiba,2024-09-07,3377
+590.600.480-85,Karina Souza,karina.souza98@exemplo-mail.invalid,Manaus,2024-07-27,806
+327.894.882-41,Karina Silva,karina.silva99@exemplo-mail.invalid, recife ,2024-04-14,4929
+011.287.796-78,Carla Souza,carla.souza100@exemplo-mail.invalid,São Paulo,2024-11-01,4741
+542.041.915-86,Lucas Lima,lucas.lima101@exemplo-mail.invalid,Curitiba,2024-08-20,3159
+907.093.330-74,Diego Rodrigues,diego.rodrigues102@exemplo-mail.invalid,Belo Horizonte,2024-10-28,1421
+694.713.693-90,Hugo Pereira,hugo.pereira103@exemplo-mail.invalid,Porto Alegre,2024-05-13,3968
+256.204.685-52,Bruno Oliveira,bruno.oliveira104@exemplo-mail.invalid,Recife,2024-06-18,
+165.836.374-58,Karina Souza,karina.souza105@exemplo-mail.invalid,Salvador,2024-04-14,2286
+232.134.828-48,Ana Costa,ana.costa106@exemplo-mail.invalid,Goiânia,2024-08-27,
+669.347.833-70,Fábio Lima,fábio.lima107@exemplo-mail.invalid,Goiânia,2024-11-05,
+836.983.218-17,João Costa,joão.costa108@exemplo-mail.invalid,Recife,2024-09-28,2215
+406.123.531-27,Karina Oliveira,karina.oliveira109@exemplo-mail.invalid,Recife,2024-09-12,4098
+134.264.567-80,Bruno Pereira,bruno.pereira110@exemplo-mail.invalid,Belo Horizonte,2024-05-06,3003
+607.365.124-56,Karina Costa,karina.costa111@exemplo-mail.invalid,Recife,2024-05-20,
+634.260.842-46,Ana Oliveira,ana.oliveira112@exemplo-mail.invalid, recife ,2024-04-19,
+014.099.031-43,Gabriela Costa,gabriela.costa113@exemplo-mail.invalid,São Paulo,2024-06-07,
+934.815.675-71,Lucas Rodrigues,lucas.rodrigues114@exemplo-mail.invalid,,2024-12-23,3709
+682.730.842-23,Karina Lima,karina.lima115@exemplo-mail.invalid,,2024-03-25,
+255.613.422-50,Diego Silva,diego.silva116@exemplo-mail.invalid,Goiânia,2024-11-16,1948
+254.229.935-96,Inês Almeida,inês.almeida117@exemplo-mail.invalid,Recife,2024-09-14,1268
+314.057.300-74,Hugo Rodrigues,hugo.rodrigues118@exemplo-mail.invalid,Manaus,2024-05-07,
+577.954.281-44,Bruno Oliveira,bruno.oliveira119@exemplo-mail.invalid,São Paulo,2024-01-15,687
+941.767.385-98,Lucas Costa,lucas.costa120@exemplo-mail.invalid,São Paulo,2024-06-03,2059
+200.624.528-88,Diego Souza,diego.souza121@exemplo-mail.invalid,Belo Horizonte,2024-02-26,
+535.285.430-37,Carla Costa,carla.costa122@exemplo-mail.invalid,São Paulo,2024-02-19,3303
+724.991.232-24,Hugo Rodrigues,hugo.rodrigues123@exemplo-mail.invalid,Belo Horizonte,2024-08-21,3288
+335.009.862-36,Hugo Almeida,hugo.almeida124@exemplo-mail.invalid,Manaus,2024-02-22,4215
+170.226.407-79,Gabriela Costa,gabriela.costa125@exemplo-mail.invalid, recife ,2024-11-12,
+876.826.991-01,Bruno Costa,bruno.costa126@exemplo-mail.invalid,São Paulo,2024-12-22,4990
+572.458.033-17,Elisa Rodrigues,elisa.rodrigues127@exemplo-mail.invalid,Goiânia,2024-12-03,
+583.976.413-37,Inês Rodrigues,inês.rodrigues128@exemplo-mail.invalid,Belo Horizonte,2024-04-18,
+384.738.738-41,Karina Souza,karina.souza129@exemplo-mail.invalid, recife ,2024-12-04,4820
+172.888.181-20,Bruno Rodrigues,bruno.rodrigues130@exemplo-mail.invalid,Goiânia,2024-11-13,4458
+125.906.305-59,João Almeida,joão.almeida131@exemplo-mail.invalid,São Paulo,2024-01-23,
+261.939.152-16,Elisa Souza,elisa.souza132@exemplo-mail.invalid,Salvador,2024-12-27,
+588.570.951-44,Bruno Lima,bruno.lima133@exemplo-mail.invalid,Salvador,2024-09-11,4940
+453.709.710-90,Karina Lima,karina.lima134@exemplo-mail.invalid,Goiânia,2024-02-03,2116
+629.484.700-23,Inês Pereira,inês.pereira135@exemplo-mail.invalid,Salvador,2024-03-16,4110
+299.672.763-14,Ana Souza,ana.souza136@exemplo-mail.invalid, recife ,2024-09-03,2697
+299.032.575-21,Diego Pereira,diego.pereira137@exemplo-mail.invalid, recife ,2024-08-13,2897
+530.379.022-40,Fábio Almeida,fábio.almeida138@exemplo-mail.invalid,Manaus,2024-07-09,
+081.369.154-17,Fábio Oliveira,fábio.oliveira139@exemplo-mail.invalid,Curitiba,2024-03-22,
+835.865.055-92,Lucas Costa,lucas.costa140@exemplo-mail.invalid,Goiânia,2024-09-12,
+307.676.942-20,Carla Oliveira,carla.oliveira141@exemplo-mail.invalid, recife ,2024-02-05,
+139.192.495-03,Lucas Costa,lucas.costa142@exemplo-mail.invalid,Goiânia,2024-06-25,
+448.024.303-98,Fábio Oliveira,fábio.oliveira143@exemplo-mail.invalid,São Paulo,2024-07-15,
+330.290.119-51,Inês Souza,inês.souza144@exemplo-mail.invalid,Salvador,2024-12-05,
+503.550.769-79,Inês Silva,inês.silva145@exemplo-mail.invalid,Salvador,2024-03-02,3393
+796.470.059-72,Karina Costa,karina.costa146@exemplo-mail.invalid,Salvador,2024-01-14,2696
+328.155.658-30,Ana Oliveira,ana.oliveira147@exemplo-mail.invalid, recife ,2024-09-05,
+704.878.458-13,Diego Pereira,diego.pereira148@exemplo-mail.invalid,,2024-05-05,74
+523.610.921-41,Hugo Souza,hugo.souza149@exemplo-mail.invalid,São Paulo,2024-09-17,1678
+222.805.377-63,Elisa Costa,elisa.costa150@exemplo-mail.invalid,Curitiba,2024-11-12,3186
+101.650.396-30,Fábio Silva,fábio.silva151@exemplo-mail.invalid,Porto Alegre,2024-07-22,
+633.535.644-07,Ana Pereira,ana.pereira152@exemplo-mail.invalid,Goiânia,2024-04-19,
+415.073.259-18,Carla Pereira,carla.pereira153@exemplo-mail.invalid, recife ,2024-08-07,4745
+072.624.012-64,Lucas Costa,lucas.costa154@exemplo-mail.invalid,São Paulo,2024-03-10,4117
+276.165.650-52,Fábio Souza,fábio.souza155@exemplo-mail.invalid, recife ,2024-04-07,125
+961.005.111-28,Inês Lima,inês.lima156@exemplo-mail.invalid,Goiânia,2024-03-17,3510
+881.857.153-37,Diego Oliveira,diego.oliveira157@exemplo-mail.invalid,Curitiba,2024-12-03,2236
+103.806.854-28,Elisa Pereira,elisa.pereira158@exemplo-mail.invalid,São Paulo,2024-06-23,3717
+646.658.662-70,Elisa Costa,elisa.costa159@exemplo-mail.invalid,Porto Alegre,2024-07-14,1171
+963.311.900-76,João Pereira,joão.pereira160@exemplo-mail.invalid,Porto Alegre,2024-12-18,3624
+790.778.598-80,Karina Costa,karina.costa161@exemplo-mail.invalid,Porto Alegre,2024-04-27,2909
+849.518.394-41,Bruno Rodrigues,bruno.rodrigues162@exemplo-mail.invalid,Manaus,2024-08-28,4276
+218.583.825-40,Hugo Lima,hugo.lima163@exemplo-mail.invalid,Curitiba,2024-11-06,1248
+565.616.246-12,Karina Silva,karina.silva164@exemplo-mail.invalid,Recife,2024-06-12,
+464.717.728-00,Hugo Souza,hugo.souza165@exemplo-mail.invalid,Belo Horizonte,2024-01-22,
+958.564.083-16,Inês Lima,inês.lima166@exemplo-mail.invalid,São Paulo,2024-10-09,472
+543.471.871-32,Elisa Pereira,elisa.pereira167@exemplo-mail.invalid,Curitiba,2024-03-14,2379
+650.466.945-83,Lucas Almeida,lucas.almeida168@exemplo-mail.invalid,Curitiba,2024-07-28,1060
+135.117.668-52,Diego Costa,diego.costa169@exemplo-mail.invalid,Porto Alegre,2024-08-21,883
+766.721.767-15,João Almeida,joão.almeida170@exemplo-mail.invalid,Belo Horizonte,2024-09-25,1903
+804.856.711-41,Diego Rodrigues,diego.rodrigues171@exemplo-mail.invalid,Curitiba,2024-02-19,
+970.357.086-10,Bruno Lima,bruno.lima172@exemplo-mail.invalid, recife ,2024-03-14,
+802.848.415-97,Fábio Lima,fábio.lima173@exemplo-mail.invalid,Porto Alegre,2024-05-22,
+044.366.844-33,Inês Rodrigues,inês.rodrigues174@exemplo-mail.invalid,Curitiba,2024-03-02,4397
+792.553.780-00,Fábio Almeida,fábio.almeida175@exemplo-mail.invalid,Salvador,2024-01-18,3349
+437.433.997-43,Fábio Silva,fábio.silva176@exemplo-mail.invalid,Porto Alegre,2024-12-15,1670
+102.197.208-96,Carla Rodrigues,carla.rodrigues177@exemplo-mail.invalid,Belo Horizonte,2024-08-08,1728
+381.713.106-31,Carla Oliveira,carla.oliveira178@exemplo-mail.invalid,Curitiba,2024-11-27,3624
+020.274.395-11,Gabriela Oliveira,gabriela.oliveira179@exemplo-mail.invalid,,2024-12-05,
+236.056.243-77,Inês Lima,inês.lima180@exemplo-mail.invalid,,2024-12-03,1623
+656.105.138-73,Lucas Oliveira,lucas.oliveira181@exemplo-mail.invalid,,2024-02-10,4013
+374.499.813-53,Hugo Souza,hugo.souza182@exemplo-mail.invalid,Belo Horizonte,2024-08-09,
+053.240.255-44,Ana Souza,ana.souza183@exemplo-mail.invalid,Goiânia,2024-08-08,2699
+187.181.296-94,Bruno Pereira,bruno.pereira184@exemplo-mail.invalid,Goiânia,2024-01-02,4205
+269.515.252-44,Bruno Rodrigues,bruno.rodrigues185@exemplo-mail.invalid,Recife,2024-06-01,3934
+131.274.881-91,Elisa Souza,elisa.souza186@exemplo-mail.invalid,Salvador,2024-08-08,4656
+534.683.238-77,Ana Pereira,ana.pereira187@exemplo-mail.invalid,,2024-04-04,123
+312.240.669-20,Hugo Lima,hugo.lima188@exemplo-mail.invalid,,2024-02-10,4667
+339.803.195-22,Karina Lima,karina.lima189@exemplo-mail.invalid,Recife,2024-01-07,
+920.566.013-30,Bruno Almeida,bruno.almeida190@exemplo-mail.invalid,Belo Horizonte,2024-12-17,
+335.107.078-10,Carla Lima,carla.lima191@exemplo-mail.invalid,Salvador,2024-02-25,4943
+561.592.772-10,Karina Silva,karina.silva192@exemplo-mail.invalid,Manaus,2024-12-10,3818
+668.498.114-54,João Oliveira,joão.oliveira193@exemplo-mail.invalid,Curitiba,2024-04-07,3751
+906.656.613-30,Diego Almeida,diego.almeida194@exemplo-mail.invalid,Salvador,2024-11-20,3494
+901.766.947-16,Elisa Almeida,elisa.almeida195@exemplo-mail.invalid,Belo Horizonte,2024-06-18,
+904.514.276-80,Gabriela Almeida,gabriela.almeida196@exemplo-mail.invalid,,2024-04-04,
+452.523.596-05,Carla Rodrigues,carla.rodrigues197@exemplo-mail.invalid,Manaus,2024-08-11,4151
+800.213.794-01,Carla Rodrigues,carla.rodrigues198@exemplo-mail.invalid,Salvador,2024-11-04,4209
+461.895.744-26,Gabriela Oliveira,gabriela.oliveira199@exemplo-mail.invalid,Salvador,2024-05-22,4277
+750.018.674-70,Ana Almeida,ana.almeida200@exemplo-mail.invalid,,2024-03-24,4973
+204.239.980-09,Fábio Almeida,fábio.almeida201@exemplo-mail.invalid,Porto Alegre,2024-03-24,2300
+806.861.675-72,Diego Pereira,diego.pereira202@exemplo-mail.invalid,Manaus,2024-06-06,4711
+238.024.824-02,Inês Costa,inês.costa203@exemplo-mail.invalid,São Paulo,2024-10-10,2950
+473.957.614-82,Carla Pereira,carla.pereira204@exemplo-mail.invalid,Salvador,2024-07-11,
+978.625.024-03,Bruno Lima,bruno.lima205@exemplo-mail.invalid,,2024-08-22,4577
+568.414.700-46,Elisa Rodrigues,elisa.rodrigues206@exemplo-mail.invalid,,2024-12-19,2897
+318.196.142-73,Fábio Pereira,fábio.pereira207@exemplo-mail.invalid,Belo Horizonte,2024-12-21,
+667.552.288-52,Lucas Costa,lucas.costa208@exemplo-mail.invalid,Porto Alegre,2024-11-10,
+618.093.966-80,Karina Souza,karina.souza209@exemplo-mail.invalid,Curitiba,2024-10-24,2243
+814.064.269-13,Diego Lima,diego.lima210@exemplo-mail.invalid,Manaus,2024-12-03,4954
+341.591.508-63,Elisa Lima,elisa.lima211@exemplo-mail.invalid,Recife,2024-02-27,2663
+748.079.890-40,Hugo Oliveira,hugo.oliveira212@exemplo-mail.invalid,São Paulo,2024-09-27,
+558.933.834-53,Diego Pereira,diego.pereira213@exemplo-mail.invalid, recife ,2024-09-23,249
+651.419.166-60,Ana Pereira,ana.pereira214@exemplo-mail.invalid,,2024-10-14,
+417.926.797-87,Inês Costa,inês.costa215@exemplo-mail.invalid,Curitiba,2024-06-20,
+318.073.343-94,Carla Pereira,carla.pereira216@exemplo-mail.invalid,,2024-12-27,187
+153.608.485-06,Lucas Silva,lucas.silva217@exemplo-mail.invalid,Belo Horizonte,2024-10-21,
+256.071.512-14,Bruno Silva,bruno.silva218@exemplo-mail.invalid,Salvador,2024-08-16,
+189.486.354-35,Hugo Oliveira,hugo.oliveira219@exemplo-mail.invalid,São Paulo,2024-04-23,
+262.201.398-20,Lucas Rodrigues,lucas.rodrigues220@exemplo-mail.invalid,Porto Alegre,2024-01-01,704
+559.877.303-27,Diego Souza,diego.souza221@exemplo-mail.invalid,Curitiba,2024-06-13,803
+779.971.907-01,Carla Lima,carla.lima222@exemplo-mail.invalid,Belo Horizonte,2024-07-21,3846
+179.613.306-17,Hugo Oliveira,hugo.oliveira223@exemplo-mail.invalid, recife ,2024-12-27,1836
+007.063.308-99,Bruno Lima,bruno.lima224@exemplo-mail.invalid, recife ,2024-07-09,
+112.282.985-15,Ana Almeida,ana.almeida225@exemplo-mail.invalid,Recife,2024-09-26,3126
+889.998.108-70,Ana Souza,ana.souza226@exemplo-mail.invalid, recife ,2024-05-15,62
+028.731.361-21,Lucas Lima,lucas.lima227@exemplo-mail.invalid, recife ,2024-02-18,2887
+311.544.442-89,Bruno Souza,bruno.souza228@exemplo-mail.invalid,Goiânia,2024-10-19,2743
+019.386.769-08,Bruno Souza,bruno.souza229@exemplo-mail.invalid, recife ,2024-11-07,653
+260.294.742-45,Lucas Silva,lucas.silva230@exemplo-mail.invalid,Manaus,2024-05-28,
+272.795.430-24,Gabriela Souza,gabriela.souza231@exemplo-mail.invalid,Porto Alegre,2024-09-01,1890
+035.182.105-90,Fábio Costa,fábio.costa232@exemplo-mail.invalid,Porto Alegre,2024-11-11,526
+238.083.681-89,Bruno Almeida,bruno.almeida233@exemplo-mail.invalid,Curitiba,2024-04-10,
+297.924.635-36,Lucas Souza,lucas.souza234@exemplo-mail.invalid,Manaus,2024-01-03,2125
+191.641.118-67,Karina Oliveira,karina.oliveira235@exemplo-mail.invalid,São Paulo,2024-02-12,1165
+847.214.466-77,Bruno Almeida,bruno.almeida236@exemplo-mail.invalid,Belo Horizonte,2024-08-24,
+063.135.549-00,Fábio Lima,fábio.lima237@exemplo-mail.invalid,São Paulo,2024-04-03,1294
+420.271.064-09,Karina Pereira,karina.pereira238@exemplo-mail.invalid,Recife,2024-10-19,1828
+425.582.254-09,Elisa Silva,elisa.silva239@exemplo-mail.invalid,Salvador,2024-06-06,4284
+603.336.537-36,Carla Pereira,carla.pereira240@exemplo-mail.invalid,Manaus,2024-01-02,
+077.711.787-92,Diego Pereira,diego.pereira241@exemplo-mail.invalid,Recife,2024-07-04,3972
+701.314.577-82,Diego Rodrigues,diego.rodrigues242@exemplo-mail.invalid,Curitiba,2024-06-18,585
+399.610.680-86,Diego Almeida,diego.almeida243@exemplo-mail.invalid,Curitiba,2024-09-06,4181
+747.721.751-31,Bruno Souza,bruno.souza244@exemplo-mail.invalid,Curitiba,2024-05-22,2959
+742.808.070-45,Lucas Almeida,lucas.almeida245@exemplo-mail.invalid,,2024-11-08,4087
+265.052.309-49,Karina Costa,karina.costa246@exemplo-mail.invalid,Goiânia,2024-12-03,3681
+234.593.160-57,Elisa Almeida,elisa.almeida247@exemplo-mail.invalid,Belo Horizonte,2024-01-12,3966
+873.933.734-18,Hugo Costa,hugo.costa248@exemplo-mail.invalid,Goiânia,2024-05-08,
+609.523.029-36,Carla Costa,carla.costa249@exemplo-mail.invalid,Manaus,2024-10-15,4602
+243.814.622-30,Lucas Rodrigues,lucas.rodrigues250@exemplo-mail.invalid,,2024-03-19,2631
+219.764.932-03,Diego Rodrigues,diego.rodrigues251@exemplo-mail.invalid,Manaus,2024-12-14,
+414.226.186-19,Bruno Silva,bruno.silva252@exemplo-mail.invalid,Manaus,2024-11-21,4200
+789.588.361-66,Hugo Lima,hugo.lima253@exemplo-mail.invalid, recife ,2024-05-19,1487
+658.410.973-03,Elisa Lima,elisa.lima254@exemplo-mail.invalid,Salvador,2024-01-15,2785
+753.613.866-10,Lucas Oliveira,lucas.oliveira255@exemplo-mail.invalid,Belo Horizonte,2024-12-08,
+523.341.082-70,Karina Almeida,karina.almeida256@exemplo-mail.invalid,Porto Alegre,2024-10-14,3846
+985.565.270-45,Hugo Costa,hugo.costa257@exemplo-mail.invalid,Belo Horizonte,2024-07-12,2393
+393.544.219-13,Karina Lima,karina.lima258@exemplo-mail.invalid,Goiânia,2024-11-25,4823
+840.102.130-96,Ana Rodrigues,ana.rodrigues259@exemplo-mail.invalid,Belo Horizonte,2024-04-06,2171
+113.275.185-48,Ana Souza,ana.souza260@exemplo-mail.invalid,Salvador,2024-05-14,
+424.119.042-25,Ana Souza,ana.souza261@exemplo-mail.invalid,Salvador,2024-06-17,4028
+266.403.417-10,João Silva,joão.silva262@exemplo-mail.invalid,Recife,2024-02-19,1567
+391.796.203-06,Hugo Almeida,hugo.almeida263@exemplo-mail.invalid, recife ,2024-04-04,
+885.003.038-18,Inês Rodrigues,inês.rodrigues264@exemplo-mail.invalid,Manaus,2024-04-21,3721
+422.037.546-66,Diego Pereira,diego.pereira265@exemplo-mail.invalid,Salvador,2024-09-24,455
+405.832.237-47,Fábio Souza,fábio.souza266@exemplo-mail.invalid,São Paulo,2024-04-11,4151
+784.111.966-76,Inês Costa,inês.costa267@exemplo-mail.invalid,Goiânia,2024-02-09,
+658.759.017-09,Fábio Almeida,fábio.almeida268@exemplo-mail.invalid,Recife,2024-11-09,306
+790.415.681-50,Carla Souza,carla.souza269@exemplo-mail.invalid,Belo Horizonte,2024-07-23,770
+811.528.962-12,Elisa Oliveira,elisa.oliveira270@exemplo-mail.invalid,Curitiba,2024-03-13,
+781.146.732-24,Bruno Lima,bruno.lima271@exemplo-mail.invalid, recife ,2024-05-25,3221
+371.853.048-24,Diego Oliveira,diego.oliveira272@exemplo-mail.invalid,Goiânia,2024-12-05,2631
+360.039.504-22,Lucas Costa,lucas.costa273@exemplo-mail.invalid, recife ,2024-01-02,
+459.566.413-49,Elisa Costa,elisa.costa274@exemplo-mail.invalid,São Paulo,2024-11-14,2001
+244.856.642-05,Ana Oliveira,ana.oliveira275@exemplo-mail.invalid,Curitiba,2024-09-23,
+280.875.773-63,Carla Costa,carla.costa276@exemplo-mail.invalid,Salvador,2024-06-08,524
+035.191.703-06,Fábio Silva,fábio.silva277@exemplo-mail.invalid,Goiânia,2024-11-13,
+554.591.998-93,Elisa Almeida,elisa.almeida278@exemplo-mail.invalid,Recife,2024-08-15,96
+358.519.079-18,Diego Lima,diego.lima279@exemplo-mail.invalid, recife ,2024-07-01,1073
+851.390.356-79,Carla Pereira,carla.pereira280@exemplo-mail.invalid,Belo Horizonte,2024-07-21,630
+582.788.029-08,Fábio Pereira,fábio.pereira281@exemplo-mail.invalid,Porto Alegre,2024-09-26,1344
+950.038.083-90,Karina Souza,karina.souza282@exemplo-mail.invalid,,2024-08-05,4587
+062.949.436-49,Carla Almeida,carla.almeida283@exemplo-mail.invalid,Curitiba,2024-09-21,3836
+238.438.239-11,Ana Costa,ana.costa284@exemplo-mail.invalid,Belo Horizonte,2024-04-19,3787
+468.070.711-01,João Lima,joão.lima285@exemplo-mail.invalid,,2024-11-14,
+856.333.265-22,Carla Lima,carla.lima286@exemplo-mail.invalid, recife ,2024-07-10,1326
+123.951.842-19,Diego Almeida,diego.almeida287@exemplo-mail.invalid,Porto Alegre,2024-08-27,
+783.798.282-85,Hugo Pereira,hugo.pereira288@exemplo-mail.invalid,Curitiba,2024-02-12,
+655.627.980-44,Bruno Costa,bruno.costa289@exemplo-mail.invalid,São Paulo,2024-12-16,4168
+694.280.256-68,Lucas Rodrigues,lucas.rodrigues290@exemplo-mail.invalid,Salvador,2024-10-19,1799
+241.209.577-09,Inês Rodrigues,inês.rodrigues291@exemplo-mail.invalid,Goiânia,2024-05-12,
+715.469.994-03,Inês Costa,inês.costa292@exemplo-mail.invalid,São Paulo,2024-06-26,
+454.726.013-49,Karina Silva,karina.silva293@exemplo-mail.invalid,Curitiba,2024-01-24,
+064.112.881-04,Diego Lima,diego.lima294@exemplo-mail.invalid,Belo Horizonte,2024-07-27,326
+612.924.010-54,Hugo Rodrigues,hugo.rodrigues295@exemplo-mail.invalid,Belo Horizonte,2024-02-02,2685
+172.123.953-84,Lucas Oliveira,lucas.oliveira296@exemplo-mail.invalid,Salvador,2024-02-28,
+737.022.225-12,Gabriela Pereira,gabriela.pereira297@exemplo-mail.invalid,São Paulo,2024-08-17,3601
+770.956.820-48,João Silva,joão.silva298@exemplo-mail.invalid,,2024-09-05,1433
+088.056.396-74,Gabriela Oliveira,gabriela.oliveira299@exemplo-mail.invalid,Porto Alegre,2024-06-16,
+439.095.584-63,Gabriela Lima,gabriela.lima300@exemplo-mail.invalid, recife ,2024-06-06,
+702.619.649-02,Elisa Souza,elisa.souza301@exemplo-mail.invalid,,2024-07-23,714
+641.967.417-56,Carla Souza,carla.souza302@exemplo-mail.invalid,Salvador,2024-02-02,4045
+453.888.694-84,Bruno Pereira,bruno.pereira303@exemplo-mail.invalid,Goiânia,2024-11-28,3287
+102.409.825-86,Lucas Almeida,lucas.almeida304@exemplo-mail.invalid,Porto Alegre,2024-04-09,
+110.379.714-10,Hugo Silva,hugo.silva305@exemplo-mail.invalid,Salvador,2024-10-06,983
+522.373.440-96,Carla Pereira,carla.pereira306@exemplo-mail.invalid,Curitiba,2024-03-20,516
+316.750.637-80,Gabriela Almeida,gabriela.almeida307@exemplo-mail.invalid,Goiânia,2024-09-07,1314
+856.227.774-71,Karina Souza,karina.souza308@exemplo-mail.invalid, recife ,2024-06-04,4075
+515.612.794-14,Fábio Oliveira,fábio.oliveira309@exemplo-mail.invalid,Salvador,2024-07-19,
+371.475.957-44,Ana Costa,ana.costa310@exemplo-mail.invalid,Curitiba,2024-09-28,1432
+443.916.038-80,João Lima,joão.lima311@exemplo-mail.invalid,Recife,2024-04-17,4157
+413.904.061-15,Karina Souza,karina.souza312@exemplo-mail.invalid,Manaus,2024-06-19,
+093.231.314-17,Fábio Oliveira,fábio.oliveira313@exemplo-mail.invalid, recife ,2024-12-17,
+196.148.265-86,Lucas Silva,lucas.silva314@exemplo-mail.invalid,São Paulo,2024-01-02,4352
+558.255.482-48,Gabriela Oliveira,gabriela.oliveira315@exemplo-mail.invalid,Belo Horizonte,2024-03-05,904
+489.918.767-16,Bruno Oliveira,bruno.oliveira316@exemplo-mail.invalid,,2024-01-24,
+035.317.966-41,Carla Lima,carla.lima317@exemplo-mail.invalid,Salvador,2024-08-25,1821
+830.923.141-68,Ana Almeida,ana.almeida318@exemplo-mail.invalid,Salvador,2024-02-11,
+322.465.186-62,Bruno Almeida,bruno.almeida319@exemplo-mail.invalid,Belo Horizonte,2024-10-02,1002
+048.050.183-23,Karina Oliveira,karina.oliveira320@exemplo-mail.invalid,,2024-07-06,
+137.036.136-12,Elisa Almeida,elisa.almeida321@exemplo-mail.invalid,Recife,2024-09-22,
+530.666.121-22,Diego Pereira,diego.pereira322@exemplo-mail.invalid,Recife,2024-01-18,2155
+874.317.974-70,Bruno Rodrigues,bruno.rodrigues323@exemplo-mail.invalid,Recife,2024-10-27,3879
+620.290.115-35,Bruno Almeida,bruno.almeida324@exemplo-mail.invalid,Curitiba,2024-01-08,
+642.772.021-11,Carla Costa,carla.costa325@exemplo-mail.invalid,,2024-12-14,1272
+161.302.051-22,Elisa Souza,elisa.souza326@exemplo-mail.invalid,Manaus,2024-10-11,
+483.752.558-17,Karina Lima,karina.lima327@exemplo-mail.invalid,,2024-10-08,2272
+669.208.441-60,Inês Silva,inês.silva328@exemplo-mail.invalid,Goiânia,2024-06-17,2039
+844.604.753-69,Inês Rodrigues,inês.rodrigues329@exemplo-mail.invalid,Goiânia,2024-06-23,
+336.450.480-75,Bruno Costa,bruno.costa330@exemplo-mail.invalid,Salvador,2024-06-14,3583
+355.712.715-17,Inês Pereira,inês.pereira331@exemplo-mail.invalid,Curitiba,2024-05-16,
+462.522.254-11,Gabriela Almeida,gabriela.almeida332@exemplo-mail.invalid,São Paulo,2024-11-28,2010
+663.258.114-63,Carla Silva,carla.silva333@exemplo-mail.invalid,Goiânia,2024-09-13,4876
+260.515.520-16,Gabriela Rodrigues,gabriela.rodrigues334@exemplo-mail.invalid, recife ,2024-12-07,166
+413.337.995-10,Karina Lima,karina.lima335@exemplo-mail.invalid,Recife,2024-01-19,4227
+871.337.465-75,João Souza,joão.souza336@exemplo-mail.invalid,São Paulo,2024-04-04,2719
+359.360.884-82,Karina Rodrigues,karina.rodrigues337@exemplo-mail.invalid,Manaus,2024-08-25,3925
+739.929.786-15,Ana Rodrigues,ana.rodrigues338@exemplo-mail.invalid,Belo Horizonte,2024-02-09,
+011.125.066-93,Hugo Lima,hugo.lima339@exemplo-mail.invalid,,2024-08-10,
+188.715.483-47,Lucas Oliveira,lucas.oliveira340@exemplo-mail.invalid,Curitiba,2024-07-12,4931
+419.515.852-50,Inês Pereira,inês.pereira341@exemplo-mail.invalid,Salvador,2024-11-28,933
+536.023.875-60,Gabriela Silva,gabriela.silva342@exemplo-mail.invalid,Porto Alegre,2024-05-08,1411
+063.560.787-68,Fábio Silva,fábio.silva343@exemplo-mail.invalid,Curitiba,2024-09-06,1429
+829.285.488-76,Carla Pereira,carla.pereira344@exemplo-mail.invalid,Belo Horizonte,2024-12-16,
+389.937.592-10,Elisa Pereira,elisa.pereira345@exemplo-mail.invalid,Salvador,2024-08-15,4504
+199.098.241-85,Karina Souza,karina.souza346@exemplo-mail.invalid,Belo Horizonte,2024-09-01,
+832.355.902-44,Bruno Almeida,bruno.almeida347@exemplo-mail.invalid,Salvador,2024-06-03,184
+024.441.379-83,Lucas Souza,lucas.souza348@exemplo-mail.invalid,Manaus,2024-09-01,482
+879.926.876-14,Elisa Souza,elisa.souza349@exemplo-mail.invalid,Goiânia,2024-04-08,2217
+246.031.375-77,Inês Lima,inês.lima350@exemplo-mail.invalid,Goiânia,2024-09-12,4106
+632.576.282-87,João Costa,joão.costa351@exemplo-mail.invalid,Porto Alegre,2024-03-16,4151
+591.445.174-50,Karina Lima,karina.lima352@exemplo-mail.invalid,Porto Alegre,2024-10-19,
+428.899.224-09,Ana Pereira,ana.pereira353@exemplo-mail.invalid,Recife,2024-11-14,3577
+312.628.253-03,Lucas Rodrigues,lucas.rodrigues354@exemplo-mail.invalid,Porto Alegre,2024-07-09,1219
+279.837.871-13,Lucas Lima,lucas.lima355@exemplo-mail.invalid,São Paulo,2024-04-15,313
+349.392.551-50,Inês Rodrigues,inês.rodrigues356@exemplo-mail.invalid,Goiânia,2024-02-21,1291
+090.333.144-70,Elisa Souza,elisa.souza357@exemplo-mail.invalid,Recife,2024-05-16,1494
+353.613.015-25,Elisa Almeida,elisa.almeida358@exemplo-mail.invalid,Recife,2024-08-23,4016
+056.686.346-57,Diego Costa,diego.costa359@exemplo-mail.invalid,Recife,2024-10-26,3610
+426.630.837-14,Gabriela Almeida,gabriela.almeida360@exemplo-mail.invalid, recife ,2024-04-18,4166
+600.472.372-11,Karina Costa,karina.costa361@exemplo-mail.invalid,Manaus,2024-07-23,1169
+406.758.935-36,Gabriela Silva,gabriela.silva362@exemplo-mail.invalid,Recife,2024-03-02,647
+821.114.052-82,Elisa Pereira,elisa.pereira363@exemplo-mail.invalid, recife ,2024-07-21,4106
+477.616.363-30,Bruno Almeida,bruno.almeida364@exemplo-mail.invalid,Salvador,2024-08-21,3220
+190.743.276-15,Inês Pereira,inês.pereira365@exemplo-mail.invalid, recife ,2024-05-12,4942
+243.180.610-45,Carla Rodrigues,carla.rodrigues366@exemplo-mail.invalid, recife ,2024-08-22,
+116.480.652-20,Lucas Souza,lucas.souza367@exemplo-mail.invalid,Goiânia,2024-02-01,1237
+183.981.246-11,Diego Souza,diego.souza368@exemplo-mail.invalid,Goiânia,2024-05-19,1974
+864.901.161-72,João Souza,joão.souza369@exemplo-mail.invalid, recife ,2024-12-07,2275
+296.047.954-91,Hugo Pereira,hugo.pereira370@exemplo-mail.invalid,,2024-05-21,4170
+535.158.844-85,Inês Almeida,inês.almeida371@exemplo-mail.invalid,Salvador,2024-04-14,2243
+674.932.828-99,João Lima,joão.lima372@exemplo-mail.invalid,São Paulo,2024-02-09,
+672.141.278-16,Lucas Lima,lucas.lima373@exemplo-mail.invalid,Porto Alegre,2024-01-07,3203
+584.696.863-66,Gabriela Lima,gabriela.lima374@exemplo-mail.invalid,Porto Alegre,2024-03-17,
+318.254.775-68,Ana Souza,ana.souza375@exemplo-mail.invalid,Manaus,2024-10-12,4471
+129.837.518-66,Carla Oliveira,carla.oliveira376@exemplo-mail.invalid,Belo Horizonte,2024-03-23,
+143.606.367-27,Elisa Pereira,elisa.pereira377@exemplo-mail.invalid,São Paulo,2024-08-28,3073
+430.917.698-54,Diego Rodrigues,diego.rodrigues378@exemplo-mail.invalid,Recife,2024-04-15,2348
+190.978.262-02,Fábio Silva,fábio.silva379@exemplo-mail.invalid,,2024-08-09,2832
+959.634.950-42,Diego Souza,diego.souza380@exemplo-mail.invalid,,2024-06-17,
+468.777.795-43,Elisa Pereira,elisa.pereira381@exemplo-mail.invalid,Recife,2024-12-20,1435
+323.753.577-11,Lucas Oliveira,lucas.oliveira382@exemplo-mail.invalid,São Paulo,2024-11-27,1420
+170.076.816-72,Hugo Souza,hugo.souza383@exemplo-mail.invalid,Curitiba,2024-03-25,
+476.608.050-63,Diego Costa,diego.costa384@exemplo-mail.invalid, recife ,2024-07-07,1814
+067.751.969-07,Ana Souza,ana.souza385@exemplo-mail.invalid,Salvador,2024-01-13,3353
+886.171.617-38,Bruno Almeida,bruno.almeida386@exemplo-mail.invalid,Porto Alegre,2024-09-20,948
+409.694.073-04,João Almeida,joão.almeida387@exemplo-mail.invalid,Salvador,2024-10-15,
+548.396.906-60,Karina Silva,karina.silva388@exemplo-mail.invalid,Goiânia,2024-09-21,1198
+480.402.503-17,Lucas Almeida,lucas.almeida389@exemplo-mail.invalid,São Paulo,2024-11-06,1950
+895.992.137-95,Gabriela Lima,gabriela.lima390@exemplo-mail.invalid,,2024-07-12,1257
+508.470.120-52,Inês Pereira,inês.pereira391@exemplo-mail.invalid,Porto Alegre,2024-09-22,
+624.809.178-29,Bruno Oliveira,bruno.oliveira392@exemplo-mail.invalid,Belo Horizonte,2024-08-27,989
+004.127.852-79,Elisa Lima,elisa.lima393@exemplo-mail.invalid,Belo Horizonte,2024-06-23,1190
+449.822.952-65,João Almeida,joão.almeida394@exemplo-mail.invalid,Curitiba,2024-12-23,166
+451.478.271-98,Elisa Silva,elisa.silva395@exemplo-mail.invalid,Recife,2024-06-13,1473
+161.237.067-66,Bruno Silva,bruno.silva396@exemplo-mail.invalid,Recife,2024-01-13,2790
+578.526.146-57,João Rodrigues,joão.rodrigues397@exemplo-mail.invalid,Manaus,2024-05-24,
+437.469.117-12,Fábio Almeida,fábio.almeida398@exemplo-mail.invalid,Recife,2024-10-15,
+138.286.307-25,Elisa Rodrigues,elisa.rodrigues399@exemplo-mail.invalid,Porto Alegre,2024-06-13,4563
+624.682.457-02,Lucas Souza,lucas.souza400@exemplo-mail.invalid,Goiânia,2024-05-28,3915
+248.060.487-14,João Oliveira,joão.oliveira401@exemplo-mail.invalid,Salvador,2024-04-14,
+113.463.659-99,Lucas Lima,lucas.lima402@exemplo-mail.invalid,Goiânia,2024-11-14,2994
+481.976.596-66,Diego Souza,diego.souza403@exemplo-mail.invalid,Belo Horizonte,2024-04-21,4155
+465.770.798-21,Gabriela Costa,gabriela.costa404@exemplo-mail.invalid,Curitiba,2024-11-02,
+337.478.681-36,Elisa Souza,elisa.souza405@exemplo-mail.invalid,São Paulo,2024-12-03,1696
+284.512.856-96,Bruno Rodrigues,bruno.rodrigues406@exemplo-mail.invalid,Curitiba,2024-02-02,
+457.342.722-90,Ana Rodrigues,ana.rodrigues407@exemplo-mail.invalid,Goiânia,2024-12-12,4881
+813.454.831-90,Karina Rodrigues,karina.rodrigues408@exemplo-mail.invalid,,2024-06-13,1889
+654.739.343-84,Ana Almeida,ana.almeida409@exemplo-mail.invalid,Salvador,2024-09-25,
+109.098.657-38,Lucas Rodrigues,lucas.rodrigues410@exemplo-mail.invalid,Curitiba,2024-07-26,4508
+735.704.427-15,Hugo Silva,hugo.silva411@exemplo-mail.invalid, recife ,2024-11-28,2335
+346.501.453-86,Hugo Oliveira,hugo.oliveira412@exemplo-mail.invalid, recife ,2024-03-06,3390
+144.864.748-82,Fábio Oliveira,fábio.oliveira413@exemplo-mail.invalid,Salvador,2024-05-22,
+364.504.408-74,Diego Costa,diego.costa414@exemplo-mail.invalid,Manaus,2024-03-07,955
+182.641.977-38,Fábio Costa,fábio.costa415@exemplo-mail.invalid,Manaus,2024-06-17,
+827.752.349-27,Gabriela Pereira,gabriela.pereira416@exemplo-mail.invalid,Recife,2024-04-08,2022
+287.575.033-13,Lucas Lima,lucas.lima417@exemplo-mail.invalid,Porto Alegre,2024-09-16,369
+145.172.882-52,Fábio Silva,fábio.silva418@exemplo-mail.invalid,Recife,2024-09-20,1217
+957.175.635-17,Elisa Lima,elisa.lima419@exemplo-mail.invalid,São Paulo,2024-08-16,1630
+739.152.138-98,Inês Souza,inês.souza420@exemplo-mail.invalid,Salvador,2024-06-22,640
+467.745.480-01,Inês Silva,inês.silva421@exemplo-mail.invalid,Curitiba,2024-08-06,
+311.809.208-58,Karina Rodrigues,karina.rodrigues422@exemplo-mail.invalid,Goiânia,2024-08-20,2073
+804.273.332-20,Gabriela Pereira,gabriela.pereira423@exemplo-mail.invalid,São Paulo,2024-11-22,4776
+506.608.179-95,Hugo Rodrigues,hugo.rodrigues424@exemplo-mail.invalid,São Paulo,2024-07-23,
+862.864.413-11,Carla Oliveira,carla.oliveira425@exemplo-mail.invalid,Recife,2024-08-21,2981
+832.015.353-13,Inês Oliveira,inês.oliveira426@exemplo-mail.invalid,Recife,2024-01-14,1485
+364.328.977-52,Hugo Almeida,hugo.almeida427@exemplo-mail.invalid,Belo Horizonte,2024-01-12,
+711.588.982-25,Bruno Lima,bruno.lima428@exemplo-mail.invalid,São Paulo,2024-11-09,
+902.566.163-80,João Rodrigues,joão.rodrigues429@exemplo-mail.invalid,,2024-09-12,4237
+549.170.516-16,Gabriela Pereira,gabriela.pereira430@exemplo-mail.invalid,Goiânia,2024-08-06,
+902.047.503-87,Ana Lima,ana.lima431@exemplo-mail.invalid,Curitiba,2024-08-09,
+251.597.206-44,Bruno Lima,bruno.lima432@exemplo-mail.invalid,Curitiba,2024-02-24,
+190.663.819-67,João Oliveira,joão.oliveira433@exemplo-mail.invalid,Curitiba,2024-08-11,
+928.515.901-13,Bruno Almeida,bruno.almeida434@exemplo-mail.invalid,Manaus,2024-07-20,
+158.324.892-86,Ana Almeida,ana.almeida435@exemplo-mail.invalid,,2024-05-09,
+447.392.937-16,Lucas Oliveira,lucas.oliveira436@exemplo-mail.invalid,Belo Horizonte,2024-04-24,
+762.506.428-13,Elisa Rodrigues,elisa.rodrigues437@exemplo-mail.invalid,Salvador,2024-11-07,3123
+788.932.258-69,Carla Costa,carla.costa438@exemplo-mail.invalid,Manaus,2024-01-22,3548
+314.875.934-75,Elisa Souza,elisa.souza439@exemplo-mail.invalid,Manaus,2024-06-22,4635
+900.294.819-12,Karina Souza,karina.souza440@exemplo-mail.invalid,Porto Alegre,2024-04-08,
+441.658.413-17,Hugo Silva,hugo.silva441@exemplo-mail.invalid, recife ,2024-11-23,
+301.965.926-50,Elisa Souza,elisa.souza442@exemplo-mail.invalid,Salvador,2024-05-08,4228
+918.203.588-20,Elisa Oliveira,elisa.oliveira443@exemplo-mail.invalid,Goiânia,2024-03-18,
+510.520.902-91,Carla Silva,carla.silva444@exemplo-mail.invalid,Belo Horizonte,2024-05-10,4149
+284.522.727-33,Carla Rodrigues,carla.rodrigues445@exemplo-mail.invalid,Porto Alegre,2024-03-05,2482
+836.518.597-13,Inês Costa,inês.costa446@exemplo-mail.invalid,Recife,2024-09-18,963
+255.608.112-13,Elisa Souza,elisa.souza447@exemplo-mail.invalid,Porto Alegre,2024-05-11,1191
+555.277.054-50,Elisa Souza,elisa.souza448@exemplo-mail.invalid,Salvador,2024-12-17,829
+588.957.421-43,Fábio Rodrigues,fábio.rodrigues449@exemplo-mail.invalid,Manaus,2024-11-03,1598
+882.688.123-64,Ana Pereira,ana.pereira450@exemplo-mail.invalid,Recife,2024-11-05,3621
+032.682.289-60,Ana Lima,ana.lima451@exemplo-mail.invalid,Porto Alegre,2024-08-26,2276
+487.056.297-09,Karina Costa,karina.costa452@exemplo-mail.invalid,Belo Horizonte,2024-10-20,2714
+882.057.659-89,Ana Almeida,ana.almeida453@exemplo-mail.invalid,São Paulo,2024-11-16,
+965.347.178-42,Bruno Souza,bruno.souza454@exemplo-mail.invalid,,2024-08-19,4344
+736.161.852-07,Inês Costa,inês.costa455@exemplo-mail.invalid,,2024-07-22,1708
+506.440.086-20,Diego Lima,diego.lima456@exemplo-mail.invalid,Manaus,2024-11-26,3191
+927.774.601-85,Lucas Pereira,lucas.pereira457@exemplo-mail.invalid,Goiânia,2024-10-11,1524
+234.599.150-15,Lucas Almeida,lucas.almeida458@exemplo-mail.invalid, recife ,2024-06-12,3173
+542.209.178-80,Fábio Costa,fábio.costa459@exemplo-mail.invalid,Salvador,2024-04-17,
+845.480.184-86,Diego Rodrigues,diego.rodrigues460@exemplo-mail.invalid,,2024-11-12,4731
+940.560.440-76,Lucas Rodrigues,lucas.rodrigues461@exemplo-mail.invalid,Salvador,2024-01-19,1938
+195.184.512-00,Lucas Almeida,lucas.almeida462@exemplo-mail.invalid,Recife,2024-12-26,3758
+857.469.893-90,Carla Pereira,carla.pereira463@exemplo-mail.invalid,Recife,2024-01-18,4399
+526.694.630-12,Carla Almeida,carla.almeida464@exemplo-mail.invalid,Recife,2024-12-18,
+009.550.064-32,Hugo Oliveira,hugo.oliveira465@exemplo-mail.invalid,Curitiba,2024-04-19,867
+133.179.156-27,Bruno Lima,bruno.lima466@exemplo-mail.invalid,Salvador,2024-08-06,3858
+672.811.787-45,Carla Costa,carla.costa467@exemplo-mail.invalid,Recife,2024-02-24,1969
+776.296.727-40,Bruno Rodrigues,bruno.rodrigues468@exemplo-mail.invalid,Manaus,2024-09-04,4914
+393.376.876-50,Fábio Costa,fábio.costa469@exemplo-mail.invalid,,2024-11-26,1171
+114.172.770-78,Fábio Costa,fábio.costa470@exemplo-mail.invalid,Porto Alegre,2024-02-19,
+823.565.359-28,Diego Silva,diego.silva471@exemplo-mail.invalid,Curitiba,2024-09-09,1653
+040.910.686-10,Fábio Silva,fábio.silva472@exemplo-mail.invalid,Goiânia,2024-06-27,135
+275.948.704-19,João Silva,joão.silva473@exemplo-mail.invalid,Salvador,2024-06-01,
+171.140.618-13,Ana Rodrigues,ana.rodrigues474@exemplo-mail.invalid,,2024-04-13,986
+869.928.012-38,Fábio Silva,fábio.silva475@exemplo-mail.invalid,Curitiba,2024-04-06,
+628.734.803-96,Ana Costa,ana.costa476@exemplo-mail.invalid,Salvador,2024-07-07,
+693.696.111-95,Ana Costa,ana.costa477@exemplo-mail.invalid,Recife,2024-05-18,1010
+903.029.839-20,Lucas Souza,lucas.souza478@exemplo-mail.invalid, recife ,2024-07-13,
+727.487.043-30,Carla Costa,carla.costa479@exemplo-mail.invalid,,2024-04-16,4730
+082.113.202-50,Karina Costa,karina.costa480@exemplo-mail.invalid,Goiânia,2024-03-01,
+704.352.645-18,Gabriela Lima,gabriela.lima481@exemplo-mail.invalid,Salvador,2024-06-05,
+031.773.721-11,Lucas Almeida,lucas.almeida482@exemplo-mail.invalid,,2024-08-18,
+996.810.394-34,Carla Lima,carla.lima483@exemplo-mail.invalid,Recife,2024-02-06,3639
+434.691.634-23,Diego Rodrigues,diego.rodrigues484@exemplo-mail.invalid,Porto Alegre,2024-07-04,3479
+422.837.823-51,Carla Oliveira,carla.oliveira485@exemplo-mail.invalid,Curitiba,2024-03-05,
+131.980.019-10,Fábio Costa,fábio.costa486@exemplo-mail.invalid, recife ,2024-10-25,
+855.696.882-28,Diego Rodrigues,diego.rodrigues487@exemplo-mail.invalid,,2024-12-26,367
+967.367.317-08,Diego Oliveira,diego.oliveira488@exemplo-mail.invalid,Porto Alegre,2024-07-23,
+707.758.072-67,Lucas Pereira,lucas.pereira489@exemplo-mail.invalid,,2024-05-10,
+277.578.485-30,Bruno Souza,bruno.souza490@exemplo-mail.invalid,Porto Alegre,2024-10-05,150
+542.555.679-09,Inês Souza,inês.souza491@exemplo-mail.invalid,São Paulo,2024-03-05,1688
+629.799.809-53,Gabriela Costa,gabriela.costa492@exemplo-mail.invalid, recife ,2024-04-11,1170
+456.746.853-90,João Souza,joão.souza493@exemplo-mail.invalid,Manaus,2024-09-08,
+813.716.841-07,Carla Almeida,carla.almeida494@exemplo-mail.invalid,Recife,2024-02-12,
+542.720.239-10,Bruno Almeida,bruno.almeida495@exemplo-mail.invalid,Goiânia,2024-10-05,
+164.389.414-60,Hugo Silva,hugo.silva496@exemplo-mail.invalid, recife ,2024-01-09,1967
+270.238.544-46,Carla Almeida,carla.almeida497@exemplo-mail.invalid,São Paulo,2024-06-15,
+241.238.372-49,Elisa Almeida,elisa.almeida498@exemplo-mail.invalid,Recife,2024-06-15,
+246.097.111-86,Carla Oliveira,carla.oliveira499@exemplo-mail.invalid,Porto Alegre,2024-03-08,856
