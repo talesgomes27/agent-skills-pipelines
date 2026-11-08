@@ -26,7 +26,7 @@ Siga o [contrato comum](references/common-contract.md) para leitura inicial, est
 
 ## Autorização e modo
 
-Aprovar um gate valida os artefatos daquele gate. Uma ação externa usa a autorização já dada só quando ela cobre o destino e o efeito, e mudança material no artefato ou no destino a invalida; senão, mostre o que será publicado e peça a autorização final. Preparar localmente não autoriza commit, push, publicação ou deploy, e estar autenticado não a amplia.
+Aprovar um gate valida os artefatos daquele gate. Uma ação externa usa a autorização já dada só quando ela cobre o destino e o efeito, e mudança material no artefato ou no destino a invalida; senão, mostre o que será publicado e peça a autorização final. Preparar localmente não autoriza commit, push, publicação ou deploy, e estar autenticado não amplia a autorização.
 
 - **Por efeito** (padrão): pare no A2 de cada efeito do catálogo não pré-autorizado e no A3 ao fim de RL-5. O plano de RL-2 vai no A1 ou no primeiro A2.
 - **Assistido**: espere o aceite, com `aguardando_aprovacao`, ao fim de RL-2, RL-4 e RL-5, e o de RL-4 é o A2 da publicação; nos outros, apresente, siga e registre o aceite deles com o seguinte.
@@ -58,4 +58,4 @@ Siga o estado e a retomada do contrato comum, registrando também artefato, dest
 
 ## Especialistas e ferramentas
 
-Carregue especialistas de CI, plataforma, empacotamento ou revisão só para a lacuna atual, com as regras de especialistas do contrato comum. Sem cadeia editorial em todo commit nem checklist de lançamento num pacote local simples. Conectores consultam runs e deployments ou executam uma ação já autorizada. Graphify é opcional: não construa nem publique grafo sem pedido, e confira o conteúdo interno antes de expô-lo.
+Carregue especialistas de CI, plataforma, empacotamento ou revisão só para a lacuna atual, pelas regras de especialistas do contrato. Sem cadeia editorial em todo commit nem checklist de lançamento num pacote local simples. Conectores consultam runs e deployments ou executam uma ação já autorizada. Graphify é opcional: não construa nem publique grafo sem pedido, e confira o conteúdo interno antes de expô-lo.
