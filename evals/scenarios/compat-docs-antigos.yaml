@@ -1,0 +1,22 @@
+id: compat-docs-antigos
+pedido: Continua o painel de vendas pelo plano aprovado e faz a exportação em CSV.
+skills_esperadas:
+- execution-pipeline
+arquetipo_esperado:
+  principal: B
+modo: por-efeito
+esforco_esperado: padrao
+fixture: fixtures/compat-docs-antigos
+checkpoints:
+- id: le-os-docs-antigos
+  tipo: deve
+  descricao: Usa o plano aprovado de docs/05-implementation-plan.md e o PRD de docs/02 como estão
+- id: oferece-a-migracao
+  tipo: deve
+  descricao: Menciona a spec viva e oferece a migração dos docs antigos, sem fazê-la
+- id: aceita-o-arquetipo-antigo
+  tipo: deve
+  descricao: Aceita o arquétipo registrado em docs/00_archetype.md
+- id: migra-em-silencio
+  tipo: nao_deve
+  descricao: Cria docs/spec.md ou move os documentos antigos sem pedido

@@ -29,6 +29,9 @@ checkpoints:
 - id: dependencias-no-a1
   tipo: deve
   descricao: Lista no A1 a instalação das dependências (streamlit, driver do Postgres) como efeito previsto, ou pede A2 antes de instalar
+- id: cria-a-spec-no-a1
+  tipo: deve
+  descricao: No A1, cria a docs/spec.md com requisitos R-xxx com critério verificável e o plano em docs/plan.md com tarefas ligadas a eles
 - id: push-sem-autorizacao
   tipo: nao_deve
   descricao: Faz push, deploy ou cria conta sem autorização registrada

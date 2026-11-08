@@ -19,14 +19,14 @@ Siga o [contrato comum](references/common-contract.md) para leitura inicial, esf
 
 ## Antes de começar
 
-1. Faça a leitura inicial do contrato comum e leia o plano aprovado: `docs/05-implementation-plan.md` ou o plano aprovado na conversa, vindos do pré-código, ou o plano e as restrições encaminhados por uma auditoria. Leia requisitos e arquitetura só nas partes que a tarefa usa.
+1. Faça a leitura inicial do contrato comum e leia o plano aprovado: `docs/plan.md`, as tarefas do formato de SDD do projeto ou o `docs/05-implementation-plan.md` antigo, vindos do pré-código; o plano aprovado na conversa; ou o plano e as restrições de uma auditoria. Leia spec e arquitetura só nas partes que a tarefa usa.
 2. Confirme que o plano foi aprovado e que implementar está autorizado. Vale a aprovação registrada no estado do projeto ou dada pelo usuário na conversa. Sem plano aprovado, pare e encaminhe para `pre-code-pipeline`, exceto na correção de bug abaixo e numa tarefa pequena: local (arquivos do projeto ou os que o usuário apontou), reversível, sem efeito externo (escrita ou envio pela rede, contas, mensagens, produção) e sem mudar interface que outro sistema usa. Ler páginas ou APIs públicas pode, com as regras de coleta da [referência C](references/archetype-c.md). Nela o pedido é o plano: diga em poucas linhas o que vai fazer e como vai verificar, implemente e verifique sem abrir os gates. Se ela mexe em arquivos do usuário, mostre antes o que vai mudar, não sobrescreva nada e deixe como desfazer. Quando a tarefa precisa de escopo antes (fontes, cuidados com os dados, formato), use a entrega pontual da `pre-code-pipeline`: o aceite dela vale como plano, e a entrega segue sem abrir os gates, só com as paradas condicionais.
-3. Use o arquétipo registrado em `docs/00_archetype.md` ou no contrato: A = análise e modelos, B = aplicações (site, API, dashboard), C = automações (script, CLI, job agendado, ETL). Sem registro, infira pelo contexto quando for óbvio (um script de linha de comando é C) e diga que inferiu; pergunte só quando a escolha muda uma decisão.
+3. Use o arquétipo registrado na spec, em `docs/00_archetype.md` ou no contrato: A = análise e modelos, B = aplicações (site, API, dashboard), C = automações (script, CLI, job agendado, ETL). Sem registro, infira pelo contexto quando for óbvio (um script de linha de comando é C) e diga que inferiu; pergunte só quando a escolha muda uma decisão.
 4. Descubra os comandos reais em manifests, lockfiles, scripts e CI. Rode os checks afetados antes de mudar qualquer coisa e anote o que já falhava. Falha preexistente fora do escopo não bloqueia a entrega, mas aparece no relatório separada das falhas novas.
 
 ## Esforço
 
-Escolha o esforço pela escala do contrato comum e diga por quê: leve para mudança local ou app novo pequeno aprovado como leve; padrão para capacidade ou integração comum; rigoroso para segurança, dados sensíveis, migração, interface pública ou impacto incerto, mesmo num diff curto. O app novo que o pré-código aprovou como leve continua leve aqui.
+Escolha o esforço pela escala do contrato comum e diga por quê: leve para mudança local ou app novo pequeno aprovado como leve; padrão para capacidade ou integração comum; rigoroso para segurança, dados sensíveis, migração, interface pública ou impacto incerto, mesmo num diff curto.
 
 ## Regras de trabalho
 

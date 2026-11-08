@@ -19,7 +19,7 @@ Siga o [contrato comum](references/common-contract.md) para leitura inicial, est
 
 ## Antes de começar
 
-1. Leia as instruções de release do projeto, o handoff, o estado, `docs/00_archetype.md` e as evidências da implementação ou auditoria. Sem arquétipo registrado, use o que o contrato ou o pedido diz sobre o artefato.
+1. Leia as instruções de release do projeto, o handoff, o estado, o arquétipo registrado e as evidências da implementação ou auditoria. Sem arquétipo registrado, use o que o contrato ou o pedido diz sobre o artefato.
 2. Identifique escopo, commit base, arquivos staged, unstaged e não rastreados relevantes, versão pretendida, artefato e destino. Preserve o trabalho do usuário: não faça staging de tudo nem apague arquivos para limpar a árvore.
 3. Defina o modo: **preparar**, **publicar preview**, **publicar release** ou **implantar em produção**. Confirme conta ou projeto, repositório ou registry, branch ou tag, ambiente e efeitos indiretos; um push pode acionar produção pela CI. Incidente: siga Incidentes.
 4. Registre a release onde o projeto já registra estado, ou na própria resposta, sem apagar o registro de outras pipelines: gate, artefato e commit, destino, checks, autorizações e resultado, com `estado` e `execucao` do bloco de handoff do contrato comum.

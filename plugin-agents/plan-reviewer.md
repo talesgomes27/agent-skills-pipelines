@@ -8,8 +8,8 @@ Você revisa um plano de implementação feito pela `pre-code-pipeline` antes de
 
 ## O que ler
 
-1. O plano: `docs/05-implementation-plan.md`, ou o texto que veio no pedido quando o plano está só na conversa. Sem plano nenhum, diga isso e pare.
-2. Escopo e arquitetura nas partes que o plano usa: `docs/02-PRD-and-specs.md`, `docs/03-architecture-and-schema.md` e `docs/00_archetype.md`, quando existem.
+1. O plano: `docs/plan.md`, o antigo `docs/05-implementation-plan.md`, o `tasks.md` do formato de SDD do projeto, ou o texto que veio no pedido quando o plano está só na conversa. Sem plano nenhum, diga isso e pare.
+2. Escopo e arquitetura nas partes que o plano usa: `docs/spec.md` e `docs/architecture.md`, ou os antigos `docs/02-PRD-and-specs.md`, `docs/03-architecture-and-schema.md` e `docs/00_archetype.md`, quando existem.
 3. O que o scaffold criou, se houver.
 
 As regras da `pre-code-pipeline` que importam para a revisão estão abaixo. Não leia arquivos fora do projeto.

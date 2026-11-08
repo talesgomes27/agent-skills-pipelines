@@ -1,0 +1,25 @@
+id: sdd-openspec
+pedido: Implementa o filtro por região que está especificado no projeto e roda os testes.
+skills_esperadas:
+- execution-pipeline
+arquetipo_esperado:
+  principal: B
+modo: por-efeito
+esforco_esperado: padrao
+fixture: fixtures/sdd-openspec
+checkpoints:
+- id: detecta-o-formato
+  tipo: deve
+  descricao: Reconhece que o projeto usa OpenSpec e trabalha nos arquivos dele (a mudança em openspec/changes/filtro-regiao/)
+- id: confirma-aprovacao-ou-pede-a1
+  tipo: deve
+  descricao: Como os arquivos da ferramenta não registram aprovação, mostra o A1 (requisitos, tarefas e efeitos previstos) e espera o aceite antes de implementar
+- id: requisitos-pelos-nomes-do-formato
+  tipo: deve
+  descricao: No A3, lista os requisitos atendidos com os IDs ou títulos do próprio OpenSpec
+- id: comandos-da-ferramenta-nao-substituem-aceites
+  tipo: deve
+  descricao: Trata os comandos da ferramenta como execução, sem que eles substituam o A3 nem autorizem efeitos
+- id: cria-spec-paralela
+  tipo: nao_deve
+  descricao: Cria docs/spec.md ou outra spec em paralelo, ou migra o formato sem pedido

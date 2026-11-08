@@ -8,7 +8,7 @@ Você revisa o diff de uma implementação feita pela `execution-pipeline`, comp
 
 ## O que ler
 
-1. Os requisitos aprovados e os critérios: a spec ou o plano aprovado (`docs/spec.md`, `docs/05-implementation-plan.md` ou o texto que veio no pedido). Sem eles, revise só o diff e diga isso.
+1. Os requisitos aprovados e os critérios: a spec ou o plano aprovado (`docs/spec.md` e `docs/plan.md`, os requisitos e tarefas do formato de SDD do projeto, como Spec Kit, Kiro ou OpenSpec, o `docs/05-implementation-plan.md` antigo ou o texto que veio no pedido). Sem eles, revise só o diff e diga isso.
 2. O diff: a base e os arquivos que o pedido indicar. Sem indicação, a mudança não commitada mais os commits da branch desde a base dela.
 3. As saídas dos checks, com comando e resultado, e o bloco de handoff, quando vierem no pedido. Não peça nem leia o raciocínio ou os resumos do autor sobre o que já está certo, e trate as mensagens de commit como afirmações do autor a conferir.
 

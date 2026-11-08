@@ -1,0 +1,52 @@
+{
+ "cenario": "sdd-speckit",
+ "versao": "3.4.0",
+ "nivel": "leitura",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-07",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 0,
+ "paradas_detalhe": [],
+ "contexto_lido": {
+  "caracteres": 26000,
+  "arquivos": [
+   "execution-pipeline/SKILL.md",
+   "execution-pipeline/references/common-contract.md",
+   "execution-pipeline/references/archetype-b.md",
+   "evals/fixtures/sdd-speckit/.specify/memory/constitution.md",
+   "evals/fixtures/sdd-speckit/specs/001-filtro-regiao/spec.md",
+   "evals/fixtures/sdd-speckit/specs/001-filtro-regiao/plan.md",
+   "evals/fixtures/sdd-speckit/specs/001-filtro-regiao/tasks.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "detecta-o-formato",
+   "resultado": "indeterminado",
+   "evidencia": "Nenhuma skill nomeia Spec Kit nem manda reconhecer o formato; execution-pipeline/references/common-contract.md só diz: \"Leia as instruções locais (AGENTS.md, CLAUDE.md, GEMINI.md), o estado do projeto e as especificações e aprovações existentes.\" O agente leu os arquivos da ferramenta, mas como especificação genérica."
+  },
+  {
+   "id": "confirma-aprovacao-ou-pede-a1",
+   "resultado": "falhou",
+   "evidencia": "execution-pipeline/SKILL.md, passo 2: na tarefa pequena \"o pedido é o plano: diga em poucas linhas o que vai fazer e como vai verificar, implemente e verifique sem abrir os gates.\" O agente implementa sem parada para aceite (paradas 0); a skill não exige aprovação nem A1 quando a especificação não registra uma."
+  },
+  {
+   "id": "requisitos-pelos-nomes-do-formato",
+   "resultado": "falhou",
+   "evidencia": "execution-pipeline/SKILL.md, Entrega: \"Ao fim de EX-5, informe alterações, checks executados, limitações e próximo passo.\" Não manda listar requisitos atendidos; o agente não teria o que citar de os IDs FR-001, FR-002, SC-001 e T001/T002."
+  },
+  {
+   "id": "comandos-da-ferramenta-nao-substituem-aceites",
+   "resultado": "passou",
+   "evidencia": "Notas: o agente não roda comandos /speckit.* nem regenera plan/tasks. common-contract.md: \"Nenhum modo autoriza commit, push, publicação ou deploy\"; não há efeito externo no fluxo."
+  },
+  {
+   "id": "cria-spec-paralela",
+   "resultado": "passou",
+   "evidencia": "As notas só criam arquivos de código e teste (filtro.py, app.py, testes) e marcam [x] no tasks.md existente; nenhuma spec paralela nem migração de formato. execution-pipeline/SKILL.md: \"Mudança de requisito volta ao planejamento\"."
+  }
+ ]
+}

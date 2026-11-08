@@ -5,6 +5,7 @@ Leia apenas a seção do artefato solicitado. Arquétipo do projeto ajuda no con
 ## PRD, especificação e plano
 
 Distinga problema observado, objetivo futuro, requisito, critério de aceite e decisão. Métricas desejadas ficam identificadas como metas, nunca como resultados alcançados. Preserve non-goals, restrições e questões abertas. Use os nomes e contratos de arquivos da pipeline chamadora, sem criar um segundo plano.
+Na spec viva (`docs/spec.md`), redija cada requisito com ID, enunciado, critério verificável e estado, sem promover critério a resultado alcançado; na revisão, preserve os IDs e o caráter futuro dos critérios. Num formato de SDD do projeto, siga as convenções dele.
 
 ## ADR
 

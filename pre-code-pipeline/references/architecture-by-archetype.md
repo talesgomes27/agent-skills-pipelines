@@ -30,7 +30,7 @@ Leia só a parte do arquétipo registrado e, em projeto híbrido, a do domínio 
 
 ## Registro do arquétipo
 
-`docs/00_archetype.md` registra em YAML `archetype`, `stack`, `project_name`, `gerado_por: pre-code-pipeline` e `data` (ISO 8601). Stack indefinida fica explícita; não invente versões.
+Na spec viva, o arquétipo fica no front matter da `docs/spec.md` (`arquetipo: {principal: aplicacao, secundario: analise}`), como em [spec viva](spec-template.md). Sem spec, ou num projeto que já o tem, `docs/00_archetype.md` registra em YAML `archetype`, `stack`, `project_name`, `gerado_por: pre-code-pipeline` e `data` (ISO 8601). O arquétipo aceita a letra ou o nome: A ou `analise`, B ou `aplicacao`, C ou `automacao`. Stack indefinida fica explícita; não invente versões.
 
 ## Onde a verificação roda
 
