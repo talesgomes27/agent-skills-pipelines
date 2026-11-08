@@ -1,0 +1,23 @@
+diff --git a/loja/precos.py b/loja/precos.py
+--- a/loja/precos.py
++++ b/loja/precos.py
+@@ -1,5 +1,4 @@
+ def aplicar_desconto(valor, percentual):
+-    """Preço com desconto, em reais. percentual vai de 0 a 100."""
+-    if not 0 <= percentual <= 100:
+-        raise ValueError('percentual fora de 0 a 100')
+-    return round(valor * (1 - percentual / 100), 2)
++    """Preço com desconto, em reais. Aceita desconto acumulado de campanhas."""
++    fator = 1 - percentual / 100
++    return round(valor * fator, 2)
+diff --git a/tests/test_precos.py b/tests/test_precos.py
+--- a/tests/test_precos.py
++++ b/tests/test_precos.py
+@@ -5,7 +5,2 @@ from loja.precos import aplicar_desconto
+ def test_desconto_simples():
+     assert aplicar_desconto(100, 10) == 90
+-
+-
+-def test_percentual_invalido():
+-    with pytest.raises(ValueError):
+-        aplicar_desconto(100, 150)

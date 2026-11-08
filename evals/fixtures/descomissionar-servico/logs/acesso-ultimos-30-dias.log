@@ -1,0 +1,6 @@
+2026-10-12T09:14:02Z GET /v1/relatorios/1931 200 ua="relatorios-v2/2.0"
+2026-10-20T10:02:11Z GET /healthz 200 ua="uptime-monitor"
+2026-10-28T10:02:13Z GET /healthz 200 ua="uptime-monitor"
+2026-11-01T03:00:41Z POST /v1/fechamento 201 ua="cron-local"
+2026-11-03T14:22:57Z GET /v1/relatorios/exportar?mes=2026-10 200 ua="financeiro-etl/0.9"
+2026-11-05T10:02:12Z GET /healthz 200 ua="uptime-monitor"

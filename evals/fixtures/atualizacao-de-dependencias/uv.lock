@@ -1,0 +1,21 @@
+version = 1
+requires-python = ">=3.10"
+
+[[package]]
+name = "cotacoes"
+version = "0.3.0"
+source = { editable = "." }
+dependencies = [
+    { name = "pandas" },
+    { name = "requests" },
+]
+
+[[package]]
+name = "pandas"
+version = "2.1.4"
+source = { registry = "https://pypi.org/simple" }
+
+[[package]]
+name = "requests"
+version = "2.31.0"
+source = { registry = "https://pypi.org/simple" }

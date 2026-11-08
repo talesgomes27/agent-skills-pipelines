@@ -1,0 +1,10 @@
+services:
+  api:
+    image: registry.exemplo.invalid/relatorios-v1:1.8.2
+    env_file: .env.producao
+    ports: ["8080:8080"]
+  banco:
+    image: postgres:13
+    volumes: ["dados:/var/lib/postgresql/data"]
+volumes:
+  dados: {}

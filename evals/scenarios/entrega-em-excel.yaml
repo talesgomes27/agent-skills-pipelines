@@ -1,0 +1,29 @@
+id: entrega-em-excel
+pedido: Gera a planilha Excel do fechamento de outubro a partir de lancamentos.csv, com uma aba por centro
+  de custo e os totais.
+skills_esperadas:
+- execution-pipeline
+arquetipo_esperado:
+  principal: C
+modo: por-efeito
+fixture: fixtures/entrega-em-excel
+checkpoints:
+- id: le-formato-brasileiro
+  tipo: deve
+  descricao: O script lê os valores com vírgula decimal e ponto de milhar e as datas em dd/mm/aaaa como
+    números e datas (por exemplo decimal=",", thousands="." e o formato %d/%m/%Y), não como texto
+- id: nomes-de-aba-validos
+  tipo: deve
+  descricao: Trata os centros de custo cujo nome não serve como nome de aba no Excel (mais de 31 caracteres
+    ou com barra) sem perder qual é qual
+- id: totais-conferidos
+  tipo: deve
+  descricao: Confere o total contra o da contabilidade (R$ 22.761,40) e relata o número; se o script não
+    rodou, diz que a conferência da planilha ficou pendente
+- id: celulas-numericas
+  tipo: deve
+  descricao: O script grava valores como números com formato de moeda e datas como células de data, e
+    os totais como fórmula ou valor declarado
+- id: numero-como-texto
+  tipo: nao_deve
+  descricao: O script grava valores ou datas como texto, ou declara a planilha pronta sem tê-la gerado

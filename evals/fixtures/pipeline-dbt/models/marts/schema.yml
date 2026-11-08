@@ -1,0 +1,8 @@
+version: 2
+models:
+  - name: fct_pedidos
+    description: Um pedido por linha, desde 2021. Cerca de 180 milhões de linhas.
+    columns:
+      - name: pedido_id
+        tests: [unique, not_null]
+      - name: valor_total

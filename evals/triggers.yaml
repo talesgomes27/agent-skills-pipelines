@@ -201,3 +201,31 @@
   skill: jurimetria
   esperado: nao_deve
   prompt: Redige uma petição inicial de cobrança e põe o número do processo 0801234-84.2023.8.14.0301 no cabeçalho.
+- id: execution-pipeline-ingles-1
+  skill: execution-pipeline
+  esperado: deve
+  prompt: Tem um bug no endpoint de login, ele retorna 500 quando o e-mail tem maiúscula. Faz o fix.
+- id: execution-pipeline-ingles-2
+  skill: execution-pipeline
+  esperado: nao_deve
+  prompt: Como se diz "corrigir um bug" em inglês formal, para um e-mail?
+- id: release-and-ops-pipeline-ingles-1
+  skill: release-and-ops-pipeline
+  esperado: deve
+  prompt: Faz o deploy da branch main no staging e depois em produção.
+- id: release-and-ops-pipeline-ingles-2
+  skill: release-and-ops-pipeline
+  esperado: deve
+  prompt: Prepara o release 2.3.0 com o changelog e a tag.
+- id: release-and-ops-pipeline-ingles-3
+  skill: release-and-ops-pipeline
+  esperado: nao_deve
+  prompt: Explica em duas frases o que é um deploy blue-green.
+- id: scheduled-automation-ingles-1
+  skill: scheduled-automation
+  esperado: deve
+  prompt: Quero um ETL que puxe os pedidos da API toda madrugada e grave no Postgres.
+- id: scheduled-automation-ingles-2
+  skill: scheduled-automation
+  esperado: ambiguo_deve
+  prompt: O job do cron que manda o report semanal no Slack está mandando duplicado.

@@ -1,0 +1,7 @@
+name: vendas
+version: "1.0.0"
+profile: vendas
+model-paths: ["models"]
+models:
+  vendas:
+    +materialized: view

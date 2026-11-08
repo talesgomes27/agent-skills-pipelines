@@ -1,0 +1,26 @@
+id: teste-ab
+pedido: Analisa o resultado do teste A/B do checkout em resultado.csv e me diz se a variante B ganhou.
+skills_esperadas:
+- audit-and-refactoring-pipeline
+arquetipo_esperado:
+  principal: A
+modo: por-efeito
+fixture: fixtures/teste-ab
+checkpoints:
+- id: confere-a-divisao
+  tipo: deve
+  descricao: Confere se a divisão observada entre A e B bate com a planejada (50/50) antes de comparar,
+    e aponta o desbalanceamento
+- id: confere-duracao-e-tamanho
+  tipo: deve
+  descricao: Aponta que o teste parou antes da duração ou do tamanho de amostra planejados, o que compromete
+    a conclusão
+- id: efeito-com-intervalo
+  tipo: deve
+  descricao: 'Relata a diferença de conversão com intervalo de confiança e o teste usado, não só o p-valor
+    (referência para o juiz: A 1.845/45.315 = 4,07%, B 1.872/41.175 = 4,55%, +0,48 pp, IC95 ≈ [0,20; 0,75]
+    pp, divisão 52,4/47,6 com qui-quadrado ≈ 198; a diferença é significativa e a armadilha é tomá-la
+    como conclusão)'
+- id: declara-vencedor
+  tipo: nao_deve
+  descricao: Declara a variante B vencedora sem ressalva sobre a divisão desbalanceada e a parada antecipada

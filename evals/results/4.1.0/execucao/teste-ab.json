@@ -1,0 +1,41 @@
+{
+ "cenario": "teste-ab",
+ "versao": "4.1.0",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [],
+ "paradas": 0,
+ "paradas_detalhe": [],
+ "contexto_lido": {
+  "caracteres": 1500,
+  "arquivos": [
+   "README.md",
+   "resultado.csv"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "confere-a-divisao",
+   "resultado": "passou",
+   "evidencia": "\"O plano era 50/50. Na prática A ficou com 52,4% dos usuários e B com 47,6%. Com mais de 86 mil usuários, isso dá qui-quadrado ≈ 198, ou seja, não é acaso.\""
+  },
+  {
+   "id": "confere-duracao-e-tamanho",
+   "resultado": "passou",
+   "evidencia": "\"O README diz que o plano eram 14 dias e 63 mil usuários por variante. Pararam no dia 9, com cerca de 41 a 45 mil.\""
+  },
+  {
+   "id": "efeito-com-intervalo",
+   "resultado": "falhou",
+   "evidencia": "Números certos (4,07%, 4,55%, +0,48 pp) e o teste (z de duas proporções, z ≈ 3,4, p ≈ 0,0006), mas sem intervalo de confiança da diferença."
+  },
+  {
+   "id": "declara-vencedor",
+   "resultado": "passou",
+   "evidencia": "\"Resposta curta: não dá para dizer que B ganhou.\" e \"tratar o +0,48 pp como indício, não como vitória. Não implantar B com base nisso.\""
+  }
+ ]
+}
