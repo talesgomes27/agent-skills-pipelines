@@ -72,4 +72,4 @@ Carregue outra skill só para uma lacuna concreta, com as regras de especialista
 
 ## Entrega
 
-Ao fim de EX-5, informe alterações, checks executados, limitações e próximo passo. Num projeto com os `docs/00` a `docs/05` antigos, que você seguiu como estão, termine oferecendo em uma linha migrar para a spec viva; só migre se o usuário aceitar. Para publicar, encaminhe a `release-and-ops-pipeline`; sem autorização, pare no estado preparado.
+Ao fim de EX-5, informe alterações, checks executados, limitações e próximo passo. Num projeto com os `docs/00` a `docs/05` antigos, que você seguiu como estão, ofereça no A3, em uma linha, migrar para a spec viva; só migre se o usuário aceitar. Para publicar, encaminhe a `release-and-ops-pipeline`; sem autorização, pare no estado preparado.
