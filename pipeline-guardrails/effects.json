@@ -3,13 +3,13 @@
   "efeitos": [
     {
       "catalogo": "Commit, push, PR ou tag",
-      "descricao": "push, tag, PR ou merge",
-      "padrao": "\\bgit\\b.*\\b(push|tag)\\b|\\bgh\\s+(pr\\s+(create|merge)|release\\s+create|workflow\\s+(run|enable))\\b|\\bgh\\s+api\\b.*(\\bmerge|mergePullRequest|createPullRequest)|\\bgh\\s+api\\b(?=.*\\b(pulls|releases|git/refs|git/tags)\\b)(?=.*(\\s-[fF]\\b|\\s-[fF]\\S|--(raw-)?field\\b|--input\\b|-X\\s*POST|--method[=\\s]+POST))|\\bdocker\\s+push\\b"
+      "descricao": "push, tag, PR, merge ou escrita no repositório pela API",
+      "padrao": "\\bgit\\b.*\\b(push|tag)\\b|\\bgh\\s+(pr\\s+(create|merge)|release\\s+create|workflow\\s+(run|enable))\\b|\\bgh\\s+api\\b.*(\\bmerge|mergePullRequest|createPullRequest|createRef|updateRef|deleteRef|createCommitOnBranch)|\\bgh\\s+api\\b(?!.*(-X\\s*['\"]?(?i:get)\\b|--method[=\\s]+['\"]?(?i:get)\\b))(?=.*\\b(pulls|releases|git/refs|git/tags|contents|dispatches)\\b)(?=.*(\\s-[fF]\\b|\\s-[fF]\\S|--(raw-)?field\\b|--input\\b|-X\\s*['\"]?(?i:post|put|patch|delete)\\b|--method[=\\s]+['\"]?(?i:post|put|patch|delete)\\b))|\\bgh\\s+api\\s+graphql\\b(?=.*(=@|--input\\b))|\\bcurl\\b(?=.*\\b(api|uploads)\\.github\\.com\\b)(?=.*(\\s-[A-Za-z]*X\\s*['\"]?(?i:post|put|patch|delete)\\b|--request[=\\s]+['\"]?(?i:post|put|patch|delete)\\b|\\s-[A-Za-z]*[dFT]|--(data(-raw|-binary|-urlencode)?|form|json|upload-file)\\b))|\\bdocker\\s+push\\b"
     },
     {
       "catalogo": "Publicar em produção",
       "descricao": "deploy (o vercel sem argumentos já publica), quarto publish, rsconnect ou publicação de pacote",
-      "padrao": "\\bvercel\\b|\\b(netlify(-cli)?|rsconnect|flyctl|fly|firebase|wrangler)\\s+deploy\\b|\\bgcloud\\b.*\\bdeploy\\b|\\brailway\\s+up\\b|\\bquarto\\s+publish\\b|\\bmkdocs\\s+gh-deploy\\b|\\b(npm|pnpm|yarn)\\s+run\\s+deploy\\b|\\bmake\\s+deploy\\b|\\bdeploy(App|Doc|Site|API)\\s*\\(|\\b(npm|pnpm|yarn)\\s+publish\\b|\\b(twine\\s+upload|uv\\s+publish|poetry\\s+publish|cargo\\s+publish|gem\\s+push)\\b"
+      "padrao": "(?<![\\w.-])vercel\\b(?![\\w.-])|\\b(netlify(-cli)?|rsconnect|flyctl|fly|firebase|wrangler)\\s+deploy\\b|\\bgcloud\\b.*\\bdeploy\\b|\\brailway\\s+up\\b|\\bquarto\\s+publish\\b|\\bmkdocs\\s+gh-deploy\\b|\\b(npm|pnpm|yarn)\\s+run\\s+deploy\\b|\\bmake\\s+deploy\\b|\\bdeploy(App|Doc|Site|API)\\s*\\(|\\b(npm|pnpm|yarn)\\s+publish\\b|\\b(twine\\s+upload|uv\\s+publish|poetry\\s+publish|cargo\\s+publish|gem\\s+push)\\b"
     },
     {
       "catalogo": "Migrar banco com dados reais",

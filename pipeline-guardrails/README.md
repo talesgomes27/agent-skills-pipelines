@@ -5,7 +5,7 @@ Plugin opcional do Claude Code que pede confirmação antes das formas comuns de
 ## Duas camadas
 
 1. **Regras de permissão.** Copie `settings-template.json` para o `.claude/settings.json` do projeto, ou junte as listas às suas. As regras são avaliadas na ordem deny, ask e allow, e uma regra `ask` pergunta mesmo quando uma `allow` mais específica também casa. O limite é que uma regra de Bash compara o começo do comando: `Bash(git push *)` não pega `git -C . push`.
-2. **Hook `PreToolUse`.** O plugin traz `hooks/hooks.json`, que roda `scripts/effect_guard.py` antes de cada comando das ferramentas Bash e PowerShell. O script procura os padrões de `effects.json` em qualquer ponto do comando, o que pega `git -C . push`, `cd app && git push`, `env X=1 git push` e `bash -c "git push"`, e devolve `permissionDecision: "ask"`. Sem achado, não decide, e as permissões normais seguem.
+2. **Hook `PreToolUse`.** O plugin traz `hooks/hooks.json`, que roda `scripts/effect_guard.py` antes de cada comando das ferramentas Bash e PowerShell. O script procura os padrões de `effects.json` em qualquer ponto do comando, o que pega `git -C . push`, `cd app && git push`, `env X=1 git push` e `bash -c "git push"`, além de escritas no repositório pela API do GitHub com `gh api` ou `curl` (conteúdo, refs, dispatches e mutations como `createRef`), e devolve `permissionDecision: "ask"`. Sem achado, não decide, e as permissões normais seguem.
 
 O hook usa `onFailure: "block"`: se o script falhar, o comando é bloqueado em vez de passar. Isso exige o Claude Code v2.1.295 ou mais novo e um `python3` no PATH. Numa máquina sem `python3`, todo comando Bash fica bloqueado até você desativar o plugin com `claude plugin disable pipeline-guardrails`.
 

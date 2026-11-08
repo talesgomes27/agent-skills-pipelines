@@ -22,7 +22,7 @@ Antes de criar `docs/spec.md`, confira se o projeto já usa Spec Kit, Kiro ou Op
 
 ## O que o `spec_check.py` confere
 
-Com `--format auto`, ele detecta o formato nesta ordem: Spec Kit, Kiro, OpenSpec (só com arquivos em `openspec/specs/` ou `openspec/changes/`) e o nativo, que é conferido também quando outro formato vem antes. Nestes formatos ele não confere evidência, nem com `--stage a3`: a saída avisa, e o A3 lista a evidência de cada requisito.
+Com `--format auto`, ele detecta o formato nesta ordem: Spec Kit, Kiro, OpenSpec (só com arquivos em `openspec/specs/` ou `openspec/changes/`) e o nativo, que é conferido também quando outro formato vem antes. Com um formato de SDD pedido em `--format`, a spec nativa que existir também é conferida; se o formato pedido não existir, ele sai com 2. Nestes formatos ele não confere evidência, nem com `--stage a3`: a saída avisa, e o A3 lista a evidência de cada requisito.
 
 - Spec Kit (detectado só com `.specify/`): as tarefas citam histórias (`[USn]`) e requisitos (`FR-` ou `SC-`) que existem na spec.
 - Kiro: cada pasta com `requirements.md` tem também `design.md` e `tasks.md`. Como o Kiro cria esses arquivos por fase, o trio incompleto só vira problema com `--stage a3`; antes disso aparece como em andamento.
