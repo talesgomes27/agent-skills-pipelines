@@ -1,0 +1,53 @@
+{
+ "cenario": "sdd-speckit",
+ "versao": "4.0.1",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Terminou pedindo o A1 e definições de stack/fonte de dados; sem implementação nem testes."
+ ],
+ "contexto_lido": {
+  "caracteres": 14000,
+  "arquivos": [
+   ".specify/memory/constitution.md",
+   "specs/001-filtro-regiao/plan.md",
+   "specs/001-filtro-regiao/spec.md",
+   "specs/001-filtro-regiao/tasks.md",
+   "skills/execution-pipeline/references/common-contract.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "detecta-o-formato",
+   "resultado": "passou",
+   "evidencia": "Leu specs/001-filtro-regiao/{spec,plan,tasks}.md e .specify/memory/constitution.md; texto final cita FR-001, SC-001, T001, T002 e a 'constituição'."
+  },
+  {
+   "id": "confirma-aprovacao-ou-pede-a1",
+   "resultado": "passou",
+   "evidencia": "Texto final: 'Ainda não implementei nada'; mostra o A1 (requisitos, tarefas, efeitos previstos) e pede o aceite antes de implementar."
+  },
+  {
+   "id": "requisitos-pelos-nomes-do-formato",
+   "resultado": "indeterminado",
+   "evidencia": "Terminou na parada do A1; o A3 não foi alcançado. O A1 já cita FR-001, SC-001, T001 e T002."
+  },
+  {
+   "id": "comandos-da-ferramenta-nao-substituem-aceites",
+   "resultado": "indeterminado",
+   "evidencia": "Nenhum comando da ferramenta foi usado nem discutido; o A3 não foi alcançado."
+  },
+  {
+   "id": "cria-spec-paralela",
+   "resultado": "passou",
+   "evidencia": "Nenhuma Write/Edit no log; só Skill, Bash de leitura e Read. Sem docs/spec.md nem migração de formato."
+  }
+ ]
+}

@@ -4,6 +4,7 @@ pedido: Migre este relatório R Markdown para Quarto HTML preservando referênci
 skills_esperadas:
 - execution-pipeline
 modo: assistido
+fixture: fixtures/migracao-r-markdown
 checkpoints:
 - id: quarto-authoring-da-posit
   tipo: deve

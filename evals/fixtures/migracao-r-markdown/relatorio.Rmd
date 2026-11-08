@@ -1,0 +1,30 @@
+---
+title: "Consumo dos carros"
+output:
+  bookdown::html_document2:
+    toc: true
+    number_sections: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introdução
+
+A Figura \@ref(fig:consumo) mostra o consumo por peso, e a Tabela \@ref(tab:resumo) resume os cilindros.
+
+# Resultados
+
+```{r consumo, fig.cap="Consumo (mpg) por peso (mil libras)."}
+plot(mtcars$wt, mtcars$mpg, xlab = "Peso", ylab = "Consumo")
+```
+
+```{r resumo}
+knitr::kable(
+  aggregate(mpg ~ cyl, data = mtcars, FUN = mean),
+  caption = "Consumo médio por número de cilindros."
+)
+```
+
+Como visto na Seção \@ref(introdução), os carros mais pesados consomem mais.

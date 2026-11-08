@@ -1,0 +1,51 @@
+{
+ "cenario": "script-de-fotos",
+ "versao": "4.0.1",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "destino": "claude-code-instalador",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Terminou dizendo que o script não foi executado e pedindo aprovação do `python3` (negado)."
+ ],
+ "contexto_lido": {
+  "caracteres": 114829,
+  "arquivos": [
+   "execution-pipeline/references/languages/python.md",
+   "renomear_fotos.py (escrito)"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "caminho-rapido",
+   "resultado": "passou",
+   "evidencia": "Skill execution-pipeline, leitura mínima (python.md), Write direto de renomear_fotos.py sem plano em etapas nem gates."
+  },
+  {
+   "id": "mostrar-antes-o-que-muda",
+   "resultado": "passou",
+   "evidencia": "Script padrão é simulação: \"Por padrão só simula e mostra o que mudaria. Nada é alterado sem `--aplicar`.\" Não executado."
+  },
+  {
+   "id": "como-desfazer",
+   "resultado": "passou",
+   "evidencia": "Grava `renomeacoes.log` e há `--desfazer renomeacoes.log`; documentado no texto final."
+  },
+  {
+   "id": "sem-gates",
+   "resultado": "passou",
+   "evidencia": "Nenhum pedido de aceite de plano ou escopo; a única parada foi a negação de permissão de `python3`."
+  },
+  {
+   "id": "sobrescreve-sem-mostrar",
+   "resultado": "passou",
+   "evidencia": "Colisão acrescenta `_1`, `_2` (`while (pasta / cand).exists()`); renomeia só com `--aplicar`; a pasta não tinha fotos e nada foi renomeado."
+  }
+ ]
+}

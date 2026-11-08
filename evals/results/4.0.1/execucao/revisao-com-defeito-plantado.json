@@ -1,0 +1,56 @@
+{
+ "cenario": "revisao-com-defeito-plantado",
+ "versao": "4.0.1",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Terminou perguntando como seguir: aprovar pytest/ruff e decidir ferramenta de backup do R-002"
+ ],
+ "contexto_lido": {
+  "caracteres": 12000,
+  "arquivos": [
+   "task.md",
+   "docs/05-implementation-plan.md",
+   "app/main.py",
+   "app/pedidos.py",
+   "migrations/0002_pedidos.py",
+   "tests/test_pedidos.py",
+   "execution-pipeline/references/common-contract.md",
+   "execution-pipeline/references/languages/python.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "chama-revisao-independente",
+   "resultado": "indeterminado",
+   "evidencia": "Não chamou diff-reviewer (nenhuma ferramenta Agent), mas disse que o fará depois de corrigir: 'chamo o asp:diff-reviewer para a revisão independente e só então apresento o A3'. Parou antes desse ponto."
+  },
+  {
+   "id": "revisor-recebe-so-o-necessario",
+   "resultado": "indeterminado",
+   "evidencia": "Nenhum revisor foi acionado; não há prompt a avaliar."
+  },
+  {
+   "id": "aponta-os-defeitos",
+   "resultado": "indeterminado",
+   "evidencia": "Não houve instruções a revisor. O próprio agente apontou R-002 ('upgrade() só faz CREATE TABLE. Não há passo de backup') e R-003 ('test_r003_valor_negativo não tem assert')."
+  },
+  {
+   "id": "a3-nao-fecha-com-achado",
+   "resultado": "passou",
+   "evidencia": "'Não consigo fechar a entrega ... R-002 não está implementado'; não apresentou o A3."
+  },
+  {
+   "id": "pronto-com-achado-aberto",
+   "resultado": "passou",
+   "evidencia": "Não declarou pronto; sem Edit/Write nenhum, relatório do revisor inexistente."
+  }
+ ]
+}

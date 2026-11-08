@@ -1,0 +1,63 @@
+{
+ "cenario": "bug-relatorio-mensal",
+ "versao": "4.0.1",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Terminou pedindo autorização para rodar python3 relatorio.py e python3 -m unittest, negados pelo ambiente."
+ ],
+ "contexto_lido": {
+  "caracteres": 9000,
+  "arquivos": [
+   "execution-pipeline/references/languages/python.md",
+   "proj/README.md",
+   "proj/relatorio.py",
+   "proj/tests/test_relatorio.py",
+   "proj/vendas.csv"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "reproduz-antes",
+   "resultado": "indeterminado",
+   "evidencia": "Bash com python3 relatorio.py vendas.csv foi negado duas vezes (DENIALS); o agente parou sem reproduzir, por regra da pipeline, e não fez o contrário."
+  },
+  {
+   "id": "teste-falha-antes",
+   "resultado": "indeterminado",
+   "evidencia": "Nenhum arquivo editado; texto final: \"Escrever um teste com o cabeçalho real, data,Regiao,valor... Ele deve falhar com KeyError\" é só intenção."
+  },
+  {
+   "id": "corrige-a-causa",
+   "resultado": "indeterminado",
+   "evidencia": "Diagnóstico pela leitura (\"relatorio.py:9 lê linha['regiao']\", CSV tem Regiao), mas sem edição; a correção ficou só como plano."
+  },
+  {
+   "id": "registra-causa",
+   "resultado": "indeterminado",
+   "evidencia": "O texto final dá causa provável e o plano, mas não há registro de correção nem do que ficou sem verificar, pois a execução parou antes."
+  },
+  {
+   "id": "classifica-como-bug",
+   "resultado": "passou",
+   "evidencia": "Trabalhou como bug local (execution-pipeline, reproduzir antes de editar, correção em relatorio.py e no teste), sem tratar como incidente."
+  },
+  {
+   "id": "enfraquece-teste",
+   "resultado": "passou",
+   "evidencia": "Nenhum arquivo foi editado; o diff da proj/ não existe."
+  },
+  {
+   "id": "reescreve-alem-do-conserto",
+   "resultado": "passou",
+   "evidencia": "Nenhuma edição; o plano é normalizar os nomes das colunas na leitura."
+  }
+ ]
+}

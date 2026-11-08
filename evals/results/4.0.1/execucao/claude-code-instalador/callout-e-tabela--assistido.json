@@ -1,0 +1,34 @@
+{
+ "cenario": "callout-e-tabela",
+ "versao": "4.0.1",
+ "nivel": "execucao",
+ "modo": "assistido",
+ "host": "claude-code",
+ "destino": "claude-code-instalador",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 0,
+ "paradas_detalhe": [],
+ "contexto_lido": {
+  "caracteres": 10200,
+  "arquivos": [
+   "execution-pipeline/SKILL.md",
+   "relatorio.qmd"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "so-a-quarto-authoring",
+   "resultado": "indeterminado",
+   "evidencia": "A `quarto-authoring` da Posit não estava instalada e o agente só carregou a execution-pipeline, sem tentar a quarto-authoring; fez a edição direto (`.callout-warning`, tabela com `{#tbl-vendas}`)."
+  },
+  {
+   "id": "carrega-quarto-expert",
+   "resultado": "passou",
+   "evidencia": "A única Skill chamada foi a execution-pipeline; quarto-expert não foi carregada."
+  }
+ ]
+}
