@@ -1,0 +1,53 @@
+{
+ "cenario": "cli-em-go",
+ "versao": "4.0.0",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Terminou pedindo aprovação do go test; só planejou, nenhuma edição."
+ ],
+ "contexto_lido": {
+  "caracteres": 14000,
+  "arquivos": [
+   "execution-pipeline/SKILL.md",
+   "references/languages/go.md",
+   "main.go",
+   "main_test.go",
+   "README.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "le-o-perfil-go",
+   "resultado": "passou",
+   "evidencia": "Read de .../execution-pipeline/references/languages/go.md; o `cat go.mod` foi tentado mas negado, então a versão do go.mod não foi vista."
+  },
+  {
+   "id": "comandos-do-projeto",
+   "resultado": "passou",
+   "evidencia": "Tentou `go test ./... && go vet ./... && gofmt -l .` (negado) e o plano lista os três."
+  },
+  {
+   "id": "erro-de-data-tratado",
+   "resultado": "indeterminado",
+   "evidencia": "Só plano ('Data inválida dá erro e saída 1', testes de data inválida); sem código, parou antes."
+  },
+  {
+   "id": "toolchain-local-ou-a2",
+   "resultado": "passou",
+   "evidencia": "Todos os comandos go usaram `GOTOOLCHAIN=local`."
+  },
+  {
+   "id": "instala-ou-troca-toolchain",
+   "resultado": "passou",
+   "evidencia": "Nada instalado, go.mod e dependências intactos (nenhuma edição)."
+  }
+ ]
+}

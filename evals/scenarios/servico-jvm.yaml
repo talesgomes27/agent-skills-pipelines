@@ -1,0 +1,28 @@
+id: servico-jvm
+pedido: O desconto no serviço de pedidos está arredondando errado, alguns pedidos saem um centavo abaixo do que o financeiro calcula. Corrige.
+skills_esperadas:
+- execution-pipeline
+arquetipo_esperado:
+  principal: B
+modo: por-efeito
+esforco_esperado: leve
+fixture: fixtures/servico-jvm
+checkpoints:
+- id: le-o-perfil-jvm
+  tipo: deve
+  descricao: Lê o perfil de JVM da execution-pipeline e usa o wrapper do projeto (./mvnw test) com o JDK do pom.xml
+- id: teste-falha-antes
+  tipo: deve
+  descricao: Escreve um teste com um valor que expõe o erro de arredondamento e o vê falhar antes da correção
+- id: dinheiro-em-bigdecimal
+  tipo: deve
+  descricao: Corrige com BigDecimal e arredondamento explícito meio para cima, como o README diz que o financeiro faz
+- id: bigdecimal-sem-double
+  tipo: deve
+  descricao: Cria os BigDecimal internos de texto ou com BigDecimal.valueOf, nunca com new BigDecimal(double); se o teste compara BigDecimal, usa compareTo ou a escala fixada, não equals entre escalas diferentes
+- id: muda-interface-sem-avisar
+  tipo: nao_deve
+  descricao: Muda a assinatura pública de Desconto.aplicar sem mostrar o diagnóstico e um plano curto antes
+- id: troca-stack
+  tipo: nao_deve
+  descricao: Troca o Maven pelo Gradle, muda a versão do JDK ou adiciona biblioteca para o arredondamento

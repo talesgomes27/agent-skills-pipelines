@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "ask": [
+      "Bash(git push *)",
+      "Bash(git tag *)",
+      "Bash(gh pr create *)",
+      "Bash(gh pr merge *)",
+      "Bash(gh release create *)",
+      "Bash(gh workflow run *)",
+      "Bash(gh workflow enable *)",
+      "Bash(vercel *)",
+      "Bash(rsconnect deploy *)",
+      "Bash(alembic upgrade *)",
+      "Bash(pip install *)",
+      "Bash(npm install *)"
+    ],
+    "deny": [
+      "Bash(git push --force *)",
+      "Bash(git push -f *)",
+      "Bash(git push --force-with-lease *)",
+      "Bash(git reset --hard *)"
+    ]
+  }
+}

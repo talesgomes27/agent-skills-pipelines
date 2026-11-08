@@ -1,0 +1,61 @@
+{
+ "cenario": "compat-docs-antigos",
+ "versao": "3.4.0",
+ "nivel": "leitura",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-07",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 2,
+ "paradas_detalhe": [
+  "aceite ao fim de EX-3",
+  "aceite ao fim de EX-5"
+ ],
+ "contexto_lido": {
+  "caracteres": 24000,
+  "arquivos": [
+   "execution-pipeline/SKILL.md",
+   "execution-pipeline/references/common-contract.md",
+   "execution-pipeline/references/archetype-b.md",
+   "audit-and-refactoring-pipeline/SKILL.md (frontmatter)",
+   "personal-data/SKILL.md (frontmatter)",
+   "pre-code-pipeline/SKILL.md (frontmatter)",
+   "quarto-expert/SKILL.md (frontmatter)",
+   "release-and-ops-pipeline/SKILL.md (frontmatter)",
+   "scheduled-automation/SKILL.md (frontmatter)",
+   "skill-loader/SKILL.md (frontmatter)",
+   "writing-pipeline/SKILL.md (frontmatter)",
+   "evals/fixtures/compat-docs-antigos/app.py",
+   "evals/fixtures/compat-docs-antigos/pyproject.toml",
+   "evals/fixtures/compat-docs-antigos/docs/00_archetype.md",
+   "evals/fixtures/compat-docs-antigos/docs/02-PRD-and-specs.md",
+   "evals/fixtures/compat-docs-antigos/docs/05-implementation-plan.md",
+   "evals/fixtures/compat-docs-antigos/tests/test_filtrar.py",
+   "evals/fixtures/compat-docs-antigos/dados/vendas_exemplo.csv"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "le-os-docs-antigos",
+   "resultado": "passou",
+   "evidencia": "execution-pipeline/SKILL.md: \"leia o plano... `docs/05-implementation-plan.md` ou o plano aprovado na conversa, vindos do pré-código\"; \"Leia requisitos e arquitetura só nas partes que a tarefa usa.\""
+  },
+  {
+   "id": "oferece-a-migracao",
+   "resultado": "falhou",
+   "evidencia": "Nem execution-pipeline/SKILL.md nem references/common-contract.md da 3.4.0 mencionam spec viva ou migração dos docs antigos; o agente só executa e não oferece nada."
+  },
+  {
+   "id": "aceita-o-arquetipo-antigo",
+   "resultado": "passou",
+   "evidencia": "execution-pipeline/SKILL.md: \"Use o arquétipo registrado em `docs/00_archetype.md` ou no contrato: ... B = aplicações (site, API, dashboard)\"."
+  },
+  {
+   "id": "migra-em-silencio",
+   "resultado": "passou",
+   "evidencia": "Nenhuma instrução da 3.4.0 manda criar docs/spec.md ou mover docs; o agente não migra."
+  }
+ ]
+}

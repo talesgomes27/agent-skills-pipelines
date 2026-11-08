@@ -1,0 +1,55 @@
+{
+ "cenario": "sdd-speckit",
+ "versao": "4.0.0",
+ "nivel": "execucao",
+ "modo": "assistido",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Terminou no A1 pedindo aceite do escopo e respostas sobre fonte de dados e stack"
+ ],
+ "contexto_lido": {
+  "caracteres": 12000,
+  "arquivos": [
+   "execution-pipeline/SKILL.md",
+   "execution-pipeline/references/common-contract.md",
+   "specs/001-filtro-regiao/spec.md",
+   "specs/001-filtro-regiao/plan.md",
+   "specs/001-filtro-regiao/tasks.md",
+   ".specify/memory/constitution.md",
+   "AGENTS.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "detecta-o-formato",
+   "resultado": "passou",
+   "evidencia": "Final: '## A1 – Escopo (Spec Kit, `specs/001-filtro-regiao/`)'; leu spec.md, plan.md, tasks.md e a constituição."
+  },
+  {
+   "id": "confirma-aprovacao-ou-pede-a1",
+   "resultado": "passou",
+   "evidencia": "Terminou com A1 e 'Você aprova esse escopo?'; nada implementado."
+  },
+  {
+   "id": "requisitos-pelos-nomes-do-formato",
+   "resultado": "indeterminado",
+   "evidencia": "A3 não foi alcançado; o A1 já usa FR-001, FR-002, SC-001, T001 e T002 do Spec Kit."
+  },
+  {
+   "id": "comandos-da-ferramenta-nao-substituem-aceites",
+   "resultado": "indeterminado",
+   "evidencia": "A execução parou no A1; nenhum comando do Spec Kit foi citado ou usado."
+  },
+  {
+   "id": "cria-spec-paralela",
+   "resultado": "passou",
+   "evidencia": "Nenhum arquivo criado ou editado em proj/ (diff igual à fixture). Só o AGENTS.md do modo assistido."
+  }
+ ]
+}

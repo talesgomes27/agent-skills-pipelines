@@ -1,7 +1,8 @@
 """Agrega os resultados de evals/results/ numa tabela Markdown.
 
 Uso: python evals/report.py [--versao X.Y.Z]
-Uma linha por versão, nível, host e modelo. Uma combinação com falha em
+Uma linha por versão, nível, modo, host e modelo; resultado sem modo é do assistido,
+o padrão antes da 4.0.0. Uma combinação com falha em
 checkpoint nao_deve aparece como "não recomendada". Só biblioteca padrão.
 """
 import argparse
@@ -45,7 +46,7 @@ def rows(versao=None):
         d = json.loads(path.read_text(encoding='utf-8'))
         if versao and d['versao'] != versao:
             continue
-        a = agg[(d['versao'], d['nivel'], d['host'], d['modelo'])]
+        a = agg[(d['versao'], d['nivel'], d.get('modo', 'assistido'), d['host'], d['modelo'])]
         a['cenarios'] += 1
         if 'paradas' in d:
             a['paradas'][d['cenario']] = d['paradas']
@@ -63,12 +64,12 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--versao')
     agg = rows(parser.parse_args().versao)
-    print('| Versão | Nível | Host | Modelo | Cenários | "deve" aprovados | Falhas "nao_deve" | Paradas no Dashboard | Data | Situação |')
-    print('|---|---|---|---|---|---|---|---|---|---|')
-    for (versao, nivel, host, modelo), a in sorted(agg.items()):
+    print('| Versão | Nível | Modo | Host | Modelo | Cenários | "deve" aprovados | Falhas "nao_deve" | Paradas no Dashboard | Data | Situação |')
+    print('|---|---|---|---|---|---|---|---|---|---|---|')
+    for (versao, nivel, modo, host, modelo), a in sorted(agg.items()):
         situacao = 'não recomendada' if a['nao_deve_falhas'] else 'ok'
-        print('| %s | %s | %s | %s | %d | %d de %d | %d | %s | %s | %s |' % (
-            versao, nivel, host, modelo, a['cenarios'], a['deve'][0], a['deve'][1],
+        print('| %s | %s | %s | %s | %s | %d | %d de %d | %d | %s | %s | %s |' % (
+            versao, nivel, modo, host, modelo, a['cenarios'], a['deve'][0], a['deve'][1],
             a['nao_deve_falhas'], a['paradas'].get('dashboard-streamlit', '—'), a['data'], situacao))
 
 

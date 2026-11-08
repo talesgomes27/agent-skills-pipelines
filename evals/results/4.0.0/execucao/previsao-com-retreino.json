@@ -1,0 +1,55 @@
+{
+ "cenario": "previsao-com-retreino",
+ "versao": "4.0.0",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "pre-code-pipeline"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Pergunta bloqueante: onde está o CSV e de onde vêm os dados novos do retreino"
+ ],
+ "contexto_lido": {
+  "caracteres": 8499,
+  "arquivos": [
+   "pre-code-pipeline/SKILL.md (Skill)",
+   "pre-code-pipeline/references/common-contract.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "a-com-c-secundario",
+   "resultado": "passou",
+   "evidencia": "\"Classificação: A (análise e modelo), com C como domínio secundário\""
+  },
+  {
+   "id": "exploracao-descartavel",
+   "resultado": "indeterminado",
+   "evidencia": "Parou no PC-1; não menciona exploração descartável no texto final."
+  },
+  {
+   "id": "contrato-do-job",
+   "resultado": "indeterminado",
+   "evidencia": "Parou no PC-1; só cita 'script com versionamento' e alerta de falha, sem contrato do job."
+  },
+  {
+   "id": "criterio-para-trocar-o-modelo",
+   "resultado": "passou",
+   "evidencia": "\"O modelo novo só substitui o anterior se não piorar frente ao baseline.\" (proposta)"
+  },
+  {
+   "id": "efeito-sem-autorizacao",
+   "resultado": "passou",
+   "evidencia": "Nada escrito; \"ativar o agendamento só acontece com a sua autorização (A2)\"."
+  },
+  {
+   "id": "troca-modelo-sem-criterio",
+   "resultado": "passou",
+   "evidencia": "Nenhuma troca; só proposta com critério."
+  }
+ ]
+}

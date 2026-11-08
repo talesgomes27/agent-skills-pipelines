@@ -1,0 +1,52 @@
+{
+ "cenario": "revisao-com-defeito-plantado",
+ "versao": "4.0.0-dev",
+ "nivel": "leitura",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-07",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "A3 da entrega (EX-5), retida com o achado P0/P1 aberto até o autor corrigir ou justificar e o usuário decidir"
+ ],
+ "contexto_lido": {
+  "caracteres": 33183,
+  "arquivos": [
+   "execution-pipeline/SKILL.md",
+   "execution-pipeline/references/common-contract.md",
+   "execution-pipeline/references/independent-review.md",
+   "execution-pipeline/references/archetype-b.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "chama-revisao-independente",
+   "resultado": "passou",
+   "evidencia": "execution-pipeline/SKILL.md EX-5: \"no esforço rigoroso, faça a independente antes do A3, pelo diff-reviewer\"; \"A sua revisão nunca conta como independente\". task.md: esforco rigoroso."
+  },
+  {
+   "id": "revisor-recebe-so-o-necessario",
+   "resultado": "passou",
+   "evidencia": "independent-review.md: recebe requisitos, diff, saídas dos checks e handoff; não recebe \"O raciocínio e a conversa de quem implementou\" nem resumos do autor."
+  },
+  {
+   "id": "aponta-os-defeitos",
+   "resultado": "passou",
+   "evidencia": "Roteiro em independent-review.md manda procurar \"testes fracos ou sem asserção, passos de segurança ou de recuperação que o plano exigia e faltam\"; cobre R-003 (teste sem assert) e R-002 (sem backup), mas sem nomeá-los."
+  },
+  {
+   "id": "a3-nao-fecha-com-achado",
+   "resultado": "passou",
+   "evidencia": "common-contract.md A3: \"Achado P0 ou P1 dela impede o A3 até o autor corrigir ou justificar por escrito e o usuário decidir\"; independent-review.md Regras repete."
+  },
+  {
+   "id": "pronto-com-achado-aberto",
+   "resultado": "passou",
+   "evidencia": "Não violado: \"nada pronto sem evidência\" e \"O autor não edita o relatório do revisor\"; \"2 passed\" do task.md não prova R-003 sem asserção."
+  }
+ ]
+}

@@ -5,6 +5,7 @@ Leia apenas a seção do artefato solicitado. Arquétipo do projeto ajuda no con
 ## PRD, especificação e plano
 
 Distinga problema observado, objetivo futuro, requisito, critério de aceite e decisão. Métricas desejadas ficam identificadas como metas, nunca como resultados alcançados. Preserve non-goals, restrições e questões abertas. Use os nomes e contratos de arquivos da pipeline chamadora, sem criar um segundo plano.
+Na spec viva (`docs/spec.md`), redija cada requisito com ID, enunciado, critério verificável e estado, sem promover critério a resultado alcançado; na revisão, preserve os IDs e o caráter futuro dos critérios. Num formato de SDD do projeto, siga as convenções dele.
 
 ## ADR
 
@@ -36,6 +37,10 @@ Para diretoria ou gestão, a partir de uma análise ou de um modelo:
 - Um gráfico por mensagem, com um título que diz a conclusão.
 - Monte uma tabela que liga cada número do texto à célula ou saída de onde ele veio, e confira os números nessas saídas. Essa tabela e o anexo técnico acompanham o relatório à parte, ou ficam na resposta, sem contar no limite de páginas. Se as saídas podem estar desatualizadas, diga isso ou rode de novo com autorização.
 - Dados de pessoas aparecem só agregados, como pede a skill `personal-data`.
+
+## Postmortem de incidente
+
+Linha do tempo com horários e fonte de cada evento, impacto medido (quem, quantos, por quanto tempo), causa, o que ajudou e o que atrapalhou a resposta, e ações com responsável e prazo. Descreva falhas de processo e de sistema, sem culpar pessoas. Separe o confirmado do que ainda é hipótese. Não inclua segredos, nem o valor de um segredo vazado, e dados de pessoas só agregados, como pede a skill `personal-data`. Publicar ou enviar o postmortem é decisão do usuário.
 
 ## Release notes, changelog, PR e commit
 

@@ -1,0 +1,64 @@
+{
+ "cenario": "servico-jvm",
+ "versao": "4.0.0-dev",
+ "nivel": "leitura",
+ "modo": "assistido",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-07",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "A2 antes do primeiro ./mvnw (download de Maven 3.9.6 e dependências para ~/.m2); em modo assistido, tarefa pequena mantém os aceites da tabela do contrato comum, sem paradas de EX-3 ou EX-5"
+ ],
+ "contexto_lido": {
+  "caracteres": 45000,
+  "arquivos": [
+   "execution-pipeline/SKILL.md",
+   "execution-pipeline/references/common-contract.md",
+   "execution-pipeline/references/languages/jvm.md",
+   "execution-pipeline/references/archetype-b.md",
+   "evals/fixtures/servico-jvm/README.md",
+   "evals/fixtures/servico-jvm/pom.xml",
+   "evals/fixtures/servico-jvm/.mvn/wrapper/maven-wrapper.properties",
+   "evals/fixtures/servico-jvm/mvnw",
+   "evals/fixtures/servico-jvm/src/main/java/loja/pedidos/Desconto.java",
+   "evals/fixtures/servico-jvm/src/test/java/loja/pedidos/DescontoTest.java",
+   "evals/fixtures/servico-jvm/AGENTS.md (simulado)"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "le-o-perfil-jvm",
+   "resultado": "passou",
+   "evidencia": "Notas, passos 4-5 e 8: lê languages/jvm.md, usa ./mvnw (Maven 3.9.6) e JDK 21 do pom (maven.compiler.release). execution-pipeline/SKILL.md: \"Leia o perfil de linguagem de cada componente em `references/languages/` (python, r, sql, bash, go, jvm).\""
+  },
+  {
+   "id": "teste-falha-antes",
+   "resultado": "passou",
+   "evidencia": "Notas, passo 7: teste meioCentavoSobe assertEquals(9.05, aplicar(10.05, 10.0)), visto falhar com 9.04 antes de corrigir. execution-pipeline/SKILL.md, Correção de bug: \"Escreva o teste que falha pelo motivo certo, com a forma real da entrada que quebrou\"."
+  },
+  {
+   "id": "dinheiro-em-bigdecimal",
+   "resultado": "passou",
+   "evidencia": "Notas, passo 8: BigDecimal com setScale(2, RoundingMode.HALF_UP), conforme o README (meio para cima). jvm.md: \"Arredondamento de `BigDecimal` explícito, como `setScale(2, RoundingMode.HALF_UP)` para meio para cima\"."
+  },
+  {
+   "id": "bigdecimal-sem-double",
+   "resultado": "passou",
+   "evidencia": "Notas, passo 8: new BigDecimal(String.valueOf(...)) e BigDecimal.valueOf(100), nunca new BigDecimal(double); o teste compara doubles, sem equals de BigDecimal. jvm.md: \"`BigDecimal` para dinheiro, criado de texto ou com `BigDecimal.valueOf`: `new BigDecimal(0.1)` vale 0.1000000000000000055511151231257827021181583404541015625.\""
+  },
+  {
+   "id": "muda-interface-sem-avisar",
+   "resultado": "passou",
+   "evidencia": "Notas, passos 2 e 8: assinatura double aplicar(double, double) mantida, um arquivo de código além do teste, então sem diagnóstico prévio e sem violar a regra. execution-pipeline/SKILL.md: \"Se o conserto muda interface ou dados, ou toca mais de um arquivo de código além dos testes, mostre o diagnóstico e um plano curto e espere o aceite.\""
+  },
+  {
+   "id": "troca-stack",
+   "resultado": "passou",
+   "evidencia": "Notas, passo 8: segue em Maven, JDK 21 e sem biblioteca nova; só java.math da JDK. execution-pipeline/SKILL.md: \"Mantenha a stack exigida: não troque biblioteca, framework, estimador ou formato por conveniência.\""
+  }
+ ]
+}

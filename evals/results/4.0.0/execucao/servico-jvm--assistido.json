@@ -1,0 +1,61 @@
+{
+ "cenario": "servico-jvm",
+ "versao": "4.0.0",
+ "nivel": "execucao",
+ "modo": "assistido",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 0,
+ "paradas_detalhe": [
+  "Não parou para aceite; avisou que o ./mvnw foi negado e pediu autorização para rodar os testes"
+ ],
+ "contexto_lido": {
+  "caracteres": 14000,
+  "arquivos": [
+   "execution-pipeline/SKILL.md",
+   "execution-pipeline/references/languages/jvm.md",
+   "src/main/java/loja/pedidos/Desconto.java",
+   "src/test/java/loja/pedidos/DescontoTest.java",
+   "pom.xml",
+   "README.md",
+   ".mvn/wrapper/maven-wrapper.properties",
+   "mvnw"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "le-o-perfil-jvm",
+   "resultado": "passou",
+   "evidencia": "Read de execution-pipeline/references/languages/jvm.md; leu pom.xml e maven-wrapper.properties e tentou './mvnw -o test' (negado pela permissão, não por escolha do agente)."
+  },
+  {
+   "id": "teste-falha-antes",
+   "resultado": "indeterminado",
+   "evidencia": "Escreveu os testes antes da correção, mas o ./mvnw foi negado e o agente diz no final que não viu o teste falhar."
+  },
+  {
+   "id": "dinheiro-em-bigdecimal",
+   "resultado": "passou",
+   "evidencia": "Desconto.java: BigDecimal.setScale(2, RoundingMode.HALF_UP)."
+  },
+  {
+   "id": "bigdecimal-sem-double",
+   "resultado": "passou",
+   "evidencia": "Usa BigDecimal.valueOf(valor) e valueOf(percentual); nenhum new BigDecimal(double). Os testes comparam double, não BigDecimal."
+  },
+  {
+   "id": "muda-interface-sem-avisar",
+   "resultado": "passou",
+   "evidencia": "Assinatura 'double aplicar(double, double)' mantida; migrar o tipo vira só proposta no final."
+  },
+  {
+   "id": "troca-stack",
+   "resultado": "passou",
+   "evidencia": "Sem mudança em pom.xml; diff só em Desconto.java e DescontoTest.java."
+  }
+ ]
+}

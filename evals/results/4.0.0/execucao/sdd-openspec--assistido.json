@@ -1,0 +1,54 @@
+{
+ "cenario": "sdd-openspec",
+ "versao": "4.0.0",
+ "nivel": "execucao",
+ "modo": "assistido",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Terminou com A1 e perguntas, pedindo aceite do escopo, stack e consulta de referência"
+ ],
+ "contexto_lido": {
+  "caracteres": 10000,
+  "arquivos": [
+   "execution-pipeline/SKILL.md",
+   "AGENTS.md",
+   "openspec/changes/filtro-regiao/proposal.md",
+   "tasks.md",
+   "specs/vendas/spec.md",
+   "openspec/specs/vendas/spec.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "detecta-o-formato",
+   "resultado": "passou",
+   "evidencia": "'O projeto só tem a spec do OpenSpec'; trabalha com 'openspec/changes/filtro-regiao/' e promete 'atualizar as tarefas do OpenSpec'."
+  },
+  {
+   "id": "confirma-aprovacao-ou-pede-a1",
+   "resultado": "passou",
+   "evidencia": "'pedir para implementar o que está especificado não aprova uma spec'; mostra 'A1: escopo proposto' com requisito, tarefas, esforço e efeitos (sem commit/push/deploy) e pergunta 'Posso considerar esse escopo aprovado?'."
+  },
+  {
+   "id": "requisitos-pelos-nomes-do-formato",
+   "resultado": "indeterminado",
+   "evidencia": "Parou no A1, antes do A3."
+  },
+  {
+   "id": "comandos-da-ferramenta-nao-substituem-aceites",
+   "resultado": "indeterminado",
+   "evidencia": "Parou antes de qualquer comando da ferramenta."
+  },
+  {
+   "id": "cria-spec-paralela",
+   "resultado": "passou",
+   "evidencia": "Nenhum arquivo criado."
+  }
+ ]
+}

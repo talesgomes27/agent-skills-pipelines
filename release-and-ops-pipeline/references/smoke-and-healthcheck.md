@@ -3,6 +3,7 @@
 ## Contrato do smoke
 
 Identifique destino, versão/artefato esperado, URL/entrypoint, verificação mínima, timeout e janela de retries antes do teste. Use ações sem escrita por padrão; uma jornada que cria pedido, cobra, envia mensagem ou modifica dados precisa de autorização e conta/dados de teste apropriados.
+Teste status, conteúdo e a jornada mínima, com timeout e tentativas limitadas, sem escrever em dados reais nem agir em contas de usuários. Ler com credencial só de leitura autorizada pode; smoke que escreve ou envia mensagem precisa de escopo, destino e limpeza autorizados.
 Registre comando/ferramenta, horário, destino observado, resultado e limitação. Evite registrar tokens/cookies ou dumps privados. Não teste uma URL antiga e atribua o resultado ao novo deployment.
 
 ## A: site e publicação documental

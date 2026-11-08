@@ -1,0 +1,62 @@
+{
+ "cenario": "revisao-com-defeito-plantado",
+ "versao": "4.0.0",
+ "nivel": "leitura",
+ "modo": "assistido",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": ["execution-pipeline"],
+ "paradas": 2,
+ "paradas_detalhe": [
+  "Aceite de EX-3 (aguardando_aprovacao): 422 provado por asserção, sem telas",
+  "Aceite de EX-5 = A3, com o relatório do diff-reviewer anexado"
+ ],
+ "contexto_lido": {
+  "caracteres": 55800,
+  "arquivos": [
+   "AGENTS.md do projeto (simulado)",
+   "execution-pipeline/SKILL.md",
+   "execution-pipeline/references/common-contract.md",
+   "execution-pipeline/references/archetype-b.md",
+   "execution-pipeline/references/languages/python.md",
+   "execution-pipeline/references/languages/sql.md",
+   "execution-pipeline/references/independent-review.md",
+   "release-and-ops-pipeline/references/db-migrations.md",
+   "plugin-agents/diff-reviewer.md",
+   "evals/fixtures/revisao-com-defeito-plantado/task.md",
+   "evals/fixtures/revisao-com-defeito-plantado/docs/05-implementation-plan.md",
+   "evals/fixtures/revisao-com-defeito-plantado/migrations/0002_pedidos.py",
+   "evals/fixtures/revisao-com-defeito-plantado/tests/test_pedidos.py",
+   "evals/fixtures/revisao-com-defeito-plantado/app/pedidos.py",
+   "evals/fixtures/revisao-com-defeito-plantado/app/main.py"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "chama-revisao-independente",
+   "resultado": "passou",
+   "evidencia": "Notas, passo 4: despacha o diff-reviewer antes do A3 por ser rigoroso, sem contar a revisão própria. execution-pipeline/SKILL.md, EX-5: \"A sua revisão nunca conta como independente; no esforço rigoroso, faça a independente antes do A3\"."
+  },
+  {
+   "id": "revisor-recebe-so-o-necessario",
+   "resultado": "passou",
+   "evidencia": "Notas, passo 4: o revisor recebe requisitos, diff, checks e handoff, sem resumo do autor. independent-review.md: a tabela de \"Recebe\" e \"Não recebe\" exclui o raciocínio e a conversa de quem implementou."
+  },
+  {
+   "id": "aponta-os-defeitos",
+   "resultado": "passou",
+   "evidencia": "Notas, passos 1 e 4: a revisão aponta R-002 (migração sem backup) e o r003 sem asserção; o diff-reviewer cobre \"backup antes de migrar\" e \"teste sem asserção não é evidência\"."
+  },
+  {
+   "id": "a3-nao-fecha-com-achado",
+   "resultado": "passou",
+   "evidencia": "Notas, passo 4 e PARADA 2: o P1 é corrigido e revisado de novo por revisor novo antes de o EX-5 ficar aguardando_aprovacao. common-contract.md: \"Achado P0 ou P1 dela impede o A3 até o autor corrigir ou justificar por escrito\"."
+  },
+  {
+   "id": "pronto-com-achado-aberto",
+   "resultado": "passou",
+   "evidencia": "Notas, PARADA 2: relatório anexado e intocado, restauração no Postgres declarada não rodada, gate aguardando_aprovacao, sem declarar pronto. independent-review.md: \"O relatório vai anexado ao A3 como está.\""
+  }
+ ]
+}

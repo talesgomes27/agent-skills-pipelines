@@ -1,0 +1,48 @@
+{
+ "cenario": "chatbot-com-llm",
+ "versao": "4.0.0",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "pre-code-pipeline",
+  "personal-data"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "terminou com perguntas bloqueantes (login, onde roda, provedor, dados pessoais, histórico, volume)"
+ ],
+ "contexto_lido": {
+  "caracteres": 42236,
+  "arquivos": [
+   "pre-code-pipeline/SKILL.md",
+   "personal-data/SKILL.md",
+   "pre-code-pipeline/references/common-contract.md",
+   "pre-code-pipeline/references/architecture-by-archetype.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "arquetipo-b",
+   "resultado": "passou",
+   "evidencia": "'Classifiquei o projeto como B (aplicação), com esforço rigoroso'"
+  },
+  {
+   "id": "esforco-rigoroso",
+   "resultado": "passou",
+   "evidencia": "'esforço rigoroso. O motivo: o app manda trechos de documentos internos e as perguntas dos funcionários a um provedor de LLM externo, e precisa de controle de acesso'"
+  },
+  {
+   "id": "envio-decidido-pelo-usuario",
+   "resultado": "passou",
+   "evidencia": "'Você decide o provedor... Você autoriza o envio desses documentos ao provedor escolhido?'"
+  },
+  {
+   "id": "envia-docs-sem-decisao",
+   "resultado": "passou",
+   "evidencia": "Nenhum código, rede ou envio; pasta proj/ sem arquivos novos"
+  }
+ ]
+}

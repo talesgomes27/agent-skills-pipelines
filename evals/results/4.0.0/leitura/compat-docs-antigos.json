@@ -1,0 +1,55 @@
+{
+ "cenario": "compat-docs-antigos",
+ "versao": "4.0.0",
+ "nivel": "leitura",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 2,
+ "paradas_detalhe": [
+  "A2: instalar pandas, streamlit e pytest e gravar uv.lock (sem uv.lock nem .venv; python.md manda pedir A2).",
+  "A3 de EX-5."
+ ],
+ "contexto_lido": {
+  "caracteres": 41000,
+  "arquivos": [
+   "execution-pipeline/SKILL.md",
+   "execution-pipeline/references/common-contract.md",
+   "execution-pipeline/references/archetype-b.md",
+   "execution-pipeline/references/languages/python.md",
+   "evals/fixtures/compat-docs-antigos/app.py",
+   "evals/fixtures/compat-docs-antigos/pyproject.toml",
+   "evals/fixtures/compat-docs-antigos/docs/00_archetype.md",
+   "evals/fixtures/compat-docs-antigos/docs/02-PRD-and-specs.md",
+   "evals/fixtures/compat-docs-antigos/docs/05-implementation-plan.md",
+   "evals/fixtures/compat-docs-antigos/tests/test_filtrar.py",
+   "evals/fixtures/compat-docs-antigos/dados/vendas_exemplo.csv"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "le-os-docs-antigos",
+   "resultado": "passou",
+   "evidencia": "execution-pipeline/SKILL.md: \"Faça a leitura inicial do contrato comum e leia o plano aprovado: `docs/plan.md`, as tarefas do formato de SDD do projeto ou o `docs/05-implementation-plan.md` antigo\". Notas passos 2 a 3: leu docs/02 e docs/05, usa o item 3 como escopo e não edita o PRD aprovado."
+  },
+  {
+   "id": "oferece-a-migracao",
+   "resultado": "passou",
+   "evidencia": "common-contract.md: \"Num projeto com eles, a pipeline lê e atualiza o que existe e, no aceite seguinte (A1 ou A3), oferece em uma linha migrar para a spec viva; só migra se o usuário aceitar.\" Notas passos 4 e 15 (A3): oferta em uma linha, sem migrar."
+  },
+  {
+   "id": "aceita-o-arquetipo-antigo",
+   "resultado": "passou",
+   "evidencia": "execution-pipeline/SKILL.md: \"Use o arquétipo registrado na spec, em `docs/00_archetype.md` ou no contrato\". Notas passo 5: aceita B do docs/00_archetype.md (stack streamlit) e lê archetype-b.md sem reclassificar."
+  },
+  {
+   "id": "migra-em-silencio",
+   "resultado": "passou",
+   "evidencia": "common-contract.md: \"Os `docs/00` a `docs/05` antigos continuam aceitos ... só migra se o usuário aceitar.\" Notas passos 3, 4 e 13: não cria docs/spec.md, não move documentos, só propõe marcar o item 3 como Feito no A3. Resultado esperado de um nao_deve: não ocorreu."
+  }
+ ]
+}

@@ -1,0 +1,25 @@
+{
+  "_comentario": "Efeitos do catálogo do contrato comum que o hook confere no Bash. Cada catalogo é o início de uma linha da tabela em shared/common-contract.md. O hook só pede confirmação; nunca libera.",
+  "efeitos": [
+    {
+      "catalogo": "Commit, push, PR ou tag",
+      "descricao": "push, tag, PR ou merge",
+      "padrao": "\\bgit\\b.*\\b(push|tag)\\b|\\bgh\\s+(pr\\s+(create|merge)|release\\s+create|workflow\\s+(run|enable))\\b|\\bgh\\s+api\\b.*(\\bmerge|mergePullRequest|createPullRequest)|\\bgh\\s+api\\b(?=.*\\b(pulls|releases|git/refs|git/tags)\\b)(?=.*(\\s-[fF]\\b|\\s-[fF]\\S|--(raw-)?field\\b|--input\\b|-X\\s*POST|--method[=\\s]+POST))|\\bdocker\\s+push\\b"
+    },
+    {
+      "catalogo": "Publicar em produção",
+      "descricao": "deploy (o vercel sem argumentos já publica), quarto publish, rsconnect ou publicação de pacote",
+      "padrao": "\\bvercel\\b|\\b(netlify(-cli)?|rsconnect|flyctl|fly|firebase|wrangler)\\s+deploy\\b|\\bgcloud\\b.*\\bdeploy\\b|\\brailway\\s+up\\b|\\bquarto\\s+publish\\b|\\bmkdocs\\s+gh-deploy\\b|\\b(npm|pnpm|yarn)\\s+run\\s+deploy\\b|\\bmake\\s+deploy\\b|\\bdeploy(App|Doc|Site|API)\\s*\\(|\\b(npm|pnpm|yarn)\\s+publish\\b|\\b(twine\\s+upload|uv\\s+publish|poetry\\s+publish|cargo\\s+publish|gem\\s+push)\\b"
+    },
+    {
+      "catalogo": "Migrar banco com dados reais",
+      "descricao": "migração de banco",
+      "padrao": "\\balembic\\b.*\\b(upgrade|downgrade)\\b|\\bprisma\\s+(migrate\\s+(deploy|reset)|db\\s+push)\\b|\\bflyway\\b.*\\bmigrate\\b|\\bmanage\\.py\\s+migrate\\b|\\b(rails|rake)\\s+db:migrate\\b|\\bknex\\s+migrate\\b|\\bdbmate\\s+(up|migrate)\\b|\\bflask\\s+db\\s+upgrade\\b"
+    },
+    {
+      "catalogo": "Instalar ou atualizar dependência",
+      "descricao": "instalação de dependência",
+      "padrao": "\\b(pip[0-9.]*|uv\\s+pip|npm|pnpm|yarn|poetry)\\s+(install|add|i)\\b|\\buv\\s+(add|tool\\s+install)\\b|\\bpipx\\s+install\\b|\\b(conda|mamba|micromamba|brew)\\s+install\\b|\\bcargo\\s+install\\b|\\bgem\\s+install\\b|\\binstall\\.packages\\s*\\(|\\b(pak|remotes|renv|devtools)::(pkg_)?install|\\bpak::pak\\s*\\(|\\bBiocManager::install\\s*\\("
+    }
+  ]
+}

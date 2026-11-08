@@ -1,0 +1,52 @@
+{
+ "cenario": "bug-relatorio-mensal",
+ "versao": "3.4.0",
+ "nivel": "leitura",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-07",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 0,
+ "contexto_lido": {
+  "caracteres": 17700,
+  "arquivos": [
+   "execution-pipeline/SKILL.md",
+   "execution-pipeline/references/common-contract.md",
+   "execution-pipeline/references/archetype-c.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "reproduz-antes",
+   "resultado": "indeterminado",
+   "evidencia": "execution-pipeline/SKILL.md: 'Rode os checks afetados antes de mudar qualquer coisa'. Não manda reproduzir o erro relatado."
+  },
+  {
+   "id": "teste-falha-antes",
+   "resultado": "passou",
+   "evidencia": "execution-pipeline/SKILL.md: 'escreva o teste antes... veja-o falhar pelo motivo esperado'."
+  },
+  {
+   "id": "corrige-a-causa",
+   "resultado": "indeterminado",
+   "evidencia": "Nenhuma instrução manda buscar outros pontos afetados."
+  },
+  {
+   "id": "registra-causa",
+   "resultado": "indeterminado",
+   "evidencia": "SKILL.md, Entrega: 'alterações, checks executados, limitações'. A causa não é citada."
+  },
+  {
+   "id": "enfraquece-teste",
+   "resultado": "passou",
+   "evidencia": "execution-pipeline/SKILL.md: 'Não enfraqueça testes nem troque dados reais por sintéticos'."
+  },
+  {
+   "id": "reescreve-alem-do-conserto",
+   "resultado": "passou",
+   "evidencia": "SKILL.md: 'Fique no escopo'."
+  }
+ ]
+}

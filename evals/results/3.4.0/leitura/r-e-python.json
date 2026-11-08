@@ -1,0 +1,50 @@
+{
+ "cenario": "r-e-python",
+ "versao": "3.4.0",
+ "nivel": "leitura",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-07",
+ "skills_carregadas": [
+  "pre-code-pipeline",
+  "personal-data"
+ ],
+ "paradas": 4,
+ "paradas_detalhe": [
+  "Pergunta bloqueante: onde estão o modelo e os scripts R, entrada por id ou payload, quem chama, onde roda",
+  "Aceite de PC-2",
+  "Aceite de PC-3",
+  "Aceite de PC-5"
+ ],
+ "contexto_lido": {
+  "caracteres": 26775,
+  "arquivos": [
+   "pre-code-pipeline/SKILL.md",
+   "pre-code-pipeline/references/common-contract.md",
+   "pre-code-pipeline/references/architecture-by-archetype.md",
+   "personal-data/SKILL.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "linguagem-por-componente",
+   "resultado": "passou",
+   "evidencia": "Nota 6: mantém R na análise e no treino e FastAPI na API, por 'Mantenha a stack exigida' (execution-pipeline/SKILL.md); descarta reescrever em Python como origem de divergência."
+  },
+  {
+   "id": "interface-explicita",
+   "resultado": "falhou",
+   "evidencia": "Nota 6: a ligação R-FastAPI fica entre subprocess/rpy2, serviço plumber/vetiver e formato portável, só com recomendação 'ii ou i'. Não escreve formato, colunas, tipos e versão; só o OpenAPI do POST /score no plano (nota 8)."
+  },
+  {
+   "id": "perfis-das-duas-linguagens",
+   "resultado": "falhou",
+   "evidencia": "Nota 8: a 3.4.0 não tem perfis de R nem de Python; o handoff aponta só execution-pipeline e archetype-b.md ('Não introduza FastAPI, React ou Tailwind apenas por constarem de uma biblioteca de skills')."
+  },
+  {
+   "id": "reescreve-a-analise",
+   "resultado": "passou",
+   "evidencia": "Nota 6: reescrever em Python é a opção desaconselhada, citando model-in-production ('Uma segunda implementação ... é a origem mais comum de diferença')."
+  }
+ ]
+}

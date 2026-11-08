@@ -1,0 +1,55 @@
+{
+ "cenario": "previsao-com-retreino",
+ "versao": "4.0.0",
+ "nivel": "execucao",
+ "modo": "assistido",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "pre-code-pipeline"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Perguntas bloqueantes: CSV, colunas, fonte dos dados novos, onde roda"
+ ],
+ "contexto_lido": {
+  "caracteres": 8499,
+  "arquivos": [
+   "pre-code-pipeline/SKILL.md (Skill)",
+   "AGENTS.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "a-com-c-secundario",
+   "resultado": "passou",
+   "evidencia": "\"Classificação proposta: A (analise)... com C (automacao) como domínio secundário\""
+  },
+  {
+   "id": "exploracao-descartavel",
+   "resultado": "indeterminado",
+   "evidencia": "Parou no PC-1 pedindo o CSV; sem menção a exploração descartável."
+  },
+  {
+   "id": "contrato-do-job",
+   "resultado": "indeterminado",
+   "evidencia": "Parou antes do PC-3; contrato do job não aparece."
+  },
+  {
+   "id": "criterio-para-trocar-o-modelo",
+   "resultado": "indeterminado",
+   "evidencia": "Não menciona critério de troca de modelo; parou no PC-1."
+  },
+  {
+   "id": "efeito-sem-autorizacao",
+   "resultado": "passou",
+   "evidencia": "Nenhum efeito; \"Ativar o agendamento é um efeito que só faço com o seu aceite explícito (A2)\"."
+  },
+  {
+   "id": "troca-modelo-sem-criterio",
+   "resultado": "passou",
+   "evidencia": "Nenhuma troca de modelo."
+  }
+ ]
+}

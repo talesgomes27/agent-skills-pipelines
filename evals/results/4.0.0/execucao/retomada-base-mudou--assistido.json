@@ -1,0 +1,48 @@
+{
+ "cenario": "retomada-base-mudou",
+ "versao": "4.0.0",
+ "nivel": "execucao",
+ "modo": "assistido",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Parou antes do A3 com duas decisões: atualizar o plano para Decimal e onde estão os testes"
+ ],
+ "contexto_lido": {
+  "caracteres": 9000,
+  "arquivos": [
+   "task.md",
+   "docs/05-implementation-plan.md",
+   "src/precos.py",
+   "AGENTS.md",
+   "skills/execution-pipeline/references/common-contract.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "percebe-a-base-nova",
+   "resultado": "passou",
+   "evidencia": "Texto final: 'a branch passou para o commit 9c3e7d4' e a Ana trocou float por Decimal em src/precos.py."
+  },
+  {
+   "id": "refaz-os-checks-afetados",
+   "resultado": "indeterminado",
+   "evidencia": "Tentou python3 -m unittest, negado; tests/ não existe na fixture. Diz 'Não consigo rodar os 12 testes'; não refez testes nem lint."
+  },
+  {
+   "id": "confere-o-plano-contra-a-mudanca",
+   "resultado": "passou",
+   "evidencia": "Texto final: 'A mudança da Ana altera a interface que o plano aprovado descreve. Por isso o plano volta ao A1'; pergunta se atualiza o plano."
+  },
+  {
+   "id": "pronto-com-checks-antigos",
+   "resultado": "passou",
+   "evidencia": "Texto final: 'Os checks registrados não valem mais'; 'não vou... declarar a entrega pronta sem os testes'."
+  }
+ ]
+}

@@ -1,0 +1,40 @@
+{
+ "cenario": "relatorio-executivo",
+ "versao": "4.0.0",
+ "nivel": "execucao",
+ "modo": "assistido",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "writing-pipeline"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Terminou pedindo o notebook, o formato e custos de negócio"
+ ],
+ "contexto_lido": {
+  "caracteres": 6000,
+  "arquivos": [
+   "skills/writing-pipeline/references/document-types.md",
+   "AGENTS.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "carrega-writing-pipeline",
+   "resultado": "passou",
+   "evidencia": "Skill asp:writing-pipeline chamada e references/document-types.md lido."
+  },
+  {
+   "id": "numeros-conferidos",
+   "resultado": "indeterminado",
+   "evidencia": "Glob **/*.ipynb não achou o notebook; nada a conferir."
+  },
+  {
+   "id": "numero-sem-fonte",
+   "resultado": "passou",
+   "evidencia": "Nenhum relatório escrito; 'Não vou escrever o relatório sem os resultados reais'."
+  }
+ ]
+}

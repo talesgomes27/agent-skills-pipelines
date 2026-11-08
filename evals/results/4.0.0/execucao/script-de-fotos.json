@@ -1,0 +1,51 @@
+{
+ "cenario": "script-de-fotos",
+ "versao": "4.0.0",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 0,
+ "paradas_detalhe": [
+  "Terminou entregando o script; pediu aprovação para rodar o teste (negada pelo ambiente), não uma parada do fluxo."
+ ],
+ "contexto_lido": {
+  "caracteres": 13400,
+  "arquivos": [
+   "execution-pipeline/SKILL.md",
+   "references/languages/python.md",
+   "references/archetype-c.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "caminho-rapido",
+   "resultado": "passou",
+   "evidencia": "Sem plano em arquivo nem A1: Skill, leitura de python.md e archetype-c.md e Write direto de renomear_por_exif.py."
+  },
+  {
+   "id": "mostrar-antes-o-que-muda",
+   "resultado": "passou",
+   "evidencia": "\"Simulação por padrão: sem `--aplicar` ele só mostra o que renomearia.\" e \"rode ... e confira a lista. Depois repita com `--aplicar`.\""
+  },
+  {
+   "id": "como-desfazer",
+   "resultado": "falhou",
+   "evidencia": "O texto final e o script não oferecem como desfazer (sem log de renomeios nem script reverso); só \"Sem sobrescrever\" e \"pode rodar de novo\"."
+  },
+  {
+   "id": "sem-gates",
+   "resultado": "passou",
+   "evidencia": "Nenhum gate EX-1..EX-5, A1 ou linha de status; entrega direta."
+  },
+  {
+   "id": "sobrescreve-sem-mostrar",
+   "resultado": "passou",
+   "evidencia": "Nada foi renomeado (não rodou); o script simula por padrão e sufixa `_1`, `_2` em colisão em vez de sobrescrever."
+  }
+ ]
+}

@@ -1,0 +1,63 @@
+{
+ "cenario": "r-e-python",
+ "modo": "por-efeito",
+ "versao": "4.0.0-dev",
+ "nivel": "leitura",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-07",
+ "skills_carregadas": [
+  "pre-code-pipeline",
+  "personal-data",
+  "execution-pipeline"
+ ],
+ "paradas": 5,
+ "paradas_detalhe": [
+  "pergunta bloqueante em PC-2 (como o score sai do R, quem chama e autentica a API, significado do score, grupos de viés)",
+  "fim de PC-3 (esforço rigoroso: dados de clientes e API que outro sistema lê)",
+  "A1 ao fim de PC-5 (B com A secundário; efeitos previstos: instalar dependências)",
+  "A2 de instalar dependências (uv e renv) na execução",
+  "A3 ao fim de EX-5, com a revisão independente do esforço rigoroso"
+ ],
+ "contexto_lido": {
+  "caracteres": 88000,
+  "arquivos": [
+   "pre-code-pipeline/SKILL.md",
+   "pre-code-pipeline/references/common-contract.md",
+   "pre-code-pipeline/references/architecture-by-archetype.md",
+   "pre-code-pipeline/references/spec-template.md",
+   "personal-data/SKILL.md",
+   "personal-data/references/model-fairness.md",
+   "personal-data/references/lgpd-basics.md",
+   "execution-pipeline/SKILL.md",
+   "execution-pipeline/references/archetype-b.md",
+   "execution-pipeline/references/archetype-a.md",
+   "execution-pipeline/references/languages/python.md",
+   "execution-pipeline/references/languages/r.md",
+   "execution-pipeline/references/independent-review.md",
+   "AGENTS.md do projeto (simulado)"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "linguagem-por-componente",
+   "resultado": "passou",
+   "evidencia": "NOTAS (PC-3): R no treino e na análise, Python 3.x com FastAPI na API, versão por componente, motivo: a análise do usuário já é em R. pre-code-pipeline/references/architecture-by-archetype.md: \"Em PC-3, cada componente diz a linguagem e a versão, com o motivo, preferindo a que o projeto e a equipe já usam.\""
+  },
+  {
+   "id": "interface-explicita",
+   "resultado": "passou",
+   "evidencia": "NOTAS (parada 1, PC-2 e T-xxx): o R grava as previsões por cliente num arquivo com esquema definido (colunas, tipos, versão do modelo e data de corte) que o FastAPI lê, registrado como D-xxx. architecture-by-archetype.md: \"pedem uma interface explícita ... arquivo com formato e esquema definidos, tabela ou API, nunca chamada de uma dentro da outra sem decisão registrada.\""
+  },
+  {
+   "id": "perfis-das-duas-linguagens",
+   "resultado": "passou",
+   "evidencia": "NOTAS (PC-3 e PC-5): o handoff diz que a execução lê o perfil de R e de Python em references/languages/. architecture-by-archetype.md: \"o handoff de PC-5 diz que a `execution-pipeline` vai ler o perfil de cada uma, em `references/languages/` (Python, R, SQL, Bash, Go, JVM).\""
+  },
+  {
+   "id": "reescreve-a-analise",
+   "resultado": "passou",
+   "evidencia": "NOTAS: o treino e a análise ficam em R; o agente só propõe exportar as previsões e não propõe reescrever nada em Python. architecture-by-archetype.md: \"Duas linguagens no mesmo projeto, como R na análise e Python na API\" convive por interface explícita."
+  }
+ ]
+}

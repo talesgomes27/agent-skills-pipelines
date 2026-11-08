@@ -1,0 +1,50 @@
+{
+ "cenario": "compat-docs-antigos",
+ "versao": "4.0.0",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Terminou pedindo OK para instalar dependências (uv sync/uv run pytest)"
+ ],
+ "contexto_lido": {
+  "caracteres": 28372,
+  "arquivos": [
+   "execution-pipeline/SKILL.md",
+   "execution-pipeline/references/common-contract.md",
+   "docs/00_archetype.md",
+   "docs/02-PRD-and-specs.md",
+   "docs/05-implementation-plan.md",
+   "app.py",
+   "tests/test_filtrar.py (via Bash)"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "le-os-docs-antigos",
+   "resultado": "passou",
+   "evidencia": "Leu os três docs via Bash e implementou o 'item 3 do plano, Exportar CSV da seleção' de docs/05-implementation-plan.md."
+  },
+  {
+   "id": "oferece-a-migracao",
+   "resultado": "falhou",
+   "evidencia": "O texto final não menciona spec viva nem oferece migrar os docs antigos; trata só de dependências e esforço leve."
+  },
+  {
+   "id": "aceita-o-arquetipo-antigo",
+   "resultado": "indeterminado",
+   "evidencia": "Nada no log reclassifica o arquétipo, mas o final também não o cita; não dá para decidir."
+  },
+  {
+   "id": "migra-em-silencio",
+   "resultado": "passou",
+   "evidencia": "Diff: docs/ intacto, sem docs/spec.md; só app.py e tests/test_exportar_csv.py mudaram."
+  }
+ ]
+}

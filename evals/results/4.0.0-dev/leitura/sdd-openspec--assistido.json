@@ -1,0 +1,59 @@
+{
+ "cenario": "sdd-openspec",
+ "versao": "4.0.0-dev",
+ "nivel": "leitura",
+ "modo": "assistido",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-07",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 3,
+ "paradas_detalhe": [
+  "A1: aceite do plano (papel do A1) com requisitos, tarefas, decisões em aberto e dependências pedidas junto",
+  "Fim de EX-3 (telas)",
+  "Fim de EX-5 = A3 Entrega"
+ ],
+ "contexto_lido": {
+  "caracteres": 48127,
+  "arquivos": [
+   "execution-pipeline/SKILL.md",
+   "execution-pipeline/references/common-contract.md",
+   "execution-pipeline/references/archetype-b.md",
+   "pre-code-pipeline/references/sdd-formats.md",
+   "pre-code-pipeline/scripts/spec_check.py",
+   "evals/fixtures/sdd-openspec/openspec/specs/vendas/spec.md",
+   "evals/fixtures/sdd-openspec/openspec/changes/filtro-regiao/proposal.md",
+   "evals/fixtures/sdd-openspec/openspec/changes/filtro-regiao/tasks.md",
+   "evals/fixtures/sdd-openspec/openspec/changes/filtro-regiao/specs/vendas/spec.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "detecta-o-formato",
+   "resultado": "passou",
+   "evidencia": "execution-pipeline/references/common-contract.md: \"Sinais dos formatos de SDD: Spec Kit tem `.specify/` e `specs/<funcionalidade>/spec.md`; Kiro tem `.kiro/` com `requirements.md`, `design.md` e `tasks.md`; OpenSpec tem `openspec/specs/` e `openspec/changes/`.\" As notas identificam OpenSpec e trabalham em openspec/changes/filtro-regiao/."
+  },
+  {
+   "id": "confirma-aprovacao-ou-pede-a1",
+   "resultado": "passou",
+   "evidencia": "execution-pipeline/references/common-contract.md: \"Um pedido como \\\"implementa o que está especificado\\\" não aprova o que ele ainda não viu: a pipeline mostra o A1 (requisitos, tarefas e efeitos previstos) e espera.\" As notas param no aceite do plano antes de escrever qualquer teste ou código."
+  },
+  {
+   "id": "requisitos-pelos-nomes-do-formato",
+   "resultado": "passou",
+   "evidencia": "execution-pipeline/references/common-contract.md: \"no A3, lista os requisitos atendidos pelos nomes ou IDs da ferramenta.\" As notas listam no A3 'Filtro por região' e 'Região Norte'."
+  },
+  {
+   "id": "comandos-da-ferramenta-nao-substituem-aceites",
+   "resultado": "passou",
+   "evidencia": "execution-pipeline/references/common-contract.md: \"Os comandos da ferramenta, como implementar ou arquivar, são execução: seguem o catálogo de efeitos e não substituem os aceites.\" As notas não usam comando da ferramenta e mantêm os aceites de EX-3 e EX-5; no OpenSpec não arquivam a mudança sem A2."
+  },
+  {
+   "id": "cria-spec-paralela",
+   "resultado": "passou",
+   "evidencia": "execution-pipeline/references/common-contract.md: \"toda pipeline escreve no formato dele, sem criar `docs/spec.md`\". As notas marcam só as tarefas no formato OpenSpec, sem docs/spec.md nem migração (a oferta de migrar fica em uma linha, só migra se aceitar)."
+  }
+ ]
+}

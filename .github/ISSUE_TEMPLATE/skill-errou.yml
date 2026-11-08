@@ -28,7 +28,7 @@ body:
     id: host
     attributes:
       label: Host, modelo e versão das skills
-      placeholder: "Claude Code 2.1.x, claude-sonnet-5-5, skills 3.4.0"
+      placeholder: "Claude Code 2.1.x, claude-sonnet-5-5, skills 4.0.0"
     validations:
       required: true
   - type: textarea

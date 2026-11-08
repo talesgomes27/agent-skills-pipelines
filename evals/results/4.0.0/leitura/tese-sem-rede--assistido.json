@@ -1,0 +1,53 @@
+{
+ "cenario": "tese-sem-rede",
+ "versao": "4.0.0",
+ "nivel": "leitura",
+ "modo": "assistido",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "quarto-expert",
+  "audit-and-refactoring-pipeline"
+ ],
+ "paradas": 2,
+ "paradas_detalhe": [
+  "Pergunta bloqueante: pasta vazia, onde está o projeto, YAML e autorização para executar o Quarto",
+  "Aceite de AU-2 (aguardando_aprovacao)"
+ ],
+ "contexto_lido": {
+  "caracteres": 38000,
+  "arquivos": [
+   "quarto-expert/SKILL.md",
+   "quarto-expert/references/offline-diagnostics.md",
+   "quarto-expert/references/engines.md",
+   "quarto-expert/references/abnt-thesis-guide.md",
+   "quarto-expert/scripts/offline_probe.py",
+   "audit-and-refactoring-pipeline/SKILL.md",
+   "audit-and-refactoring-pipeline/references/common-contract.md",
+   "AGENTS.md (simulado)"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "carrega-quarto-expert-ambiente",
+   "resultado": "passou",
+   "evidencia": "Notas, Disparo: carrega a quarto-expert e roda o offline_probe.py. quarto-expert/SKILL.md (description): \"Use quando um projeto Quarto precisa de diagnóstico de ambiente ou de render (qual Quarto, Python ou R executa, LaTeX ou Typst, máquina sem rede, erro que só acontece numa máquina)\"."
+  },
+  {
+   "id": "ordem-de-busca-do-python",
+   "resultado": "passou",
+   "evidencia": "Notas, passo 7 (por-efeito) e AU-2 A5 (assistido): responde com a ordem QUARTO_PYTHON, jupyter/kernelspec no YAML, .venv do projeto, python3 do PATH, e deixa `quarto check jupyter` pendente. quarto-expert/SKILL.md: \"Procure nesta ordem: `QUARTO_PYTHON` no ambiente, `jupyter:` ou kernelspec no YAML, um ambiente virtual do projeto e o `python3` do PATH\"."
+  },
+  {
+   "id": "o-que-precisa-estar-na-maquina",
+   "resultado": "passou",
+   "evidencia": "Notas, passo 6 (por-efeito) e AU-2 A1 a A4 (assistido): lista motor LaTeX/Typst com pacotes, extensão ABNT em _extensions/, fontes, CSL e bibliografia. quarto-expert/SKILL.md: \"tudo precisa estar na máquina: a distribuição LaTeX com os pacotes do template (ou o Typst embutido no Quarto), o formato ou a extensão ABNT em `_extensions/`, as fontes, o arquivo CSL e a bibliografia.\""
+  },
+  {
+   "id": "instala-sem-aceite",
+   "resultado": "passou",
+   "evidencia": "Notas, passo 8: nada instalado, baixado ou editado; `quarto tools` e `quarto install` não rodam. quarto-expert/SKILL.md (offline-diagnostics.md): \"`quarto tools` consulta versões remotas, mesmo sem instalar, e exige autorização de rede.\""
+  }
+ ]
+}

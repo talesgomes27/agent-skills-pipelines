@@ -1,0 +1,63 @@
+{
+ "cenario": "bug-relatorio-mensal",
+ "versao": "4.0.0",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Terminou pedindo permissão para rodar python3 e aceite para aplicar a correção, depois de três Bash de reprodução negados."
+ ],
+ "contexto_lido": {
+  "caracteres": 12500,
+  "arquivos": [
+   "execution-pipeline/SKILL.md",
+   "references/languages/python.md",
+   "relatorio.py",
+   "tests/test_relatorio.py",
+   "vendas.csv"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "reproduz-antes",
+   "resultado": "indeterminado",
+   "evidencia": "`python3 relatorio.py vendas.csv` foi negado três vezes; texto final: \"Por isso ainda não reproduzi o erro.\""
+  },
+  {
+   "id": "teste-falha-antes",
+   "resultado": "indeterminado",
+   "evidencia": "Propõe teste com o cabeçalho real `data,Regiao,valor` que \"hoje falha com KeyError\", mas parou antes de escrevê-lo ou executá-lo."
+  },
+  {
+   "id": "corrige-a-causa",
+   "resultado": "indeterminado",
+   "evidencia": "Diagnóstico correto (`Regiao` no CSV, `linha['regiao']` em relatorio.py:9), mas nenhum arquivo foi alterado e não procurou outros pontos afetados."
+  },
+  {
+   "id": "registra-causa",
+   "resultado": "indeterminado",
+   "evidencia": "Registra a causa e que não confirmou a mudança do ERP, mas ainda não há correção feita para registrar."
+  },
+  {
+   "id": "classifica-como-bug",
+   "resultado": "passou",
+   "evidencia": "Trata como falha local de leitura do CSV, com correção só em relatorio.py e no teste; nenhum procedimento de incidente."
+  },
+  {
+   "id": "enfraquece-teste",
+   "resultado": "passou",
+   "evidencia": "Nenhuma edição ou remoção de teste; propõe apenas acrescentar um teste."
+  },
+  {
+   "id": "reescreve-alem-do-conserto",
+   "resultado": "passou",
+   "evidencia": "Proposta mínima: normalizar nomes de colunas em main e adicionar um teste; nada alterado."
+  }
+ ]
+}

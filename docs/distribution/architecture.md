@@ -39,8 +39,10 @@ O padrão é a pasta do projeto atual; `--scope user` instala no perfil. Os cami
 | `editorial` | `writing-pipeline` |
 | `release` | `release-and-ops-pipeline` |
 | `library` | `skill-loader` |
+| `essencial` | `pre-code-pipeline`, `execution-pipeline`, `release-and-ops-pipeline`, `personal-data` |
+| `completo` | as nove skills |
 
-Os pacotes `essencial` (pre-code, execution e release, mais a `personal-data`) e `completo` valem só para o marketplace do Claude Code; o instalador usa os bundles desta tabela. Bundles agrupam skills e mais nada; ferramentas e MCPs que uma skill cite você instala à parte. Dá para repetir `--bundle` e `--skill`, combiná-los e tirar nomes com `--exclude`. Instalar tudo exige `--all`.
+Os bundles `essencial` e `completo` têm as mesmas skills dos pacotes de mesmo nome do marketplace do Claude Code. No marketplace, o `completo` traz também o plugin `pipeline-guardrails`, que não é skill e o instalador não instala. Bundles agrupam skills e mais nada; ferramentas e MCPs que uma skill cite você instala à parte. Dá para repetir `--bundle` e `--skill`, combiná-los e tirar nomes com `--exclude`. Instalar tudo exige `--all`.
 
 ```bash
 # Ver o plano sem gravar nada
@@ -131,7 +133,21 @@ Troque ou acrescente os comandos de deploy que você usa, como `npm publish`. De
 
 - As regras são avaliadas na ordem deny, ask e allow. Uma regra `allow` mais ampla, como `Bash(git *)`, não dispensa a pergunta.
 - Uma regra `ask` vale também para o comando dentro de um comando composto, como `cd app && git push`. Ela vale também nos modos auto e bypassPermissions; no modo dontAsk, o comando é negado em vez de perguntado.
-- A regra compara o texto do comando, então não é uma barreira de segurança. `git -C . push`, `git -c push.default=current push` e `gh api` escapam de `Bash(git push *)` e das regras do `gh`. Para um limite que não depende do texto, use o [sandbox](https://code.claude.com/docs/en/sandboxing) ou um [hook `PreToolUse`](https://code.claude.com/docs/en/hooks#pretooluse-decision-control).
+- A regra compara o texto do comando, então não é uma barreira de segurança. `git -C . push`, `git -c push.default=current push` e `gh api` escapam de `Bash(git push *)` e das regras do `gh`. Para um limite que não depende do texto, use o [sandbox](https://code.claude.com/docs/en/sandboxing) ou um [hook `PreToolUse`](https://code.claude.com/docs/en/hooks#pretooluse-decision-control). O plugin [`pipeline-guardrails`](../../pipeline-guardrails/README.md) traz esse hook pronto, com um modelo das regras `ask` e `deny`.
+
+## Modo e efeitos liberados por projeto
+
+Sem configuração, as pipelines param no A1 (escopo), antes de cada efeito do catálogo do contrato comum (A2), na entrega (A3) e nas paradas condicionais, como mudança de escopo ou risco de perder trabalho. Para mudar isso num projeto, acrescente ao `AGENTS.md` dele uma seção como esta:
+
+```markdown
+## Pipelines
+
+- Modo: assistido
+- Efeitos pré-autorizados: commit na branch de trabalho; push da branch de trabalho (não a padrão, sem workflow nem integração da plataforma que publique a partir dela) e abertura de PR
+- Sempre perguntar: deploy em produção
+```
+
+`Modo: assistido` volta às paradas da 3.x, nos gates que cada pipeline marca para aceite; `Modo: continuo` também existe, mas não autoriza sequência nenhuma, que vem do seu pedido. Só valem linhas que você escreveu, e o agente não edita a seção sem você pedir. Uma linha nova que libera efeito é confirmada uma vez no chat; uma que só deixa o fluxo mais cauteloso, como `Modo: assistido` ou "Sempre perguntar", vale direto. Publicar em produção, mexer em dados reais, enviar dados a terceiros, mandar mensagem ou e-mail a destinatários reais e gastar dinheiro nunca são pré-autorizáveis. As regras completas estão no contrato comum, em [`shared/common-contract.md`](../../shared/common-contract.md#preferência-por-projeto).
 
 ## Depois de instalar
 

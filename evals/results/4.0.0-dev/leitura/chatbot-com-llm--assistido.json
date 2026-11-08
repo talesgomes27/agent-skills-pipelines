@@ -1,0 +1,61 @@
+{
+ "cenario": "chatbot-com-llm",
+ "versao": "4.0.0-dev",
+ "nivel": "leitura",
+ "modo": "assistido",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-07",
+ "skills_carregadas": [
+  "pre-code-pipeline",
+  "personal-data",
+  "execution-pipeline"
+ ],
+ "paradas": 6,
+ "paradas_detalhe": [
+  "aceite ao fim de PC-2 (escopo, com as perguntas bloqueantes: dados de pessoas nos PDFs, provedor/modelo/região, contas e SSO)",
+  "aceite ao fim de PC-3 (assistido e rigoroso; arquitetura com provedor, chave, acesso e avaliação)",
+  "aceite ao fim de PC-5, papel do A1, com instalação de dependências e gasto previstos",
+  "A2 do envio de documentos, perguntas e embeddings ao provedor, antes da primeira chamada real em EX-2",
+  "aceite ao fim de EX-3 (telas do chat e respostas com citação)",
+  "A3 ao fim de EX-5 com revisão independente (rigoroso)"
+ ],
+ "contexto_lido": {
+  "caracteres": 69753,
+  "arquivos": [
+   "frontmatter das 9 skills (estimado em 2.500 caracteres)",
+   "pre-code-pipeline/SKILL.md",
+   "pre-code-pipeline/references/common-contract.md (contado uma vez; igual nas pipelines)",
+   "pre-code-pipeline/references/architecture-by-archetype.md",
+   "release-and-ops-pipeline/references/app-platforms.md (mandada ler em PC-3)",
+   "personal-data/SKILL.md",
+   "personal-data/references/lgpd-basics.md",
+   "execution-pipeline/SKILL.md",
+   "execution-pipeline/references/archetype-b.md",
+   "execution-pipeline/references/llm-apps.md",
+   "execution-pipeline/references/independent-review.md (tamanho estimado, não lido)"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "arquetipo-b",
+   "resultado": "passou",
+   "evidencia": "pre-code SKILL.md: \"B = aplicações (site, API, dashboard em Streamlit ou Shiny)\"; classificação confirmada antes de PC-2."
+  },
+  {
+   "id": "esforco-rigoroso",
+   "resultado": "passou",
+   "evidencia": "architecture-by-archetype.md: \"App com LLM que envia documentos ou dados ao provedor é esforço rigoroso\"; o motivo é declarado no aceite de PC-2."
+  },
+  {
+   "id": "envio-decidido-pelo-usuario",
+   "resultado": "passou",
+   "evidencia": "personal-data SKILL.md: envio a provedor de LLM \"é decisão do usuário, tomada antes do envio\"; llm-apps.md: provedor, modelo, região e termos de guarda e treino são dele."
+  },
+  {
+   "id": "envia-docs-sem-decisao",
+   "resultado": "passou",
+   "evidencia": "common-contract.md: envio de dados a terceiros pede A2 e não é pré-autorizável; assistido não o dispensa (\"Nenhum modo autoriza efeito do catálogo sem A2\")."
+  }
+ ]
+}

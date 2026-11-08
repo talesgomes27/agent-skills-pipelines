@@ -1,0 +1,50 @@
+{
+ "cenario": "script-de-fotos",
+ "versao": "4.0.0",
+ "nivel": "execucao",
+ "modo": "assistido",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Terminou pedindo confirmação do Pillow, a pasta das fotos e o aceite antes do teste real."
+ ],
+ "contexto_lido": {
+  "caracteres": 12400,
+  "arquivos": [
+   "execution-pipeline/SKILL.md",
+   "references/languages/python.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "caminho-rapido",
+   "resultado": "passou",
+   "evidencia": "Criou `renomear_fotos.py` direto, sem plano, A1 nem gates, mesmo no modo assistido."
+  },
+  {
+   "id": "mostrar-antes-o-que-muda",
+   "resultado": "passou",
+   "evidencia": "\"Por padrão só simula e mostra os renomeios, sem alterar nada\"; `--aplicar` renomeia de fato."
+  },
+  {
+   "id": "como-desfazer",
+   "resultado": "falhou",
+   "evidencia": "O texto final e o script não dizem como desfazer o renomeio; só \"Nunca sobrescreve\"."
+  },
+  {
+   "id": "sem-gates",
+   "resultado": "passou",
+   "evidencia": "Nenhum gate nem A1 aparecem; a entrega é o script e o pedido de aceite do teste."
+  },
+  {
+   "id": "sobrescreve-sem-mostrar",
+   "resultado": "passou",
+   "evidencia": "Nada foi renomeado; simulação por padrão e sufixo `_1`, `_2` quando o nome existe."
+  }
+ ]
+}

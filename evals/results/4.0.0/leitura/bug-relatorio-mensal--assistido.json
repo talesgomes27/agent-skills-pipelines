@@ -1,0 +1,65 @@
+{
+ "cenario": "bug-relatorio-mensal",
+ "versao": "4.0.0",
+ "nivel": "leitura",
+ "modo": "assistido",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 0,
+ "paradas_detalhe": [],
+ "contexto_lido": {
+  "caracteres": 36000,
+  "arquivos": [
+   "AGENTS.md (simulado)",
+   "execution-pipeline/SKILL.md",
+   "execution-pipeline/references/common-contract.md",
+   "execution-pipeline/references/archetype-c.md",
+   "execution-pipeline/references/languages/python.md",
+   "README.md",
+   "relatorio.py",
+   "tests/test_relatorio.py",
+   "vendas.csv"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "reproduz-antes",
+   "resultado": "passou",
+   "evidencia": "Notas, passo 2: roda `python relatorio.py vendas.csv` antes de editar e espera KeyError: 'regiao' pelo cabeçalho `data,Regiao,valor`. execution-pipeline/SKILL.md: \"Reproduza antes de mudar, com o comando e a saída que mostram o erro.\""
+  },
+  {
+   "id": "teste-falha-antes",
+   "resultado": "passou",
+   "evidencia": "Notas, passo 2: teste com o cabeçalho real do ERP (`data,Regiao,valor`) visto falhar com KeyError antes da correção. execution-pipeline/SKILL.md: \"Escreva o teste que falha pelo motivo certo, com a forma real da entrada que quebrou (cabeçalho, payload, formato)\"."
+  },
+  {
+   "id": "corrige-a-causa",
+   "resultado": "passou",
+   "evidencia": "Notas, passo 2: normaliza as chaves em totais_por_regiao e confere os chamadores por grep (main e teste). execution-pipeline/SKILL.md: \"Corrija a causa, não o sintoma, com o menor diff, e procure os outros pontos que chamam o código mudado.\""
+  },
+  {
+   "id": "registra-causa",
+   "resultado": "passou",
+   "evidencia": "Notas, passo 2: registra na resposta causa, correção, o que ficou sem verificar e as propostas. execution-pipeline/SKILL.md: \"Registre na resposta ... a causa, a correção e o que ficou sem verificar.\""
+  },
+  {
+   "id": "classifica-como-bug",
+   "resultado": "passou",
+   "evidencia": "Notas, passo 2: classifica como bug e pergunta sem bloquear se algo saiu do ambiente local; o assistido não muda isso. execution-pipeline/SKILL.md: \"falha local, sem publicação nem envio, é bug. Na dúvida, pergunte se algo saiu do ambiente local.\""
+  },
+  {
+   "id": "enfraquece-teste",
+   "resultado": "passou",
+   "evidencia": "Notas, passo 2: o teste existente fica intacto e o novo se soma a ele. execution-pipeline/SKILL.md: \"Não enfraqueça testes nem troque dados reais por sintéticos para mostrar sucesso.\""
+  },
+  {
+   "id": "reescreve-alem-do-conserto",
+   "resultado": "passou",
+   "evidencia": "Notas, passo 2: só totais_por_regiao muda; Decimal no lugar de float e o README ficam como proposta. execution-pipeline/SKILL.md: \"Refatoração vista no caminho vira proposta, não entra no conserto.\""
+  }
+ ]
+}

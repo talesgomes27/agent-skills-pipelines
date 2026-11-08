@@ -1,0 +1,54 @@
+{
+ "cenario": "retomada-aprovacao-valida",
+ "versao": "4.0.0",
+ "nivel": "execucao",
+ "modo": "assistido",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Terminou com pergunta bloqueante: indicar o repositório ou autorizar recriar EX-1/EX-2"
+ ],
+ "contexto_lido": {
+  "caracteres": 9000,
+  "arquivos": [
+   "task.md",
+   "README.md",
+   "pr-7-comentarios.md",
+   "docs/05-implementation-plan.md",
+   "AGENTS.md",
+   "skills/execution-pipeline/references/common-contract.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "le-o-handoff",
+   "resultado": "passou",
+   "evidencia": "Read de task.md; texto final: 'gate EX-3 em andamento... Próximo passo: exportar a tabela filtrada em CSV'."
+  },
+  {
+   "id": "confere-a-base",
+   "resultado": "passou",
+   "evidencia": "Texto final: 'A pasta não é um repositório git, então não verifico o commit 4f2a9c1 nem a branch'; não reaproveita os '6 testes OK'. A fixture não tem repositório."
+  },
+  {
+   "id": "nao-repede-o-plano",
+   "resultado": "passou",
+   "evidencia": "Texto final: 'o comentário do PR 7 diz \"plano ok, pode implementar\"... Não preciso pedir a aprovação de novo.'"
+  },
+  {
+   "id": "pede-aprovacao-ja-valida",
+   "resultado": "passou",
+   "evidencia": "Não pede o plano de novo; pede só a localização do repositório ou autorização para recriar EX-1/EX-2."
+  },
+  {
+   "id": "efeito-sem-autorizacao",
+   "resultado": "passou",
+   "evidencia": "Nenhum commit, push ou PR; só leituras."
+  }
+ ]
+}

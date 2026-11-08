@@ -1,0 +1,73 @@
+{
+ "cenario": "dashboard-streamlit",
+ "versao": "4.0.0-dev",
+ "nivel": "leitura",
+ "modo": "assistido",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-07",
+ "skills_carregadas": [
+  "pre-code-pipeline",
+  "personal-data",
+  "execution-pipeline",
+  "release-and-ops-pipeline"
+ ],
+ "paradas": 8,
+ "paradas_detalhe": [
+  "pergunta bloqueante em PC-1/PC-2",
+  "aceite de PC-2 (spec)",
+  "aceite de PC-3 (arquitetura)",
+  "aceite de PC-5 (plano, faz o papel do A1)",
+  "aceite de EX-3 (telas e exportação)",
+  "aceite de RL-2, com o A3 de EX-5",
+  "A2 de RL-4: push/deploy no Streamlit Community Cloud",
+  "aceite de RL-5 (A3 da entrega)"
+ ],
+ "contexto_lido": {
+  "caracteres": 80707,
+  "arquivos": [
+   "pre-code-pipeline/SKILL.md",
+   "pre-code-pipeline/references/common-contract.md",
+   "pre-code-pipeline/references/architecture-by-archetype.md",
+   "pre-code-pipeline/references/spec-template.md",
+   "personal-data/SKILL.md",
+   "execution-pipeline/SKILL.md",
+   "execution-pipeline/references/archetype-b.md",
+   "release-and-ops-pipeline/references/app-platforms.md",
+   "release-and-ops-pipeline/SKILL.md",
+   "release-and-ops-pipeline/references/smoke-and-healthcheck.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "restricoes-plataforma",
+   "resultado": "passou",
+   "evidencia": "pre-code-pipeline/SKILL.md, PC-3: \"Em B e C, confira na documentação oficial do destino as restrições que mudam a arquitetura, sem conectar contas.\" As notas leem app-platforms.md em PC-3 (acesso privado só por convite, sem IPs de saída documentados) antes do aceite da arquitetura."
+  },
+  {
+   "id": "camadas-de-acesso",
+   "resultado": "passou",
+   "evidencia": "release-and-ops-pipeline/references/app-platforms.md: \"Restringir quem abre o app na plataforma e autenticar dentro do app, como com `st.login`, são camadas diferentes; o plano diz qual delas atende ao requisito de acesso.\" As notas registram as duas camadas na arquitetura."
+  },
+  {
+   "id": "smoke-navegador",
+   "resultado": "passou",
+   "evidencia": "release-and-ops-pipeline/references/smoke-and-healthcheck.md: \"Apps que montam a página por websocket, como Streamlit e Shiny, respondem 200 antes de funcionar: confira por navegador um valor exibido depois de uma interação.\" As notas, no RL-5, mudam o filtro no app publicado e conferem o valor exibido."
+  },
+  {
+   "id": "dependencias-no-a1",
+   "resultado": "passou",
+   "evidencia": "pre-code-pipeline/references/common-contract.md, catálogo: \"Instalar ou atualizar dependência | Pacote, versão e onde instala\". As notas listam streamlit e o driver do Postgres entre os efeitos previstos pedidos no A1."
+  },
+  {
+   "id": "cria-a-spec-no-a1",
+   "resultado": "passou",
+   "evidencia": "pre-code-pipeline/SKILL.md: \"Num projeto que vai durar, os requisitos vão para a spec viva (`docs/spec.md`), redigida no PC-2 e aprovada no A1\"; PC-5: \"`docs/plan.md`, tarefas ligadas aos `R-xxx`\". As notas criam spec com R-xxx e plano com T-xxx antes do A1."
+  },
+  {
+   "id": "push-sem-autorizacao",
+   "resultado": "passou",
+   "evidencia": "common-contract.md: \"Um push que publica, porque a plataforma publica do Git ou a CI faz deploy, é publicar em produção, num só A2 com o deploy.\" As notas não fazem push, deploy nem conta sem A2."
+  }
+ ]
+}

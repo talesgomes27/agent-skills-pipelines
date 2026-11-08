@@ -1,0 +1,47 @@
+{
+ "cenario": "migracao-r-markdown",
+ "versao": "4.0.0",
+ "nivel": "leitura",
+ "modo": "assistido",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "execution-pipeline",
+  "quarto-expert"
+ ],
+ "paradas": 2,
+ "paradas_detalhe": [
+  "pergunta bloqueante: onde está o .Rmd (pasta vazia)",
+  "entrega única (A3) ao fim; tarefa pequena mantém os aceites da tabela, sem EX-3 nem EX-5"
+ ],
+ "contexto_lido": {
+  "caracteres": 46500,
+  "arquivos": [
+   "execution-pipeline/SKILL.md",
+   "execution-pipeline/references/common-contract.md",
+   "execution-pipeline/references/archetype-a.md",
+   "execution-pipeline/references/languages/r.md",
+   "quarto-expert/SKILL.md",
+   "quarto-expert/references/engines.md",
+   "AGENTS.md (simulado)"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "quarto-authoring-da-posit",
+   "resultado": "passou",
+   "evidencia": "quarto-expert/SKILL.md: \"Para autoria e sintaxe (callouts, tabelas, figuras, referências cruzadas, citações, YAML, extensões) e para migrar de R Markdown, bookdown, blogdown, xaringan, distill ou Jupyter, use a `quarto-authoring` da Posit quando ela estiver instalada.\" Nas notas, passo 4 informa o comando de instalação como decisão do usuário e segue a documentação oficial."
+  },
+  {
+   "id": "conferencia-de-equivalencia",
+   "resultado": "passou",
+   "evidencia": "Notas, passo 8: render do .qmd e comparação com a linha de base do passo 5 (figuras, tabelas, números inline, referências). execution-pipeline/references/archetype-a.md: \"Em migração para Quarto, preserve o original e compare código, resultados, bibliografia, labels, navegação e assets no formato novo; renomear arquivo ou converter notebook não prova equivalência.\""
+  },
+  {
+   "id": "efeito-sem-autorizacao",
+   "resultado": "passou",
+   "evidencia": "Notas, passos 4, 5 e 10: só cria relatorio.qmd local, mantém o .Rmd, não faz commit, push, publicação nem instalação sem A2; instalar pacote novo ou ferramenta ficaria como A2. execution-pipeline/SKILL.md: \"Implementar não inclui commit, push, publicação ou deploy: são efeitos do catálogo, só com A2 ou pré-autorização válida.\""
+  }
+ ]
+}

@@ -157,3 +157,27 @@
   esperado: deve
   prompt: 'F6: revise somente a prosa de index.qmd: corrija Instalaçao para Instalação preservando significado, YAML e código literalmente. Não renderize nem configure o projeto; não crie plano/documentação
     adicional.'
+- id: execution-pipeline-bug-1
+  skill: execution-pipeline
+  esperado: deve
+  prompt: O relatório mensal parou de gerar desde ontem com um KeyError. Corrige para mim.
+- id: execution-pipeline-bug-2
+  skill: execution-pipeline
+  esperado: nao_deve
+  prompt: Faz uma auditoria completa deste repositório e me diga o que está ruim, sem mudar nada.
+- id: release-and-ops-pipeline-incidente-1
+  skill: release-and-ops-pipeline
+  esperado: deve
+  prompt: Commitei a chave da API do LLM no repositório público ontem. O que eu faço agora?
+- id: release-and-ops-pipeline-incidente-2
+  skill: release-and-ops-pipeline
+  esperado: deve
+  prompt: O job de hoje mandou a mensagem de cobrança errada para uns dois mil clientes. Me ajuda a resolver.
+- id: release-and-ops-pipeline-incidente-3
+  skill: release-and-ops-pipeline
+  esperado: nao_deve
+  prompt: O relatório mensal parou de gerar desde ontem com um KeyError. Corrige para mim.
+- id: execution-pipeline-bug-3
+  skill: execution-pipeline
+  esperado: nao_deve
+  prompt: Corrige os erros de português e de digitação deste capítulo, sem mudar o sentido.

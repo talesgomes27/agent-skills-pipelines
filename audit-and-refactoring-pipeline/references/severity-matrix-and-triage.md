@@ -14,6 +14,8 @@ Centralidade do grafo, complexidade ciclomática, cobertura e alertas de scanner
 
 ## Achado verificável
 
+Com spec viva (`docs/spec.md` ou o formato de SDD do projeto), a divergência entre código e spec é achado e cita o ID ou o título do requisito na coluna Diagnóstico; a severidade segue o impacto, como os demais. Sem spec, a referência é o README, e o parecer propõe criar uma.
+
 Use a tabela do chamador:
 
 | ID | Linha / Arquivo | Severidade | Diagnóstico Original | Sugestão de Refatoração | Racional Técnico |

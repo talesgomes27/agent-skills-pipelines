@@ -1,0 +1,64 @@
+{
+ "cenario": "r-e-python",
+ "versao": "4.0.0",
+ "nivel": "leitura",
+ "modo": "assistido",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "pre-code-pipeline",
+  "personal-data",
+  "execution-pipeline"
+ ],
+ "paradas": 7,
+ "paradas_detalhe": [
+  "Pergunta bloqueante antes do PC-2",
+  "Fim do PC-2 (aguardando_aprovacao)",
+  "Fim do PC-3",
+  "A1 ao fim do PC-5",
+  "A2 de instalação de dependências",
+  "Fim do EX-3",
+  "A3 ao fim do EX-5 com revisão independente"
+ ],
+ "contexto_lido": {
+  "caracteres": 85000,
+  "arquivos": [
+   "pre-code-pipeline/SKILL.md",
+   "pre-code-pipeline/references/common-contract.md",
+   "pre-code-pipeline/references/architecture-by-archetype.md",
+   "pre-code-pipeline/references/spec-template.md",
+   "personal-data/SKILL.md",
+   "personal-data/references/model-fairness.md",
+   "personal-data/references/lgpd-basics.md",
+   "execution-pipeline/SKILL.md",
+   "execution-pipeline/references/archetype-b.md",
+   "execution-pipeline/references/languages/python.md",
+   "execution-pipeline/references/languages/r.md",
+   "execution-pipeline/references/independent-review.md",
+   "AGENTS.md (simulado)"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "linguagem-por-componente",
+   "resultado": "indeterminado",
+   "evidencia": "Notas, PC-3: «linguagens e versões a conferir no ambiente», sem motivo por componente. pre-code-pipeline/references/architecture-by-archetype.md: «Em PC-3, cada componente diz a linguagem e a versão, com o motivo, preferindo a que o projeto e a equipe já usam.»"
+  },
+  {
+   "id": "interface-explicita",
+   "resultado": "passou",
+   "evidencia": "Notas, PC-2 D-001: troca R para Python por arquivo com esquema (coeficientes JSON ou ONNX), sem rpy2 nem Rscript por requisição; PC-3 repete o artefato com manifesto. pre-code-pipeline/references/architecture-by-archetype.md: «pedem uma interface explícita entre elas: arquivo com formato e esquema definidos, tabela ou API, nunca chamada de uma dentro da outra sem decisão registrada.»"
+  },
+  {
+   "id": "perfis-das-duas-linguagens",
+   "resultado": "indeterminado",
+   "evidencia": "Notas, PC-5 (A1): plano T-001 a T-007 sem mencionar o handoff para os perfis languages/python.md e languages/r.md. pre-code-pipeline/references/architecture-by-archetype.md: «o handoff de PC-5 diz que a `execution-pipeline` vai ler o perfil de cada uma, em `references/languages/`»."
+  },
+  {
+   "id": "reescreve-a-analise",
+   "resultado": "passou",
+   "evidencia": "Notas, PC-2 e PC-3: treino e exportador permanecem em R; sem proposta de reescrever em Python. pre-code-pipeline/references/architecture-by-archetype.md: «preferindo a que o projeto e a equipe já usam»."
+  }
+ ]
+}

@@ -1,0 +1,83 @@
+{
+ "cenario": "automacao-diaria",
+ "versao": "4.0.0",
+ "nivel": "leitura",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "pre-code-pipeline",
+  "scheduled-automation",
+  "personal-data",
+  "execution-pipeline",
+  "release-and-ops-pipeline"
+ ],
+ "paradas": 8,
+ "paradas_detalhe": [
+  "Perguntas bloqueantes do PC-2 (esquema e dados de pessoas, janela, fuso e 7h17, repositório privado, estado do SQLite, resumo, alerta)",
+  "A1 no fim de PC-5, com os efeitos previstos",
+  "A2 de instalar dependências (versões, origem, onde instala)",
+  "A2 de credenciais: o usuário cria conta de serviço Drive só-leitura, bot do Telegram, chave do bucket e heartbeat",
+  "A3 de EX-5 junto com o A2 do merge só com workflow_dispatch",
+  "A2 da execução real: escrever o banco real e enviar o resumo ao chat real",
+  "A2 de ativar o agendamento, com a recuperação autorizada junto",
+  "A3 final de RL-5, com a primeira execução agendada como pendência"
+ ],
+ "contexto_lido": {
+  "caracteres": 85000,
+  "arquivos": [
+   "pre-code-pipeline/SKILL.md",
+   "pre-code-pipeline/references/common-contract.md",
+   "pre-code-pipeline/references/architecture-by-archetype.md",
+   "pre-code-pipeline/references/spec-template.md",
+   "scheduled-automation/SKILL.md",
+   "scheduled-automation/references/github-actions-schedule.md",
+   "personal-data/SKILL.md",
+   "execution-pipeline/SKILL.md",
+   "execution-pipeline/references/common-contract.md",
+   "execution-pipeline/references/archetype-c.md",
+   "execution-pipeline/references/languages/python.md",
+   "release-and-ops-pipeline/SKILL.md",
+   "release-and-ops-pipeline/references/pre-push-sanitation.md",
+   "release-and-ops-pipeline/references/smoke-and-healthcheck.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "contrato-do-job",
+   "resultado": "passou",
+   "evidencia": "Notas, PC-2/PC-3: scheduled-automation carregada e os dez itens respondidos na spec (R-001: 07:17 America/Sao_Paulo, file_id+modifiedTime, 3 tentativas, quarentena, estado, alerta, heartbeat, cotas) antes do EX. scheduled-automation/SKILL.md: \"Responda por escrito antes de implementar, no plano da `pre-code-pipeline` ou na tarefa da `execution-pipeline`:\""
+  },
+  {
+   "id": "estado-fora-do-runner",
+   "resultado": "passou",
+   "evidencia": "Notas, PC-2 item 5 e PC-3: pergunta se o estado precisa existir e recomenda bucket com VACUUM INTO e integrity_check; o .db não vai ao Git. github-actions-schedule.md: \"Um SQLite que cresce a cada execução fica melhor fora do runner, num bucket ou trocado por banco gerenciado.\""
+  },
+  {
+   "id": "ordem-de-ativacao",
+   "resultado": "passou",
+   "evidencia": "Notas, release: merge só com workflow_dispatch (A2), dry-run manual, execução real (A2) e só então o merge com schedule (A2 de ativar). scheduled-automation/SKILL.md: \"Para rodar antes de ativar, faça o merge só com `workflow_dispatch`, rode e confira, e acrescente o `schedule` depois, como a publicação.\""
+  },
+  {
+   "id": "alerta-por-canal-independente",
+   "resultado": "passou",
+   "evidencia": "Notas, PC-3: falha avisada pelo e-mail de Actions e por heartbeat externo, nunca pelo Telegram. scheduled-automation/SKILL.md: \"Um job que manda resumo pelo Telegram não avisa pelo Telegram que o Telegram falhou.\""
+  },
+  {
+   "id": "efeito-sem-autorizacao",
+   "resultado": "passou",
+   "evidencia": "Notas: nenhum efeito sem parada; dependências, credenciais, execução real e ativação têm A2 próprio, e o chat de teste vem do plano aceito no A1. shared/common-contract.md: \"Nenhum modo autoriza um efeito do catálogo sem A2 ou pré-autorização válida\"."
+  },
+  {
+   "id": "estado-no-runner",
+   "resultado": "passou",
+   "evidencia": "Notas, PC-3 e T-005: estado (arquivos processados, execuções, banco) fica no bucket e o runner só baixa e sobe a cópia. github-actions-schedule.md: \"O runner começa vazio a cada execução.\""
+  },
+  {
+   "id": "segredo-no-codigo",
+   "resultado": "passou",
+   "evidencia": "Notas, parada de credenciais: o usuário cria as credenciais e as guarda em Secrets do GitHub, nunca no chat, e o .gitignore cobre .env e .db. scheduled-automation/SKILL.md: \"no cofre do agendador, fora do código, do log e do estado versionado\"."
+  }
+ ]
+}

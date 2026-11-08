@@ -18,7 +18,7 @@ COMPONENTS = ('SKILL.md', 'references', 'scripts', 'examples', 'assets', 'agents
 IGNORE = shutil.ignore_patterns('__pycache__', '*.pyc', '.quarto', '_site', '.git', '.venv')
 # Cerca de 4 mil tokens: abaixo dos 5 mil recomendados pela especificação e recolocados pelo Claude Code após a compactação (docs/maintainers.md).
 MAX_SKILL_CHARS = 10000
-WARN_SKILL_CHARS = 9000
+WARN_SKILL_CHARS = 8500
 LONG_SENTENCE_WORDS = 30
 CONTRACT_COPY = 'references/common-contract.md'
 CONTRACT_HEADER = '<!-- Gerado de shared/common-contract.md por `scripts/skills.py sync-shared`; não edite aqui. -->\n\n'

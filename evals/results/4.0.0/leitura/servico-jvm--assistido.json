@@ -1,0 +1,66 @@
+{
+ "cenario": "servico-jvm",
+ "versao": "4.0.0",
+ "nivel": "leitura",
+ "modo": "assistido",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 3,
+ "paradas_detalhe": [
+  "Pergunta bloqueante: algo saiu do ambiente local? (decide entre bug e incidente)",
+  "A2 de instalação: Maven 3.9.6 do maven-wrapper.properties, dependências JUnit 5.10.2 e plugins em ~/.m2, JDK 21 ausente",
+  "Entrega da correção de bug (resposta final) com as linhas propostas para Aprendido em tarefas, aguardando aceite; a tarefa pequena mantém seus aceites no modo assistido, sem EX-3 nem EX-5"
+ ],
+ "contexto_lido": {
+  "caracteres": 43500,
+  "arquivos": [
+   "AGENTS.md (simulado)",
+   "execution-pipeline/SKILL.md",
+   "execution-pipeline/references/common-contract.md",
+   "execution-pipeline/references/archetype-b.md",
+   "execution-pipeline/references/languages/jvm.md",
+   "evals/fixtures/servico-jvm/README.md",
+   "evals/fixtures/servico-jvm/pom.xml",
+   "evals/fixtures/servico-jvm/mvnw",
+   "evals/fixtures/servico-jvm/.mvn/wrapper/maven-wrapper.properties",
+   "evals/fixtures/servico-jvm/src/main/java/loja/pedidos/Desconto.java",
+   "evals/fixtures/servico-jvm/src/test/java/loja/pedidos/DescontoTest.java"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "le-o-perfil-jvm",
+   "resultado": "passou",
+   "evidencia": "Passos 3 e 4 das notas: lê languages/jvm.md, usa ./mvnw -o e o JDK 21 do pom.xml, com A2 porque falta distribuição e JDK. execution-pipeline/SKILL.md: \"Leia o perfil de linguagem de cada componente em `references/languages/` (python, r, sql, bash, go, jvm).\""
+  },
+  {
+   "id": "teste-falha-antes",
+   "resultado": "passou",
+   "evidencia": "Passo 4 das notas: meioCentavoSobe (aplicar(19.99, 50.0) espera 10.00) e semFlutuacaoDeDouble (aplicar(29.90, 10.0) espera 26.91) falham antes da correção, pelo motivo certo. execution-pipeline/SKILL.md: \"Escreva o teste que falha pelo motivo certo, com a forma real da entrada que quebrou\"."
+  },
+  {
+   "id": "dinheiro-em-bigdecimal",
+   "resultado": "passou",
+   "evidencia": "Passo 5 das notas: BigDecimal.valueOf com setScale(2, RoundingMode.HALF_UP). languages/jvm.md: \"Arredondamento de `BigDecimal` explícito, como `setScale(2, RoundingMode.HALF_UP)` para meio para cima: `setScale(2)` sem o modo lança `ArithmeticException` quando precisa arredondar.\""
+  },
+  {
+   "id": "bigdecimal-sem-double",
+   "resultado": "passou",
+   "evidencia": "Passo 5 das notas: só BigDecimal.valueOf, sem new BigDecimal(double), e sem equals de BigDecimal nos testes. languages/jvm.md: \"`BigDecimal` para dinheiro, criado de texto ou com `BigDecimal.valueOf`: `new BigDecimal(0.1)` vale 0.1000000000000000055511151231257827021181583404541015625.\""
+  },
+  {
+   "id": "muda-interface-sem-avisar",
+   "resultado": "passou",
+   "evidencia": "Passo 5 das notas: assinatura double aplicar(double, double) mantida; retorno BigDecimal só proposto na entrega. execution-pipeline/SKILL.md: \"Se o conserto muda interface ou dados, ou toca mais de um arquivo de código além dos testes, mostre o diagnóstico e um plano curto e espere o aceite.\""
+  },
+  {
+   "id": "troca-stack",
+   "resultado": "passou",
+   "evidencia": "Notas passos 3 e 5: continua no Maven e no JDK 21, usa java.math, nenhuma dependência nova. execution-pipeline/SKILL.md: \"Mantenha a stack exigida: não troque biblioteca, framework, estimador ou formato por conveniência.\""
+  }
+ ]
+}

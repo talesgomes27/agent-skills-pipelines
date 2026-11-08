@@ -1,0 +1,61 @@
+{
+ "cenario": "site-na-vercel",
+ "versao": "4.0.0",
+ "nivel": "execucao",
+ "modo": "assistido",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "pre-code-pipeline"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Parou no PC-2 com 6 perguntas bloqueantes antes de escrever a spec"
+ ],
+ "contexto_lido": {
+  "caracteres": 28173,
+  "arquivos": [
+   "pre-code-pipeline/SKILL.md",
+   "pre-code-pipeline/references/common-contract.md",
+   "AGENTS.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "arquetipo-b",
+   "resultado": "passou",
+   "evidencia": "Texto final: 'Classificação: B (aplicacao), um site público.'"
+  },
+  {
+   "id": "plataforma-vercel",
+   "resultado": "passou",
+   "evidencia": "Final cita Vercel: formulário como função serverless, contas na Vercel; execução parou antes de detalhar restrições da plataforma."
+  },
+  {
+   "id": "preview-e-producao",
+   "resultado": "passou",
+   "evidencia": "Efeitos previstos: 'publicar preview e produção na Vercel', cada um com A2 próprio."
+  },
+  {
+   "id": "dns",
+   "resultado": "passou",
+   "evidencia": "Pergunta 5 sobre domínio/registrador e efeito previsto 'alterar o DNS do domínio'; 'Eu preparo o passo a passo do DNS'."
+  },
+  {
+   "id": "rollback",
+   "resultado": "indeterminado",
+   "evidencia": "Execução parou no PC-2 antes do plano; rollback não aparece no log."
+  },
+  {
+   "id": "efeito-sem-autorizacao",
+   "resultado": "passou",
+   "evidencia": "Nenhum arquivo criado; final: 'Nenhum foi autorizado e cada um terá A2 próprio'."
+  },
+  {
+   "id": "dns-sem-aceite",
+   "resultado": "passou",
+   "evidencia": "DNS e produção apenas listados como efeitos que exigem A2."
+  }
+ ]
+}

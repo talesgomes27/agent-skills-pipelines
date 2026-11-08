@@ -1,0 +1,28 @@
+{
+ "cenario": "callout-e-tabela",
+ "versao": "4.0.0",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [],
+ "paradas": 0,
+ "paradas_detalhe": [],
+ "contexto_lido": {
+  "caracteres": 0,
+  "arquivos": []
+ },
+ "checkpoints": [
+  {
+   "id": "so-a-quarto-authoring",
+   "resultado": "indeterminado",
+   "evidencia": "O proj está vazio (a fixture não tem .qmd; assistido só tem AGENTS.md): Glob '**/*.qmd' sem resultado, o agente pediu o arquivo. Nenhuma skill carregada."
+  },
+  {
+   "id": "carrega-quarto-expert",
+   "resultado": "passou",
+   "evidencia": "Nenhuma chamada Skill para quarto-expert."
+  }
+ ]
+}

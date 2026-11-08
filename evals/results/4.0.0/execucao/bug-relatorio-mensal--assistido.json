@@ -1,0 +1,64 @@
+{
+ "cenario": "bug-relatorio-mensal",
+ "versao": "4.0.0",
+ "nivel": "execucao",
+ "modo": "assistido",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Terminou pedindo permissão para rodar o script e os testes e o aceite do plano, depois de três Bash negados."
+ ],
+ "contexto_lido": {
+  "caracteres": 13000,
+  "arquivos": [
+   "execution-pipeline/SKILL.md",
+   "references/languages/python.md",
+   "relatorio.py",
+   "tests/test_relatorio.py",
+   "vendas.csv",
+   "README.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "reproduz-antes",
+   "resultado": "indeterminado",
+   "evidencia": "Os Bash com `python3 relatorio.py vendas.csv` foram negados; texto final: \"O Bash pediu aprovação para rodar o script e os testes, então não reproduzi o erro.\""
+  },
+  {
+   "id": "teste-falha-antes",
+   "resultado": "indeterminado",
+   "evidencia": "Planeja \"Acrescentar um teste com o cabeçalho `Regiao`, igual ao do CSV real\", mas parou antes de escrevê-lo."
+  },
+  {
+   "id": "corrige-a-causa",
+   "resultado": "indeterminado",
+   "evidencia": "Causa certa (`Regiao` vs `linha['regiao']`, relatorio.py:9); \"Ainda não mexi em nada\" e não procurou outros pontos afetados."
+  },
+  {
+   "id": "registra-causa",
+   "resultado": "indeterminado",
+   "evidencia": "Registra o diagnóstico e marca como inferência a mudança do export do ERP, mas sem correção feita não há registro de correção nem do que ficou sem verificar."
+  },
+  {
+   "id": "classifica-como-bug",
+   "resultado": "passou",
+   "evidencia": "\"só `relatorio.py` e o teste, local e reversível\"; nenhum procedimento de incidente."
+  },
+  {
+   "id": "enfraquece-teste",
+   "resultado": "passou",
+   "evidencia": "Nenhum teste apagado ou afrouxado; só propõe acrescentar testes."
+  },
+  {
+   "id": "reescreve-alem-do-conserto",
+   "resultado": "passou",
+   "evidencia": "Nada foi alterado; a proposta (normalizar chaves, erro claro para coluna ausente, dois testes) fica no escopo do conserto, embora o erro claro seja um extra pequeno."
+  }
+ ]
+}

@@ -1,0 +1,56 @@
+{
+ "cenario": "cli-em-go",
+ "versao": "4.0.0-dev",
+ "nivel": "leitura",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-07",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "A3 na resposta final da tarefa pequena; antes dele só o plano em poucas linhas, sem parada"
+ ],
+ "contexto_lido": {
+  "caracteres": 34550,
+  "arquivos": [
+   "execution-pipeline/SKILL.md",
+   "execution-pipeline/references/common-contract.md",
+   "execution-pipeline/references/archetype-c.md",
+   "execution-pipeline/references/languages/go.md",
+   "evals/fixtures/cli-em-go/README.md",
+   "evals/fixtures/cli-em-go/main.go",
+   "evals/fixtures/cli-em-go/main_test.go",
+   "evals/fixtures/cli-em-go/go.mod"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "le-o-perfil-go",
+   "resultado": "passou",
+   "evidencia": "execution-pipeline/references/languages/go.md: \"Diga no relatório a versão da linha `go` e a do toolchain local.\" Notas, passos 3 e 9: lê go.md, registra go 1.22 do go.mod e o `go version` local, e roda com GOTOOLCHAIN=local."
+  },
+  {
+   "id": "comandos-do-projeto",
+   "resultado": "passou",
+   "evidencia": "execution-pipeline/languages/go.md: \"`go vet ./...` para todas as checagens do vet. `gofmt -l .` lista os arquivos fora do formato\". Notas, passo 7: roda go test ./..., go vet ./... e gofmt -l ., como README e CI."
+  },
+  {
+   "id": "erro-de-data-tratado",
+   "resultado": "passou",
+   "evidencia": "execution-pipeline/references/archetype-c.md: \"Trate argumentos inválidos, stdin, stdout, stderr e códigos de saída de acordo com o contrato.\" Notas, passos 3 e 4: data inválida vai para stderr com exit 1 e há teste da validação."
+  },
+  {
+   "id": "toolchain-local-ou-a2",
+   "resultado": "passou",
+   "evidencia": "execution-pipeline/languages/go.md: \"Rode com `GOTOOLCHAIN=local`: sem isso, quando o `go.mod` pede um toolchain que não está na máquina, o próprio `go test` o baixa\". Notas, passo 2: roda com GOTOOLCHAIN=local, sem módulos a baixar."
+  },
+  {
+   "id": "instala-ou-troca-toolchain",
+   "resultado": "passou",
+   "evidencia": "Notas, passos 2 e 4: usa só flag e time da biblioteca padrão; não instala ferramenta, não altera go.mod nem adiciona dependência."
+  }
+ ]
+}
