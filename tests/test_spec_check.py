@@ -254,6 +254,17 @@ class External(Base):
         self.assertIn('formato: native', out)
         self.assertNotIn('aviso', out)
 
+    def test_explicit_sdd_format_still_checks_native(self):
+        d = self.write(self.tmp(), {
+            'docs/spec.md': SPEC.replace('- Estado: aprovado', '- Estado: aprovdo'),
+            '.kiro/specs/x/requirements.md': '', '.kiro/specs/x/design.md': '', '.kiro/specs/x/tasks.md': '',
+        })
+        code, out = run(d, '--format', 'kiro')
+        self.assertEqual(code, 1, out)
+        self.assertIn('formato: kiro', out)
+        self.assertIn('problema: native: R-002: estado ausente ou fora da lista', out)
+        self.assertEqual(run(self.write(self.tmp(), {'docs/spec.md': SPEC}), '--format', 'kiro')[0], 2)
+
 
 if __name__ == '__main__':
     unittest.main()

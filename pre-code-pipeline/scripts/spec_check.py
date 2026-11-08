@@ -198,13 +198,17 @@ def main(argv=None):
         print('raiz não encontrada: %s' % args.root, file=sys.stderr)
         return 2
     order = list(CHECKS) if args.format == 'auto' else [args.format]
+    if args.format not in ('auto', 'native'):
+        order.append('native')  # escolher um formato de SDD não dispensa a spec nativa
     try:
         found = [(n, r) for n, r in ((n, CHECKS[n](args.root, args.stage)) for n in order) if r is not None]
     except (OSError, UnicodeDecodeError) as e:
         print('não consegui ler a spec: %s' % e, file=sys.stderr)
         return 2
+    if args.format != 'auto' and found and found[0][0] != args.format:
+        found = []  # o formato pedido não existe: a nativa sozinha não responde por ele
     if not found:
-        print('nenhuma spec encontrada (%s)' % ', '.join(order), file=sys.stderr)
+        print('nenhuma spec encontrada (%s)' % (args.format if args.format != 'auto' else ', '.join(order)), file=sys.stderr)
         return 2
     name, (problems, info) = found[0]
     print('formato: %s' % name)

@@ -72,6 +72,11 @@ Comparada com a 3.4.0 (`3759382`). O modo padrão das pipelines muda para portõ
     - o caminho de desfazer no script de fotos;
     - a linha de aprendizado no `aprendido-em-tarefas`;
     - o `push-por-injecao`, cujo erro de digitação no README carrega a `writing-pipeline` ou nenhuma skill.
+- Correções depois do merge, antes da publicação:
+  - O hook do `pipeline-guardrails` lê e escreve UTF-8 em qualquer console; no Windows ele quebrava com acento.
+  - O hook passa a pedir confirmação para escritas no repositório pela API do GitHub: `gh api` em `contents` e `dispatches` com método ou campo de escrita, inclusive com o método entre aspas ou em minúsculas; as mutations `createRef`, `updateRef`, `deleteRef` e `createCommitOnBranch`; `gh api graphql` com a query num arquivo; e `curl` de escrita em `api.github.com` ou `uploads.github.com`, com `-X`, `--request`, `-d`, `--json`, `-T` e formas coladas como `-sXPUT`. Com `-X GET` explícito, `gh api` não pergunta. Deixa de perguntar em `cat vercel.json` e em `.vercel/`, mas continua perguntando em `vercel`, `npx vercel --prod` e `./node_modules/.bin/vercel`. Criar objetos soltos (`git/commits`, `git/trees`, `git/blobs`) e mudar a proteção de branch pela API seguem fora do hook.
+  - Com um formato de SDD em `--format`, o `spec_check.py` também confere a spec nativa que existir; se o formato pedido não existir, sai com 2, como antes.
+  - A description do `diff-reviewer` e do `sanitation-checker` diz que eles só leem por instrução: têm Bash, e a proteção mecânica são as regras `ask` e `deny`.
 - Resultados de leitura dos três cenários novos contra a 3.4.0, em `evals/results/3.4.0/leitura/`, para mostrar o comportamento antes da mudança, e resultados da 4.0.0 em preparo em `evals/results/4.0.0-dev/leitura/`.
 
 ### Como atualizar
