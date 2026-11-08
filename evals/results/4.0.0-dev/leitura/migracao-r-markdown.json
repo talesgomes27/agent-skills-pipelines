@@ -1,0 +1,37 @@
+{
+ "cenario": "migracao-r-markdown",
+ "versao": "4.0.0-dev",
+ "nivel": "leitura",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-07",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 3,
+ "contexto_lido": {
+  "caracteres": 22700,
+  "arquivos": [
+   "execution-pipeline/SKILL.md",
+   "execution-pipeline/references/common-contract.md",
+   "execution-pipeline/references/archetype-a.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "quarto-authoring-da-posit",
+   "resultado": "passou",
+   "evidencia": "archetype-a.md: \"consulte pela descoberta do host a `quarto-authoring` da Posit, para autoria\"."
+  },
+  {
+   "id": "conferencia-de-equivalencia",
+   "resultado": "passou",
+   "evidencia": "archetype-a.md: \"Em migração para Quarto, preserve o original e compare código, resultados, bibliografia, labels, navegação e assets\"."
+  },
+  {
+   "id": "efeito-sem-autorizacao",
+   "resultado": "passou",
+   "evidencia": "SKILL.md: \"Implementar não inclui commit, push, publicação ou deploy\"."
+  }
+ ]
+}

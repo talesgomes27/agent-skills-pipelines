@@ -1,6 +1,6 @@
 ---
 name: execution-pipeline
-description: "Use quando o usuário pedir para implementar ou continuar um plano já aprovado, vindo do planejamento ou de uma auditoria, com autorização para alterar o código."
+description: "Use quando o usuário pedir para implementar ou continuar um plano já aprovado, vindo do planejamento ou de uma auditoria, com autorização para alterar o código, ou para corrigir um erro, bug ou regressão."
 ---
 
 # Execução de um plano aprovado
@@ -20,7 +20,7 @@ Siga o [contrato comum](references/common-contract.md) para leitura inicial, esf
 ## Antes de começar
 
 1. Faça a leitura inicial do contrato comum e leia o plano aprovado: `docs/05-implementation-plan.md` ou o plano aprovado na conversa, vindos do pré-código, ou o plano e as restrições encaminhados por uma auditoria. Leia requisitos e arquitetura só nas partes que a tarefa usa.
-2. Confirme que o plano foi aprovado e que implementar está autorizado. Vale a aprovação registrada no estado do projeto ou dada pelo usuário na conversa. Sem plano aprovado, pare e encaminhe para `pre-code-pipeline`, exceto numa tarefa pequena: local (arquivos do projeto ou os que o usuário apontou), reversível, sem efeito externo (escrita ou envio pela rede, contas, mensagens, produção) e sem mudar interface que outro sistema usa. Ler páginas ou APIs públicas pode, com as regras de coleta da [referência C](references/archetype-c.md). Nela o pedido é o plano: diga em poucas linhas o que vai fazer e como vai verificar, implemente e verifique sem abrir os gates. Se ela mexe em arquivos do usuário, mostre antes o que vai mudar, não sobrescreva nada e deixe como desfazer. Quando a tarefa precisa de escopo antes (fontes, cuidados com os dados, formato), use a entrega pontual da `pre-code-pipeline`: o aceite dela vale como plano, e a entrega segue sem abrir os gates, só com as paradas condicionais.
+2. Confirme que o plano foi aprovado e que implementar está autorizado. Vale a aprovação registrada no estado do projeto ou dada pelo usuário na conversa. Sem plano aprovado, pare e encaminhe para `pre-code-pipeline`, exceto na correção de bug abaixo e numa tarefa pequena: local (arquivos do projeto ou os que o usuário apontou), reversível, sem efeito externo (escrita ou envio pela rede, contas, mensagens, produção) e sem mudar interface que outro sistema usa. Ler páginas ou APIs públicas pode, com as regras de coleta da [referência C](references/archetype-c.md). Nela o pedido é o plano: diga em poucas linhas o que vai fazer e como vai verificar, implemente e verifique sem abrir os gates. Se ela mexe em arquivos do usuário, mostre antes o que vai mudar, não sobrescreva nada e deixe como desfazer. Quando a tarefa precisa de escopo antes (fontes, cuidados com os dados, formato), use a entrega pontual da `pre-code-pipeline`: o aceite dela vale como plano, e a entrega segue sem abrir os gates, só com as paradas condicionais.
 3. Use o arquétipo registrado em `docs/00_archetype.md` ou no contrato: A = análise e modelos, B = aplicações (site, API, dashboard), C = automações (script, CLI, job agendado, ETL). Sem registro, infira pelo contexto quando for óbvio (um script de linha de comando é C) e diga que inferiu; pergunte só quando a escolha muda uma decisão.
 4. Descubra os comandos reais em manifests, lockfiles, scripts e CI. Rode os checks afetados antes de mudar qualquer coisa e anote o que já falhava. Falha preexistente fora do escopo não bloqueia a entrega, mas aparece no relatório separada das falhas novas.
 
@@ -38,9 +38,19 @@ Escolha o esforço pela escala do contrato comum e diga por quê: leve para muda
 - Testes, migrações, notebooks e builds executam código. Rode em ambiente de desenvolvimento ou teste, nunca contra produção salvo a leitura do item seguinte, e não instale nada globalmente.
 - Ler dados reais com uma credencial só de leitura que o usuário autorizou vale quando o plano prevê; o que for para testes, logs ou relatórios segue a política de dados. Escrever, enviar mensagem, cobrar ou publicar usa o recurso de teste do plano (banco, pasta, chat ou conta) ou uma autorização específica para aquela execução.
 
+## Correção de bug
+
+Corrigir um erro, bug ou regressão local e reversível é tarefa pequena. Se o conserto muda interface ou dados, ou toca mais de um arquivo de código além dos testes, mostre o diagnóstico e um plano curto e espere o aceite. É incidente, na `release-and-ops-pipeline`, o defeito que teve efeito fora do desenvolvimento (usuários, dados reais, envios) ou parou um serviço ou job de produção usado por outros. Falha local que não publicou nem enviou nada é bug.
+
+1. Reproduza antes de mudar, com o comando e a saída que mostram o erro.
+2. Escreva o teste que falha pelo motivo certo, com a forma real da entrada que quebrou (cabeçalho, payload, formato), sem dados pessoais; sem teste possível, caracterize o comportamento.
+3. Corrija a causa, não o sintoma, com o menor diff, e procure os outros pontos que chamam o código mudado.
+4. Rode o teste novo e os checks afetados.
+5. Registre na resposta, ou onde o projeto já registra estado, a causa, a correção e o que ficou sem verificar. Refatoração vista no caminho vira proposta, não entra no conserto.
+
 ## Modo
 
-No modo assistido, mostre o resultado e espere o aceite ao fim de EX-3 e EX-5. No app novo que o pré-código aprovou como leve, o pedido de construí-lo já autoriza implementar depois do aceite do plano, e o único aceite que falta é o do fim de EX-5. O modo contínuo segue o contrato comum. As paradas condicionais (escopo mudou, decisão bloqueante, conflito com trabalho existente, risco de perda, efeito fora do autorizado) valem em qualquer modo.
+No modo assistido, mostre o resultado e espere o aceite ao fim de EX-3 e EX-5. No app novo que o pré-código aprovou como leve, o pedido de construí-lo já autoriza implementar depois do aceite do plano, e o único aceite que falta é o do fim de EX-5. O modo contínuo segue o contrato comum. As paradas condicionais do contrato comum valem em qualquer modo.
 
 Implementar não inclui commit, push, publicação ou deploy. Faça essas ações só quando o usuário pedir.
 

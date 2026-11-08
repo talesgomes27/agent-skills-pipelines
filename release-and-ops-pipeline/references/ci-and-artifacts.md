@@ -15,6 +15,10 @@ Mudança de versão/arquivo depois do teste exige checks pertinentes do artefato
 Para containers, identifique imagem por digest/revisão e confira entrypoint/configuração no destino de teste. Build local e registry push são estados distintos.
 Validador YAML/actionlint verifica propriedades locais; confirmação de CI exige consultar run e conclusão para o commit certo. URL de deployment emitida pode representar fila, erro ou preview: confira status e destino final antes de concluir.
 
+## Pacotes
+
+Publique o pacote real da linguagem; em Python, confira wheel, sdist e entrypoints. GitHub Release, PyPI e outro registry são ações distintas, cada uma com a sua autorização. Use a identidade de menor privilégio, como o trusted publishing já configurado.
+
 ## Observação e recuperação
 
 Use consultas limitadas e intervalos razoáveis para runs/deployments; se não houver estado terminal dentro da janela disponível, relate pendência, sem loop infinito ou repetição de upload/deploy.

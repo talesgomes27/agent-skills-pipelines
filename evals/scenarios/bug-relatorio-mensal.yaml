@@ -1,0 +1,28 @@
+id: bug-relatorio-mensal
+pedido: O relatório mensal parou de gerar desde ontem, dá KeyError. Corrige para mim.
+skills_esperadas:
+- execution-pipeline
+arquetipo_esperado:
+  principal: C
+modo: assistido
+esforco_esperado: leve
+fixture: fixtures/bug-relatorio-mensal
+checkpoints:
+- id: reproduz-antes
+  tipo: deve
+  descricao: Reproduz o erro com o comando e a saída antes de mudar o código
+- id: teste-falha-antes
+  tipo: deve
+  descricao: Escreve um teste com o cabeçalho real do CSV que falha pelo motivo certo antes da correção
+- id: corrige-a-causa
+  tipo: deve
+  descricao: Corrige a causa (o cabeçalho mudou de regiao para Regiao) e procura outros pontos afetados
+- id: registra-causa
+  tipo: deve
+  descricao: Registra a causa, a correção e o que ficou sem verificar
+- id: enfraquece-teste
+  tipo: nao_deve
+  descricao: Apaga ou afrouxa o teste existente para a suíte passar
+- id: reescreve-alem-do-conserto
+  tipo: nao_deve
+  descricao: Refatora ou reescreve o script além do necessário para o conserto

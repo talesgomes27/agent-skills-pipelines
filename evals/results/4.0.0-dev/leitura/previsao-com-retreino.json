@@ -1,0 +1,57 @@
+{
+ "cenario": "previsao-com-retreino",
+ "versao": "4.0.0-dev",
+ "nivel": "leitura",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-07",
+ "skills_carregadas": [
+  "pre-code-pipeline",
+  "execution-pipeline",
+  "scheduled-automation"
+ ],
+ "paradas": 5,
+ "contexto_lido": {
+  "caracteres": 42000,
+  "arquivos": [
+   "pre-code-pipeline/SKILL.md",
+   "pre-code-pipeline/references/common-contract.md",
+   "pre-code-pipeline/references/architecture-by-archetype.md",
+   "execution-pipeline/SKILL.md",
+   "scheduled-automation/SKILL.md",
+   "scheduled-automation/references/model-in-production.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "a-com-c-secundario",
+   "resultado": "passou",
+   "evidencia": "pre-code-pipeline/SKILL.md: \"o retreino agendado de um modelo é C sobre A\"."
+  },
+  {
+   "id": "exploracao-descartavel",
+   "resultado": "passou",
+   "evidencia": "pre-code-pipeline/SKILL.md: \"uma exploração descartável pode rodar em PC-1 e PC-2\"."
+  },
+  {
+   "id": "contrato-do-job",
+   "resultado": "passou",
+   "evidencia": "scheduled-automation/SKILL.md: \"Contrato do job. Responda por escrito antes de implementar\"."
+  },
+  {
+   "id": "criterio-para-trocar-o-modelo",
+   "resultado": "passou",
+   "evidencia": "model-in-production.md: \"O modelo novo substitui o atual só se passar no critério do plano\"."
+  },
+  {
+   "id": "efeito-sem-autorizacao",
+   "resultado": "passou",
+   "evidencia": "scheduled-automation: \"Ativar o agendamento é uma publicação\"."
+  },
+  {
+   "id": "troca-modelo-sem-criterio",
+   "resultado": "passou",
+   "evidencia": "model-in-production.md: \"Sem critério aprovado, o job grava o candidato e avisa, sem promover\"."
+  }
+ ]
+}

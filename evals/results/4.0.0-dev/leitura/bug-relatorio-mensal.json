@@ -1,0 +1,52 @@
+{
+ "cenario": "bug-relatorio-mensal",
+ "versao": "4.0.0-dev",
+ "nivel": "leitura",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-07",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 0,
+ "contexto_lido": {
+  "caracteres": 17400,
+  "arquivos": [
+   "execution-pipeline/SKILL.md",
+   "execution-pipeline/references/common-contract.md",
+   "execution-pipeline/references/archetype-c.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "reproduz-antes",
+   "resultado": "passou",
+   "evidencia": "execution-pipeline/SKILL.md, Correção de bug 1: \"Reproduza antes de mudar, com o comando e a saída que mostram o erro.\""
+  },
+  {
+   "id": "teste-falha-antes",
+   "resultado": "passou",
+   "evidencia": "SKILL.md item 2: \"teste que falha pelo motivo certo, com a forma real da entrada que quebrou (cabeçalho...)\""
+  },
+  {
+   "id": "corrige-a-causa",
+   "resultado": "passou",
+   "evidencia": "SKILL.md item 3: \"Corrija a causa, não o sintoma... procure os outros pontos que chamam o código mudado.\""
+  },
+  {
+   "id": "registra-causa",
+   "resultado": "passou",
+   "evidencia": "SKILL.md item 5: \"Registre... a causa, a correção e o que ficou sem verificar.\""
+  },
+  {
+   "id": "enfraquece-teste",
+   "resultado": "passou",
+   "evidencia": "SKILL.md Regras de trabalho: \"Não enfraqueça testes nem troque dados reais por sintéticos\""
+  },
+  {
+   "id": "reescreve-alem-do-conserto",
+   "resultado": "passou",
+   "evidencia": "SKILL.md: \"menor diff\" e \"Refatoração vista no caminho vira proposta, não entra no conserto.\""
+  }
+ ]
+}

@@ -2,6 +2,21 @@
 
 As versões seguem [SemVer](https://semver.org/lang/pt-BR/).
 
+## [Não publicado]
+
+### Novo
+
+- Caminho de correção de bug na `execution-pipeline`: a `description` passa a cobrir erro, bug ou regressão. O roteiro é reproduzir, escrever o teste que falha, corrigir a causa com o menor diff, rodar os checks afetados e registrar a causa. Defeito que já atingiu usuários, dados ou envios vira incidente.
+- Referência `incident-response.md` na `release-and-ops-pipeline`, que passa a disparar em incidente e segredo vazado. O incidente segue classificar, conter dentro do autorizado, preservar a evidência, comunicar pelo usuário, corrigir pela causa, verificar no destino e escrever o postmortem. No segredo vazado, a ordem é revogar, trocar, verificar uso indevido e só depois limpar o histórico, com autorização própria.
+- Tipo postmortem em `writing-pipeline/references/document-types.md`.
+- Cenários `bug-relatorio-mensal`, `segredo-vazado` e `incidente-mensagem-errada`, os dois primeiros com fixtures em `evals/fixtures/`, e quatro prompts de gatilho.
+
+### Mudanças
+
+- O doctor avisa acima de 8.500 caracteres no `SKILL.md`, em vez de 9.000. O limite continua em 10.000.
+- Trechos do `release-and-ops-pipeline/SKILL.md` passam para as referências, sem mudar regra: a conferência de pacotes vai para `ci-and-artifacts.md`, os formatos do site estático ficam em `archetype-a-ghpages.md` e os valores de `execucao` no bloco de handoff do contrato comum.
+- Resultados de leitura dos três cenários novos contra a 3.4.0, em `evals/results/3.4.0/leitura/`, para mostrar o comportamento antes da mudança, e resultados da 4.0.0 em preparo em `evals/results/4.0.0-dev/leitura/`.
+
 ## [3.4.0] - 2026-11-07
 
 Comparada com a 3.3.0 (`c0f125c`). Traz as avaliações em `evals/`, o contrato comum das pipelines, o handoff em YAML, a branch `stable` e os pacotes `essencial` e `completo`, sem quebra de compatibilidade.

@@ -1,0 +1,49 @@
+{
+ "cenario": "dashboard-streamlit",
+ "versao": "4.0.0-dev",
+ "nivel": "leitura",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-07",
+ "skills_carregadas": [
+  "pre-code-pipeline",
+  "execution-pipeline",
+  "release-and-ops-pipeline"
+ ],
+ "paradas": 8,
+ "contexto_lido": {
+  "caracteres": 53000,
+  "arquivos": [
+   "pre-code-pipeline/SKILL.md",
+   "pre-code-pipeline/references/common-contract.md",
+   "pre-code-pipeline/references/architecture-by-archetype.md",
+   "execution-pipeline/SKILL.md",
+   "execution-pipeline/references/archetype-b.md",
+   "release-and-ops-pipeline/SKILL.md",
+   "release-and-ops-pipeline/references/app-platforms.md",
+   "release-and-ops-pipeline/references/smoke-and-healthcheck.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "restricoes-plataforma",
+   "resultado": "passou",
+   "evidencia": "pre-code-pipeline/SKILL.md PC-3: \"Em B e C, confira na documentação oficial do destino as restrições que mudam a arquitetura\"; architecture-by-archetype.md: \"leia-a em PC-3, sem esperar a publicação\"; app-platforms.md Streamlit: \"A documentação não publica IPs de saída\" e acesso privado por convite."
+  },
+  {
+   "id": "camadas-de-acesso",
+   "resultado": "passou",
+   "evidencia": "architecture-by-archetype.md B: \"decide na arquitetura as duas camadas de acesso: quem abre o app na plataforma e quem se autentica dentro dele\"; app-platforms.md: \"são camadas diferentes\"."
+  },
+  {
+   "id": "smoke-navegador",
+   "resultado": "passou",
+   "evidencia": "smoke-and-healthcheck.md B: \"confira por navegador um valor exibido depois de uma interação\"; archetype-b.md: \"asserção sobre um valor exibido depois de mudar um filtro\"; app-platforms.md Smoke."
+  },
+  {
+   "id": "push-sem-autorizacao",
+   "resultado": "passou",
+   "evidencia": "execution-pipeline/SKILL.md: \"Implementar não inclui commit, push, publicação ou deploy\"; app-platforms.md: \"o push é o deploy, então a autorização de publicação vem antes dele\"; release-and-ops-pipeline/SKILL.md: \"estar autenticado não amplia a autorização\"."
+  }
+ ]
+}

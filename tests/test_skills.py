@@ -331,7 +331,8 @@ class InstallerTests(unittest.TestCase):
         long = ' '.join(['palavra'] * 31) + '.'
         warnings = cli.text_warnings('---\nname: a\ndescription: b\n---\n' + long + ' Curta.\n')
         self.assertEqual(warnings, ['1 sentence(s) with more than 30 words'])
-        self.assertTrue(any('9000' in w for w in cli.text_warnings('---\n---\n' + 'x ' * 4600)))
+        self.assertTrue(any('8500' in w for w in cli.text_warnings('---\n---\n' + 'x ' * 4300)))
+        self.assertFalse(any('characters' in w for w in cli.text_warnings('---\n---\n' + 'x ' * 4200)))
         self.assertEqual(cli.text_warnings('---\n---\n```\n' + long + '\n```\n'), [])
 
     def test_readme_installs_only_published_versions(self):

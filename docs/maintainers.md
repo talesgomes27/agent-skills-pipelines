@@ -27,7 +27,7 @@ Mudança de comportamento numa skill se testa com os cenários de [`evals/`](../
 - Sintaxe YAML e chaves duplicadas no frontmatter e nos arquivos `.yml` e `.yaml` da skill; nome igual ao da pasta; descrição e metadata como texto.
 - Links Markdown inline no `SKILL.md` e em `references/**/*.md`: o destino existe e fica dentro da skill. Ignora código, URLs externas e âncoras; em `arquivo.md#seção`, confere o arquivo, não a seção. Não lê links por definição nem em HTML.
 - `examples/` fica fora da varredura de links, mas os arquivos YAML e as regras de symlink continuam valendo.
-- O limite de 10.000 caracteres do `SKILL.md`. Acima de 9.000 caracteres e em frases com mais de 30 palavras, o doctor só avisa, em `warnings`, sem falhar.
+- O limite de 10.000 caracteres do `SKILL.md`. Acima de 8.500 caracteres e em frases com mais de 30 palavras, o doctor só avisa, em `warnings`, sem falhar.
 - O contrato comum: cada pipeline tem em `references/common-contract.md` uma cópia gerada de `shared/common-contract.md`. Edite só a fonte e rode `scripts/skills.py sync-shared`; o doctor falha quando a cópia difere, e o hook de edição gera as cópias.
 - No destino de uma instalação, a integridade de cada cópia gerenciada pelo SHA-256 registrado. Um link é verificado só na estrutura, porque o conteúdo é o do checkout vivo. Uma skill sem registro recebe só a verificação estrutural.
 

@@ -37,6 +37,10 @@ Para diretoria ou gestão, a partir de uma análise ou de um modelo:
 - Monte uma tabela que liga cada número do texto à célula ou saída de onde ele veio, e confira os números nessas saídas. Essa tabela e o anexo técnico acompanham o relatório à parte, ou ficam na resposta, sem contar no limite de páginas. Se as saídas podem estar desatualizadas, diga isso ou rode de novo com autorização.
 - Dados de pessoas aparecem só agregados, como pede a skill `personal-data`.
 
+## Postmortem de incidente
+
+Linha do tempo com horários e fonte de cada evento, impacto medido (quem, quantos, por quanto tempo), causa, o que ajudou e o que atrapalhou a resposta, e ações com responsável e prazo. Descreva falhas de processo e de sistema, sem culpar pessoas. Separe o confirmado do que ainda é hipótese. Não inclua segredos, nem o valor de um segredo vazado, e dados de pessoas só agregados, como pede a skill `personal-data`. Publicar ou enviar o postmortem é decisão do usuário.
+
 ## Release notes, changelog, PR e commit
 
 Descreva mudanças efetivamente implementadas e seus efeitos. Separe novidades, correções e incompatibilidades conforme a convenção do projeto. Preserve rastreabilidade e divulgações exigidas; não proíba menções a ferramentas ou assistência quando forem relevantes ou requeridas.
