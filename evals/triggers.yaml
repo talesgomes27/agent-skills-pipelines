@@ -185,3 +185,19 @@
   skill: writing-pipeline
   esperado: nao_deve
   prompt: Roda o notebook de análise e exporta o HTML.
+- id: jurimetria-1
+  skill: jurimetria
+  esperado: deve
+  prompt: Quanto tempo leva, em média, um processo de execução fiscal no TJSP? Quero usar os dados do DataJud.
+- id: jurimetria-2
+  skill: jurimetria
+  esperado: ambiguo_deve
+  prompt: Tenho uma lista de números de processo de clientes; confere quais estão escritos certo antes de eu mandar para o sistema.
+- id: jurimetria-3
+  skill: jurimetria
+  esperado: nao_deve
+  prompt: Revisa este contrato de locação e aponta as cláusulas abusivas.
+- id: jurimetria-4
+  skill: jurimetria
+  esperado: nao_deve
+  prompt: Redige uma petição inicial de cobrança e põe o número do processo 0801234-84.2023.8.14.0301 no cabeçalho.

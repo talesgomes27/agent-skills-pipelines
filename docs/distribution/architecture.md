@@ -34,13 +34,13 @@ O padrão é a pasta do projeto atual; `--scope user` instala no perfil. Os cami
 | Bundle | Skills |
 |---|---|
 | `planning` | `pre-code-pipeline` |
-| `development` | `pre-code-pipeline`, `execution-pipeline`, `audit-and-refactoring-pipeline`, `scheduled-automation`, `personal-data` |
-| `research` | `pre-code-pipeline`, `execution-pipeline`, `writing-pipeline`, `quarto-expert`, `personal-data` |
+| `development` | `pre-code-pipeline`, `execution-pipeline`, `audit-and-refactoring-pipeline`, `scheduled-automation`, `personal-data`, `jurimetria` |
+| `research` | `pre-code-pipeline`, `execution-pipeline`, `writing-pipeline`, `quarto-expert`, `personal-data`, `jurimetria` |
 | `editorial` | `writing-pipeline` |
 | `release` | `release-and-ops-pipeline` |
 | `library` | `skill-loader` |
 | `essencial` | `pre-code-pipeline`, `execution-pipeline`, `release-and-ops-pipeline`, `personal-data` |
-| `completo` | as nove skills |
+| `completo` | as dez skills |
 
 Os bundles `essencial` e `completo` têm as mesmas skills dos pacotes de mesmo nome do marketplace do Claude Code. No marketplace, o `completo` traz também o plugin `pipeline-guardrails`, que não é skill e o instalador não instala. Bundles agrupam skills e mais nada; ferramentas e MCPs que uma skill cite você instala à parte. Dá para repetir `--bundle` e `--skill`, combiná-los e tirar nomes com `--exclude`. Instalar tudo exige `--all`.
 

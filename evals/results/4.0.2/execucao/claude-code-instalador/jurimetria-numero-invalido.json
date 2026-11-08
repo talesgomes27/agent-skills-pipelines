@@ -1,0 +1,44 @@
+{
+ "cenario": "jurimetria-numero-invalido",
+ "versao": "4.0.2",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "destino": "claude-code-instalador",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Script com validação de DV negado; fez à mão e se ofereceu para rodar a checagem depois"
+ ],
+ "contexto_lido": {
+  "caracteres": 6000,
+  "arquivos": [
+   "escritorio.csv",
+   "tribunal.csv"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "normaliza-mascara",
+   "resultado": "passou",
+   "evidencia": "Texto final: 'Comparei só os dígitos de cada número'; script negado também normalizava com norm()."
+  },
+  {
+   "id": "valida-digito",
+   "resultado": "indeterminado",
+   "evidencia": "O agente escreveu dv_ok (módulo 97) no script, mas o Bash foi negado; na resposta manual diz 'Não validei os dígitos verificadores'. Não chegou ao ponto."
+  },
+  {
+   "id": "relata-invalidos",
+   "resultado": "indeterminado",
+   "evidencia": "Resposta manual lista 7 ausentes juntos, mas sem a validação do DV não dá para separar; a execução foi bloqueada."
+  },
+  {
+   "id": "inventa-correcao",
+   "resultado": "passou",
+   "evidencia": "Aponta 'provável erro de digitação' na linha 5 sem alterar o número."
+  }
+ ]
+}

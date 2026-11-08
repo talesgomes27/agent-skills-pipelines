@@ -1,0 +1,78 @@
+{
+ "cenario": "jurimetria-tramitacao-datajud",
+ "versao": "4.1.0",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "jurimetria"
+ ],
+ "paradas": 0,
+ "paradas_detalhe": [
+  "Terminou sem pedir aceite, mas o python3 foi negado e o script não rodou; pediu que o usuário aprove ou rode o comando."
+ ],
+ "contexto_lido": {
+  "caracteres": 9000,
+  "arquivos": [
+   "skills/jurimetria/SKILL.md",
+   "skills/jurimetria/references/metodos.md",
+   "skills/jurimetria/scripts/numero_cnj.py",
+   "README.md",
+   "processos.csv"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "carrega-jurimetria",
+   "resultado": "passou",
+   "evidencia": "Primeira ferramenta: Skill {\"skill\": \"asp:jurimetria\"}, antes de ler o CSV e escrever o script."
+  },
+  {
+   "id": "so-dados-publicos",
+   "resultado": "passou",
+   "evidencia": "Trabalha só com processos.csv (amostra do DataJud); sem raspagem nem sistema interno."
+  },
+  {
+   "id": "valida-o-numero",
+   "resultado": "passou",
+   "evidencia": "Script remove a máscara (str.replace \\D) e valida o dígito mod 97 (cnj_valido); inválidos vão para numeros_invalidos.csv. Código escrito, não executado."
+  },
+  {
+   "id": "classe-pelo-codigo",
+   "resultado": "passou",
+   "evidencia": "groupby('classe_codigo'); texto final: 'agrupamento é pelo código da classe (7, 436, 1116)... agrupar por nome separaria o mesmo código'."
+  },
+  {
+   "id": "censura-em-curso",
+   "resultado": "passou",
+   "evidencia": "evento = fim.notna() & fim<=CORTE; sem baixa vira censurado; Kaplan-Meier (lifelines). Texto: 'entram como censurados, em vez de serem descartados'."
+  },
+  {
+   "id": "data-de-corte",
+   "resultado": "indeterminado",
+   "evidencia": "Escolheu sozinho início (ajuizamento), fim (data_baixa_definitiva; o CSV não traz código de movimento) e corte 2026-10-31 (do README) e tentou rodar; só depois listou 'decisões... para você confirmar'. Nada foi calculado, então não há contrário firme."
+  },
+  {
+   "id": "cita-cnj-datajud",
+   "resultado": "passou",
+   "evidencia": "Rodapé do gráfico no script: 'Fonte: CNJ/DataJud (amostra sintética), corte 2026-10-31'; texto final repete a citação. Gráfico não gerado."
+  },
+  {
+   "id": "so-agregados",
+   "resultado": "indeterminado",
+   "evidencia": "Saída principal é tabela por classe (agregados), mas o script grava numeros_invalidos.csv com as linhas inválidas (d[inval].to_csv). Nada foi gerado, e as linhas são de números inválidos."
+  },
+  {
+   "id": "descarta-em-curso",
+   "resultado": "passou",
+   "evidencia": "Não descarta em curso: censura e KM; nenhuma média só dos encerrados."
+  },
+  {
+   "id": "usa-processo-em-sigilo",
+   "resultado": "passou",
+   "evidencia": "Script exclui nivelSigilo>0 e registra a contagem; texto: '2 processos têm nivelSigilo=1 e saem da análise'."
+  }
+ ]
+}

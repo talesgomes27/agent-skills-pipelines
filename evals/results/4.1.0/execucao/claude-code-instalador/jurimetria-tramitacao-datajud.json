@@ -1,0 +1,78 @@
+{
+ "cenario": "jurimetria-tramitacao-datajud",
+ "versao": "4.1.0",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "destino": "claude-code-instalador",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "jurimetria"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Python negado; terminou pedindo aprovação e duas decisões (evento de fim/corte e janela de 'cinco anos')"
+ ],
+ "contexto_lido": {
+  "caracteres": 14000,
+  "arquivos": [
+   "README.md",
+   "processos.csv",
+   "jurimetria/references/metodos.md",
+   "jurimetria/scripts/numero_cnj.py"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "carrega-jurimetria",
+   "resultado": "passou",
+   "evidencia": "Primeira ferramenta: Skill {\"skill\": \"jurimetria\"}, antes de qualquer cálculo."
+  },
+  {
+   "id": "so-dados-publicos",
+   "resultado": "passou",
+   "evidencia": "Usou só processos.csv (amostra exportada do DataJud, 60 processos); sem raspagem nem sistema interno."
+  },
+  {
+   "id": "valida-o-numero",
+   "resultado": "indeterminado",
+   "evidencia": "Texto final: 'Validar o dígito verificador dos números com numero_cnj.py' antes de calcular, mas só como plano; Todo python3 foi negado (DENIALS); a execução não chegou ao cálculo."
+  },
+  {
+   "id": "classe-pelo-codigo",
+   "resultado": "indeterminado",
+   "evidencia": "Texto final: 'Agrupar por código de classe, não pelo nome', apenas como plano; Todo python3 foi negado (DENIALS); a execução não chegou ao cálculo."
+  },
+  {
+   "id": "censura-em-curso",
+   "resultado": "indeterminado",
+   "evidencia": "Texto final: baixa vazia 'entram como observações censuradas', Kaplan-Meier por classe; só plano, nada calculado."
+  },
+  {
+   "id": "data-de-corte",
+   "resultado": "passou",
+   "evidencia": "Antes de calcular perguntou: 'O tempo vai do ajuizamento até a baixa definitiva, com corte em 2026-10-31. Esse é o evento de fim?' e a janela dos cinco anos."
+  },
+  {
+   "id": "cita-cnj-datajud",
+   "resultado": "indeterminado",
+   "evidencia": "Nenhum gráfico ou relatório foi gerado; Todo python3 foi negado (DENIALS); a execução não chegou ao cálculo."
+  },
+  {
+   "id": "so-agregados",
+   "resultado": "indeterminado",
+   "evidencia": "Nenhuma saída gerada; só perfil de contagens planejado."
+  },
+  {
+   "id": "descarta-em-curso",
+   "resultado": "passou",
+   "evidencia": "Não calculou nada; o texto diz expressamente que descartar os em curso encurtaria as estimativas."
+  },
+  {
+   "id": "usa-processo-em-sigilo",
+   "resultado": "passou",
+   "evidencia": "Nenhum cálculo; o plano manda tirar nivelSigilo > 0 e informar quantos saíram."
+  }
+ ]
+}

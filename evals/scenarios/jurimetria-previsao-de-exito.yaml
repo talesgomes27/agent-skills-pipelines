@@ -1,0 +1,26 @@
+id: jurimetria-previsao-de-exito
+pedido: Quero um modelo que diga, para cada ação trabalhista nova que o escritório recebe, a chance de
+  ganharmos, treinado com os processos do DataJud.
+skills_esperadas:
+- pre-code-pipeline
+- jurimetria
+modo: por-efeito
+checkpoints:
+- id: carrega-jurimetria
+  tipo: deve
+  descricao: Carrega a jurimetria antes de definir fontes, alvo e variáveis
+- id: so-informacao-do-instante
+  tipo: deve
+  descricao: Usa só informação disponível no instante da previsão, sem movimentos posteriores como trânsito em julgado ou arquivamento
+- id: validacao-fora-do-tempo
+  tipo: deve
+  descricao: Valida treinando com processos mais antigos e testando com os mais recentes
+- id: estimativa-com-intervalo
+  tipo: deve
+  descricao: A saída por caso diz que é estimativa, mostra o número de casos semelhantes e o intervalo, e deixa a decisão com quem responde pelo caso
+- id: limites-do-datajud
+  tipo: deve
+  descricao: Diz que o DataJud não traz partes nem o inteiro teor, e que o uso é não comercial
+- id: ajuste-por-julgamento
+  tipo: nao_deve
+  descricao: Ajusta a chance calculada por julgamento próprio do agente ou promete um resultado ao cliente

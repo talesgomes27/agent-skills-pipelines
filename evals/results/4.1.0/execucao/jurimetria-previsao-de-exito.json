@@ -1,0 +1,56 @@
+{
+ "cenario": "jurimetria-previsao-de-exito",
+ "versao": "4.1.0",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "jurimetria",
+  "pre-code-pipeline"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Terminou com 5 perguntas (lado do escritório, desfecho, tribunais, dados próprios, formato) antes de especificar e planejar."
+ ],
+ "contexto_lido": {
+  "caracteres": 8000,
+  "arquivos": [
+   "skills/jurimetria/SKILL.md",
+   "skills/pre-code-pipeline/SKILL.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "carrega-jurimetria",
+   "resultado": "passou",
+   "evidencia": "Skill {\"skill\": \"asp:jurimetria\"} é a primeira ferramenta, antes de qualquer pergunta ou plano."
+  },
+  {
+   "id": "so-informacao-do-instante",
+   "resultado": "passou",
+   "evidencia": "'Só entra o que se sabe na hora da previsão. Uma ação nova só tem tribunal, vara, classe e assuntos. Movimentos posteriores... não podem ser usados'."
+  },
+  {
+   "id": "validacao-fora-do-tempo",
+   "resultado": "passou",
+   "evidencia": "Etapa 4 do plano: 'validado por tempo (treina em anos antigos, testa nos recentes), com calibração'."
+  },
+  {
+   "id": "estimativa-com-intervalo",
+   "resultado": "passou",
+   "evidencia": "'entre X% e Y% dos casos semelhantes (n = …)... e a decisão sobre o caso continua sendo de quem responde por ele'; etapa 5 inclui o aviso."
+  },
+  {
+   "id": "limites-do-datajud",
+   "resultado": "passou",
+   "evidencia": "'Não vêm as partes, os advogados, o valor da causa, o pedido nem o inteiro teor'; 'uso não comercial e exige citar o CNJ e o DataJud'."
+  },
+  {
+   "id": "ajuste-por-julgamento",
+   "resultado": "passou",
+   "evidencia": "Não ajusta nem promete resultado; propõe faixa com intervalo e avisa que o modelo deve ficar perto da taxa-base."
+  }
+ ]
+}

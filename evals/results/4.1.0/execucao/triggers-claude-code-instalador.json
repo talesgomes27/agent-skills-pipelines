@@ -1,0 +1,202 @@
+{
+ "versao": "4.1.0",
+ "nivel": "execucao",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "resultados": [
+  {
+   "id": "pre-code-pipeline-1",
+   "observado": "ativou"
+  },
+  {
+   "id": "pre-code-pipeline-2",
+   "observado": "ativou"
+  },
+  {
+   "id": "pre-code-pipeline-3",
+   "observado": "nao_ativou"
+  },
+  {
+   "id": "execution-pipeline-1",
+   "observado": "ativou"
+  },
+  {
+   "id": "execution-pipeline-2",
+   "observado": "ativou"
+  },
+  {
+   "id": "execution-pipeline-3",
+   "observado": "nao_ativou"
+  },
+  {
+   "id": "writing-pipeline-1",
+   "observado": "ativou"
+  },
+  {
+   "id": "writing-pipeline-2",
+   "observado": "ativou"
+  },
+  {
+   "id": "writing-pipeline-3",
+   "observado": "nao_ativou"
+  },
+  {
+   "id": "audit-and-refactoring-pipeline-1",
+   "observado": "ativou"
+  },
+  {
+   "id": "audit-and-refactoring-pipeline-2",
+   "observado": "ativou"
+  },
+  {
+   "id": "audit-and-refactoring-pipeline-3",
+   "observado": "nao_ativou"
+  },
+  {
+   "id": "release-and-ops-pipeline-1",
+   "observado": "ativou"
+  },
+  {
+   "id": "release-and-ops-pipeline-2",
+   "observado": "ativou"
+  },
+  {
+   "id": "release-and-ops-pipeline-3",
+   "observado": "nao_ativou"
+  },
+  {
+   "id": "quarto-expert-1",
+   "observado": "ativou"
+  },
+  {
+   "id": "quarto-expert-2",
+   "observado": "ativou"
+  },
+  {
+   "id": "quarto-expert-3",
+   "observado": "outra"
+  },
+  {
+   "id": "scheduled-automation-1",
+   "observado": "ativou"
+  },
+  {
+   "id": "scheduled-automation-2",
+   "observado": "ativou"
+  },
+  {
+   "id": "scheduled-automation-3",
+   "observado": "nao_ativou"
+  },
+  {
+   "id": "personal-data-1",
+   "observado": "ativou"
+  },
+  {
+   "id": "personal-data-2",
+   "observado": "ativou"
+  },
+  {
+   "id": "personal-data-3",
+   "observado": "nao_ativou"
+  },
+  {
+   "id": "skill-loader-1",
+   "observado": "ativou"
+  },
+  {
+   "id": "skill-loader-2",
+   "observado": "ativou"
+  },
+  {
+   "id": "skill-loader-3",
+   "observado": "outra"
+  },
+  {
+   "id": "cenario-e",
+   "observado": "ativou"
+  },
+  {
+   "id": "cenario-a",
+   "observado": "ativou"
+  },
+  {
+   "id": "cenario-b",
+   "observado": "ativou"
+  },
+  {
+   "id": "cenario-h",
+   "observado": "ativou"
+  },
+  {
+   "id": "cenario-f1",
+   "observado": "nao_ativou"
+  },
+  {
+   "id": "cenario-f2",
+   "observado": "ativou"
+  },
+  {
+   "id": "cenario-f3",
+   "observado": "ativou"
+  },
+  {
+   "id": "cenario-f4",
+   "observado": "ativou"
+  },
+  {
+   "id": "cenario-f5",
+   "observado": "ativou"
+  },
+  {
+   "id": "cenario-f6",
+   "observado": "nao_ativou"
+  },
+  {
+   "id": "execution-pipeline-bug-1",
+   "observado": "ativou"
+  },
+  {
+   "id": "execution-pipeline-bug-2",
+   "observado": "outra"
+  },
+  {
+   "id": "release-and-ops-pipeline-incidente-1",
+   "observado": "ativou"
+  },
+  {
+   "id": "release-and-ops-pipeline-incidente-2",
+   "observado": "ativou"
+  },
+  {
+   "id": "release-and-ops-pipeline-incidente-3",
+   "observado": "outra"
+  },
+  {
+   "id": "execution-pipeline-bug-3",
+   "observado": "nao_ativou"
+  },
+  {
+   "id": "writing-pipeline-notebook",
+   "observado": "nao_ativou"
+  },
+  {
+   "id": "jurimetria-1",
+   "observado": "ativou"
+  },
+  {
+   "id": "jurimetria-2",
+   "observado": "ativou"
+  },
+  {
+   "id": "jurimetria-3",
+   "observado": "nao_ativou"
+  },
+  {
+   "id": "jurimetria-4",
+   "observado": "nao_ativou"
+  }
+ ],
+ "destino": "claude-code-instalador"
+}

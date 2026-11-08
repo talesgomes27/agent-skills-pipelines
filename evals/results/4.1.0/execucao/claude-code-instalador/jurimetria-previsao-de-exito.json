@@ -1,0 +1,56 @@
+{
+ "cenario": "jurimetria-previsao-de-exito",
+ "versao": "4.1.0",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "destino": "claude-code-instalador",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "jurimetria",
+  "pre-code-pipeline"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Parou no PC-1/PC-2 com cinco perguntas e pedido de autorização para a coleta"
+ ],
+ "contexto_lido": {
+  "caracteres": 8000,
+  "arquivos": [
+   "jurimetria/references/datajud.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "carrega-jurimetria",
+   "resultado": "passou",
+   "evidencia": "Primeira Skill chamada: jurimetria, antes de definir fontes, alvo e variáveis."
+  },
+  {
+   "id": "so-informacao-do-instante",
+   "resultado": "passou",
+   "evidencia": "Texto final: 'Movimentos posteriores não podem entrar como variável, senão vazam o resultado'; PC-2 define o ponto de previsão."
+  },
+  {
+   "id": "validacao-fora-do-tempo",
+   "resultado": "passou",
+   "evidencia": "Plano: 'validação temporal por ano de ajuizamento' com baseline e calibração."
+  },
+  {
+   "id": "estimativa-com-intervalo",
+   "resultado": "passou",
+   "evidencia": "Texto final: 'estimativa com o intervalo e o número de casos semelhantes, e a decisão continua sendo do advogado responsável'."
+  },
+  {
+   "id": "limites-do-datajud",
+   "resultado": "passou",
+   "evidencia": "Texto final: 'Não há partes, advogados, valor da causa nem inteiro teor' e 'uso não comercial', com aviso de checar com o CNJ."
+  },
+  {
+   "id": "ajuste-por-julgamento",
+   "resultado": "passou",
+   "evidencia": "Disse que o modelo 'não vai prever o desfecho do seu caso específico'; sem ajuste próprio nem promessa de resultado."
+  }
+ ]
+}

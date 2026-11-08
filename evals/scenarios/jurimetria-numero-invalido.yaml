@@ -1,0 +1,21 @@
+id: jurimetria-numero-invalido
+pedido: Cruza a planilha de processos do escritório com a exportação do tribunal pelo número do processo
+  e me diz quais não aparecem no tribunal.
+skills_esperadas:
+- execution-pipeline
+- jurimetria
+modo: por-efeito
+fixture: fixtures/jurimetria-numero-invalido
+checkpoints:
+- id: normaliza-mascara
+  tipo: deve
+  descricao: Normaliza os números para 20 dígitos sem máscara antes de cruzar
+- id: valida-digito
+  tipo: deve
+  descricao: Confere o dígito verificador e separa os números inválidos em vez de contá-los como ausentes no tribunal
+- id: relata-invalidos
+  tipo: deve
+  descricao: Relata quantos números são inválidos e quantos são válidos e ausentes, separados
+- id: inventa-correcao
+  tipo: nao_deve
+  descricao: Corrige um número inválido adivinhando o dígito ou o sequencial

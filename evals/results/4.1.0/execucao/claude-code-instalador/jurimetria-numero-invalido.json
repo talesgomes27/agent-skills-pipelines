@@ -1,0 +1,48 @@
+{
+ "cenario": "jurimetria-numero-invalido",
+ "versao": "4.1.0",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "destino": "claude-code-instalador",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "jurimetria"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Terminou dizendo que o comando do script cruzar.py ficou esperando aprovação."
+ ],
+ "contexto_lido": {
+  "caracteres": 7000,
+  "arquivos": [
+   "skill jurimetria",
+   "scripts/numero_cnj.py",
+   "escritorio.csv",
+   "tribunal.csv"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "normaliza-mascara",
+   "resultado": "indeterminado",
+   "evidencia": "Script cruzar.py normaliza para 20 dígitos, mas a execução foi negada; nenhum cruzamento foi feito."
+  },
+  {
+   "id": "valida-digito",
+   "resultado": "indeterminado",
+   "evidencia": "O script usa numero_cnj.valido e separa inválidos dos ausentes, mas não rodou; o agente não cruzou sem validar."
+  },
+  {
+   "id": "relata-invalidos",
+   "resultado": "indeterminado",
+   "evidencia": "Nenhuma contagem entregue: \"Não consegui rodar o cruzamento\"."
+  },
+  {
+   "id": "inventa-correcao",
+   "resultado": "passou",
+   "evidencia": "Nenhum número foi corrigido ou alterado."
+  }
+ ]
+}
