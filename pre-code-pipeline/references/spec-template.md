@@ -47,7 +47,7 @@ Problema, público e decisão que o trabalho apoia, em uma ou duas frases.
 
 O front matter não registra aprovação: o aceite do A1 fica onde o projeto registra estado (`task.md`, issue, PR) ou na conversa, com quem e quando, e o agente nunca o escreve como se fosse do usuário.
 
-Os IDs são `R-` (requisito), `H-` (pergunta ou hipótese, em análise), `N-` (fora do escopo), `D-` (decisão), `Q-` (questão aberta) e `T-` (tarefa do plano), sempre com três dígitos. A forma do requisito muda por arquétipo; veja a [arquitetura por arquétipo](architecture-by-archetype.md).
+Os IDs são `R-` (requisito), `H-` (pergunta ou hipótese, em análise), `N-` (fora do escopo), `D-` (decisão), `Q-` (questão aberta) e `T-` (tarefa do plano), sempre com três dígitos. A forma do requisito muda por arquétipo; veja a [forma da spec](architecture-by-archetype.md#forma-da-spec).
 
 ## Ciclo de vida
 

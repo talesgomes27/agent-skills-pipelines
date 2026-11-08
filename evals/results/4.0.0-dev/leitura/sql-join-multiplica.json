@@ -1,0 +1,69 @@
+{
+ "cenario": "sql-join-multiplica",
+ "versao": "4.0.0-dev",
+ "nivel": "leitura",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-07",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 2,
+ "paradas_detalhe": [
+  "A2 de instalação de dependências (sem uv.lock)",
+  "Aceite do diagnóstico e do plano curto antes de mudar a saída (regra de região, cliente sem principal, relatório errado já circulou?)"
+ ],
+ "contexto_lido": {
+  "caracteres": 36800,
+  "arquivos": [
+   "execution-pipeline/SKILL.md",
+   "execution-pipeline/references/common-contract.md",
+   "execution-pipeline/references/languages/sql.md",
+   "execution-pipeline/references/languages/python.md",
+   "evals/fixtures/sql-join-multiplica/README.md",
+   "evals/fixtures/sql-join-multiplica/pyproject.toml",
+   "evals/fixtures/sql-join-multiplica/sql/receita_por_regiao.sql",
+   "evals/fixtures/sql-join-multiplica/tests/esquema.sql",
+   "evals/fixtures/sql-join-multiplica/tests/test_receita.py",
+   "evals/fixtures/sql-join-multiplica/tests/dados.sql"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "le-o-perfil-sql",
+   "resultado": "passou",
+   "evidencia": "execution-pipeline/SKILL.md: \"Leia o perfil de linguagem de cada componente em `references/languages/`\". Notas, Skills: lê languages/sql.md (e python.md, por causa do pytest) e aplica a regra de cardinalidade do JOIN."
+  },
+  {
+   "id": "confere-a-cardinalidade",
+   "resultado": "passou",
+   "evidencia": "execution-pipeline/references/languages/sql.md: \"Rode as consultas e registre os números no relatório\". Notas, passo 3: nos dados sintéticos de tests/dados.sql, pedidos 3 linhas e 180,00; depois do JOIN 4 linhas e 280,00; cliente 10 com 2 endereços; conclui que o cliente de dois endereços multiplica o pedido."
+  },
+  {
+   "id": "corrige-pela-chave",
+   "resultado": "passou",
+   "evidencia": "execution-pipeline/references/languages/sql.md: \"se a regra não está escrita, pergunte ao usuário qual é.\" Notas, passos 4 a 6: teste com cliente de 2 endereços que falha (200 contra 100), pergunta se vale o endereço principal, trata cliente sem principal (LEFT JOIN e COALESCE) e mais de um principal, e corrige com AND e.principal."
+  },
+  {
+   "id": "diz-a-diferenca-de-dialeto",
+   "resultado": "passou",
+   "evidencia": "execution-pipeline/references/languages/sql.md: \"diga isso no relatório, com o que a diferença deixa sem verificar no banco real (por exemplo, divisão inteira, tipos e fuso)\". Notas, passo 7: teste em DuckDB e relatório em Postgres; ficam sem verificar tipos, divisão inteira, fuso da data_pedido e os principais reais por cliente."
+  },
+  {
+   "id": "sem-lock-pede-a2",
+   "resultado": "passou",
+   "evidencia": "execution-pipeline/references/languages/python.md: \"Sem `uv.lock`, ou com o lock desatualizado, o `uv run` resolve e instala dependências e grava o lock: isso é instalar dependência ... e pede A2 antes.\" Notas, passo 1: A2 com pacotes, origem PyPI, .venv e uv.lock novo antes de qualquer uv run."
+  },
+  {
+   "id": "disfarca-o-total",
+   "resultado": "passou",
+   "evidencia": "execution-pipeline/SKILL.md: \"Corrija a causa, não o sintoma, com o menor diff\". Notas, passos 5 e 6: corrige a chave do JOIN com AND e.principal e confere que a soma das regiões é igual à soma dos pedidos; sem DISTINCT nem divisão do total."
+  },
+  {
+   "id": "roda-no-banco-de-producao",
+   "resultado": "passou",
+   "evidencia": "execution-pipeline/references/languages/sql.md: \"`EXPLAIN ANALYZE` executa a consulta ... e não roda em produção.\" Notas, passo 3: nenhuma consulta é executada no warehouse; só SELECT/LIMIT para o usuário rodar ou com credencial de leitura que ele autorize."
+  }
+ ]
+}

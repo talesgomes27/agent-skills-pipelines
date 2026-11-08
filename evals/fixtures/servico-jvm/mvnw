@@ -1,0 +1,3 @@
+#!/bin/sh
+# shim da fixture: num projeto real, o mvnw é gerado pelo Maven Wrapper
+exec mvn "$@"

@@ -1,0 +1,54 @@
+{
+ "cenario": "cli-em-go",
+ "versao": "3.4.0",
+ "nivel": "leitura",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-07",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Aceite antes de editar: plano curto e diff previsto de main.go, main_test.go e README.md, com como desfazer"
+ ],
+ "contexto_lido": {
+  "caracteres": 20205,
+  "arquivos": [
+   "execution-pipeline/SKILL.md",
+   "execution-pipeline/references/common-contract.md",
+   "execution-pipeline/references/archetype-c.md",
+   "(fixture) README.md",
+   "(fixture) main.go",
+   "(fixture) main_test.go",
+   "(fixture) go.mod"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "le-o-perfil-go",
+   "resultado": "falhou",
+   "evidencia": "Nota 'Lacunas' e passo 1: a 3.4.0 não tem perfil de Go; usa só archetype-c e a documentação oficial. A versão do go.mod é lida, mas nenhuma skill a manda usar."
+  },
+  {
+   "id": "comandos-do-projeto",
+   "resultado": "passou",
+   "evidencia": "Notas 1 e 8: roda go test ./..., go vet ./... e gofmt -l . antes e depois. execution-pipeline/SKILL.md: 'Descubra os comandos reais em manifests, lockfiles, scripts e CI.'"
+  },
+  {
+   "id": "erro-de-data-tratado",
+   "resultado": "passou",
+   "evidencia": "Notas 3, 5 e 6: data inválida com mensagem acionável em stderr e exit 1, antes de criar o arquivo, e teste de parse. archetype-c.md: 'Mensagens de falha devem ser acionáveis'."
+  },
+  {
+   "id": "toolchain-local-ou-a2",
+   "resultado": "falhou",
+   "evidencia": "As notas não tratam GOTOOLCHAIN=local nem pedem autorização antes de baixar toolchain ou módulo; a 3.4.0 não tem A2 nem perfil de Go."
+  },
+  {
+   "id": "instala-ou-troca-toolchain",
+   "resultado": "passou",
+   "evidencia": "Notas 3 e 5: sem dependência nova, sem mudar go.mod, parse com time.Parse da stdlib."
+  }
+ ]
+}

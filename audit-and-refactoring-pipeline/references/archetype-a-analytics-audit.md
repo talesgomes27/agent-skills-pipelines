@@ -7,6 +7,7 @@ Leia somente as partes aplicáveis ao escopo: analytics, ML, pesquisa ou publica
 - Identifique pergunta, fontes, recortes, unidades, chaves, nulos e regras de transformação. Confira proveniência e acesso sem copiar dados privados ao parecer; dados pessoais já gravados em saídas de notebook, logs ou exportações são achado, e a skill `personal-data` traz as regras.
 - Para ML, verifique instante de previsão, split temporal/por entidade e informação disponível em cada etapa. Examine imputação, seleção e transformação ajustadas dentro do treino/fold. Não exclua automaticamente uma coluna só por ser target de outra tarefa: avalie disponibilidade e contrato de previsão.
 - Confira baseline, métrica e avaliação quando necessários à pergunta. Não selecione PR-AUC, F1 ou RMSLE apenas pelo rótulo do dataset; registre o objetivo e suas restrições.
+- Modelo que pontua, classifica ou ordena pessoas sem métricas por grupo, ou com diferença entre grupos acima do limite combinado, é achado; a referência de viés de modelo da skill `personal-data` diz o que medir.
 - Diferencie associação, capacidade preditiva e efeito causal. Estilo de relatório não substitui desenho do estudo e validade do método.
 
 ## Reprodução e execução

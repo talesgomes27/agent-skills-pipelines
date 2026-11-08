@@ -2,7 +2,7 @@
 
 Em B e C, as restrições do destino que costumam mudar a arquitetura são autenticação, hibernação, limites, custo e armazenamento. Num app novo leve, com um só aceite por PC-2, PC-3 e PC-5, a restrição do destino que muda a arquitetura vai no início da resposta, antes do escopo, para o usuário não aceitar sem vê-la.
 
-Leia só a parte do arquétipo registrado e, em projeto híbrido, a do domínio secundário nas partes que ele usa. Com dados de pessoas, em qualquer arquétipo, a arquitetura diz onde eles ficam, quem os vê e o que sai do ambiente, seguindo a skill `personal-data`.
+Leia só a parte do arquétipo registrado e, em projeto híbrido, a do domínio secundário nas partes que ele usa, além das seções gerais: forma da spec, linguagem por componente, registro do arquétipo e onde a verificação roda. Com dados de pessoas, em qualquer arquétipo, a arquitetura diz onde eles ficam, quem os vê e o que sai do ambiente, seguindo a skill `personal-data`.
 
 ## A: análise e modelos
 
@@ -27,6 +27,31 @@ Leia só a parte do arquétipo registrado e, em projeto híbrido, a do domínio 
 - Num job agendado, também horário e fuso, onde o estado fica entre execuções, nova tentativa e quem recebe o alerta de falha.
 - Modelo pontuado ou retreinado de forma recorrente segue a referência de modelo em produção da skill `scheduled-automation`.
 - Coleta em sites ou APIs de terceiros declara a fonte, os termos de uso e o robots.txt que valem, o ritmo das requisições e o que fazer diante de login ou CAPTCHA.
+
+## Forma da spec
+
+Os requisitos da [spec viva](spec-template.md) mudam de forma conforme o arquétipo principal; em projeto híbrido, cada componente usa a forma do seu domínio.
+
+- **A, análise e modelos.** Cada pergunta vira um cartão `### H-001`: a pergunta, a hipótese ou estimativa esperada, o dado e o recorte que a respondem, o método, o critério que confirma ou refuta (por exemplo, "diferença maior que o intervalo de 95%" ou "MASE abaixo do ingênuo sazonal em todas as origens") e a decisão que muda com a resposta. A evidência é a célula rotulada, a tabela ou a figura que responde.
+- **B, aplicações.** Cada requisito `### R-001` tem critério no formato Dado / Quando / Então, com o valor observável na tela ou na resposta da API, e um critério por papel quando há login. Requisito de interface que outro sistema usa traz o contrato (rota, campos, códigos de erro).
+- **C, automações.** Cada job ou comando tem um contrato de execução: entradas e de onde vêm, saídas e para onde vão, horário e fuso, idempotência (rodar duas vezes dá o mesmo resultado), comportamento em falha (código de saída, nova tentativa, alerta e quem recebe) e onde fica o estado entre execuções. O critério diz o que conferir depois de uma execução de teste.
+
+Exemplo de cartão de análise:
+
+```markdown
+### H-001 A campanha de março aumentou a recompra?
+- Hipótese: a recompra em 60 dias subiu entre quem recebeu a campanha.
+- Dados: pedidos de jan a mai, clientes ativos; grupo de controle sem envio.
+- Método: diferença de proporções entre os grupos, com intervalo de 95%.
+- Critério: confirma se o intervalo da diferença não inclui zero.
+- Decisão: repetir a campanha em junho.
+- Estado: aprovado
+- Evidência: (preenchida na entrega)
+```
+
+## Linguagem por componente
+
+Em PC-3, cada componente diz a linguagem e a versão, com o motivo, preferindo a que o projeto e a equipe já usam. Duas linguagens no mesmo projeto, como R na análise e Python na API, pedem uma interface explícita entre elas: arquivo com formato e esquema definidos, tabela ou API, nunca chamada de uma dentro da outra sem decisão registrada. O plano registra a linguagem e a versão de cada componente, e o handoff de PC-5 diz que a `execution-pipeline` vai ler o perfil de cada uma, em `references/languages/` (Python, R, SQL, Bash, Go, JVM).
 
 ## Registro do arquétipo
 

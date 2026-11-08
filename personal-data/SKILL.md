@@ -26,7 +26,7 @@ Dado pessoal é qualquer informação ligada a uma pessoa identificada ou identi
 - Saídas de análise (slides, relatórios, dashboards analíticos, resumos por e-mail) mostram agregados. Nenhuma linha real, exemplo de cliente ou identificador aparece nelas.
 - Telas e listas operacionais, em que mostrar a pessoa é o objetivo, como o cadastro de um cliente ou a lista que o CRM vai contatar, mostram só os campos necessários a quem tem acesso e seguem as regras de envio abaixo.
 - Um grupo com menos pessoas que o mínimo aprovado pelo usuário é juntado a outro ou omitido, porque o recorte identifica quem está nele. Proponha o mínimo no plano, por exemplo 5 ou 10.
-- Score ou ranking de pessoas, como risco de churn ou de crédito, é perfilamento. A lista diz que o score é estimativa, o plano define quantos nomes vão e se o score aparece, e uma decisão sobre alguém tomada só pelo modelo precisa permitir revisão humana.
+- Score ou ranking de pessoas, como risco de churn ou de crédito, é perfilamento. A lista diz que o score é estimativa e a quem pedir a revisão de uma decisão, o plano define quantos nomes vão e se o score aparece, e uma decisão sobre alguém tomada só pelo modelo precisa permitir revisão humana. Modelo que pontua ou ordena pessoas mede o viés por grupo antes de liberar e em cada execução em produção, como em [viés de modelo](references/model-fairness.md).
 - Gráficos não rotulam pontos individuais, e tabelas exportáveis respeitam a política de acesso aprovada.
 - Saídas de notebook com linhas pessoais são limpas antes de versionar ou publicar.
 

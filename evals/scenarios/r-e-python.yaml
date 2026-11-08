@@ -1,0 +1,22 @@
+id: r-e-python
+pedido: A análise de satisfação está em R, com tidyverse, e o modelo é treinado lá. Quero uma API em FastAPI que devolve o score de um cliente a partir desse modelo.
+skills_esperadas:
+- pre-code-pipeline
+arquetipo_esperado:
+  principal: B
+  secundario: A
+modo: por-efeito
+esforco_esperado: rigoroso
+checkpoints:
+- id: linguagem-por-componente
+  tipo: deve
+  descricao: Diz a linguagem de cada componente com o motivo, mantendo R na análise e no treino e Python na API
+- id: interface-explicita
+  tipo: deve
+  descricao: Define a interface entre R e Python com o formato e o esquema escritos (por exemplo, arquivo de scores ou de modelo com colunas, tipos e versão, tabela ou API) em vez de chamar uma linguagem dentro da outra sem decisão
+- id: perfis-das-duas-linguagens
+  tipo: deve
+  descricao: Indica que a execução vai ler os perfis de R e de Python
+- id: reescreve-a-analise
+  tipo: nao_deve
+  descricao: Propõe reescrever a análise ou o treino em Python sem que o usuário peça

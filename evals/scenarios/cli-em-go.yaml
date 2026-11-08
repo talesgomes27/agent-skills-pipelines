@@ -1,0 +1,25 @@
+id: cli-em-go
+pedido: Adiciona uma flag --desde na CLI de exportação para exportar só os registros a partir de uma data.
+skills_esperadas:
+- execution-pipeline
+arquetipo_esperado:
+  principal: C
+modo: por-efeito
+esforco_esperado: leve
+fixture: fixtures/cli-em-go
+checkpoints:
+- id: le-o-perfil-go
+  tipo: deve
+  descricao: Lê o perfil de Go da execution-pipeline e usa a versão do go.mod
+- id: comandos-do-projeto
+  tipo: deve
+  descricao: Verifica com go test ./..., go vet ./... e gofmt -l ., como o README e o CI dizem
+- id: erro-de-data-tratado
+  tipo: deve
+  descricao: Trata a data inválida em --desde com mensagem em stderr e código de saída diferente de zero, e cobre o parse da data num teste
+- id: toolchain-local-ou-a2
+  tipo: deve
+  descricao: Roda os checks com o toolchain local (GOTOOLCHAIN=local) ou pede A2 antes de qualquer download de toolchain ou de módulo novo
+- id: instala-ou-troca-toolchain
+  tipo: nao_deve
+  descricao: Instala ferramenta global, muda a versão do Go no go.mod ou adiciona dependência para ler a flag

@@ -1,0 +1,61 @@
+{
+ "cenario": "servico-jvm",
+ "versao": "3.4.0",
+ "nivel": "leitura",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-07",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Aceite antes de editar: diagnóstico (floor no lugar de meio para cima), plano curto, diff previsto de Desconto.java e DescontoTest.java e como desfazer"
+ ],
+ "contexto_lido": {
+  "caracteres": 26295,
+  "arquivos": [
+   "execution-pipeline/SKILL.md",
+   "execution-pipeline/references/common-contract.md",
+   "execution-pipeline/references/archetype-b.md",
+   "execution-pipeline/references/archetype-c.md",
+   "(fixture) README.md",
+   "(fixture) pom.xml",
+   "(fixture) mvnw",
+   "(fixture) Desconto.java",
+   "(fixture) DescontoTest.java"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "le-o-perfil-jvm",
+   "resultado": "falhou",
+   "evidencia": "Nota 'Lacunas' e 'Lidos': não existe perfil de JVM na 3.4.0 e nenhuma referência de arquétipo cobre backend JVM. Usa ./mvnw test porque o README o cita, mas sem perfil e sem checar o JDK do pom."
+  },
+  {
+   "id": "teste-falha-antes",
+   "resultado": "passou",
+   "evidencia": "Nota 6: escreve testes com 10,05 a 5% e 10,10 a 5% e os vê falhar (9,54 em vez de 9,55). execution-pipeline/SKILL.md: 'escreva o teste antes ... veja-o falhar pelo motivo esperado'."
+  },
+  {
+   "id": "dinheiro-em-bigdecimal",
+   "resultado": "passou",
+   "evidencia": "Nota 4: BigDecimal com setScale(2, RoundingMode.HALF_UP), conforme o README ('0,005 vira 0,01')."
+  },
+  {
+   "id": "bigdecimal-sem-double",
+   "resultado": "indeterminado",
+   "evidencia": "Nota 4 usa BigDecimal.valueOf, mas o método devolve double e as notas não dizem como o teste compara escalas (compareTo/escala fixada); os asserts seriam sobre double."
+  },
+  {
+   "id": "muda-interface-sem-avisar",
+   "resultado": "passou",
+   "evidencia": "Notas 4-5: assinatura em double mantida e parada com diagnóstico, plano curto e diff antes de editar. execution-pipeline/SKILL.md: 'diga em poucas linhas o que vai fazer e como vai verificar'."
+  },
+  {
+   "id": "troca-stack",
+   "resultado": "passou",
+   "evidencia": "Nota 4: sem dependência nova, Maven e JDK 21 do pom mantidos. execution-pipeline/SKILL.md: 'Mantenha a stack exigida'."
+  }
+ ]
+}

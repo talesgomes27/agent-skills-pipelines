@@ -25,6 +25,7 @@ Vale para pontuar um modelo de forma recorrente (uma lista semanal, um score di�
 
 - A data de referência e o horizonte da previsão (por exemplo, quem cancela nos próximos 90 dias) são os mesmos do treino.
 - Quantos nomes entram na lista, ou qual score dispara uma ação, é decisão de quem usa a lista, pela capacidade da equipe e pelo custo de errar. O plano registra o critério.
+- Modelo que pontua pessoas mede o viés por grupo no treino, no monitoramento e no critério de troca, como na referência de viés de modelo da skill `personal-data`.
 - Meça a lista pela taxa de acerto entre os primeiros nomes, comparada com um baseline simples. Quando der, guarde um grupo que não é contatado, para saber se a ação muda o resultado.
 - Combine com quem usa a lista se quem já foi contatado sai das listas seguintes.
 - A entrega da lista segue a skill `personal-data`: só os campos necessários, canal restrito e destinatário definido.

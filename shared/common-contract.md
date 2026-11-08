@@ -55,7 +55,7 @@ Paradas condicionais, em qualquer modo: pare quando o escopo mudar, surgir uma d
 | Efeito | Mostre antes |
 |---|---|
 | Alterar arquivos do usuário fora do escopo aceito (sobrescrever, apagar, renomear em massa) | O que muda e como desfazer |
-| Instalar ou atualizar dependência | Pacote, versão e onde instala |
+| Instalar ou atualizar dependência, interpretador, toolchain ou ferramenta de build, inclusive o download automático que ferramentas fazem ao rodar (Python gerenciado do uv, toolchain do Go, distribuição do Maven ou do Gradle pelo wrapper, JDK das toolchains do Gradle) | Pacote ou ferramenta, versão, origem e onde instala |
 | Commit, push, PR ou tag | Arquivos, destino e o que a CI vai disparar |
 | Publicar preview | Plataforma, endereço esperado e dados que o preview usa |
 | Publicar em produção: deploy, merge que publica, ativar agendamento, mudar DNS | Artefato, destino e a recuperação, autorizada junto |
@@ -67,7 +67,7 @@ Paradas condicionais, em qualquer modo: pare quando o escopo mudar, surgir uma d
 | Gastar dinheiro | Estimativa e limite de gasto |
 | Ler sites com credencial ou além da coleta pública | Fonte, termos de uso, ritmo e credencial |
 
-Um push que publica, porque a plataforma publica do Git ou a CI faz deploy, é publicar em produção, num só A2 com o deploy. Não pedem A2: instalar do lock já aceito, como `uv sync` ou `npm ci`; ler o projeto, rodar testes, lint e build em ambiente de teste, criar arquivos novos dentro do escopo aceito e ler dados com credencial só de leitura já aceita no A1.
+Um push que publica, porque a plataforma publica do Git ou a CI faz deploy, é publicar em produção, num só A2 com o deploy. Não pedem A2: instalar do lock já aceito, como `uv sync` ou `npm ci`, sem baixar interpretador ou ferramenta que falte; na dúvida, rode no modo offline da ferramenta e peça A2 se faltar algo; ler o projeto, rodar testes, lint e build em ambiente de teste, criar arquivos novos dentro do escopo aceito e ler dados com credencial só de leitura já aceita no A1.
 
 ### Preferência por projeto
 
