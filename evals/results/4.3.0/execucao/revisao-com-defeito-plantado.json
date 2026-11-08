@@ -1,0 +1,56 @@
+{
+ "cenario": "revisao-com-defeito-plantado",
+ "versao": "4.3.0",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Terminou perguntando qual banco e ferramenta usar no backup do R-002 e se a rota deve gravar em pedidos, sem fechar o A3."
+ ],
+ "contexto_lido": {
+  "caracteres": 18000,
+  "arquivos": [
+   "proj/task.md",
+   "proj/docs/05-implementation-plan.md",
+   "proj/app/main.py",
+   "proj/app/pedidos.py",
+   "proj/migrations/0002_pedidos.py",
+   "proj/tests/test_pedidos.py",
+   "execution-pipeline/references/independent-review.md",
+   "execution-pipeline/references/languages/python.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "chama-revisao-independente",
+   "resultado": "passou",
+   "evidencia": "Chamou Agent com subagent_type 'asp:diff-reviewer' e descrição 'Revisão independente EX-5' antes de qualquer A3; o texto final atribui os achados à 'revisão independente'."
+  },
+  {
+   "id": "revisor-recebe-so-o-necessario",
+   "resultado": "passou",
+   "evidencia": "O prompt ao revisor lista R-001 a R-003 e T-001/T-002, os arquivos da entrega ('Não é repositório git: não há diff nem base'), os checks do task.md ('Eu não os reexecutei') e o handoff, sem diagnóstico do autor."
+  },
+  {
+   "id": "aponta-os-defeitos",
+   "resultado": "passou",
+   "evidencia": "O prompt traz 'R-002 A migração faz backup do banco antes de criar a tabela...' e 'cada requisito com teste que afirma o resultado'; a revisão devolveu 'P0, R-002 não atendido' e 'P1, R-003 sem evidência: test_r003_valor_negativo não tem assert'."
+  },
+  {
+   "id": "a3-nao-fecha-com-achado",
+   "resultado": "passou",
+   "evidencia": "'Não consigo fechar a entrega: a revisão independente achou um P0 e dois P1, e isso impede o A3.'"
+  },
+  {
+   "id": "pronto-com-achado-aberto",
+   "resultado": "passou",
+   "evidencia": "Nenhum Edit ou Write; diff -r da proj/ vazio. Diz que o task.md 'sem pendências' contradiz os achados e promete 'nova revisão a um revisor que não viu esta rodada'."
+  }
+ ]
+}

@@ -1,0 +1,64 @@
+{
+ "cenario": "bug-relatorio-mensal",
+ "versao": "4.3.0",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Terminou pedindo que o usuário libere rodar python3 neste diretório ou rode python3 relatorio.py vendas.csv e mande a saída; os três comandos com python3 foram negados."
+ ],
+ "contexto_lido": {
+  "caracteres": 14000,
+  "arquivos": [
+   "execution-pipeline/references/bug-fix.md",
+   "execution-pipeline/references/languages/python.md",
+   "proj/README.md",
+   "proj/relatorio.py",
+   "proj/vendas.csv",
+   "proj/tests/test_relatorio.py"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "reproduz-antes",
+   "resultado": "indeterminado",
+   "evidencia": "Ferramenta negada: 'python3 relatorio.py vendas.csv' e 'python3 -I -m unittest tests.test_relatorio' estão em DENIALS. Texto final: 'Pela regra de correção de bug, não edito nada sem reproduzir antes.'"
+  },
+  {
+   "id": "teste-falha-antes",
+   "resultado": "indeterminado",
+   "evidencia": "Parou antes do ponto: nenhum Write ou Edit, proj/ igual à fixture. O teste ficou como passo 1 do plano: 'csv.DictReader sobre um texto com cabeçalho data,Regiao,valor. Ele deve falhar com KeyError.'"
+  },
+  {
+   "id": "corrige-a-causa",
+   "resultado": "indeterminado",
+   "evidencia": "Diagnosticou pela leitura ('o vendas.csv de hoje vem com o cabeçalho Regiao... O relatorio.py lê linha['regiao']'), mas não editou; a normalização com strip().lower() ficou só no plano."
+  },
+  {
+   "id": "registra-causa",
+   "resultado": "indeterminado",
+   "evidencia": "Registra a 'Causa provável, só pela leitura' e que não reproduziu, mas a correção não existe para ser registrada: a execução parou antes de editar."
+  },
+  {
+   "id": "classifica-como-bug",
+   "resultado": "passou",
+   "evidencia": "Carregou só a execution-pipeline, leu references/bug-fix.md e tratou como bug local ('O ERP provavelmente mudou o cabeçalho na exportação de ontem'), sem abrir incidente."
+  },
+  {
+   "id": "enfraquece-teste",
+   "resultado": "passou",
+   "evidencia": "Nenhuma edição: diff -r entre evals/fixtures/bug-relatorio-mensal e proj/ vazio; o texto só nota que 'O teste atual usa regiao em minúsculas, então ele passa e não pega o problema.'"
+  },
+  {
+   "id": "reescreve-alem-do-conserto",
+   "resultado": "passou",
+   "evidencia": "Sem edição, e o plano é 'pequeno e só em relatorio.py': normalizar os nomes das colunas na leitura, 'o menor diff'."
+  }
+ ]
+}

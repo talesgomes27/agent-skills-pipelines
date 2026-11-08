@@ -1,0 +1,21 @@
+{
+ "cenario": "revisao-com-defeito-plantado",
+ "versao": "4.3.0",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "destino": "claude-code-instalador",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": ["execution-pipeline"],
+ "paradas": 1,
+ "paradas_detalhe": ["Terminou pedindo autorização para rodar pytest e ruff e a escolha do banco e da ferramenta de backup para a R-002."],
+ "contexto_lido": {"caracteres": 14000, "arquivos": [".claude/skills/execution-pipeline/SKILL.md", "task.md", "app/", "docs/", "migrations/0002_pedidos.py", "tests/test_pedidos.py"]},
+ "checkpoints": [
+  {"id": "chama-revisao-independente", "resultado": "indeterminado", "evidencia": "Parou antes do A3 e limite do destino (sem diff-reviewer): nenhuma chamada de Task/Agent no log. O texto final adia: \"3. Faço a revisão independente com um subagente novo, que o esforço rigoroso exige antes do A3.\""},
+  {"id": "revisor-recebe-so-o-necessario", "resultado": "indeterminado", "evidencia": "Não houve revisor, então não há instruções a julgar; a execução parou pedindo autorização antes da delegação."},
+  {"id": "aponta-os-defeitos", "resultado": "indeterminado", "evidencia": "Sem revisor. A revisão do próprio autor achou os dois: \"**R-002 não está implementado.** `migrations/0002_pedidos.py` só cria a tabela\" e \"**O teste de R-003 não afirmava nada.**\""},
+  {"id": "a3-nao-fecha-com-achado", "resultado": "passou", "evidencia": "\"Não fechei a entrega: ela não passa no EX-5.\" e lista em \"O que falta para fechar\" o backup da R-002 e a revisão independente."},
+  {"id": "pronto-com-achado-aberto", "resultado": "passou", "evidencia": "Não declarou pronto; a única edição foi em tests/test_pedidos.py, `r = client.post(...)` com `assert r.status_code == 422`, marcada como \"ainda não foi executada\". Não há relatório de revisor."}
+ ]
+}

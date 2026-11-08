@@ -33,7 +33,7 @@ Escolha o esforço pela escala do contrato comum e diga por quê: leve para muda
 - Fique no escopo e nas interfaces do plano. Mudança de requisito volta ao planejamento; falha de implementação se corrige na própria tarefa.
 - Para comportamento novo ou corrigido, escreva o teste antes quando o plano prevê, veja-o falhar pelo motivo esperado, implemente e rode de novo. Em código legado sem teste, caracterize o comportamento antes de mudá-lo.
 - Não enfraqueça testes nem troque dados reais por sintéticos para mostrar sucesso.
-- Valide com as ferramentas e o ambiente do projeto, nos comandos do perfil da linguagem. Comece pelos checks afetados e amplie conforme o risco.
+- Valide com as ferramentas e o ambiente do projeto, nos comandos do perfil da linguagem. Em Python, o primeiro `uv run` sem ambiente sincronizado baixa pacotes, mesmo com `uv.lock`: isso pede A2, ou use o ambiente que já existe. Comece pelos checks afetados e amplie conforme o risco.
 - Mantenha a stack exigida: não troque biblioteca, framework, estimador ou formato por conveniência. Se faltar algo indispensável, bloqueie só a tarefa afetada e explique o que falta.
 - Testes, migrações, notebooks e builds executam código. Rode em ambiente de desenvolvimento ou teste, nunca contra produção salvo a leitura do item seguinte, e não instale nada globalmente.
 - Ler dados reais com uma credencial só de leitura que o usuário autorizou vale quando o plano prevê; o que for para testes, logs ou relatórios segue a política de dados. Escrever, enviar mensagem, cobrar ou publicar usa o recurso de teste do plano (banco, pasta, chat ou conta) ou uma autorização específica para aquela execução.

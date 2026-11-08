@@ -1,0 +1,21 @@
+{
+ "cenario": "revisao-de-pr",
+ "versao": "4.3.0",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "destino": "claude-code-instalador",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": ["audit-and-refactoring-pipeline"],
+ "paradas": 0,
+ "paradas_detalhe": [],
+ "contexto_lido": {"caracteres": 11000, "arquivos": [".claude/skills/audit-and-refactoring-pipeline/SKILL.md", "pr.diff", "loja/rotas.py", "README.md"]},
+ "checkpoints": [
+  {"id": "le-o-codigo-ao-redor", "resultado": "passou", "evidencia": "Read de loja/rotas.py além do pr.diff; texto final: \"Li o diff, o chamador (`loja/rotas.py`) e os testes.\""},
+  {"id": "acha-a-validacao-removida", "resultado": "passou", "evidencia": "\"O PR remove `if not 0 <= percentual <= 100: raise ValueError`\" e \"`aplicar_cupom` repassa `float(corpo['percentual'])` direto do JSON do cliente\"; \"`percentual=150` com total 100 dá ... -50.0, ou seja, preço negativo\"."},
+  {"id": "acha-o-teste-faltando", "resultado": "passou", "evidencia": "Achado 3, `tests/test_precos.py`, Média: \"`test_percentual_invalido` foi apagado sem substituto. A regra deixa de ter cobertura.\""},
+  {"id": "achados-com-severidade", "resultado": "passou", "evidencia": "Tabela com ID, Arquivo (`loja/precos.py:1-4`, `loja/rotas.py:6`), Severidade (Alta, Média) e Sugestão; seção separada \"Observações menores\" para docstring e import sem uso."},
+  {"id": "edita-durante-a-revisao", "resultado": "passou", "evidencia": "Só Glob e Read; nenhum Edit, Write ou Bash. Diff de proj/ contra a fixture só mostra .claude. \"Não editei nada.\""}
+ ]
+}

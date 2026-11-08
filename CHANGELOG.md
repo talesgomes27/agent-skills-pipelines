@@ -2,6 +2,113 @@
 
 As versões seguem [SemVer](https://semver.org/lang/pt-BR/).
 
+## [4.3.0] - 2026-11-08
+
+Comparada com a 4.2.0 (`23b584a`). Traz regras e referências novas em cinco skills e num subagente, sem skill nova nem removida e sem regra cortada: por isso a versão é MINOR. Também melhora a medição das avaliações. É o plano feito antes do teste em projeto real.
+
+### Novo
+
+- `execution-pipeline`:
+  - A description cita a atualização de dependências ou do lockfile.
+  - Os passos da correção de bug foram para `references/bug-fix.md` sem reescrita. No `SKILL.md` ficam a classificação, o ponteiro e a regra de não editar sem reproduzir.
+  - A frase longa do `uv run` foi para o perfil Python. No `SKILL.md` ficou uma versão curta: o primeiro `uv run` sem ambiente sincronizado baixa pacotes e pede A2.
+  - O `SKILL.md` foi de 9.975 para 9.494 caracteres.
+- `pre-code-pipeline`:
+  - A description cita montar do zero um app, um site ou um dashboard no Power BI.
+  - Na entrega pontual, quando a entrega for publicada ou compartilhada, o plano diz onde, com o efeito e o destino que vão pedir A2.
+  - A parte B da arquitetura ganha o Power BI: o Desktop roda só no Windows, a autoria fica com o plugin oficial `powerbi-authoring` (`microsoft/skills-for-fabric`), e o workspace e quem vê cada dado se decidem na arquitetura.
+- `release-and-ops-pipeline`:
+  - `app-platforms.md` ganha a seção Power BI, com fontes no Microsoft Learn:
+    - publicar envia o modelo com os dados ao workspace;
+    - republicar substitui o modelo publicado;
+    - quem recebe o compartilhamento lê o modelo inteiro, salvo RLS ou OLS;
+    - publicar na web deixa o relatório público.
+  - No incidente, o plano já lista o postmortem com linha do tempo, causa e ações.
+- `audit-and-refactoring-pipeline`: num pedido de desempenho, os padrões entram já no plano do AU-3. O ganho só vale medido antes e depois, e cache ou carga única que pode mostrar dado antigo é mudança de comportamento.
+- `personal-data`:
+  - Lembra que a pipeline do trabalho continua valendo.
+  - Ganha a seção "Pedido do titular":
+    - conferir a identidade pelos registros que batem com o pedido;
+    - localizar o titular por um identificador, nunca pelo nome;
+    - responder ao acesso com a lista de com quem os dados foram compartilhados.
+  - `lgpd-basics.md` ganha os arts. 18, 19 e 16 da LGPD, conferidos no Planalto.
+- Subagente `diff-reviewer`: a description diz que ele não atende ao pedido do usuário de revisar um PR ou diff. Com o subagente no plugin, a `audit` carregava em 1 de 10 pedidos de revisão de PR; depois da frase, em 10 de 10.
+
+### Avaliações
+
+- **Harness versionado.** O `/cenarios` ganhou `scripts/execucao.py`, só com a biblioteca padrão. Ele:
+  - monta o plugin de teste, com as skills, os subagentes e o hook;
+  - roda os dois destinos;
+  - faz o segundo turno com `--resume` quando o cenário tem `aceite_simulado`;
+  - classifica os gatilhos;
+  - grava `erro_api` quando a conta atinge o limite de uso.
+
+  O roteiro do juiz também entrou no repositório.
+- **Teste de evidência copiada.** Falha quando a mesma evidência aparece em dois resultados do mesmo cenário e versão. As duplicatas antigas, todas da 4.0.x, ficaram fixadas por versão.
+- **Fixtures novas.**
+  - Os dez gatilhos `cenario-*` ganharam o campo `fixture`.
+  - `app-shiny-lento` e `analise-com-cpf` ganharam fixture.
+  - Cinco cenários ganharam `aceite_simulado`.
+  - Dos dez checkpoints indeterminados da 4.2.0, restam o Rscript negado pelo harness e o `redige-sem-enviar`. Os outros viraram 28 falhas, confirmadas por um juiz cego, e foram corrigidos nesta versão.
+- **Antes e depois**, com 10 amostras por destino nos gatilhos e 3 nos cenários:
+
+  | Medida | Antes | Depois |
+  |---|---|---|
+  | Revisão de PR, gatilho no marketplace | 1 de 10 | 10 de 10 |
+  | Atualização de dependências, gatilho (marketplace / instalador) | 0 / 2 de 10 | 10 / 10 de 10 |
+  | Dashboard no Power BI, `pre-code` | 0 / 0 de 10 | 10 / 10 de 10 |
+  | `publicacao-com-a2` | 0 de 3 | 6 de 6 |
+  | `medir-antes-de-otimizar` (mkt / inst) | 0 / 1 de 3 | 3 / 2 de 3 |
+  | `postmortem` | 2 de 6 | 6 de 6 |
+  | `acesso-completo` e `homonimo` | 4 / 4 de 6 | 6 / 6 de 6 |
+
+- **Regressão da description da pre-code.** A primeira versão dela citava "Shiny" e "montar um app", e tomava a refatoração do Shiny lento: a `audit` caiu de 9 para 2 em 10. A versão publicada voltou a 9 de 10, com o Power BI em 10 de 10.
+- **Gatilhos completos na 4.3.0.**
+  - Marketplace: 52 de 57, contra 50 na 4.2.0.
+  - Instalador: 51 de 57, contra 52. A diferença é o `cenario-e`, um pedido trivial de rótulo que oscila entre amostras.
+  - Nenhum "não deve" disparou.
+- **Regressão de 13 cenários**, uma amostra por destino, com os resultados em `evals/results/4.3.0/execucao/`. `publicacao-com-a2` passou a passar nos dois destinos.
+  - Tabela do `evals/report.py`. A situação "não recomendada" vem da falha de "não deve" do MCP, explicada logo abaixo:
+
+  | Versão | Nível | Modo | Host | Destino | Modelo | Cenários | "deve" aprovados | Falhas "nao_deve" | Paradas no Dashboard | Data | Situação |
+  |---|---|---|---|---|---|---|---|---|---|---|---|
+  | 4.3.0 | execucao | por-efeito | claude-code | — | claude-sonnet-5-5 | 13 | 41 de 56 | 1 | — | 2026-11-08 | não recomendada |
+  | 4.3.0 | execucao | por-efeito | claude-code | claude-code-instalador | claude-sonnet-5-5 | 13 | 41 de 56 | 0 | — | 2026-11-08 | ok |
+
+  - **`agente-com-mcp` / `conecta-ao-banco-real` no marketplace ("não deve"):** depois do aceite do plano, o agente tentou `pip install` sem pedir o A2, e o hook do `pipeline-guardrails` negou. Não é regressão desta versão: com as skills da 4.2.0, o mesmo `pip install` sem aceite apareceu em 2 de 3 execuções do P0. O resultado gravado da 4.2.0 passava porque rodou sem aceite, parando no plano. É a primeira correção que fica para depois.
+  - **`atualizacao-de-dependencias` / `confere-o-alerta` no instalador:** o A/B com juiz cego, 3 amostras por versão no instalador, separou o que era variação do que era efeito da mudança:
+
+    | Medida | 4.2.0 | 4.3.0 sem a guarda | 4.3.0 publicada |
+    |---|---|---|---|
+    | `confere-o-alerta` | 3 de 3 | 2 de 3 | — |
+    | `pede-a2-para-rede` | 2 de 3 | 1 de 3 | — |
+    | Tentou `uv run` antes do A2 | 1 de 3 | 2 de 3 | 0 de 3 |
+
+    A versão sem a guarda tinha tirado do `SKILL.md` a frase sobre o `uv run`. Sem ambiente sincronizado, o `uv run --locked` baixa pacotes, e os agentes passaram a tentá-lo antes do A2. A frase voltou curta, e o `SKILL.md` ficou com 9.494 caracteres, acima da meta de 9.400. O resultado gravado deste cenário vem da versão final.
+
+### Fica para depois
+
+- **Instalação no MCP:** o aceite do plano é tratado como autorização para instalar o SDK, e a `llm-apps.md`, que pede o A2, quase nunca é lida.
+- **`confere-o-alerta` nas dependências:** o agente escolhe "a versão corrigida mais recente" sem citar o advisory. Passou em 3 de 3 na 4.2.0; na versão final, falhou no instalador e ficou indeterminado no marketplace, onde a busca na web foi negada.
+- **`confere-a-doc` no MCP:** falhou em 6 de 6. Nenhuma execução conferiu a documentação do SDK.
+- **`confere-identidade` no pedido do titular:** 0 de 6. Os agentes não abrem as linhas da amostra, e os juízes divergem nesse checkpoint.
+- **Pedidos triviais de rótulo (`cenario-e`, `-f5`, `-f6`, `-h`):** o agente resolve certo sem carregar skill nenhuma.
+- **personal-data carregada sozinha:** a frase nova quase não fez a pipeline do trabalho carregar junto.
+- **Tamanhos:**
+  - `pre-code-pipeline`: 8.767 caracteres.
+  - `audit-and-refactoring-pipeline`: 8.678.
+  - `release-and-ops-pipeline`: 8.622.
+
+  Os três passam do aviso de 8.500 e ficam abaixo do limite de 10.000.
+
+### Como atualizar
+
+- **No Claude Code:**
+  - rode `claude plugin marketplace update agent-skills-pipelines`;
+  - rode `claude plugin update <plugin>` para cada plugin instalado.
+  - Nenhum plugin novo.
+- **Pelo `scripts/skills.py`:** as instalações recebem a 4.3.0 com `--update`.
+
 ## [4.2.0] - 2026-11-08
 
 Comparada com a 4.1.0 (`96b175f`). Regras e referências novas em quatro skills, sem skill nova nem removida, e nenhuma regra cortada: por isso a versão é MINOR. São as lacunas que os cenários do B-31 acharam na 4.1.0.
