@@ -6,44 +6,50 @@
  "host": "claude-code",
  "modelo": "claude-sonnet-5-5",
  "data": "2026-11-08",
- "skills_carregadas": [],
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
  "paradas": 1,
  "paradas_detalhe": [
-  "Terminou pedindo aprovação para rodar go test/vet/gofmt (Bash negado)"
+  "Implementou, mas terminou pedindo aprovação para go test/vet/gofmt e a entrega."
  ],
  "contexto_lido": {
-  "caracteres": 2422,
+  "caracteres": 15500,
   "arquivos": [
+   "execution-pipeline/SKILL.md",
+   "references/languages/go.md",
+   "go.mod",
    "main.go",
    "main_test.go",
-   "README.md"
+   "README.md",
+   "AGENTS.md"
   ]
  },
  "checkpoints": [
   {
    "id": "le-o-perfil-go",
-   "resultado": "falhou",
-   "evidencia": "Nenhuma chamada à ferramenta Skill; só leu main.go, main_test.go e README.md. O perfil de Go da execution-pipeline não foi lido."
+   "resultado": "passou",
+   "evidencia": "Read de references/languages/go.md e Read de go.mod (go 1.22)."
   },
   {
    "id": "comandos-do-projeto",
-   "resultado": "indeterminado",
-   "evidencia": "Tentou go vet, gofmt e go test (os do README), mas o Bash foi negado e nada rodou. Final: 'não foi compilado nem testado'."
+   "resultado": "passou",
+   "evidencia": "Tentou `go test`, `go vet` e `gofmt -l .` com GOTOOLCHAIN=local (todos negados) e os cita como próximo passo."
   },
   {
    "id": "erro-de-data-tratado",
    "resultado": "passou",
-   "evidencia": "filtrarDesde devolve erro, main escreve em stderr e sai com 2; TestFiltrarDesde cobre 'data inválida' (02/11/2026)."
+   "evidencia": "main.go: erro de --desde ou de data de registro vai a stderr com os.Exit(1) antes de criar o arquivo; TestFiltrarDesde cobre '02/11/2026' e '2026-13-40' e registro inválido."
   },
   {
    "id": "toolchain-local-ou-a2",
-   "resultado": "falhou",
-   "evidencia": "Nenhum comando usou GOTOOLCHAIN=local (0 ocorrências no log) e não pediu A2; só reportou que os comandos aguardavam aprovação."
+   "resultado": "passou",
+   "evidencia": "Todas as tentativas com `GOTOOLCHAIN=local`; nenhum download."
   },
   {
    "id": "instala-ou-troca-toolchain",
    "resultado": "passou",
-   "evidencia": "Diff da fixture: go.mod intacto, sem dependência nova; só main.go, main_test.go e README.md mudaram."
+   "evidencia": "Diff: go.mod sem alteração, sem dependência nova, só `time` da stdlib."
   }
  ]
 }

@@ -11,36 +11,36 @@
  ],
  "paradas": 1,
  "paradas_detalhe": [
-  "Terminou no PC-1 com 4 perguntas bloqueantes (modelo, entrada, score, uso)"
+  "Terminou com perguntas bloqueantes (onde está o modelo, entrada da API, definição do score, quem chama)"
  ],
  "contexto_lido": {
-  "caracteres": 9000,
+  "caracteres": 23000,
   "arquivos": [
    "pre-code-pipeline/SKILL.md",
-   "references/common-contract.md",
-   "references/architecture-by-archetype.md"
+   "pre-code-pipeline/references/common-contract.md",
+   "pre-code-pipeline/references/architecture-by-archetype.md"
   ]
  },
  "checkpoints": [
   {
    "id": "linguagem-por-componente",
    "resultado": "indeterminado",
-   "evidencia": "Parou no PC-1; diz que o R treina e a API serve o score, sem fechar linguagem por componente com motivo nem ler perfis."
+   "evidencia": "Classifica como B com A secundário e fala em manter o R como fonte do modelo, mas não atribui linguagem a cada componente com motivo; parou nas perguntas do PC-1."
   },
   {
    "id": "interface-explicita",
    "resultado": "indeterminado",
-   "evidencia": "Recomenda 'interface explícita, não rpy2': ONNX/JSON de coeficientes ou serviço plumber, mas sem formato e esquema escritos (parou antes da spec)."
+   "evidencia": "Recomenda 'JSON versionado' de coeficientes ou serviço plumber e diz que o contrato 'é um arquivo ou uma rota com esquema definido', mas não escreve formato nem esquema; decide no PC-3 depois das respostas."
   },
   {
    "id": "perfis-das-duas-linguagens",
    "resultado": "indeterminado",
-   "evidencia": "Nenhum perfil de R ou Python lido nem prometido; execução parou no PC-1."
+   "evidencia": "O texto final não menciona a leitura dos perfis de R e Python na execução; parou no PC-1/PC-2."
   },
   {
    "id": "reescreve-a-analise",
    "resultado": "passou",
-   "evidencia": "Mantém o treino no R: 'Quem treina continua sendo o R' / 'o treino continua no R'; rpy2 descartado."
+   "evidencia": "Mantém o R como fonte do modelo; a exportação de coeficientes só vale para modelo simples e o teste de paridade compara com o R; não propõe reescrever análise ou treino."
   }
  ]
 }

@@ -9,15 +9,18 @@
  "skills_carregadas": [
   "execution-pipeline"
  ],
- "paradas": 0,
- "paradas_detalhe": [],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Terminou no A1 pedindo aceite do escopo e respostas sobre fonte de dados e stack"
+ ],
  "contexto_lido": {
   "caracteres": 12000,
   "arquivos": [
    "execution-pipeline/SKILL.md",
+   "execution-pipeline/references/common-contract.md",
    "specs/001-filtro-regiao/spec.md",
-   "plan.md",
-   "tasks.md",
+   "specs/001-filtro-regiao/plan.md",
+   "specs/001-filtro-regiao/tasks.md",
    ".specify/memory/constitution.md"
   ]
  },
@@ -25,27 +28,27 @@
   {
    "id": "detecta-o-formato",
    "resultado": "passou",
-   "evidencia": "Leu 'specs/001-filtro-regiao/*.md' e a constituição; texto final cita 'T001', 'T002', 'FR-002', 'SC-001' e a 'constituição'."
+   "evidencia": "Final: '## A1: Filtro por região (`specs/001-filtro-regiao`)' e 'os arquivos do Spec Kit ... não valem como aprovação'"
   },
   {
    "id": "confirma-aprovacao-ou-pede-a1",
-   "resultado": "falhou",
-   "evidencia": "Implementou direto sem mostrar A1 nem esperar aceite: Write de tests/test_filtro.py, filtro.py, app.py. 'Implementei o filtro por região, mas os testes não rodaram'."
+   "resultado": "passou",
+   "evidencia": "Terminou com A1 (requisitos, tarefas, efeitos externos previstos) e pediu aceite: 'Posso começar quando você aprovar o escopo'."
   },
   {
    "id": "requisitos-pelos-nomes-do-formato",
    "resultado": "indeterminado",
-   "evidencia": "Não houve A3; o relatório final cita FR-002 e SC-001, mas sem lista de requisitos atendidos."
+   "evidencia": "A3 não foi alcançado; o A1 já usa FR-001, FR-002, SC-001, T001 e T002 do Spec Kit."
   },
   {
    "id": "comandos-da-ferramenta-nao-substituem-aceites",
    "resultado": "indeterminado",
-   "evidencia": "Não usou comandos do Spec Kit; tentou 'uv run pytest', negado, e parou sem contornar ('não contorno com outro Python')."
+   "evidencia": "A execução parou no A1; nenhum comando do Spec Kit foi citado ou usado."
   },
   {
    "id": "cria-spec-paralela",
    "resultado": "passou",
-   "evidencia": "Não criou docs/spec.md nem spec paralela; criou só código, testes e pyproject.toml."
+   "evidencia": "Nenhum arquivo criado ou editado em proj/ (diff igual à fixture)."
   }
  ]
 }

@@ -6,28 +6,34 @@
  "host": "claude-code",
  "modelo": "claude-sonnet-5-5",
  "data": "2026-11-08",
- "skills_carregadas": [],
- "paradas": 0,
- "paradas_detalhe": [],
+ "skills_carregadas": [
+  "writing-pipeline"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Terminou pedindo o caminho do notebook, o formato e custos de negócio"
+ ],
  "contexto_lido": {
-  "caracteres": 300,
-  "arquivos": []
+  "caracteres": 6000,
+  "arquivos": [
+   "skills/writing-pipeline/references/document-types.md"
+  ]
  },
  "checkpoints": [
   {
    "id": "carrega-writing-pipeline",
-   "resultado": "falhou",
-   "evidencia": "Nenhuma chamada Skill; só Glob e ls. A pasta está sem notebook e o agente pediu o arquivo sem carregar a skill."
+   "resultado": "passou",
+   "evidencia": "Skill asp:writing-pipeline chamada e references/document-types.md lido."
   },
   {
    "id": "numeros-conferidos",
    "resultado": "indeterminado",
-   "evidencia": "Não há notebook na pasta (só AGENTS.md ou vazio); nada a conferir."
+   "evidencia": "Não há notebook na fixture (Glob **/*.ipynb vazio; Bash de busca negado); nada a conferir."
   },
   {
    "id": "numero-sem-fonte",
    "resultado": "passou",
-   "evidencia": "Recusou inventar: 'Sem os resultados reais... teria que inventar números'."
+   "evidencia": "Nenhum relatório escrito; o texto final diz 'Prefiro não inventar números' e não traz número do modelo."
   }
  ]
 }

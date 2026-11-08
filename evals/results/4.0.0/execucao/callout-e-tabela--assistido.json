@@ -6,25 +6,27 @@
  "host": "claude-code",
  "modelo": "claude-sonnet-5-5",
  "data": "2026-11-08",
- "skills_carregadas": [],
- "paradas": 1,
- "paradas_detalhe": [
-  "perguntou qual .qmd editar: proj/ não tem nenhum .qmd (a fixture do cenário não existe)"
+ "skills_carregadas": [
+  "execution-pipeline"
  ],
+ "paradas": 0,
+ "paradas_detalhe": [],
  "contexto_lido": {
-  "caracteres": 0,
-  "arquivos": []
+  "caracteres": 9400,
+  "arquivos": [
+   "execution-pipeline/SKILL.md"
+  ]
  },
  "checkpoints": [
   {
    "id": "so-a-quarto-authoring",
    "resultado": "indeterminado",
-   "evidencia": "Nenhuma skill carregada; 'Não há nenhum arquivo .qmd neste diretório'; o plugin de teste também não tem a quarto-authoring (é de outro plugin)"
+   "evidencia": "O proj está vazio (a fixture não tem .qmd; assistido só tem AGENTS.md): Glob '**/*.qmd' sem resultado, o agente pediu o arquivo. Só execution-pipeline foi carregada; quarto-authoring não."
   },
   {
    "id": "carrega-quarto-expert",
    "resultado": "passou",
-   "evidencia": "Nenhuma chamada Skill; só Glob e Bash ls"
+   "evidencia": "Nenhuma chamada Skill para quarto-expert."
   }
  ]
 }

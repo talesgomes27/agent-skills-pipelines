@@ -11,35 +11,36 @@
  ],
  "paradas": 1,
  "paradas_detalhe": [
-  "Terminou no PC-1 com 4 perguntas bloqueantes (modelo, entrada, score, uso)"
+  "Terminou com perguntas bloqueantes (onde está o modelo, entrada da API, definição do score, quem chama)"
  ],
  "contexto_lido": {
-  "caracteres": 6000,
+  "caracteres": 16000,
   "arquivos": [
    "pre-code-pipeline/SKILL.md",
-   "references/common-contract.md"
+   "pre-code-pipeline/references/common-contract.md",
+   "AGENTS.md"
   ]
  },
  "checkpoints": [
   {
    "id": "linguagem-por-componente",
    "resultado": "indeterminado",
-   "evidencia": "Parou no PC-1; diz que o R treina e a API serve o score, sem fechar linguagem por componente com motivo nem ler perfis."
+   "evidencia": "Classifica como B com A secundário e fala em manter o R como fonte do modelo, mas não atribui linguagem a cada componente com motivo; parou nas perguntas do PC-1."
   },
   {
    "id": "interface-explicita",
    "resultado": "indeterminado",
-   "evidencia": "Propõe plumber/vetiver por HTTP ou ONNX/PMML e descarta rpy2, mas sem esquema escrito (parou antes da spec)."
+   "evidencia": "Recomenda plumber atrás da FastAPI e evita rpy2, sem escrever formato nem esquema; fica para o PC-3."
   },
   {
    "id": "perfis-das-duas-linguagens",
    "resultado": "indeterminado",
-   "evidencia": "Nenhum perfil de R ou Python lido nem prometido; execução parou no PC-1."
+   "evidencia": "O texto final não menciona a leitura dos perfis de R e Python na execução; parou no PC-1/PC-2."
   },
   {
    "id": "reescreve-a-analise",
    "resultado": "passou",
-   "evidencia": "Mantém o treino no R: 'Quem treina continua sendo o R' / 'o treino continua no R'; rpy2 descartado."
+   "evidencia": "Recomenda manter o R como fonte da verdade e evitar reescrever o pré-processamento do tidyverse em Python."
   }
  ]
 }

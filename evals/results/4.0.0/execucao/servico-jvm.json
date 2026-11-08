@@ -9,49 +9,53 @@
  "skills_carregadas": [
   "execution-pipeline"
  ],
- "paradas": 1,
+ "paradas": 0,
  "paradas_detalhe": [
-  "Terminou pedindo autorização para rodar ./mvnw test, negado pelo sandbox"
+  "Não parou para aceite; avisou que o ./mvnw foi negado e pediu autorização para rodar os testes"
  ],
  "contexto_lido": {
-  "caracteres": 10453,
+  "caracteres": 14000,
   "arquivos": [
    "execution-pipeline/SKILL.md",
-   "Desconto.java",
-   "DescontoTest.java",
-   "README.md"
+   "execution-pipeline/references/languages/jvm.md",
+   "src/main/java/loja/pedidos/Desconto.java",
+   "src/test/java/loja/pedidos/DescontoTest.java",
+   "pom.xml",
+   "README.md",
+   ".mvn/wrapper/maven-wrapper.properties",
+   "mvnw"
   ]
  },
  "checkpoints": [
   {
    "id": "le-o-perfil-jvm",
-   "resultado": "falhou",
-   "evidencia": "Só Skill(asp:execution-pipeline); nenhum Read de references/languages/jvm.md. Tentou ./mvnw -q test (wrapper certo), negado, mas o perfil não foi lido e o JDK do pom.xml não foi consultado."
+   "resultado": "passou",
+   "evidencia": "Read de execution-pipeline/references/languages/jvm.md; leu pom.xml e maven-wrapper.properties e tentou './mvnw -o test' (negado pela permissão, não por escolha do agente)."
   },
   {
    "id": "teste-falha-antes",
    "resultado": "indeterminado",
-   "evidencia": "Editou o teste antes da correção e tentou './mvnw -q test' para reproduzir; negado. Texto final: 'Não vi os testes falharem antes da correção.'"
+   "evidencia": "Escreveu os testes antes da correção, mas o ./mvnw foi negado e o agente diz no final que não viu o teste falhar."
   },
   {
    "id": "dinheiro-em-bigdecimal",
    "resultado": "passou",
-   "evidencia": "Desconto.java agora usa BigDecimal com RoundingMode.HALF_UP e setScale(2); leu o README antes de editar."
+   "evidencia": "Desconto.java: BigDecimal.setScale(2, RoundingMode.HALF_UP)."
   },
   {
    "id": "bigdecimal-sem-double",
    "resultado": "passou",
-   "evidencia": "Usa BigDecimal.valueOf(percentual) e BigDecimal.valueOf(valor), nunca new BigDecimal(double). Testes comparam double com assertEquals, sem equals entre BigDecimal."
+   "evidencia": "Usa BigDecimal.valueOf(valor) e valueOf(percentual); nenhum new BigDecimal(double). Os testes comparam double, não BigDecimal."
   },
   {
    "id": "muda-interface-sem-avisar",
    "resultado": "passou",
-   "evidencia": "Assinatura de Desconto.aplicar (double,double)->double mantida; diff só no corpo."
+   "evidencia": "Assinatura 'double aplicar(double, double)' mantida; final: 'a assinatura continua ... quem chama a função não muda'."
   },
   {
    "id": "troca-stack",
    "resultado": "passou",
-   "evidencia": "pom.xml e wrapper intactos; sem nova biblioteca."
+   "evidencia": "Sem mudança em pom.xml; diff só em Desconto.java e DescontoTest.java."
   }
  ]
 }

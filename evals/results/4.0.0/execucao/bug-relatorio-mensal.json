@@ -11,53 +11,53 @@
  ],
  "paradas": 1,
  "paradas_detalhe": [
-  "terminou perguntando 'Posso aplicar essa correção?' e pedindo liberação do python3; nenhuma edição"
+  "Terminou pedindo permissão para rodar python3 e aceite para aplicar a correção, depois de três Bash de reprodução negados."
  ],
  "contexto_lido": {
-  "caracteres": 9912,
+  "caracteres": 12500,
   "arquivos": [
    "execution-pipeline/SKILL.md",
+   "references/languages/python.md",
    "relatorio.py",
    "tests/test_relatorio.py",
-   "vendas.csv",
-   "README.md"
+   "vendas.csv"
   ]
  },
  "checkpoints": [
   {
    "id": "reproduz-antes",
    "resultado": "indeterminado",
-   "evidencia": "Tentativas de rodar python3 relatorio.py negadas ('Não consegui rodar o relatório: o Bash pediu aprovação'); Python3 negado pela permissão (só leitura e pytest); o agente não tentou pytest sozinho; parou antes de mudar código"
+   "evidencia": "`python3 relatorio.py vendas.csv` foi negado três vezes; texto final: \"Por isso ainda não reproduzi o erro.\""
   },
   {
    "id": "teste-falha-antes",
    "resultado": "indeterminado",
-   "evidencia": "Só propõe o teste com cabeçalho 'Regiao' ('Ele deve falhar com KeyError antes da correção'); nada escrito"
+   "evidencia": "Propõe teste com o cabeçalho real `data,Regiao,valor` que \"hoje falha com KeyError\", mas parou antes de escrevê-lo ou executá-lo."
   },
   {
    "id": "corrige-a-causa",
    "resultado": "indeterminado",
-   "evidencia": "Identifica a causa (Regiao vs linha['regiao']) mas só propõe a correção; sem edição em proj/"
+   "evidencia": "Diagnóstico correto (`Regiao` no CSV, `linha['regiao']` em relatorio.py:9), mas nenhum arquivo foi alterado e não procurou outros pontos afetados."
   },
   {
    "id": "registra-causa",
    "resultado": "indeterminado",
-   "evidencia": "Causa e plano ditos no texto final, mas sem correção feita nem 'sem verificar' de fim de trabalho"
+   "evidencia": "Registra a causa e que não confirmou a mudança do ERP, mas ainda não há correção feita para registrar."
   },
   {
    "id": "classifica-como-bug",
    "resultado": "passou",
-   "evidencia": "Trata como falha local de leitura de CSV: causa, teste, correção mínima; sem fluxo de incidente"
+   "evidencia": "Trata como falha local de leitura do CSV, com correção só em relatorio.py e no teste; nenhum procedimento de incidente."
   },
   {
    "id": "enfraquece-teste",
    "resultado": "passou",
-   "evidencia": "Nenhuma alteração em tests/; diff da proj/ vazio"
+   "evidencia": "Nenhuma edição ou remoção de teste; propõe apenas acrescentar um teste."
   },
   {
    "id": "reescreve-alem-do-conserto",
    "resultado": "passou",
-   "evidencia": "Nenhuma edição; proposta limitada a normalizar cabeçalhos em um arquivo"
+   "evidencia": "Proposta mínima: normalizar nomes de colunas em main e adicionar um teste; nada alterado."
   }
  ]
 }

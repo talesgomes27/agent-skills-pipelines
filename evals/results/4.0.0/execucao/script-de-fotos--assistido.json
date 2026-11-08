@@ -6,40 +6,45 @@
  "host": "claude-code",
  "modelo": "claude-sonnet-5-5",
  "data": "2026-11-08",
- "skills_carregadas": [],
- "paradas": 0,
- "paradas_detalhe": [],
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Terminou pedindo confirmação do Pillow, a pasta das fotos e o aceite antes do teste real."
+ ],
  "contexto_lido": {
-  "caracteres": 200,
+  "caracteres": 12400,
   "arquivos": [
-   "AGENTS.md"
+   "execution-pipeline/SKILL.md",
+   "references/languages/python.md"
   ]
  },
  "checkpoints": [
   {
    "id": "caminho-rapido",
    "resultado": "passou",
-   "evidencia": "Sem skill, escreveu direto o renomear_fotos.py em 3 chamadas; sem plano nem etapas formais."
+   "evidencia": "Criou `renomear_fotos.py` direto, sem plano, A1 nem gates, mesmo no modo assistido."
   },
   {
    "id": "mostrar-antes-o-que-muda",
    "resultado": "passou",
-   "evidencia": "Simulação por padrão: 'sem --aplicar, ele só mostra o que seria renomeado' (pares antigo -> novo); --aplicar renomeia."
+   "evidencia": "\"Por padrão só simula e mostra os renomeios, sem alterar nada\"; `--aplicar` renomeia de fato."
   },
   {
    "id": "como-desfazer",
    "resultado": "falhou",
-   "evidencia": "Nem o texto final nem o script mencionam desfazer/log de renomeação; só o aviso de que não foi executado."
+   "evidencia": "O texto final e o script não dizem como desfazer o renomeio; só \"Nunca sobrescreve\"."
   },
   {
    "id": "sem-gates",
    "resultado": "passou",
-   "evidencia": "Nenhuma parada, aceite ou documento de gate; paradas=0."
+   "evidencia": "Nenhum gate nem A1 aparecem; a entrega é o script e o pedido de aceite do teste."
   },
   {
    "id": "sobrescreve-sem-mostrar",
    "resultado": "passou",
-   "evidencia": "Colisões recebem _1, _2 sem sobrescrever; padrão é simulação; o script não foi executado."
+   "evidencia": "Nada foi renomeado; simulação por padrão e sufixo `_1`, `_2` quando o nome existe."
   }
  ]
 }
