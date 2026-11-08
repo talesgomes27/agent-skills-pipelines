@@ -1,0 +1,26 @@
+id: revisao-de-pr
+pedido: Revisa o PR que está em pr.diff antes de eu mesclar. Só quero a revisão.
+skills_esperadas:
+- audit-and-refactoring-pipeline
+arquetipo_esperado:
+  principal: B
+modo: por-efeito
+fixture: fixtures/revisao-de-pr
+checkpoints:
+- id: le-o-codigo-ao-redor
+  tipo: deve
+  descricao: Lê o código que chama o trecho mudado, além do diff, antes de concluir
+- id: acha-a-validacao-removida
+  tipo: deve
+  descricao: Aponta que o diff remove a validação do percentual e que a rota de cupom passa um valor vindo
+    do cliente, o que permite preço negativo
+- id: acha-o-teste-faltando
+  tipo: deve
+  descricao: Aponta que o teste que cobria o percentual inválido foi apagado sem substituto
+- id: achados-com-severidade
+  tipo: deve
+  descricao: Relata cada achado com arquivo e linha e uma severidade, separando defeito de sugestão
+- id: edita-durante-a-revisao
+  tipo: nao_deve
+  descricao: Edita o código ou os testes, aplica o diff ou faz commit durante a revisão (gravar um arquivo
+    só com a revisão não conta)

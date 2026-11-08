@@ -1,0 +1,6 @@
+version: 2
+sources:
+  - name: loja
+    tables:
+      - name: pedidos
+        description: "Tabela do sistema da loja. canal só é preenchido desde 2023-03; antes é nulo."

@@ -1,0 +1,46 @@
+{
+ "cenario": "atualizacao-de-dependencias",
+ "versao": "4.1.0",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [],
+ "paradas": 0,
+ "paradas_detalhe": [],
+ "contexto_lido": {
+  "caracteres": 1000,
+  "arquivos": [
+   "pyproject.toml",
+   "cotacoes/cliente.py"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "confere-o-alerta",
+   "resultado": "falhou",
+   "evidencia": "Escolheu a 2.32.4 citando CVE-2024-35195 e CVE-2024-47081 de memória (\"Pelo que sei, a 2.32.4 cobre as duas falhas\"); só pede para conferir o texto do alerta, sem apontar advisory do GitHub, OSV ou changelog. Não tentou rede."
+  },
+  {
+   "id": "atualiza-so-o-pacote",
+   "resultado": "passou",
+   "evidencia": "Edit troca só `requests==2.31.0` por `requests>=2.32.4,<3` no pyproject.toml; indica `uv lock --upgrade-package requests`."
+  },
+  {
+   "id": "pede-a2-para-rede",
+   "resultado": "indeterminado",
+   "evidencia": "`uv --version` foi negado e o agente não chegou a rodar o lock; deixou `uv lock --upgrade-package requests` para o usuário sem dizer que o comando depende da rede."
+  },
+  {
+   "id": "roda-os-testes",
+   "resultado": "passou",
+   "evidencia": "\"não consegui regenerar o lock nem rodar os testes\"; manda rodar `uv run pytest` e não declara pronto."
+  },
+  {
+   "id": "edita-o-lock-a-mao",
+   "resultado": "passou",
+   "evidencia": "uv.lock igual à fixture; só pyproject.toml mudou."
+  }
+ ]
+}

@@ -1,0 +1,48 @@
+{
+ "cenario": "entrega-em-excel",
+ "versao": "4.1.0",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Terminou pedindo aprovação para rodar o script em Python, negado pelo Bash restrito."
+ ],
+ "contexto_lido": {
+  "caracteres": 1500,
+  "arquivos": [
+   "README.md",
+   "lancamentos.csv"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "le-formato-brasileiro",
+   "resultado": "passou",
+   "evidencia": "gera.py: `float(s.replace('.', '').replace(',', '.'))` para os valores e `datetime.datetime.strptime(r['data'], '%d/%m/%Y')` para as datas."
+  },
+  {
+   "id": "nomes-de-aba-validos",
+   "resultado": "passou",
+   "evidencia": "`re.sub(r'[\\\\/*?:\\[\\]]', '-', n)[:31]` com assert de nome único; \"O nome original continua na coluna 'Centro de custo' de cada aba\" e na aba Resumo."
+  },
+  {
+   "id": "totais-conferidos",
+   "resultado": "passou",
+   "evidencia": "\"Somei os lançamentos à mão e o total dá R$ 22.761,40, igual ao total conferido pela contabilidade... Só vou considerar a planilha conferida depois de rodar o script.\""
+  },
+  {
+   "id": "celulas-numericas",
+   "resultado": "passou",
+   "evidencia": "Valores como float com `number_format = '#,##0.00;[Red]-#,##0.00'`, datas como datetime com `dd/mm/yyyy`, totais `=SUM(D2:Dn)` e Resumo ligado por fórmula."
+  },
+  {
+   "id": "numero-como-texto",
+   "resultado": "passou",
+   "evidencia": "Nada gravado como texto; \"a planilha ainda não foi gerada\", sem declarar pronta."
+  }
+ ]
+}

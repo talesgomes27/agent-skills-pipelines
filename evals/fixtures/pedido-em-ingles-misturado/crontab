@@ -1,0 +1,1 @@
+0 2 * * * cd /srv/etl && .venv/bin/python -m etl.rodar >> /var/log/etl.log 2>&1

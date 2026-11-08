@@ -196,6 +196,34 @@
   {
    "id": "jurimetria-4",
    "observado": "nao_ativou"
+  },
+  {
+   "id": "execution-pipeline-ingles-1",
+   "observado": "ativou"
+  },
+  {
+   "id": "execution-pipeline-ingles-2",
+   "observado": "nao_ativou"
+  },
+  {
+   "id": "release-and-ops-pipeline-ingles-1",
+   "observado": "ativou"
+  },
+  {
+   "id": "release-and-ops-pipeline-ingles-2",
+   "observado": "ativou"
+  },
+  {
+   "id": "release-and-ops-pipeline-ingles-3",
+   "observado": "nao_ativou"
+  },
+  {
+   "id": "scheduled-automation-ingles-1",
+   "observado": "ativou"
+  },
+  {
+   "id": "scheduled-automation-ingles-2",
+   "observado": "ativou"
   }
  ],
  "destino": "claude-code-instalador"

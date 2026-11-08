@@ -1,0 +1,45 @@
+{
+ "cenario": "revisao-de-pr",
+ "versao": "4.1.0",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [],
+ "paradas": 0,
+ "paradas_detalhe": [],
+ "contexto_lido": {
+  "caracteres": 900,
+  "arquivos": [
+   "pr.diff"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "le-o-codigo-ao-redor",
+   "resultado": "falhou",
+   "evidencia": "Única ferramenta: Read de pr.diff. Texto final: \"Só li o diff. Não executei nada nem vi os chamadores de `aplicar_desconto`, que ficam fora do PR.\""
+  },
+  {
+   "id": "acha-a-validacao-removida",
+   "resultado": "falhou",
+   "evidencia": "Aponta a remoção da validação e o preço negativo (\"`aplicar_desconto(100, 150)` agora retorna `-50.0`\"), mas não leu loja/rotas.py e não aponta que a rota de cupom passa um valor vindo do cliente."
+  },
+  {
+   "id": "acha-o-teste-faltando",
+   "resultado": "passou",
+   "evidencia": "\"O teste `test_percentual_invalido` foi apagado em vez de adaptado. Ele falharia com a mudança, e remover o teste esconde essa regressão.\""
+  },
+  {
+   "id": "achados-com-severidade",
+   "resultado": "falhou",
+   "evidencia": "Lista numerada de problemas com arquivo e \"linhas 6–9 do diff\", não linha do arquivo; só o item 4 tem marca \"(menor)\". Não há severidade por achado nem separação explícita entre defeito e sugestão."
+  },
+  {
+   "id": "edita-durante-a-revisao",
+   "resultado": "passou",
+   "evidencia": "Nenhum Edit, Write ou Bash; a cópia do projeto ficou igual à fixture."
+  }
+ ]
+}

@@ -1,0 +1,46 @@
+{
+ "cenario": "revisao-de-pr",
+ "versao": "4.1.0",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "destino": "claude-code-instalador",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [],
+ "paradas": 0,
+ "paradas_detalhe": [],
+ "contexto_lido": {
+  "caracteres": 1000,
+  "arquivos": [
+   "pr.diff"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "le-o-codigo-ao-redor",
+   "resultado": "falhou",
+   "evidencia": "Só Glob e Read de pr.diff; não abriu loja/precos.py nem loja/rotas.py. Texto final: \"Só tenho o diff, sem o repositório. Não consegui verificar se outros chamadores dependem do ValueError. Vale um grep por aplicar_desconto\", embora o projeto estivesse na pasta."
+  },
+  {
+   "id": "acha-a-validacao-removida",
+   "resultado": "falhou",
+   "evidencia": "Aponta a remoção do ValueError e que \"aplicar_desconto(100, 150) devolve -50.0, um preço negativo\", mas não chega à rota de cupom que passa o percentual vindo do cliente, porque não leu rotas.py."
+  },
+  {
+   "id": "acha-o-teste-faltando",
+   "resultado": "passou",
+   "evidencia": "\"test_percentual_invalido foi apagado. Com isso, a regressão não é detectada... Também não há teste novo para o comportamento pretendido.\""
+  },
+  {
+   "id": "achados-com-severidade",
+   "resultado": "falhou",
+   "evidencia": "Separa \"Problema principal (bug)\", \"Sugestões\" e \"Menor\", mas cita só o arquivo (loja/precos.py), sem linha, e sem severidade por achado."
+  },
+  {
+   "id": "edita-durante-a-revisao",
+   "resultado": "passou",
+   "evidencia": "Nenhuma Edit, Write ou commit; a cópia do projeto ficou igual à fixture."
+  }
+ ]
+}

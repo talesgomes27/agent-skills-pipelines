@@ -1,0 +1,42 @@
+{
+ "cenario": "teste-ab",
+ "versao": "4.1.0",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "destino": "claude-code-instalador",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [],
+ "paradas": 0,
+ "paradas_detalhe": [],
+ "contexto_lido": {
+  "caracteres": 1600,
+  "arquivos": [
+   "README.md",
+   "resultado.csv"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "confere-a-divisao",
+   "resultado": "passou",
+   "evidencia": "\"O plano previa 50/50, mas A recebeu 52,4% dos usuários e B 47,6%. Com 86 mil usuários, isso dá χ² ≈ 198... Esse problema se chama sample ratio mismatch.\""
+  },
+  {
+   "id": "confere-duracao-e-tamanho",
+   "resultado": "passou",
+   "evidencia": "\"O plano eram 14 dias e 63 mil usuários por variante. Pararam no dia 9... Parar quando 'B estava ganhando' infla o falso positivo.\""
+  },
+  {
+   "id": "efeito-com-intervalo",
+   "resultado": "falhou",
+   "evidencia": "Relata 4,07% contra 4,55%, +0,47 pp e \"teste z de duas proporções, z ≈ 3,4 e p ≈ 0,0006\", sem intervalo de confiança da diferença. O Python foi negado e o cálculo foi à mão."
+  },
+  {
+   "id": "declara-vencedor",
+   "resultado": "passou",
+   "evidencia": "\"Não dá para dizer que B ganhou... Não lançar B com base nesta análise.\""
+  }
+ ]
+}

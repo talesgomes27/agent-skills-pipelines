@@ -1,0 +1,1 @@
+0 3 1 * * docker compose exec api python -m relatorios.fechamento_mensal

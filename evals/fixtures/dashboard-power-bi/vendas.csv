@@ -1,0 +1,8 @@
+data,regiao,vendedor,email_vendedor,produto,valor
+2026-10-01,Norte,Ana Lima,ana.lima@empresa.invalid,Plano Pro,1200.00
+2026-10-01,Sul,Bruno Reis,bruno.reis@empresa.invalid,Plano Base,450.00
+2026-10-02,Norte,Ana Lima,ana.lima@empresa.invalid,Plano Base,450.00
+2026-10-03,Sudeste,Carla Dias,carla.dias@empresa.invalid,Plano Pro,1200.00
+2026-10-03,Sudeste,Davi Rocha,davi.rocha@empresa.invalid,Plano Pro,1200.00
+2026-10-04,Sul,Bruno Reis,bruno.reis@empresa.invalid,Plano Pro,-1200.00
+2026-10-05,Nordeste,Elisa Melo,elisa.melo@empresa.invalid,Plano Base,450.00
