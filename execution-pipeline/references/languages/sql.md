@@ -1,6 +1,6 @@
 # SQL
 
-Leia quando o componente da tarefa escreve, muda ou roda consultas ou migrações SQL.
+Leia quando o componente da tarefa escreve, muda ou roda consultas, modelos dbt ou migrações SQL.
 
 ## Descubra no projeto
 
@@ -35,6 +35,13 @@ Teste contra um banco de teste do mesmo dialeto e versão, com a migração apli
 - `EXPLAIN` pode rodar, com a mesma credencial autorizada. `EXPLAIN ANALYZE` executa a consulta, com todos os efeitos de um `INSERT`, `UPDATE` ou `DELETE`, e não roda em produção.
 - Migração segue as regras de backup e recuperação do [contrato comum](../common-contract.md) e da referência do arquétipo, como a [B](../archetype-b.md): arquivo revisável, aplicado só na base de teste autorizada; produção é release.
 
+## dbt
+
+- Para o trabalho comum com dbt, como escrever testes e rodar comandos, use as skills oficiais da dbt Labs (dbt-labs/dbt-agent-skills) quando instaladas; as regras abaixo cobrem o que elas não cobrem.
+- Descubra o target padrão em `profiles.yml` ou na documentação do projeto e rode no target de desenvolvimento. Comando que grava no target de produção, como `dbt run`, `build`, `seed`, `snapshot` ou `--full-refresh`, é efeito do catálogo e pede A2.
+- Coluna nova num modelo incremental: o padrão de `on_schema_change` é `ignore`, e a coluna não entra na tabela existente. `append_new_columns` e `sync_all_columns` acrescentam a coluna, mas nenhum preenche as linhas antigas. O histórico pede `--full-refresh`, que apaga e recria a tabela, ou uma atualização manual; mostre o volume e o custo no pedido de A2.
+- Coluna nova leva descrição e teste em `schema.yml`. Se a origem não tem valor num período, use `where` no teste, como um `not_null` só a partir da data em que a coluna passou a existir, e diga no relatório o período que fica nulo.
+
 ## Fontes
 
 Conferido em 08/11/2026:
@@ -48,3 +55,6 @@ Conferido em 08/11/2026:
 - https://duckdb.org/docs/stable/sql/dialect/postgresql_compatibility
 - https://www.sqlite.org/datatype3.html
 - https://docs.python.org/3/library/sqlite3.html (placeholders e injeção de SQL)
+- https://docs.getdbt.com/docs/build/incremental-models (on_schema_change e full refresh)
+- https://docs.getdbt.com/reference/resource-configs/where
+- https://github.com/dbt-labs/dbt-agent-skills (skills oficiais da dbt Labs)
