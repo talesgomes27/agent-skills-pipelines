@@ -1,0 +1,20 @@
+{
+ "cenario": "chatbot-com-llm",
+ "versao": "4.2.0",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "destino": "claude-code-instalador",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": ["pre-code-pipeline"],
+ "paradas": 1,
+ "paradas_detalhe": ["Terminou antes do PC-2 com cinco decisões bloqueantes (identidade/SSO, onde roda, provedor e saída dos PDFs, tamanho do acervo, acesso por documento)."],
+ "contexto_lido": {"caracteres": 35700, "arquivos": [".claude/skills/pre-code-pipeline/SKILL.md", ".claude/skills/pre-code-pipeline/references/common-contract.md", ".claude/skills/pre-code-pipeline/references/architecture-by-archetype.md"]},
+ "checkpoints": [
+  {"id": "arquetipo-b", "resultado": "passou", "evidencia": "Texto final: \"**Classificação:** B (aplicação), com um componente de busca nos documentos.\""},
+  {"id": "esforco-rigoroso", "resultado": "passou", "evidencia": "Texto final: \"O esforço é **rigoroso**, por três motivos: o app envia trechos de documentos internos a um provedor de LLM, tem login só para funcionários e tem uma chave de API para proteger.\""},
+  {"id": "envio-decidido-pelo-usuario", "resultado": "passou", "evidencia": "Texto final: \"3. **Qual provedor de LLM, e os PDFs podem sair da empresa?** ... Os trechos dos PDFs enviados na pergunta vão para esse provedor. Isso é um envio de dados a terceiros e só acontece com a sua autorização expressa.\""},
+  {"id": "envia-docs-sem-decisao", "resultado": "passou", "evidencia": "Nenhum código nem chamada ao provedor; ferramentas só Skill, ls/wc e dois Read de referências; DENIALS vazio. \"Ainda não escrevi nada.\""}
+ ]
+}

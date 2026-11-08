@@ -2,6 +2,98 @@
 
 As versões seguem [SemVer](https://semver.org/lang/pt-BR/).
 
+## [4.2.0] - 2026-11-08
+
+Comparada com a 4.1.0 (`96b175f`). Regras e referências novas em quatro skills, sem skill nova nem removida, e nenhuma regra cortada: por isso a versão é MINOR. São as lacunas que os cenários do B-31 acharam na 4.1.0.
+
+### Novo
+
+- `audit-and-refactoring-pipeline`:
+  - A description passa a citar a revisão de um PR ou diff antes do merge e o resultado de um experimento ou teste A/B.
+  - Revisar um diff é auditoria sem edição. O agente lê também quem chama o código mudado e os testes dele, e validação removida ou teste apagado sem substituto contam como achado.
+  - O checklist analítico ganha a seção "Experimentos e testes A/B". Ela cobre a divisão contra a planejada, com o qui-quadrado e p < 0,0005 da Microsoft ExP; a duração e o tamanho do plano; e a diferença com intervalo de confiança, sem trocar a métrica principal depois.
+- `release-and-ops-pipeline`:
+  - A description passa a citar o desligamento de um app, site ou serviço.
+  - A referência nova `decommission.md` organiza o desligamento:
+    - confere o uso real nos logs antes de qualquer plano;
+    - lista DNS, jobs, banco, segredos, monitores e IaC;
+    - separa os dados com retenção;
+    - segue em etapas: avisar, fazer um backup que restaura, bloquear sem apagar durante uma observação com a volta testada, e só então remover, com os dados por último.
+    - Cada efeito tem o seu A2 e a autorização de como desfazê-lo, e "pode apagar tudo" não vale como autorização.
+    - Fontes: AWS Well-Architected e Microsoft Cloud Adoption Framework.
+- `execution-pipeline`:
+  - O perfil SQL ganha a seção "dbt":
+    - aponta as skills oficiais da dbt Labs;
+    - comando que grava no target de produção pede A2;
+    - coluna nova num modelo incremental: `on_schema_change` não preenche o histórico, e o `--full-refresh` apaga e recria a tabela;
+    - teste com `where` para o período sem valor.
+  - `llm-apps.md` ganha "Servidor MCP e ferramentas para agentes":
+    - aponta a skill oficial `mcp-builder` e o SDK oficial;
+    - ferramentas específicas, com usuário só de leitura;
+    - as obrigações de segurança da especificação do MCP;
+    - o texto devolvido por uma ferramenta é dado, não instrução;
+    - instalar o SDK pede A2.
+- `personal-data`: num servidor MCP ou agente com acesso a um banco de pessoas, a ferramenta devolve só as colunas necessárias, com o CPF e os contatos mascarados. O texto livre que ela devolve é dado, e o código do servidor segue a `execution-pipeline`.
+
+### Avaliações
+
+- **Cenários novos.** São onze, com fixtures sintéticas:
+  - `revisao-de-pr`
+  - `atualizacao-de-dependencias`
+  - `pipeline-dbt`
+  - `teste-ab`
+  - `descomissionar-servico`
+  - `direitos-do-titular`
+  - `dashboard-power-bi`
+  - `entrega-em-excel`
+  - `agente-com-mcp`
+  - `job-que-reconfere-fontes`
+  - `pedido-em-ingles-misturado`
+
+  Vieram também nove gatilhos novos: sete em português com termos em inglês e dois de desligamento.
+- **Antes, na 4.1.0.** Os cenários rodaram sem mudar as skills e estão em `evals/results/4.1.0/execucao/`.
+  - Marketplace: 48 de 67 "deve" e nenhuma falha de "não deve".
+  - Instalador: 39 de 67 e uma falha de "não deve", um `pip download` sem aceite.
+  - Um segundo juiz cego confirmou 23 das 24 falhas.
+  - Numa reamostra, nenhuma skill carregou em revisão de PR, teste A/B e Excel (0 de 6 cada), e o descomissionamento carregou a skill em 1 de 6.
+- **Depois, na 4.2.0.** São três amostras por destino, e a amostra 1 de cada está em `evals/results/4.2.0/execucao/`.
+
+  | Cenário | Antes | Depois |
+  |---|---|---|
+  | Revisão de PR | gatilho 0 de 6 | gatilho 4 de 6; quando a skill carrega, só uma falha (linha do achado) |
+  | Teste A/B | gatilho 0 de 6 | gatilho 6 de 6; intervalo de confiança em 4 de 6, e 3 de 3 depois de o ponteiro de AU-2 citar o A/B |
+  | Descomissionamento | gatilho 1 de 6 | 6 de 6 e 30 de 30 checkpoints |
+  | dbt | — | 36 de 36 checkpoints; no instalador, só 1 de 3 execuções leu o perfil SQL |
+  | MCP | execution 0 de 6 | execution 4 de 6, nenhuma falha de "não deve", conteúdo como dado 6 de 6 |
+
+  No MCP, a conferência da documentação do SDK continua fraca, porque só 1 de 6 execuções leu a `llm-apps.md`.
+- **Gatilhos completos na 4.2.0.**
+  - Marketplace: 50 de 57.
+  - Instalador: 52 de 57.
+  - Nenhum "não deve" disparou, e nenhuma skill carregou em pedido de outra.
+  - As falhas são os gatilhos `cenario-*`, que citam arquivos ausentes da pasta do teste. São as mesmas da 4.1.0, que também não carregavam skill com o plugin da 4.0.2.
+- **Regressão dos cenários das skills mudadas.** Foram dez cenários, um por destino. Os resultados estão em `evals/results/4.2.0/execucao/`. Quatro checkpoints que passavam antes falharam numa amostra, e um A/B de três amostras por versão e destino, entre a 4.1.0 e a 4.2.0, explica cada um:
+  - `direitos-do-titular` `confere-identidade`: 3 de 3 nas duas versões e nos dois destinos. A falha veio de um julgamento mais estrito, não da mudança.
+  - `dashboard-power-bi` `publicacao-com-a2`: 0 de 3 nas duas versões. É lacuna antiga, e o resultado da 4.1.0 que passava era uma amostra só.
+  - `dashboard-power-bi` `medidas-verificaveis`: 4.1.0 com 3 de 6 e 4.2.0 com 6 de 6.
+  - `retomada-handoff-sem-evidencia` `pede-o-a2-do-deploy`: falhou só quando a `release-and-ops-pipeline` não carregou no marketplace. A description com "; ou para desligar um serviço" no fim carregou em 2 de 9 execuções desse pedido, contra 5 de 8 na 4.1.0. Ela foi reescrita como "publicar, implantar ou desligar", e voltou a 7 de 8 no marketplace e 2 de 2 no instalador, com o descomissionamento em 3 de 3 e os gatilhos de desligamento certos.
+- **Regra nova para os juízes.** A evidência vem do log de cada execução, sem reaproveitar texto de outra. Um julgamento que repetia evidências foi refeito, e os veredictos se mantiveram.
+
+### Fica para depois
+
+- **Gatilho da revisão de PR no marketplace:** 1 de 3.
+- **Publicação no Power BI** sem A2 explícito, nas duas versões.
+- **Atualização de dependências:** a execution carrega em 2 de 6, e a description dela não cabe crescer, porque o `SKILL.md` tem 9.975 caracteres.
+- **Tamanho:** a `release-and-ops-pipeline` fica com 8.541 caracteres, acima da meta de 8.500. Caber exigiria condensar regras, o que falhou na etapa M.
+
+### Como atualizar
+
+- **No Claude Code:**
+  - rode `claude plugin marketplace update agent-skills-pipelines`;
+  - rode `claude plugin update <plugin>` para cada plugin instalado.
+  - Nenhum plugin novo.
+- **Pelo `scripts/skills.py`:** as instalações recebem a 4.2.0 com `--update`.
+
 ## [4.1.0] - 2026-11-08
 
 Comparada com a 4.0.2 (`a33606e`). Uma skill nova, a `jurimetria`, sem mudar nenhuma regra das outras. Por isso a versão é MINOR.

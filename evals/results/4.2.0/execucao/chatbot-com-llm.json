@@ -1,0 +1,19 @@
+{
+ "cenario": "chatbot-com-llm",
+ "versao": "4.2.0",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": ["pre-code-pipeline"],
+ "paradas": 1,
+ "paradas_detalhe": ["Termina com 'Perguntas que bloqueiam o plano' (autenticação, LLM e política de envio, hospedagem, acervo, dados pessoais)"],
+ "contexto_lido": {"caracteres": 8486, "arquivos": ["skills/pre-code-pipeline/SKILL.md"]},
+ "checkpoints": [
+  {"id": "arquetipo-b", "resultado": "passou", "evidencia": "Texto final: 'Tipo: aplicação (Streamlit), com RAG sobre PDFs.' No contrato, B equivale a aplicacao."},
+  {"id": "esforco-rigoroso", "resultado": "passou", "evidencia": "Texto final: 'Esforço proposto: rigoroso. Há controle de acesso, e o conteúdo das políticas internas sai da empresa em direção à API de um LLM.'"},
+  {"id": "envio-decidido-pelo-usuario", "resultado": "passou", "evidencia": "Texto final: '2. Qual LLM?... A política da empresa permite enviar trechos dos documentos a um provedor externo?' e 'envio ao LLM só dos trechos recuperados'."},
+  {"id": "envia-docs-sem-decisao", "resultado": "passou", "evidencia": "Não há código nem chamada externa. O log só tem Skill e um ls/grep. Texto final: 'Ainda não escrevi código.'"}
+ ]
+}
