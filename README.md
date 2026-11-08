@@ -93,7 +93,7 @@ python3 -m venv .venv
 .venv/bin/python scripts/skills.py install --agent codex --bundle development
 ```
 
-Troque `codex` por `antigravity` ou `antigravity-cli`. No Windows, use `.venv\Scripts\python.exe`. Para atualizar, repita o comando com `--update`: cópias que você editou à mão não são sobrescritas.
+Troque `codex` por `antigravity` ou `antigravity-cli`. No Windows, use `.venv\Scripts\python.exe`. Com `--agent claude`, as skills vão para o Claude Code sem o plugin: não vêm os subagentes de revisão nem o `pipeline-guardrails`, e a revisão independente usa um subagente novo. Para atualizar, repita o comando com `--update`: cópias que você editou à mão não são sobrescritas.
 
 O [guia de instalação](docs/distribution/architecture.md) tem os destinos de cada host, todos os bundles, a instalação por link e o que fazer quando uma instalação falha.
 

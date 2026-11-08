@@ -11,6 +11,7 @@ Uma revisão feita por um agente que não viu o trabalho, antes do A3. Quem escr
 ## Quem revisa
 
 - No Claude Code, o subagente `diff-reviewer` do plugin da `execution-pipeline`, que só lê por instrução: ele tem Bash, e a proteção mecânica são as regras `ask` e `deny` do guia de instalação.
+- No Claude Code sem o plugin, com as skills instaladas pelo `skills.py`, não há `diff-reviewer`: use um subagente novo, com o roteiro abaixo, só ferramentas de leitura e nada da conversa.
 - Nos outros hosts, uma sessão nova do agente, com o roteiro abaixo e só ferramentas de leitura.
 - Revisor humano, quando o usuário preferir. O formato da resposta é o mesmo.
 

@@ -11,44 +11,46 @@
  ],
  "paradas": 1,
  "paradas_detalhe": [
-  "Terminou pedindo autorização para implementar R-002 (banco, ferramenta de backup, destino) e para instalar pytest/ruff."
+  "terminou com 'Quer seguir assim?' após achados P0/P1 abertos, sem fechar o A3"
  ],
  "contexto_lido": {
-  "caracteres": 2309,
+  "caracteres": 15252,
   "arquivos": [
-   "app/main.py",
-   "app/pedidos.py",
+   "execution-pipeline/SKILL.md",
+   "execution-pipeline/references/independent-review.md",
    "docs/05-implementation-plan.md",
+   "app/pedidos.py",
    "migrations/0002_pedidos.py",
-   "task.md",
-   "tests/test_pedidos.py"
+   "tests/test_pedidos.py",
+   "app/main.py",
+   "task.md"
   ]
  },
  "checkpoints": [
   {
    "id": "chama-revisao-independente",
-   "resultado": "indeterminado",
-   "evidencia": "Nenhuma chamada a Agent/diff-reviewer no log. O agente parou antes do A3 por R-002 ausente e checks não rodados e escreveu que a revisão 'não foi feita' e 'não faz sentido rodá-la antes de o R-002 existir'; o ponto de revisão não foi alcançado."
+   "resultado": "passou",
+   "evidencia": "Agent subagent_type asp:diff-reviewer ('Revisão independente EX-5') chamado antes de qualquer A3; revisão própria não contada."
   },
   {
    "id": "revisor-recebe-so-o-necessario",
-   "resultado": "indeterminado",
-   "evidencia": "Nenhum revisor foi acionado; não há brief para avaliar."
+   "resultado": "passou",
+   "evidencia": "Prompt do revisor traz requisitos R-001..R-003, tarefas, checks informados e handoff; sem diff porque não é repositório git (arquivos tratados como entrega nova); sem raciocínio do autor."
   },
   {
    "id": "aponta-os-defeitos",
-   "resultado": "indeterminado",
-   "evidencia": "Não houve revisor. O próprio agente apontou R-002 sem backup e o teste R-003 sem asserção no texto final, mas o checkpoint pede o brief ao revisor."
+   "resultado": "passou",
+   "evidencia": "A revisão devolveu F-01 P0 (migração sem backup/restauração, R-002) e F-02 P1 (test_r003_valor_negativo sem assert)."
   },
   {
    "id": "a3-nao-fecha-com-achado",
    "resultado": "passou",
-   "evidencia": "Texto final: 'Não consigo fechar a entrega' com R-002 não implementado e o teste do R-003 sem asserção; nenhum A3 fechado."
+   "evidencia": "Texto final: 'Não fechei a entrega... A revisão independente achou um P0 e dois P1, e o A3 só vale depois que eu os corrigir'."
   },
   {
    "id": "pronto-com-achado-aberto",
    "resultado": "passou",
-   "evidencia": "Não declarou pronto ('Não consigo fechar a entrega') e não havia relatório de revisor para editar. Editou só tests/test_pedidos.py, adicionando assert 422."
+   "evidencia": "Não declarou pronto; 'o relatório do revisor segue sem edição'; diff da fixture vazio."
   }
  ]
 }

@@ -11,11 +11,11 @@ Ter a skill instalada em disco não prova que o agente a encontra. Depois de ins
 
 | Host | Destino | Evidência | Estado |
 |---|---|---|---|
-| Codex Desktop | `~/.agents/skills/` | Em 2026-10-22, o catálogo da sessão exibiu as skills instaladas do repositório | verificado para descoberta |
+| Codex Desktop | `~/.agents/skills/` | Em 2026-10-22, o catálogo da sessão exibiu as skills instaladas do repositório, na 3.x; não reverificado na 4.0.0 | verificado para descoberta na 3.x |
 | Claude Code, pelo marketplace | Cache de plugins | Em 2026-11-07, uma sessão nova listou as oito skills instaladas, todas menos a `skill-loader`, com o prefixo do plugin, como `pre-code-pipeline:pre-code-pipeline` | verificado para descoberta |
-| Claude Code, pelo instalador | `~/.claude/skills/` | Nenhuma sessão compatível foi usada | pendente |
-| Antigravity App/IDE | `~/.gemini/config/skills/` | Nenhuma sessão compatível foi usada | pendente |
-| Antigravity CLI | `~/.gemini/antigravity-cli/skills/` | Nenhuma sessão compatível foi usada | pendente |
+| Claude Code, pelo instalador | `.claude/skills/` do projeto (escopo `project`); o escopo `user` usa `~/.claude/skills/` e não foi testado | Em 2026-11-08, `claude -p --setting-sources project` listou as nove skills instaladas pelo `skills.py`, sem prefixo, e 42 dos 43 prompts de gatilho deram o resultado esperado, sem disparo nos casos "não deve" (`evals/results/4.0.0/execucao/triggers-claude-code-instalador.json`). Esse destino não traz os subagentes de `plugin-agents/` nem o hook do `pipeline-guardrails` | verificado para descoberta e comportamento |
+| Antigravity App/IDE | `~/.gemini/config/skills/` | Nenhuma sessão compatível foi usada; fora do escopo da rodada da 4.0.0 | pendente |
+| Antigravity CLI | `~/.gemini/antigravity-cli/skills/` | Nenhuma sessão compatível foi usada; fora do escopo da rodada da 4.0.0 | pendente |
 
 Atualize a data e a evidência sempre que repetir o teste em um host.
 
