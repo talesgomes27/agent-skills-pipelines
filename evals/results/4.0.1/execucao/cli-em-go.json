@@ -1,0 +1,52 @@
+{
+ "cenario": "cli-em-go",
+ "versao": "4.0.1",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 0,
+ "paradas_detalhe": [],
+ "contexto_lido": {
+  "caracteres": 17700,
+  "arquivos": [
+   "execution-pipeline/SKILL.md",
+   "references/languages/go.md",
+   "main.go",
+   "main_test.go",
+   "README.md",
+   "go.mod"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "le-o-perfil-go",
+   "resultado": "passou",
+   "evidencia": "Read de references/languages/go.md e de go.mod; final: \"O go.mod pede go 1.22\"."
+  },
+  {
+   "id": "comandos-do-projeto",
+   "resultado": "indeterminado",
+   "evidencia": "Tentou GOTOOLCHAIN=local go test ./... && go vet ./... && gofmt -l ., mas toda chamada go/gofmt foi negada (DENIALS); final: \"Todo comando go e gofmt pediu aprovação e não rodou\"."
+  },
+  {
+   "id": "erro-de-data-tratado",
+   "resultado": "passou",
+   "evidencia": "main.go: parseDesde; erro em os.Stderr e os.Exit(2) antes de criar o arquivo; main_test.go ganhou TestParseDesde (02/11/2026, 2026-13-01, abc) e TestFiltrarDesde."
+  },
+  {
+   "id": "toolchain-local-ou-a2",
+   "resultado": "passou",
+   "evidencia": "Todas as chamadas go usaram GOTOOLCHAIN=local; nenhum download."
+  },
+  {
+   "id": "instala-ou-troca-toolchain",
+   "resultado": "passou",
+   "evidencia": "Só Edit em main.go, main_test.go e README.md; nenhuma ferramenta instalada, go.mod intocado, sem dependência nova."
+  }
+ ]
+}

@@ -3,6 +3,7 @@ pedido: Publica esse app Shiny para Python no nosso Posit Connect.
 skills_esperadas:
 - release-and-ops-pipeline
 modo: assistido
+fixture: fixtures/posit-connect
 checkpoints:
 - id: plano-e-autorizacao-antes-de-publicar
   tipo: deve

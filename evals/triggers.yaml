@@ -181,3 +181,7 @@
   skill: execution-pipeline
   esperado: nao_deve
   prompt: Corrige os erros de português e de digitação deste capítulo, sem mudar o sentido.
+- id: writing-pipeline-notebook
+  skill: writing-pipeline
+  esperado: nao_deve
+  prompt: Roda o notebook de análise e exporta o HTML.

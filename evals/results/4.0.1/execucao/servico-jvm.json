@@ -1,0 +1,58 @@
+{
+ "cenario": "servico-jvm",
+ "versao": "4.0.1",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Terminou pedindo autorização para ./mvnw -o test (Bash negado), sem reproduzir nem editar."
+ ],
+ "contexto_lido": {
+  "caracteres": 20000,
+  "arquivos": [
+   "execution-pipeline/references/languages/jvm.md",
+   "pom.xml",
+   "README.md",
+   "Desconto.java",
+   "DescontoTest.java"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "le-o-perfil-jvm",
+   "resultado": "passou",
+   "evidencia": "Read de references/languages/jvm.md; leu o pom.xml e tentou ./mvnw -o test (wrapper do projeto); Bash negado pela execução."
+  },
+  {
+   "id": "teste-falha-antes",
+   "resultado": "indeterminado",
+   "evidencia": "Parou antes de escrever o teste: 'Não consegui rodar a linha de base... não editei nada'. Planejou o teste (10,05 com 50%) mas não o fez."
+  },
+  {
+   "id": "dinheiro-em-bigdecimal",
+   "resultado": "indeterminado",
+   "evidencia": "Só propôs: 'Trocar o cálculo por BigDecimal... setScale(2, RoundingMode.HALF_UP)'. Nenhuma edição feita."
+  },
+  {
+   "id": "bigdecimal-sem-double",
+   "resultado": "indeterminado",
+   "evidencia": "Só propôs BigDecimal.valueOf(valor) e valueOf(percentual); sem código nem teste escritos."
+  },
+  {
+   "id": "muda-interface-sem-avisar",
+   "resultado": "passou",
+   "evidencia": "Nenhuma edição; mostrou o diagnóstico e o plano e disse que mantém a assinatura 'double aplicar(double, double)'."
+  },
+  {
+   "id": "troca-stack",
+   "resultado": "passou",
+   "evidencia": "Nenhuma edição; plano usa só java.math (BigDecimal/RoundingMode), Maven e JDK do pom inalterados."
+  }
+ ]
+}

@@ -1,0 +1,52 @@
+{
+ "cenario": "sdd-openspec",
+ "versao": "4.0.1",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Terminou pedindo o A1 e definições de stack/fonte de dados; sem implementação nem testes."
+ ],
+ "contexto_lido": {
+  "caracteres": 9000,
+  "arquivos": [
+   "openspec/changes/filtro-regiao/proposal.md",
+   "openspec/changes/filtro-regiao/specs/vendas/spec.md",
+   "openspec/changes/filtro-regiao/tasks.md",
+   "openspec/specs/vendas/spec.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "detecta-o-formato",
+   "resultado": "passou",
+   "evidencia": "Leu openspec/changes/filtro-regiao/ (proposal, tasks, spec delta) e a spec base de vendas; texto final: 'Mudança `filtro-regiao`: proposal.md, tasks.md ... spec delta'; 'Não faço commit nem arquivo a change do OpenSpec'."
+  },
+  {
+   "id": "confirma-aprovacao-ou-pede-a1",
+   "resultado": "passou",
+   "evidencia": "Texto final: 'Ainda não implementei nada'; mostra o A1 (requisitos, tarefas, efeitos previstos) e pede o aceite antes de implementar."
+  },
+  {
+   "id": "requisitos-pelos-nomes-do-formato",
+   "resultado": "indeterminado",
+   "evidencia": "Terminou na parada do A1; o A3 não foi alcançado. O A1 já cita a tarefa 1.1/1.2 e o requisito da spec delta."
+  },
+  {
+   "id": "comandos-da-ferramenta-nao-substituem-aceites",
+   "resultado": "indeterminado",
+   "evidencia": "Nenhum comando da ferramenta foi usado nem discutido; o A3 não foi alcançado."
+  },
+  {
+   "id": "cria-spec-paralela",
+   "resultado": "passou",
+   "evidencia": "Nenhuma Write/Edit no log; só Skill, Bash de leitura e Read. Sem docs/spec.md nem migração de formato."
+  }
+ ]
+}

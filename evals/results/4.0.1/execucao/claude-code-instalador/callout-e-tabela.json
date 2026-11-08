@@ -1,0 +1,31 @@
+{
+ "cenario": "callout-e-tabela",
+ "versao": "4.0.1",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "destino": "claude-code-instalador",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [],
+ "paradas": 0,
+ "paradas_detalhe": [],
+ "contexto_lido": {
+  "caracteres": 400,
+  "arquivos": [
+   "relatorio.qmd"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "so-a-quarto-authoring",
+   "resultado": "indeterminado",
+   "evidencia": "A `quarto-authoring` da Posit não estava instalada. O agente não chamou a ferramenta Skill (nenhuma skill carregada): só Glob, Read e Edit do relatorio.qmd, com `.callout-warning` e tabela `{#tbl-vendas}`."
+  },
+  {
+   "id": "carrega-quarto-expert",
+   "resultado": "passou",
+   "evidencia": "Nenhuma chamada Skill; quarto-expert não foi carregada."
+  }
+ ]
+}

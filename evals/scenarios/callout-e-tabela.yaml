@@ -3,6 +3,7 @@ pedido: Adicione um callout de aviso e uma tabela com legenda neste .qmd.
 skills_esperadas:
 - execution-pipeline
 modo: assistido
+fixture: fixtures/callout-e-tabela
 checkpoints:
 - id: so-a-quarto-authoring
   tipo: deve

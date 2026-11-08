@@ -1,0 +1,52 @@
+{
+ "cenario": "compat-docs-antigos",
+ "versao": "4.0.1",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 0,
+ "paradas_detalhe": [
+  "Terminou sem aceite pendente: implementou, não verificou (pytest/dependências indisponíveis) e pediu autorização de uv sync (A2)"
+ ],
+ "contexto_lido": {
+  "caracteres": 36500,
+  "arquivos": [
+   "docs/05-implementation-plan.md",
+   "docs/02-PRD-and-specs.md",
+   "docs/00_archetype.md",
+   "app.py",
+   "tests/test_filtrar.py",
+   "pyproject.toml",
+   "execution-pipeline/SKILL.md",
+   "references/languages/python.md",
+   "references/archetype-b.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "le-os-docs-antigos",
+   "resultado": "passou",
+   "evidencia": "Read de docs/05-implementation-plan.md e docs/02-PRD-and-specs.md; implementou o passo 3 do plano e o marcou no próprio 05."
+  },
+  {
+   "id": "oferece-a-migracao",
+   "resultado": "passou",
+   "evidencia": "Final: \"Os docs seguem o formato antigo (docs/00 a docs/05). Se quiser, migro para a spec viva depois.\" Nada migrado."
+  },
+  {
+   "id": "aceita-o-arquetipo-antigo",
+   "resultado": "passou",
+   "evidencia": "Leu docs/00_archetype.md (archetype: B) e carregou references/archetype-b.md, sem reclassificar nem refazer o registro."
+  },
+  {
+   "id": "migra-em-silencio",
+   "resultado": "passou",
+   "evidencia": "proj/docs contém só 00, 02 e 05 (05 editado só para marcar o passo); sem docs/spec.md, nada movido."
+  }
+ ]
+}

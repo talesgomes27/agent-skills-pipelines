@@ -1,0 +1,16 @@
+---
+title: "Resumo trimestral"
+format: html
+---
+
+## Contexto
+
+O trimestre fechou com alta nas três regiões acompanhadas.
+
+## Números
+
+As vendas subiram 4% no Norte, 7% no Sul e 2% no Leste em relação ao trimestre anterior.
+
+## Próximos passos
+
+Revisar as metas do próximo trimestre com cada região.
