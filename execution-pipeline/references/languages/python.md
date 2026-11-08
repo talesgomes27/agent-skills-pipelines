@@ -14,7 +14,7 @@ Use os comandos do projeto e o ambiente isolado que ele já usa (`.venv` do uv, 
 
 Exemplos a confirmar no projeto:
 
-- `uv run --locked --no-python-downloads pytest`: com o lock já aceito, o `uv run` sincroniza o ambiente a partir dele, o `--locked` faz falhar se o lock não bate com o `pyproject.toml`, em vez de reescrevê-lo, e o `--no-python-downloads` impede que o uv baixe sozinho o Python pedido pelo `.python-version` ou pelo `requires-python` quando a máquina não o tem. Se faltar o Python, pare e peça A2 com a versão, a origem e onde fica. Sem `uv.lock`, ou com o lock desatualizado, o `uv run` resolve e instala dependências e grava o lock: isso é instalar dependência, um efeito do catálogo do contrato comum, e pede A2 antes.
+- `uv run --locked --no-python-downloads pytest`: com o lock já aceito, o `uv run` sincroniza o ambiente a partir dele, o `--locked` faz falhar se o lock não bate com o `pyproject.toml`, em vez de reescrevê-lo, e o `--no-python-downloads` impede que o uv baixe sozinho o Python pedido pelo `.python-version` ou pelo `requires-python` quando a máquina não o tem. Se faltar o Python, pare e peça A2 com a versão, a origem e onde fica, ou use o ambiente que já existe e diga qual. Sem `uv.lock`, ou com o lock desatualizado, o `uv run` resolve e instala dependências e grava o lock: isso é instalar dependência, um efeito do catálogo do contrato comum, e pede A2 antes.
 - `uv run --locked --no-python-downloads ruff check .` e o mesmo com `ruff format --check .`: o segundo só aponta arquivos fora do formato e sai com código 1.
 - `uv run --locked --no-python-downloads mypy <pacote>` quando o projeto usa tipos.
 
