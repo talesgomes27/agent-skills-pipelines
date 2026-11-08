@@ -4,7 +4,7 @@
  "nivel": "leitura",
  "modo": "assistido",
  "host": "claude-code",
- "modelo": "claude-sonnet-5-5",
+ "modelo": "nao-registrado",
  "data": "2026-11-07",
  "skills_carregadas": [
   "execution-pipeline",

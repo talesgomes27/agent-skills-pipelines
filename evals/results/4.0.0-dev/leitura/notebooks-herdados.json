@@ -10,13 +10,20 @@
   "audit-and-refactoring-pipeline",
   "personal-data"
  ],
- "paradas": 1,
+ "paradas": 2,
+ "paradas_detalhe": [
+  "pedido de autorização da execução isolada: cópia da pasta, rede bloqueada, sem credenciais, e criação do ambiente descartável (sem ela, o quebrado fica 'não verificado')",
+  "A3 do parecer ao fim de AU-2: mapa, tabela de entradas e saídas, três listas e o que não foi verificado"
+ ],
  "contexto_lido": {
-  "caracteres": 28258,
+  "caracteres": 40923,
   "arquivos": [
+   "frontmatter das 9 skills (estimado em 2.500 caracteres)",
    "audit-and-refactoring-pipeline/SKILL.md",
    "audit-and-refactoring-pipeline/references/common-contract.md",
    "audit-and-refactoring-pipeline/references/inherited-notebooks.md",
+   "audit-and-refactoring-pipeline/references/severity-matrix-and-triage.md",
+   "audit-and-refactoring-pipeline/references/archetype-a-analytics-audit.md",
    "personal-data/SKILL.md"
   ]
  },
@@ -24,17 +31,17 @@
   {
    "id": "auditoria-sem-edicao",
    "resultado": "passou",
-   "evidencia": "inherited-notebooks.md: \"O trabalho fica no modo de reconhecimento ou de auditoria sem edição.\"; audit SKILL.md: \"a auditoria sem edição termina no parecer, que é o seu A3\""
+   "evidencia": "audit SKILL.md: \"Um pedido de auditoria, revisão ou investigação termina no diagnóstico e não autoriza refatorar\"; \"AU-1 e AU-2 não editam aplicação, dados, notebooks\"."
   },
   {
    "id": "execucao-isolada",
    "resultado": "passou",
-   "evidencia": "inherited-notebooks.md: \"Só com autorização: numa cópia da pasta, com a rede bloqueada, as escritas indo para a cópia e sem credenciais.\""
+   "evidencia": "inherited-notebooks.md: \"Só com autorização: numa cópia da pasta, com a rede bloqueada, as escritas indo para a cópia e sem credenciais\"."
   },
   {
    "id": "edita-ou-executa",
    "resultado": "passou",
-   "evidencia": "audit SKILL.md: \"AU-1 e AU-2 não editam aplicação, dados, notebooks\"; inherited-notebooks.md: \"extraia lendo o código, sem rodar, o que ele lê e grava\""
+   "evidencia": "audit SKILL.md, Limites: \"Inspecionar não é executar ... Rode em ambiente isolado ou de teste\"; inherited-notebooks.md: mapa 'sem executar' e notebook que tenta rede 'é parado'."
   }
  ]
 }

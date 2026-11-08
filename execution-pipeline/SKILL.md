@@ -62,7 +62,7 @@ Leia só a referência do arquétipo confirmado: [A](references/archetype-a.md),
 2. **EX-2 Integração.** Ligue a lógica à fonte de dados, API, notebook, serviço ou CLI prevista e rode o fluxo principal em ambiente controlado, incluindo as falhas de fronteira importantes.
 3. **EX-3 Saídas.** Apenas as figuras, telas, serializações ou mensagens previstas. Confira unidades, semântica e acessibilidade conforme a referência do arquétipo.
 4. **EX-4 Documentação.** Atualize README, relatório ou referência de API a partir do que foi implementado. Confira exemplos, flags e números, e separe resultado real de esperado.
-5. **EX-5 Revisão e build.** Revise o diff quanto a comportamento, qualidade dos testes e fidelidade da documentação. Rode lint, tipos, testes e build do projeto e corrija o que for concreto. Com um check obrigatório falhando ou não executado, a entrega não está validada. Não chame de revisão independente a revisão que você mesmo fez; no Claude Code, o subagente `diff-reviewer` do plugin faz a leitura de quem não escreveu o código.
+5. **EX-5 Revisão e build.** Revise o diff quanto a comportamento, qualidade dos testes e fidelidade da documentação. Rode lint, tipos, testes e build do projeto e corrija o que for concreto. Com um check obrigatório falhando ou não executado, a entrega não está validada. A sua revisão nunca conta como independente; no esforço rigoroso, faça a [independente](references/independent-review.md) antes do A3, pelo `diff-reviewer` no Claude Code.
 
 Gate que não se aplica fica marcado como não aplicável, com o motivo.
 

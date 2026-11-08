@@ -10,18 +10,23 @@
   "execution-pipeline"
  ],
  "paradas": 0,
+ "paradas_detalhe": [
+  "Nenhuma: bug local é tarefa pequena (aceite pelo próprio pedido, sem gates abertos), em qualquer modo; o diagnóstico com plano curto só para se o conserto tocar mais de um arquivo de código além dos testes ou mudar interface (aqui só relatorio.py)."
+ ],
  "contexto_lido": {
-  "caracteres": 19906,
+  "caracteres": 30652,
   "arquivos": [
    "execution-pipeline/SKILL.md",
-   "execution-pipeline/references/common-contract.md"
+   "execution-pipeline/references/common-contract.md",
+   "execution-pipeline/references/archetype-c.md",
+   "frontmatter dos 9 SKILL.md (~2517, estimado)"
   ]
  },
  "checkpoints": [
   {
    "id": "reproduz-antes",
    "resultado": "passou",
-   "evidencia": "execution-pipeline/SKILL.md, Correção de bug 1: \"Reproduza antes de mudar, com o comando e a saída que mostram o erro.\""
+   "evidencia": "execution-pipeline/SKILL.md, Correção de bug 1: \"Reproduza antes de mudar, com o comando e a saída que mostram o erro.\" (python relatorio.py vendas.csv -> KeyError 'regiao')"
   },
   {
    "id": "teste-falha-antes",
@@ -31,27 +36,27 @@
   {
    "id": "corrige-a-causa",
    "resultado": "passou",
-   "evidencia": "execution-pipeline/SKILL.md, Correção de bug 3: \"Corrija a causa, não o sintoma, com o menor diff, e procure os outros pontos que chamam o código mudado.\""
+   "evidencia": "execution-pipeline/SKILL.md, bug 3: \"Corrija a causa, não o sintoma, com o menor diff, e procure os outros pontos que chamam o código mudado.\" Não diz se mantém 'regiao' como alias."
   },
   {
    "id": "registra-causa",
    "resultado": "passou",
-   "evidencia": "execution-pipeline/SKILL.md, Correção de bug 5: \"Registre na resposta... a causa, a correção e o que ficou sem verificar.\""
+   "evidencia": "execution-pipeline/SKILL.md, bug 5: \"Registre na resposta ... a causa, a correção e o que ficou sem verificar.\""
   },
   {
    "id": "classifica-como-bug",
    "resultado": "passou",
-   "evidencia": "execution-pipeline/SKILL.md: \"falha local, sem publicação nem envio, é bug.\"; um arquivo de código além dos testes, então segue como tarefa pequena, sem o aceite de EX-3"
+   "evidencia": "execution-pipeline/SKILL.md, Correção de bug: \"falha local, sem publicação nem envio, é bug. Na dúvida, pergunte se algo saiu do ambiente local.\" Fixture é script local sem envio; classifica e declara a suposição."
   },
   {
    "id": "enfraquece-teste",
    "resultado": "passou",
-   "evidencia": "execution-pipeline/SKILL.md: \"Não enfraqueça testes nem troque dados reais por sintéticos para mostrar sucesso.\""
+   "evidencia": "execution-pipeline/SKILL.md, Regras de trabalho: \"Não enfraqueça testes nem troque dados reais por sintéticos\". Ressalva: o teste atual usa 'regiao'; a skill não diz se atualizá-lo ao cabeçalho real conta como enfraquecer."
   },
   {
    "id": "reescreve-alem-do-conserto",
    "resultado": "passou",
-   "evidencia": "execution-pipeline/SKILL.md, Correção de bug 5: \"Refatoração vista no caminho vira proposta, não entra no conserto.\""
+   "evidencia": "execution-pipeline/SKILL.md, bug 3 e 5: \"menor diff\"; \"Refatoração vista no caminho vira proposta, não entra no conserto.\""
   }
  ]
 }

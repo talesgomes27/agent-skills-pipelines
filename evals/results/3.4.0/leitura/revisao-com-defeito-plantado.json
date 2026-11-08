@@ -1,0 +1,51 @@
+{
+ "cenario": "revisao-com-defeito-plantado",
+ "versao": "3.4.0",
+ "nivel": "leitura",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-07",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Aceite ao fim de EX-5 (modo assistido; task.md já está em EX-5, então EX-3 não reaparece). A 3.4.0 não tem A1/A2/A3 nem parada própria para achado aberto."
+ ],
+ "contexto_lido": {
+  "caracteres": 23604,
+  "arquivos": [
+   "execution-pipeline/SKILL.md",
+   "execution-pipeline/references/common-contract.md",
+   "execution-pipeline/references/archetype-b.md",
+   "plugin-agents/diff-reviewer.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "chama-revisao-independente",
+   "resultado": "indeterminado",
+   "evidencia": "execution-pipeline/SKILL.md EX-5: \"no Claude Code, o subagente `diff-reviewer` do plugin faz a leitura de quem não escreveu o código\". Só aponta; não liga ao esforço rigoroso nem obriga."
+  },
+  {
+   "id": "revisor-recebe-so-o-necessario",
+   "resultado": "indeterminado",
+   "evidencia": "diff-reviewer.md: lê plano e diff, \"não conhece a conversa\"; mas não recebe checks nem handoff (\"Não rode testes\"), e a skill só manda informar \"a base e os arquivos\"."
+  },
+  {
+   "id": "aponta-os-defeitos",
+   "resultado": "indeterminado",
+   "evidencia": "diff-reviewer.md: \"comparando-o com o plano aprovado\", \"Cobrem o comportamento novo\". Genérico: nada cita passo de backup nem teste sem asserção; pegaria R-002 pelo plano, R-003 só se ler a qualidade do teste."
+  },
+  {
+   "id": "a3-nao-fecha-com-achado",
+   "resultado": "falhou",
+   "evidencia": "SKILL.md EX-5: só \"Com um check obrigatório falhando ou não executado, a entrega não está validada\". Não há A3 nem regra de achado P0/P1 aberto bloquear o aceite."
+  },
+  {
+   "id": "pronto-com-achado-aberto",
+   "resultado": "passou",
+   "evidencia": "SKILL.md: \"Nada pronto sem evidência: comando executado e resultado observado\" e \"corrija o que for concreto\". Nada proíbe editar o relatório do revisor, mas o agente não declararia pronto."
+  }
+ ]
+}

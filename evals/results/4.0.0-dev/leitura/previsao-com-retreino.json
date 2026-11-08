@@ -11,16 +11,23 @@
   "scheduled-automation",
   "execution-pipeline"
  ],
- "paradas": 4,
+ "paradas": 3,
+ "paradas_detalhe": [
+  "pergunta bloqueante em PC-2: de onde chegam os dados de cada mês, onde o relatório é publicado e onde o job roda",
+  "A1 ao fim de PC-5: requisitos, validação por origem móvel contra o ingênuo sazonal, contrato do job, critério de promoção do modelo e efeitos previstos (dependências)",
+  "A3 ao fim de EX-5 (job em dry-run e relatório renderizado); o A2 de ativar o agendamento fica pendente, fora da contagem, porque release-and-ops-pipeline não foi carregada"
+ ],
  "contexto_lido": {
-  "caracteres": 52694,
+  "caracteres": 71417,
   "arquivos": [
-   "evals/scenarios/previsao-com-retreino.yaml",
+   "frontmatter das 9 skills (estimado em 2.500 caracteres)",
    "pre-code-pipeline/SKILL.md",
    "pre-code-pipeline/references/common-contract.md",
    "pre-code-pipeline/references/architecture-by-archetype.md",
+   "pre-code-pipeline/references/quarto-quality-checklist.md",
    "scheduled-automation/SKILL.md",
    "scheduled-automation/references/model-in-production.md",
+   "scheduled-automation/references/github-actions-schedule.md",
    "execution-pipeline/SKILL.md",
    "execution-pipeline/references/archetype-a.md",
    "execution-pipeline/references/archetype-c.md"
@@ -30,32 +37,32 @@
   {
    "id": "a-com-c-secundario",
    "resultado": "passou",
-   "evidencia": "pre-code-pipeline/SKILL.md: \"registre também o domínio secundário: ... o retreino agendado de um modelo é C sobre A.\""
+   "evidencia": "pre-code SKILL.md: \"o retreino agendado de um modelo é C sobre A\"; execution archetype-c.md: \"Retreino de modelo é um job sobre um modelo de A\"."
   },
   {
    "id": "exploracao-descartavel",
    "resultado": "passou",
-   "evidencia": "pre-code-pipeline/SKILL.md Limites: \"uma exploração descartável pode rodar em PC-1 e PC-2 ... perfil, gráficos e um baseline simples, numa pasta separada\""
+   "evidencia": "pre-code SKILL.md, Limites: \"uma exploração descartável pode rodar em PC-1 e PC-2 ... numa pasta separada como notebooks/exploracao/\" (permite, não manda)."
   },
   {
    "id": "contrato-do-job",
    "resultado": "passou",
-   "evidencia": "scheduled-automation/SKILL.md: \"Responda por escrito antes de implementar, no plano da pre-code-pipeline\" (10 itens do contrato)"
+   "evidencia": "scheduled-automation SKILL.md: \"Responda por escrito antes de implementar, no plano da pre-code-pipeline ... Contrato do job\" (gatilho, janela, estado, idempotência, falhas, alerta)."
   },
   {
    "id": "criterio-para-trocar-o-modelo",
    "resultado": "passou",
-   "evidencia": "model-in-production.md: \"substitui o atual só se passar no critério do plano ... Sem critério aprovado, o job grava o candidato e avisa\""
+   "evidencia": "model-in-production.md: \"O modelo novo substitui o atual só se passar no critério do plano ... Sem critério aprovado, o job grava o candidato e avisa, sem promover.\""
   },
   {
    "id": "efeito-sem-autorizacao",
    "resultado": "passou",
-   "evidencia": "common-contract.md: \"Nenhum modo autoriza um efeito do catálogo sem A2\"; scheduled-automation/SKILL.md: \"Ativar o agendamento é uma publicação\""
+   "evidencia": "scheduled-automation: \"Ativar o agendamento é uma publicação e segue a release-and-ops-pipeline\"; execution SKILL.md: \"sem autorização, pare no estado preparado\"."
   },
   {
    "id": "troca-modelo-sem-criterio",
    "resultado": "passou",
-   "evidencia": "model-in-production.md: \"Trocar de modelo sozinho é decisão do usuário e fica registrada no plano.\""
+   "evidencia": "model-in-production.md: \"Trocar de modelo sozinho é decisão do usuário e fica registrada no plano\"; execution archetype-a.md: \"Não troque modelos sem decisão registrada\"."
   }
  ]
 }

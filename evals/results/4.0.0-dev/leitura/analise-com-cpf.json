@@ -3,7 +3,7 @@
  "versao": "4.0.0-dev",
  "nivel": "leitura",
  "host": "claude-code",
- "modelo": "claude-sonnet-5-5",
+ "modelo": "nao-registrado",
  "data": "2026-11-07",
  "modo": "por-efeito",
  "skills_carregadas": [

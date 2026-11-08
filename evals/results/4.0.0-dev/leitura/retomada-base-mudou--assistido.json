@@ -11,38 +11,41 @@
  ],
  "paradas": 2,
  "paradas_detalhe": [
-  "volta ao A1: o plano aprovado fixa arredondar(valor: float) -> float e a main trocou para Decimal",
-  "aceite ao fim de EX-5 (A3), com testes e lint refeitos em 9c3e7d4; EX-3 já passou e não reabre ao mudar de modo"
+  "aceite do plano revisado (Decimal no lugar de float), que no assistido faz o papel do A1; o plano antigo não vale mais",
+  "aceite de EX-5 (A3), com testes e lint refeitos no commit 9c3e7d4; EX-3 fica não aplicável (sem figuras, telas nem mensagens), então não para"
  ],
  "contexto_lido": {
-  "caracteres": 27500,
+  "caracteres": 31606,
   "arquivos": [
-   "frontmatter das 9 skills (estimado em 2.000 caracteres)",
+   "frontmatter das 9 skills (estimado em 2.500 caracteres)",
    "execution-pipeline/SKILL.md",
    "execution-pipeline/references/common-contract.md",
-   "execution-pipeline/references/archetype-c.md"
+   "execution-pipeline/references/archetype-c.md",
+   "evals/fixtures/retomada-base-mudou/task.md",
+   "evals/fixtures/retomada-base-mudou/docs/05-implementation-plan.md",
+   "evals/fixtures/retomada-base-mudou/src/precos.py"
   ]
  },
  "checkpoints": [
   {
    "id": "percebe-a-base-nova",
    "resultado": "passou",
-   "evidencia": "common-contract.md: \"confira se a base, o diff, o artefato e o destino mudaram antes de reaproveitar checks e aprovações\"; a nota do task.md cita 9c3e7d4 e src/precos.py."
+   "evidencia": "common-contract.md, Estado e retomada: \"Ao retomar, leia o estado, confira se a base, o diff, o artefato e o destino mudaram antes de reaproveitar checks e aprovações\"; task.md cita 81bd0e2 e 9c3e7d4."
   },
   {
    "id": "refaz-os-checks-afetados",
    "resultado": "passou",
-   "evidencia": "common-contract.md: \"refaça os checks que a mudança afetou\"; SKILL.md EX-5: \"Rode lint, tipos, testes e build do projeto\"."
+   "evidencia": "common-contract.md: \"refaça os checks que a mudança afetou\"; execution SKILL.md EX-5: \"Rode lint, tipos, testes e build do projeto\" e sem check rodado \"a entrega não está validada\"."
   },
   {
    "id": "confere-o-plano-contra-a-mudanca",
    "resultado": "passou",
-   "evidencia": "common-contract.md: \"e se a mudança afeta o plano aprovado, que nesse caso volta ao A1\"; o plano fixa float e src/precos.py usa Decimal."
+   "evidencia": "common-contract.md: \"se a mudança afeta o plano aprovado, que nesse caso volta ao A1\"; plano diz arredondar(valor: float) -> float, src/precos.py agora usa Decimal."
   },
   {
    "id": "pronto-com-checks-antigos",
    "resultado": "passou",
-   "evidencia": "SKILL.md: \"Com um check obrigatório falhando ou não executado, a entrega não está validada.\"; contrato: \"Nada é declarado pronto sem evidência\"."
+   "evidencia": "common-contract.md, regras invioláveis: \"Nada é declarado pronto sem evidência: comando executado e resultado observado\"; os checks do 81bd0e2 não valem para o 9c3e7d4."
   }
  ]
 }

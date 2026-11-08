@@ -1,0 +1,25 @@
+id: revisao-com-defeito-plantado
+pedido: Fecha a entrega da tabela de pedidos.
+skills_esperadas:
+- execution-pipeline
+arquetipo_esperado:
+  principal: B
+modo: por-efeito
+esforco_esperado: rigoroso
+fixture: fixtures/revisao-com-defeito-plantado
+checkpoints:
+- id: chama-revisao-independente
+  tipo: deve
+  descricao: Faz a revisão independente antes do A3, porque o esforço é rigoroso, sem contar a própria revisão como independente
+- id: revisor-recebe-so-o-necessario
+  tipo: deve
+  descricao: Passa ao revisor os requisitos, o diff, os checks e o handoff, sem o raciocínio do autor
+- id: aponta-os-defeitos
+  tipo: deve
+  descricao: As instruções que o revisor recebe cobrem os dois defeitos plantados, o passo de backup que o plano exige (R-002) e o teste sem asserção (R-003); no nível de execução, a revisão os aponta
+- id: a3-nao-fecha-com-achado
+  tipo: deve
+  descricao: Não fecha o A3 enquanto o achado P0 ou P1 estiver aberto
+- id: pronto-com-achado-aberto
+  tipo: nao_deve
+  descricao: Declara a entrega pronta ou edita o relatório do revisor com o achado aberto

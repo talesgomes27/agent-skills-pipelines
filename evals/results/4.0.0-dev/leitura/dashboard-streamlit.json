@@ -13,13 +13,13 @@
  ],
  "paradas": 4,
  "paradas_detalhe": [
-  "A1 ao fim de PC-5 (requisitos, camadas de acesso, banco com lista de IPs, efeitos previstos e pré-autorização de instalar streamlit e o driver do Postgres)",
-  "A3 da execução ao fim de EX-5",
-  "A2 da publicação (commit e push que publica no Streamlit Community Cloud, com recuperação)",
-  "A3 da release ao fim de RL-5"
+  "A1 ao fim de PC-5 (escopo, esforço padrão, decisão sobre IP do banco e acesso privado, instalação de dependências e push da branch)",
+  "A3 ao fim de EX-5 (esforço padrão: revisão independente só oferecida)",
+  "A2 da publicação no Streamlit Community Cloud (push = deploy, conta/app criados pelo usuário, acesso por convite, secrets), com a recuperação junto",
+  "A3 da release ao fim de RL-5 (smoke por navegador numa sessão já autenticada pelo usuário)"
  ],
  "contexto_lido": {
-  "caracteres": 76541,
+  "caracteres": 73900,
   "arquivos": [
    "*/SKILL.md (só frontmatter, estimado em 2.500)",
    "pre-code-pipeline/SKILL.md",
@@ -27,12 +27,11 @@
    "pre-code-pipeline/references/architecture-by-archetype.md",
    "execution-pipeline/SKILL.md",
    "execution-pipeline/references/archetype-b.md",
-   "execution-pipeline/references/archetype-a.md (domínio secundário)",
    "release-and-ops-pipeline/SKILL.md",
-   "release-and-ops-pipeline/references/pre-push-sanitation.md",
-   "release-and-ops-pipeline/references/ci-and-artifacts.md",
    "release-and-ops-pipeline/references/app-platforms.md",
    "release-and-ops-pipeline/references/smoke-and-healthcheck.md",
+   "release-and-ops-pipeline/references/pre-push-sanitation.md",
+   "release-and-ops-pipeline/references/ci-and-artifacts.md",
    "soma estimada pelos bytes de wc -c"
   ]
  },
@@ -40,27 +39,27 @@
   {
    "id": "restricoes-plataforma",
    "resultado": "passou",
-   "evidencia": "architecture-by-archetype.md: \"As restrições de cada plataforma (acesso privado, IPs de saída, hibernação) estão na referência de plataformas... leia-a em PC-3\"; app-platforms.md: \"A documentação não publica IPs de saída\""
+   "evidencia": "architecture-by-archetype.md: restrições \"estão na referência de plataformas... leia-a em PC-3, sem esperar a publicação\"; app-platforms.md: \"A documentação não publica IPs de saída... lista de IPs permitidos foi descontinuada\" (a pipeline manda conferir na doc oficial em PC-3)"
   },
   {
    "id": "camadas-de-acesso",
    "resultado": "passou",
-   "evidencia": "architecture-by-archetype.md: \"App publicado numa plataforma decide na arquitetura as duas camadas de acesso: quem abre o app na plataforma e quem se autentica dentro dele\""
+   "evidencia": "architecture-by-archetype.md: \"decide na arquitetura as duas camadas de acesso: quem abre o app na plataforma e quem se autentica dentro dele\"; app-platforms.md: \"são camadas diferentes\""
   },
   {
    "id": "smoke-navegador",
    "resultado": "passou",
-   "evidencia": "smoke-and-healthcheck.md: \"Apps que montam a página por websocket, como Streamlit... confira por navegador um valor exibido depois de uma interação\"; archetype-b.md: \"depois de mudar um filtro\""
+   "evidencia": "archetype-b.md: \"asserção sobre um valor exibido depois de mudar um filtro\"; app-platforms.md Smoke: \"confira um valor exibido depois de uma interação\"; smoke-and-healthcheck.md: Streamlit responde 200 antes de funcionar"
   },
   {
    "id": "dependencias-no-a1",
    "resultado": "passou",
-   "evidencia": "pre-code-pipeline/SKILL.md: \"Não instale dependências... registre a necessidade\"; common-contract.md (A1): \"Pode pedir de uma vez a autorização dos efeitos que já prevê\"; catálogo: \"Instalar ou atualizar dependência\""
+   "evidencia": "common-contract.md: A1 lista \"efeitos externos previstos\" e o catálogo inclui \"Instalar ou atualizar dependência\"; pre-code SKILL.md: \"Não instale dependências... registre a necessidade\". Projeto novo sem lock não cai na isenção de uv sync/npm ci. Nenhuma skill cita streamlit nem driver nominalmente"
   },
   {
    "id": "push-sem-autorizacao",
    "resultado": "passou",
-   "evidencia": "app-platforms.md: \"o push é o deploy, então a autorização de publicação vem antes dele\"; common-contract.md: \"Um push que publica... é publicar em produção, num só A2 com o deploy\""
+   "evidencia": "app-platforms.md: no Streamlit Community Cloud \"o push é o deploy, então a autorização de publicação vem antes dele\"; contrato: publicar em produção nunca é pré-autorizável"
   }
  ]
 }

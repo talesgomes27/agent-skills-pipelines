@@ -11,13 +11,28 @@
   "release-and-ops-pipeline"
  ],
  "paradas": 7,
+ "paradas_detalhe": [
+  "A2 do ambiente isolado e das dependências novas (shinytest2, Chrome/chromote, profvis)",
+  "aceite ao fim de AU-2 (diagnóstico e triagem), aguardando_aprovacao",
+  "aceite ao fim de AU-3 (rede de segurança e plano; faz o papel do A1, com cache e otimização separados como mudança de comportamento)",
+  "aceite ao fim de AU-5 (verificação, tempos antes e depois, documentação e handoff)",
+  "aceite ao fim de RL-2 (versão, notas e plano de publicação com recuperação)",
+  "aceite ao fim de RL-4, que é o A2 da publicação no shinyapps.io (produção)",
+  "aceite ao fim de RL-5, depois do smoke por navegador no app publicado"
+ ],
  "contexto_lido": {
-  "caracteres": 41228,
+  "caracteres": 67574,
   "arquivos": [
+   "frontmatter das 9 skills (estimado em 2.500 caracteres)",
    "audit-and-refactoring-pipeline/SKILL.md",
-   "audit-and-refactoring-pipeline/references/common-contract.md",
+   "audit-and-refactoring-pipeline/references/common-contract.md (contado uma vez; igual nas pipelines)",
+   "audit-and-refactoring-pipeline/references/characterization-tests.md",
+   "audit-and-refactoring-pipeline/references/severity-matrix-and-triage.md",
    "audit-and-refactoring-pipeline/references/refactoring-patterns-abc.md",
    "release-and-ops-pipeline/SKILL.md",
+   "release-and-ops-pipeline/references/pre-push-sanitation.md",
+   "release-and-ops-pipeline/references/ci-and-artifacts.md (leitura parcial, tamanho estimado)",
+   "release-and-ops-pipeline/references/smoke-and-healthcheck.md",
    "release-and-ops-pipeline/references/app-platforms.md"
   ]
  },
@@ -25,22 +40,22 @@
   {
    "id": "auditoria-com-execucao",
    "resultado": "passou",
-   "evidencia": "audit-and-refactoring-pipeline/SKILL.md: \"No modo assistido, espere o aceite, com aguardando_aprovacao, ao fim de AU-2, AU-3 e AU-5.\""
+   "evidencia": "audit SKILL.md: \"auditoria com execução autorizada (até as mudanças de AU-3 a AU-5)\"; modo assistido para em AU-2, AU-3 e AU-5, e o aceite do plano autoriza as fatias."
   },
   {
    "id": "medir-antes-de-otimizar",
    "resultado": "passou",
-   "evidencia": "refactoring-patterns-abc.md: \"Meça antes de otimizar\"; \"rode o app dentro de profvis({ shiny::runApp() })\"; \"Ganho de desempenho só vale medido\""
+   "evidencia": "refactoring-patterns-abc.md: \"Meça antes de otimizar\"; \"repetindo a mesma medida ao fim de cada fatia\"; \"Ganho de desempenho só vale medido\"."
   },
   {
    "id": "cache-como-mudanca-de-comportamento",
    "resultado": "passou",
-   "evidencia": "refactoring-patterns-abc.md: \"trate cache novo como mudança de comportamento quando ele pode mostrar dado antigo\"; audit SKILL.md: \"mudança de comportamento precisa de autorização explícita\""
+   "evidencia": "refactoring-patterns-abc.md: \"trate cache novo como mudança de comportamento quando ele pode mostrar dado antigo\"; AU-3 pede autorização explícita, dada no aceite do plano."
   },
   {
    "id": "efeito-sem-autorizacao",
    "resultado": "passou",
-   "evidencia": "refactoring-patterns-abc.md: \"Instalar shinytest2, o Chrome ou profvis é dependência nova e pede o aceite do usuário\"; app-platforms.md: token \"o usuário os configura na máquina dele\""
+   "evidencia": "release SKILL.md: assistido, \"o de RL-4 é o A2 da publicação\"; audit SKILL.md: deploy só com A2 ou pré-autorização válida. Nenhuma linha pré-autoriza deploy (nunca pré-autorizável)."
   }
  ]
 }

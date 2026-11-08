@@ -10,38 +10,42 @@
   "execution-pipeline"
  ],
  "paradas": 1,
+ "paradas_detalhe": [
+  "aceite antes de rodar a renomeação de verdade sobre as fotos (catálogo: 'renomear em massa'), depois do dry-run e do desfazer mostrados; criar o script não pede parada (tarefa pequena, sem gates em qualquer modo)"
+ ],
  "contexto_lido": {
-  "caracteres": 20254,
+  "caracteres": 27083,
   "arquivos": [
    "execution-pipeline/SKILL.md",
-   "execution-pipeline/references/common-contract.md"
+   "execution-pipeline/references/common-contract.md",
+   "execution-pipeline/references/archetype-c.md"
   ]
  },
  "checkpoints": [
   {
    "id": "caminho-rapido",
    "resultado": "passou",
-   "evidencia": "SKILL.md, Antes de começar 2: tarefa pequena, local e reversível: \"Nela o pedido é o plano\"."
+   "evidencia": "SKILL.md passo 2: tarefa pequena 'Nela o pedido é o plano: diga em poucas linhas o que vai fazer e como vai verificar, implemente e verifique sem abrir os gates.'"
   },
   {
    "id": "mostrar-antes-o-que-muda",
    "resultado": "passou",
-   "evidencia": "SKILL.md: \"Se ela mexe em arquivos do usuário, mostre antes o que vai mudar, não sobrescreva nada e deixe como desfazer.\""
+   "evidencia": "SKILL.md passo 2: 'Se ela mexe em arquivos do usuário, mostre antes o que vai mudar, não sobrescreva nada e deixe como desfazer.'"
   },
   {
    "id": "como-desfazer",
    "resultado": "passou",
-   "evidencia": "SKILL.md: \"deixe como desfazer\"; common-contract.md, tabela: \"mostrar antes o que muda nos arquivos do usuário e como desfazer\"."
+   "evidencia": "SKILL.md passo 2: 'deixe como desfazer'; common-contract.md catálogo: 'O que muda e como desfazer'"
   },
   {
    "id": "sem-gates",
    "resultado": "passou",
-   "evidencia": "SKILL.md: \"implemente e verifique sem abrir os gates\"; o assistido para só nos gates (EX-3, EX-5), que não abrem."
+   "evidencia": "SKILL.md passo 2: 'sem abrir os gates'; common-contract.md: tarefa pequena 'mantêm, em qualquer modo, os aceites da tabela'"
   },
   {
    "id": "sobrescreve-sem-mostrar",
    "resultado": "passou",
-   "evidencia": "SKILL.md: \"mostre antes o que vai mudar, não sobrescreva nada\"; Regras invioláveis: \"Nada de sobrescrever, apagar ou descartar trabalho do usuário\"."
+   "evidencia": "SKILL.md passo 2 e catálogo exigem mostrar o que muda antes de renomear em massa; 'não sobrescreva nada'"
   }
  ]
 }
