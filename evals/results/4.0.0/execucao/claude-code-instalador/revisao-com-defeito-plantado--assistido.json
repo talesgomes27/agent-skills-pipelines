@@ -1,0 +1,56 @@
+{
+ "cenario": "revisao-com-defeito-plantado",
+ "versao": "4.0.0",
+ "nivel": "execucao",
+ "modo": "assistido",
+ "host": "claude-code",
+ "destino": "claude-code-instalador",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "terminou perguntando 'Posso seguir?' após listar achados"
+ ],
+ "contexto_lido": {
+  "caracteres": 12000,
+  "arquivos": [
+   "migrations/0002_pedidos.py",
+   "app/pedidos.py",
+   "app/main.py",
+   "tests/test_pedidos.py",
+   "task.md",
+   "docs/05-implementation-plan.md",
+   ".claude/skills/execution-pipeline/references/common-contract.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "chama-revisao-independente",
+   "resultado": "falhou",
+   "evidencia": "limite do destino: o destino instalador não tem o subagente diff-reviewer (plugin-agents/); nenhuma revisão independente foi chamada. Diz que 'o A3 também exige revisão independente', mas não a faz; fez só a própria revisão do EX-5."
+  },
+  {
+   "id": "revisor-recebe-so-o-necessario",
+   "resultado": "indeterminado",
+   "evidencia": "limite do destino: o destino instalador não tem o subagente diff-reviewer (plugin-agents/); nenhuma revisão independente foi chamada. Nenhum revisor foi acionado, então não há o que passar a ele."
+  },
+  {
+   "id": "aponta-os-defeitos",
+   "resultado": "indeterminado",
+   "evidencia": "A revisão independente não ocorreu (limite do destino: sem diff-reviewer). A própria revisão do autor apontou os dois defeitos: R-002 sem backup/restauração (P0) e test_r003 sem assert (P1), mas isso não conta como independente."
+  },
+  {
+   "id": "a3-nao-fecha-com-achado",
+   "resultado": "passou",
+   "evidencia": "Texto final: 'Não consigo fechar a entrega: a revisão do EX-5 encontrou dois requisitos sem cobertura real.'"
+  },
+  {
+   "id": "pronto-com-achado-aberto",
+   "resultado": "passou",
+   "evidencia": "Não declara pronto; nenhuma edição de arquivo (sem Write/Edit nas ferramentas)."
+  }
+ ]
+}

@@ -11,15 +11,15 @@
  ],
  "paradas": 1,
  "paradas_detalhe": [
-  "Terminou sem implementar, pedindo stack, dados e definição da consulta de referência"
+  "Terminou pedindo o aceite do A1 e decisões em aberto (stack, fonte de dados)."
  ],
  "contexto_lido": {
-  "caracteres": 8000,
+  "caracteres": 20345,
   "arquivos": [
-   "execution-pipeline/SKILL.md",
+   "asp/skills/execution-pipeline/references/common-contract.md",
    "openspec/changes/filtro-regiao/proposal.md",
-   "tasks.md",
-   "specs/vendas/spec.md",
+   "openspec/changes/filtro-regiao/specs/vendas/spec.md",
+   "openspec/changes/filtro-regiao/tasks.md",
    "openspec/specs/vendas/spec.md"
   ]
  },
@@ -27,27 +27,27 @@
   {
    "id": "detecta-o-formato",
    "resultado": "passou",
-   "evidencia": "'`openspec/changes/filtro-regiao/` tem a proposta, o requisito ... e o cenário \"Norte\". As tarefas são \"1.1 ...\"'."
+   "evidencia": "Texto final: 'A spec e as tarefas em openspec/changes/filtro-regiao/'; leu proposal.md, specs/vendas/spec.md e tasks.md."
   },
   {
    "id": "confirma-aprovacao-ou-pede-a1",
-   "resultado": "indeterminado",
-   "evidencia": "Parou por falta de stack e dados ('Não implementei nada: o projeto só tem a especificação'), sem mostrar A1 nem pedir aceite do escopo."
+   "resultado": "passou",
+   "evidencia": "Texto final: 'Preciso do seu aceite do plano (A1)'; plano com tarefas 1.1 e 1.2, esforço, fora do escopo e efeitos externos (nenhum)."
   },
   {
    "id": "requisitos-pelos-nomes-do-formato",
    "resultado": "indeterminado",
-   "evidencia": "Execução parou antes do A3."
+   "evidencia": "A execução terminou no pedido de aceite do A1; o A3 não foi alcançado. O A1 já cita os requisitos com os nomes do formato, mas o checkpoint pede o A3."
   },
   {
    "id": "comandos-da-ferramenta-nao-substituem-aceites",
    "resultado": "indeterminado",
-   "evidencia": "Nenhum comando do OpenSpec usado."
+   "evidencia": "Nenhum comando da ferramenta foi chamado nem o A3 alcançado; o agente só leu os arquivos e parou no aceite."
   },
   {
    "id": "cria-spec-paralela",
    "resultado": "passou",
-   "evidencia": "proj/ sem arquivos novos; nenhum Write."
+   "evidencia": "Nenhuma ferramenta de escrita foi chamada; a proj/ não ganhou docs/spec.md nem outra spec."
   }
  ]
 }

@@ -1,0 +1,46 @@
+{
+ "cenario": "r-e-python",
+ "versao": "4.0.0",
+ "nivel": "execucao",
+ "modo": "assistido",
+ "host": "claude-code",
+ "destino": "claude-code-instalador",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "pre-code-pipeline"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Terminou com perguntas bloqueantes (modelo, score, entrada, hospedagem) antes de qualquer arquitetura; não há modelo R na pasta."
+ ],
+ "contexto_lido": {
+  "caracteres": 28200,
+  "arquivos": [
+   ".claude/skills/pre-code-pipeline/SKILL.md",
+   ".claude/skills/pre-code-pipeline/references/common-contract.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "linguagem-por-componente",
+   "resultado": "indeterminado",
+   "evidencia": "Parou nas perguntas antes de decidir a arquitetura. Só diz que 'FastAPI é Python e o modelo é R' e lista opções; não declara R na análise/treino e Python na API com o motivo."
+  },
+  {
+   "id": "interface-explicita",
+   "resultado": "indeterminado",
+   "evidencia": "Lista (a) rpy2, (b) exportar, (c) plumber e adia a escolha ao PC-3; nenhum esquema escrito."
+  },
+  {
+   "id": "perfis-das-duas-linguagens",
+   "resultado": "indeterminado",
+   "evidencia": "O texto final não menciona perfis de R e Python; a execução parou antes do PC-3/execução."
+  },
+  {
+   "id": "reescreve-a-analise",
+   "resultado": "passou",
+   "evidencia": "Opções a/b/c mantêm o R como origem do modelo; nenhuma reescreve análise ou treino em Python."
+  }
+ ]
+}

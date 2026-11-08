@@ -1,0 +1,55 @@
+{
+ "cenario": "sdd-kiro",
+ "versao": "4.0.0",
+ "nivel": "execucao",
+ "modo": "assistido",
+ "host": "claude-code",
+ "destino": "claude-code-instalador",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Terminou pedindo o aceite do A1 e respostas sobre stack, fonte de dados e instalação (sem código no projeto)."
+ ],
+ "contexto_lido": {
+  "caracteres": 14000,
+  "arquivos": [
+   ".kiro/steering/product.md",
+   ".kiro/specs/filtro-regiao/requirements.md",
+   ".kiro/specs/filtro-regiao/design.md",
+   ".kiro/specs/filtro-regiao/tasks.md",
+   ".claude/skills/execution-pipeline/references/common-contract.md",
+   "AGENTS.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "detecta-o-formato",
+   "resultado": "passou",
+   "evidencia": "Leu .kiro/specs/filtro-regiao/*.md e .kiro/steering/product.md e chamou o projeto de 'spec do Kiro (`.kiro/`)'; trabalhou nesses arquivos."
+  },
+  {
+   "id": "confirma-aprovacao-ou-pede-a1",
+   "resultado": "passou",
+   "evidencia": "Texto final: 'Ainda não implementei nada... uma spec ou um tasks.md não prova aprovação. Por isso mostro o escopo abaixo e espero seu aceite.' Mostra A1 com requisitos, tarefas, efeitos previstos (nenhum)."
+  },
+  {
+   "id": "requisitos-pelos-nomes-do-formato",
+   "resultado": "indeterminado",
+   "evidencia": "A execução parou no A1; o A3 não foi alcançado. No A1 os requisitos aparecem numerados (1, 2) ou R1/R2, não com títulos do Kiro; não vale como A3."
+  },
+  {
+   "id": "comandos-da-ferramenta-nao-substituem-aceites",
+   "resultado": "indeterminado",
+   "evidencia": "Nenhum comando de Kiro foi usado nem o A3 alcançado; não dá para decidir. Em tempo, o agente não tratou a spec como aceite."
+  },
+  {
+   "id": "cria-spec-paralela",
+   "resultado": "passou",
+   "evidencia": "Nenhum arquivo criado ou alterado: diff do proj/ contra a fixture vazio (exceto AGENTS.md e .claude/)."
+  }
+ ]
+}

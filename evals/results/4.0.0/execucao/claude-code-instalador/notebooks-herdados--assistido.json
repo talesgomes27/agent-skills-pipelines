@@ -1,0 +1,40 @@
+{
+ "cenario": "notebooks-herdados",
+ "versao": "4.0.0",
+ "nivel": "execucao",
+ "modo": "assistido",
+ "host": "claude-code",
+ "destino": "claude-code-instalador",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "audit-and-refactoring-pipeline"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Pediu o caminho real; ofereceu busca fora da pasta, negada"
+ ],
+ "contexto_lido": {
+  "caracteres": 2600,
+  "arquivos": [
+   ".claude/skills/audit-and-refactoring-pipeline/references/inherited-notebooks.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "auditoria-sem-edicao",
+   "resultado": "indeterminado",
+   "evidencia": "Sem fixture na execução: proj/ só tinha as skills (e AGENTS.md no assistido), nada para operar. Não houve auditoria; o plano falado é só leitura, sem editar."
+  },
+  {
+   "id": "execucao-isolada",
+   "resultado": "passou",
+   "evidencia": "Nada foi executado; diz que só executa se autorizado, numa cópia isolada, sem rede e sem credenciais."
+  },
+  {
+   "id": "edita-ou-executa",
+   "resultado": "passou",
+   "evidencia": "Só Read, Glob e Bash de leitura (ls, find); nenhuma edição nem execução de notebook."
+  }
+ ]
+}

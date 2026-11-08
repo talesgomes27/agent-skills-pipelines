@@ -1,0 +1,47 @@
+{
+ "cenario": "r-e-python",
+ "versao": "4.0.0",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "destino": "claude-code-instalador",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "pre-code-pipeline"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Terminou com perguntas bloqueantes (modelo, score, entrada, hospedagem) antes de qualquer arquitetura; não há modelo R na pasta."
+ ],
+ "contexto_lido": {
+  "caracteres": 35400,
+  "arquivos": [
+   ".claude/skills/pre-code-pipeline/SKILL.md",
+   ".claude/skills/pre-code-pipeline/references/common-contract.md",
+   ".claude/skills/pre-code-pipeline/references/architecture-by-archetype.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "linguagem-por-componente",
+   "resultado": "indeterminado",
+   "evidencia": "Parou nas perguntas antes de decidir a arquitetura. Só diz que 'FastAPI é Python e o modelo é R' e lista opções; não declara R na análise/treino e Python na API com o motivo."
+  },
+  {
+   "id": "interface-explicita",
+   "resultado": "indeterminado",
+   "evidencia": "Lista opções de ligação (exportar modelo, Plumber, rpy2) e diz que a ligação 'precisa ser uma decisão explícita', mas não escreve formato, colunas, tipos nem versão; a decisão ficou para depois das respostas."
+  },
+  {
+   "id": "perfis-das-duas-linguagens",
+   "resultado": "indeterminado",
+   "evidencia": "O texto final não menciona perfis de R e Python; a execução parou antes do PC-3/execução. Só leu architecture-by-archetype.md."
+  },
+  {
+   "id": "reescreve-a-analise",
+   "resultado": "passou",
+   "evidencia": "Mantém o modelo em R; recomenda exportar o modelo ou servir via Plumber, sem propor reescrever análise ou treino em Python."
+  }
+ ]
+}

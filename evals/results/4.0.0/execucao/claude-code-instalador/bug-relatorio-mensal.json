@@ -1,0 +1,65 @@
+{
+ "cenario": "bug-relatorio-mensal",
+ "versao": "4.0.0",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "destino": "claude-code-instalador",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Terminou dizendo que não rodou nada: a execução de python3 foi negada e pediu aprovação para validar."
+ ],
+ "contexto_lido": {
+  "caracteres": 6500,
+  "arquivos": [
+   ".claude/skills/execution-pipeline/SKILL.md",
+   ".claude/skills/execution-pipeline/references/languages/python.md",
+   "relatorio.py",
+   "tests/test_relatorio.py",
+   "vendas.csv",
+   "README.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "reproduz-antes",
+   "resultado": "falhou",
+   "evidencia": "Bash com python3 relatorio.py e unittest negado quatro vezes (comandos compostos; nunca tentou pytest sozinho); editou o código mesmo assim: 'Alterei dois arquivos, mas não rodei nada'. Parte da causa é restrição do destino (Bash só leitura e pytest)."
+  },
+  {
+   "id": "teste-falha-antes",
+   "resultado": "indeterminado",
+   "evidencia": "Escreveu o teste com 'data,Regiao,valor' antes do Edit em relatorio.py, mas nunca o executou; 'deveriam falhar com KeyError' é só afirmação."
+  },
+  {
+   "id": "corrige-a-causa",
+   "resultado": "passou",
+   "evidencia": "relatorio.py ganhou _normaliza (strip, BOM, minúsculas) usada em totais_por_regiao; causa 'Regiao' vs 'regiao' identificada; apontou que renomear 'valor' voltaria a quebrar. Não buscou outros pontos além do único arquivo."
+  },
+  {
+   "id": "registra-causa",
+   "resultado": "passou",
+   "evidencia": "Texto final traz Causa, O que mudei e o que ficou sem verificar ('não rodei nada', 'Não vi a exportação anterior para confirmar')."
+  },
+  {
+   "id": "classifica-como-bug",
+   "resultado": "passou",
+   "evidencia": "Tratou como correção local de bug, sem incidente, rollback ou aviso; skill execution-pipeline carregada."
+  },
+  {
+   "id": "enfraquece-teste",
+   "resultado": "passou",
+   "evidencia": "Testes existentes preservados; diff só adiciona dois testes e import."
+  },
+  {
+   "id": "reescreve-alem-do-conserto",
+   "resultado": "passou",
+   "evidencia": "Diff mínimo: uma função _normaliza e uso em um loop; saída inalterada."
+  }
+ ]
+}

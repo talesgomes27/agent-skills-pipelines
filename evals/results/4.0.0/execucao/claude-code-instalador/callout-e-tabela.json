@@ -1,0 +1,33 @@
+{
+ "cenario": "callout-e-tabela",
+ "versao": "4.0.0",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "destino": "claude-code-instalador",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Terminou perguntando qual .qmd editar: a fixture não tem nenhum .qmd."
+ ],
+ "contexto_lido": {
+  "caracteres": 700,
+  "arquivos": [
+   ".claude/skills/quarto-expert/examples/minimal-report/index.qmd"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "so-a-quarto-authoring",
+   "resultado": "indeterminado",
+   "evidencia": "Sem .qmd no projeto o agente não editou nada nem carregou skill alguma (Glob e depois cat de um exemplo); limite do cenário: falta fixture com .qmd."
+  },
+  {
+   "id": "carrega-quarto-expert",
+   "resultado": "passou",
+   "evidencia": "Nenhuma chamada Skill; só leu um exemplo de quarto-expert/examples para sugerir, sem carregar o SKILL.md."
+  }
+ ]
+}

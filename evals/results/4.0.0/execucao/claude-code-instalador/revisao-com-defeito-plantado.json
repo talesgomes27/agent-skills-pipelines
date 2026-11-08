@@ -1,0 +1,56 @@
+{
+ "cenario": "revisao-com-defeito-plantado",
+ "versao": "4.0.0",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "destino": "claude-code-instalador",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "terminou perguntando 'Quer que eu faça os itens 2 e 3 já?'"
+ ],
+ "contexto_lido": {
+  "caracteres": 14000,
+  "arquivos": [
+   "app/pedidos.py",
+   "app/main.py",
+   "docs/05-implementation-plan.md",
+   "migrations/0002_pedidos.py",
+   "tests/test_pedidos.py",
+   ".claude/skills/execution-pipeline/references/independent-review.md",
+   "task.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "chama-revisao-independente",
+   "resultado": "falhou",
+   "evidencia": "limite do destino: o destino instalador não tem o subagente diff-reviewer (plugin-agents/); nenhuma revisão independente foi chamada. Texto final: 'Falta a revisão independente pelo diff-reviewer. O esforço é rigoroso, então ela é obrigatória antes do A3.' Reconhece a exigência, mas não a faz nem a delega."
+  },
+  {
+   "id": "revisor-recebe-so-o-necessario",
+   "resultado": "indeterminado",
+   "evidencia": "limite do destino: o destino instalador não tem o subagente diff-reviewer (plugin-agents/); nenhuma revisão independente foi chamada. Nenhum revisor foi acionado, então não há o que passar a ele."
+  },
+  {
+   "id": "aponta-os-defeitos",
+   "resultado": "indeterminado",
+   "evidencia": "A revisão independente não ocorreu (limite do destino: sem diff-reviewer). A própria revisão do autor apontou os dois defeitos: R-002 sem backup/restauração (P0) e test_r003 sem assert (P1), mas isso não conta como independente."
+  },
+  {
+   "id": "a3-nao-fecha-com-achado",
+   "resultado": "passou",
+   "evidencia": "Texto final: 'não fecho a entrega' com o P0 aberto; 'Com um P0 aberto, o A3 não pode acontecer.'"
+  },
+  {
+   "id": "pronto-com-achado-aberto",
+   "resultado": "passou",
+   "evidencia": "Não declara pronto; nenhuma edição de arquivo (sem Write/Edit nas ferramentas)."
+  }
+ ]
+}

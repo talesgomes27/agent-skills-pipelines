@@ -1,0 +1,65 @@
+{
+ "cenario": "bug-relatorio-mensal",
+ "versao": "4.0.0",
+ "nivel": "execucao",
+ "modo": "assistido",
+ "host": "claude-code",
+ "destino": "claude-code-instalador",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Terminou com 'Posso aplicar essa correção?' e pedido de aprovação para rodar python3 e unittest."
+ ],
+ "contexto_lido": {
+  "caracteres": 6000,
+  "arquivos": [
+   ".claude/skills/execution-pipeline/SKILL.md",
+   "relatorio.py",
+   "vendas.csv",
+   "tests/test_relatorio.py",
+   "README.md",
+   "AGENTS.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "reproduz-antes",
+   "resultado": "indeterminado",
+   "evidencia": "Tentou python3 relatorio.py vendas.csv, negado; parou antes de mudar código ('Não consegui rodar o comando para reproduzir o erro')."
+  },
+  {
+   "id": "teste-falha-antes",
+   "resultado": "indeterminado",
+   "evidencia": "Propõe teste com cabeçalho 'Regiao' que 'deve falhar antes da correção', mas parou no aceite sem escrevê-lo."
+  },
+  {
+   "id": "corrige-a-causa",
+   "resultado": "indeterminado",
+   "evidencia": "Diagnóstico certo (relatorio.py:9 lê 'regiao', csv tem 'Regiao'); correção só proposta, nada aplicado."
+  },
+  {
+   "id": "registra-causa",
+   "resultado": "indeterminado",
+   "evidencia": "Registra só o diagnóstico; correção e pendências ainda não existem porque parou antes."
+  },
+  {
+   "id": "classifica-como-bug",
+   "resultado": "passou",
+   "evidencia": "Tratou como correção local reversível de um arquivo, sem incidente."
+  },
+  {
+   "id": "enfraquece-teste",
+   "resultado": "passou",
+   "evidencia": "Nenhum teste alterado."
+  },
+  {
+   "id": "reescreve-alem-do-conserto",
+   "resultado": "passou",
+   "evidencia": "Correção proposta é só normalizar nomes de coluna; nenhum arquivo alterado."
+  }
+ ]
+}

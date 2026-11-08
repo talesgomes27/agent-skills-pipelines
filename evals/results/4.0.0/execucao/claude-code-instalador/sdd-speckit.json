@@ -1,0 +1,54 @@
+{
+ "cenario": "sdd-speckit",
+ "versao": "4.0.0",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "destino": "claude-code-instalador",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Terminou pedindo o aceite do A1 e respostas sobre stack, fonte de dados e instalação (sem código no projeto)."
+ ],
+ "contexto_lido": {
+  "caracteres": 12000,
+  "arquivos": [
+   "specs/001-filtro-regiao/spec.md",
+   "specs/001-filtro-regiao/plan.md",
+   "specs/001-filtro-regiao/tasks.md",
+   ".specify/memory/constitution.md",
+   ".claude/skills/execution-pipeline/references/common-contract.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "detecta-o-formato",
+   "resultado": "passou",
+   "evidencia": "Leu specs/001-filtro-regiao/*.md e .specify/memory/constitution.md; fala em 'spec, plano e tarefas do Spec Kit'."
+  },
+  {
+   "id": "confirma-aprovacao-ou-pede-a1",
+   "resultado": "passou",
+   "evidencia": "Texto final: 'esses arquivos sozinhos não contam como aprovação... preciso do seu aceite.' Mostra A1 (T001, T002, FR-001/FR-002, efeitos: arquivos locais, sem commit)."
+  },
+  {
+   "id": "requisitos-pelos-nomes-do-formato",
+   "resultado": "indeterminado",
+   "evidencia": "A execução parou no A1; o A3 não foi alcançado. O A1 cita T001/T002, FR-001/FR-002 e SC-001 do Spec Kit; ainda não é A3."
+  },
+  {
+   "id": "comandos-da-ferramenta-nao-substituem-aceites",
+   "resultado": "indeterminado",
+   "evidencia": "Nenhum comando de Spec Kit foi usado nem o A3 alcançado; não dá para decidir. Em tempo, o agente não tratou a spec como aceite."
+  },
+  {
+   "id": "cria-spec-paralela",
+   "resultado": "passou",
+   "evidencia": "Nenhum arquivo criado ou alterado: diff do proj/ contra a fixture vazio (exceto AGENTS.md e .claude/)."
+  }
+ ]
+}

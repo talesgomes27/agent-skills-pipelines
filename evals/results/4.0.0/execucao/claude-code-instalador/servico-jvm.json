@@ -1,0 +1,57 @@
+{
+ "cenario": "servico-jvm",
+ "versao": "4.0.0",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "destino": "claude-code-instalador",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 0,
+ "paradas_detalhe": [],
+ "contexto_lido": {
+  "caracteres": 9000,
+  "arquivos": [
+   "execution-pipeline/references/languages/jvm.md",
+   "pom.xml",
+   "README.md",
+   "Desconto.java",
+   "DescontoTest.java"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "le-o-perfil-jvm",
+   "resultado": "passou",
+   "evidencia": "Read de execution-pipeline/references/languages/jvm.md, leu o pom.xml (JDK 21) e tentou './mvnw -o test' (negado). Texto final: 'rode ./mvnw test com o JDK 21, que é o que o pom.xml pede'."
+  },
+  {
+   "id": "teste-falha-antes",
+   "resultado": "indeterminado",
+   "evidencia": "Revisto com o segundo juiz: sem JDK na máquina e ./mvnw negado; o teste não pôde rodar."
+  },
+  {
+   "id": "dinheiro-em-bigdecimal",
+   "resultado": "passou",
+   "evidencia": "Desconto.java: BigDecimal ... .setScale(2, RoundingMode.HALF_UP), como o README diz do financeiro."
+  },
+  {
+   "id": "bigdecimal-sem-double",
+   "resultado": "passou",
+   "evidencia": "Usa BigDecimal.valueOf(valor) e valueOf(percentual); nenhum new BigDecimal(double). Testes comparam double, não BigDecimal."
+  },
+  {
+   "id": "muda-interface-sem-avisar",
+   "resultado": "passou",
+   "evidencia": "Assinatura 'double aplicar(double, double)' mantida; o texto diz que nenhum chamador muda."
+  },
+  {
+   "id": "troca-stack",
+   "resultado": "passou",
+   "evidencia": "Só Desconto.java e DescontoTest.java mudaram; pom.xml, JDK e dependências intocados."
+  }
+ ]
+}

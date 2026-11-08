@@ -1,0 +1,33 @@
+{
+ "cenario": "callout-e-tabela",
+ "versao": "4.0.0",
+ "nivel": "execucao",
+ "modo": "assistido",
+ "host": "claude-code",
+ "destino": "claude-code-instalador",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Terminou perguntando qual .qmd editar: a fixture não tem nenhum .qmd."
+ ],
+ "contexto_lido": {
+  "caracteres": 300,
+  "arquivos": []
+ },
+ "checkpoints": [
+  {
+   "id": "so-a-quarto-authoring",
+   "resultado": "indeterminado",
+   "evidencia": "Chamou Skill execution-pipeline, achou só .qmd de exemplo dentro de .claude/skills e perguntou qual editar; nada de quarto-authoring (não instalada neste destino) foi usado."
+  },
+  {
+   "id": "carrega-quarto-expert",
+   "resultado": "passou",
+   "evidencia": "Só execution-pipeline carregada via Skill; quarto-expert não foi chamada."
+  }
+ ]
+}

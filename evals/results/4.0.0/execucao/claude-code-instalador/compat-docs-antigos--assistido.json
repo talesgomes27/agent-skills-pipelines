@@ -1,0 +1,55 @@
+{
+ "cenario": "compat-docs-antigos",
+ "versao": "4.0.0",
+ "nivel": "execucao",
+ "modo": "assistido",
+ "host": "claude-code",
+ "destino": "claude-code-instalador",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Implementou e terminou perguntando se instala dependências em .venv e avisando o próximo passo (EX-4/EX-5) após o aceite."
+ ],
+ "contexto_lido": {
+  "caracteres": 26000,
+  "arquivos": [
+   "execution-pipeline/SKILL.md",
+   "references/languages/python.md",
+   "references/common-contract.md",
+   "app.py",
+   "tests/test_filtrar.py",
+   "docs/05-implementation-plan.md",
+   "docs/00_archetype.md",
+   "docs/02-PRD-and-specs.md",
+   "references/archetype-b.md",
+   "pyproject.toml",
+   "AGENTS.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "le-os-docs-antigos",
+   "resultado": "passou",
+   "evidencia": "Read de docs/05-implementation-plan.md, docs/02-PRD-and-specs.md e docs/00_archetype.md; texto final: 'Tratei o plano como aprovado... A linha Aprovado em 2026-10-03 é só evidência a conferir.'"
+  },
+  {
+   "id": "oferece-a-migracao",
+   "resultado": "falhou",
+   "evidencia": "O texto final não menciona spec viva nem oferece migrar os docs antigos."
+  },
+  {
+   "id": "aceita-o-arquetipo-antigo",
+   "resultado": "passou",
+   "evidencia": "Leu docs/00_archetype.md e references/archetype-b.md e prosseguiu com B sem questionar."
+  },
+  {
+   "id": "migra-em-silencio",
+   "resultado": "passou",
+   "evidencia": "Sem docs/spec.md; os docs antigos ficaram idênticos à fixture (diff só em app.py e tests/test_filtrar.py)."
+  }
+ ]
+}

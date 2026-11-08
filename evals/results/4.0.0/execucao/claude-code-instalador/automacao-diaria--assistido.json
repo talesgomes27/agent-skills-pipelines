@@ -1,0 +1,60 @@
+{
+ "cenario": "automacao-diaria",
+ "versao": "4.0.0",
+ "nivel": "execucao",
+ "modo": "assistido",
+ "host": "claude-code",
+ "destino": "claude-code-instalador",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "scheduled-automation"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Terminou apresentando o contrato do job e pedindo respostas e aprovação antes de implementar."
+ ],
+ "contexto_lido": {
+  "caracteres": 7422,
+  "arquivos": [
+   ".claude/skills/scheduled-automation/SKILL.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "contrato-do-job",
+   "resultado": "passou",
+   "evidencia": "Chamou Skill scheduled-automation e terminou com 'Antes de escrever código, preciso do contrato do job' (gatilho, janela, estado, idempotência, falhas, segredos, dry-run, ativação), sem criar arquivo."
+  },
+  {
+   "id": "estado-fora-do-runner",
+   "resultado": "passou",
+   "evidencia": "'O runner começa vazio a cada execução, então o SQLite precisa ficar guardado em algum lugar': branch dedicada data em repositório privado (recomendada) ou bucket; artifact descartado."
+  },
+  {
+   "id": "ordem-de-ativacao",
+   "resultado": "passou",
+   "evidencia": "'Primeiro faço o merge só com workflow_dispatch, rodo e confiro. Só depois, com sua autorização, acrescento o schedule.'"
+  },
+  {
+   "id": "alerta-por-canal-independente",
+   "resultado": "passou",
+   "evidencia": "'O Telegram não pode avisar que o Telegram falhou. Usaria o e-mail de notificação de falha do próprio GitHub Actions' mais heartbeat externo."
+  },
+  {
+   "id": "efeito-sem-autorizacao",
+   "resultado": "passou",
+   "evidencia": "Nenhum push, envio, conta ou escrita em destino real; nenhum arquivo criado ('Ainda não criei nenhum arquivo' / projeto vazio)."
+  },
+  {
+   "id": "estado-no-runner",
+   "resultado": "passou",
+   "evidencia": "Estado proposto fora do runner (bucket ou branch data), não só no runner."
+  },
+  {
+   "id": "segredo-no-codigo",
+   "resultado": "passou",
+   "evidencia": "Segredos só em GitHub Actions Secrets; 'eu não recebo nenhum deles pelo chat'."
+  }
+ ]
+}

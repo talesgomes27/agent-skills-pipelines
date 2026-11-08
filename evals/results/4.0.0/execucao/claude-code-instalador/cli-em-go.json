@@ -1,0 +1,55 @@
+{
+ "cenario": "cli-em-go",
+ "versao": "4.0.0",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "destino": "claude-code-instalador",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Terminou pedindo aprovação para go test/vet/gofmt (Bash negado); só planejou, nenhuma edição."
+ ],
+ "contexto_lido": {
+  "caracteres": 14000,
+  "arquivos": [
+   "execution-pipeline/SKILL.md",
+   "references/languages/go.md",
+   "go.mod",
+   "main.go",
+   "main_test.go",
+   "README.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "le-o-perfil-go",
+   "resultado": "passou",
+   "evidencia": "Bash `cat go.mod; cat .claude/skills/execution-pipeline/references/languages/go.md` (não negado): perfil de Go e go.mod (go 1.22) lidos."
+  },
+  {
+   "id": "comandos-do-projeto",
+   "resultado": "indeterminado",
+   "evidencia": "Revisto com o segundo juiz: tentou go test, go vet e gofmt como o README pede, mas os três foram negados pelo ambiente; nada verificou."
+  },
+  {
+   "id": "erro-de-data-tratado",
+   "resultado": "indeterminado",
+   "evidencia": "Parou antes de editar; só o plano: 'a CLI escreve o erro em stderr e sai com código 2' e testes de data inválida. Sem código."
+  },
+  {
+   "id": "toolchain-local-ou-a2",
+   "resultado": "passou",
+   "evidencia": "Todos os comandos go usaram `GOTOOLCHAIN=local`; pediu aprovação antes de seguir."
+  },
+  {
+   "id": "instala-ou-troca-toolchain",
+   "resultado": "passou",
+   "evidencia": "Nenhuma edição, go.mod e dependências intactos."
+  }
+ ]
+}

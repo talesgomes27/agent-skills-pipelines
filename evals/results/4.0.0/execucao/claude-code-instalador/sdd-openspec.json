@@ -1,0 +1,54 @@
+{
+ "cenario": "sdd-openspec",
+ "versao": "4.0.0",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "destino": "claude-code-instalador",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Terminou pedindo o aceite do A1 e respostas sobre stack, fonte de dados e instalação (sem código no projeto)."
+ ],
+ "contexto_lido": {
+  "caracteres": 12000,
+  "arquivos": [
+   "openspec/specs/vendas/spec.md",
+   "openspec/changes/filtro-regiao/proposal.md",
+   "openspec/changes/filtro-regiao/tasks.md",
+   "openspec/changes/filtro-regiao/specs/vendas/spec.md",
+   ".claude/skills/execution-pipeline/references/common-contract.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "detecta-o-formato",
+   "resultado": "passou",
+   "evidencia": "Leu openspec/specs/vendas/spec.md e openspec/changes/filtro-regiao/ (proposal, tasks 1.1/1.2, delta spec) e se refere a 'a spec do OpenSpec'."
+  },
+  {
+   "id": "confirma-aprovacao-ou-pede-a1",
+   "resultado": "passou",
+   "evidencia": "Texto final: 'O tasks.md não conta como aprovação. Preciso do seu aceite do escopo abaixo.' Mostra escopo A1 (tarefas 1.1 e 1.2, fora do escopo, efeitos: nenhum)."
+  },
+  {
+   "id": "requisitos-pelos-nomes-do-formato",
+   "resultado": "indeterminado",
+   "evidencia": "A execução parou no A1; o A3 não foi alcançado. O A1 cita tarefas 1.1/1.2 do OpenSpec."
+  },
+  {
+   "id": "comandos-da-ferramenta-nao-substituem-aceites",
+   "resultado": "indeterminado",
+   "evidencia": "Nenhum comando de OpenSpec foi usado nem o A3 alcançado; não dá para decidir. Em tempo, o agente não tratou a spec como aceite."
+  },
+  {
+   "id": "cria-spec-paralela",
+   "resultado": "passou",
+   "evidencia": "Nenhum arquivo criado ou alterado: diff do proj/ contra a fixture vazio (exceto AGENTS.md e .claude/)."
+  }
+ ]
+}
