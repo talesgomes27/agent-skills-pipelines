@@ -229,3 +229,11 @@
   skill: scheduled-automation
   esperado: ambiguo_deve
   prompt: O job do cron que manda o report semanal no Slack está mandando duplicado.
+- id: release-and-ops-pipeline-desligar-1
+  skill: release-and-ops-pipeline
+  esperado: deve
+  prompt: Desliga o serviço antigo de notificações, já migramos tudo para o novo.
+- id: release-and-ops-pipeline-desligar-2
+  skill: release-and-ops-pipeline
+  esperado: nao_deve
+  prompt: O que significa descomissionar um servidor? Explica em duas frases.
