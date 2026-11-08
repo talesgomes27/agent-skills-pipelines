@@ -26,14 +26,15 @@ def decide(command, effects):
 
 
 def main():
+    sys.stderr.reconfigure(encoding='utf-8')  # o erro em stderr sai legível também no Windows
     effects = json.loads(EFFECTS.read_text(encoding='utf-8'))['efeitos']
-    data = json.load(sys.stdin)
+    data = json.load(sys.stdin.buffer)  # bytes UTF-8, sem depender do encoding do console
     command = data.get('tool_input', {}).get('command', '')
     if not isinstance(command, str):
         raise ValueError('tool_input.command não é texto')
     out = decide(command, effects)
     if out:
-        print(json.dumps(out, ensure_ascii=False))
+        print(json.dumps(out))  # ASCII com escapes: lê igual em qualquer console, inclusive cp1252
     return 0
 
 
