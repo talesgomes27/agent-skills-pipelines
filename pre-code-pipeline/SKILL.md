@@ -26,7 +26,7 @@ Siga o [contrato comum](references/common-contract.md) para leitura inicial, esf
 
 ## Esforço e documentos
 
-Escolha o esforço pela escala do contrato comum e diga por quê: leve para mudança local ou app novo pequeno aprovado como leve; padrão para capacidade ou integração comum; rigoroso para segurança, dados sensíveis, migração, interface pública ou impacto incerto, mesmo num diff curto. Um app novo pequeno, de uso interno, só é leve quando esta pipeline o aprova assim.
+Escolha o esforço pela escala do contrato comum e diga por quê: leve para mudança local ou app novo pequeno aprovado como leve; padrão para capacidade ou integração comum; rigoroso para segurança, dados sensíveis, migração, interface pública ou impacto incerto, mesmo num diff curto. Um app novo pequeno, de uso interno, só é leve quando esta pipeline o aprova assim. Dashboard interno que só lê um banco existente é padrão.
 
 Os destinos padrão são a spec e `docs/plan.md`; `docs/01` a `docs/05` existentes continuam valendo, com a migração só oferecida, e nenhum é obrigatório. Um contrato existente com aprovação verificável cumpre o gate por referência. No esforço leve o conteúdo pode ficar na resposta; crie arquivo se precisar durar além da conversa. Num app novo leve, os gates cabem numa resposta, com um só aceite por PC-2, PC-3 e PC-5.
 
@@ -42,7 +42,7 @@ Os destinos padrão são a spec e `docs/plan.md`; `docs/01` a `docs/05` existent
 
 ## Modo
 
-No modo por efeito, o aceite do fim de PC-5 é o A1 do contrato comum: ele cobre requisitos, arquitetura e plano, as decisões do usuário em aberto e os efeitos externos previstos. No esforço rigoroso, pare também ao fim de PC-3. Uma dúvida que bloqueia um gate é perguntada na hora, em qualquer modo. No modo assistido, espere o aceite, com `aguardando_aprovacao`, ao fim de PC-2, PC-3 e PC-5. O modo contínuo e as paradas condicionais seguem o contrato comum. Nenhum modo autoriza efeito do catálogo sem A2 ou pré-autorização válida.
+No modo por efeito, o aceite do fim de PC-5 é o A1 do contrato comum: ele cobre requisitos, arquitetura e plano, as decisões do usuário em aberto e os efeitos externos previstos. Peça nele, de uma vez, a autorização dos efeitos previstos com conteúdo definido, como instalar as dependências listadas no plano. No esforço rigoroso, pare também ao fim de PC-3. Uma dúvida que bloqueia um gate é perguntada na hora, em qualquer modo. No modo assistido, espere o aceite, com `aguardando_aprovacao`, ao fim de PC-2, PC-3 e PC-5. O modo contínuo e as paradas condicionais seguem o contrato comum. Nenhum modo autoriza efeito do catálogo sem A2 ou pré-autorização válida.
 
 ## Gates
 

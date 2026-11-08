@@ -2,6 +2,30 @@
 
 As versões seguem [SemVer](https://semver.org/lang/pt-BR/).
 
+## [4.0.2] - 2026-11-08
+
+Comparada com a 4.0.1 (`b68ed94`). Trabalho sobre as metas da proposta da 4.0.0 que não tinham sido atingidas, sem mudar regra, modo nem aceite. Por isso a versão é PATCH.
+
+### Correções
+
+- `pre-code-pipeline`: no modo por efeito, o A1 pede de uma vez a autorização dos efeitos previstos com conteúdo definido, como instalar as dependências listadas no plano, como o contrato comum já permitia. E um dashboard interno que só lê um banco existente é esforço padrão, não rigoroso.
+- `release-and-ops-pipeline`: redação condensada, sem tirar regra, para ficar abaixo do aviso de 8.500 caracteres do doctor (8.488).
+
+### Metas da proposta da 4.0.0
+
+- **Paradas no dashboard:** no nível de leitura, por efeito, caíram de 6 para 4 numa amostra cega (`evals/results/4.0.2/leitura/dashboard-streamlit.json`), a meta, e para 5 numa segunda amostra, guardada fora do repositório. Nas duas sumiram a parada extra do fim do PC-3, que vinha do esforço rigoroso escolhido sem motivo, e o A2 separado para instalar dependências. Na segunda, o A1 pré-autorizou o commit, e o contrato manda então separar o A3 da execução do A2 da publicação. A pergunta bloqueante do PC-1 conta nas duas. A meta fica atingida numa amostra e a uma parada na outra.
+- **Tamanho das pipelines:** a meta de 6.500 caracteres foi revista para 8.500, o aviso do doctor, só por condensação de texto. A `release-and-ops-pipeline` ficou em 8.488, e a `pre-code-pipeline`, com as duas frases acima, em 8.454. A `execution-pipeline` segue em 9.975 e não atingiu a meta revista: condensar a redação sem tirar regra tirava uns 4% do texto, e duas conferências independentes acharam regras perdidas ou enfraquecidas nos cortes, como o "pare" de "pare e encaminhe" e "não instale nada globalmente". A condensação dela foi desfeita. Mover regras para as referências não entrou: nesta versão e na 4.0.1, regras que estavam só no contrato comum foram ignoradas pelo agente até ganharem um lembrete no `SKILL.md`.
+- **Descoberta em 3 de 5 destinos:** segue em 2 de 5, os dois do Claude Code. Por decisão do mantenedor, os testes rodam por enquanto só no Claude Code; o `discovery.md` registra isso.
+
+### Avaliações
+
+- Os 14 cenários que esperam a `pre-code-pipeline` ou a `release-and-ops-pipeline`, por efeito, nos dois destinos do Claude Code (`evals/results/4.0.2/execucao/`): nenhuma falha e nenhum checkpoint que passava falhando. Contra a última versão de cada cenário, 10 checkpoints passaram de indeterminado para passou e 9 de passou para indeterminado, porque essas execuções sem usuário pararam antes do ponto.
+
+### Como atualizar
+
+- No Claude Code, rode `claude plugin marketplace update agent-skills-pipelines` e `claude plugin update <plugin>` para cada plugin instalado.
+- Instalações feitas com `scripts/skills.py` recebem a 4.0.2 com `--update`.
+
 ## [4.0.1] - 2026-11-08
 
 Comparada com a 4.0.0 (`99343f1`). Correções de comportamento da `execution-pipeline` achadas na avaliação da 4.0.0, sem mudar interface, modos nem aceites. Por isso a versão é PATCH.

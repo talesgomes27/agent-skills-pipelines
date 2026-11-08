@@ -19,6 +19,8 @@ Ter a skill instalada em disco não prova que o agente a encontra. Depois de ins
 
 Atualize a data e a evidência sempre que repetir o teste em um host.
 
+Na 4.0.x, a descoberta está verificada em 2 dos 5 destinos, os dois do Claude Code. A meta da proposta da 4.0.0 era 3 de 5; ela segue não atingida porque, por decisão do mantenedor em 2026-11-08, os testes rodam por enquanto só no Claude Code.
+
 ## Prompts de gatilho
 
 Os prompts ficam em [`evals/triggers.yaml`](../../evals/triggers.yaml), com a skill e o resultado esperado: deve ativar, caso ambíguo que deve ativar, ou não deve ativar. Os casos ambíguos testam a fronteira entre skills. Quando um prompt ativar a skill errada, ajuste a `description` da skill, não o arquivo. Grave o que cada host observou em `evals/results/<versão>/<nível>/triggers-<destino>.json`, no formato de [`evals/README.md`](../../evals/README.md).

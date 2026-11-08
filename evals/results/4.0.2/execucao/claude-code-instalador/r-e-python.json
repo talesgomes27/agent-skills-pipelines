@@ -1,0 +1,45 @@
+{
+ "cenario": "r-e-python",
+ "versao": "4.0.2",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "destino": "claude-code-instalador",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "pre-code-pipeline"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Pasta sem R, modelo ou dados; parou no PC-1 (gate aguardando_aprovacao) com 4 perguntas."
+ ],
+ "contexto_lido": {
+  "caracteres": 28370,
+  "arquivos": [
+   ".claude/skills/pre-code-pipeline/references/common-contract.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "linguagem-por-componente",
+   "resultado": "passou",
+   "evidencia": "Arquétipo 'B (API), com dados e modelo vindos de A (análise em R/tidyverse)'; recomendação provisória: R treina e exporta, FastAPI serve sem R em produção, com motivo."
+  },
+  {
+   "id": "interface-explicita",
+   "resultado": "indeterminado",
+   "evidencia": "Apresenta três opções (exportar modelo, rpy2, plumber) e pergunta o modelo; não define formato nem esquema (colunas, tipos, versão) porque parou no PC-1."
+  },
+  {
+   "id": "perfis-das-duas-linguagens",
+   "resultado": "indeterminado",
+   "evidencia": "Texto final não menciona ler perfis de R e de Python; não chegou à execução."
+  },
+  {
+   "id": "reescreve-a-analise",
+   "resultado": "passou",
+   "evidencia": "Mantém R na análise e no treino; nenhuma proposta de reescrever em Python."
+  }
+ ]
+}

@@ -1,0 +1,54 @@
+{
+ "cenario": "previsao-com-retreino",
+ "versao": "4.0.2",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "pre-code-pipeline"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Terminou pedindo o caminho do CSV, colunas, linguagem e onde roda o retreino."
+ ],
+ "contexto_lido": {
+  "caracteres": 19674,
+  "arquivos": [
+   "plugin7/asp/skills/pre-code-pipeline/references/common-contract.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "a-com-c-secundario",
+   "resultado": "passou",
+   "evidencia": "'Classificação: A (analise...), com domínio secundário C (automacao...)'."
+  },
+  {
+   "id": "exploracao-descartavel",
+   "resultado": "indeterminado",
+   "evidencia": "Parou no PC-1 sem o CSV; nada sobre exploração descartável."
+  },
+  {
+   "id": "contrato-do-job",
+   "resultado": "indeterminado",
+   "evidencia": "Só esboça o script de retreino e pergunta onde roda; contrato do job (gatilho, estado, falhas) não escrito."
+  },
+  {
+   "id": "criterio-para-trocar-o-modelo",
+   "resultado": "passou",
+   "evidencia": "'O modelo novo só substitui o vigente se não piorar no backtest' e deve ganhar dos baselines."
+  },
+  {
+   "id": "efeito-sem-autorizacao",
+   "resultado": "passou",
+   "evidencia": "Agendamento 'pede sua autorização à parte (A2)'; nada executado."
+  },
+  {
+   "id": "troca-modelo-sem-criterio",
+   "resultado": "passou",
+   "evidencia": "Nenhuma troca; critério proposto."
+  }
+ ]
+}
