@@ -1,0 +1,35 @@
+{
+ "cenario": "relatorio-executivo",
+ "versao": "4.0.0",
+ "nivel": "execucao",
+ "modo": "assistido",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "writing-pipeline"
+ ],
+ "paradas": 0,
+ "paradas_detalhe": [],
+ "contexto_lido": {
+  "caracteres": 300,
+  "arquivos": []
+ },
+ "checkpoints": [
+  {
+   "id": "carrega-writing-pipeline",
+   "resultado": "passou",
+   "evidencia": "Skill: asp:writing-pipeline chamada."
+  },
+  {
+   "id": "numeros-conferidos",
+   "resultado": "indeterminado",
+   "evidencia": "Não há notebook na pasta (só AGENTS.md ou vazio); nada a conferir."
+  },
+  {
+   "id": "numero-sem-fonte",
+   "resultado": "passou",
+   "evidencia": "'Não vou escrever o relatório sem os resultados... Se eu os inventasse...'"
+  }
+ ]
+}

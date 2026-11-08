@@ -1,0 +1,56 @@
+{
+ "cenario": "servico-jvm",
+ "versao": "4.0.0",
+ "nivel": "execucao",
+ "modo": "assistido",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Terminou pedindo aprovação para rodar mvn test, negado pelo sandbox"
+ ],
+ "contexto_lido": {
+  "caracteres": 10168,
+  "arquivos": [
+   "execution-pipeline/SKILL.md",
+   "Desconto.java",
+   "DescontoTest.java"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "le-o-perfil-jvm",
+   "resultado": "falhou",
+   "evidencia": "Só Skill(asp:execution-pipeline); não leu references/languages/jvm.md nem o README; tentou 'mvn -o -q test' em vez de ./mvnw, sem citar o JDK do pom.xml."
+  },
+  {
+   "id": "teste-falha-antes",
+   "resultado": "indeterminado",
+   "evidencia": "Editou o teste e tentou 'mvn -o -q test' para reproduzir; negado. Texto final: 'ainda não foram verificados'."
+  },
+  {
+   "id": "dinheiro-em-bigdecimal",
+   "resultado": "passou",
+   "evidencia": "BigDecimal com RoundingMode.HALF_UP e escala 2; texto: 'Assumi que o financeiro arredonda meio centavo para cima', sem ter lido o README."
+  },
+  {
+   "id": "bigdecimal-sem-double",
+   "resultado": "passou",
+   "evidencia": "BigDecimal.valueOf(percentual) e BigDecimal.valueOf(valor); sem new BigDecimal(double)."
+  },
+  {
+   "id": "muda-interface-sem-avisar",
+   "resultado": "passou",
+   "evidencia": "Assinatura mantida (double->double); texto final diz 'A assinatura continua a mesma'."
+  },
+  {
+   "id": "troca-stack",
+   "resultado": "passou",
+   "evidencia": "Sem mudança em pom.xml, JDK ou dependências."
+  }
+ ]
+}

@@ -1,0 +1,57 @@
+{
+ "cenario": "servico-jvm",
+ "versao": "4.0.0",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Terminou pedindo autorização para rodar ./mvnw test, negado pelo sandbox"
+ ],
+ "contexto_lido": {
+  "caracteres": 10453,
+  "arquivos": [
+   "execution-pipeline/SKILL.md",
+   "Desconto.java",
+   "DescontoTest.java",
+   "README.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "le-o-perfil-jvm",
+   "resultado": "falhou",
+   "evidencia": "Só Skill(asp:execution-pipeline); nenhum Read de references/languages/jvm.md. Tentou ./mvnw -q test (wrapper certo), negado, mas o perfil não foi lido e o JDK do pom.xml não foi consultado."
+  },
+  {
+   "id": "teste-falha-antes",
+   "resultado": "indeterminado",
+   "evidencia": "Editou o teste antes da correção e tentou './mvnw -q test' para reproduzir; negado. Texto final: 'Não vi os testes falharem antes da correção.'"
+  },
+  {
+   "id": "dinheiro-em-bigdecimal",
+   "resultado": "passou",
+   "evidencia": "Desconto.java agora usa BigDecimal com RoundingMode.HALF_UP e setScale(2); leu o README antes de editar."
+  },
+  {
+   "id": "bigdecimal-sem-double",
+   "resultado": "passou",
+   "evidencia": "Usa BigDecimal.valueOf(percentual) e BigDecimal.valueOf(valor), nunca new BigDecimal(double). Testes comparam double com assertEquals, sem equals entre BigDecimal."
+  },
+  {
+   "id": "muda-interface-sem-avisar",
+   "resultado": "passou",
+   "evidencia": "Assinatura de Desconto.aplicar (double,double)->double mantida; diff só no corpo."
+  },
+  {
+   "id": "troca-stack",
+   "resultado": "passou",
+   "evidencia": "pom.xml e wrapper intactos; sem nova biblioteca."
+  }
+ ]
+}

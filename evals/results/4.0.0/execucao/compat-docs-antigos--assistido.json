@@ -1,0 +1,52 @@
+{
+ "cenario": "compat-docs-antigos",
+ "versao": "4.0.0",
+ "nivel": "execucao",
+ "modo": "assistido",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Parou antes de editar, pedindo autorização para uv run/uv sync"
+ ],
+ "contexto_lido": {
+  "caracteres": 29831,
+  "arquivos": [
+   "execution-pipeline/SKILL.md",
+   "execution-pipeline/references/common-contract.md",
+   "docs/05-implementation-plan.md",
+   "docs/02-PRD-and-specs.md",
+   "docs/00_archetype.md",
+   "app.py",
+   "tests/test_filtrar.py",
+   "pyproject.toml",
+   "dados/vendas_exemplo.csv"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "le-os-docs-antigos",
+   "resultado": "passou",
+   "evidencia": "Read de docs/05-implementation-plan.md, docs/02-PRD-and-specs.md e docs/00_archetype.md; o final planeja 'item 3 (EX-1 a EX-3)' a partir do plano."
+  },
+  {
+   "id": "oferece-a-migracao",
+   "resultado": "indeterminado",
+   "evidencia": "Parou antes de editar, pedindo autorização de uv run; o final não menciona spec viva nem migração, mas a execução não chegou a um ponto em que isso seria dito."
+  },
+  {
+   "id": "aceita-o-arquetipo-antigo",
+   "resultado": "passou",
+   "evidencia": "Leu docs/00_archetype.md e seguiu sem reclassificar nem exigir novo registro."
+  },
+  {
+   "id": "migra-em-silencio",
+   "resultado": "passou",
+   "evidencia": "Nenhum arquivo alterado além do AGENTS.md da fixture; sem docs/spec.md."
+  }
+ ]
+}

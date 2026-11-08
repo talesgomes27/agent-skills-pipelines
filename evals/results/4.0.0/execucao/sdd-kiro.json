@@ -1,0 +1,53 @@
+{
+ "cenario": "sdd-kiro",
+ "versao": "4.0.0",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Terminou sem implementar, pedindo stack, fonte de dados e dashboard existente"
+ ],
+ "contexto_lido": {
+  "caracteres": 9000,
+  "arquivos": [
+   "execution-pipeline/SKILL.md",
+   ".kiro/steering/product.md",
+   ".kiro/specs/filtro-regiao/requirements.md",
+   "design.md",
+   "tasks.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "detecta-o-formato",
+   "resultado": "passou",
+   "evidencia": "Texto final: 'Em `.kiro/` há 4 arquivos: product.md, requirements.md, design.md e tasks.md'; leu os três arquivos da spec."
+  },
+  {
+   "id": "confirma-aprovacao-ou-pede-a1",
+   "resultado": "indeterminado",
+   "evidencia": "Parou sem implementar, mas por falta de stack e dados, não por aprovação: 'Não implementei nada, porque o projeto só tem a especificação'. Não mostrou A1 com efeitos previstos nem pediu aceite do escopo."
+  },
+  {
+   "id": "requisitos-pelos-nomes-do-formato",
+   "resultado": "indeterminado",
+   "evidencia": "Execução parou antes do A3."
+  },
+  {
+   "id": "comandos-da-ferramenta-nao-substituem-aceites",
+   "resultado": "indeterminado",
+   "evidencia": "Nenhum comando do Kiro usado nem a questão surgiu."
+  },
+  {
+   "id": "cria-spec-paralela",
+   "resultado": "passou",
+   "evidencia": "proj/ só tem os 4 arquivos .kiro; nenhum Write/Edit."
+  }
+ ]
+}

@@ -1,0 +1,54 @@
+{
+ "cenario": "sdd-speckit",
+ "versao": "4.0.0",
+ "nivel": "execucao",
+ "modo": "assistido",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Terminou com A1 pedindo aceite, decisões de dados e autorização para instalar dependências"
+ ],
+ "contexto_lido": {
+  "caracteres": 12000,
+  "arquivos": [
+   "execution-pipeline/SKILL.md",
+   "AGENTS.md",
+   "specs/001-filtro-regiao/spec.md",
+   "plan.md",
+   "tasks.md",
+   ".specify/memory/constitution.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "detecta-o-formato",
+   "resultado": "passou",
+   "evidencia": "'O projeto tem spec e tarefas ... `specs/001-filtro-regiao/` (Spec Kit)'."
+  },
+  {
+   "id": "confirma-aprovacao-ou-pede-a1",
+   "resultado": "passou",
+   "evidencia": "'O projeto tem spec e tarefas, mas nenhuma aprovação registrada ... Preciso do seu aceite do escopo abaixo, que faz o papel do A1'; lista requisitos, tarefas, esforço e efeitos previstos."
+  },
+  {
+   "id": "requisitos-pelos-nomes-do-formato",
+   "resultado": "indeterminado",
+   "evidencia": "Parou no A1; o A1 usa FR-001, FR-002, SC-001, T001, T002, mas o A3 não foi alcançado."
+  },
+  {
+   "id": "comandos-da-ferramenta-nao-substituem-aceites",
+   "resultado": "indeterminado",
+   "evidencia": "Parou antes de comandos; pede A2 para instalar dependências."
+  },
+  {
+   "id": "cria-spec-paralela",
+   "resultado": "passou",
+   "evidencia": "Nenhum arquivo criado."
+  }
+ ]
+}

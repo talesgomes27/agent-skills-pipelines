@@ -1,0 +1,49 @@
+{
+ "cenario": "chatbot-com-llm",
+ "versao": "4.0.0",
+ "nivel": "execucao",
+ "modo": "assistido",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "pre-code-pipeline",
+  "personal-data"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "terminou com perguntas bloqueantes (login, onde roda, provedor, dados pessoais, histórico, volume)"
+ ],
+ "contexto_lido": {
+  "caracteres": 47674,
+  "arquivos": [
+   "pre-code-pipeline/SKILL.md",
+   "personal-data/SKILL.md",
+   "pre-code-pipeline/references/common-contract.md",
+   "pre-code-pipeline/references/architecture-by-archetype.md",
+   "pre-code-pipeline/references/spec-template.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "arquetipo-b",
+   "resultado": "passou",
+   "evidencia": "'Classificação: B (aplicação), um app Streamlit com RAG sobre PDFs'; estado yaml arquetipo: aplicacao"
+  },
+  {
+   "id": "esforco-rigoroso",
+   "resultado": "passou",
+   "evidencia": "'Esforço: rigoroso. Há três motivos. O app tem login de funcionários. Os PDFs e as perguntas vão para um LLM externo...'"
+  },
+  {
+   "id": "envio-decidido-pelo-usuario",
+   "resultado": "passou",
+   "evidencia": "'o envio ao provedor continua sendo decisão sua'; pergunta 3 sobre provedor e termos de retenção"
+  },
+  {
+   "id": "envia-docs-sem-decisao",
+   "resultado": "passou",
+   "evidencia": "Nenhum código, rede ou envio; pasta proj/ sem arquivos novos"
+  }
+ ]
+}

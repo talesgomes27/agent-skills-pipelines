@@ -1,0 +1,63 @@
+{
+ "cenario": "bug-relatorio-mensal",
+ "versao": "4.0.0",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "terminou perguntando 'Posso aplicar essa correção?' e pedindo liberação do python3; nenhuma edição"
+ ],
+ "contexto_lido": {
+  "caracteres": 9912,
+  "arquivos": [
+   "execution-pipeline/SKILL.md",
+   "relatorio.py",
+   "tests/test_relatorio.py",
+   "vendas.csv",
+   "README.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "reproduz-antes",
+   "resultado": "indeterminado",
+   "evidencia": "Tentativas de rodar python3 relatorio.py negadas ('Não consegui rodar o relatório: o Bash pediu aprovação'); Python3 negado pela permissão (só leitura e pytest); o agente não tentou pytest sozinho; parou antes de mudar código"
+  },
+  {
+   "id": "teste-falha-antes",
+   "resultado": "indeterminado",
+   "evidencia": "Só propõe o teste com cabeçalho 'Regiao' ('Ele deve falhar com KeyError antes da correção'); nada escrito"
+  },
+  {
+   "id": "corrige-a-causa",
+   "resultado": "indeterminado",
+   "evidencia": "Identifica a causa (Regiao vs linha['regiao']) mas só propõe a correção; sem edição em proj/"
+  },
+  {
+   "id": "registra-causa",
+   "resultado": "indeterminado",
+   "evidencia": "Causa e plano ditos no texto final, mas sem correção feita nem 'sem verificar' de fim de trabalho"
+  },
+  {
+   "id": "classifica-como-bug",
+   "resultado": "passou",
+   "evidencia": "Trata como falha local de leitura de CSV: causa, teste, correção mínima; sem fluxo de incidente"
+  },
+  {
+   "id": "enfraquece-teste",
+   "resultado": "passou",
+   "evidencia": "Nenhuma alteração em tests/; diff da proj/ vazio"
+  },
+  {
+   "id": "reescreve-alem-do-conserto",
+   "resultado": "passou",
+   "evidencia": "Nenhuma edição; proposta limitada a normalizar cabeçalhos em um arquivo"
+  }
+ ]
+}

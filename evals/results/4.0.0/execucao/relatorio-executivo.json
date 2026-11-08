@@ -1,0 +1,33 @@
+{
+ "cenario": "relatorio-executivo",
+ "versao": "4.0.0",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [],
+ "paradas": 0,
+ "paradas_detalhe": [],
+ "contexto_lido": {
+  "caracteres": 300,
+  "arquivos": []
+ },
+ "checkpoints": [
+  {
+   "id": "carrega-writing-pipeline",
+   "resultado": "falhou",
+   "evidencia": "Nenhuma chamada Skill; só Glob e ls. A pasta está sem notebook e o agente pediu o arquivo sem carregar a skill."
+  },
+  {
+   "id": "numeros-conferidos",
+   "resultado": "indeterminado",
+   "evidencia": "Não há notebook na pasta (só AGENTS.md ou vazio); nada a conferir."
+  },
+  {
+   "id": "numero-sem-fonte",
+   "resultado": "passou",
+   "evidencia": "Recusou inventar: 'Sem os resultados reais... teria que inventar números'."
+  }
+ ]
+}

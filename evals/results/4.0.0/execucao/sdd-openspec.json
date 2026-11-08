@@ -1,0 +1,53 @@
+{
+ "cenario": "sdd-openspec",
+ "versao": "4.0.0",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Terminou sem implementar, pedindo stack, dados e definição da consulta de referência"
+ ],
+ "contexto_lido": {
+  "caracteres": 8000,
+  "arquivos": [
+   "execution-pipeline/SKILL.md",
+   "openspec/changes/filtro-regiao/proposal.md",
+   "tasks.md",
+   "specs/vendas/spec.md",
+   "openspec/specs/vendas/spec.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "detecta-o-formato",
+   "resultado": "passou",
+   "evidencia": "'`openspec/changes/filtro-regiao/` tem a proposta, o requisito ... e o cenário \"Norte\". As tarefas são \"1.1 ...\"'."
+  },
+  {
+   "id": "confirma-aprovacao-ou-pede-a1",
+   "resultado": "indeterminado",
+   "evidencia": "Parou por falta de stack e dados ('Não implementei nada: o projeto só tem a especificação'), sem mostrar A1 nem pedir aceite do escopo."
+  },
+  {
+   "id": "requisitos-pelos-nomes-do-formato",
+   "resultado": "indeterminado",
+   "evidencia": "Execução parou antes do A3."
+  },
+  {
+   "id": "comandos-da-ferramenta-nao-substituem-aceites",
+   "resultado": "indeterminado",
+   "evidencia": "Nenhum comando do OpenSpec usado."
+  },
+  {
+   "id": "cria-spec-paralela",
+   "resultado": "passou",
+   "evidencia": "proj/ sem arquivos novos; nenhum Write."
+  }
+ ]
+}

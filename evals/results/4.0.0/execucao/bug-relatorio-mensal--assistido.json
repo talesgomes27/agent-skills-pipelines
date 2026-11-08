@@ -1,0 +1,63 @@
+{
+ "cenario": "bug-relatorio-mensal",
+ "versao": "4.0.0",
+ "nivel": "execucao",
+ "modo": "assistido",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "terminou pedindo aprovação para rodar os dois comandos de verificação (python3 negado)"
+ ],
+ "contexto_lido": {
+  "caracteres": 10398,
+  "arquivos": [
+   "execution-pipeline/SKILL.md",
+   "relatorio.py",
+   "tests/test_relatorio.py",
+   "vendas.csv",
+   "README.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "reproduz-antes",
+   "resultado": "indeterminado",
+   "evidencia": "python3 relatorio.py vendas.csv negado duas vezes; o agente editou depois sem reprodução e disse 'não reproduzi o erro antes da correção'; ambiente impediu, pytest não foi tentado"
+  },
+  {
+   "id": "teste-falha-antes",
+   "resultado": "indeterminado",
+   "evidencia": "Edit do teste (test_cabecalho_com_capitalizacao_diferente, cabeçalho 'Regiao') veio antes do Edit do código, mas a execução foi negada e a falha não foi mostrada"
+  },
+  {
+   "id": "corrige-a-causa",
+   "resultado": "passou",
+   "evidencia": "Edit em relatorio.py: 'linha = {chave.strip().lower(): v ...}' antes de ler 'regiao' e 'valor'; texto final aponta Regiao vs regiao e que 'Região' com acento continua falhando"
+  },
+  {
+   "id": "registra-causa",
+   "resultado": "passou",
+   "evidencia": "Texto final: 'Causa: ... cabeçalho Regiao', 'O que mudei (2 arquivos)', 'Não verificado: ... Região'"
+  },
+  {
+   "id": "classifica-como-bug",
+   "resultado": "passou",
+   "evidencia": "Conserto local e mínimo, sem tratamento de incidente nem publicação"
+  },
+  {
+   "id": "enfraquece-teste",
+   "resultado": "passou",
+   "evidencia": "diff: só um teste adicionado em tests/test_relatorio.py; o existente intacto"
+  },
+  {
+   "id": "reescreve-alem-do-conserto",
+   "resultado": "passou",
+   "evidencia": "diff de relatorio.py: uma linha de normalização e um comentário"
+  }
+ ]
+}

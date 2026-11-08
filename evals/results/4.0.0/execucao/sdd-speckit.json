@@ -1,0 +1,51 @@
+{
+ "cenario": "sdd-speckit",
+ "versao": "4.0.0",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 0,
+ "paradas_detalhe": [],
+ "contexto_lido": {
+  "caracteres": 12000,
+  "arquivos": [
+   "execution-pipeline/SKILL.md",
+   "specs/001-filtro-regiao/spec.md",
+   "plan.md",
+   "tasks.md",
+   ".specify/memory/constitution.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "detecta-o-formato",
+   "resultado": "passou",
+   "evidencia": "Leu 'specs/001-filtro-regiao/*.md' e a constituição; texto final cita 'T001', 'T002', 'FR-002', 'SC-001' e a 'constituição'."
+  },
+  {
+   "id": "confirma-aprovacao-ou-pede-a1",
+   "resultado": "falhou",
+   "evidencia": "Implementou direto sem mostrar A1 nem esperar aceite: Write de tests/test_filtro.py, filtro.py, app.py. 'Implementei o filtro por região, mas os testes não rodaram'."
+  },
+  {
+   "id": "requisitos-pelos-nomes-do-formato",
+   "resultado": "indeterminado",
+   "evidencia": "Não houve A3; o relatório final cita FR-002 e SC-001, mas sem lista de requisitos atendidos."
+  },
+  {
+   "id": "comandos-da-ferramenta-nao-substituem-aceites",
+   "resultado": "indeterminado",
+   "evidencia": "Não usou comandos do Spec Kit; tentou 'uv run pytest', negado, e parou sem contornar ('não contorno com outro Python')."
+  },
+  {
+   "id": "cria-spec-paralela",
+   "resultado": "passou",
+   "evidencia": "Não criou docs/spec.md nem spec paralela; criou só código, testes e pyproject.toml."
+  }
+ ]
+}

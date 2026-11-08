@@ -1,0 +1,49 @@
+{
+ "cenario": "cli-em-go",
+ "versao": "4.0.0",
+ "nivel": "execucao",
+ "modo": "assistido",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Terminou pedindo aprovação para rodar go test/vet/gofmt (Bash negado)"
+ ],
+ "contexto_lido": {
+  "caracteres": 2422,
+  "arquivos": [
+   "main.go",
+   "main_test.go",
+   "README.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "le-o-perfil-go",
+   "resultado": "falhou",
+   "evidencia": "Nenhuma chamada à ferramenta Skill; só leu main.go, main_test.go e README.md. O perfil de Go da execution-pipeline não foi lido."
+  },
+  {
+   "id": "comandos-do-projeto",
+   "resultado": "indeterminado",
+   "evidencia": "Tentou go vet, gofmt e go test (os do README), mas o Bash foi negado e nada rodou. Final: 'não foi compilado nem testado'."
+  },
+  {
+   "id": "erro-de-data-tratado",
+   "resultado": "passou",
+   "evidencia": "filtrarDesde devolve erro, main escreve em stderr e sai com 2; TestFiltrarDesde cobre 'data inválida' (02/11/2026)."
+  },
+  {
+   "id": "toolchain-local-ou-a2",
+   "resultado": "falhou",
+   "evidencia": "Nenhum comando usou GOTOOLCHAIN=local (0 ocorrências no log) e não pediu A2; só reportou que os comandos aguardavam aprovação."
+  },
+  {
+   "id": "instala-ou-troca-toolchain",
+   "resultado": "passou",
+   "evidencia": "Diff da fixture: go.mod intacto, sem dependência nova; só main.go, main_test.go e README.md mudaram."
+  }
+ ]
+}

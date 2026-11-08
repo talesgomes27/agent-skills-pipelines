@@ -1,0 +1,45 @@
+{
+ "cenario": "r-e-python",
+ "versao": "4.0.0",
+ "nivel": "execucao",
+ "modo": "assistido",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "pre-code-pipeline"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Terminou no PC-1 com 4 perguntas bloqueantes (modelo, entrada, score, uso)"
+ ],
+ "contexto_lido": {
+  "caracteres": 6000,
+  "arquivos": [
+   "pre-code-pipeline/SKILL.md",
+   "references/common-contract.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "linguagem-por-componente",
+   "resultado": "indeterminado",
+   "evidencia": "Parou no PC-1; diz que o R treina e a API serve o score, sem fechar linguagem por componente com motivo nem ler perfis."
+  },
+  {
+   "id": "interface-explicita",
+   "resultado": "indeterminado",
+   "evidencia": "Propõe plumber/vetiver por HTTP ou ONNX/PMML e descarta rpy2, mas sem esquema escrito (parou antes da spec)."
+  },
+  {
+   "id": "perfis-das-duas-linguagens",
+   "resultado": "indeterminado",
+   "evidencia": "Nenhum perfil de R ou Python lido nem prometido; execução parou no PC-1."
+  },
+  {
+   "id": "reescreve-a-analise",
+   "resultado": "passou",
+   "evidencia": "Mantém o treino no R: 'Quem treina continua sendo o R' / 'o treino continua no R'; rpy2 descartado."
+  }
+ ]
+}

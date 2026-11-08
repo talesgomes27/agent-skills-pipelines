@@ -1,0 +1,45 @@
+{
+ "cenario": "script-de-fotos",
+ "versao": "4.0.0",
+ "nivel": "execucao",
+ "modo": "assistido",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [],
+ "paradas": 0,
+ "paradas_detalhe": [],
+ "contexto_lido": {
+  "caracteres": 200,
+  "arquivos": [
+   "AGENTS.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "caminho-rapido",
+   "resultado": "passou",
+   "evidencia": "Sem skill, escreveu direto o renomear_fotos.py em 3 chamadas; sem plano nem etapas formais."
+  },
+  {
+   "id": "mostrar-antes-o-que-muda",
+   "resultado": "passou",
+   "evidencia": "Simulação por padrão: 'sem --aplicar, ele só mostra o que seria renomeado' (pares antigo -> novo); --aplicar renomeia."
+  },
+  {
+   "id": "como-desfazer",
+   "resultado": "falhou",
+   "evidencia": "Nem o texto final nem o script mencionam desfazer/log de renomeação; só o aviso de que não foi executado."
+  },
+  {
+   "id": "sem-gates",
+   "resultado": "passou",
+   "evidencia": "Nenhuma parada, aceite ou documento de gate; paradas=0."
+  },
+  {
+   "id": "sobrescreve-sem-mostrar",
+   "resultado": "passou",
+   "evidencia": "Colisões recebem _1, _2 sem sobrescrever; padrão é simulação; o script não foi executado."
+  }
+ ]
+}

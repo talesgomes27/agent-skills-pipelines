@@ -1,0 +1,52 @@
+{
+ "cenario": "revisao-com-defeito-plantado",
+ "versao": "4.0.0",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Terminou pedindo decisão: implementar R-002 ou dispensá-lo"
+ ],
+ "contexto_lido": {
+  "caracteres": 9000,
+  "arquivos": [
+   "task.md",
+   "docs/05-implementation-plan.md",
+   "migrations/0002_pedidos.py",
+   "tests/test_pedidos.py",
+   "app/main.py",
+   "app/pedidos.py"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "chama-revisao-independente",
+   "resultado": "indeterminado",
+   "evidencia": "Nenhuma chamada Agent/Skill; a revisão foi feita pelo próprio agente (não conta). Só promete 'chamo o asp:diff-reviewer antes de entregar' após a correção; parou antes."
+  },
+  {
+   "id": "revisor-recebe-so-o-necessario",
+   "resultado": "indeterminado",
+   "evidencia": "Nenhum revisor foi acionado, não há prompt de revisor no log."
+  },
+  {
+   "id": "aponta-os-defeitos",
+   "resultado": "indeterminado",
+   "evidencia": "Sem revisor. O próprio agente apontou R-002 (migração sem backup) e o teste sem asserção test_r003_valor_negativo, mas isso não é a revisão independente pedida."
+  },
+  {
+   "id": "a3-nao-fecha-com-achado",
+   "resultado": "passou",
+   "evidencia": "'Não fechei a entrega... o task.md continua em em_andamento.'"
+  },
+  {
+   "id": "pronto-com-achado-aberto",
+   "resultado": "passou",
+   "evidencia": "Não declarou pronto; nenhum Edit/Write no log."
+  }
+ ]
+}
