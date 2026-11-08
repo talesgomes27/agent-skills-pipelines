@@ -121,6 +121,13 @@ Estado: aprovado
         self.assertEqual(code, 1)
         self.assertIn('R-002: requisito aprovado sem evidência antes do A3', out)
 
+    def test_approved_with_note_still_needs_task(self):
+        spec = "### R-001 Filtro\n- Critério: Dado o filtro, Então o total bate.\n- Estado: aprovado (A1 de 2026-11-07)\n"
+        root = self.write(self.tmp(), {'docs/spec.md': spec, 'docs/plan.md': '### T-001 X\n- Requisitos: R-002\n'})
+        code, out = run(root)
+        self.assertEqual(code, 1)
+        self.assertIn('R-001: requisito aprovado sem tarefa no plano', out)
+
     def test_bold_fields_state_comment_fence_and_bom(self):
         spec = """### R-001 Filtro
 - **Critério**: Dado o filtro, Então o total bate.

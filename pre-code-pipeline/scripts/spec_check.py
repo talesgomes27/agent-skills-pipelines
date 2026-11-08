@@ -77,6 +77,7 @@ def check_native(root, stage):
         problems.append('docs/spec.md: nenhum requisito (### R-001 ou ### H-001)')
     for b in reqs:
         estado = (b['campos'].get('estado', '').lower().split() or [''])[0].strip('.,;')
+        b['estado'] = estado
         if estado not in STATES:
             problems.append('%s: estado ausente ou fora da lista (%s)' % (b['id'], ', '.join(sorted(STATES))))
         criterio = b['campos'].get('critério') or b['campos'].get('criterio') or b['campos'].get('critério de sucesso')
@@ -111,7 +112,7 @@ def check_native(root, stage):
                     problems.append('%s: cita requisito que não existe: %s' % (t['id'], c))
                 covered.add(c)
         for b in reqs:
-            if b['campos'].get('estado', '').lower() == 'aprovado' and b['id'] not in covered:
+            if b['estado'] == 'aprovado' and b['id'] not in covered:
                 problems.append('%s: requisito aprovado sem tarefa no plano' % b['id'])
     info += ['questão aberta: %s' % b['id'] for b in blocks if b['id'][0] == 'Q']
     return problems, info
