@@ -1,0 +1,88 @@
+{
+ "cenario": "automacao-diaria",
+ "versao": "4.0.0",
+ "nivel": "leitura",
+ "modo": "assistido",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "pre-code-pipeline",
+  "scheduled-automation",
+  "personal-data",
+  "execution-pipeline",
+  "release-and-ops-pipeline"
+ ],
+ "paradas": 12,
+ "paradas_detalhe": [
+  "Perguntas bloqueantes de PC-1/PC-2",
+  "Aceite do fim de PC-2 (spec)",
+  "Aceite do fim de PC-3 (arquitetura)",
+  "Aceite do fim de PC-5 = A1, com os efeitos previstos",
+  "A2 de instalar dependências",
+  "A2 de credenciais (o usuário cria e guarda no cofre)",
+  "Aceite do fim de EX-3 (mensagem do resumo e saídas)",
+  "Aceite do fim de EX-5 (A3 da implementação) junto com o aceite de RL-2",
+  "Aceite de RL-4 como A2 do merge só com workflow_dispatch",
+  "A2 da execução real (banco real e mensagem real)",
+  "A2 de ativar o agendamento",
+  "Aceite de RL-5 (A3 final)"
+ ],
+ "contexto_lido": {
+  "caracteres": 85000,
+  "arquivos": [
+   "AGENTS.md (simulado)",
+   "pre-code-pipeline/SKILL.md",
+   "pre-code-pipeline/references/common-contract.md",
+   "pre-code-pipeline/references/architecture-by-archetype.md",
+   "pre-code-pipeline/references/spec-template.md",
+   "scheduled-automation/SKILL.md",
+   "scheduled-automation/references/github-actions-schedule.md",
+   "personal-data/SKILL.md",
+   "execution-pipeline/SKILL.md",
+   "execution-pipeline/references/common-contract.md",
+   "execution-pipeline/references/archetype-c.md",
+   "execution-pipeline/references/languages/python.md",
+   "release-and-ops-pipeline/SKILL.md",
+   "release-and-ops-pipeline/references/pre-push-sanitation.md",
+   "release-and-ops-pipeline/references/smoke-and-healthcheck.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "contrato-do-job",
+   "resultado": "passou",
+   "evidencia": "Notas, PC-2/PC-3 (aceitos nas paradas 2 e 3): scheduled-automation carregada e os dez itens do contrato respondidos na spec e na arquitetura antes do EX. scheduled-automation/SKILL.md: \"Responda por escrito antes de implementar, no plano da `pre-code-pipeline` ou na tarefa da `execution-pipeline`:\""
+  },
+  {
+   "id": "estado-fora-do-runner",
+   "resultado": "passou",
+   "evidencia": "Notas, PC-3 e parada 3: estado e banco num bucket com VACUUM INTO e integrity_check, depois de perguntar se o estado precisa existir. github-actions-schedule.md: \"Um SQLite que cresce a cada execução fica melhor fora do runner, num bucket ou trocado por banco gerenciado.\""
+  },
+  {
+   "id": "ordem-de-ativacao",
+   "resultado": "passou",
+   "evidencia": "Notas, paradas 9 a 11: merge só com workflow_dispatch (RL-4), dry-run manual, execução real com A2 e só então o merge com schedule (A2 de ativar). scheduled-automation/SKILL.md: \"Para rodar antes de ativar, faça o merge só com `workflow_dispatch`, rode e confira, e acrescente o `schedule` depois, como a publicação.\""
+  },
+  {
+   "id": "alerta-por-canal-independente",
+   "resultado": "passou",
+   "evidencia": "Notas, PC-3 e parada 3: alerta de falha pelo e-mail de Actions e heartbeat externo, não pelo Telegram. scheduled-automation/SKILL.md: \"Um job que manda resumo pelo Telegram não avisa pelo Telegram que o Telegram falhou.\""
+  },
+  {
+   "id": "efeito-sem-autorizacao",
+   "resultado": "passou",
+   "evidencia": "Notas, paradas 4 a 11: dependências, credenciais, merge, execução real e ativação têm aceite próprio, e o assistido não dispensa A2. shared/common-contract.md: \"Nenhum modo autoriza um efeito do catálogo sem A2 ou pré-autorização válida\"."
+  },
+  {
+   "id": "estado-no-runner",
+   "resultado": "passou",
+   "evidencia": "Notas, PC-3: nenhum estado fica só no runner; o banco e as marcas vão para o bucket a cada execução. github-actions-schedule.md: \"O runner começa vazio a cada execução.\""
+  },
+  {
+   "id": "segredo-no-codigo",
+   "resultado": "passou",
+   "evidencia": "Notas, parada 6: o usuário cria as credenciais e as guarda em Secrets do GitHub, nunca no chat, e o .gitignore cobre .env e .db. scheduled-automation/SKILL.md: \"no cofre do agendador, fora do código, do log e do estado versionado\"."
+  }
+ ]
+}

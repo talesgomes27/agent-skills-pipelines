@@ -133,7 +133,21 @@ Troque ou acrescente os comandos de deploy que você usa, como `npm publish`. De
 
 - As regras são avaliadas na ordem deny, ask e allow. Uma regra `allow` mais ampla, como `Bash(git *)`, não dispensa a pergunta.
 - Uma regra `ask` vale também para o comando dentro de um comando composto, como `cd app && git push`. Ela vale também nos modos auto e bypassPermissions; no modo dontAsk, o comando é negado em vez de perguntado.
-- A regra compara o texto do comando, então não é uma barreira de segurança. `git -C . push`, `git -c push.default=current push` e `gh api` escapam de `Bash(git push *)` e das regras do `gh`. Para um limite que não depende do texto, use o [sandbox](https://code.claude.com/docs/en/sandboxing) ou um [hook `PreToolUse`](https://code.claude.com/docs/en/hooks#pretooluse-decision-control).
+- A regra compara o texto do comando, então não é uma barreira de segurança. `git -C . push`, `git -c push.default=current push` e `gh api` escapam de `Bash(git push *)` e das regras do `gh`. Para um limite que não depende do texto, use o [sandbox](https://code.claude.com/docs/en/sandboxing) ou um [hook `PreToolUse`](https://code.claude.com/docs/en/hooks#pretooluse-decision-control). O plugin [`pipeline-guardrails`](../../pipeline-guardrails/README.md) traz esse hook pronto, com um modelo das regras `ask` e `deny`.
+
+## Modo e efeitos liberados por projeto
+
+Sem configuração, as pipelines param no A1 (escopo), antes de cada efeito do catálogo do contrato comum (A2), na entrega (A3) e nas paradas condicionais, como mudança de escopo ou risco de perder trabalho. Para mudar isso num projeto, acrescente ao `AGENTS.md` dele uma seção como esta:
+
+```markdown
+## Pipelines
+
+- Modo: assistido
+- Efeitos pré-autorizados: commit na branch de trabalho; push da branch de trabalho (não a padrão, sem workflow nem integração da plataforma que publique a partir dela) e abertura de PR
+- Sempre perguntar: deploy em produção
+```
+
+`Modo: assistido` volta às paradas da 3.x, nos gates que cada pipeline marca para aceite; `Modo: continuo` também existe, mas não autoriza sequência nenhuma, que vem do seu pedido. Só valem linhas que você escreveu, e o agente não edita a seção sem você pedir. Uma linha nova que libera efeito é confirmada uma vez no chat; uma que só deixa o fluxo mais cauteloso, como `Modo: assistido` ou "Sempre perguntar", vale direto. Publicar em produção, mexer em dados reais, enviar dados a terceiros, mandar mensagem ou e-mail a destinatários reais e gastar dinheiro nunca são pré-autorizáveis. As regras completas estão no contrato comum, em [`shared/common-contract.md`](../../shared/common-contract.md#preferência-por-projeto).
 
 ## Depois de instalar
 

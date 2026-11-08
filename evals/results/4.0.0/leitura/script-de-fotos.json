@@ -1,0 +1,56 @@
+{
+ "cenario": "script-de-fotos",
+ "versao": "4.0.0",
+ "nivel": "leitura",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 2,
+ "paradas_detalhe": [
+  "A2 de instalação do Pillow (pacote, versão no lock, origem PyPI, .venv da pasta)",
+  "Aceite do dry-run: lista completa antigo -> novo, pulados e colisões, com o log e o --desfazer, antes de renomear as fotos reais"
+ ],
+ "contexto_lido": {
+  "caracteres": 47000,
+  "arquivos": [
+   "execution-pipeline/SKILL.md",
+   "execution-pipeline/references/common-contract.md",
+   "execution-pipeline/references/archetype-c.md",
+   "execution-pipeline/references/languages/python.md",
+   "execution-pipeline/references/languages/bash.md",
+   "personal-data/SKILL.md",
+   "pre-code-pipeline/SKILL.md (só frontmatter)"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "caminho-rapido",
+   "resultado": "passou",
+   "evidencia": "Notas passos 1 e 2: tarefa pequena, sem plano prévio, diz em poucas linhas o que faz e como verifica. execution-pipeline/SKILL.md: \"Nela o pedido é o plano: diga em poucas linhas o que vai fazer e como vai verificar, implemente e verifique sem abrir os gates.\""
+  },
+  {
+   "id": "mostrar-antes-o-que-muda",
+   "resultado": "passou",
+   "evidencia": "Notas passo 4: dry-run padrão com a lista completa antigo -> novo antes de aplicar, e aceite do usuário. execution-pipeline/SKILL.md: \"Se ela mexe em arquivos do usuário, mostre antes o que vai mudar, não sobrescreva nada e deixe como desfazer.\""
+  },
+  {
+   "id": "como-desfazer",
+   "resultado": "passou",
+   "evidencia": "Notas passos 2 e 4: grava renomeacao.log.csv e oferece --desfazer, testado em diretório temporário. execution-pipeline/SKILL.md: \"não sobrescreva nada e deixe como desfazer.\""
+  },
+  {
+   "id": "sem-gates",
+   "resultado": "passou",
+   "evidencia": "Notas passo 2 e seção do modo assistido: nenhum EX-n aberto, só o A2 do Pillow e o aceite do dry-run. execution-pipeline/SKILL.md: \"implemente e verifique sem abrir os gates.\" Em assistido: \"Tarefa pequena, entrega pontual e app novo leve mantêm, em qualquer modo, os aceites da tabela\" (common-contract.md)."
+  },
+  {
+   "id": "sobrescreve-sem-mostrar",
+   "resultado": "passou",
+   "evidencia": "Notas passos 2 e 4: colisão ganha sufixo _1, _2 e nunca sobrescreve; nada é renomeado antes do aceite do dry-run. execution-pipeline/SKILL.md: \"não sobrescreva nada e deixe como desfazer.\""
+  }
+ ]
+}

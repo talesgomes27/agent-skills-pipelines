@@ -1,0 +1,61 @@
+{
+ "cenario": "sdd-speckit",
+ "versao": "4.0.0",
+ "nivel": "leitura",
+ "modo": "assistido",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 4,
+ "paradas_detalhe": [
+  "Aceite do plano (papel do A1), com requisitos, tarefas, efeitos previstos e a instalação das dependências",
+  "A2 da instalação de streamlit e pytest com a versão resolvida",
+  "Aceite ao fim de EX-3 (assistido)",
+  "Aceite ao fim de EX-5 (A3 com a evidência de cada requisito)"
+ ],
+ "contexto_lido": {
+  "caracteres": 43500,
+  "arquivos": [
+   "AGENTS.md (simulado)",
+   "execution-pipeline/SKILL.md",
+   "execution-pipeline/references/common-contract.md",
+   "execution-pipeline/references/archetype-b.md",
+   "execution-pipeline/references/languages/python.md",
+   "pre-code-pipeline/references/sdd-formats.md",
+   "evals/fixtures/sdd-speckit/.specify/memory/constitution.md",
+   "evals/fixtures/sdd-speckit/specs/001-filtro-regiao/spec.md",
+   "evals/fixtures/sdd-speckit/specs/001-filtro-regiao/plan.md",
+   "evals/fixtures/sdd-speckit/specs/001-filtro-regiao/tasks.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "detecta-o-formato",
+   "resultado": "passou",
+   "evidencia": "Notas, passo 1: detecta Spec Kit por .specify/ e specs/001-filtro-regiao/ e a constitution vira restrição. Sustenta: pre-code-pipeline/references/sdd-formats.md, \"Spec Kit | `.specify/` e `specs/<funcionalidade>/spec.md`\" e \"O formato detectado vence\"."
+  },
+  {
+   "id": "confirma-aprovacao-ou-pede-a1",
+   "resultado": "passou",
+   "evidencia": "Notas, passo 2 e PARADA 1: mostra o plano com requisitos, tarefas e efeitos e espera o aceite antes de escrever código. Sustenta: execution-pipeline/references/common-contract.md, \"O aceite do plano faz o papel do A1\" e \"a pipeline mostra o A1 (requisitos, tarefas e efeitos previstos) e espera\"."
+  },
+  {
+   "id": "requisitos-pelos-nomes-do-formato",
+   "resultado": "passou",
+   "evidencia": "Notas, PARADA 4: o A3 do fim de EX-5 lista US1, FR-001, FR-002 e SC-001 com a evidência. Sustenta: execution-pipeline/references/common-contract.md, \"no A3, lista os requisitos atendidos pelos nomes ou IDs da ferramenta\"."
+  },
+  {
+   "id": "comandos-da-ferramenta-nao-substituem-aceites",
+   "resultado": "indeterminado",
+   "evidencia": "As notas não tratam os comandos do Spec Kit; só seguem os aceites do modo assistido. A regra existe em execution-pipeline/references/common-contract.md: \"Os comandos da ferramenta, como implementar ou arquivar, são execução: seguem o catálogo de efeitos e não substituem os aceites.\""
+  },
+  {
+   "id": "cria-spec-paralela",
+   "resultado": "passou",
+   "evidencia": "Notas, passo 1 e EX-5: só marca T001 e T002 em tasks.md, sem criar docs/spec.md nem migrar. Sustenta: execution-pipeline/references/common-contract.md, \"toda pipeline escreve no formato dele, sem criar `docs/spec.md`\"."
+  }
+ ]
+}

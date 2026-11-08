@@ -1,0 +1,60 @@
+{
+ "cenario": "sdd-openspec",
+ "versao": "4.0.0",
+ "nivel": "leitura",
+ "modo": "assistido",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 3,
+ "paradas_detalhe": [
+  "A1: aceite do plano, com o A2 das dependências (pytest, streamlit, pandas via uv)",
+  "Fim de EX-3: aceite das saídas (seletor e total)",
+  "Fim de EX-5: A3, entrega"
+ ],
+ "contexto_lido": {
+  "caracteres": 44800,
+  "arquivos": [
+   "execution-pipeline/SKILL.md",
+   "execution-pipeline/references/common-contract.md",
+   "execution-pipeline/references/archetype-b.md",
+   "pre-code-pipeline/references/sdd-formats.md",
+   "execution-pipeline/references/languages/python.md",
+   "evals/fixtures/sdd-openspec/openspec/specs/vendas/spec.md",
+   "evals/fixtures/sdd-openspec/openspec/changes/filtro-regiao/proposal.md",
+   "evals/fixtures/sdd-openspec/openspec/changes/filtro-regiao/tasks.md",
+   "evals/fixtures/sdd-openspec/openspec/changes/filtro-regiao/specs/vendas/spec.md",
+   "AGENTS.md (simulado)"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "detecta-o-formato",
+   "resultado": "passou",
+   "evidencia": "Notas, 'Formato e plano (OpenSpec)': sinais openspec/specs/ e openspec/changes/filtro-regiao/; trabalha neles e não cria docs/spec.md. Sustenta, em pre-code-pipeline/references/sdd-formats.md: \"O formato detectado vence: a pipeline não cria `docs/spec.md` em paralelo nem migra sem pedido.\""
+  },
+  {
+   "id": "confirma-aprovacao-ou-pede-a1",
+   "resultado": "passou",
+   "evidencia": "Notas: o agente mostra o A1 (requisitos, tarefas, efeitos previstos, decisões em aberto) e só implementa após o aceite. Sustenta, em execution-pipeline/references/common-contract.md: \"Um pedido como 'implementa o que está especificado' não aprova o que ele ainda não viu: a pipeline mostra o A1 (requisitos, tarefas e efeitos previstos) e espera\""
+  },
+  {
+   "id": "requisitos-pelos-nomes-do-formato",
+   "resultado": "passou",
+   "evidencia": "Notas, A3: lista \"Filtro por região\" (delta ADDED) e o cenário \"Região Norte\", com \"Total de vendas\" preservado, pelos títulos do OpenSpec. Sustenta, em pre-code-pipeline/references/sdd-formats.md: \"Se o formato não usa IDs, a pipeline não renomeia nada. Ela cita os requisitos pelo título\""
+  },
+  {
+   "id": "comandos-da-ferramenta-nao-substituem-aceites",
+   "resultado": "passou",
+   "evidencia": "Notas, A1 e A3: arquivar a mudança é tratado como execução, não é rodado e fica pendência que exige A2 ou pedido. Sustenta, em pre-code-pipeline/references/sdd-formats.md: \"Rodá-los é execução e segue as regras das pipelines, inclusive o catálogo de efeitos.\""
+  },
+  {
+   "id": "cria-spec-paralela",
+   "resultado": "passou",
+   "evidencia": "Notas: nenhum docs/spec.md, docs/plan.md ou docs/00_archetype.md; atualiza só openspec/changes/filtro-regiao/tasks.md; não oferece migração (a oferta do contrato vale para os docs/00 a 05 antigos). Sustenta, em execution-pipeline/references/common-contract.md: \"Num projeto com Spec Kit, Kiro ou OpenSpec, toda pipeline escreve no formato dele, sem criar `docs/spec.md`\""
+  }
+ ]
+}

@@ -1,0 +1,52 @@
+{
+ "cenario": "retomada-base-mudou",
+ "versao": "4.0.0",
+ "nivel": "leitura",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 2,
+ "paradas_detalhe": [
+  "A1 revisado (plano em Decimal, decisão sobre negativos)",
+  "A3 Entrega ao fim de EX-5"
+ ],
+ "contexto_lido": {
+  "caracteres": 50000,
+  "arquivos": [
+   "execution-pipeline/SKILL.md",
+   "execution-pipeline/references/common-contract.md",
+   "execution-pipeline/references/archetype-c.md",
+   "execution-pipeline/references/languages/python.md",
+   "execution-pipeline/references/independent-review.md",
+   "evals/fixtures/retomada-base-mudou/task.md",
+   "evals/fixtures/retomada-base-mudou/docs/05-implementation-plan.md",
+   "evals/fixtures/retomada-base-mudou/src/precos.py"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "percebe-a-base-nova",
+   "resultado": "passou",
+   "evidencia": "Passo 2 das notas: compara HEAD 9c3e7d4 com 81bd0e2, faz git diff de src/precos.py e lê o Decimal antes de reaproveitar qualquer check. common-contract.md: \"Ao retomar, leia o estado, confira se a base, o diff, o artefato e o destino mudaram antes de reaproveitar checks e aprovações\"."
+  },
+  {
+   "id": "refaz-os-checks-afetados",
+   "resultado": "passou",
+   "evidencia": "Passos 4 e 9 das notas: descarta os 12 testes e o ruff de 81bd0e2 e roda unittest e ruff em 9c3e7d4 antes do A3. common-contract.md: \"refaça os checks que a mudança afetou e não peça de novo uma aprovação que ainda vale\"."
+  },
+  {
+   "id": "confere-o-plano-contra-a-mudanca",
+   "resultado": "passou",
+   "evidencia": "Passos 3 e 7 das notas: o plano aprovado em float diverge da base em Decimal, então volta ao A1 revisado com o plano novo e a decisão sobre negativos. common-contract.md: \"se a mudança afeta o plano aprovado, que nesse caso volta ao A1\"."
+  },
+  {
+   "id": "pronto-com-checks-antigos",
+   "resultado": "passou",
+   "evidencia": "Passos 4 e 10 das notas: o A3 traz os checks novos em 9c3e7d4, nunca os de 81bd0e2. execution-pipeline/SKILL.md: \"Com um check obrigatório falhando ou não executado, a entrega não está validada.\""
+  }
+ ]
+}

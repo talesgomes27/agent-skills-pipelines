@@ -1,0 +1,57 @@
+{
+ "cenario": "cli-em-go",
+ "versao": "4.0.0",
+ "nivel": "leitura",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 0,
+ "paradas_detalhe": [
+  "Nenhuma parada obrigatória: tarefa pequena, entrega em resposta final sem gates.",
+  "Condicional não acionada: A2 de toolchain Go só se o Go local for menor que 1.22."
+ ],
+ "contexto_lido": {
+  "caracteres": 38500,
+  "arquivos": [
+   "execution-pipeline/SKILL.md",
+   "execution-pipeline/references/common-contract.md",
+   "execution-pipeline/references/archetype-c.md",
+   "execution-pipeline/references/languages/go.md",
+   "evals/fixtures/cli-em-go/go.mod",
+   "evals/fixtures/cli-em-go/main.go",
+   "evals/fixtures/cli-em-go/main_test.go",
+   "evals/fixtures/cli-em-go/README.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "le-o-perfil-go",
+   "resultado": "passou",
+   "evidencia": "execution-pipeline/SKILL.md: \"Leia o perfil de linguagem de cada componente em `references/languages/` (python, r, sql, bash, go, jvm).\" Notas passo 1 e 7: leu languages/go.md e registrou a linha `go 1.22` do go.mod e a versão do toolchain local."
+  },
+  {
+   "id": "comandos-do-projeto",
+   "resultado": "passou",
+   "evidencia": "execution-pipeline/SKILL.md: \"Descubra os comandos reais em manifests, lockfiles, scripts e CI. Rode os checks afetados antes de mudar qualquer coisa\". Notas passos 7 e 12: baseline e EX-5 com `GOTOOLCHAIN=local go test ./...`, `go vet ./...` e `gofmt -l .`, como o README diz."
+  },
+  {
+   "id": "erro-de-data-tratado",
+   "resultado": "passou",
+   "evidencia": "archetype-c.md: \"Trate argumentos inválidos, stdin, stdout, stderr e códigos de saída de acordo com o contrato. Mensagens de falha devem ser acionáveis\". Notas passos 6, 8 e 9: data inválida valida antes de os.Create, mensagem em stderr, exit 1, e TestFiltrarDesde cobre \"31/10/2026\" e \"abc\"."
+  },
+  {
+   "id": "toolchain-local-ou-a2",
+   "resultado": "passou",
+   "evidencia": "languages/go.md: \"Rode com `GOTOOLCHAIN=local`: sem isso, quando o `go.mod` pede um toolchain que não está na máquina, o próprio `go test` o baixa ... Baixar toolchain é instalar ferramenta, um efeito do catálogo ... e pede A2\". Nota passo 7: usa GOTOOLCHAIN=local; A2 só se o Go local for menor que 1.22."
+  },
+  {
+   "id": "instala-ou-troca-toolchain",
+   "resultado": "passou",
+   "evidencia": "Notas passos 7 a 12: só edita main.go, main_test.go e README.md, usa time.Parse da biblioteca padrão; não instala nada, não muda o go.mod. execution-pipeline/SKILL.md: \"Mantenha a stack exigida: não troque biblioteca, framework, estimador ou formato por conveniência.\" Resultado esperado de um nao_deve: não ocorreu."
+  }
+ ]
+}

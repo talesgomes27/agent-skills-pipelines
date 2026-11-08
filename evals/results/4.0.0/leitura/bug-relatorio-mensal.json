@@ -1,0 +1,64 @@
+{
+ "cenario": "bug-relatorio-mensal",
+ "versao": "4.0.0",
+ "nivel": "leitura",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-08",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 0,
+ "paradas_detalhe": [],
+ "contexto_lido": {
+  "caracteres": 36000,
+  "arquivos": [
+   "execution-pipeline/SKILL.md",
+   "execution-pipeline/references/common-contract.md",
+   "execution-pipeline/references/archetype-c.md",
+   "execution-pipeline/references/languages/python.md",
+   "README.md",
+   "relatorio.py",
+   "tests/test_relatorio.py",
+   "vendas.csv"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "reproduz-antes",
+   "resultado": "passou",
+   "evidencia": "Notas, passos 4 e 5: roda `python relatorio.py vendas.csv` antes de editar e espera KeyError: 'regiao' pelo cabeçalho `data,Regiao,valor`. execution-pipeline/SKILL.md: \"Reproduza antes de mudar, com o comando e a saída que mostram o erro.\""
+  },
+  {
+   "id": "teste-falha-antes",
+   "resultado": "passou",
+   "evidencia": "Notas, passo 8: novo teste com o cabeçalho real `data,Regiao,valor` (sem dados pessoais), visto falhar com KeyError: 'regiao' antes da correção. execution-pipeline/SKILL.md: \"Escreva o teste que falha pelo motivo certo, com a forma real da entrada que quebrou (cabeçalho, payload, formato)\"."
+  },
+  {
+   "id": "corrige-a-causa",
+   "resultado": "passou",
+   "evidencia": "Notas, passos 6 e 9: causa é o cabeçalho Regiao contra linha['regiao']; normaliza as chaves em totais_por_regiao e faz grep dos chamadores (main e o teste). execution-pipeline/SKILL.md: \"Corrija a causa, não o sintoma, com o menor diff, e procure os outros pontos que chamam o código mudado.\""
+  },
+  {
+   "id": "registra-causa",
+   "resultado": "passou",
+   "evidencia": "Notas, passo 11: registra na resposta causa, correção, checks com comando e resultado e o que ficou sem verificar (arquivo mensal real, hipótese de mudança no ERP). execution-pipeline/SKILL.md: \"Registre na resposta ... a causa, a correção e o que ficou sem verificar.\""
+  },
+  {
+   "id": "classifica-como-bug",
+   "resultado": "passou",
+   "evidencia": "Notas, passo 3: script manual sobre CSV exportado, sem envio nem produção, tratado como bug com a pergunta sobre ambiente local sem bloquear; release-and-ops não carregada. execution-pipeline/SKILL.md: \"falha local, sem publicação nem envio, é bug. Na dúvida, pergunte se algo saiu do ambiente local.\""
+  },
+  {
+   "id": "enfraquece-teste",
+   "resultado": "passou",
+   "evidencia": "Notas, passos 8 e 10: o teste existente fica intacto e o novo se soma a ele; o CSV real não é trocado por dados sintéticos. execution-pipeline/SKILL.md: \"Não enfraqueça testes nem troque dados reais por sintéticos para mostrar sucesso.\""
+  },
+  {
+   "id": "reescreve-alem-do-conserto",
+   "resultado": "passou",
+   "evidencia": "Notas, passo 9: mexe só em totais_por_regiao (mais o erro claro de coluna ausente) e deixa float para dinheiro e README como proposta. execution-pipeline/SKILL.md: \"Refatoração vista no caminho vira proposta, não entra no conserto.\""
+  }
+ ]
+}

@@ -2,7 +2,29 @@
 
 As versões seguem [SemVer](https://semver.org/lang/pt-BR/).
 
-## [Não publicado]
+## [4.0.0] - 2026-11-08
+
+Comparada com a 3.4.0 (`3759382`). O modo padrão das pipelines muda para portões por efeito, e a spec viva passa a ser o destino padrão do planejamento. O modo assistido e os `docs/00` a `docs/05` continuam funcionando, mas quem dependia das paradas nos gates que cada pipeline marca para aceite precisa pedir o modo assistido. Por isso a versão é MAJOR.
+
+### Quebra de compatibilidade
+
+- Sem modo declarado, as pipelines param nos aceites A1 (escopo), A2 (efeito) e A3 (entrega), nas paradas condicionais e nas paradas extras do esforço rigoroso, não mais em todos os gates que cada pipeline marca para aceite: PC-2, PC-3 e EX-3, por exemplo, passam a mostrar só uma linha de status. O modo assistido segue disponível com `Modo: assistido`.
+- Num projeto novo que vai durar, o pré-código escreve `docs/spec.md` e `docs/plan.md` em vez de `docs/01` a `docs/05`.
+- Instalar interpretador, toolchain ou ferramenta de build, inclusive o download automático do uv, do Go e dos wrappers do Maven e do Gradle, passa a pedir A2.
+
+### Como migrar
+
+- Para manter as paradas da 3.4.0, acrescente ao `AGENTS.md` do projeto:
+
+  ```markdown
+  ## Pipelines
+
+  - Modo: assistido
+  ```
+
+- Projetos com `docs/00` a `docs/05` não precisam mudar nada: a pipeline lê esses arquivos e só oferece a migração para a spec viva no aceite seguinte. Projetos com Spec Kit, Kiro ou OpenSpec continuam no formato deles.
+- Efeitos que você quer liberar sem parada vão na mesma seção, como linhas de pré-autorização escritas por você, no formato do contrato comum. Publicar em produção, mexer em dados reais, enviar a terceiros, mandar mensagem a destinatários reais e gastar dinheiro nunca são pré-autorizáveis.
+- `analise`, `aplicacao` e `automacao` passam a valer como nomes de arquétipo; `A`, `B` e `C` continuam aceitos.
 
 ### Novo
 
@@ -36,7 +58,13 @@ As versões seguem [SemVer](https://semver.org/lang/pt-BR/).
 - O doctor avisa acima de 8.500 caracteres no `SKILL.md`, em vez de 9.000. O limite continua em 10.000.
 - Trechos do `release-and-ops-pipeline/SKILL.md` passam para as referências, sem mudar regra: a conferência de pacotes vai para `ci-and-artifacts.md`, os formatos do site estático ficam em `archetype-a-ghpages.md` e os valores de `execucao` no bloco de handoff do contrato comum.
 - Parte dos resultados de trabalho em `evals/results/4.0.0-dev/` tem `modelo: nao-registrado`: eles rodaram num subagente que herdou o modelo da sessão (claude-opus-5-5) e gravou claude-sonnet-5-5, sem como separar com certeza. Os refeitos depois disso rodam fixados no claude-sonnet-5-5 e registram o modelo real, assim como a rodada final da 4.0.0.
+- Rodada final de leitura da 4.0.0 em `evals/results/4.0.0/leitura/`, no claude-sonnet-5-5, com os 36 cenários nos dois modos e os 43 prompts de gatilho: 121 de 127 checkpoints `deve` no modo por efeito e 119 de 127 no assistido, nenhuma falha de `nao_deve` e nenhum gatilho fora do esperado. O julgamento ficou mais estrito: "passou" só vale com o comportamento nas notas, não com a citação da regra. Quatro checkpoints que passavam na 3.4.0 ficaram indeterminados, sem falha. `so-a-quarto-authoring` e `restricoes-plataforma` passaram numa segunda amostra dos mesmos cenários, que não fica versionada; o resumo está no PR da release. `comandos-da-ferramenta-nao-substituem-aceites` (sdd-speckit) e `linguagem-por-componente` (r-e-python) ficaram indeterminados de novo, assim como `perfis-das-duas-linguagens`, que já falhava na 3.4.0: as notas não usam um comando do Spec Kit nem escrevem o motivo da linguagem, que a 3.4.0 dava por implícito. As regras estão no texto, no contrato comum e na arquitetura por arquétipo. `vies-por-grupo`, que é novo, falhou nas duas versões: nas notas do plano, o limite de diferença entre grupos ficou como questão aberta, e faltou dizer por que a métrica reflete o dano.
 - Resultados de leitura dos três cenários novos contra a 3.4.0, em `evals/results/3.4.0/leitura/`, para mostrar o comportamento antes da mudança, e resultados da 4.0.0 em preparo em `evals/results/4.0.0-dev/leitura/`.
+
+### Como atualizar
+
+- No Claude Code, rode `claude plugin marketplace update agent-skills-pipelines` e `claude plugin update <plugin>` para cada plugin instalado. O `pipeline-guardrails` é um plugin novo e opcional: `claude plugin install pipeline-guardrails@agent-skills-pipelines` (o pacote `completo` já o inclui).
+- Instalações feitas com `scripts/skills.py` recebem a 4.0.0 com `--update`. Nenhuma skill sai e nenhuma referência muda de nome; entram referências novas, como `references/languages/` na execução e `model-fairness.md` em `personal-data`. Cópias editadas à mão continuam protegidas.
 
 ## [3.4.0] - 2026-11-07
 
