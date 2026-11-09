@@ -1,4 +1,6 @@
-# Agent Skills Pipelines
+# Project Pipelines for AI Agents
+
+Fluxos de trabalho em português para agentes de IA planejarem, implementarem, auditarem e publicarem projetos de dados e de software, parando para o seu aceite antes de cada efeito.
 
 [![CI](https://github.com/talesgomes27/agent-skills-pipelines/actions/workflows/ci.yml/badge.svg)](https://github.com/talesgomes27/agent-skills-pipelines/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
@@ -33,7 +35,7 @@ Um pedido pequeno, como uma análise pontual ou a correção de um bug, passa po
 
 Prefere as paradas da 3.x, nos gates que cada pipeline marca para aceite? Ponha no `AGENTS.md` do projeto uma seção `## Pipelines` com a linha `- Modo: assistido`. A mesma seção lista os efeitos que você libera sem parada, como push da branch de trabalho; o [guia de instalação](docs/distribution/architecture.md#modo-e-efeitos-liberados-por-projeto) mostra o formato. Projetos com `docs/00` a `docs/05` ou com Spec Kit, Kiro e OpenSpec continuam no formato que já usam.
 
-Você não precisa chamar as skills: o agente as escolhe pelo pedido. Para forçar uma, peça pelo nome; no Claude Code, as skills dos plugins têm o prefixo do plugin, como `pre-code-pipeline:pre-code-pipeline`.
+Os nomes das skills ficam em inglês, como identificadores estáveis; o conteúdo e as respostas são em português. Você não precisa chamar as skills: o agente as escolhe pelo pedido. Para forçar uma, peça pelo nome; no Claude Code, as skills dos plugins têm o prefixo do plugin, como `pre-code-pipeline:pre-code-pipeline`.
 
 As pipelines separam o trabalho em três tipos, cada um com as suas regras de teste e de publicação:
 
@@ -45,23 +47,23 @@ As pipelines separam o trabalho em três tipos, cada um com as suas regras de te
 
 Pipelines, que conduzem uma etapa inteira do trabalho, com paradas para o seu aceite:
 
-| Skill | Quando entra |
-|---|---|
-| [`pre-code-pipeline`](pre-code-pipeline/SKILL.md) | Antes de programar: descoberta, escopo, arquitetura e plano. |
-| [`execution-pipeline`](execution-pipeline/SKILL.md) | Para implementar um plano aprovado, com testes proporcionais à stack. |
-| [`audit-and-refactoring-pipeline`](audit-and-refactoring-pipeline/SKILL.md) | Para entender e refatorar código ou notebooks herdados sem quebrar o que funciona. |
-| [`release-and-ops-pipeline`](release-and-ops-pipeline/SKILL.md) | Para publicar: saneamento, versão, CI, deploy autorizado e teste do que foi publicado. |
-| [`writing-pipeline`](writing-pipeline/SKILL.md) | Para redigir ou revisar documentos técnicos e de negócio sem perder fatos e fontes. |
+| Para | Skill | Quando entra |
+|---|---|---|
+| **Planejar** | [`pre-code-pipeline`](pre-code-pipeline/SKILL.md) | Antes de programar: descoberta, escopo, arquitetura e plano. |
+| **Implementar ou corrigir** | [`execution-pipeline`](execution-pipeline/SKILL.md) | Para implementar um plano aprovado, corrigir um bug ou atualizar dependências, com testes proporcionais à stack. |
+| **Auditar e refatorar** | [`audit-and-refactoring-pipeline`](audit-and-refactoring-pipeline/SKILL.md) | Para entender, revisar e refatorar código, notebooks ou um PR sem quebrar o que funciona. |
+| **Publicar e operar** | [`release-and-ops-pipeline`](release-and-ops-pipeline/SKILL.md) | Para publicar: saneamento, versão, CI, deploy autorizado e teste do que foi publicado; também incidentes e desligamento. |
+| **Escrever e revisar** | [`writing-pipeline`](writing-pipeline/SKILL.md) | Para redigir ou revisar documentos técnicos e de negócio sem perder fatos e fontes. |
 
 Especialistas, que as pipelines chamam quando o assunto aparece:
 
-| Skill | Quando entra |
-|---|---|
-| [`scheduled-automation`](scheduled-automation/SKILL.md) | Jobs agendados, ETL recorrente e retreino de modelo: estado, falhas, alertas e primeira execução. |
-| [`personal-data`](personal-data/SKILL.md) | Dados de pessoas em análises, apps e listas, com base na LGPD. |
-| [`jurimetria`](jurimetria/SKILL.md) | Dados de processos judiciais: número único do CNJ, DataJud, tabelas processuais, tempo de tramitação e sigilo. |
-| [`quarto-expert`](quarto-expert/SKILL.md) | Ambiente e render de projetos Quarto, teses em ABNT e manuscritos com Binder. |
-| [`skill-loader`](skill-loader/SKILL.md) | Buscar uma skill numa biblioteca externa grande, sem carregar tudo. Veja [biblioteca externa](docs/library-maintenance.md). |
+| Para | Skill | Quando entra |
+|---|---|---|
+| **Automação agendada** | [`scheduled-automation`](scheduled-automation/SKILL.md) | Jobs agendados, ETL recorrente e retreino de modelo: estado, falhas, alertas e primeira execução. |
+| **Dados pessoais (LGPD)** | [`personal-data`](personal-data/SKILL.md) | Dados de pessoas em análises, apps e listas, com base na LGPD. |
+| **Jurimetria** | [`jurimetria`](jurimetria/SKILL.md) | Dados de processos judiciais: número único do CNJ, DataJud, tabelas processuais, tempo de tramitação e sigilo. |
+| **Quarto e ABNT** | [`quarto-expert`](quarto-expert/SKILL.md) | Ambiente e render de projetos Quarto, teses em ABNT e manuscritos com Binder. |
+| **Buscar skills** | [`skill-loader`](skill-loader/SKILL.md) | Buscar uma skill numa biblioteca externa grande, sem carregar tudo. Veja [biblioteca externa](docs/library-maintenance.md). |
 
 ## Instalação
 
