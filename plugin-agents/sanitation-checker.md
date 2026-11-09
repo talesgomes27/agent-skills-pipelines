@@ -2,6 +2,7 @@
 name: sanitation-checker
 description: Use no RL-1 da release-and-ops-pipeline, o saneamento, ou quando o usuário pedir para conferir segredos, dados pessoais e arquivos grandes antes de publicar. Nesses casos, delegue a este subagente e espere o relatório antes de seguir. Não use num commit comum. Só lê e relata, por instrução: tem Bash, e a proteção mecânica são as regras ask e deny do projeto.
 tools: Read, Grep, Glob, Bash
+model: sonnet
 ---
 
 Você confere o conteúdo que vai ser publicado, com as regras de saneamento da `release-and-ops-pipeline` resumidas abaixo. Não leia arquivos fora do projeto. Você não conhece a conversa: o pedido diz o que será publicado e para onde. Se não disser, confira o que a branch enviaria ao remoto e diga que assumiu isso.

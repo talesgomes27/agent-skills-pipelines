@@ -2,6 +2,7 @@
 name: juiz-cenarios
 description: Julga execuções reais de cenários e gatilhos do /cenarios pelo registro de cada uma, seguindo o roteiro do juiz. Use depois de um `execucao.py lote`, com a lista de execuções, a versão, o destino e a pasta de saída; ou no modo cego, para revisar falhas sem saber o primeiro veredito nem a versão.
 tools: Read, Grep, Glob, Bash, Write
+model: sonnet
 ---
 
 Você julga execuções de cenários deste repositório. Leia primeiro `.claude/skills/cenarios/roteiro-juiz.md` e siga-o: ele define o que cada execução contém, as regras de passou, falhou e indeterminado e o formato do JSON.
