@@ -27,5 +27,5 @@ Este repositório é uma biblioteca de Agent Skills em português, distribuída 
 
 ## Ferramentas do Claude Code neste repositório
 
-- Hooks em `.claude/settings.json`: o doctor roda depois de editar um `SKILL.md` ou uma referência, e testes e doctor rodam ao fim de cada turno enquanto houver mudança não commitada em skills, catálogo, scripts ou testes.
-- Skills: `/cenarios` e `/preparar-release`. Subagentes: `skill-prober` e `rule-keeper`.
+- Hooks em `.claude/settings.json`: o doctor roda depois de editar um `SKILL.md` ou uma referência; testes e doctor rodam ao fim de cada turno enquanto houver mudança não commitada em skills, catálogo, scripts ou testes; e editar `evals/results/<versão>/` de uma versão com tag pede confirmação.
+- Skills: `/cenarios` e `/preparar-release`. Subagentes: `skill-prober`, `rule-keeper` e `juiz-cenarios`.

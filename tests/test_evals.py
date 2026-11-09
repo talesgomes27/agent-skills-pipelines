@@ -241,6 +241,37 @@ class Harness(unittest.TestCase):
             log.write_text('', encoding='utf-8')
             self.assertEqual(ex.gatilho(log, 'execution-pipeline'), 'nao_ativou')
 
+    def test_contar_reads_lote_layout(self):
+        import contextlib
+        import importlib.util
+        import io
+        import tempfile
+        spec = importlib.util.spec_from_file_location('execucao', REPO / '.claude/skills/cenarios/scripts/execucao.py')
+        ex = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(ex)
+        uso = json.dumps({'type': 'assistant', 'message': {'content': [{'type': 'tool_use', 'name': 'Skill', 'input': {'skill': 'asp:release-and-ops-pipeline'}}]}})
+        with tempfile.TemporaryDirectory() as t:
+            for n, log, done in ((1, uso, True), (2, '', True), (3, uso, False)):
+                exe = Path(t) / 'claude-code' / f'gatilho-release-and-ops-pipeline-incidente-1-{n}'
+                exe.mkdir(parents=True)
+                (exe / 'meta.json').write_text(json.dumps({'tipo': 'gatilho', 'id': 'release-and-ops-pipeline-incidente-1', 'destino': 'claude-code', 'amostra': n}))
+                (exe / 'log.jsonl').write_text(log + '\n', encoding='utf-8')
+                if done:
+                    (exe / 'done').write_text('0')
+            out = io.StringIO()
+            with contextlib.redirect_stdout(out):
+                ex.contar(t, '4.3.0')
+            texto = out.getvalue()
+            self.assertIn('1/2 certos (ati nao)', texto)
+            self.assertIn('1 execuções sem done', texto)
+            self.assertIn('| 4.3.0: ativou', texto)  # o --contra lê o resultado publicado
+            (Path(t) / 'claude-code' / 'quebrada').mkdir()
+            (Path(t) / 'claude-code' / 'quebrada' / 'meta.json').write_text('{')
+            out = io.StringIO()
+            with contextlib.redirect_stdout(out):
+                ex.contar(t, '4.3.0')
+            self.assertIn('1 pastas com meta.json inválido', out.getvalue())
+
     def test_api_error_does_not_mark_done(self):
         import importlib.util
         import tempfile

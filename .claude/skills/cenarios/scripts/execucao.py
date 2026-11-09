@@ -6,8 +6,14 @@
                                        destino claude-code (plugin de teste) ou claude-code-instalador (skills.py)
   resumo <log>                         ferramentas, skills, negações e texto final de um log stream-json
   gatilho <log> <skill>                ativou, nao_ativou ou outra
+  lote <pasta> [--cenarios a,b] [--gatilhos a,b|todos] [--destinos d1,d2] [--amostras N] [--paralelo N]
+                                       prepara e roda as execuções em <pasta>/<destino>/<tipo>-<id>-<n>, retomando as
+                                       que ficaram sem done; o plugin de teste vai para <pasta>/plugin
+  contar <pasta> [--contra VERSAO]     gatilhos ativou/total por destino e skills carregadas nos cenários,
+                                       comparados com evals/results/VERSAO quando pedido; ambiguo_deve conta como deve
 """
 import json
+import os
 import shutil
 import subprocess
 import sys
@@ -130,6 +136,123 @@ def resumo(log):
     print('FINAL TEXT:\n', (texts[-1] if texts else '')[:3000])
 
 
+DESTINOS = ('claude-code', 'claude-code-instalador')
+
+
+def _yaml(caminho):
+    import yaml  # o PyYAML já é dependência do repositório (distribution/requirements.txt)
+    return yaml.safe_load(Path(caminho).read_text(encoding='utf-8'))
+
+
+def _gatilhos():
+    return {t['id']: t for t in _yaml(REPO / 'evals/triggers.yaml')}
+
+
+def lote(pasta, cenarios=(), gatilhos=(), destinos=DESTINOS, amostras=1, paralelo=4):
+    from concurrent.futures import ThreadPoolExecutor
+    pasta = Path(pasta)
+    if set(destinos) - set(DESTINOS):
+        sys.exit(f'destino desconhecido; use {", ".join(DESTINOS)}')
+    pasta.mkdir(parents=True, exist_ok=True)
+    trava = pasta / '.lote-em-andamento'
+    if trava.exists():
+        try:
+            os.kill(int(trava.read_text()), 0)
+            sys.exit(f'outro lote ainda roda nesta pasta (pid {trava.read_text()}); espere ele terminar')
+        except (ValueError, ProcessLookupError):
+            pass  # trava de um lote que morreu
+    trava.write_text(str(os.getpid()))
+    if not (pasta / 'plugin/asp').exists():
+        plugin(pasta / 'plugin')
+    T = _gatilhos()
+    if list(gatilhos) == ['todos']:
+        gatilhos = list(T)
+    itens = [('cenario', i, _yaml(REPO / f'evals/scenarios/{i}.yaml')) for i in cenarios]
+    itens += [('gatilho', i, T[i]) for i in gatilhos]
+    jobs = []
+    for destino in destinos:
+        for tipo, i, d in itens:
+            for n in range(1, amostras + 1):
+                exe = pasta / destino / f'{tipo}-{i}-{n}'
+                if (exe / 'done').exists():
+                    continue
+                if exe.exists():
+                    shutil.rmtree(exe)  # sem done: erro de API ou execução interrompida; a cópia pode ter sido editada
+                preparar(exe, d['pedido'] if tipo == 'cenario' else d['prompt'], d.get('fixture'))
+                (exe / 'meta.json').write_text(json.dumps({'tipo': tipo, 'id': i, 'destino': destino, 'amostra': n}))
+                aceite = d.get('aceite_simulado') if tipo == 'cenario' else None
+                jobs.append((exe, destino, 40 if tipo == 'cenario' else 8, aceite))
+    print(len(jobs), 'execuções')
+
+    def um(j):
+        try:
+            rodar(j[0], j[1], pasta / 'plugin/asp', j[2], j[3])
+        except BaseException as e:  # inclui o sys.exit e o CalledProcessError do install: fica gravado, a rodada segue
+            (j[0] / 'erro_local').write_text(repr(e))
+    try:
+        with ThreadPoolExecutor(paralelo) as ex:
+            list(ex.map(um, jobs))
+    finally:
+        trava.unlink(missing_ok=True)
+    api = sum((j[0] / 'erro_api').exists() for j in jobs)
+    local = sum((j[0] / 'erro_local').exists() for j in jobs)
+    print(len(jobs) - api - local, 'concluídas;', api, 'com erro da API e', local, 'com erro local (rode lote de novo para retomá-las)')
+
+
+def contar(pasta, contra=None):
+    import collections
+    pasta = Path(pasta)
+    T = _gatilhos()
+    gat = collections.defaultdict(list)
+    cen = collections.defaultdict(collections.Counter)
+    pendentes = 0
+    invalidas = 0
+    for meta in sorted(pasta.glob('*/*/meta.json')):
+        try:
+            m = json.loads(meta.read_text())
+            if m['tipo'] == 'gatilho' and m['id'] not in T:
+                raise KeyError(m['id'])
+        except (ValueError, KeyError):
+            invalidas += 1
+            continue
+        exe = meta.parent
+        if not (exe / 'done').exists():
+            pendentes += 1
+            continue
+        if m['tipo'] == 'gatilho':
+            gat[(m['destino'], m['id'])].append(gatilho(exe / 'log.jsonl', T[m['id']]['skill']))
+        else:
+            sk = [s.split(':')[-1] for s in skills(exe / 'log.jsonl')] or ['(nenhuma)']
+            for s in set(sk):
+                cen[(m['destino'], m['id'])][s] += 1
+            cen[(m['destino'], m['id'])]['_total'] += 1
+    for destino in DESTINOS:
+        linhas = sorted((i, obs) for (d, i), obs in gat.items() if d == destino)
+        if not linhas:
+            continue
+        antes = {}
+        if contra:
+            f = REPO / f'evals/results/{contra}/execucao/triggers-{destino}.json'
+            if f.exists():
+                antes = {r['id']: r['observado'] for r in json.loads(f.read_text(encoding='utf-8'))['resultados']}
+        certos = 0
+        print(f'\n## Gatilhos, {destino}')
+        for i, obs in linhas:
+            esperado = T[i]['esperado']
+            ok = sum((o != 'ativou') if esperado == 'nao_deve' else (o == 'ativou') for o in obs)
+            certos += ok == len(obs)
+            extra = f' | {contra}: {antes[i]}' if i in antes else ''
+            print(f'{i:40} {esperado:12} {ok}/{len(obs)} certos ({" ".join(o[:3] for o in obs)}){extra}')
+        print(f'{certos} de {len(linhas)} gatilhos certos em todas as amostras')
+    for (destino, i), c in sorted(cen.items()):
+        total = c.pop('_total')
+        print(f'cenário {i} ({destino}): {total} execuções; skills: ' + ', '.join(f'{s} {n}' for s, n in c.most_common()))
+    if pendentes:
+        print(f'\n{pendentes} execuções sem done (erro da API, erro local ou em andamento)')
+    if invalidas:
+        print(f'{invalidas} pastas com meta.json inválido ou gatilho que saiu do triggers.yaml, ignoradas')
+
+
 if __name__ == '__main__':
     import argparse
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -143,6 +266,13 @@ if __name__ == '__main__':
     sub.add_parser('resumo').add_argument('log')
     p = sub.add_parser('gatilho')
     p.add_argument('log'); p.add_argument('skill')
+    p = sub.add_parser('lote')
+    lista = lambda v: [x for x in v.split(',') if x]
+    p.add_argument('pasta'); p.add_argument('--cenarios', type=lista, default=[]); p.add_argument('--gatilhos', type=lista, default=[])
+    p.add_argument('--destinos', type=lista, default=list(DESTINOS)); p.add_argument('--amostras', type=int, default=1)
+    p.add_argument('--paralelo', type=int, default=4)
+    p = sub.add_parser('contar')
+    p.add_argument('pasta'); p.add_argument('--contra')
     x = ap.parse_args()
     if x.cmd == 'plugin':
         plugin(x.saida)
@@ -152,5 +282,9 @@ if __name__ == '__main__':
         rodar(x.exe, x.destino, x.plugin, x.turnos, x.aceite)
     elif x.cmd == 'resumo':
         resumo(x.log)
+    elif x.cmd == 'lote':
+        lote(x.pasta, x.cenarios, x.gatilhos, x.destinos, x.amostras, x.paralelo)
+    elif x.cmd == 'contar':
+        contar(x.pasta, x.contra)
     else:
         print(gatilho(x.log, x.skill))

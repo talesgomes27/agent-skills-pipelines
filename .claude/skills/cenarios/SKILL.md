@@ -26,6 +26,7 @@ Testa se as skills deste repositório levam um agente ao comportamento esperado 
 
 O harness é `scripts/execucao.py`, só com a biblioteca padrão. Rode `/usr/bin/python3 .claude/skills/cenarios/scripts/execucao.py` sem argumentos para ver os comandos. Nunca use credenciais, contas nem destinos reais.
 
+- Para uma rodada inteira, use `lote <pasta> --cenarios a,b --gatilhos c,d|todos --amostras N`. Ele monta o plugin de teste em `<pasta>/plugin`, prepara e roda cada execução nos dois destinos, quatro de cada vez, e retoma numa nova chamada as que ficaram sem `done`. Depois, `contar <pasta> --contra <versão anterior>` dá os gatilhos certos por destino, com o resultado da versão anterior ao lado, e as skills carregadas em cada cenário. Os comandos abaixo são as peças do `lote`, para uma execução avulsa.
 - Monte o plugin de teste uma vez por rodada com `plugin <pasta no scratchpad>`. Ele copia todas as skills, os subagentes de `plugin-agents/` e o hook do `pipeline-guardrails` para um plugin `asp`, carregado por `--plugin-dir` sem tocar os plugins do usuário.
 - Para cada execução, rode `preparar <exec> "<pedido>" [<fixture do cenário>]` e depois `rodar <exec> <destino>`:
   - destino `claude-code`, com `--plugin <pasta>/asp`;
@@ -39,8 +40,9 @@ O harness é `scripts/execucao.py`, só com a biblioteca padrão. Rode `/usr/bin
 - Na primeira execução de cada destino, confira na linha INIT do `resumo` que só aparecem as skills do repositório e as do próprio Claude Code. Se aparecerem as do usuário, pare e diga ao usuário.
 - Se o cenário tem `aceite_simulado`, passe `--aceite "<texto>"`. Depois de um primeiro turno terminado com sucesso, o harness retoma a mesma sessão com `--resume` e grava `log2.jsonl`; se o primeiro turno estourou turnos ou orçamento, grava `aceite_pulado` no lugar.
 - Rode até quatro execuções em paralelo, em segundo plano. Uma execução que termina em erro da API, como o limite de uso da conta, grava `erro_api` em vez de `done`; prepare a execução de novo, porque a cópia do projeto pode ter sido editada, e não a conte como `nao_ativou`. Mudança de skill usa três amostras por destino, e diferença pequena entre destinos usa dez.
+- Alternativa oficial para gatilhos no marketplace: o `claude plugin eval`, com um caso por gatilho e o grader `tool_used: Skill` (`min: 0` e `max: 0` para um "não deve"), rodado com `--ablation none`, `-j 4` e `--no-publish`, que mantém o relatório local. Num piloto em 2026-11-08, ele deu os mesmos 24 de 24 do `lote` em 8 gatilhos, mais rápido e com o custo por caso. Ele não cobre o destino `claude-code-instalador` e só copia fixture com `--scaffold`, que roda bash; por isso o `lote` continua sendo o padrão.
 - Gatilho: prepare com a `fixture` do gatilho, quando houver, rode com `--turnos 8` e classifique com `gatilho <log> <skill>`, que devolve `ativou`, `nao_ativou` ou `outra`.
-- Julgue com subagentes novos, até quatro cenários por juiz, passando o [roteiro do juiz](roteiro-juiz.md) com a lista de ids, a pasta das execuções, a de saída, a versão e o destino. Um segundo juiz cego revê as falhas.
+- Julgue com o subagente `juiz-cenarios`, até quatro cenários por juiz, passando as execuções, a versão, o destino e a pasta de saída; ele segue o [roteiro do juiz](roteiro-juiz.md). Um segundo `juiz-cenarios`, no modo cego, revê as falhas.
 
 ## Gravar e comparar
 
