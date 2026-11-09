@@ -2,6 +2,28 @@
 
 As versões seguem [SemVer](https://semver.org/lang/pt-BR/).
 
+## [4.3.1] - 2026-11-09
+
+Comparada com a 4.3.0 (`dc5907d`). As skills não mudam. O subagente `sanitation-checker` passa a rodar em Sonnet, por isso a versão é PATCH.
+
+### Mudou
+
+- Subagente `sanitation-checker` (plugin da `release-and-ops-pipeline`): fixa `model: sonnet` em vez de herdar o modelo da sessão. A conferência é mecânica: segredos, CPF e tamanho de arquivo. Nas avaliações ele já rodava em Sonnet, então o saneamento da release passa a gastar menos da sua cota sem mudar o resultado. Num teste com `--plugin-dir`, o `model:` do frontmatter foi respeitado.
+- `diff-reviewer` e `plan-reviewer` continuam herdando o modelo da sessão, porque a revisão independente é onde a qualidade importa.
+
+### Avaliações (ferramentas do repositório)
+
+- `juiz-cenarios` em Sonnet: julgou a mesma rodada de 12 execuções e concordou com o juiz no Opus em 71 de 74 checkpoints. As três diferenças foram entre passou e indeterminado, e o juiz no Sonnet usou menos tokens. O juiz cego que revê as falhas continua no modelo da sessão.
+- `execucao.py lote` e `contar`, subagente `juiz-cenarios` e o hook que pede confirmação antes de editar os resultados de uma versão publicada (PR #55).
+
+### Como atualizar
+
+- **No Claude Code:**
+  - rode `claude plugin marketplace update agent-skills-pipelines`;
+  - rode `claude plugin update <plugin>` para cada plugin instalado.
+  - Só o plugin `release-and-ops-pipeline`, que traz o `sanitation-checker`, muda de fato.
+- **Pelo `scripts/skills.py`:** as instalações recebem a 4.3.1 com `--update`. Os subagentes não vão por esse caminho.
+
 ## [4.3.0] - 2026-11-08
 
 Comparada com a 4.2.0 (`23b584a`). Traz regras e referências novas em cinco skills e num subagente, sem skill nova nem removida e sem regra cortada: por isso a versão é MINOR. Também melhora a medição das avaliações. É o plano feito antes do teste em projeto real.
