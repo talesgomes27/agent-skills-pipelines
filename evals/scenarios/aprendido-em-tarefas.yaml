@@ -1,7 +1,7 @@
 id: aprendido-em-tarefas
 pedido: Acrescenta uma coluna com a média por dia no resumo de vendas e roda os testes.
 skills_esperadas:
-- execution-pipeline
+- implementation-pipeline
 arquetipo_esperado:
   principal: C
 modo: por-efeito

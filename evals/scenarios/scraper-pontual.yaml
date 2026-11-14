@@ -2,7 +2,7 @@ id: scraper-pontual
 pedido: Faz um script que coleta os preços de um produto em três sites de e-commerce e me entrega uma
   planilha. É só uma vez, para eu comparar.
 skills_esperadas:
-- execution-pipeline
+- implementation-pipeline
 modo: assistido
 checkpoints:
 - id: caminho-rapido-com-coleta-externa

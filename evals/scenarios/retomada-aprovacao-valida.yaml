@@ -1,7 +1,7 @@
 id: retomada-aprovacao-valida
 pedido: Continua de onde a gente parou ontem.
 skills_esperadas:
-- execution-pipeline
+- implementation-pipeline
 arquetipo_esperado:
   principal: C
 modo: por-efeito

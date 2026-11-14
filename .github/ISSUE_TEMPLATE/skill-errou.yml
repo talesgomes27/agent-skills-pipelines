@@ -12,8 +12,8 @@ body:
     attributes:
       label: Skill envolvida
       options:
-        - pre-code-pipeline
-        - execution-pipeline
+        - planning-pipeline
+        - implementation-pipeline
         - audit-and-refactoring-pipeline
         - release-and-ops-pipeline
         - writing-pipeline

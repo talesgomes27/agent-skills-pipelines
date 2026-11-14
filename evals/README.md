@@ -24,7 +24,7 @@ evals/
 id: dashboard-streamlit            # igual ao nome do arquivo
 pedido: >
   Texto do pedido, como o usuário escreveria.
-skills_esperadas: [pre-code-pipeline, execution-pipeline]
+skills_esperadas: [planning-pipeline, implementation-pipeline]
 arquetipo_esperado: {principal: B, secundario: A}   # opcional
 modo: por-efeito                   # por-efeito, assistido ou continuo: o modo para o qual o cenário foi escrito
 esforco_esperado: padrao           # opcional: leve, padrao ou rigoroso
@@ -60,10 +60,10 @@ O modo padrão é o por efeito a partir da 4.0.0; antes dela, era o assistido, e
   "host": "claude-code",
   "modelo": "identificador exato do modelo",
   "data": "2026-11-07",
-  "skills_carregadas": ["pre-code-pipeline"],
+  "skills_carregadas": ["planning-pipeline"],
   "paradas": 8,
   "paradas_detalhe": ["A1 ao fim de PC-5", "A3 ao fim de EX-5"],
-  "contexto_lido": {"caracteres": 21000, "arquivos": ["pre-code-pipeline/SKILL.md"]},
+  "contexto_lido": {"caracteres": 21000, "arquivos": ["planning-pipeline/SKILL.md"]},
   "checkpoints": [
     {"id": "restricoes-plataforma", "resultado": "passou", "evidencia": "trecho ou arquivo:linha"}
   ]

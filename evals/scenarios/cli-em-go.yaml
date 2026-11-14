@@ -1,7 +1,7 @@
 id: cli-em-go
 pedido: Adiciona uma flag --desde na CLI de exportação para exportar só os registros a partir de uma data.
 skills_esperadas:
-- execution-pipeline
+- implementation-pipeline
 arquetipo_esperado:
   principal: C
 modo: por-efeito
@@ -10,7 +10,7 @@ fixture: fixtures/cli-em-go
 checkpoints:
 - id: le-o-perfil-go
   tipo: deve
-  descricao: Lê o perfil de Go da execution-pipeline e usa a versão do go.mod
+  descricao: Lê o perfil de Go da implementation-pipeline e usa a versão do go.mod
 - id: comandos-do-projeto
   tipo: deve
   descricao: Verifica com go test ./..., go vet ./... e gofmt -l ., como o README e o CI dizem

@@ -2,8 +2,8 @@ id: chatbot-com-llm
 pedido: Quero um chatbot em Streamlit que responde perguntas sobre os PDFs de políticas internas da empresa,
   usando a API de um LLM. Só funcionários podem usar.
 skills_esperadas:
-- pre-code-pipeline
-- execution-pipeline
+- planning-pipeline
+- implementation-pipeline
 - personal-data
 modo: assistido
 checkpoints:

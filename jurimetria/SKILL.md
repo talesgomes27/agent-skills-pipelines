@@ -18,7 +18,7 @@ Dados de processos judiciais têm regras próprias: um identificador com dígito
 
 1. API Pública do DataJud, do CNJ: metadados de processos de todos os tribunais (classe, assuntos, movimentos, órgão julgador, grau), sem partes, sem advogados e sem o inteiro teor. Como pedir, paginar e o que ela não traz está em [DataJud](references/datajud.md).
 2. Dados abertos e painéis oficiais dos tribunais e do CNJ.
-3. Consulta pública dos tribunais, só quando as duas primeiras não bastam, pelas regras de coleta externa da `execution-pipeline`: termos de uso, ritmo baixo e parar diante de CAPTCHA, nunca contorná-lo.
+3. Consulta pública dos tribunais, só quando as duas primeiras não bastam, pelas regras de coleta externa da `implementation-pipeline`: termos de uso, ritmo baixo e parar diante de CAPTCHA, nunca contorná-lo.
 
 - A chave da API é pública e o CNJ pode trocá-la a qualquer momento: leia-a na página de acesso da wiki do DataJud e guarde-a na configuração do projeto, não no código.
 - O uso da API é só para fins legais e não comerciais, até 120 requisições por minuto, e citar o CNJ e o DataJud como fontes é obrigatório em publicações, painéis, aplicativos e estudos. Ponha a citação nessas saídas e o limite no código de coleta.
@@ -62,5 +62,5 @@ Dados de processos judiciais têm regras próprias: um identificador com dígito
 ## Especialistas e ferramentas
 
 - `scripts/numero_cnj.py` valida e normaliza números (biblioteca padrão, sem rede); em R, o `abjutils` da Associação Brasileira de Jurimetria faz o mesmo e mais.
-- As pipelines carregam esta skill quando as fontes do trabalho são judiciais, a lacuna concreta que ela cobre; a `personal-data` vale junto sempre que houver partes; a coleta externa segue a `execution-pipeline`.
+- As pipelines carregam esta skill quando as fontes do trabalho são judiciais, a lacuna concreta que ela cobre; a `personal-data` vale junto sempre que houver partes; a coleta externa segue a `implementation-pipeline`.
 - Fatos de norma e de plataforma mudam. As referências trazem o link oficial e a data em que cada fato foi conferido; reconfira antes de publicar um resultado.

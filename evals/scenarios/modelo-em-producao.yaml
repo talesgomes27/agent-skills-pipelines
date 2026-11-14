@@ -2,8 +2,8 @@ id: modelo-em-producao
 pedido: 'Já treinei um modelo de churn num notebook. Quero colocá-lo em produção: o time de CRM precisa
   de uma lista semanal dos clientes com maior risco, e talvez depois uma API.'
 skills_esperadas:
-- pre-code-pipeline
-- execution-pipeline
+- planning-pipeline
+- implementation-pipeline
 - scheduled-automation
 - release-and-ops-pipeline
 - personal-data

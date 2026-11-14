@@ -3,8 +3,8 @@ pedido: Tenho um CSV com vendas mensais de 3 anos de 40 lojas. Quero prever a de
   por loja, comparar com um baseline e entregar um relatório em Quarto com os resultados. Depois quero
   que o modelo seja retreinado todo mês automaticamente.
 skills_esperadas:
-- pre-code-pipeline
-- execution-pipeline
+- planning-pipeline
+- implementation-pipeline
 - scheduled-automation
 modo: assistido
 checkpoints:

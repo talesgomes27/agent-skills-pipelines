@@ -1,5 +1,5 @@
 ```yaml
-pipeline: execution-pipeline
+pipeline: implementation-pipeline
 gate: EX-5
 estado: aguardando_aprovacao
 execucao: null

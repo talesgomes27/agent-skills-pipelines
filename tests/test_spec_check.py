@@ -6,7 +6,7 @@ from contextlib import redirect_stdout, redirect_stderr
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
-spec = importlib.util.spec_from_file_location('spec_check', REPO / 'pre-code-pipeline/scripts/spec_check.py')
+spec = importlib.util.spec_from_file_location('spec_check', REPO / 'planning-pipeline/scripts/spec_check.py')
 sc = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(sc)
 

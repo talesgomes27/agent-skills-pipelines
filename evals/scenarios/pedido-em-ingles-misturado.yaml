@@ -2,7 +2,7 @@ id: pedido-em-ingles-misturado
 pedido: 'Tem um bug no ETL que roda no cron: depois do deploy de ontem o parse das datas quebrou. Faz
   o fix e prepara o release.'
 skills_esperadas:
-- execution-pipeline
+- implementation-pipeline
 - scheduled-automation
 - release-and-ops-pipeline
 arquetipo_esperado:

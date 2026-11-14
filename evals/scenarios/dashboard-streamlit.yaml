@@ -5,8 +5,8 @@ pedido: 'Quero um dashboard em Streamlit que lê as vendas de um banco Postgres,
 
   '
 skills_esperadas:
-- pre-code-pipeline
-- execution-pipeline
+- planning-pipeline
+- implementation-pipeline
 - release-and-ops-pipeline
 arquetipo_esperado:
   principal: B

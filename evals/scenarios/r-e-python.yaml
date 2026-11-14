@@ -1,7 +1,7 @@
 id: r-e-python
 pedido: A análise de satisfação está em R, com tidyverse, e o modelo é treinado lá. Quero uma API em FastAPI que devolve o score de um cliente a partir desse modelo.
 skills_esperadas:
-- pre-code-pipeline
+- planning-pipeline
 arquetipo_esperado:
   principal: B
   secundario: A

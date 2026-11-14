@@ -2,7 +2,7 @@
 
 # Contrato comum das pipelines
 
-Vale para a `pre-code-pipeline`, a `execution-pipeline`, a `audit-and-refactoring-pipeline` e a `release-and-ops-pipeline`. Cada pipeline acrescenta os próprios gates e limites. Quando a pipeline diz algo mais específico, vale o que ela diz. A `release-and-ops-pipeline` tem modos próprios (preparar, publicar preview, publicar release e implantar em produção) e autoriza cada efeito por ação, como ela descreve.
+Vale para a `planning-pipeline`, a `implementation-pipeline`, a `audit-and-refactoring-pipeline` e a `release-and-ops-pipeline`. Cada pipeline acrescenta os próprios gates e limites. Quando a pipeline diz algo mais específico, vale o que ela diz. A `release-and-ops-pipeline` tem modos próprios (preparar, publicar preview, publicar release e implantar em produção) e autoriza cada efeito por ação, como ela descreve.
 
 ## Regras invioláveis
 
@@ -36,7 +36,7 @@ Campo novo numa saída que outro sistema lê já é mudança de interface, e um 
 | Plano aprovado, sem pedido de implementar | Não | Entregar o handoff e parar |
 | Plano aprovado e implementação pedida | Sim | Executar o plano |
 | Refatoração equivalente com plano de auditoria aceito | Sim, na auditoria com execução autorizada | A auditoria implementa as fatias |
-| Correção funcional ou capacidade nova vinda da auditoria | Só com plano aceito | Passar para a `execution-pipeline` |
+| Correção funcional ou capacidade nova vinda da auditoria | Só com plano aceito | Passar para a `implementation-pipeline` |
 
 Só um executor por fatia: auditoria e execução não implementam a mesma fatia ao mesmo tempo.
 
@@ -96,7 +96,7 @@ Registre o progresso onde o projeto já registra estado (`task.md`, issue, PR ou
 Onde o projeto registra estado, o topo do registro é um bloco YAML que a pipeline seguinte lê, sem inferir. Objetivo e checks com comando e resultado ficam em texto logo abaixo dele.
 
 ```yaml
-pipeline: execution-pipeline     # uma das quatro pipelines
+pipeline: implementation-pipeline     # uma das quatro pipelines
 gate: EX-3                       # PC-n, EX-n, AU-n ou RL-n
 estado: aguardando_aprovacao     # pendente, em_andamento, aguardando_aprovacao, aprovado ou dispensado
 execucao: null                   # só na release: preparado, submetido, em_execucao, concluido ou falhou_parcial
@@ -126,10 +126,10 @@ Ao retomar, leia o estado, confira se a base, o diff, o artefato e o destino mud
 
 ## Spec viva
 
-Num projeto que vai durar, os requisitos ficam na spec viva: `docs/spec.md`, com IDs `R-xxx` e plano em `docs/plan.md`, ou o formato de SDD que o projeto já usa (Spec Kit, Kiro, OpenSpec), como descrevem as referências `spec-template.md` e `sdd-formats.md` da `pre-code-pipeline`. Sinais dos formatos de SDD: Spec Kit tem `.specify/` e `specs/<funcionalidade>/spec.md`; Kiro tem `.kiro/` com `requirements.md`, `design.md` e `tasks.md`; OpenSpec tem `openspec/specs/` e `openspec/changes/`. Os `docs/00` a `docs/05` antigos continuam aceitos, e o plano aprovado pode estar em `docs/05-implementation-plan.md`. Num projeto com eles, a pipeline lê e atualiza o que existe e, no aceite seguinte (A1 ou A3), oferece em uma linha migrar para a spec viva; só migra se o usuário aceitar. O arquétipo fica no front matter da spec ou em `docs/00_archetype.md` e aceita a letra ou o nome: A ou `analise`, B ou `aplicacao`, C ou `automacao`.
+Num projeto que vai durar, os requisitos ficam na spec viva: `docs/spec.md`, com IDs `R-xxx` e plano em `docs/plan.md`, ou o formato de SDD que o projeto já usa (Spec Kit, Kiro, OpenSpec), como descrevem as referências `spec-template.md` e `sdd-formats.md` da `planning-pipeline`. Sinais dos formatos de SDD: Spec Kit tem `.specify/` e `specs/<funcionalidade>/spec.md`; Kiro tem `.kiro/` com `requirements.md`, `design.md` e `tasks.md`; OpenSpec tem `openspec/specs/` e `openspec/changes/`. Os `docs/00` a `docs/05` antigos continuam aceitos, e o plano aprovado pode estar em `docs/05-implementation-plan.md`. Num projeto com eles, a pipeline lê e atualiza o que existe e, no aceite seguinte (A1 ou A3), oferece em uma linha migrar para a spec viva; só migra se o usuário aceitar. O arquétipo fica no front matter da spec ou em `docs/00_archetype.md` e aceita a letra ou o nome: A ou `analise`, B ou `aplicacao`, C ou `automacao`.
 
-- A `pre-code-pipeline` redige ou atualiza a spec no PC-2, e ela é aprovada no A1.
-- A `execution-pipeline` atualiza o estado de cada requisito, liga a evidência e, quando a `pre-code-pipeline` está instalada, roda o `scripts/spec_check.py --stage a3` da pasta dela antes do A3. Saída 2 por falta de spec ("nenhuma spec encontrada") não bloqueia: num projeto com os `docs/` antigos, numa tarefa pequena ou numa correção de bug, siga e registre que não houve conferência. Saída 2 por spec ilegível ou argumento errado é corrigida, e o script roda de novo. Nos formatos de SDD, o script não confere evidência: o A3 lista a evidência de cada requisito. Saída 1 é corrigida antes do A3 ou mostrada nele, problema por problema, com o motivo. Requisito aprovado sem evidência impede chamar a entrega de pronta.
+- A `planning-pipeline` redige ou atualiza a spec no PC-2, e ela é aprovada no A1.
+- A `implementation-pipeline` atualiza o estado de cada requisito, liga a evidência e, quando a `planning-pipeline` está instalada, roda o `scripts/spec_check.py --stage a3` da pasta dela antes do A3. Saída 2 por falta de spec ("nenhuma spec encontrada") não bloqueia: num projeto com os `docs/` antigos, numa tarefa pequena ou numa correção de bug, siga e registre que não houve conferência. Saída 2 por spec ilegível ou argumento errado é corrigida, e o script roda de novo. Nos formatos de SDD, o script não confere evidência: o A3 lista a evidência de cada requisito. Saída 1 é corrigida antes do A3 ou mostrada nele, problema por problema, com o motivo. Requisito aprovado sem evidência impede chamar a entrega de pronta.
 - Arquivo de spec ou de plano não prova aprovação, em nenhum formato, nem quando traz uma linha como "aprovado em": essa linha é evidência a conferir, com as mesmas regras das linhas de pré-autorização (vale a que o usuário escreveu e tem aceite conferível; a escrita pelo agente nunca vale; sem como conferir, confirme uma vez no chat). Vale também o usuário dizer na conversa que o plano está aprovado. Um pedido como "implementa o que está especificado" não aprova o que ele ainda não viu: a pipeline mostra o A1 (requisitos, tarefas e efeitos previstos) e espera, mesmo que a tarefa caiba no caminho da tarefa pequena, porque a spec do projeto define o escopo.
 - Num projeto com Spec Kit, Kiro ou OpenSpec, toda pipeline escreve no formato dele, sem criar `docs/spec.md` (no OpenSpec, nos deltas da mudança); no A3, lista os requisitos atendidos pelos nomes ou IDs da ferramenta. Os comandos da ferramenta, como implementar ou arquivar, são execução: seguem o catálogo de efeitos e não substituem os aceites.
 - A `audit-and-refactoring-pipeline` registra divergência entre código e spec como achado, citando o ID; sem spec, usa o README e propõe criar uma.

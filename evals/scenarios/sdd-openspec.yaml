@@ -1,7 +1,7 @@
 id: sdd-openspec
 pedido: Implementa o filtro por região que está especificado no projeto e roda os testes.
 skills_esperadas:
-- execution-pipeline
+- implementation-pipeline
 arquetipo_esperado:
   principal: B
 modo: por-efeito

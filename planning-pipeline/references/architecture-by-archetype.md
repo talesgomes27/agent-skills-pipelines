@@ -14,12 +14,12 @@ Leia só a parte do arquétipo registrado e, em projeto híbrido, a do domínio 
 ## B: aplicações
 
 - Limites e persistência proporcionais ao domínio, com DDD, C4 ou OpenAPI só quando a complexidade pede.
-- Site ou app web define no plano as metas de SEO, acessibilidade e desempenho, o destino do formulário e onde o site é publicado; a referência B da `execution-pipeline` tem o mínimo de cada um.
+- Site ou app web define no plano as metas de SEO, acessibilidade e desempenho, o destino do formulário e onde o site é publicado; a referência B da `implementation-pipeline` tem o mínimo de cada um.
 - App publicado numa plataforma decide na arquitetura as duas camadas de acesso: quem abre o app na plataforma e quem se autentica dentro dele. As restrições de cada plataforma (acesso privado, IPs de saída, hibernação) estão na referência de plataformas da `release-and-ops-pipeline`; leia-a em PC-3, sem esperar a publicação.
 - Dashboard no Power BI: o Power BI Desktop roda só no Windows, então fora dele o plano prepara os dados, as medidas DAX com a fórmula e um projeto PBIP, sem dizer que gerou um `.pbix`. Para autoria de modelo e relatório, aponte o plugin oficial `powerbi-authoring` da Microsoft, do marketplace `microsoft/skills-for-fabric`. A arquitetura decide o workspace e quem vê cada dado: quem recebe o relatório lê o modelo inteiro, salvo segurança por linha ou objeto. Publicar, compartilhar e criar o app são efeitos com A2, como diz a referência de plataformas da `release-and-ops-pipeline`.
-- App com LLM que envia documentos ou dados ao provedor é esforço rigoroso e decide na arquitetura provedor e modelo, onde fica a chave, quem acessa, o que vai para o provedor e como as respostas serão avaliadas; a `execution-pipeline` tem a referência de apps com LLM.
+- App com LLM que envia documentos ou dados ao provedor é esforço rigoroso e decide na arquitetura provedor e modelo, onde fica a chave, quem acessa, o que vai para o provedor e como as respostas serão avaliadas; a `implementation-pipeline` tem a referência de apps com LLM.
 - App que grava dados, mesmo no esforço leve, diz onde eles ficam e como copiar e restaurar.
-- Pedido com login decide em PC-2 quem cria as contas (cadastro aberto, convite ou administrador) e como se recupera a senha, porque isso muda telas, e-mails enviados e o mínimo de segurança da referência B da `execution-pipeline`. Login com senha tira o app do esforço leve.
+- Pedido com login decide em PC-2 quem cria as contas (cadastro aberto, convite ou administrador) e como se recupera a senha, porque isso muda telas, e-mails enviados e o mínimo de segurança da referência B da `implementation-pipeline`. Login com senha tira o app do esforço leve.
 - Mudança de esquema num banco que já tem dados de produção entra na arquitetura como plano de migração, com backup, etapas compatíveis e volta; a `release-and-ops-pipeline` tem a referência de migrações.
 
 ## C: automações
@@ -52,11 +52,11 @@ Exemplo de cartão de análise:
 
 ## Linguagem por componente
 
-Em PC-3, cada componente diz a linguagem e a versão, com o motivo, preferindo a que o projeto e a equipe já usam. Duas linguagens no mesmo projeto, como R na análise e Python na API, pedem uma interface explícita entre elas: arquivo com formato e esquema definidos, tabela ou API, nunca chamada de uma dentro da outra sem decisão registrada. O plano registra a linguagem e a versão de cada componente, e o handoff de PC-5 diz que a `execution-pipeline` vai ler o perfil de cada uma, em `references/languages/` (Python, R, SQL, Bash, Go, JVM).
+Em PC-3, cada componente diz a linguagem e a versão, com o motivo, preferindo a que o projeto e a equipe já usam. Duas linguagens no mesmo projeto, como R na análise e Python na API, pedem uma interface explícita entre elas: arquivo com formato e esquema definidos, tabela ou API, nunca chamada de uma dentro da outra sem decisão registrada. O plano registra a linguagem e a versão de cada componente, e o handoff de PC-5 diz que a `implementation-pipeline` vai ler o perfil de cada uma, em `references/languages/` (Python, R, SQL, Bash, Go, JVM).
 
 ## Registro do arquétipo
 
-Na spec viva, o arquétipo fica no front matter da `docs/spec.md` (`arquetipo: {principal: aplicacao, secundario: analise}`), como em [spec viva](spec-template.md). Sem spec, ou num projeto que já o tem, `docs/00_archetype.md` registra em YAML `archetype`, `stack`, `project_name`, `gerado_por: pre-code-pipeline` e `data` (ISO 8601). O arquétipo aceita a letra ou o nome: A ou `analise`, B ou `aplicacao`, C ou `automacao`. Stack indefinida fica explícita; não invente versões.
+Na spec viva, o arquétipo fica no front matter da `docs/spec.md` (`arquetipo: {principal: aplicacao, secundario: analise}`), como em [spec viva](spec-template.md). Sem spec, ou num projeto que já o tem, `docs/00_archetype.md` registra em YAML `archetype`, `stack`, `project_name`, `gerado_por: planning-pipeline` e `data` (ISO 8601). O arquétipo aceita a letra ou o nome: A ou `analise`, B ou `aplicacao`, C ou `automacao`. Stack indefinida fica explícita; não invente versões.
 
 ## Onde a verificação roda
 

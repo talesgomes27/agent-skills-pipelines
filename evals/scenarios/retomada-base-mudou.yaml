@@ -1,7 +1,7 @@
 id: retomada-base-mudou
 pedido: Pode fechar a entrega do arredondamento de preços que ficou pendente.
 skills_esperadas:
-- execution-pipeline
+- implementation-pipeline
 arquetipo_esperado:
   principal: C
 modo: por-efeito

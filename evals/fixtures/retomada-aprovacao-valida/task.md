@@ -1,5 +1,5 @@
 ```yaml
-pipeline: execution-pipeline
+pipeline: implementation-pipeline
 gate: EX-3
 estado: em_andamento
 execucao: null

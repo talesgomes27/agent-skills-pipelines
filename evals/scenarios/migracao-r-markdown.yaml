@@ -2,7 +2,7 @@ id: migracao-r-markdown
 pedido: Migre este relatório R Markdown para Quarto HTML preservando referências cruzadas e a execução
   do código.
 skills_esperadas:
-- execution-pipeline
+- implementation-pipeline
 modo: assistido
 fixture: fixtures/migracao-r-markdown
 checkpoints:

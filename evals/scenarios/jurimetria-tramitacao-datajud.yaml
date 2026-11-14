@@ -2,8 +2,8 @@ id: jurimetria-tramitacao-datajud
 pedido: Quero saber o tempo de tramitação por classe processual no TJPA nos últimos cinco anos, usando
   o DataJud. Já exportei uma amostra em processos.csv para testar. Faz a análise e um gráfico.
 skills_esperadas:
-- pre-code-pipeline
-- execution-pipeline
+- planning-pipeline
+- implementation-pipeline
 - jurimetria
 modo: por-efeito
 fixture: fixtures/jurimetria-tramitacao-datajud

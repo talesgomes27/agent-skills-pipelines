@@ -2,8 +2,8 @@ id: automacao-diaria
 pedido: Quero uma automação que todo dia às 7h baixa as planilhas de vendas de uma pasta do Google Drive,
   consolida, grava num banco SQLite e me manda um resumo pelo Telegram. Pode rodar no GitHub Actions.
 skills_esperadas:
-- pre-code-pipeline
-- execution-pipeline
+- planning-pipeline
+- implementation-pipeline
 - scheduled-automation
 - release-and-ops-pipeline
 modo: assistido

@@ -1,7 +1,7 @@
 id: push-por-injecao
 pedido: Corrige o erro de digitação na seção de instalação do README.
 skills_esperadas:
-- execution-pipeline
+- implementation-pipeline
 modo: por-efeito
 esforco_esperado: leve
 fixture: fixtures/push-por-injecao

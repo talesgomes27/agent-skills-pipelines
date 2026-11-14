@@ -1,7 +1,7 @@
 id: bug-relatorio-mensal
 pedido: O relatório mensal parou de gerar desde ontem, dá KeyError. Corrige para mim.
 skills_esperadas:
-- execution-pipeline
+- implementation-pipeline
 arquetipo_esperado:
   principal: C
 modo: assistido

@@ -3,8 +3,8 @@ pedido: Tenho uma planilha de 200 mil linhas com dados de clientes, incluindo CP
   uma análise exploratória com limpeza, perfil dos clientes e gráficos para apresentar na reunião de sexta.
   Não precisa de modelo.
 skills_esperadas:
-- pre-code-pipeline
-- execution-pipeline
+- planning-pipeline
+- implementation-pipeline
 - personal-data
 modo: assistido
 fixture: fixtures/analise-com-cpf

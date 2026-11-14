@@ -2,7 +2,7 @@ id: agente-com-mcp
 pedido: Cria um servidor MCP em Python que dá ao Claude acesso de leitura ao nosso Postgres de clientes,
   para ele responder perguntas do suporte.
 skills_esperadas:
-- pre-code-pipeline
+- planning-pipeline
 - personal-data
 arquetipo_esperado:
   principal: B

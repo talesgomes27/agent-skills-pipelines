@@ -22,7 +22,7 @@ WARN_SKILL_CHARS = 8500
 LONG_SENTENCE_WORDS = 30
 CONTRACT_COPY = 'references/common-contract.md'
 CONTRACT_HEADER = '<!-- Gerado de shared/common-contract.md por `scripts/skills.py sync-shared`; não edite aqui. -->\n\n'
-PIPELINES = ('pre-code-pipeline', 'execution-pipeline', 'audit-and-refactoring-pipeline', 'release-and-ops-pipeline')
+PIPELINES = ('planning-pipeline', 'implementation-pipeline', 'audit-and-refactoring-pipeline', 'release-and-ops-pipeline')
 
 
 def shared_contract():
@@ -65,7 +65,7 @@ def read_json(path):
 
 def catalog():
     c = read_json(REPO / 'distribution/catalog.json')
-    if not isinstance(c, dict) or set(c) != {'version', 'release', 'skills', 'bundles'} or type(c['version']) is not int or c['version'] != 1:
+    if not isinstance(c, dict) or set(c) - {'renamed'} != {'version', 'release', 'skills', 'bundles'} or type(c['version']) is not int or c['version'] != 1:
         raise ValueError('Unsupported catalog shape/version')
     if not isinstance(c['release'], str) or not re.fullmatch(r'(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)', c['release']):
         raise ValueError('Invalid catalog release')
@@ -77,11 +77,15 @@ def catalog():
     for name, members in c['bundles'].items():
         if not isinstance(name, str) or not isinstance(members, list) or not members or any(n not in names for n in members) or len(set(members)) != len(members):
             raise ValueError('Invalid bundle: ' + str(name))
+    # nome antigo -> nome atual, para aceitar o nome antigo e migrar instalações no --update
+    renamed = c.setdefault('renamed', {})
+    if not isinstance(renamed, dict) or any(old in names or new not in names for old, new in renamed.items()):
+        raise ValueError('Invalid renamed map')
     return c
 
 
 def selected(args, c):
-    wanted = set(args.skill or [])
+    wanted = {c['renamed'].get(n, n) for n in args.skill or []}
     for bundle in args.bundle or []:
         if bundle not in c['bundles']:
             raise ValueError('Unknown bundle: ' + bundle)
@@ -92,7 +96,7 @@ def selected(args, c):
         raise ValueError('Unknown skills: ' + ', '.join(sorted(wanted - set(c['skills']))))
     if not wanted and args.command == 'doctor':
         wanted.update(c['skills'])
-    excluded = set(args.exclude or [])
+    excluded = {c['renamed'].get(n, n) for n in args.exclude or []}
     if excluded - set(c['skills']):
         raise ValueError('Unknown exclusions: ' + ', '.join(sorted(excluded - set(c['skills']))))
     wanted.difference_update(excluded)
@@ -233,7 +237,7 @@ def stage_copy(src, dst):
             shutil.copy2(p, dst / name)
 
 
-def install(args, names, release):
+def install(args, names, release, renamed=None):
     dest = target(args)
     for n in names:
         validate_skill(REPO / n, n)
@@ -268,11 +272,36 @@ def install(args, names, release):
             else:
                 same = False
             plans.append((n, src, dst, staged, digest, exists, same))
+        # A pasta gerenciada de uma skill renomeada sai depois que a nova entra; com mudança local, nada muda.
+        retired, notes = [], []
+        for old_name, new_name in (renamed or {}).items():
+            odst, orec = dest / old_name, state['skills'].get(old_name)
+            present = odst.exists() or odst.is_symlink()
+            if new_name not in names or not (orec or present):
+                continue
+            if not orec:
+                # pasta antiga que o instalador não criou: fica, mas o usuário fica sabendo que há duas
+                notes.append({'skill': old_name, 'action': 'kept-unmanaged', 'destination': str(odst), 'replaced_by': new_name})
+                continue
+            if not args.update:
+                raise ValueError('Renamed skill requires --update: ' + old_name + ' -> ' + new_name)
+            if not present:
+                retired.append((old_name, new_name, None))
+                continue
+            if odst.is_symlink():
+                if orec.get('mode') != 'link' or str(odst.resolve()) != orec.get('source'):
+                    raise ValueError('Managed link changed; preserved: ' + str(odst))
+            elif orec.get('mode') != 'copy' or not odst.is_dir() or fingerprint(odst) != orec.get('files'):
+                raise ValueError('Local changes detected; preserved: ' + str(odst))
+            retired.append((old_name, new_name, odst))
         output = []
         for n, src, dst, staged, digest, exists, same in plans:
             action = 'unchanged' if same else ('update' if exists else 'install')
             old = state['skills'].get(n, {})
             output.append({'skill': n, 'action': action, 'destination': str(dst), 'mode': args.mode, 'installed_release': old.get('release'), 'source_release': release})
+        for old_name, new_name, odst in retired:
+            output.append({'skill': old_name, 'action': 'remove-renamed' if odst else 'forget-renamed', 'destination': str(dest / old_name), 'replaced_by': new_name})
+        output += notes
         if args.dry_run:
             return {'dry_run': True, 'plan': output}
         dest.mkdir(parents=True, exist_ok=True)
@@ -301,6 +330,13 @@ def install(args, names, release):
                     if exists:
                         backup.rename(dst)
                     raise
+        for old_name, new_name, odst in retired:
+            # Tira a pasta do caminho e do estado antes de apagar: uma falha no rmtree não deixa pasta parcial registrada.
+            with tempfile.TemporaryDirectory(prefix='.meta-skills-stage-', dir=dest) as work:
+                if odst:
+                    odst.rename(Path(work) / 'old')
+                del state['skills'][old_name]
+                write_state(dest, state)
         return {'dry_run': False, 'plan': output}
 
 
@@ -334,7 +370,7 @@ def main(argv=None):
                     validate_skill(REPO / n, n)
                 result = {'entries': [{'path': str((REPO / n).resolve())} for n in names]}
             elif args.command == 'install':
-                result = install(args, names, c['release'])
+                result = install(args, names, c['release'], c['renamed'])
             else:
                 root = Path(args.destination).expanduser().absolute() if args.destination else REPO
                 checks = []

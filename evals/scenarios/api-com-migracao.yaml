@@ -2,8 +2,8 @@ id: api-com-migracao
 pedido: Preciso de uma API em FastAPI com Postgres, login por e-mail e senha, e uma tabela nova de pedidos
   que exige migração do banco que já está em produção.
 skills_esperadas:
-- pre-code-pipeline
-- execution-pipeline
+- planning-pipeline
+- implementation-pipeline
 - release-and-ops-pipeline
 - personal-data
 modo: assistido

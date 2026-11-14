@@ -69,6 +69,86 @@ class InstallerTests(unittest.TestCase):
         self.assertFalse((self.dest / 'alpha').exists())
         self.assertEqual(marker.read_text(), 'user data')
 
+    def rename_alpha(self):
+        (self.repo / 'alpha').rename(self.repo / 'gamma')
+        (self.repo / 'gamma/SKILL.md').write_text('---\nname: gamma\ndescription: Edit a selected document.\n---\n[Guide](references/guide.md)\n')
+        (self.repo / 'distribution/catalog.json').write_text(json.dumps({'version': 1, 'release': '2.0.0', 'skills': ['gamma', 'beta'], 'bundles': {'pair': ['gamma', 'beta']}, 'renamed': {'alpha': 'gamma'}}))
+
+    def test_renamed_skill_migrates_on_update(self):
+        for mode in ('copy', 'link'):
+            with self.subTest(mode=mode):
+                if self.dest.exists():
+                    cli.shutil.rmtree(self.dest)
+                if (self.repo / 'gamma').exists():
+                    (self.repo / 'gamma').rename(self.repo / 'alpha')
+                    (self.repo / 'alpha/SKILL.md').write_text('---\nname: alpha\ndescription: Edit a selected document.\n---\n[Guide](references/guide.md)\n')
+                    (self.repo / 'distribution/catalog.json').write_text(json.dumps({'version': 1, 'release': '1.0.0', 'skills': self.names, 'bundles': {'pair': self.names}}))
+                self.assertEqual(self.install('--skill', 'alpha', '--mode', mode)[0], 0)
+                self.rename_alpha()
+                before = (self.dest / cli.STATE).read_text()
+                self.assertEqual(self.install('--skill', 'alpha', '--mode', mode)[0], 1)
+                self.assertTrue((self.dest / 'alpha').is_symlink() or (self.dest / 'alpha').is_dir())
+                self.assertFalse((self.dest / 'gamma').exists())
+                self.assertEqual((self.dest / cli.STATE).read_text(), before)
+                code, data = self.install('--skill', 'alpha', '--mode', mode, '--update', '--dry-run')
+                self.assertEqual(code, 0)
+                self.assertIn('remove-renamed', [p['action'] for p in data['plan']])
+                self.assertFalse((self.dest / 'gamma').exists())
+                self.assertEqual((self.dest / cli.STATE).read_text(), before)
+                code, data = self.install('--skill', 'alpha', '--mode', mode, '--update')
+                self.assertEqual(code, 0)
+                self.assertIn({'skill': 'alpha', 'action': 'remove-renamed', 'destination': str(self.dest / 'alpha'), 'replaced_by': 'gamma'}, data['plan'])
+                self.assertFalse((self.dest / 'alpha').exists() or (self.dest / 'alpha').is_symlink())
+                self.assertTrue((self.dest / 'gamma/SKILL.md').exists())
+                state = json.loads((self.dest / cli.STATE).read_text())
+                self.assertEqual(set(state['skills']), {'gamma'})
+                self.assertEqual(self.run_cli('doctor', '--destination', str(self.dest), '--skill', 'gamma')[0], 0)
+
+    def test_renamed_skill_with_local_changes_is_preserved(self):
+        self.assertEqual(self.install('--skill', 'alpha')[0], 0)
+        (self.dest / 'alpha/references/guide.md').write_text('Local edit\n')
+        self.rename_alpha()
+        self.assertEqual(self.install('--skill', 'gamma', '--update')[0], 1)
+        self.assertEqual((self.dest / 'alpha/references/guide.md').read_text(), 'Local edit\n')
+        self.assertFalse((self.dest / 'gamma').exists())
+
+    def test_renamed_changed_link_is_preserved(self):
+        self.assertEqual(self.install('--skill', 'alpha', '--mode', 'link')[0], 0)
+        (self.dest / 'alpha').unlink()
+        (self.dest / 'alpha').symlink_to(self.repo / 'beta', target_is_directory=True)
+        self.rename_alpha()
+        self.assertEqual(self.install('--skill', 'gamma', '--update')[0], 1)
+        self.assertTrue((self.dest / 'alpha').is_symlink())
+        self.assertFalse((self.dest / 'gamma').exists())
+
+    def test_renamed_orphan_record_and_unmanaged_folder(self):
+        self.assertEqual(self.install('--skill', 'alpha')[0], 0)
+        cli.shutil.rmtree(self.dest / 'alpha')
+        self.rename_alpha()
+        code, data = self.install('--skill', 'gamma', '--update')
+        self.assertEqual(code, 0)
+        self.assertIn('forget-renamed', [p['action'] for p in data['plan']])
+        self.assertEqual(set(json.loads((self.dest / cli.STATE).read_text())['skills']), {'gamma'})
+        (self.dest / 'alpha').mkdir()
+        (self.dest / 'alpha/user.txt').write_text('user data')
+        code, data = self.install('--skill', 'gamma', '--update')
+        self.assertEqual(code, 0)
+        self.assertIn('kept-unmanaged', [p['action'] for p in data['plan']])
+        self.assertEqual((self.dest / 'alpha/user.txt').read_text(), 'user data')
+
+    def test_renamed_names_in_selection_and_invalid_map(self):
+        self.rename_alpha()
+        code, data = self.install('--all', '--exclude', 'alpha', '--dry-run')
+        self.assertEqual(code, 0)
+        self.assertEqual([p['skill'] for p in data['plan']], ['beta'])
+        catalog = self.repo / 'distribution/catalog.json'
+        data = json.loads(catalog.read_text())
+        for bad in ({'beta': 'gamma'}, {'alpha': 'delta'}, ['alpha']):
+            with self.subTest(renamed=bad):
+                data['renamed'] = bad
+                catalog.write_text(json.dumps(data))
+                self.assertEqual(self.install('--skill', 'gamma', '--dry-run')[0], 1)
+
     def test_update_requires_flag_and_preserves_local_changes(self):
         self.assertEqual(self.install('--skill', 'alpha')[0], 0)
         source = self.repo / 'alpha/references/guide.md'
@@ -382,7 +462,7 @@ class InstallerTests(unittest.TestCase):
             self.assertEqual(set(p), {'name', 'source', 'description', 'version', 'author', 'license', 'skills', 'dependencies'})
             self.assertEqual(p['skills'], [])
             self.assertEqual(len(p['dependencies']), len(set(p['dependencies'])))
-        self.assertEqual(bundles[0]['dependencies'], ['pre-code-pipeline', 'execution-pipeline', 'release-and-ops-pipeline', 'personal-data'])
+        self.assertEqual(bundles[0]['dependencies'], ['planning-pipeline', 'implementation-pipeline', 'release-and-ops-pipeline', 'personal-data'])
         self.assertEqual(set(bundles[1]['dependencies']), set(c['skills']) | {'pipeline-guardrails'})
         for name in ('essencial', 'completo'):
             self.assertEqual(set(c['bundles'][name]), set(next(p for p in bundles if p['name'] == name)['dependencies']) - {'pipeline-guardrails'})
