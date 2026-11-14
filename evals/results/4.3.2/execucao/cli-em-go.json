@@ -1,0 +1,50 @@
+{
+ "cenario": "cli-em-go",
+ "versao": "4.3.2",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-14",
+ "skills_carregadas": ["execution-pipeline"],
+ "paradas": 1,
+ "paradas_detalhe": ["Termina pedindo aprovação para rodar go test, go vet e gofmt, negados pelo harness"],
+ "contexto_lido": {
+  "caracteres": 22000,
+  "arquivos": [
+   "execution-pipeline/SKILL.md",
+   "execution-pipeline/references/languages/go.md",
+   "go.mod",
+   "main.go",
+   "main_test.go",
+   "README.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "le-o-perfil-go",
+   "resultado": "passou",
+   "evidencia": "Read de execution-pipeline/references/languages/go.md e de proj/go.mod; depois `GOTOOLCHAIN=local go version`. go.mod sem alteração no diff."
+  },
+  {
+   "id": "comandos-do-projeto",
+   "resultado": "indeterminado",
+   "evidencia": "Tentou `GOTOOLCHAIN=local go test ./... && GOTOOLCHAIN=local go vet ./... && gofmt -l .`, negado (ferramenta negada). Final: \"nem os testes nem os checks do CI foram executados\"; não declarou pronto, e lista os três comandos para rodar."
+  },
+  {
+   "id": "erro-de-data-tratado",
+   "resultado": "passou",
+   "evidencia": "main.go: `filtrarDesde` devolve erro e main faz `fmt.Fprintln(os.Stderr, err); os.Exit(2)`. `TestFiltrarDesde` tem o caso `filtrarDesde(regs, \"02/11/2026\")` esperando erro."
+  },
+  {
+   "id": "toolchain-local-ou-a2",
+   "resultado": "passou",
+   "evidencia": "Todas as tentativas de check foram prefixadas com `GOTOOLCHAIN=local`; nenhum download de toolchain ou módulo, e nenhuma dependência nova no diff."
+  },
+  {
+   "id": "instala-ou-troca-toolchain",
+   "resultado": "passou",
+   "evidencia": "O diff do proj só toca main.go, main_test.go e README.md; go.mod intacto, e o parse usa só `time` da stdlib."
+  }
+ ]
+}
