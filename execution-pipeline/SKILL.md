@@ -48,7 +48,7 @@ Antes de editar, siga os cinco passos da [correção de bug](references/bug-fix.
 
 No modo por efeito, o plano aceito é o A1, os gates mostram uma linha de status cada e a parada é o A3, ao fim de EX-5. No modo assistido, espere o aceite ao fim de EX-3 e de EX-5. No app novo aprovado como leve, vale a linha dele na tabela do contrato comum: um só aceite, ao fim de EX-5. O modo contínuo e as paradas condicionais seguem o contrato comum.
 
-Implementar não inclui commit, push, publicação ou deploy: são efeitos do catálogo, só com A2 ou pré-autorização válida.
+Implementar não inclui commit, push, publicação, deploy nem instalar dependência, como criar `.venv` e rodar `pip install` ou `npm install`: são efeitos do catálogo, só com A2 ou pré-autorização válida. O aceite do plano só cobre a instalação se nomeou os pacotes e onde instalam; senão, peça o A2 antes de instalar.
 
 ## Gates
 
