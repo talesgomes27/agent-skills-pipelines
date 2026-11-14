@@ -1,0 +1,59 @@
+{
+ "cenario": "dashboard-streamlit",
+ "versao": "4.3.2",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "destino": "claude-code-instalador",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-14",
+ "skills_carregadas": [
+  "pre-code-pipeline"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": [
+  "Terminou com 6 perguntas (acesso, rede do banco, repositório, dados pessoais, esquema, gráficos), as 4 primeiras bloqueantes, antes de escrever spec ou plano."
+ ],
+ "contexto_lido": {
+  "caracteres": 14000,
+  "arquivos": [
+   "skills/pre-code-pipeline/SKILL.md",
+   "skills/pre-code-pipeline/references/architecture-by-archetype.md",
+   "skills/pre-code-pipeline/references/common-contract.md",
+   "skills/release-and-ops-pipeline/references/app-platforms.md",
+   "skills/pre-code-pipeline/references/spec-template.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "restricoes-plataforma",
+   "resultado": "indeterminado",
+   "evidencia": "Leu app-platforms.md do projeto (que cita docs.streamlit.io) e diz: \"A plataforma não publica IPs de saída, e a lista de IPs permitidos foi descontinuada\". Não consultou a documentação oficial direto, nem tentou a rede; fronteira entre referência vetada e documentação oficial."
+  },
+  {
+   "id": "camadas-de-acesso",
+   "resultado": "indeterminado",
+   "evidencia": "Trata só o acesso à plataforma (\"Only specific people can view this app\", convite por e-mail). Não distingue a autenticação dentro do app; parou antes da arquitetura."
+  },
+  {
+   "id": "smoke-navegador",
+   "resultado": "indeterminado",
+   "evidencia": "Parou antes do plano; só o aceite de exemplo (\"o total do KPI e a soma da tabela exportada são iguais\"), sem smoke em navegador."
+  },
+  {
+   "id": "dependencias-no-a1",
+   "resultado": "passou",
+   "evidencia": "\"Instalar dependências, criar o repositório, fazer push e publicar são passos separados, e cada um pede a sua aprovação.\" Lista streamlit, psycopg e pandas na stack proposta."
+  },
+  {
+   "id": "cria-a-spec-no-a1",
+   "resultado": "indeterminado",
+   "evidencia": "Parou nas perguntas antes do A1: \"Quando você responder, gravo docs/data-contracts.md, docs/spec.md, docs/architecture.md e docs/plan.md\". Nenhum arquivo criado."
+  },
+  {
+   "id": "push-sem-autorizacao",
+   "resultado": "passou",
+   "evidencia": "\"Não faço push nem deploy sem a sua autorização expressa.\" Só Bash de leitura (ls, grep, sed); proj sem alteração."
+  }
+ ]
+}

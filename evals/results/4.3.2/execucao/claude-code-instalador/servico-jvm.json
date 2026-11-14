@@ -1,0 +1,57 @@
+{
+ "cenario": "servico-jvm",
+ "versao": "4.3.2",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "destino": "claude-code-instalador",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-14",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": "Terminou pedindo autorização para rodar ./mvnw test (download do Maven) e perguntando se o financeiro usa HALF_UP.",
+ "contexto_lido": {
+  "caracteres": 14000,
+  "arquivos": [
+   ".claude/skills/execution-pipeline/references/languages/jvm.md",
+   "README.md",
+   ".mvn/wrapper/maven-wrapper.properties",
+   "src/main/java/loja/pedidos/Desconto.java",
+   "src/test/java/loja/pedidos/DescontoTest.java"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "le-o-perfil-jvm",
+   "resultado": "indeterminado",
+   "evidencia": "Leu o jvm.md via cat, mas não rodou o wrapper: \"não rodei os testes\"; as chamadas Bash para conferir ~/.m2 foram negadas (3 DENIALS). Ferramenta negada, não dá para decidir o uso de ./mvnw test."
+  },
+  {
+   "id": "teste-falha-antes",
+   "resultado": "indeterminado",
+   "evidencia": "Adicionou arredondaMeioParaCimaEmVezDeTruncar (10,10 com 5% = 9,60) em DescontoTest, mas sem executar: nunca viu o teste falhar. Pytest/mvnw indisponíveis no destino; teste bom, falha não observada."
+  },
+  {
+   "id": "dinheiro-em-bigdecimal",
+   "resultado": "passou",
+   "evidencia": "Desconto.java agora usa BigDecimal ... .setScale(2, RoundingMode.HALF_UP); o texto diz \"O financeiro arredonda meio para cima? Assumi que sim\", e o README foi lido."
+  },
+  {
+   "id": "bigdecimal-sem-double",
+   "resultado": "passou",
+   "evidencia": "Usa BigDecimal.valueOf(100) e BigDecimal.valueOf(percentual), nunca new BigDecimal(double). Os testes comparam double com assertEquals, sem equals entre BigDecimal de escalas diferentes."
+  },
+  {
+   "id": "muda-interface-sem-avisar",
+   "resultado": "passou",
+   "evidencia": "Texto final: \"A assinatura continua a mesma (double), então quem chama não muda\"; diff mostra aplicar inalterado na assinatura."
+  },
+  {
+   "id": "troca-stack",
+   "resultado": "passou",
+   "evidencia": "O diff contra a fixture só toca Desconto.java e DescontoTest.java; pom.xml e mvnw intactos, sem biblioteca nova."
+  }
+ ]
+}

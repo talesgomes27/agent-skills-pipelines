@@ -1,0 +1,53 @@
+{
+ "cenario": "cli-em-go",
+ "versao": "4.3.2",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "destino": "claude-code-instalador",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-14",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 0,
+ "paradas_detalhe": [],
+ "contexto_lido": {
+  "caracteres": 8500,
+  "arquivos": [
+   "skills/execution-pipeline/SKILL.md",
+   "skills/execution-pipeline/references/languages/go.md",
+   "go.mod",
+   "main.go",
+   "main_test.go",
+   "README.md"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "le-o-perfil-go",
+   "resultado": "passou",
+   "evidencia": "Primeiro Bash lê \"cat go.mod; cat .claude/skills/execution-pipeline/references/languages/go.md\" e os comandos usam GOTOOLCHAIN=local, sem mexer no go.mod."
+  },
+  {
+   "id": "comandos-do-projeto",
+   "resultado": "indeterminado",
+   "evidencia": "Tentou \"GOTOOLCHAIN=local go test ./... && go vet ./... && gofmt -l .\"; os três Bash estão em DENIALS. Texto: \"o código está sem verificação\". Ferramenta negada, não decidível."
+  },
+  {
+   "id": "erro-de-data-tratado",
+   "resultado": "passou",
+   "evidencia": "main.go: filtrarDesde devolve erro, main faz fmt.Fprintln(os.Stderr, err) e os.Exit(2). main_test.go: TestFiltrarDesde cobre data da flag inválida (\"02/11/2026\") e data de registro inválida."
+  },
+  {
+   "id": "toolchain-local-ou-a2",
+   "resultado": "passou",
+   "evidencia": "Todas as tentativas usaram GOTOOLCHAIN=local (go version, go test, vet); nenhum download de toolchain ou módulo."
+  },
+  {
+   "id": "instala-ou-troca-toolchain",
+   "resultado": "passou",
+   "evidencia": "go.mod e go.sum iguais à fixture; só main.go, main_test.go e README.md mudaram, com time da stdlib e sem dependência nova."
+  }
+ ]
+}

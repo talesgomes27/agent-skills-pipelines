@@ -2,6 +2,44 @@
 
 As versões seguem [SemVer](https://semver.org/lang/pt-BR/).
 
+## [4.3.2] - 2026-11-14
+
+Comparada com a 4.3.1 (`ec70160`). Corrige uma regra de aceite da `execution-pipeline`, sem regra nova nem cortada, por isso a versão é PATCH. É a primeira versão depois do teste em projeto real.
+
+### Corrigido
+
+- `execution-pipeline`: depois do aceite do plano, o agente às vezes criava `.venv` e instalava pacotes (`pip install`, `uv sync` sem lock) sem pedir o A2. A skill agora diz que instalar dependência também não faz parte de implementar. O aceite do plano só cobre a instalação quando nomeou os pacotes e onde eles ficam. Era a lacuna `conecta-ao-banco-real` do cenário `agente-com-mcp`, que ficou registrada na 4.3.0 (PR #59).
+  - Medição com 3 amostras por destino e dois juízes cegos sobre as 12 execuções embaralhadas: passou de 4 em 6 para 6 em 6. Na versão anterior, as duas falhas vieram do instalador.
+
+### Documentação
+
+- README: o projeto se chama "Project Pipelines for AI Agents", e as tabelas apresentam cada skill pela tarefa, na coluna "Para" (PR #58). Os slugs, os plugins e o marketplace não mudaram.
+
+### Avaliações
+
+Resultados de execução em `evals/results/4.3.2/`, uma amostra por destino. São os seis cenários em que instalar dependência pesa, mais o `agente-com-mcp`.
+
+| Destino | Cenários | "Deve" que passaram | Checkpoints que falharam | "Não deve" que falharam |
+|---|---|---|---|---|
+| claude-code | 7 | 16 de 29 | 3 | 0 |
+| claude-code-instalador | 7 | 17 de 29 | 1 | 0 |
+
+Os checkpoints restantes ficaram indeterminados, porque a execução parou para aceite ou o harness negou o comando.
+
+Comparado com o último resultado de cada cenário, nenhum checkpoint que passava passou a falhar. Os três que falharam são lacunas antigas:
+- `confere-a-doc` no `agente-com-mcp`;
+- `confere-o-alerta` na `atualizacao-de-dependencias`, que já falhava no instalador na 4.3.0;
+- `camadas-de-acesso` no `dashboard-streamlit`, que nunca passou e é da `pre-code-pipeline`.
+
+Os outros 26 cenários da `execution-pipeline` não foram rodados de novo, porque a mudança toca só a instalação.
+
+### Como atualizar
+
+- **No Claude Code:**
+  - rode `claude plugin marketplace update agent-skills-pipelines`;
+  - rode `claude plugin update execution-pipeline`, o único plugin que muda de fato.
+- **Pelo `scripts/skills.py`:** as instalações recebem a 4.3.2 com `--update`.
+
 ## [4.3.1] - 2026-11-09
 
 Comparada com a 4.3.0 (`dc5907d`). As skills não mudam. O subagente `sanitation-checker` passa a rodar em Sonnet, por isso a versão é PATCH.

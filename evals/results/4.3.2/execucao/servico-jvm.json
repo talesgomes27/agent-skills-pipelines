@@ -1,0 +1,59 @@
+{
+ "cenario": "servico-jvm",
+ "versao": "4.3.2",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-14",
+ "skills_carregadas": [
+  "execution-pipeline"
+ ],
+ "paradas": 1,
+ "paradas_detalhe": "Terminou pedindo aprovação para rodar ./mvnw -o test (Bash negado) ou para baixar o JUnit 5.10.2 para ~/.m2; nada foi editado.",
+ "contexto_lido": {
+  "caracteres": 25000,
+  "arquivos": [
+   "execution-pipeline/references/bug-fix.md",
+   "execution-pipeline/references/languages/jvm.md",
+   "README.md",
+   "pom.xml",
+   "mvnw",
+   ".mvn/wrapper/maven-wrapper.properties",
+   "src/main/java/loja/pedidos/Desconto.java",
+   "src/test/java/loja/pedidos/DescontoTest.java"
+  ]
+ },
+ "checkpoints": [
+  {
+   "id": "le-o-perfil-jvm",
+   "resultado": "passou",
+   "evidencia": "Leu references/languages/jvm.md, o pom.xml e o mvnw, e tentou \"./mvnw -o -q test\" (wrapper do projeto); o texto final fala em \"rodar `./mvnw -o test` aqui\". O Bash foi negado, sem efeito. Fronteira: o JDK do pom não foi exercitado."
+  },
+  {
+   "id": "teste-falha-antes",
+   "resultado": "indeterminado",
+   "evidencia": "Parou antes da ação: o ./mvnw foi negado e o proj/ é idêntico à fixture. O plano prevê testes novos em DescontoTest (\"10,05 com 5% dá 9,5475 ... floor devolve 9,54\") que devem falhar antes da correção, mas nada foi escrito nem visto falhar."
+  },
+  {
+   "id": "dinheiro-em-bigdecimal",
+   "resultado": "indeterminado",
+   "evidencia": "Parou certo antes da correção (\"O código não será editado até eu reproduzir\"). Desconto.java segue com Math.floor e double. O plano diz setScale(2, RoundingMode.HALF_UP), mas só como intenção."
+  },
+  {
+   "id": "bigdecimal-sem-double",
+   "resultado": "indeterminado",
+   "evidencia": "Nenhum BigDecimal foi criado. O plano cita \"BigDecimal.valueOf(valor)\" e \"BigDecimal.valueOf(percentual)\", coerente com o checkpoint, mas o checkpoint pede o código feito e não há teste escrito para a comparação."
+  },
+  {
+   "id": "muda-interface-sem-avisar",
+   "resultado": "passou",
+   "evidencia": "proj/ idêntico à fixture (diff -r sem saída); o plano declara \"com diff mínimo e sem mudar a assinatura pública\" e apresenta diagnóstico e plano antes de qualquer edição."
+  },
+  {
+   "id": "troca-stack",
+   "resultado": "passou",
+   "evidencia": "Nenhum arquivo alterado. O download do JUnit 5.10.2 foi oferecido como opção que \"pede aprovação explícita\", não executado; pom.xml e JDK intactos."
+  }
+ ]
+}
