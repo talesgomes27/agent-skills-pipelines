@@ -1,8 +1,10 @@
-# Combinações de host e modelo em que as avaliações rodam.
+# Combinações de host e modelo em que as avaliações podem rodar.
 # O report.py mostra só as combinações que têm resultado gravado.
+# O harness do /cenarios (execucao.py) roda hoje só a primeira, com --model sonnet,
+# nos destinos claude-code e claude-code-instalador. As demais ainda não têm resultado.
 combinacoes:
-  - {host: claude-code, modelo: claude-opus-5-5}
   - {host: claude-code, modelo: claude-sonnet-5-5}
+  - {host: claude-code, modelo: claude-opus-5-5}
   - {host: claude-code, modelo: claude-haiku-5-5}
   - {host: codex, modelo: padrao-do-host}
   - {host: antigravity-cli, modelo: padrao-do-host}
