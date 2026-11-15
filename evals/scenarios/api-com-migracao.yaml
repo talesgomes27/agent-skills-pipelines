@@ -7,6 +7,7 @@ skills_esperadas:
 - release-and-ops-pipeline
 - personal-data
 modo: assistido
+aceite_simulado: Aceito o plano. Pode seguir.
 checkpoints:
 - id: referencia-de-migracoes
   tipo: deve

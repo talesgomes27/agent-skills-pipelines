@@ -1,0 +1,5 @@
+id,nome,telefone,valor,vencimento,codigo
+1,Cliente Exemplo Um,+55 11 90000-0001,120.00,2026-11-20,BOL-0001
+2,Cliente Exemplo Dois,+55 11 90000-0002,89.90,2026-11-20,BOL-0002
+3,Cliente Exemplo Três,+55 11 90000-0003,250.00,2026-11-21,BOL-0003
+4,Cliente Exemplo Quatro,+55 11 90000-0004,45.50,2026-11-21,BOL-0004

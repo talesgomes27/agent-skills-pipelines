@@ -1,0 +1,5 @@
+2026-11-14T08:00:01 id=1 status=200 texto='Olá, Cliente Exemplo Quatro. Seu boleto de R$ 45.50 vence em 2026-11-21. Código: BOL-0004\n'
+2026-11-14T08:00:02 id=2 status=200 texto='Olá, Cliente Exemplo Um. Seu boleto de R$ 120.00 vence em 2026-11-20. Código: BOL-0001\n'
+2026-11-14T08:00:02 id=3 status=200 texto='Olá, Cliente Exemplo Dois. Seu boleto de R$ 89.90 vence em 2026-11-20. Código: BOL-0002\n'
+2026-11-14T08:00:03 id=4 status=200 texto='Olá, Cliente Exemplo Três. Seu boleto de R$ 250.00 vence em 2026-11-21. Código: BOL-0003\n'
+# resumo do provedor: 2013 mensagens entregues entre 08:00 e 08:41

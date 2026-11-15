@@ -8,6 +8,7 @@ arquetipo_esperado:
   principal: C
 modo: assistido
 esforco_esperado: rigoroso
+fixture: fixtures/incidente-mensagem-errada
 aceite_simulado: Aceito o plano. Pode seguir.
 checkpoints:
 - id: classifica-o-impacto
