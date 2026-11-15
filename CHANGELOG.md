@@ -2,6 +2,53 @@
 
 As versões seguem [SemVer](https://semver.org/lang/pt-BR/).
 
+## [5.0.0] - 2026-11-14
+
+Comparada com a 4.3.2 (`f3b0a8a`). Duas skills mudam de nome para dizer o que fazem, e as regras continuam as mesmas. É MAJOR porque as instalações com os nomes antigos param de receber atualização.
+
+### Mudou (incompatível)
+
+- `pre-code-pipeline` passa a se chamar `planning-pipeline`, e `execution-pipeline`, `implementation-pipeline` (PR #61). Os subagentes vão junto, como `planning-pipeline:plan-reviewer` e `implementation-pipeline:diff-reviewer`.
+- Os ids dos gatilhos em `evals/triggers.yaml` continuam com os nomes antigos. Assim, o resultado de uma versão nova se compara com o das versões anteriores.
+- Os resultados de antes da 5.0.0, em `evals/results/`, guardam os nomes antigos e continuam válidos nos testes.
+
+### Por que só essas duas
+
+Num experimento com cinco renomeações, três nomes não mudaram nada mensurável. O quarto, `publishing-pipeline` no lugar de `release-and-ops-pipeline`, derrubou o gatilho de incidente de 5 em 5 para 1 em 5 num A/B com 5 amostras: com ele, o pedido ia para a `scheduled-automation`. As outras skills já têm nomes que dizem o que fazem.
+
+### Instalador
+
+- O `catalog.json` ganha `renamed`, o mapa dos nomes antigos.
+- O `skills.py install --update` migra a instalação. Ele instala a skill nova e tira a pasta antiga do caminho e do estado antes de apagá-la.
+- Sem `--update`, com mudança local ou com link alterado, o comando recusa sem mudar nada.
+- Um registro sem pasta sai do estado (`forget-renamed`). Uma pasta antiga que o instalador não criou fica onde está, e o plano avisa (`kept-unmanaged`).
+- `--skill` e `--exclude` aceitam os nomes antigos.
+
+### Avaliações
+
+Gatilhos em `evals/results/5.0.0/`, com uma amostra:
+
+| Destino | 4.3.0 | 5.0.0 |
+|---|---|---|
+| claude-code | 52 de 57 | 51 de 57 |
+| claude-code-instalador | 51 de 57 | 53 de 57 |
+
+- **Marketplace:** a diferença é o `cenario-e`. Num A/B com 5 amostras, ele acertou 1 vez com os nomes antigos e nenhuma com os novos; ele já era fraco no marketplace.
+- **Instalador:** com 3 amostras nos 18 gatilhos das duas skills renomeadas, o `cenario-e` acertou 3 em 3, e o `cenario-f1` e o `cenario-f5`, 2 em 3. No A/B do experimento, com 5 amostras de cada versão, os nomes novos deram 15 acertos em 20 nos quatro gatilhos testados, e os antigos, 12 em 20.
+- Nenhum "não deve" disparou.
+
+Os cenários não foram rodados de novo: o texto das duas skills só mudou o nome, o título da `planning-pipeline` ("Planejamento antes do código") e uma menção ao planejamento na `implementation-pipeline`.
+
+### Como atualizar
+
+- **No Claude Code:** os plugins com o nome antigo saíram do marketplace. Eles continuam instalados, mas não carregam, e o `claude plugin list` mostra "failed to load". Rode:
+  - `claude plugin marketplace update agent-skills-pipelines`;
+  - `claude plugin install planning-pipeline@agent-skills-pipelines` e `claude plugin install implementation-pipeline@agent-skills-pipelines`. Com um pacote, troque os dois por `claude plugin update essencial@agent-skills-pipelines`, ou `completo`, que traz os novos como dependências;
+  - `claude plugin uninstall pre-code-pipeline@agent-skills-pipelines` e `claude plugin uninstall execution-pipeline@agent-skills-pipelines`;
+  - `claude plugin update <plugin>` nos outros plugins instalados.
+- Troque os nomes antigos em `settings.json`, `CLAUDE.md` ou `AGENTS.md`, como `@agent-execution-pipeline:diff-reviewer` ou uma regra de permissão com `pre-code-pipeline`. A referência antiga deixa de valer sem aviso.
+- **Pelo `scripts/skills.py`:** repita a instalação com `--update`, e ele troca as pastas antigas pelas novas.
+
 ## [4.3.2] - 2026-11-14
 
 Comparada com a 4.3.1 (`ec70160`). Corrige uma regra de aceite da `execution-pipeline`, sem regra nova nem cortada, por isso a versão é PATCH. É a primeira versão depois do teste em projeto real.
