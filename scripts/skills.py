@@ -289,7 +289,10 @@ def install(args, names, release, renamed=None):
                 retired.append((old_name, new_name, None))
                 continue
             if odst.is_symlink():
-                if orec.get('mode') != 'link' or str(odst.resolve()) != orec.get('source'):
+                # o alvo antigo já não existe; no Windows com Python 3.9, resolve() de um link quebrado não devolve o alvo
+                target = os.readlink(odst)
+                target = target[4:] if target.startswith('\\\\?\\') else target
+                if orec.get('mode') != 'link' or orec.get('source') not in (target, str(odst.resolve())):
                     raise ValueError('Managed link changed; preserved: ' + str(odst))
             elif orec.get('mode') != 'copy' or not odst.is_dir() or fingerprint(odst) != orec.get('files'):
                 raise ValueError('Local changes detected; preserved: ' + str(odst))
