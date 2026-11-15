@@ -7,6 +7,7 @@ arquetipo_esperado:
 modo: por-efeito
 esforco_esperado: rigoroso
 fixture: fixtures/revisao-com-defeito-plantado
+aceite_simulado: Aceito o plano. Pode seguir.
 checkpoints:
 - id: chama-revisao-independente
   tipo: deve

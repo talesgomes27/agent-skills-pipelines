@@ -1,0 +1,1 @@
+0 8 * * * cd /srv/cobranca && WHATSAPP_TOKEN=$(cat /srv/cobranca/.token) python enviar_cobranca.py clientes.csv

@@ -6,6 +6,7 @@ skills_esperadas:
 - implementation-pipeline
 - release-and-ops-pipeline
 modo: assistido
+aceite_simulado: Aceito o plano. Pode seguir.
 checkpoints:
 - id: arquetipo-b
   tipo: deve
