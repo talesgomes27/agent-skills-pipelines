@@ -290,9 +290,9 @@ def install(args, names, release, renamed=None):
                 continue
             if odst.is_symlink():
                 # o alvo antigo já não existe; no Windows com Python 3.9, resolve() de um link quebrado não devolve o alvo
-                target = os.readlink(odst)
-                target = target[4:] if target.startswith('\\\\?\\') else target
-                if orec.get('mode') != 'link' or orec.get('source') not in (target, str(odst.resolve())):
+                pointed = os.readlink(odst)
+                pointed = pointed[4:] if pointed.startswith('\\\\?\\') else pointed
+                if orec.get('mode') != 'link' or orec.get('source') not in (pointed, str(odst.resolve())):
                     raise ValueError('Managed link changed; preserved: ' + str(odst))
             elif orec.get('mode') != 'copy' or not odst.is_dir() or fingerprint(odst) != orec.get('files'):
                 raise ValueError('Local changes detected; preserved: ' + str(odst))
