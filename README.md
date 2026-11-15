@@ -76,11 +76,32 @@ claude plugin marketplace add talesgomes27/agent-skills-pipelines@stable
 claude plugin install essencial@agent-skills-pipelines
 ```
 
-O pacote `completo` instala as dez skills e o plugin [`pipeline-guardrails`](pipeline-guardrails/README.md), que pede a sua confirmação antes de push, tag, PR, deploy, migração e instalação de dependência, mesmo quando o agente esqueceria o A2. Ele também se instala sozinho, com `claude plugin install pipeline-guardrails@agent-skills-pipelines`. Os pacotes não têm conteúdo próprio: eles instalam os plugins das skills como dependências. Ao desinstalar um pacote, o Claude Code mantém essas dependências e sugere `claude plugin prune`, que remove só as que ele instalou automaticamente, não as que você instalou à mão.
+O pacote `completo` instala as dez skills e o plugin [`pipeline-guardrails`](pipeline-guardrails/README.md), que pede a sua confirmação antes de push, tag, PR, deploy, migração e instalação de dependência, mesmo quando o agente esqueceria o A2:
+
+```bash
+claude plugin install completo@agent-skills-pipelines
+```
+
+O `pipeline-guardrails` também se instala sozinho, com `claude plugin install pipeline-guardrails@agent-skills-pipelines`. Os pacotes não têm conteúdo próprio: eles instalam os plugins das skills como dependências. Ao desinstalar um pacote, o Claude Code mantém essas dependências e sugere `claude plugin prune`, que remove só as que ele instalou automaticamente, não as que você instalou à mão.
 
 Cada uma dessas três pipelines traz um subagente de revisão que o Claude Code pode chamar sozinho nesse ponto, ou que você chama pelo nome, como `@agent-planning-pipeline:plan-reviewer`: `plan-reviewer` revisa o plano antes do seu aceite, `diff-reviewer` revisa o diff no fim da implementação e `sanitation-checker` confere segredos, dados pessoais e arquivos grandes antes de publicar. Eles relatam e não editam.
 
-Acrescente as outras skills da tabela uma a uma, com `claude plugin install <skill>@agent-skills-pipelines`. A branch `stable` só avança quando sai uma release, então você recebe só versões publicadas; para fixar uma versão exata, use uma tag, como `@v5.0.0`, no lugar de `@stable`. Sem o `@`, o marketplace acompanha a `main`, que muda a cada PR. Abra uma sessão nova para o Claude Code encontrá-las. No Claude Code, prefira o marketplace ao instalador abaixo: ele atualiza com `claude plugin update`.
+Para instalar as skills uma a uma, sem pacote, use `claude plugin install <skill>@agent-skills-pipelines`:
+
+```bash
+claude plugin install planning-pipeline@agent-skills-pipelines
+claude plugin install implementation-pipeline@agent-skills-pipelines
+claude plugin install release-and-ops-pipeline@agent-skills-pipelines
+claude plugin install writing-pipeline@agent-skills-pipelines
+claude plugin install audit-and-refactoring-pipeline@agent-skills-pipelines
+claude plugin install scheduled-automation@agent-skills-pipelines
+claude plugin install personal-data@agent-skills-pipelines
+claude plugin install jurimetria@agent-skills-pipelines
+claude plugin install quarto-expert@agent-skills-pipelines
+claude plugin install skill-loader@agent-skills-pipelines
+```
+
+A branch `stable` só avança quando sai uma release, então você recebe só versões publicadas; para fixar uma versão exata, use uma tag, como `@v5.0.0`, no lugar de `@stable`. Sem o `@`, o marketplace acompanha a `main`, que muda a cada PR. Abra uma sessão nova para o Claude Code encontrá-las. No Claude Code, prefira o marketplace ao instalador abaixo: ele atualiza com `claude plugin update`.
 
 ### Codex, Antigravity e outros hosts
 

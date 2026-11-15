@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Stop: enquanto houver mudança não commitada em skills, catálogo, scripts ou testes, roda os testes e o doctor antes de encerrar.
+# Stop: enquanto houver mudança não commitada em skills, contrato, catálogo, scripts, avaliações, guardrails, subagentes ou testes, roda os testes e o doctor antes de encerrar.
 input=$(cat)
 # Sem jq não há como ler o stop_hook_active, e bloquear poderia virar laço.
 command -v jq >/dev/null || exit 0
@@ -7,7 +7,7 @@ command -v jq >/dev/null || exit 0
 [ "$(printf '%s' "$input" | jq -r '.stop_hook_active // false')" = "true" ] && exit 0
 root="${CLAUDE_PROJECT_DIR:-$(pwd)}"
 cd "$root" 2>/dev/null || exit 0
-changes=$(git status --porcelain -- '*/SKILL.md' '*/references/*' distribution .claude-plugin README.md scripts tests ':(exclude).claude' 2>/dev/null)
+changes=$(git status --porcelain -- '*/SKILL.md' '*/references/*' distribution .claude-plugin README.md scripts tests shared evals pipeline-guardrails plugin-agents ':(exclude).claude' 2>/dev/null)
 [ -z "$changes" ] && exit 0
 failed=""
 tests_out=$(/usr/bin/python3 -m unittest discover -s tests 2>&1) || failed="testes"
