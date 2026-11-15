@@ -21,7 +21,7 @@ Atualize a data e a evidência sempre que repetir o teste em um host. Um destino
 
 Na 5.0.0, a descoberta está verificada em 2 dos 5 destinos, os dois do Claude Code. Todos os resultados de gatilho desde a 4.0.0 usam o mesmo modelo (`claude-sonnet-5-5`) e uma amostra gravada por gatilho. Por decisão do mantenedor em 2026-11-08, os testes rodam por enquanto só no Claude Code.
 
-As rodadas isolam o ambiente (`--setting-sources project`, `--strict-mcp-config`). Assim, elas não medem o efeito de um catálogo cheio de outros plugins, em que o host pode omitir as descrições.
+As rodadas isolam o ambiente (`--setting-sources project`, `--strict-mcp-config`). Assim, elas não medem o efeito de um catálogo cheio de outros plugins. No Claude Code, a lista de skills tem um orçamento de 1% da janela de contexto, e, quando ele estoura, o host tira primeiro as descrições das skills menos invocadas, mantendo só o nome ([documentação](https://code.claude.com/docs/en/skills#skill-descriptions-are-cut-short), conferida em 2026-11-15). Uma instalação nova, que ainda não usou estas skills, é a primeira a perder as descrições. O `/doctor` estima o custo da lista, e `skillListingBudgetFraction` ou `skillOverrides` com `"name-only"` abrem espaço; o README traz o mesmo aviso.
 
 ## Prompts de gatilho
 
