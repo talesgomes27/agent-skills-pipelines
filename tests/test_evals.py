@@ -172,6 +172,13 @@ class MatrixAndReport(unittest.TestCase):
         instalador = r[('9.0.0', 'execucao', 'claude-code', 'claude-code-instalador', 'm')]
         self.assertEqual((instalador['certos'], instalador['total']), (2, 2))
 
+    def test_report_cost_shows_coverage(self):
+        mod = self._report()
+        self.assertEqual(mod.custo([]), '—')
+        self.assertEqual(mod.custo([None]), '—')
+        self.assertEqual(mod.custo([0.25, 0.5]), '0.75')
+        self.assertEqual(mod.custo([0.25, None]), '0.25 (1 de 2)')
+
     def test_report_reads_triggers_without_pyyaml(self):
         mod = self._report()
         real = mod.gatilhos_esperados()
@@ -250,7 +257,10 @@ class ResultFormat(unittest.TestCase):
                     for r in data['resultados']:
                         self.assertIn(r['id'], trig)
                         self.assertIn(r['observado'], ('ativou', 'nao_ativou', 'outra'))
+                        self.assertLessEqual(set(r.get('amostras', [])), {'ativou', 'nao_ativou', 'outra'})
+                    self.check_metricas(data.get('metricas'))
                     continue
+                self.check_metricas(data.get('metricas'))
                 # <id>.json no modo padrão da versão; <id>--<modo>.json nos outros
                 stem, _, modo = path.stem.partition('--')
                 self.assertEqual(data['cenario'], stem)
@@ -270,6 +280,16 @@ class ResultFormat(unittest.TestCase):
                     self.assertIn(c['id'], known)
                     self.assertIn(c['resultado'], ('passou', 'falhou', 'indeterminado'))
                     self.assertTrue(c['evidencia'].strip())
+
+    def check_metricas(self, m):
+        # opcional; um valor que o host não deu fica null, nunca 0
+        if m is None:
+            return
+        self.assertLessEqual(set(m), {'custo_usd', 'turnos', 'duracao_ms', 'tokens', 'sem_custo'})
+        for k in ('custo_usd', 'turnos', 'duracao_ms', 'sem_custo'):
+            self.assertTrue(m.get(k) is None or (isinstance(m[k], (int, float)) and m[k] >= 0), k)
+        if m.get('tokens') is not None:
+            self.assertEqual(set(m['tokens']), {'entrada', 'saida', 'cache_leitura', 'cache_escrita'})
 
 
 # resultados julgados antes da regra de evidência própria (4.2.0), sem os registros das execuções para rejulgar:
@@ -341,6 +361,55 @@ class Harness(unittest.TestCase):
             with contextlib.redirect_stdout(out):
                 ex.contar(t, '4.3.0')
             self.assertIn('1 pastas com meta.json inválido', out.getvalue())
+
+    def _ex(self):
+        import importlib.util
+        spec = importlib.util.spec_from_file_location('execucao', REPO / '.claude/skills/cenarios/scripts/execucao.py')
+        ex = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(ex)
+        return ex
+
+    def test_metricas_sums_both_turns_and_keeps_missing_as_none(self):
+        import tempfile
+        ex = self._ex()
+        res = lambda **k: json.dumps(dict({'type': 'result', 'subtype': 'success'}, **k))
+        uso = {'input_tokens': 6, 'output_tokens': 100, 'cache_read_input_tokens': 900, 'cache_creation_input_tokens': 50}
+        with tempfile.TemporaryDirectory() as t:
+            exe = Path(t)
+            (exe / 'log.jsonl').write_text(res(total_cost_usd=0.25, num_turns=5, duration_ms=1000, usage=uso) + '\n', encoding='utf-8')
+            (exe / 'log2.jsonl').write_text('lixo\n' + res(total_cost_usd=0.5, num_turns=2, duration_ms=500, usage=uso) + '\n', encoding='utf-8')
+            m = ex.metricas(exe)
+            self.assertEqual((m['custo_usd'], m['turnos'], m['duracao_ms']), (0.75, 7, 1500))
+            self.assertEqual(m['tokens'], {'entrada': 12, 'saida': 200, 'cache_leitura': 1800, 'cache_escrita': 100})
+            (exe / 'log2.jsonl').unlink()
+            (exe / 'log.jsonl').write_text(res(num_turns=3) + '\n', encoding='utf-8')
+            m = ex.metricas(exe)
+            self.assertEqual((m['custo_usd'], m['turnos'], m['duracao_ms'], m['tokens']), (None, 3, None, None))  # ausente não vira 0
+            (exe / 'log.jsonl').write_text('', encoding='utf-8')
+            self.assertEqual(ex.metricas(exe), {'custo_usd': None, 'turnos': None, 'duracao_ms': None, 'tokens': None})
+
+    def test_contar_json_keeps_samples(self):
+        import contextlib
+        import io
+        import tempfile
+        ex = self._ex()
+        uso = json.dumps({'type': 'assistant', 'message': {'content': [{'type': 'tool_use', 'name': 'Skill', 'input': {'skill': 'asp:release-and-ops-pipeline'}}]}})
+        fim = json.dumps({'type': 'result', 'subtype': 'success', 'total_cost_usd': 0.1, 'num_turns': 2, 'duration_ms': 10})
+        with tempfile.TemporaryDirectory() as t:
+            for n, log in ((1, uso + '\n' + fim), (2, fim), (3, uso)):
+                exe = Path(t) / 'claude-code' / f'gatilho-release-and-ops-pipeline-incidente-1-{n}'
+                exe.mkdir(parents=True)
+                (exe / 'meta.json').write_text(json.dumps({'tipo': 'gatilho', 'id': 'release-and-ops-pipeline-incidente-1', 'destino': 'claude-code', 'amostra': n}))
+                (exe / 'log.jsonl').write_text(log + '\n', encoding='utf-8')
+                (exe / 'done').write_text('0')
+            out = io.StringIO()
+            with contextlib.redirect_stdout(out):
+                ex.contar(t, json_saida=True)
+            d = json.loads(out.getvalue())['claude-code']
+        (r,) = d['resultados']
+        # uma amostra errada basta para o observado ser o erro, como no "certos em todas as amostras"
+        self.assertEqual(r, {'id': 'release-and-ops-pipeline-incidente-1', 'observado': 'nao_ativou', 'amostras': ['ativou', 'nao_ativou', 'ativou']})
+        self.assertEqual(d['metricas'], {'custo_usd': 0.2, 'turnos': 4, 'duracao_ms': 20, 'sem_custo': 1})
 
     def test_api_error_does_not_mark_done(self):
         import importlib.util

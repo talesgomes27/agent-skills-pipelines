@@ -46,6 +46,7 @@ Para cada id, leia `evals/scenarios/<id>.yaml`, julgue cada checkpoint e grave c
 - `paradas`: 1 se terminou pedindo aceite ou com uma pergunta bloqueante, senão 0;
 - `paradas_detalhe`;
 - `contexto_lido`, com `caracteres` estimado e `arquivos`;
+- `metricas`: a saída de `/usr/bin/python3 .claude/skills/cenarios/scripts/execucao.py metricas <exec>`, copiada sem mudar; um `null` continua `null`;
 - `checkpoints`: `id`, `resultado` e `evidencia`.
 
 Grave só nesse caminho e só esses arquivos.
