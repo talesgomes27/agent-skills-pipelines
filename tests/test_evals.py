@@ -123,6 +123,61 @@ class MatrixAndReport(unittest.TestCase):
             keys = set(mod.rows(root=root))
         self.assertEqual({k[4] for k in keys}, {'', 'claude-code-instalador'})
 
+    def _report(self):
+        import importlib.util
+        spec = importlib.util.spec_from_file_location('report', EVALS / 'report.py')
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        return mod
+
+    def test_report_situation_separates_failed_from_undetermined(self):
+        import tempfile
+        mod = self._report()
+        proibidos = {'x': {'p'}}
+
+        def situacao(*checkpoints):
+            d = {'cenario': 'x', 'versao': '9.0.0', 'nivel': 'execucao', 'host': 'h', 'modelo': 'm', 'data': '2026-11-14',
+                 'checkpoints': [{'id': i, 'resultado': r} for i, r in checkpoints]}
+            with tempfile.TemporaryDirectory() as t:
+                (Path(t) / '9.0.0/execucao').mkdir(parents=True)
+                (Path(t) / '9.0.0/execucao/x.json').write_text(json.dumps(d), encoding='utf-8')
+                (a,) = mod.rows(root=Path(t), proibidos=proibidos).values()
+            return mod.situacao(a), a
+        self.assertEqual(situacao(('p', 'falhou'), ('d', 'passou'))[0], 'não recomendada')
+        self.assertEqual(situacao(('p', 'indeterminado'), ('d', 'passou'))[0], 'sem evidência')
+        self.assertEqual(situacao(('d', 'passou'))[0], 'sem evidência')  # nenhum nao_deve julgado
+        self.assertEqual(situacao()[0], 'sem evidência')
+        self.assertEqual(situacao(('p', 'passou'), ('d', 'falhou'), ('e', 'passou'))[0], 'parcial')
+        s, a = situacao(('p', 'passou'), ('d', 'passou'), ('e', 'indeterminado'))
+        self.assertEqual(s, 'ok')
+        self.assertEqual((a['deve']['passou'], a['deve']['indeterminado'], a['deve']['falhou']), (1, 1, 0))
+
+    def test_report_counts_triggers(self):
+        import tempfile
+        mod = self._report()
+        gatilhos = {'a': 'deve', 'b': 'ambiguo_deve', 'c': 'nao_deve', 'd': 'nao_deve'}
+        d = {'versao': '9.0.0', 'nivel': 'execucao', 'host': 'claude-code', 'modelo': 'm', 'data': '2026-11-14',
+             'resultados': [{'id': 'a', 'observado': 'nao_ativou'}, {'id': 'b', 'observado': 'ativou'},
+                            {'id': 'c', 'observado': 'outra'}, {'id': 'd', 'observado': 'ativou'},
+                            {'id': 'saiu-do-yaml', 'observado': 'ativou'}]}
+        with tempfile.TemporaryDirectory() as t:
+            (Path(t) / '9.0.0/execucao').mkdir(parents=True)
+            (Path(t) / '9.0.0/execucao/triggers-claude-code.json').write_text(json.dumps(d), encoding='utf-8')
+            (Path(t) / '9.0.0/execucao/triggers-claude-code-instalador.json').write_text(
+                json.dumps(dict(d, destino='claude-code-instalador', resultados=d['resultados'][1:3])), encoding='utf-8')
+            r = mod.trigger_rows(root=Path(t), gatilhos=gatilhos)
+        marketplace = r[('9.0.0', 'execucao', 'claude-code', '', 'm')]
+        self.assertEqual((marketplace['certos'], marketplace['total'], marketplace['erros_deve'], marketplace['ativou_nao_deve'],
+                          marketplace['ignorados']), (2, 4, 1, 1, 1))
+        instalador = r[('9.0.0', 'execucao', 'claude-code', 'claude-code-instalador', 'm')]
+        self.assertEqual((instalador['certos'], instalador['total']), (2, 2))
+
+    def test_report_reads_triggers_without_pyyaml(self):
+        mod = self._report()
+        real = mod.gatilhos_esperados()
+        texto = (EVALS / 'triggers.yaml').read_text(encoding='utf-8')
+        self.assertEqual(mod.gatilhos_esperados(texto_sem_yaml=texto), real)
+
 
 @unittest.skipIf(yaml is None, 'PyYAML ausente')
 class ResultFormat(unittest.TestCase):
