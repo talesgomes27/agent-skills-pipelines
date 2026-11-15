@@ -103,6 +103,8 @@ claude plugin install skill-loader@agent-skills-pipelines
 
 A branch `stable` só avança quando sai uma release, então você recebe só versões publicadas; para fixar uma versão exata, use uma tag, como `@v5.0.0`, no lugar de `@stable`. Sem o `@`, o marketplace acompanha a `main`, que muda a cada PR. Abra uma sessão nova para o Claude Code encontrá-las. No Claude Code, prefira o marketplace ao instalador abaixo: ele atualiza com `claude plugin update`.
 
+Com muitos plugins instalados, o Claude Code pode listar as skills só pelo nome, sem a `description`, e o agente deixa de reconhecer quando usá-las. A lista tem um orçamento de 1% da janela de contexto e perde primeiro as descrições das skills menos usadas. O `/doctor` mostra o custo da lista; para abrir espaço, aumente `skillListingBudgetFraction` nas configurações ou marque como `"name-only"`, em `skillOverrides`, as skills de outros plugins que você pouco usa. Veja [Skill descriptions are cut short](https://code.claude.com/docs/en/skills#skill-descriptions-are-cut-short).
+
 ### Codex, Antigravity e outros hosts
 
 O instalador instala grupos de skills, os bundles. O `development` traz planejamento, execução, auditoria, automações, dados pessoais e jurimetria; o `research` troca a auditoria e as automações por escrita e Quarto. Com Python 3.9 ou mais novo:
