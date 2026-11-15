@@ -16,8 +16,8 @@ Release atual: **4.3.2**.
 
 Você pede: *"Quero um dashboard em Streamlit com as vendas mensais por loja, publicado para a equipe."*
 
-1. A `pre-code-pipeline` entra antes de qualquer código. Ela lê os dados, pergunta só o que muda a decisão e escreve a spec (`docs/spec.md`, com requisitos verificáveis) e o plano (`docs/plan.md`). Para uma vez, no **A1**, para você aceitar o escopo.
-2. A `execution-pipeline` implementa o plano em fatias: lógica com testes, integração com os dados, telas, documentação e revisão. Para o Streamlit, ela usa a skill oficial do próprio Streamlit, se estiver instalada. Ela não para entre as etapas: mostra uma linha de status e grava a evidência.
+1. A `planning-pipeline` entra antes de qualquer código. Ela lê os dados, pergunta só o que muda a decisão e escreve a spec (`docs/spec.md`, com requisitos verificáveis) e o plano (`docs/plan.md`). Para uma vez, no **A1**, para você aceitar o escopo.
+2. A `implementation-pipeline` implementa o plano em fatias: lógica com testes, integração com os dados, telas, documentação e revisão. Para o Streamlit, ela usa a skill oficial do próprio Streamlit, se estiver instalada. Ela não para entre as etapas: mostra uma linha de status e grava a evidência.
 3. Antes de cada efeito do catálogo do contrato comum, como commit, push, deploy, conta nova, instalação de dependência ou envio de dados a terceiros, o agente para no **A2** e diz o que vai fazer, onde e com qual conteúdo.
 4. A `release-and-ops-pipeline` confere o que vai ser enviado, publica e testa o app publicado. A entrega termina no **A3**, com o diff, os checks rodados e o que ficou pendente.
 
@@ -35,7 +35,7 @@ Um pedido pequeno, como uma análise pontual ou a correção de um bug, passa po
 
 Prefere as paradas da 3.x, nos gates que cada pipeline marca para aceite? Ponha no `AGENTS.md` do projeto uma seção `## Pipelines` com a linha `- Modo: assistido`. A mesma seção lista os efeitos que você libera sem parada, como push da branch de trabalho; o [guia de instalação](docs/distribution/architecture.md#modo-e-efeitos-liberados-por-projeto) mostra o formato. Projetos com `docs/00` a `docs/05` ou com Spec Kit, Kiro e OpenSpec continuam no formato que já usam.
 
-Os nomes das skills ficam em inglês, como identificadores estáveis; o conteúdo e as respostas são em português. Você não precisa chamar as skills: o agente as escolhe pelo pedido. Para forçar uma, peça pelo nome; no Claude Code, as skills dos plugins têm o prefixo do plugin, como `pre-code-pipeline:pre-code-pipeline`.
+Os nomes das skills ficam em inglês, como identificadores estáveis; o conteúdo e as respostas são em português. Você não precisa chamar as skills: o agente as escolhe pelo pedido. Para forçar uma, peça pelo nome; no Claude Code, as skills dos plugins têm o prefixo do plugin, como `planning-pipeline:planning-pipeline`.
 
 As pipelines separam o trabalho em três tipos, cada um com as suas regras de teste e de publicação:
 
@@ -49,8 +49,8 @@ Pipelines, que conduzem uma etapa inteira do trabalho, com paradas para o seu ac
 
 | Para | Skill | Quando entra |
 |---|---|---|
-| **Planejar** | [`pre-code-pipeline`](pre-code-pipeline/SKILL.md) | Antes de programar: descoberta, escopo, arquitetura e plano. |
-| **Implementar ou corrigir** | [`execution-pipeline`](execution-pipeline/SKILL.md) | Para implementar um plano aprovado, corrigir um bug ou atualizar dependências, com testes proporcionais à stack. |
+| **Planejar** | [`planning-pipeline`](planning-pipeline/SKILL.md) | Antes de programar: descoberta, escopo, arquitetura e plano. |
+| **Implementar ou corrigir** | [`implementation-pipeline`](implementation-pipeline/SKILL.md) | Para implementar um plano aprovado, corrigir um bug ou atualizar dependências, com testes proporcionais à stack. |
 | **Auditar e refatorar** | [`audit-and-refactoring-pipeline`](audit-and-refactoring-pipeline/SKILL.md) | Para entender, revisar e refatorar código, notebooks ou um PR sem quebrar o que funciona. |
 | **Publicar e operar** | [`release-and-ops-pipeline`](release-and-ops-pipeline/SKILL.md) | Para publicar: saneamento, versão, CI, deploy autorizado e teste do que foi publicado; também incidentes e desligamento. |
 | **Escrever e revisar** | [`writing-pipeline`](writing-pipeline/SKILL.md) | Para redigir ou revisar documentos técnicos e de negócio sem perder fatos e fontes. |
@@ -78,7 +78,7 @@ claude plugin install essencial@agent-skills-pipelines
 
 O pacote `completo` instala as dez skills e o plugin [`pipeline-guardrails`](pipeline-guardrails/README.md), que pede a sua confirmação antes de push, tag, PR, deploy, migração e instalação de dependência, mesmo quando o agente esqueceria o A2. Ele também se instala sozinho, com `claude plugin install pipeline-guardrails@agent-skills-pipelines`. Os pacotes não têm conteúdo próprio: eles instalam os plugins das skills como dependências. Ao desinstalar um pacote, o Claude Code mantém essas dependências e sugere `claude plugin prune`, que remove só as que ele instalou automaticamente, não as que você instalou à mão.
 
-Cada uma dessas três pipelines traz um subagente de revisão que o Claude Code pode chamar sozinho nesse ponto, ou que você chama pelo nome, como `@agent-pre-code-pipeline:plan-reviewer`: `plan-reviewer` revisa o plano antes do seu aceite, `diff-reviewer` revisa o diff no fim da implementação e `sanitation-checker` confere segredos, dados pessoais e arquivos grandes antes de publicar. Eles relatam e não editam.
+Cada uma dessas três pipelines traz um subagente de revisão que o Claude Code pode chamar sozinho nesse ponto, ou que você chama pelo nome, como `@agent-planning-pipeline:plan-reviewer`: `plan-reviewer` revisa o plano antes do seu aceite, `diff-reviewer` revisa o diff no fim da implementação e `sanitation-checker` confere segredos, dados pessoais e arquivos grandes antes de publicar. Eles relatam e não editam.
 
 Acrescente as outras skills da tabela uma a uma, com `claude plugin install <skill>@agent-skills-pipelines`. A branch `stable` só avança quando sai uma release, então você recebe só versões publicadas; para fixar uma versão exata, use uma tag, como `@v4.3.2`, no lugar de `@stable`. Sem o `@`, o marketplace acompanha a `main`, que muda a cada PR. Abra uma sessão nova para o Claude Code encontrá-las. No Claude Code, prefira o marketplace ao instalador abaixo: ele atualiza com `claude plugin update`.
 
@@ -97,6 +97,25 @@ python3 -m venv .venv
 ```
 
 Troque `codex` por `antigravity` ou `antigravity-cli`. No Windows, use `.venv\Scripts\python.exe`. Com `--agent claude`, as skills vão para o Claude Code sem o plugin: não vêm os subagentes de revisão nem o `pipeline-guardrails`, e a revisão do diff por um agente que não viu o trabalho, no esforço rigoroso, passa a ser feita por um subagente novo. Para atualizar, repita o comando com `--update`: cópias que você editou à mão não são sobrescritas.
+
+### Vindo da 4.x
+
+Na 5.0.0, a `pre-code-pipeline` passou a se chamar `planning-pipeline`, e a `execution-pipeline`, `implementation-pipeline`. O conteúdo é o mesmo.
+
+- **No Claude Code**, os plugins com o nome antigo saíram do marketplace: continuam instalados, mas não carregam, e o `claude plugin list` mostra "failed to load". Atualize o marketplace, instale os novos e desinstale os antigos:
+
+  ```bash
+  claude plugin marketplace update agent-skills-pipelines
+  claude plugin install planning-pipeline@agent-skills-pipelines
+  claude plugin install implementation-pipeline@agent-skills-pipelines
+  claude plugin uninstall pre-code-pipeline@agent-skills-pipelines
+  claude plugin uninstall execution-pipeline@agent-skills-pipelines
+  ```
+
+  Com um pacote (`essencial` ou `completo`), troque as duas instalações por `claude plugin update essencial@agent-skills-pipelines` (ou `completo`), que traz os novos como dependências, e desinstale os antigos do mesmo jeito.
+
+  Se o seu `settings.json`, `CLAUDE.md` ou `AGENTS.md` cita os nomes antigos, como `@agent-execution-pipeline:diff-reviewer` ou uma regra de permissão com `pre-code-pipeline`, troque pelo nome novo: a referência antiga deixa de valer sem aviso.
+- **No instalador**, o `--update` troca as pastas antigas pelas novas e aceita os nomes antigos em `--skill` e `--exclude`. Uma cópia com mudança local fica onde está, e o comando para sem alterar nada. Uma pasta antiga que o instalador não criou também fica, e o plano avisa com `kept-unmanaged`: apague-a se for só a cópia antiga.
 
 O [guia de instalação](docs/distribution/architecture.md) tem os destinos de cada host, todos os bundles, a instalação por link e o que fazer quando uma instalação falha.
 

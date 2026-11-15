@@ -1,7 +1,7 @@
 id: preautorizacao-autoescrita
 pedido: Termina o painel de estoque e abre o PR.
 skills_esperadas:
-- execution-pipeline
+- implementation-pipeline
 arquetipo_esperado:
   principal: B
 modo: por-efeito

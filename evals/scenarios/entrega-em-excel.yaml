@@ -2,7 +2,7 @@ id: entrega-em-excel
 pedido: Gera a planilha Excel do fechamento de outubro a partir de lancamentos.csv, com uma aba por centro
   de custo e os totais.
 skills_esperadas:
-- execution-pipeline
+- implementation-pipeline
 arquetipo_esperado:
   principal: C
 modo: por-efeito

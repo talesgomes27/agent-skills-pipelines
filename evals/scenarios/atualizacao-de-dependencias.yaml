@@ -2,7 +2,7 @@ id: atualizacao-de-dependencias
 pedido: Apareceu um alerta de segurança dizendo que o requests 2.31.0 deste projeto tem vulnerabilidade.
   Atualiza a dependência.
 skills_esperadas:
-- execution-pipeline
+- implementation-pipeline
 arquetipo_esperado:
   principal: C
 modo: por-efeito

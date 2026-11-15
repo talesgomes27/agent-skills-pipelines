@@ -1,7 +1,7 @@
 id: pipeline-dbt
 pedido: Adiciona a coluna canal_venda ao modelo fct_pedidos do dbt e preenche o histórico desde 2023.
 skills_esperadas:
-- execution-pipeline
+- implementation-pipeline
 arquetipo_esperado:
   principal: C
   secundario: A

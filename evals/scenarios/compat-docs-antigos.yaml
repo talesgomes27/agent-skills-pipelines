@@ -1,7 +1,7 @@
 id: compat-docs-antigos
 pedido: Continua o painel de vendas pelo plano aprovado e faz a exportação em CSV.
 skills_esperadas:
-- execution-pipeline
+- implementation-pipeline
 arquetipo_esperado:
   principal: B
 modo: por-efeito

@@ -7,7 +7,7 @@
   },
   "plugins": [
     {
-      "name": "pre-code-pipeline",
+      "name": "planning-pipeline",
       "source": "./",
       "description": "Descoberta, requisitos, arquitetura, scaffold documental e plano verificável.",
       "version": "4.3.2",
@@ -16,14 +16,14 @@
       },
       "license": "MIT",
       "skills": [
-        "./pre-code-pipeline"
+        "./planning-pipeline"
       ],
       "agents": [
         "./plugin-agents/plan-reviewer.md"
       ]
     },
     {
-      "name": "execution-pipeline",
+      "name": "implementation-pipeline",
       "source": "./",
       "description": "Implementação de um plano aprovado e validação proporcional à stack.",
       "version": "4.3.2",
@@ -32,7 +32,7 @@
       },
       "license": "MIT",
       "skills": [
-        "./execution-pipeline"
+        "./implementation-pipeline"
       ],
       "agents": [
         "./plugin-agents/diff-reviewer.md"
@@ -166,8 +166,8 @@
       "license": "MIT",
       "skills": [],
       "dependencies": [
-        "pre-code-pipeline",
-        "execution-pipeline",
+        "planning-pipeline",
+        "implementation-pipeline",
         "release-and-ops-pipeline",
         "personal-data"
       ]
@@ -183,8 +183,8 @@
       "license": "MIT",
       "skills": [],
       "dependencies": [
-        "pre-code-pipeline",
-        "execution-pipeline",
+        "planning-pipeline",
+        "implementation-pipeline",
         "writing-pipeline",
         "audit-and-refactoring-pipeline",
         "release-and-ops-pipeline",

@@ -9,7 +9,7 @@ Um job agendado roda sem ninguém olhando, então o erro dele aparece depois e �
 
 ## Contrato do job
 
-Responda por escrito antes de implementar, no plano da `pre-code-pipeline` ou na tarefa da `execution-pipeline`:
+Responda por escrito antes de implementar, no plano da `planning-pipeline` ou na tarefa da `implementation-pipeline`:
 
 1. **Gatilho.** Agendador, horário e fuso; o que acontece com atraso, execução perdida e duas execuções ao mesmo tempo. Inclua o disparo manual do mesmo job, para testar e reprocessar. Escolha o agendador pelo que o job precisa: GitHub Actions serve a job curto, sem disco persistente e com dados que podem passar pelo GitHub; servidor próprio ou agendador de nuvem servem quando o job precisa de disco, rede privada ou dados que não devem sair do seu ambiente.
 2. **Janela.** De onde vêm os dados, que janela cada execução processa (o dia anterior, os arquivos novos desde a última marca) e como reprocessar uma janela passada.
@@ -26,7 +26,7 @@ Responda por escrito antes de implementar, no plano da `pre-code-pipeline` ou na
 
 - O dry-run lê as entradas reais, com credencial só de leitura quando o plano prevê, e mostra o que gravaria e enviaria. Ele não grava estado, não envia mensagem e não avança a marca de execução; a mensagem que seria enviada aparece na saída do job. O plano diz o que ele suprime.
 - Teste a lógica com fixtures pequenas: o arquivo repetido, a planilha com esquema mudado e a falha no meio do lote. Para a idempotência, rode duas vezes sobre a mesma entrada; o resultado e os envios ficam iguais.
-- Teste a integração com os recursos de teste do plano, como pasta, banco e chat de teste. No recurso de teste, gravar e enviar seguem a regra da `execution-pipeline` para o recurso que o plano nomeia. No destino real, a primeira execução vem com a autorização de ativar.
+- Teste a integração com os recursos de teste do plano, como pasta, banco e chat de teste. No recurso de teste, gravar e enviar seguem a regra da `implementation-pipeline` para o recurso que o plano nomeia. No destino real, a primeira execução vem com a autorização de ativar.
 
 ## Ativar, acompanhar e desligar
 

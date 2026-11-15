@@ -1,6 +1,6 @@
 # Incidentes e segredo vazado
 
-É incidente o defeito com efeito fora do desenvolvimento (usuários, dados reais, envios), o serviço ou job de produção usado por outros que parou e o segredo exposto; falha local, sem publicação nem envio, é bug. Na dúvida, pergunte se algo saiu do ambiente local. Num incidente, as paradas são o A2 de cada contenção fora do plano de recuperação já autorizado, envio, reprocessamento ou limpeza de histórico, e o A3 depois da verificação no destino; os gates RL-1 a RL-5 voltam na nova publicação. O conserto do código segue a correção de bug da `execution-pipeline`.
+É incidente o defeito com efeito fora do desenvolvimento (usuários, dados reais, envios), o serviço ou job de produção usado por outros que parou e o segredo exposto; falha local, sem publicação nem envio, é bug. Na dúvida, pergunte se algo saiu do ambiente local. Num incidente, as paradas são o A2 de cada contenção fora do plano de recuperação já autorizado, envio, reprocessamento ou limpeza de histórico, e o A3 depois da verificação no destino; os gates RL-1 a RL-5 voltam na nova publicação. O conserto do código segue a correção de bug da `implementation-pipeline`.
 
 ## Ordem
 
@@ -8,7 +8,7 @@
 2. **Conter dentro do autorizado.** Pausar o agendamento, desligar a funcionalidade ou voltar ao deploy anterior pelo plano de recuperação já autorizado. Uma contenção fora desse plano é efeito externo. Mostre a ação, o alvo e como desfazer, e peça a autorização para o mínimo que interrompe o dano. Não apague dados, logs nem registros de envio: eles são a evidência.
 3. **Preservar a evidência.** Guarde logs, IDs de execução, versão do artefato e horários, sem segredos e sem dados pessoais além do necessário.
 4. **Comunicar.** Quem precisa saber, como a equipe, os afetados ou o cliente, é decisão do usuário. O agente redige a mensagem e não a envia: enviar é efeito com autorização própria. Incidente com dados pessoais segue a skill `personal-data`: comunicar a ANPD e os titulares cabe ao controlador, que tem essa obrigação quando há risco ou dano relevante ([LGPD, art. 48](https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm), conferido em 07/11/2026).
-5. **Corrigir pela causa.** Reproduza, escreva o teste que falha e corrija, como na `execution-pipeline`. Reprocessar ou reenviar só com escopo autorizado e com a idempotência conferida, para não repetir o envio errado.
+5. **Corrigir pela causa.** Reproduza, escreva o teste que falha e corrija, como na `implementation-pipeline`. Reprocessar ou reenviar só com escopo autorizado e com a idempotência conferida, para não repetir o envio errado.
 6. **Verificar no destino.** O sintoma parou onde aconteceu, não só no ambiente local. Confira de novo depois de qualquer recuperação.
 7. **Postmortem.** Escreva com a `writing-pipeline`, no tipo postmortem: linha do tempo, impacto, causa, o que ajudou, o que atrapalhou e ações com responsável e prazo, sem culpar pessoas.
 

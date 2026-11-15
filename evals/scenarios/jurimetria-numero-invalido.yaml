@@ -2,7 +2,7 @@ id: jurimetria-numero-invalido
 pedido: Cruza a planilha de processos do escritório com a exportação do tribunal pelo número do processo
   e me diz quais não aparecem no tribunal.
 skills_esperadas:
-- execution-pipeline
+- implementation-pipeline
 - jurimetria
 modo: por-efeito
 fixture: fixtures/jurimetria-numero-invalido

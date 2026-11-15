@@ -13,7 +13,16 @@ except ImportError:  # pragma: no cover
 REPO = Path(__file__).resolve().parents[1]
 EVALS = REPO / 'evals'
 MODOS = ('por-efeito', 'assistido', 'continuo')
-SKILLS = set(json.loads((REPO / 'distribution/catalog.json').read_text(encoding='utf-8'))['skills'])
+CATALOG = json.loads((REPO / 'distribution/catalog.json').read_text(encoding='utf-8'))
+SKILLS = set(CATALOG['skills'])
+# resultados de antes da 5.0.0 guardam os nomes antigos das skills renomeadas
+SKILLS_ANTES_DA_5 = SKILLS | set(CATALOG.get('renamed', {}))
+
+
+def skills_validas(versao):
+    return SKILLS_ANTES_DA_5 if int(versao.split('.')[0]) < 5 else SKILLS
+
+
 ID = re.compile(r'^[a-z0-9]+(-[a-z0-9]+)*$')
 
 
@@ -120,6 +129,12 @@ class ResultFormat(unittest.TestCase):
     def test_results_match_scenarios(self):
         self.check_results(EVALS / 'results')
 
+    def test_old_skill_names_only_before_5(self):
+        for old, new in CATALOG['renamed'].items():
+            self.assertIn(old, skills_validas('4.3.2'))
+            self.assertNotIn(old, skills_validas('5.0.0'))
+            self.assertIn(new, skills_validas('5.0.0'))
+
     def test_evidence_is_not_copied_between_runs(self):
         import collections
         por_versao = collections.Counter(d[0].split('/')[0] for d in copied_evidence(EVALS / 'results'))
@@ -191,7 +206,7 @@ class ResultFormat(unittest.TestCase):
                 scenario = found[data['cenario']]
                 self.assertIsInstance(data['skills_carregadas'], list)
                 # skills de outros plugins vêm com prefixo, como superpowers:brainstorming
-                self.assertLessEqual({s for s in data['skills_carregadas'] if ':' not in s}, SKILLS)
+                self.assertLessEqual({s for s in data['skills_carregadas'] if ':' not in s}, skills_validas(data['versao']))
                 self.assertIs(type(data['paradas']), int)
                 self.assertIs(type(data['contexto_lido']['caracteres']), int)
                 self.assertIsInstance(data['contexto_lido']['arquivos'], list)
@@ -237,9 +252,9 @@ class Harness(unittest.TestCase):
             log = Path(t) / 'log.jsonl'
             log.write_text('lixo\n' + uso('asp:audit-and-refactoring-pipeline') + '\n', encoding='utf-8')
             self.assertEqual(ex.gatilho(log, 'audit-and-refactoring-pipeline'), 'ativou')
-            self.assertEqual(ex.gatilho(log, 'execution-pipeline'), 'outra')
+            self.assertEqual(ex.gatilho(log, 'implementation-pipeline'), 'outra')
             log.write_text('', encoding='utf-8')
-            self.assertEqual(ex.gatilho(log, 'execution-pipeline'), 'nao_ativou')
+            self.assertEqual(ex.gatilho(log, 'implementation-pipeline'), 'nao_ativou')
 
     def test_contar_reads_lote_layout(self):
         import contextlib

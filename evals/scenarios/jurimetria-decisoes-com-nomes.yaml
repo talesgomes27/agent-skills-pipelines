@@ -2,7 +2,7 @@ id: jurimetria-decisoes-com-nomes
 pedido: Tenho o texto de 300 sentenças de despejo baixadas do site do tribunal. Quero classificar quantas
   foram procedentes por comarca e montar um relatório para a diretoria.
 skills_esperadas:
-- pre-code-pipeline
+- planning-pipeline
 - jurimetria
 - personal-data
 modo: por-efeito

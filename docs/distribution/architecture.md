@@ -33,13 +33,13 @@ O padrão é a pasta do projeto atual; `--scope user` instala no perfil. Os cami
 
 | Bundle | Skills |
 |---|---|
-| `planning` | `pre-code-pipeline` |
-| `development` | `pre-code-pipeline`, `execution-pipeline`, `audit-and-refactoring-pipeline`, `scheduled-automation`, `personal-data`, `jurimetria` |
-| `research` | `pre-code-pipeline`, `execution-pipeline`, `writing-pipeline`, `quarto-expert`, `personal-data`, `jurimetria` |
+| `planning` | `planning-pipeline` |
+| `development` | `planning-pipeline`, `implementation-pipeline`, `audit-and-refactoring-pipeline`, `scheduled-automation`, `personal-data`, `jurimetria` |
+| `research` | `planning-pipeline`, `implementation-pipeline`, `writing-pipeline`, `quarto-expert`, `personal-data`, `jurimetria` |
 | `editorial` | `writing-pipeline` |
 | `release` | `release-and-ops-pipeline` |
 | `library` | `skill-loader` |
-| `essencial` | `pre-code-pipeline`, `execution-pipeline`, `release-and-ops-pipeline`, `personal-data` |
+| `essencial` | `planning-pipeline`, `implementation-pipeline`, `release-and-ops-pipeline`, `personal-data` |
 | `completo` | as dez skills |
 
 Os bundles `essencial` e `completo` têm as mesmas skills dos pacotes de mesmo nome do marketplace do Claude Code. No marketplace, o `completo` traz também o plugin `pipeline-guardrails`, que não é skill e o instalador não instala. Bundles agrupam skills e mais nada; ferramentas e MCPs que uma skill cite você instala à parte. Dá para repetir `--bundle` e `--skill`, combiná-los e tirar nomes com `--exclude`. Instalar tudo exige `--all`.
@@ -102,7 +102,7 @@ As skills que já tinham terminado aparecem como `unchanged`. Rode o doctor de n
 Com as skills nas pastas padrão, o `skills.json` não é necessário. Para registrar uma fonte externa, gere as entradas, revise e incorpore ao `.agents/skills.json` do workspace ou ao manifesto global da sua versão:
 
 ```bash
-python3 scripts/skills.py manifest --bundle research --exclude execution-pipeline
+python3 scripts/skills.py manifest --bundle research --exclude implementation-pipeline
 ```
 
 O formato de `entries[].path` segue o [exemplo do Chromium](https://chromium.googlesource.com/experimental/chromium/src/+/HEAD/agents/skills/README.md); o [changelog do Antigravity CLI](https://github.com/google-antigravity/antigravity-cli/blob/main/CHANGELOG.md) registra o suporte a exclusões. O `--exclude` é aplicado antes de gerar as entradas. O comando não mescla nem sobrescreve configurações existentes, e os caminhos são absolutos para a máquina atual: gere de novo ao trocar de máquina ou de clone. Não registre a mesma fonte por dois mecanismos.

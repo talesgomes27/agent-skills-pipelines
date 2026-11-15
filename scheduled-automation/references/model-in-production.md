@@ -19,7 +19,7 @@ Vale para pontuar um modelo de forma recorrente (uma lista semanal, um score di�
 ## Lote ou API
 
 - Comece pela pontuação em lote quando quem usa precisa de uma lista periódica: ela é mais simples de testar, refazer e auditar.
-- Uma API vale quando a decisão precisa do score na hora, como num atendimento ou num checkout. Ela segue a referência B da `execution-pipeline`, com contrato de entrada, latência combinada e o mesmo código de features.
+- Uma API vale quando a decisão precisa do score na hora, como num atendimento ou num checkout. Ela segue a referência B da `implementation-pipeline`, com contrato de entrada, latência combinada e o mesmo código de features.
 
 ## Limiar e entrega
 

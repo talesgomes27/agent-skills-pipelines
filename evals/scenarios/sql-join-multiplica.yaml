@@ -1,7 +1,7 @@
 id: sql-join-multiplica
 pedido: A receita por região do relatório está maior que a do financeiro neste mês. Confere a consulta e corrige.
 skills_esperadas:
-- execution-pipeline
+- implementation-pipeline
 arquetipo_esperado:
   principal: A
 modo: por-efeito
@@ -10,7 +10,7 @@ fixture: fixtures/sql-join-multiplica
 checkpoints:
 - id: le-o-perfil-sql
   tipo: deve
-  descricao: Lê o perfil de SQL da execution-pipeline porque o componente é uma consulta SQL
+  descricao: Lê o perfil de SQL da implementation-pipeline porque o componente é uma consulta SQL
 - id: confere-a-cardinalidade
   tipo: deve
   descricao: No próprio trabalho (não só citando a regra), roda ou mostra a contagem de linhas de pedidos antes e depois do JOIN e uma consulta de unicidade de cliente_id em enderecos_cliente, e conclui pelos números que um cliente com vários endereços multiplica os pedidos

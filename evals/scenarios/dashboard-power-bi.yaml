@@ -2,7 +2,7 @@ id: dashboard-power-bi
 pedido: Monta um dashboard no Power BI com as vendas por região e por vendedor, a partir de vendas.csv,
   para a diretoria.
 skills_esperadas:
-- pre-code-pipeline
+- planning-pipeline
 - personal-data
 arquetipo_esperado:
   principal: B
