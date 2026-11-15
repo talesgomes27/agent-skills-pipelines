@@ -9,8 +9,11 @@
   lote <pasta> [--cenarios a,b] [--gatilhos a,b|todos] [--destinos d1,d2] [--amostras N] [--paralelo N]
                                        prepara e roda as execuções em <pasta>/<destino>/<tipo>-<id>-<n>, retomando as
                                        que ficaram sem done; o plugin de teste vai para <pasta>/plugin
-  contar <pasta> [--contra VERSAO]     gatilhos ativou/total por destino e skills carregadas nos cenários,
-                                       comparados com evals/results/VERSAO quando pedido; ambiguo_deve conta como deve
+  contar <pasta> [--contra VERSAO] [--json]
+                                       gatilhos ativou/total por destino e skills carregadas nos cenários,
+                                       comparados com evals/results/VERSAO quando pedido; ambiguo_deve conta como deve;
+                                       com --json, os resultados com amostras e as metricas de cada triggers-<destino>.json
+  metricas <exec>                      custo_usd, turnos, duracao_ms e tokens da execução, em JSON; ausente é null
 """
 import json
 import os
@@ -51,11 +54,12 @@ def preparar(exe, pedido, fixture=None):
 
 
 def ler(log):
-    for linha in open(log, encoding='utf-8'):
-        try:
-            yield json.loads(linha)
-        except ValueError:
-            continue
+    with open(log, encoding='utf-8') as f:  # fechado já ao fim: no Windows, arquivo aberto impede apagar a pasta
+        for linha in f:
+            try:
+                yield json.loads(linha)
+            except ValueError:
+                continue
 
 
 def _claude(proj, texto, log, plugin_dir, turnos, sessao=None):
@@ -136,6 +140,28 @@ def resumo(log):
     print('FINAL TEXT:\n', (texts[-1] if texts else '')[:3000])
 
 
+TOKENS = {'entrada': 'input_tokens', 'saida': 'output_tokens', 'cache_leitura': 'cache_read_input_tokens',
+          'cache_escrita': 'cache_creation_input_tokens'}
+
+
+def metricas(exe):
+    """Custo, turnos, duração e tokens do evento result de log.jsonl e log2.jsonl, somados.
+
+    Um valor que nenhum log traz fica None, nunca 0: desconhecido não é de graça."""
+    fins = []
+    for nome in ('log.jsonl', 'log2.jsonl'):
+        if (Path(exe) / nome).exists():
+            fins += [d for d in ler(Path(exe) / nome) if d.get('type') == 'result'][-1:]
+
+    def soma(valores):
+        valores = [v for v in valores if isinstance(v, (int, float))]
+        return round(sum(valores), 6) if valores else None
+    usos = [f['usage'] for f in fins if isinstance(f.get('usage'), dict)]
+    return {'custo_usd': soma(f.get('total_cost_usd') for f in fins), 'turnos': soma(f.get('num_turns') for f in fins),
+            'duracao_ms': soma(f.get('duration_ms') for f in fins),
+            'tokens': {k: soma(u.get(v) for u in usos) for k, v in TOKENS.items()} if usos else None}
+
+
 DESTINOS = ('claude-code', 'claude-code-instalador')
 
 
@@ -199,11 +225,12 @@ def lote(pasta, cenarios=(), gatilhos=(), destinos=DESTINOS, amostras=1, paralel
     print(len(jobs) - api - local, 'concluídas;', api, 'com erro da API e', local, 'com erro local (rode lote de novo para retomá-las)')
 
 
-def contar(pasta, contra=None):
+def contar(pasta, contra=None, json_saida=False):
     import collections
     pasta = Path(pasta)
     T = _gatilhos()
     gat = collections.defaultdict(list)
+    met = collections.defaultdict(list)
     cen = collections.defaultdict(collections.Counter)
     pendentes = 0
     invalidas = 0
@@ -221,11 +248,29 @@ def contar(pasta, contra=None):
             continue
         if m['tipo'] == 'gatilho':
             gat[(m['destino'], m['id'])].append(gatilho(exe / 'log.jsonl', T[m['id']]['skill']))
+            met[m['destino']].append(metricas(exe))
         else:
             sk = [s.split(':')[-1] for s in skills(exe / 'log.jsonl')] or ['(nenhuma)']
             for s in set(sk):
                 cen[(m['destino'], m['id'])][s] += 1
             cen[(m['destino'], m['id'])]['_total'] += 1
+    if json_saida:
+        # resultados e metricas do triggers-<destino>.json; uma amostra errada faz do erro o observado
+        out = {}
+        for destino in DESTINOS:
+            res = []
+            for (d, i), obs in sorted(gat.items()):
+                if d != destino:
+                    continue
+                certo = (lambda o: o != 'ativou') if T[i]['esperado'] == 'nao_deve' else (lambda o: o == 'ativou')
+                res.append({'id': i, 'observado': next((o for o in obs if not certo(o)), obs[0]), 'amostras': obs})
+            if res:
+                ms = met[destino]
+                soma = lambda k: round(sum(x[k] for x in ms if x[k] is not None), 6)
+                out[destino] = {'resultados': res, 'metricas': {'custo_usd': soma('custo_usd'), 'turnos': soma('turnos'),
+                                'duracao_ms': soma('duracao_ms'), 'sem_custo': sum(x['custo_usd'] is None for x in ms)}}
+        print(json.dumps(out, ensure_ascii=False, indent=1))
+        return
     for destino in DESTINOS:
         linhas = sorted((i, obs) for (d, i), obs in gat.items() if d == destino)
         if not linhas:
@@ -272,7 +317,8 @@ if __name__ == '__main__':
     p.add_argument('--destinos', type=lista, default=list(DESTINOS)); p.add_argument('--amostras', type=int, default=1)
     p.add_argument('--paralelo', type=int, default=4)
     p = sub.add_parser('contar')
-    p.add_argument('pasta'); p.add_argument('--contra')
+    p.add_argument('pasta'); p.add_argument('--contra'); p.add_argument('--json', action='store_true')
+    sub.add_parser('metricas').add_argument('exe')
     x = ap.parse_args()
     if x.cmd == 'plugin':
         plugin(x.saida)
@@ -285,6 +331,8 @@ if __name__ == '__main__':
     elif x.cmd == 'lote':
         lote(x.pasta, x.cenarios, x.gatilhos, x.destinos, x.amostras, x.paralelo)
     elif x.cmd == 'contar':
-        contar(x.pasta, x.contra)
+        contar(x.pasta, x.contra, x.json)
+    elif x.cmd == 'metricas':
+        print(json.dumps(metricas(x.exe)))
     else:
         print(gatilho(x.log, x.skill))

@@ -74,6 +74,7 @@ O modo padrão é o por efeito a partir da 4.0.0; antes dela, era o assistido, e
 - `skills_carregadas`: as skills deste repositório pelo nome; as de outros plugins com o prefixo, como `superpowers:brainstorming`.
 - `resultado`: `passou`, `falhou` ou `indeterminado`, sempre com a evidência.
 - `paradas_detalhe` (opcional): quais aceites ou perguntas o agente pediu, na ordem, para conferir a contagem de `paradas`.
+- `metricas` (opcional, no nível de execução): `custo_usd`, `turnos`, `duracao_ms` e `tokens` (`entrada`, `saida`, `cache_leitura`, `cache_escrita`), somados dos dois turnos, como `execucao.py metricas <exec>` devolve. Um valor que o host não deu fica `null`, nunca 0. Os resultados gravados antes desse campo não o têm.
 - `modo` (opcional no modo padrão da versão): `por-efeito`, `assistido` ou `continuo`.
 - `destino` (opcional): o caminho de instalação, quando o mesmo host tem mais de um, como `claude-code-instalador` para as skills instaladas pelo `skills.py` no Claude Code. O resultado fica numa subpasta com esse nome, e o `report.py` mostra uma linha por destino. Sem o campo, vale o destino padrão do host; no Claude Code, o plugin do marketplace.
 
@@ -91,7 +92,7 @@ Resultado de gatilhos, em `<nível>/triggers-<destino>.json`:
 }
 ```
 
-`observado` é `ativou`, `nao_ativou` ou `outra` (ativou outra skill), e `id` é o do `triggers.yaml`. O `<destino>` do nome do arquivo é o campo `destino`, ou o `host` quando não há destino.
+`observado` é `ativou`, `nao_ativou` ou `outra` (ativou outra skill), e `id` é o do `triggers.yaml`. Com mais de uma amostra, `amostras` (opcional) guarda a observação de cada uma, e `observado` é a primeira errada, ou a primeira quando todas acertam. O `metricas` opcional, no topo, soma `custo_usd`, `turnos` e `duracao_ms` das execuções, e `sem_custo` diz quantas não trouxeram custo. `execucao.py contar <pasta> --json` gera os dois campos. O `<destino>` do nome do arquivo é o campo `destino`, ou o `host` quando não há destino.
 
 A versão é a das skills avaliadas. Uma rodada sobre a branch em preparo grava na pasta da versão que vai ser publicada.
 
@@ -104,4 +105,4 @@ A versão é a das skills avaliadas. Uma rodada sobre a branch em preparo grava 
 - `parcial`: algum `deve` falhou;
 - `ok`: nenhum dos casos acima. Um `deve` indeterminado não é falha, mas aparece na contagem.
 
-A de gatilhos mostra os acertos por versão e destino. Acerto é `ativou` em `deve` e `ambiguo_deve`, e qualquer resultado diferente de `ativou` em `nao_deve`, inclusive `outra`. Um id que saiu do `triggers.yaml` não conta, e o total desses ids aparece no stderr.
+As duas tabelas têm a coluna de custo, soma do `metricas.custo_usd`, com quantos resultados tinham custo quando falta algum. A de gatilhos mostra os acertos por versão e destino. Acerto é `ativou` em `deve` e `ambiguo_deve`, e qualquer resultado diferente de `ativou` em `nao_deve`, inclusive `outra`. Um id que saiu do `triggers.yaml` não conta, e o total desses ids aparece no stderr.

@@ -6,6 +6,8 @@ o padrão antes da 4.0.0. Os checkpoints "deve" e "nao_deve" aparecem como passo
 Situação: "não recomendada" com falha em nao_deve; "sem evidência" com nao_deve indeterminado ou nenhum
 nao_deve julgado; "parcial" com falha em deve; "ok" no resto. Indeterminado em deve não é falha.
 Gatilhos: acerto é "ativou" em deve e ambiguo_deve, e qualquer coisa menos "ativou" em nao_deve.
+Custo: soma do metricas.custo_usd gravado; com algum resultado sem custo, mostra quantos tinham.
+Um triggers-<destino>.json com sem_custo maior que 0 conta como sem custo.
 Só biblioteca padrão; o PyYAML é usado quando existe.
 """
 import argparse
@@ -64,7 +66,7 @@ def gatilhos_esperados(texto_sem_yaml=None):
 
 def rows(versao=None, root=None, proibidos=None):
     proibidos = nao_deve_ids() if proibidos is None else proibidos
-    agg = defaultdict(lambda: {'deve': Counter(), 'nao_deve': Counter(), 'cenarios': 0, 'paradas': {}, 'data': ''})
+    agg = defaultdict(lambda: {'deve': Counter(), 'nao_deve': Counter(), 'cenarios': 0, 'paradas': {}, 'data': '', 'custo': []})
     for path in sorted((root or EVALS / 'results').rglob('*.json')):
         if path.name.startswith('triggers-'):
             continue
@@ -76,6 +78,7 @@ def rows(versao=None, root=None, proibidos=None):
         if 'paradas' in d:
             a['paradas'][d['cenario']] = d['paradas']
         a['data'] = max(a['data'], d.get('data', ''))
+        a['custo'].append((d.get('metricas') or {}).get('custo_usd'))
         for c in d.get('checkpoints', []):
             tipo = 'nao_deve' if c['id'] in proibidos.get(d['cenario'], set()) else 'deve'
             a[tipo][c['resultado']] += 1
@@ -100,8 +103,10 @@ def trigger_rows(versao=None, root=None, gatilhos=None):
         if versao and d['versao'] != versao:
             continue
         a = agg.setdefault((d['versao'], d['nivel'], d['host'], d.get('destino', ''), d['modelo']),
-                           {'certos': 0, 'total': 0, 'erros_deve': 0, 'ativou_nao_deve': 0, 'ignorados': 0, 'data': ''})
+                           {'certos': 0, 'total': 0, 'erros_deve': 0, 'ativou_nao_deve': 0, 'ignorados': 0, 'data': '', 'custo': []})
         a['data'] = max(a['data'], d.get('data', ''))
+        m = d.get('metricas') or {}
+        a['custo'].append(m.get('custo_usd') if not m.get('sem_custo') else None)
         for r in d['resultados']:
             esperado = gatilhos.get(r['id'])
             if esperado is None:  # id que saiu do triggers.yaml: sem expectativa, não conta
@@ -118,6 +123,15 @@ def trigger_rows(versao=None, root=None, gatilhos=None):
     return agg
 
 
+def custo(valores):
+    """Soma dos custos gravados; '—' sem nenhum, e a cobertura quando falta algum."""
+    conhecidos = [v for v in valores if v is not None]
+    if not conhecidos:
+        return '—'
+    texto = '%.2f' % sum(conhecidos)
+    return texto if len(conhecidos) == len(valores) else '%s (%d de %d)' % (texto, len(conhecidos), len(valores))
+
+
 def _pfi(c):
     return '%d/%d/%d' % (c['passou'], c['falhou'], c['indeterminado'])
 
@@ -126,20 +140,21 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--versao')
     versao = parser.parse_args().versao
-    print('| Versão | Nível | Modo | Host | Destino | Modelo | Cenários | "deve" passou/falhou/indet. | "nao_deve" passou/falhou/indet. | Paradas no Dashboard | Data | Situação |')
-    print('|---|---|---|---|---|---|---|---|---|---|---|---|')
+    print('| Versão | Nível | Modo | Host | Destino | Modelo | Cenários | "deve" passou/falhou/indet. | "nao_deve" passou/falhou/indet. | Paradas no Dashboard | Custo (US$) | Data | Situação |')
+    print('|---|---|---|---|---|---|---|---|---|---|---|---|---|')
     for (v, nivel, modo, host, destino, modelo), a in sorted(rows(versao).items()):
-        print('| %s | %s | %s | %s | %s | %s | %d | %s | %s | %s | %s | %s |' % (
+        print('| %s | %s | %s | %s | %s | %s | %d | %s | %s | %s | %s | %s | %s |' % (
             v, nivel, modo, host, destino or '—', modelo, a['cenarios'], _pfi(a['deve']), _pfi(a['nao_deve']),
-            a['paradas'].get('dashboard-streamlit', '—'), a['data'], situacao(a)))
+            a['paradas'].get('dashboard-streamlit', '—'), custo(a['custo']), a['data'], situacao(a)))
     print()
-    print('| Versão | Nível | Host | Destino | Modelo | Gatilhos certos | Erros em "deve" | Ativou em "nao_deve" | Data |')
-    print('|---|---|---|---|---|---|---|---|---|')
+    print('| Versão | Nível | Host | Destino | Modelo | Gatilhos certos | Erros em "deve" | Ativou em "nao_deve" | Custo (US$) | Data |')
+    print('|---|---|---|---|---|---|---|---|---|---|')
     ignorados = 0
     for (v, nivel, host, destino, modelo), a in sorted(trigger_rows(versao).items()):
         ignorados += a['ignorados']
-        print('| %s | %s | %s | %s | %s | %d de %d | %d | %d | %s |' % (
-            v, nivel, host, destino or '—', modelo, a['certos'], a['total'], a['erros_deve'], a['ativou_nao_deve'], a['data']))
+        print('| %s | %s | %s | %s | %s | %d de %d | %d | %d | %s | %s |' % (
+            v, nivel, host, destino or '—', modelo, a['certos'], a['total'], a['erros_deve'], a['ativou_nao_deve'],
+            custo(a['custo']), a['data']))
     if ignorados:
         print('%d resultados de gatilho com id fora do triggers.yaml atual, ignorados' % ignorados, file=sys.stderr)
 
