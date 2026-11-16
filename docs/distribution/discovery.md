@@ -25,7 +25,7 @@ As rodadas isolam o ambiente (`--setting-sources project`, `--strict-mcp-config`
 
 ## Prompts de gatilho
 
-Os prompts ficam em [`evals/triggers.yaml`](../../evals/triggers.yaml), com a skill e o resultado esperado: deve ativar, caso ambíguo que deve ativar, ou não deve ativar. Os casos ambíguos testam a fronteira entre skills. Quando um prompt ativar a skill errada, ajuste a `description` da skill, não o arquivo. Grave o que cada host observou em `evals/results/<versão>/<nível>/triggers-<destino>.json`, no formato de [`evals/README.md`](../../evals/README.md).
+Os prompts ficam em [`evals/triggers.yaml`](../../evals/triggers.yaml), com a skill e o resultado esperado: deve ativar, caso ambíguo que deve ativar, não deve ativar, ou opcional, quando ativar ou não são ambos aceitáveis. Os casos ambíguos testam a fronteira entre skills. Quando um prompt ativar a skill errada, ajuste a `description` da skill, não o arquivo. Grave o que cada host observou em `evals/results/<versão>/<nível>/triggers-<destino>.json`, no formato de [`evals/README.md`](../../evals/README.md).
 
 ## Cenários de comportamento
 

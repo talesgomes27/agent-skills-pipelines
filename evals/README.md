@@ -48,7 +48,7 @@ O modo padrão é o por efeito a partir da 4.0.0; antes dela, era o assistido, e
 
 ## Gatilhos
 
-`triggers.yaml` é uma lista de `{id, skill, esperado, prompt}`, com `esperado` igual a `deve`, `ambiguo_deve` ou `nao_deve`. O campo opcional `fixture` aponta para uma pasta em `fixtures/` quando o prompt cita arquivos do projeto; no nível de execução, o `/cenarios` copia essa pasta antes de rodar o gatilho, e sem ela o gatilho roda numa pasta vazia.
+`triggers.yaml` é uma lista de `{id, skill, esperado, prompt}`, com `esperado` igual a `deve`, `ambiguo_deve`, `nao_deve` ou `opcional`. Em `opcional`, ativar ou não são ambos aceitáveis, e o gatilho fica fora da conta de acertos; ele serve às correções de uma palavra, que a regra de tarefa pequena deixa fazer sem a pipeline, e o comportamento delas é cobrado por cenário. O campo opcional `fixture` aponta para uma pasta em `fixtures/` quando o prompt cita arquivos do projeto; no nível de execução, o `/cenarios` copia essa pasta antes de rodar o gatilho, e sem ela o gatilho roda numa pasta vazia.
 
 ## Resultado
 
@@ -105,4 +105,4 @@ A versão é a das skills avaliadas. Uma rodada sobre a branch em preparo grava 
 - `parcial`: algum `deve` falhou;
 - `ok`: nenhum dos casos acima. Um `deve` indeterminado não é falha, mas aparece na contagem.
 
-As duas tabelas têm a coluna de custo, soma do `metricas.custo_usd`, com quantos resultados tinham custo quando falta algum. A de gatilhos mostra os acertos por versão e destino. Acerto é `ativou` em `deve` e `ambiguo_deve`, e qualquer resultado diferente de `ativou` em `nao_deve`, inclusive `outra`. Um id que saiu do `triggers.yaml` não conta, e o total desses ids aparece no stderr.
+As duas tabelas têm a coluna de custo, soma do `metricas.custo_usd`, com quantos resultados tinham custo quando falta algum. A de gatilhos mostra os acertos por versão e destino. Acerto é `ativou` em `deve` e `ambiguo_deve`, e qualquer resultado diferente de `ativou` em `nao_deve`, inclusive `outra`; `opcional` não conta. A expectativa é a do `triggers.yaml` atual, também nas versões antigas. Um id que saiu do `triggers.yaml` não conta, e o total desses ids aparece no stderr.

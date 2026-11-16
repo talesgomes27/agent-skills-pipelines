@@ -5,7 +5,8 @@ Cenários: uma linha por versão, nível, modo, host, destino e modelo; resultad
 o padrão antes da 4.0.0. Os checkpoints "deve" e "nao_deve" aparecem como passou/falhou/indeterminado.
 Situação: "não recomendada" com falha em nao_deve; "sem evidência" com nao_deve indeterminado ou nenhum
 nao_deve julgado; "parcial" com falha em deve; "ok" no resto. Indeterminado em deve não é falha.
-Gatilhos: acerto é "ativou" em deve e ambiguo_deve, e qualquer coisa menos "ativou" em nao_deve.
+Gatilhos: acerto é "ativou" em deve e ambiguo_deve, e qualquer coisa menos "ativou" em nao_deve;
+opcional fica fora da conta. Vale o esperado do triggers.yaml atual, também para versões antigas.
 Custo: soma do metricas.custo_usd gravado; com algum resultado sem custo, mostra quantos tinham.
 Um triggers-<destino>.json com sem_custo maior que 0 conta como sem custo.
 Só biblioteca padrão; o PyYAML é usado quando existe.
@@ -111,6 +112,8 @@ def trigger_rows(versao=None, root=None, gatilhos=None):
             esperado = gatilhos.get(r['id'])
             if esperado is None:  # id que saiu do triggers.yaml: sem expectativa, não conta
                 a['ignorados'] += 1
+                continue
+            if esperado == 'opcional':  # ativar ou não são ambos aceitáveis
                 continue
             a['total'] += 1
             if esperado == 'nao_deve':
