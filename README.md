@@ -103,6 +103,15 @@ claude plugin install skill-loader@agent-skills-pipelines
 
 A branch `stable` só avança quando sai uma release, então você recebe só versões publicadas; para fixar uma versão exata, use uma tag, como `@v5.1.0`, no lugar de `@stable`. Sem o `@`, o marketplace acompanha a `main`, que muda a cada PR. Abra uma sessão nova para o Claude Code encontrá-las. No Claude Code, prefira o marketplace ao instalador abaixo: ele atualiza com `claude plugin update`.
 
+Para atualizar depois de uma release, atualize o marketplace e cada plugin instalado. Atualizar o pacote não atualiza os plugins que ele trouxe, só instala os que ele ganhou, e nenhum comando de shell atualiza todos de uma vez ([documentação](https://code.claude.com/docs/en/plugins/install#update-plugins-now), conferida em 2026-11-16). No shell, com o `completo`:
+
+```bash
+claude plugin marketplace update agent-skills-pipelines
+for p in completo planning-pipeline implementation-pipeline release-and-ops-pipeline writing-pipeline audit-and-refactoring-pipeline scheduled-automation personal-data jurimetria quarto-expert skill-loader pipeline-guardrails; do claude plugin update "$p@agent-skills-pipelines"; done
+```
+
+Com o `essencial` ou com plugins avulsos, deixe na lista só os que o `claude plugin list` mostra. Numa sessão, o `/plugin`, na aba **Marketplaces**, faz o mesmo com **Update marketplace**, que atualiza todos os plugins instalados deste marketplace; lá também dá para ligar o auto-update, que vem desligado em marketplaces de terceiros.
+
 Com muitos plugins instalados, o Claude Code pode listar as skills só pelo nome, sem a `description`, e o agente deixa de reconhecer quando usá-las. A lista tem um orçamento de 1% da janela de contexto e perde primeiro as descrições das skills menos usadas. O `/doctor` mostra o custo da lista; para abrir espaço, aumente `skillListingBudgetFraction` nas configurações ou marque como `"name-only"`, em `skillOverrides`, as skills de outros plugins que você pouco usa. Veja [Skill descriptions are cut short](https://code.claude.com/docs/en/skills#skill-descriptions-are-cut-short).
 
 ### Codex, Antigravity e outros hosts
@@ -135,7 +144,7 @@ Na 5.0.0, a `pre-code-pipeline` passou a se chamar `planning-pipeline`, e a `exe
   claude plugin uninstall execution-pipeline@agent-skills-pipelines
   ```
 
-  Com um pacote (`essencial` ou `completo`), troque as duas instalações por `claude plugin update essencial@agent-skills-pipelines` (ou `completo`), que traz os novos como dependências, e desinstale os antigos do mesmo jeito.
+  Com um pacote (`essencial` ou `completo`), as duas instalações acima também valem. Depois, atualize os outros plugins como em [Claude Code](#claude-code): o update do pacote não atualiza as dependências que já estavam instaladas.
 
   Se o seu `settings.json`, `CLAUDE.md` ou `AGENTS.md` cita os nomes antigos, como `@agent-execution-pipeline:diff-reviewer` ou uma regra de permissão com `pre-code-pipeline`, troque pelo nome novo: a referência antiga deixa de valer sem aviso.
 - **No instalador**, o `--update` troca as pastas antigas pelas novas e aceita os nomes antigos em `--skill` e `--exclude`. Uma cópia com mudança local fica onde está, e o comando para sem alterar nada. Uma pasta antiga que o instalador não criou também fica, e o plano avisa com `kept-unmanaged`: apague-a se for só a cópia antiga.
