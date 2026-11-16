@@ -2,6 +2,12 @@
 
 As versões seguem [SemVer](https://semver.org/lang/pt-BR/).
 
+## Não publicado
+
+### Corrigido
+
+- O README dizia que atualizar o pacote `essencial` ou `completo` atualizava os plugins que ele traz. Não atualiza: o `claude plugin update` do pacote só instala as dependências novas, e as que já estavam instaladas ficam na versão antiga. O "Como atualizar" da 5.1.0 tinha o mesmo erro. O README agora atualiza cada plugin, com um laço no shell, ou pelo **Update marketplace** do `/plugin`.
+
 ## [5.1.0] - 2026-11-16
 
 Comparada com a 5.0.0 (`d6c79d6`). A `planning-pipeline` passa a ativar quando o pedido é retomar um planejamento interrompido, e as avaliações ganham custo, amostras e gatilhos opcionais. É MINOR porque a descrição da skill cobre um pedido novo, e as avaliações ganham campos novos sem quebrar os antigos.
