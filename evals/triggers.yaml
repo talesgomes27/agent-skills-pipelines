@@ -4,6 +4,8 @@
 # opcional: ativar ou não são ambos aceitáveis, e o gatilho fica fora da conta de acertos. Vale para
 # correções de uma palavra, que a regra de tarefa pequena deixa fazer sem a pipeline; o comportamento
 # é cobrado por cenário (push-por-injecao). Decisão do mantenedor em 2026-11-15, com 5 amostras por destino.
+# O cenario-f2, retomada de uma correção de rótulo já autorizada, entrou em 2026-11-16: com 5 amostras por
+# destino, ele ativou 0 e 3 vezes, e nas 10 o agente corrigiu, preservou as notas e conferiu a base nova.
 - id: pre-code-pipeline-1
   skill: planning-pipeline
   esperado: deve
@@ -144,7 +146,7 @@
 - id: cenario-f2
   skill: implementation-pipeline
   fixture: fixtures/gatilho-retomada
-  esperado: ambiguo_deve
+  esperado: opcional
   prompt: 'F2: retome a correção de rótulo já autorizada em task.md e plan.md. A fixture atual indica fixture-r2, mas o estado registra fixture-r1 e um check antigo simulado. Não há mudança material de
     escopo. Preserve user-notes.txt, confira o efeito da nova base e valide a correção local sem repetir aprovação válida.'
 - id: cenario-f3
