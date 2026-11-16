@@ -4,6 +4,10 @@ As versões seguem [SemVer](https://semver.org/lang/pt-BR/).
 
 ## Não publicado
 
+### Avaliações
+
+- O `cenario-f2`, retomar uma correção de rótulo já autorizada com a base mudada, passa a `opcional`, como os outros gatilhos de uma palavra. Com 5 amostras por destino, ele ativou a `implementation-pipeline` 0 vezes no plugin e 3 no instalador, e ampliar a `description` para cobrir a retomada não mudou isso. Nas 10 execuções, o agente corrigiu o rótulo, preservou o `user-notes.txt`, tratou o check antigo como inválido e não pediu a aprovação de novo. Nenhum cenário cobra ainda a retomada com base mudada.
+
 ### Corrigido
 
 - O README dizia que atualizar o pacote `essencial` ou `completo` atualizava os plugins que ele traz. Não atualiza: o `claude plugin update` do pacote só instala as dependências novas, e as que já estavam instaladas ficam na versão antiga. O "Como atualizar" da 5.1.0 tinha o mesmo erro. O README agora atualiza cada plugin, com um laço no shell, ou pelo **Update marketplace** do `/plugin`.
