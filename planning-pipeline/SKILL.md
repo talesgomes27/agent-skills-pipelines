@@ -1,6 +1,6 @@
 ---
 name: planning-pipeline
-description: "Use quando o usuário quiser planejar ou montar do zero um projeto novo, como um app, um site ou um dashboard no Power BI, ou planejar uma mudança relevante antes de implementar, com requisitos, arquitetura ou plano ainda por definir."
+description: "Use quando o usuário quiser planejar ou montar do zero um projeto novo, como um app, um site ou um dashboard no Power BI, ou planejar uma mudança relevante antes de implementar, com requisitos, arquitetura ou plano ainda por definir; ou para retomar ou concluir um planejamento interrompido e preparar o handoff, sem implementar."
 ---
 
 # Planejamento antes do código
