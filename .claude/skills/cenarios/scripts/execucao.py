@@ -262,7 +262,9 @@ def contar(pasta, contra=None, json_saida=False):
             for (d, i), obs in sorted(gat.items()):
                 if d != destino:
                     continue
-                certo = (lambda o: o != 'ativou') if T[i]['esperado'] == 'nao_deve' else (lambda o: o == 'ativou')
+                esperado = T[i]['esperado']
+                certo = ((lambda o: True) if esperado == 'opcional' else
+                         (lambda o: o != 'ativou') if esperado == 'nao_deve' else (lambda o: o == 'ativou'))
                 res.append({'id': i, 'observado': next((o for o in obs if not certo(o)), obs[0]), 'amostras': obs})
             if res:
                 ms = met[destino]
@@ -280,15 +282,19 @@ def contar(pasta, contra=None, json_saida=False):
             f = REPO / f'evals/results/{contra}/execucao/triggers-{destino}.json'
             if f.exists():
                 antes = {r['id']: r['observado'] for r in json.loads(f.read_text(encoding='utf-8'))['resultados']}
-        certos = 0
+        certos = contados = 0
         print(f'\n## Gatilhos, {destino}')
         for i, obs in linhas:
             esperado = T[i]['esperado']
+            extra = f' | {contra}: {antes[i]}' if i in antes else ''
+            if esperado == 'opcional':  # ativar ou não são ambos aceitáveis: fora da conta
+                print(f'{i:40} {esperado:12} fora da conta ({" ".join(o[:3] for o in obs)}){extra}')
+                continue
             ok = sum((o != 'ativou') if esperado == 'nao_deve' else (o == 'ativou') for o in obs)
             certos += ok == len(obs)
-            extra = f' | {contra}: {antes[i]}' if i in antes else ''
+            contados += 1
             print(f'{i:40} {esperado:12} {ok}/{len(obs)} certos ({" ".join(o[:3] for o in obs)}){extra}')
-        print(f'{certos} de {len(linhas)} gatilhos certos em todas as amostras')
+        print(f'{certos} de {contados} gatilhos certos em todas as amostras')
     for (destino, i), c in sorted(cen.items()):
         total = c.pop('_total')
         print(f'cenário {i} ({destino}): {total} execuções; skills: ' + ', '.join(f'{s} {n}' for s, n in c.most_common()))

@@ -82,7 +82,7 @@ class ScenarioFormat(unittest.TestCase):
         for t in items:
             with self.subTest(gatilho=t['id']):
                 self.assertIn(t['skill'], SKILLS)
-                self.assertIn(t['esperado'], ('deve', 'ambiguo_deve', 'nao_deve'))
+                self.assertIn(t['esperado'], ('deve', 'ambiguo_deve', 'nao_deve', 'opcional'))
                 self.assertTrue(t['prompt'].strip())
                 if 'fixture' in t:
                     self.assertTrue(t['fixture'].startswith('fixtures/'))
@@ -155,11 +155,11 @@ class MatrixAndReport(unittest.TestCase):
     def test_report_counts_triggers(self):
         import tempfile
         mod = self._report()
-        gatilhos = {'a': 'deve', 'b': 'ambiguo_deve', 'c': 'nao_deve', 'd': 'nao_deve'}
+        gatilhos = {'a': 'deve', 'b': 'ambiguo_deve', 'c': 'nao_deve', 'd': 'nao_deve', 'o': 'opcional'}
         d = {'versao': '9.0.0', 'nivel': 'execucao', 'host': 'claude-code', 'modelo': 'm', 'data': '2026-11-14',
              'resultados': [{'id': 'a', 'observado': 'nao_ativou'}, {'id': 'b', 'observado': 'ativou'},
                             {'id': 'c', 'observado': 'outra'}, {'id': 'd', 'observado': 'ativou'},
-                            {'id': 'saiu-do-yaml', 'observado': 'ativou'}]}
+                            {'id': 'saiu-do-yaml', 'observado': 'ativou'}, {'id': 'o', 'observado': 'nao_ativou'}]}
         with tempfile.TemporaryDirectory() as t:
             (Path(t) / '9.0.0/execucao').mkdir(parents=True)
             (Path(t) / '9.0.0/execucao/triggers-claude-code.json').write_text(json.dumps(d), encoding='utf-8')
