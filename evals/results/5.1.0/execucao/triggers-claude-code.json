@@ -1,0 +1,426 @@
+{
+ "versao": "5.1.0",
+ "nivel": "execucao",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-15",
+ "metricas": {
+  "custo_usd": 5.612172,
+  "turnos": 407,
+  "duracao_ms": 1102350,
+  "sem_custo": 0
+ },
+ "resultados": [
+  {
+   "id": "audit-and-refactoring-pipeline-1",
+   "observado": "ativou",
+   "amostras": [
+    "ativou"
+   ]
+  },
+  {
+   "id": "audit-and-refactoring-pipeline-2",
+   "observado": "ativou",
+   "amostras": [
+    "ativou"
+   ]
+  },
+  {
+   "id": "audit-and-refactoring-pipeline-3",
+   "observado": "nao_ativou",
+   "amostras": [
+    "nao_ativou"
+   ]
+  },
+  {
+   "id": "cenario-a",
+   "observado": "ativou",
+   "amostras": [
+    "ativou"
+   ]
+  },
+  {
+   "id": "cenario-b",
+   "observado": "ativou",
+   "amostras": [
+    "ativou"
+   ]
+  },
+  {
+   "id": "cenario-e",
+   "observado": "nao_ativou",
+   "amostras": [
+    "nao_ativou"
+   ]
+  },
+  {
+   "id": "cenario-f1",
+   "observado": "ativou",
+   "amostras": [
+    "ativou",
+    "ativou",
+    "ativou",
+    "ativou",
+    "ativou"
+   ]
+  },
+  {
+   "id": "cenario-f2",
+   "observado": "nao_ativou",
+   "amostras": [
+    "nao_ativou",
+    "nao_ativou",
+    "nao_ativou",
+    "nao_ativou",
+    "nao_ativou"
+   ]
+  },
+  {
+   "id": "cenario-f3",
+   "observado": "ativou",
+   "amostras": [
+    "ativou"
+   ]
+  },
+  {
+   "id": "cenario-f4",
+   "observado": "nao_ativou",
+   "amostras": [
+    "ativou",
+    "nao_ativou",
+    "ativou",
+    "ativou",
+    "nao_ativou"
+   ]
+  },
+  {
+   "id": "cenario-f5",
+   "observado": "nao_ativou",
+   "amostras": [
+    "nao_ativou"
+   ]
+  },
+  {
+   "id": "cenario-f6",
+   "observado": "nao_ativou",
+   "amostras": [
+    "nao_ativou"
+   ]
+  },
+  {
+   "id": "cenario-h",
+   "observado": "nao_ativou",
+   "amostras": [
+    "nao_ativou"
+   ]
+  },
+  {
+   "id": "execution-pipeline-1",
+   "observado": "ativou",
+   "amostras": [
+    "ativou"
+   ]
+  },
+  {
+   "id": "execution-pipeline-2",
+   "observado": "ativou",
+   "amostras": [
+    "ativou"
+   ]
+  },
+  {
+   "id": "execution-pipeline-3",
+   "observado": "nao_ativou",
+   "amostras": [
+    "nao_ativou"
+   ]
+  },
+  {
+   "id": "execution-pipeline-bug-1",
+   "observado": "ativou",
+   "amostras": [
+    "ativou"
+   ]
+  },
+  {
+   "id": "execution-pipeline-bug-2",
+   "observado": "outra",
+   "amostras": [
+    "outra"
+   ]
+  },
+  {
+   "id": "execution-pipeline-bug-3",
+   "observado": "nao_ativou",
+   "amostras": [
+    "nao_ativou"
+   ]
+  },
+  {
+   "id": "execution-pipeline-ingles-1",
+   "observado": "ativou",
+   "amostras": [
+    "ativou"
+   ]
+  },
+  {
+   "id": "execution-pipeline-ingles-2",
+   "observado": "nao_ativou",
+   "amostras": [
+    "nao_ativou"
+   ]
+  },
+  {
+   "id": "jurimetria-1",
+   "observado": "ativou",
+   "amostras": [
+    "ativou"
+   ]
+  },
+  {
+   "id": "jurimetria-2",
+   "observado": "ativou",
+   "amostras": [
+    "ativou"
+   ]
+  },
+  {
+   "id": "jurimetria-3",
+   "observado": "nao_ativou",
+   "amostras": [
+    "nao_ativou"
+   ]
+  },
+  {
+   "id": "jurimetria-4",
+   "observado": "nao_ativou",
+   "amostras": [
+    "nao_ativou"
+   ]
+  },
+  {
+   "id": "personal-data-1",
+   "observado": "ativou",
+   "amostras": [
+    "ativou"
+   ]
+  },
+  {
+   "id": "personal-data-2",
+   "observado": "ativou",
+   "amostras": [
+    "ativou"
+   ]
+  },
+  {
+   "id": "personal-data-3",
+   "observado": "nao_ativou",
+   "amostras": [
+    "nao_ativou"
+   ]
+  },
+  {
+   "id": "pre-code-pipeline-1",
+   "observado": "ativou",
+   "amostras": [
+    "ativou"
+   ]
+  },
+  {
+   "id": "pre-code-pipeline-2",
+   "observado": "ativou",
+   "amostras": [
+    "ativou"
+   ]
+  },
+  {
+   "id": "pre-code-pipeline-3",
+   "observado": "nao_ativou",
+   "amostras": [
+    "nao_ativou"
+   ]
+  },
+  {
+   "id": "quarto-expert-1",
+   "observado": "ativou",
+   "amostras": [
+    "ativou"
+   ]
+  },
+  {
+   "id": "quarto-expert-2",
+   "observado": "ativou",
+   "amostras": [
+    "ativou"
+   ]
+  },
+  {
+   "id": "quarto-expert-3",
+   "observado": "nao_ativou",
+   "amostras": [
+    "nao_ativou"
+   ]
+  },
+  {
+   "id": "release-and-ops-pipeline-1",
+   "observado": "ativou",
+   "amostras": [
+    "ativou"
+   ]
+  },
+  {
+   "id": "release-and-ops-pipeline-2",
+   "observado": "ativou",
+   "amostras": [
+    "ativou"
+   ]
+  },
+  {
+   "id": "release-and-ops-pipeline-3",
+   "observado": "nao_ativou",
+   "amostras": [
+    "nao_ativou"
+   ]
+  },
+  {
+   "id": "release-and-ops-pipeline-desligar-1",
+   "observado": "ativou",
+   "amostras": [
+    "ativou"
+   ]
+  },
+  {
+   "id": "release-and-ops-pipeline-desligar-2",
+   "observado": "nao_ativou",
+   "amostras": [
+    "nao_ativou"
+   ]
+  },
+  {
+   "id": "release-and-ops-pipeline-incidente-1",
+   "observado": "ativou",
+   "amostras": [
+    "ativou"
+   ]
+  },
+  {
+   "id": "release-and-ops-pipeline-incidente-2",
+   "observado": "ativou",
+   "amostras": [
+    "ativou"
+   ]
+  },
+  {
+   "id": "release-and-ops-pipeline-incidente-3",
+   "observado": "outra",
+   "amostras": [
+    "outra"
+   ]
+  },
+  {
+   "id": "release-and-ops-pipeline-ingles-1",
+   "observado": "ativou",
+   "amostras": [
+    "ativou"
+   ]
+  },
+  {
+   "id": "release-and-ops-pipeline-ingles-2",
+   "observado": "ativou",
+   "amostras": [
+    "ativou"
+   ]
+  },
+  {
+   "id": "release-and-ops-pipeline-ingles-3",
+   "observado": "nao_ativou",
+   "amostras": [
+    "nao_ativou"
+   ]
+  },
+  {
+   "id": "scheduled-automation-1",
+   "observado": "ativou",
+   "amostras": [
+    "ativou"
+   ]
+  },
+  {
+   "id": "scheduled-automation-2",
+   "observado": "ativou",
+   "amostras": [
+    "ativou"
+   ]
+  },
+  {
+   "id": "scheduled-automation-3",
+   "observado": "nao_ativou",
+   "amostras": [
+    "nao_ativou"
+   ]
+  },
+  {
+   "id": "scheduled-automation-ingles-1",
+   "observado": "ativou",
+   "amostras": [
+    "ativou"
+   ]
+  },
+  {
+   "id": "scheduled-automation-ingles-2",
+   "observado": "ativou",
+   "amostras": [
+    "ativou"
+   ]
+  },
+  {
+   "id": "skill-loader-1",
+   "observado": "ativou",
+   "amostras": [
+    "ativou"
+   ]
+  },
+  {
+   "id": "skill-loader-2",
+   "observado": "ativou",
+   "amostras": [
+    "ativou"
+   ]
+  },
+  {
+   "id": "skill-loader-3",
+   "observado": "outra",
+   "amostras": [
+    "outra"
+   ]
+  },
+  {
+   "id": "writing-pipeline-1",
+   "observado": "ativou",
+   "amostras": [
+    "ativou"
+   ]
+  },
+  {
+   "id": "writing-pipeline-2",
+   "observado": "ativou",
+   "amostras": [
+    "ativou"
+   ]
+  },
+  {
+   "id": "writing-pipeline-3",
+   "observado": "nao_ativou",
+   "amostras": [
+    "nao_ativou"
+   ]
+  },
+  {
+   "id": "writing-pipeline-notebook",
+   "observado": "nao_ativou",
+   "amostras": [
+    "nao_ativou"
+   ]
+  }
+ ]
+}
