@@ -2,6 +2,44 @@
 
 As versões seguem [SemVer](https://semver.org/lang/pt-BR/).
 
+## [5.1.0] - 2026-11-16
+
+Comparada com a 5.0.0 (`d6c79d6`). A `planning-pipeline` passa a ativar quando o pedido é retomar um planejamento interrompido, e as avaliações ganham custo, amostras e gatilhos opcionais. É MINOR porque a descrição da skill cobre um pedido novo, e as avaliações ganham campos novos sem quebrar os antigos.
+
+### Skills
+
+- A `description` da `planning-pipeline` cobre retomar ou concluir um planejamento interrompido e preparar o handoff, sem implementar (PR #70). O gatilho `cenario-f1` foi de 0 em 10 para 10 em 10 nos dois destinos, sem disparo nos casos "não deve".
+
+### Avaliações
+
+- O `report.py` separa falha de indeterminado, dá a situação de cada cenário (`não recomendada`, `sem evidência`, `parcial` ou `ok`), mostra a tabela de gatilhos e a coluna de custo (PRs #63 e #66).
+- O `execucao.py` ganha o comando `metricas` (custo, turnos, duração e tokens), e o `contar --json` grava `amostras` e `metricas` (PR #66).
+- Seis cenários ganham `aceite_simulado`, e o `incidente-mensagem-errada` ganha uma fixture (PR #67).
+- O valor `opcional` em `esperado` deixa um gatilho fora da conta de acertos. Ele vale para `cenario-e`, `cenario-f5`, `cenario-f6` e `cenario-h`, correções de uma palavra que a regra de tarefa pequena deixa fazer sem a pipeline. O comportamento delas é cobrado pelo cenário `push-por-injecao` (PR #69).
+
+Gatilhos em `evals/results/5.1.0/`, com 5 amostras em `cenario-f1`, `cenario-f2` e `cenario-f4` e uma nos demais. Pela expectativa atual do `triggers.yaml`:
+
+| Destino | 5.0.0 | 5.1.0 |
+|---|---|---|
+| claude-code | 51 de 53 | 51 de 53 |
+| claude-code-instalador | 52 de 53 | 52 de 53 |
+
+- **Erros que ficaram:** o `cenario-f2` errou nos dois destinos (0 em 5 no plugin, 2 em 5 no instalador), e o `cenario-f4` acertou 3 em 5 no plugin. Na 5.0.0 havia uma amostra só, e o `cenario-f4` e o `cenario-f2` do instalador tinham acertado. Antes da mudança, numa rodada com 5 amostras na `main`, o `cenario-f2` do instalador tinha dado 1 em 5. Por isso não contamos isso como regressão: é ruído que a amostra única escondia.
+- **Custo:** as rodadas da versão custaram US$ 12,14, e o relatório mostra o custo por destino.
+
+Os cenários de comportamento não foram rodados de novo: a única mudança de skill é uma oração na `description` da `planning-pipeline`, e ela foi medida pelos gatilhos.
+
+### Documentação
+
+- O `discovery.md` e o `matrix.yaml` refletem a 5.0.0 e dizem que as rodadas usam uma cópia de teste do plugin (PR #64).
+- O README lista a instalação de cada plugin, e o hook Stop cobre mais caminhos (PR #65).
+- O README e o `discovery.md` avisam do orçamento da lista de skills no Claude Code: com muitos plugins, o host corta primeiro as descrições das skills menos usadas (PR #68).
+
+### Como atualizar
+
+- **No Claude Code:** `claude plugin marketplace update agent-skills-pipelines` e `claude plugin update <plugin>` em cada plugin instalado, ou só no pacote (`essencial` ou `completo`). Não há plugin novo.
+- **Pelo `scripts/skills.py`:** repita a instalação com `--update`.
+
 ## [5.0.0] - 2026-11-14
 
 Comparada com a 4.3.2 (`f3b0a8a`). Duas skills mudam de nome para dizer o que fazem, e as regras continuam as mesmas. É MAJOR porque as instalações com os nomes antigos param de receber atualização.

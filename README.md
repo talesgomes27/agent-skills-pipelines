@@ -4,13 +4,13 @@ Fluxos de trabalho em português para agentes de IA planejarem, implementarem, a
 
 [![CI](https://github.com/talesgomes27/agent-skills-pipelines/actions/workflows/ci.yml/badge.svg)](https://github.com/talesgomes27/agent-skills-pipelines/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Release](https://img.shields.io/badge/release-5.0.0-blue.svg)](distribution/catalog.json)
+[![Release](https://img.shields.io/badge/release-5.1.0-blue.svg)](distribution/catalog.json)
 [![Python](https://img.shields.io/badge/Python-3.9%2B-3776AB.svg?logo=python&logoColor=white)](https://www.python.org/)
 [![Agent Skills](https://img.shields.io/badge/Agent%20Skills-Codex%20%7C%20Claude%20Code%20%7C%20Antigravity-6f42c1.svg)](docs/distribution/architecture.md)
 
 Uma skill é uma pasta de instruções que um agente de IA, como o Claude Code, o Codex ou o Antigravity, lê quando a tarefa pede. Estas skills, em português, dão ao agente um processo de trabalho: planejar antes de programar, implementar em etapas verificadas, auditar código herdado e publicar só com a sua autorização. Foram pensadas para ciência de dados, sites e dashboards em Streamlit ou Shiny, e automações.
 
-Release atual: **5.0.0**.
+Release atual: **5.1.0**.
 
 ## Como é na prática
 
@@ -101,7 +101,7 @@ claude plugin install quarto-expert@agent-skills-pipelines
 claude plugin install skill-loader@agent-skills-pipelines
 ```
 
-A branch `stable` só avança quando sai uma release, então você recebe só versões publicadas; para fixar uma versão exata, use uma tag, como `@v5.0.0`, no lugar de `@stable`. Sem o `@`, o marketplace acompanha a `main`, que muda a cada PR. Abra uma sessão nova para o Claude Code encontrá-las. No Claude Code, prefira o marketplace ao instalador abaixo: ele atualiza com `claude plugin update`.
+A branch `stable` só avança quando sai uma release, então você recebe só versões publicadas; para fixar uma versão exata, use uma tag, como `@v5.1.0`, no lugar de `@stable`. Sem o `@`, o marketplace acompanha a `main`, que muda a cada PR. Abra uma sessão nova para o Claude Code encontrá-las. No Claude Code, prefira o marketplace ao instalador abaixo: ele atualiza com `claude plugin update`.
 
 Com muitos plugins instalados, o Claude Code pode listar as skills só pelo nome, sem a `description`, e o agente deixa de reconhecer quando usá-las. A lista tem um orçamento de 1% da janela de contexto e perde primeiro as descrições das skills menos usadas. O `/doctor` mostra o custo da lista; para abrir espaço, aumente `skillListingBudgetFraction` nas configurações ou marque como `"name-only"`, em `skillOverrides`, as skills de outros plugins que você pouco usa. Veja [Skill descriptions are cut short](https://code.claude.com/docs/en/skills#skill-descriptions-are-cut-short).
 
