@@ -16,6 +16,8 @@ As versões seguem [SemVer](https://semver.org/lang/pt-BR/).
 
 - O `lote` do `/cenarios` passa a nomear as pastas de execução `exec-<hash>-<n>`, com o id só no `meta.json`. O `claude` vê o caminho, e o nome antigo, `gatilho-<id>-<n>`, trazia o nome da skill em muitos ids. O gatilho `implementation-pipeline-relatorio-errado`, novo, ativou em 16 de 16 execuções com o nome no caminho e em 3 de 6 numa pasta neutra. Os acertos de gatilho gravados até a 5.1.0 estão inflados nos ids que contêm o nome da skill e precisam ser medidos de novo.
 
+- Os gatilhos foram medidos de novo com as pastas neutras, 5 amostras por destino, 580 execuções e US$ 46 pela assinatura. No plugin, 44 dos 53 gatilhos contados acertaram em todas as amostras (239 de 265 amostras); no instalador, 48 (254 de 265). Nenhum "não deve" disparou. Os mais fracos no plugin: `implementation-pipeline-relatorio-errado` 0/5, `release-and-ops-pipeline-incidente-2` 0/5 (carrega a `scheduled-automation`), `cenario-f4` 1/5, `writing-pipeline-2` 1/5, `release-and-ops-pipeline-2` 2/5 e `release-and-ops-pipeline-desligar-1` 3/5. A 5.1.0 tinha 51 e 52 de 52, com uma amostra e o nome da skill no caminho.
+
 ### Corrigido
 
 - O README dizia que atualizar o pacote `essencial` ou `completo` atualizava os plugins que ele traz. Não atualiza: o `claude plugin update` do pacote só instala as dependências novas, e as que já estavam instaladas ficam na versão antiga. O "Como atualizar" da 5.1.0 tinha o mesmo erro. O README agora atualiza cada plugin, com um laço no shell, ou pelo **Update marketplace** do `/plugin`.
