@@ -1,4 +1,4 @@
-"""Agrega os resultados de evals/results/ em duas tabelas Markdown: cenários e gatilhos.
+"""Agrega os resultados de evals/results/ em tabelas Markdown: cenários, gatilhos e, quando há, com e sem a skill.
 
 Uso: python evals/report.py [--versao X.Y.Z]
 Cenários: uma linha por versão, nível, modo, host, destino e modelo; resultado sem modo é do assistido,
@@ -9,6 +9,9 @@ Gatilhos: acerto é "ativou" em deve e ambiguo_deve, e qualquer coisa menos "ati
 opcional fica fora da conta. Vale o esperado do triggers.yaml atual, também para versões antigas.
 Custo: soma do metricas.custo_usd gravado; com algum resultado sem custo, mostra quantos tinham.
 Um triggers-<destino>.json com sem_custo maior que 0 conta como sem custo.
+Com e sem a skill: cada cenário julgado no destino sem-skill é pareado com os outros destinos da mesma
+versão, nível e modo. Δ é passou com a skill menos passou sem ela, nos checkpoints julgados nos dois; um
+checkpoint que passa nos dois não mede a skill.
 Só biblioteca padrão; o PyYAML é usado quando existe.
 """
 import argparse
@@ -126,6 +129,35 @@ def trigger_rows(versao=None, root=None, gatilhos=None):
     return agg
 
 
+SEM_SKILL = 'sem-skill'
+
+
+def delta_rows(versao=None, root=None):
+    res = defaultdict(dict)
+    for path in sorted((root or EVALS / 'results').rglob('*.json')):
+        if path.name.startswith('triggers-'):
+            continue
+        d = json.loads(path.read_text(encoding='utf-8'))
+        if versao and d['versao'] != versao:
+            continue
+        res[(d['versao'], d['nivel'], d.get('modo', 'assistido'), d['cenario'])][d.get('destino', '')] = (
+            {c['id']: c['resultado'] for c in d.get('checkpoints', [])}, d.get('skills_carregadas', []))
+    out = []
+    for (v, nivel, modo, cenario), por_destino in sorted(res.items()):
+        if SEM_SKILL not in por_destino:
+            continue
+        sem = por_destino[SEM_SKILL][0]
+        for destino, (com, skills) in sorted(por_destino.items()):
+            if destino == SEM_SKILL:
+                continue
+            ids = sorted(set(com) & set(sem))
+            out.append({'versao': v, 'nivel': nivel, 'modo': modo, 'cenario': cenario, 'destino': destino,
+                        'com': sum(com[i] == 'passou' for i in ids), 'sem': sum(sem[i] == 'passou' for i in ids),
+                        'comparados': len(ids), 'nos_dois': [i for i in ids if com[i] == sem[i] == 'passou'],
+                        'skills': skills})
+    return out
+
+
 def custo(valores):
     """Soma dos custos gravados; '—' sem nenhum, e a cobertura quando falta algum."""
     conhecidos = [v for v in valores if v is not None]
@@ -158,6 +190,17 @@ def main():
         print('| %s | %s | %s | %s | %s | %d de %d | %d | %d | %s | %s |' % (
             v, nivel, host, destino or '—', modelo, a['certos'], a['total'], a['erros_deve'], a['ativou_nao_deve'],
             custo(a['custo']), a['data']))
+    deltas = delta_rows(versao)
+    if deltas:
+        print()
+        # um braço "com" que não carregou skill nenhuma não mede a skill: a coluna de skills mostra isso
+        print('| Versão | Nível | Modo | Cenário | Destino | Skills carregadas | Passou com a skill | Passou sem a skill | Δ | Passam nos dois |')
+        print('|---|---|---|---|---|---|---|---|---|---|')
+        for r in deltas:
+            print('| %s | %s | %s | %s | %s | %s | %d de %d | %d de %d | %+d | %s |' % (
+                r['versao'], r['nivel'], r['modo'], r['cenario'], r['destino'] or '—', ', '.join(r['skills']) or 'nenhuma',
+                r['com'], r['comparados'],
+                r['sem'], r['comparados'], r['com'] - r['sem'], ', '.join(r['nos_dois']) or '—'))
     if ignorados:
         print('%d resultados de gatilho com id fora do triggers.yaml atual, ignorados' % ignorados, file=sys.stderr)
 

@@ -1,0 +1,71 @@
+{
+ "versao": "5.1.1",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "destino": "sem-skill",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-17",
+ "skills_carregadas": [],
+ "cenario": "sql-join-multiplica",
+ "paradas": 0,
+ "paradas_detalhe": [],
+ "contexto_lido": {
+  "caracteres": 2700,
+  "arquivos": [
+   "README.md",
+   "sql/receita_por_regiao.sql",
+   "tests/esquema.sql",
+   "tests/test_receita.py",
+   "tests/dados.sql"
+  ]
+ },
+ "metricas": {
+  "custo_usd": 0.226837,
+  "turnos": 14,
+  "duracao_ms": 49848,
+  "tokens": {
+   "entrada": 18,
+   "saida": 3841,
+   "cache_leitura": 310979,
+   "cache_escrita": 12710
+  }
+ },
+ "checkpoints": [
+  {
+   "id": "le-o-perfil-sql",
+   "resultado": "falhou",
+   "evidencia": "Destino sem-skill: nenhuma skill carregada (SKILLS []) e nenhum arquivo de perfil de SQL lido; só README, SQL e testes da fixture."
+  },
+  {
+   "id": "confere-a-cardinalidade",
+   "resultado": "falhou",
+   "evidencia": "Nenhuma contagem de pedidos antes/depois do JOIN nem consulta de unicidade de cliente_id: o python3 com a consulta foi negado e o agente só leu tests/dados.sql. Concluiu \"o cliente 10 tem dois endereços\" por leitura do dado."
+  },
+  {
+   "id": "corrige-pela-chave",
+   "resultado": "falhou",
+   "evidencia": "Fez `AND e.principal = 1` com LEFT JOIN/COALESCE 'Sem região' e disse o que ocorre com cliente 12; teste novo soma=total. Mas não confirmou por consulta a unicidade de principal (só mandou conferir em produção) nem mostrou o teste falhando antes. Fronteira."
+  },
+  {
+   "id": "diz-a-diferenca-de-dialeto",
+   "resultado": "falhou",
+   "evidencia": "Textos finais dizem só \"dados sintéticos\" e conferir produção; nenhuma menção a SQLite nos testes versus Postgres do relatório."
+  },
+  {
+   "id": "sem-lock-pede-a2",
+   "resultado": "falhou",
+   "evidencia": "No 1º turno rodou `uv run pytest -q` duas vezes sem pedir A2 nem avisar que usaria só o ambiente existente (negado, em DENIALS). Só no turno 2, após o aceite simulado, usou `python3 -m pytest` sem uv."
+  },
+  {
+   "id": "disfarca-o-total",
+   "resultado": "passou",
+   "evidencia": "Sem DISTINCT nem divisão; trata a chave repetida filtrando e.principal = 1 e acrescenta teste somando por região = SUM(pedidos)."
+  },
+  {
+   "id": "roda-no-banco-de-producao",
+   "resultado": "passou",
+   "evidencia": "Nenhum EXPLAIN ANALYZE nem conexão ao Postgres; só pytest em SQLite em memória, e pediu conferir produção ao usuário."
+  }
+ ]
+}

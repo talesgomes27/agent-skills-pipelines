@@ -3,11 +3,12 @@
   plugin <saida>                       monta em <saida>/plugins um plugin por entrada do marketplace
   preparar <exec> <pedido> [fixture]   cria <exec>/proj (cópia da fixture ou vazia) e <exec>/pedido.txt
   rodar <exec> <destino> [--plugin P] [--turnos N] [--aceite TEXTO]
-                                       destino claude-code (plugin de teste) ou claude-code-instalador (skills.py)
+                                       destino claude-code (plugin de teste), claude-code-instalador (skills.py)
+                                       ou sem-skill (nenhuma skill do repositório: o braço de comparação dos cenários)
   resumo <log>                         ferramentas, skills, negações e texto final de um log stream-json
   gatilho <log> <skill>                ativou, nao_ativou ou outra
   lote <pasta> [--cenarios a,b] [--gatilhos a,b|todos] [--destinos d1,d2] [--amostras N] [--paralelo N]
-                                       prepara e roda as execuções em <pasta>/<destino>/exec-<hash>-<n>, com o id no meta.json, retomando as
+                                       --destinos aceita sem-skill, que roda só os cenários; prepara e roda as execuções em <pasta>/<destino>/exec-<hash>-<n>, com o id no meta.json, retomando as
                                        que ficaram sem done; o plugin de teste vai para <pasta>/plugin
   contar <pasta> [--contra VERSAO] [--json]
                                        gatilhos ativou/total por destino e skills carregadas nos cenários,
@@ -97,6 +98,8 @@ def rodar(exe, destino, plugin_dir=None, turnos=40, aceite=None):
         subprocess.run([sys.executable, str(REPO / 'scripts/skills.py'), 'install', '--agent', 'claude', '--scope', 'project',
                         '--project', str(proj), '--all', '--mode', 'copy'], check=True, stdout=subprocess.DEVNULL)
         plugin_dir = None
+    elif destino == SEM_SKILL:
+        plugin_dir = None  # nem plugin nem instalação: o que passa aqui não depende da skill
     elif not plugin_dir:
         sys.exit('o destino claude-code pede --plugin')
     else:
@@ -173,6 +176,7 @@ def metricas(exe):
 
 
 DESTINOS = ('claude-code', 'claude-code-instalador')
+SEM_SKILL = 'sem-skill'  # fora do padrão do lote: dobra o custo e só serve aos cenários
 
 
 def _yaml(caminho):
@@ -187,8 +191,8 @@ def _gatilhos():
 def lote(pasta, cenarios=(), gatilhos=(), destinos=DESTINOS, amostras=1, paralelo=4):
     from concurrent.futures import ThreadPoolExecutor
     pasta = Path(pasta)
-    if set(destinos) - set(DESTINOS):
-        sys.exit(f'destino desconhecido; use {", ".join(DESTINOS)}')
+    if set(destinos) - {*DESTINOS, SEM_SKILL}:
+        sys.exit(f'destino desconhecido; use {", ".join(DESTINOS)} ou {SEM_SKILL}')
     pasta.mkdir(parents=True, exist_ok=True)
     trava = pasta / '.lote-em-andamento'
     if trava.exists():
@@ -208,6 +212,8 @@ def lote(pasta, cenarios=(), gatilhos=(), destinos=DESTINOS, amostras=1, paralel
     jobs = []
     for destino in destinos:
         for tipo, i, d in itens:
+            if destino == SEM_SKILL and tipo == 'gatilho':
+                continue  # sem a skill, um gatilho nunca ativa
             for n in range(1, amostras + 1):
                 # nome neutro: o claude vê o caminho, e um id com o nome da skill o levava a carregá-la; o id fica no meta.json
                 exe = pasta / destino / f"exec-{hashlib.sha1(f'{tipo}-{i}'.encode()).hexdigest()[:8]}-{n}"
@@ -323,7 +329,7 @@ if __name__ == '__main__':
     p = sub.add_parser('preparar')
     p.add_argument('exe'); p.add_argument('pedido'); p.add_argument('fixture', nargs='?')
     p = sub.add_parser('rodar')
-    p.add_argument('exe'); p.add_argument('destino', choices=['claude-code', 'claude-code-instalador'])
+    p.add_argument('exe'); p.add_argument('destino', choices=[*DESTINOS, SEM_SKILL])
     p.add_argument('--plugin'); p.add_argument('--turnos', type=int, default=40); p.add_argument('--aceite')
     sub.add_parser('resumo').add_argument('log')
     p = sub.add_parser('gatilho')

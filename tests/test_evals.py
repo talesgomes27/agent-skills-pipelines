@@ -123,6 +123,22 @@ class MatrixAndReport(unittest.TestCase):
             keys = set(mod.rows(root=root))
         self.assertEqual({k[4] for k in keys}, {'', 'claude-code-instalador'})
 
+    def test_report_pairs_each_destination_with_the_no_skill_arm(self):
+        import tempfile
+        mod = self._report()
+        base = {'cenario': 'x', 'versao': '9.0.0', 'nivel': 'execucao', 'modo': 'por-efeito', 'host': 'claude-code', 'modelo': 'm', 'data': '2026-11-17'}
+        cp = lambda **r: [{'id': i, 'resultado': v, 'evidencia': i} for i, v in r.items()]
+        with tempfile.TemporaryDirectory() as t:
+            root = Path(t)
+            (root / '9.0.0/execucao/sem-skill').mkdir(parents=True)
+            (root / '9.0.0/execucao/x.json').write_text(json.dumps(dict(base, skills_carregadas=['s'], checkpoints=cp(a='passou', b='passou', c='falhou'))), encoding='utf-8')
+            (root / '9.0.0/execucao/sem-skill/x.json').write_text(json.dumps(dict(base, destino='sem-skill', checkpoints=cp(a='passou', b='falhou'))), encoding='utf-8')
+            (root / '9.0.0/execucao/y.json').write_text(json.dumps(dict(base, cenario='y', checkpoints=cp(a='passou'))), encoding='utf-8')
+            rows = mod.delta_rows(root=root)
+        # y não tem o braço sem a skill; c não foi julgado sem a skill e fica fora da comparação
+        self.assertEqual(rows, [{'versao': '9.0.0', 'nivel': 'execucao', 'modo': 'por-efeito', 'cenario': 'x', 'destino': '',
+                                 'com': 2, 'sem': 1, 'comparados': 2, 'nos_dois': ['a'], 'skills': ['s']}])
+
     def _report(self):
         import importlib.util
         spec = importlib.util.spec_from_file_location('report', EVALS / 'report.py')
@@ -352,6 +368,21 @@ class Harness(unittest.TestCase):
                 for a in p.get('agents', []):
                     self.assertTrue((raiz / p['name'] / 'agents' / Path(a).name).is_file(), a)
             self.assertTrue((raiz / 'pipeline-guardrails' / 'effects.json').is_file())
+
+    def test_lote_no_skill_arm_skips_triggers(self):
+        import contextlib
+        import importlib.util
+        import io
+        import tempfile
+        spec = importlib.util.spec_from_file_location('execucao', REPO / '.claude/skills/cenarios/scripts/execucao.py')
+        ex = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(ex)
+        with tempfile.TemporaryDirectory() as t, contextlib.redirect_stdout(io.StringIO()) as out:
+            ex.lote(t, gatilhos=['release-and-ops-pipeline-incidente-1'], destinos=['sem-skill'])
+            self.assertFalse((Path(t) / 'sem-skill').exists())
+        self.assertIn('0 execuções', out.getvalue())
+        with tempfile.TemporaryDirectory() as t, self.assertRaises(SystemExit):
+            ex.lote(t, destinos=['outro'])
 
     def test_contar_reads_lote_layout(self):
         import contextlib

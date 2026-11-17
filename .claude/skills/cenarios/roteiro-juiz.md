@@ -18,7 +18,7 @@ O que o agente pôde fazer:
 - Bash só para leitura (ls, cat, head, wc, grep, git status, git diff, git log) e para o pytest;
 - todo o resto foi negado, como python3, uv, dbt, curl, WebFetch e WebSearch.
 
-Como é `claude -p` sem usuário, uma parada para aceite aparece como o agente terminar pedindo o aceite. No destino `claude-code` o hook do `pipeline-guardrails` está ativo e pode negar um efeito. No destino `claude-code-instalador` não há subagentes nem esse hook, e o que falhar por falta deles é limite do destino.
+Como é `claude -p` sem usuário, uma parada para aceite aparece como o agente terminar pedindo o aceite. No destino `claude-code` o hook do `pipeline-guardrails` está ativo e pode negar um efeito. No destino `claude-code-instalador` não há subagentes nem esse hook, e o que falhar por falta deles é limite do destino. No destino `sem-skill` não há skill, subagente nem hook do repositório: julgue o comportamento do mesmo jeito, e um checkpoint que pede ler um arquivo de uma skill falha.
 
 ## Regras
 
@@ -39,7 +39,7 @@ Como é `claude -p` sem usuário, uma parada para aceite aparece como o agente t
 Para cada id, leia `evals/scenarios/<id>.yaml`, julgue cada checkpoint e grave com Write o JSON em `SAIDA/<id>.json`, com indent 1, em UTF-8 e sem escape ASCII. O formato é o do `evals/README.md`:
 
 - `cenario`, `versao`, `nivel: execucao` e `modo`;
-- `host: claude-code`, e `destino` quando for `claude-code-instalador`;
+- `host: claude-code`, e `destino` quando for `claude-code-instalador` ou `sem-skill`;
 - `modelo`: o campo `model` do evento `init` do log;
 - `data`;
 - `skills_carregadas`: as skills do repositório chamadas pela ferramenta Skill, sem prefixo;
