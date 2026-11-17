@@ -7,7 +7,7 @@
   resumo <log>                         ferramentas, skills, negações e texto final de um log stream-json
   gatilho <log> <skill>                ativou, nao_ativou ou outra
   lote <pasta> [--cenarios a,b] [--gatilhos a,b|todos] [--destinos d1,d2] [--amostras N] [--paralelo N]
-                                       prepara e roda as execuções em <pasta>/<destino>/<tipo>-<id>-<n>, retomando as
+                                       prepara e roda as execuções em <pasta>/<destino>/exec-<hash>-<n>, com o id no meta.json, retomando as
                                        que ficaram sem done; o plugin de teste vai para <pasta>/plugin
   contar <pasta> [--contra VERSAO] [--json]
                                        gatilhos ativou/total por destino e skills carregadas nos cenários,
@@ -15,6 +15,7 @@
                                        com --json, os resultados com amostras e as metricas de cada triggers-<destino>.json
   metricas <exec>                      custo_usd, turnos, duracao_ms e tokens da execução, em JSON; ausente é null
 """
+import hashlib
 import json
 import os
 import shutil
@@ -208,7 +209,8 @@ def lote(pasta, cenarios=(), gatilhos=(), destinos=DESTINOS, amostras=1, paralel
     for destino in destinos:
         for tipo, i, d in itens:
             for n in range(1, amostras + 1):
-                exe = pasta / destino / f'{tipo}-{i}-{n}'
+                # nome neutro: o claude vê o caminho, e um id com o nome da skill o levava a carregá-la; o id fica no meta.json
+                exe = pasta / destino / f"exec-{hashlib.sha1(f'{tipo}-{i}'.encode()).hexdigest()[:8]}-{n}"
                 if (exe / 'done').exists():
                     continue
                 if exe.exists():
