@@ -36,6 +36,7 @@
   prompt: Revise este ADR preservando fatos, links, números e o grau de certeza das decisões.
 - id: writing-pipeline-2
   skill: writing-pipeline
+  fixture: fixtures/gatilho-relatorio
   esperado: ambiguo_deve
   prompt: Melhore este relatório; uma afirmação quantitativa não tem fonte disponível.
 - id: writing-pipeline-3

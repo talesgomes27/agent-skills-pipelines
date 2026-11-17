@@ -5,9 +5,9 @@
  "modelo": "claude-sonnet-5-5",
  "data": "2026-11-17",
  "metricas": {
-  "custo_usd": 23.541819,
-  "turnos": 1475,
-  "duracao_ms": 4376646,
+  "custo_usd": 23.784851,
+  "turnos": 1491,
+  "duracao_ms": 4434554,
   "sem_custo": 0
  },
  "resultados": [
@@ -616,11 +616,9 @@
    "id": "writing-pipeline-2",
    "observado": "nao_ativou",
    "amostras": [
+    "nao_ativou",
     "ativou",
-    "nao_ativou",
-    "nao_ativou",
-    "nao_ativou",
-    "nao_ativou"
+    "ativou"
    ]
   },
   {

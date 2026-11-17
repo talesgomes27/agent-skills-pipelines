@@ -6,9 +6,9 @@
  "data": "2026-11-17",
  "destino": "claude-code-instalador",
  "metricas": {
-  "custo_usd": 24.818363,
-  "turnos": 1539,
-  "duracao_ms": 4657493,
+  "custo_usd": 25.106637,
+  "turnos": 1558,
+  "duracao_ms": 4718843,
   "sem_custo": 0
  },
  "resultados": [
@@ -617,8 +617,6 @@
    "id": "writing-pipeline-2",
    "observado": "nao_ativou",
    "amostras": [
-    "ativou",
-    "ativou",
     "ativou",
     "nao_ativou",
     "ativou"
