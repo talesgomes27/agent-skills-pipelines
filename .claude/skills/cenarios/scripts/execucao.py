@@ -1,6 +1,6 @@
 """Harness do nível de execução do /cenarios, só com a biblioteca padrão.
 
-  plugin <saida>                       monta o plugin de teste "asp" com todas as skills e os subagentes
+  plugin <saida>                       monta em <saida>/plugins um plugin por entrada do marketplace
   preparar <exec> <pedido> [fixture]   cria <exec>/proj (cópia da fixture ou vazia) e <exec>/pedido.txt
   rodar <exec> <destino> [--plugin P] [--turnos N] [--aceite TEXTO]
                                        destino claude-code (plugin de teste) ou claude-code-instalador (skills.py)
@@ -28,20 +28,27 @@ ALLOW = ['Read', 'Glob', 'Grep', 'Bash(ls:*)', 'Bash(cat:*)', 'Bash(head:*)', 'B
 
 
 def plugin(saida):
-    asp = Path(saida) / 'asp'
-    shutil.rmtree(asp, ignore_errors=True)
-    for s in sorted(p.parent for p in REPO.glob('*/SKILL.md')):
-        shutil.copytree(s, asp / 'skills' / s.name, ignore=shutil.ignore_patterns('__pycache__'))
-    shutil.copytree(REPO / 'plugin-agents', asp / 'agents')
-    # o hook do pipeline-guardrails, como no marketplace real; effect_guard.py acha o effects.json em parents[1]
-    g = REPO / 'pipeline-guardrails'
-    shutil.copytree(g / 'hooks', asp / 'hooks')
-    shutil.copytree(g / 'scripts', asp / 'scripts', ignore=shutil.ignore_patterns('__pycache__'))
-    shutil.copy(g / 'effects.json', asp)
+    # um plugin por entrada do marketplace.json, com o mesmo nome e prefixo <plugin>:<skill> da instalação real;
+    # --plugin-dir carrega cada filho de uma pasta de plugins
+    raiz = Path(saida).resolve() / 'plugins'  # absoluto: o claude roda dentro de <exec>/proj
+    shutil.rmtree(raiz, ignore_errors=True)
     versao = json.loads((REPO / 'distribution/catalog.json').read_text(encoding='utf-8'))['release']
-    (asp / '.claude-plugin').mkdir()
-    (asp / '.claude-plugin/plugin.json').write_text(json.dumps({'name': 'asp', 'version': versao, 'description': 'cópia de teste'}))
-    print(asp)
+    sem = shutil.ignore_patterns('__pycache__')
+    for p in json.loads((REPO / '.claude-plugin/marketplace.json').read_text(encoding='utf-8'))['plugins']:
+        if p.get('dependencies'):
+            continue  # pacote: só traz outros plugins
+        d = raiz / p['name']
+        if p['source'] != './':
+            shutil.copytree(REPO / p['source'], d, ignore=sem)  # pipeline-guardrails, com o hook
+            continue
+        for s in p.get('skills', []):
+            shutil.copytree(REPO / s, d / 'skills' / Path(s).name, ignore=sem)
+        for a in p.get('agents', []):
+            (d / 'agents').mkdir(parents=True, exist_ok=True)
+            shutil.copy(REPO / a, d / 'agents')
+        (d / '.claude-plugin').mkdir(parents=True)
+        (d / '.claude-plugin/plugin.json').write_text(json.dumps({'name': p['name'], 'version': versao, 'description': 'cópia de teste'}))
+    print(raiz)
 
 
 def preparar(exe, pedido, fixture=None):
@@ -91,6 +98,8 @@ def rodar(exe, destino, plugin_dir=None, turnos=40, aceite=None):
         plugin_dir = None
     elif not plugin_dir:
         sys.exit('o destino claude-code pede --plugin')
+    else:
+        plugin_dir = Path(plugin_dir).resolve()  # relativo, o claude o procuraria dentro de proj
     codigo = _claude(proj, (exe / 'pedido.txt').read_text(encoding='utf-8'), exe / 'log.jsonl', plugin_dir, turnos)
     fim = [d for d in ler(exe / 'log.jsonl') if d.get('type') == 'result']
     if aceite and fim and fim[-1].get('subtype') == 'success':
@@ -113,7 +122,7 @@ def skills(log):
 
 
 def gatilho(log, skill):
-    # o plugin de teste prefixa asp:, e o marketplace real usa <plugin>:<skill>
+    # plugin: <plugin>:<skill>; instalador: sem prefixo
     nomes = [s.split(':')[-1] for s in skills(log)]
     return 'ativou' if skill in nomes else ('outra' if nomes else 'nao_ativou')
 
@@ -131,7 +140,7 @@ def resumo(log):
                     texts.append(c['text'])
         elif d.get('type') == 'result':
             res = d
-    # isolamento: só as skills do repositório (com ou sem asp:) e as do próprio Claude Code
+    # isolamento: só as skills do repositório (com ou sem o prefixo do plugin) e as do próprio Claude Code
     print('INIT', init.get('model'), 'skills:', init.get('skills'))
     print('TOOLS', len(tools), *tools, sep='\n  ')
     print('SKILLS', skills(log))
@@ -188,7 +197,7 @@ def lote(pasta, cenarios=(), gatilhos=(), destinos=DESTINOS, amostras=1, paralel
         except (ValueError, ProcessLookupError):
             pass  # trava de um lote que morreu
     trava.write_text(str(os.getpid()))
-    if not (pasta / 'plugin/asp').exists():
+    if not (pasta / 'plugin/plugins').exists():
         plugin(pasta / 'plugin')
     T = _gatilhos()
     if list(gatilhos) == ['todos']:
@@ -212,7 +221,7 @@ def lote(pasta, cenarios=(), gatilhos=(), destinos=DESTINOS, amostras=1, paralel
 
     def um(j):
         try:
-            rodar(j[0], j[1], pasta / 'plugin/asp', j[2], j[3])
+            rodar(j[0], j[1], pasta / 'plugin/plugins', j[2], j[3])
         except BaseException as e:  # inclui o sys.exit e o CalledProcessError do install: fica gravado, a rodada segue
             (j[0] / 'erro_local').write_text(repr(e))
     try:
