@@ -252,3 +252,8 @@
   skill: release-and-ops-pipeline
   esperado: nao_deve
   prompt: O que significa descomissionar um servidor? Explica em duas frases.
+- id: implementation-pipeline-relatorio-errado
+  skill: implementation-pipeline
+  fixture: fixtures/sql-join-multiplica
+  esperado: deve
+  prompt: A receita por região do relatório está maior que a do financeiro neste mês. Confere a consulta e corrige.
