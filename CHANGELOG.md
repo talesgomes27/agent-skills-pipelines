@@ -2,7 +2,14 @@
 
 As versões seguem [SemVer](https://semver.org/lang/pt-BR/).
 
-## Não publicado
+## [5.1.1] - 2026-11-17
+
+Comparada com a 5.1.0 (`9629a91`). As `description` da `implementation-pipeline` e da `release-and-ops-pipeline` passam a cobrir um número errado num relatório e um envio errado a clientes, e o harness do `/cenarios` passa a medir os gatilhos sem o nome da skill no caminho e com um plugin por entrada do marketplace. É PATCH porque só corrige descriptions e avaliações; o corpo das skills e as referências não mudam.
+
+### Como atualizar
+
+- **No Claude Code:** `claude plugin marketplace update agent-skills-pipelines` e `claude plugin update <plugin>` em cada plugin instalado. Atualizar só o pacote (`essencial` ou `completo`) não atualiza os plugins que ele traz; o README tem um laço para atualizar todos. Não há plugin novo.
+- **Pelo `scripts/skills.py`:** repita a instalação com `--update`.
 
 ### Avaliações
 
