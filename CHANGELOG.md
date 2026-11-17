@@ -7,6 +7,7 @@ As versões seguem [SemVer](https://semver.org/lang/pt-BR/).
 ### Avaliações
 
 - O `cenario-f2`, retomar uma correção de rótulo já autorizada com a base mudada, passa a `opcional`, como os outros gatilhos de uma palavra. Com 5 amostras por destino, ele ativou a `implementation-pipeline` 0 vezes no plugin e 3 no instalador, e ampliar a `description` para cobrir a retomada não mudou isso. Nas 10 execuções, o agente corrigiu o rótulo, preservou o `user-notes.txt`, tratou o check antigo como inválido e não pediu a aprovação de novo. Nenhum cenário cobra ainda a retomada com base mudada.
+- O destino `claude-code` do `/cenarios` passa a montar um plugin por entrada do marketplace, com os nomes e prefixos da instalação real, como `audit-and-refactoring-pipeline:audit-and-refactoring-pipeline`, no lugar de um plugin único `asp`. O caminho do plugin vira absoluto, porque o `claude` roda dentro da cópia da fixture. Na rodada que motivou a troca, com 5 amostras, o `cenario-f4` ativou 3 vezes com o `asp:`, 0 com o prefixo real e 5 no instalador; os gatilhos opcionais, 0 de 25 e 2 de 25. O prefixo não explica a diferença entre o plugin e o instalador, e nas execuções sem a skill o agente entregou o diagnóstico certo, sem corrigir.
 
 ### Corrigido
 

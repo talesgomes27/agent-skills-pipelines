@@ -325,11 +325,33 @@ class Harness(unittest.TestCase):
         uso = lambda nome: json.dumps({'type': 'assistant', 'message': {'content': [{'type': 'tool_use', 'name': 'Skill', 'input': {'skill': nome}}]}})
         with tempfile.TemporaryDirectory() as t:
             log = Path(t) / 'log.jsonl'
-            log.write_text('lixo\n' + uso('asp:audit-and-refactoring-pipeline') + '\n', encoding='utf-8')
+            log.write_text('lixo\n' + uso('audit-and-refactoring-pipeline:audit-and-refactoring-pipeline') + '\n', encoding='utf-8')
             self.assertEqual(ex.gatilho(log, 'audit-and-refactoring-pipeline'), 'ativou')
             self.assertEqual(ex.gatilho(log, 'implementation-pipeline'), 'outra')
             log.write_text('', encoding='utf-8')
             self.assertEqual(ex.gatilho(log, 'implementation-pipeline'), 'nao_ativou')
+
+    def test_plugin_mirrors_marketplace(self):
+        import contextlib
+        import importlib.util
+        import io
+        import tempfile
+        spec = importlib.util.spec_from_file_location('execucao', REPO / '.claude/skills/cenarios/scripts/execucao.py')
+        ex = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(ex)
+        mkt = json.loads((REPO / '.claude-plugin/marketplace.json').read_text(encoding='utf-8'))['plugins']
+        with tempfile.TemporaryDirectory() as t, contextlib.redirect_stdout(io.StringIO()):
+            ex.plugin(t)
+            raiz = Path(t) / 'plugins'
+            self.assertEqual(sorted(d.name for d in raiz.iterdir()), sorted(p['name'] for p in mkt if not p.get('dependencies')))
+            for p in mkt:
+                for s in p.get('skills', []):
+                    self.assertTrue((raiz / p['name'] / 'skills' / Path(s).name / 'SKILL.md').is_file(), s)
+                    nome = json.loads((raiz / p['name'] / '.claude-plugin/plugin.json').read_text(encoding='utf-8'))['name']
+                    self.assertEqual(nome, p['name'])
+                for a in p.get('agents', []):
+                    self.assertTrue((raiz / p['name'] / 'agents' / Path(a).name).is_file(), a)
+            self.assertTrue((raiz / 'pipeline-guardrails' / 'effects.json').is_file())
 
     def test_contar_reads_lote_layout(self):
         import contextlib
@@ -339,7 +361,7 @@ class Harness(unittest.TestCase):
         spec = importlib.util.spec_from_file_location('execucao', REPO / '.claude/skills/cenarios/scripts/execucao.py')
         ex = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(ex)
-        uso = json.dumps({'type': 'assistant', 'message': {'content': [{'type': 'tool_use', 'name': 'Skill', 'input': {'skill': 'asp:release-and-ops-pipeline'}}]}})
+        uso = json.dumps({'type': 'assistant', 'message': {'content': [{'type': 'tool_use', 'name': 'Skill', 'input': {'skill': 'release-and-ops-pipeline:release-and-ops-pipeline'}}]}})
         with tempfile.TemporaryDirectory() as t:
             for n, log, done in ((1, uso, True), (2, '', True), (3, uso, False)):
                 exe = Path(t) / 'claude-code' / f'gatilho-release-and-ops-pipeline-incidente-1-{n}'
@@ -393,7 +415,7 @@ class Harness(unittest.TestCase):
         import io
         import tempfile
         ex = self._ex()
-        uso = json.dumps({'type': 'assistant', 'message': {'content': [{'type': 'tool_use', 'name': 'Skill', 'input': {'skill': 'asp:release-and-ops-pipeline'}}]}})
+        uso = json.dumps({'type': 'assistant', 'message': {'content': [{'type': 'tool_use', 'name': 'Skill', 'input': {'skill': 'release-and-ops-pipeline:release-and-ops-pipeline'}}]}})
         fim = json.dumps({'type': 'result', 'subtype': 'success', 'total_cost_usd': 0.1, 'num_turns': 2, 'duration_ms': 10})
         with tempfile.TemporaryDirectory() as t:
             for n, log in ((1, uso + '\n' + fim), (2, fim), (3, uso)):

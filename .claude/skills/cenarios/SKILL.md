@@ -27,9 +27,9 @@ Testa se as skills deste repositório levam um agente ao comportamento esperado 
 O harness é `scripts/execucao.py`, só com a biblioteca padrão. Rode `/usr/bin/python3 .claude/skills/cenarios/scripts/execucao.py` sem argumentos para ver os comandos. Nunca use credenciais, contas nem destinos reais.
 
 - Para uma rodada inteira, use `lote <pasta> --cenarios a,b --gatilhos c,d|todos --amostras N`. Ele monta o plugin de teste em `<pasta>/plugin`, prepara e roda cada execução nos dois destinos, quatro de cada vez, e retoma numa nova chamada as que ficaram sem `done`. Depois, `contar <pasta> --contra <versão anterior>` dá os gatilhos certos por destino, com o resultado da versão anterior ao lado, e as skills carregadas em cada cenário; `contar <pasta> --json` dá os `resultados`, com as amostras, e as `metricas` de cada `triggers-<destino>.json`. Os comandos abaixo são as peças do `lote`, para uma execução avulsa.
-- Monte o plugin de teste uma vez por rodada com `plugin <pasta no scratchpad>`. Ele copia todas as skills, os subagentes de `plugin-agents/` e o hook do `pipeline-guardrails` para um plugin `asp`, carregado por `--plugin-dir` sem tocar os plugins do usuário.
+- Monte o plugin de teste uma vez por rodada com `plugin <pasta no scratchpad>`. Ele copia todas as skills, os subagentes de `plugin-agents/` e o hook do `pipeline-guardrails` em `<pasta>/plugins`, um plugin por entrada do marketplace, com os mesmos nomes e prefixos da instalação real, carregados por `--plugin-dir` sem tocar os plugins do usuário.
 - Para cada execução, rode `preparar <exec> "<pedido>" [<fixture do cenário>]` e depois `rodar <exec> <destino>`:
-  - destino `claude-code`, com `--plugin <pasta>/asp`;
+  - destino `claude-code`, com `--plugin <pasta>/plugins` (caminho absoluto);
   - destino `claude-code-instalador`: o harness instala as skills na cópia com `skills.py install --scope project --all --mode copy` e roda sem o plugin. O escopo `project` não toca o `~/.claude/skills/` do usuário. Esse destino não tem os subagentes nem o hook do `pipeline-guardrails`: o que falhar por falta deles é limite do destino, não da skill.
 - Os dois destinos rodam o mesmo `claude -p`:
   - Sonnet, `--setting-sources project` e `--strict-mcp-config`;
