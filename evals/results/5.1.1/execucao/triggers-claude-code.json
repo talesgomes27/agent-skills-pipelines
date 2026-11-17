@@ -5,9 +5,9 @@
  "modelo": "claude-sonnet-5-5",
  "data": "2026-11-17",
  "metricas": {
-  "custo_usd": 23.109812,
-  "turnos": 1448,
-  "duracao_ms": 4284945,
+  "custo_usd": 23.541819,
+  "turnos": 1475,
+  "duracao_ms": 4376646,
   "sem_custo": 0
  },
  "resultados": [
@@ -244,13 +244,11 @@
   },
   {
    "id": "implementation-pipeline-relatorio-errado",
-   "observado": "nao_ativou",
+   "observado": "ativou",
    "amostras": [
-    "nao_ativou",
-    "nao_ativou",
-    "nao_ativou",
-    "nao_ativou",
-    "nao_ativou"
+    "ativou",
+    "ativou",
+    "ativou"
    ]
   },
   {

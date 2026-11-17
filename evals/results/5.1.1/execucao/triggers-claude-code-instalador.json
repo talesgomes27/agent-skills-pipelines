@@ -6,9 +6,9 @@
  "data": "2026-11-17",
  "destino": "claude-code-instalador",
  "metricas": {
-  "custo_usd": 24.405468,
-  "turnos": 1507,
-  "duracao_ms": 4561614,
+  "custo_usd": 24.818363,
+  "turnos": 1539,
+  "duracao_ms": 4657493,
   "sem_custo": 0
  },
  "resultados": [
@@ -245,10 +245,8 @@
   },
   {
    "id": "implementation-pipeline-relatorio-errado",
-   "observado": "nao_ativou",
+   "observado": "ativou",
    "amostras": [
-    "ativou",
-    "nao_ativou",
     "ativou",
     "ativou",
     "ativou"
