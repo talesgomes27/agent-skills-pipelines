@@ -5,9 +5,9 @@
  "modelo": "claude-sonnet-5-5",
  "data": "2026-11-17",
  "metricas": {
-  "custo_usd": 22.379722,
-  "turnos": 1396,
-  "duracao_ms": 4139665,
+  "custo_usd": 23.109812,
+  "turnos": 1448,
+  "duracao_ms": 4284945,
   "sem_custo": 0
  },
  "resultados": [
@@ -464,13 +464,11 @@
   },
   {
    "id": "release-and-ops-pipeline-incidente-2",
-   "observado": "outra",
+   "observado": "ativou",
    "amostras": [
-    "outra",
-    "outra",
-    "outra",
-    "outra",
-    "outra"
+    "ativou",
+    "ativou",
+    "ativou"
    ]
   },
   {

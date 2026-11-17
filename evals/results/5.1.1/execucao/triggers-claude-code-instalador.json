@@ -6,9 +6,9 @@
  "data": "2026-11-17",
  "destino": "claude-code-instalador",
  "metricas": {
-  "custo_usd": 23.617459,
-  "turnos": 1456,
-  "duracao_ms": 4416761,
+  "custo_usd": 24.405468,
+  "turnos": 1507,
+  "duracao_ms": 4561614,
   "sem_custo": 0
  },
  "resultados": [
@@ -465,13 +465,11 @@
   },
   {
    "id": "release-and-ops-pipeline-incidente-2",
-   "observado": "outra",
+   "observado": "ativou",
    "amostras": [
     "ativou",
     "ativou",
-    "outra",
-    "outra",
-    "outra"
+    "ativou"
    ]
   },
   {

@@ -1,6 +1,6 @@
 ---
 name: release-and-ops-pipeline
-description: "Use quando o usuário pedir para responder a um incidente, inclusive segredo vazado; para publicar, implantar ou desligar um app, site, pacote ou relatório (Posit Connect, Vercel, PyPI, servidor próprio); para preparar, versionar, retomar ou terminar uma release; ou para verificar um deploy."
+description: "Use quando o usuário pedir para responder a um incidente, como um envio errado de mensagem, cobrança ou dado a clientes ou usuários, ou um segredo vazado; para publicar, implantar ou desligar um app, site, pacote ou relatório (Posit Connect, Vercel, PyPI, servidor próprio); para preparar, versionar, retomar ou terminar uma release; ou para verificar um deploy."
 ---
 
 # Releases e operações

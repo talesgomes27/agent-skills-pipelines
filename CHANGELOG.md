@@ -20,6 +20,8 @@ As versões seguem [SemVer](https://semver.org/lang/pt-BR/).
 
 ### Corrigido
 
+- A `description` da `release-and-ops-pipeline` passa a dar como exemplo de incidente um envio errado de mensagem, cobrança ou dado a clientes ou usuários. Sem ele, o pedido "O job de hoje mandou a mensagem de cobrança errada para uns dois mil clientes" carregava só a `scheduled-automation`: o `release-and-ops-pipeline-incidente-2` ia de 0/5 no plugin e 2/5 no instalador a 3/3 nos dois. Uma primeira versão, com "um job ou deploy que mandou", acertava o incidente mas levava o `scheduled-automation-ingles-2`, um cron que duplica o report no Slack, de 5/5 a 0/3 nos dois destinos, carregando só a `release-and-ops-pipeline`; a versão final dá 3/3 nele e 3/3 no `incidente-3`, que não deve disparar. Com a versão final e 3 amostras por destino, os outros gatilhos da `release-and-ops-pipeline` e o `scheduled-automation-2` acertaram em todas as amostras, salvo o `release-and-ops-pipeline-2`, ambíguo, com 2/3 nos dois destinos; nenhum "não deve" disparou.
+
 - O README dizia que atualizar o pacote `essencial` ou `completo` atualizava os plugins que ele traz. Não atualiza: o `claude plugin update` do pacote só instala as dependências novas, e as que já estavam instaladas ficam na versão antiga. O "Como atualizar" da 5.1.0 tinha o mesmo erro. O README agora atualiza cada plugin, com um laço no shell, ou pelo **Update marketplace** do `/plugin`.
 
 ## [5.1.0] - 2026-11-16
