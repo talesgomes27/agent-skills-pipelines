@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "release": "5.1.0",
+  "release": "5.1.1",
   "skills": ["planning-pipeline", "implementation-pipeline", "writing-pipeline", "audit-and-refactoring-pipeline", "release-and-ops-pipeline", "scheduled-automation", "personal-data", "jurimetria", "quarto-expert", "skill-loader"],
   "bundles": {
     "planning": ["planning-pipeline"],

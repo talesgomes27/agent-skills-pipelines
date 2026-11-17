@@ -4,13 +4,13 @@ Fluxos de trabalho em português para agentes de IA planejarem, implementarem, a
 
 [![CI](https://github.com/talesgomes27/agent-skills-pipelines/actions/workflows/ci.yml/badge.svg)](https://github.com/talesgomes27/agent-skills-pipelines/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Release](https://img.shields.io/badge/release-5.1.0-blue.svg)](distribution/catalog.json)
+[![Release](https://img.shields.io/badge/release-5.1.1-blue.svg)](distribution/catalog.json)
 [![Python](https://img.shields.io/badge/Python-3.9%2B-3776AB.svg?logo=python&logoColor=white)](https://www.python.org/)
 [![Agent Skills](https://img.shields.io/badge/Agent%20Skills-Codex%20%7C%20Claude%20Code%20%7C%20Antigravity-6f42c1.svg)](docs/distribution/architecture.md)
 
 Uma skill é uma pasta de instruções que um agente de IA, como o Claude Code, o Codex ou o Antigravity, lê quando a tarefa pede. Estas skills, em português, dão ao agente um processo de trabalho: planejar antes de programar, implementar em etapas verificadas, auditar código herdado e publicar só com a sua autorização. Foram pensadas para ciência de dados, sites e dashboards em Streamlit ou Shiny, e automações.
 
-Release atual: **5.1.0**.
+Release atual: **5.1.1**.
 
 ## Como é na prática
 
@@ -101,7 +101,7 @@ claude plugin install quarto-expert@agent-skills-pipelines
 claude plugin install skill-loader@agent-skills-pipelines
 ```
 
-A branch `stable` só avança quando sai uma release, então você recebe só versões publicadas; para fixar uma versão exata, use uma tag, como `@v5.1.0`, no lugar de `@stable`. Sem o `@`, o marketplace acompanha a `main`, que muda a cada PR. Abra uma sessão nova para o Claude Code encontrá-las. No Claude Code, prefira o marketplace ao instalador abaixo: ele atualiza com `claude plugin update`.
+A branch `stable` só avança quando sai uma release, então você recebe só versões publicadas; para fixar uma versão exata, use uma tag, como `@v5.1.1`, no lugar de `@stable`. Sem o `@`, o marketplace acompanha a `main`, que muda a cada PR. Abra uma sessão nova para o Claude Code encontrá-las. No Claude Code, prefira o marketplace ao instalador abaixo: ele atualiza com `claude plugin update`.
 
 Para atualizar depois de uma release, atualize o marketplace e cada plugin instalado. Atualizar o pacote não atualiza os plugins que ele trouxe, só instala os que ele ganhou, e nenhum comando de shell atualiza todos de uma vez ([documentação](https://code.claude.com/docs/en/plugins/install#update-plugins-now), conferida em 2026-11-16). No shell, com o `completo`:
 
