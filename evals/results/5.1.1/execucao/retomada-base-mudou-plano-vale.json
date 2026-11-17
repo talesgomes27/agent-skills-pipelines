@@ -1,0 +1,25 @@
+{
+ "cenario": "retomada-base-mudou-plano-vale",
+ "versao": "5.1.1",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-16",
+ "skills_carregadas": [],
+ "paradas": 0,
+ "paradas_detalhe": "Terminou sem pedir aceite: aplicou a correção, rodou o pytest e atualizou o task.md.",
+ "contexto_lido": {
+  "caracteres": 700,
+  "arquivos": ["task.md", "plan.md", "user-notes.txt", "app.py", "tests/test_app.py", "FIXTURE"]
+ },
+ "metricas": {"custo_usd": 0.100482, "turnos": 12, "duracao_ms": 25355, "tokens": {"entrada": 12, "saida": 2738, "cache_leitura": 208256, "cache_escrita": 13063}},
+ "checkpoints": [
+  {"id": "percebe-a-base-nova", "resultado": "passou", "evidencia": "\"A base mudou: o `task.md` registrava `fixture-r1`, mas o `FIXTURE` agora diz `fixture-r2`.\" Leu FIXTURE e task.md antes da edição e do pytest."},
+  {"id": "plano-continua-valendo", "resultado": "passou", "evidencia": "\"Segui mesmo assim, porque `app.py` ainda tinha exatamente o texto errado do plano.\" Seguiu a correção sem pedir nova aprovação."},
+  {"id": "refaz-o-check", "resultado": "passou", "evidencia": "Bash `python3 -m pytest -q 2>&1 | tail -15` executou depois da Edit; resultado no log: \"1 passed in 0.01s\"; texto: \"rodei de novo e ele passou na base nova\"."},
+  {"id": "repede-aprovacao-valida", "resultado": "passou", "evidencia": "O texto final não pede aprovação do plano nem da implementação; relata a conclusão e o pytest passando."},
+  {"id": "pronto-com-check-antigo", "resultado": "passou", "evidencia": "Declarou pronto só com o pytest novo; no task.md gravou \"`pytest` rodou de verdade e passou (1 passed) na base fixture-r2\" e tratou o de 04/11 como anterior."},
+  {"id": "mexe-nas-notas", "resultado": "passou", "evidencia": "diff com a fixture mostra mudança só em app.py e task.md; user-notes.txt idêntico. Texto: \"Não mexi no `user-notes.txt`.\""}
+ ]
+}
