@@ -1,6 +1,6 @@
 ---
 name: implementation-pipeline
-description: "Use quando o usuário pedir para mudar o comportamento do código ou dos scripts, a configuração ou a estrutura de documentos Quarto e R Markdown de um projeto, ou criar algo pequeno nele, como uma flag, uma coluna ou um script rápido; para implementar, continuar ou terminar um plano aprovado ou uma entrega pendente, vindos do planejamento ou de uma auditoria; para corrigir um erro, bug ou regressão; ou para atualizar dependências ou o lockfile."
+description: "Use quando o usuário pedir para mudar o comportamento do código ou dos scripts, a configuração ou a estrutura de documentos Quarto e R Markdown de um projeto, ou criar algo pequeno nele, como uma flag, uma coluna ou um script rápido; para implementar, continuar ou terminar um plano aprovado ou uma entrega pendente, vindos do planejamento ou de uma auditoria; para corrigir um erro, bug ou regressão, inclusive um número errado num relatório, numa consulta ou num dashboard; ou para atualizar dependências ou o lockfile."
 ---
 
 # Execução de um plano aprovado
