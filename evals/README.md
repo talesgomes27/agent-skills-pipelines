@@ -76,7 +76,7 @@ O modo padrão é o por efeito a partir da 4.0.0; antes dela, era o assistido, e
 - `paradas_detalhe` (opcional): quais aceites ou perguntas o agente pediu, na ordem, para conferir a contagem de `paradas`.
 - `metricas` (opcional, no nível de execução): `custo_usd`, `turnos`, `duracao_ms` e `tokens` (`entrada`, `saida`, `cache_leitura`, `cache_escrita`), somados dos dois turnos, como `execucao.py metricas <exec>` devolve. Um valor que o host não deu fica `null`, nunca 0. Os resultados gravados antes desse campo não o têm.
 - `modo` (opcional no modo padrão da versão): `por-efeito`, `assistido` ou `continuo`.
-- `destino` (opcional): o caminho de instalação, quando o mesmo host tem mais de um, como `claude-code-instalador` para as skills instaladas pelo `skills.py` no Claude Code. O resultado fica numa subpasta com esse nome, e o `report.py` mostra uma linha por destino. Sem o campo, vale o destino padrão do host; no Claude Code, o plugin do marketplace.
+- `destino` (opcional): o caminho de instalação, quando o mesmo host tem mais de um, como `claude-code-instalador` para as skills instaladas pelo `skills.py` no Claude Code. O resultado fica numa subpasta com esse nome, e o `report.py` mostra uma linha por destino. Sem o campo, vale o destino padrão do host; no Claude Code, o plugin do marketplace. O destino `sem-skill` roda o mesmo pedido sem nenhuma skill do repositório e serve de comparação.
 
 Um resultado pode cobrir só parte dos checkpoints; os que ficaram de fora não contam como aprovados.
 
@@ -98,7 +98,7 @@ A versão é a das skills avaliadas. Uma rodada sobre a branch em preparo grava 
 
 ## Relatório
 
-`/usr/bin/python3 evals/report.py [--versao X.Y.Z]` imprime duas tabelas. A de cenários conta os checkpoints `deve` e `nao_deve` como passou/falhou/indeterminado, e a situação de cada linha é:
+`/usr/bin/python3 evals/report.py [--versao X.Y.Z]` imprime duas tabelas, ou três com o destino `sem-skill`. A de cenários conta os checkpoints `deve` e `nao_deve` como passou/falhou/indeterminado, e a situação de cada linha é:
 
 - `não recomendada`: algum `nao_deve` falhou;
 - `sem evidência`: algum `nao_deve` ficou indeterminado, ou nenhum foi julgado;
@@ -106,3 +106,5 @@ A versão é a das skills avaliadas. Uma rodada sobre a branch em preparo grava 
 - `ok`: nenhum dos casos acima. Um `deve` indeterminado não é falha, mas aparece na contagem.
 
 As duas tabelas têm a coluna de custo, soma do `metricas.custo_usd`, com quantos resultados tinham custo quando falta algum. A de gatilhos mostra os acertos por versão e destino. Acerto é `ativou` em `deve` e `ambiguo_deve`, e qualquer resultado diferente de `ativou` em `nao_deve`, inclusive `outra`; `opcional` não conta. A expectativa é a do `triggers.yaml` atual, também nas versões antigas. Um id que saiu do `triggers.yaml` não conta, e o total desses ids aparece no stderr.
+
+Quando há resultados no destino `sem-skill`, uma terceira tabela pareia cada cenário com os outros destinos da mesma versão, nível e modo. Ela mostra as skills carregadas no braço com a skill, quantos checkpoints passaram com e sem ela, entre os julgados nos dois, o Δ, e quais passam nos dois. Um checkpoint que passa sem a skill não mede a skill: ou o modelo já faz isso sozinho, ou o checkpoint precisa ficar mais preciso.

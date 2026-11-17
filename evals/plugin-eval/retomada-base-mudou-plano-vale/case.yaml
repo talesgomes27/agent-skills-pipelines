@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: retomada-base-mudou-plano-vale
+context:
+  scaffold_script: scaffold.sh

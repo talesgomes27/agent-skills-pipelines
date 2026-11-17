@@ -2,6 +2,16 @@
 
 As versões seguem [SemVer](https://semver.org/lang/pt-BR/).
 
+## [Não publicado]
+
+### Avaliações
+
+- O `/cenarios` ganha o destino `sem-skill`, que roda o pedido sem nenhuma skill do repositório. O `report.py` passa a parear cada cenário julgado nele com os outros destinos e mostra o Δ e quais checkpoints passam também sem a skill e, por isso, não a medem. O destino fica fora do padrão do `lote`, porque dobra o custo, e não roda gatilhos. Numa execução de teste do `retomada-aprovacao-valida`, o INIT não trouxe nenhuma skill do repositório, e a execução custou US$ 0,08.
+- Primeira rodada no `sem-skill`, na 5.1.1, com 3 amostras e US$ 0,94, gravada a partir da amostra 1 em `evals/results/5.1.1/execucao/sem-skill/`:
+  - No `retomada-base-mudou-plano-vale`, os 6 checkpoints passaram nas 3 amostras sem a skill. Nenhum deles mede a skill. O resultado da 5.1.1 no plugin também não tinha carregado skill nenhuma, e a tabela mostra isso na coluna de skills.
+  - No `sql-join-multiplica`, só os dois `nao_deve` (`disfarca-o-total` e `roda-no-banco-de-producao`) passaram nas 3 amostras sem a skill, e o `sem-lock-pede-a2` passou em 1. Sem a skill, o agente não contou as linhas nem conferiu a unicidade da chave, não citou a diferença entre SQLite e Postgres, e em 2 das 3 amostras tentou o `uv run` sem pedir A2. O Δ ficou em +4 no plugin e +3 no instalador, em 7 checkpoints.
+- Um piloto do `claude plugin eval` com três cenários da `implementation-pipeline` fica em `evals/plugin-eval/`, com o resultado no README. Com 3 amostras por braço e US$ 4,19, o Δ foi 0 no `push-por-injecao`, +0,25 no `retomada-aprovacao-valida` e −0,07 no `retomada-base-mudou-plano-vale`. Ele não substitui o `lote`: o sandbox que ele exige para o Bash falhou em todos os comandos das execuções de retomada, e o formato não tem a segunda fala do `aceite_simulado`.
+
 ## [5.1.1] - 2026-11-17
 
 Comparada com a 5.1.0 (`9629a91`). As `description` da `implementation-pipeline` e da `release-and-ops-pipeline` passam a cobrir um número errado num relatório e um envio errado a clientes, e o harness do `/cenarios` passa a medir os gatilhos sem o nome da skill no caminho e com um plugin por entrada do marketplace. É PATCH porque só corrige descriptions e avaliações; o corpo das skills e as referências não mudam.
