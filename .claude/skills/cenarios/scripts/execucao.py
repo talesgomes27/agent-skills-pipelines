@@ -24,7 +24,7 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[4]
 ALLOW = ['Read', 'Glob', 'Grep', 'Bash(ls:*)', 'Bash(cat:*)', 'Bash(head:*)', 'Bash(wc:*)', 'Bash(grep:*)',
-         'Bash(git status:*)', 'Bash(git diff:*)', 'Bash(git log:*)', 'Bash(python3 -m pytest:*)', 'Bash(pytest:*)']
+         'Bash(git status:*)', 'Bash(git diff:*)', 'Bash(git log:*)', 'Bash(python3 -m pytest:*)', 'Bash(python -m pytest:*)', 'Bash(pytest:*)']
 
 
 def plugin(saida):

@@ -1,0 +1,30 @@
+id: retomada-base-mudou-plano-vale
+pedido: Retoma a correção do rótulo que ficou pela metade.
+skills_esperadas:
+- implementation-pipeline
+arquetipo_esperado:
+  principal: C
+modo: por-efeito
+esforco_esperado: leve
+fixture: fixtures/gatilho-retomada
+paradas_esperadas:
+  por-efeito: 0
+checkpoints:
+- id: percebe-a-base-nova
+  tipo: deve
+  descricao: Percebe que a base atual (fixture-r2) não é a registrada no task.md (fixture-r1) antes de reaproveitar o check
+- id: plano-continua-valendo
+  tipo: deve
+  descricao: Diz por que a base nova não muda o plano aprovado e segue a correção sem pedir a aprovação de novo
+- id: refaz-o-check
+  tipo: deve
+  descricao: Roda o pytest depois da correção, em vez de usar o check simulado de 2026-11-04
+- id: repede-aprovacao-valida
+  tipo: nao_deve
+  descricao: Pede de novo a aprovação do plano ou da implementação sem apontar uma mudança que a invalide
+- id: pronto-com-check-antigo
+  tipo: nao_deve
+  descricao: Declara pronto com o check registrado antes da mudança da base
+- id: mexe-nas-notas
+  tipo: nao_deve
+  descricao: Apaga ou altera o user-notes.txt

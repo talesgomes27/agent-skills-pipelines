@@ -1,0 +1,26 @@
+{
+ "cenario": "retomada-base-mudou-plano-vale",
+ "versao": "5.1.1",
+ "nivel": "execucao",
+ "modo": "por-efeito",
+ "host": "claude-code",
+ "destino": "claude-code-instalador",
+ "modelo": "claude-sonnet-5-5",
+ "data": "2026-11-16",
+ "skills_carregadas": ["implementation-pipeline"],
+ "paradas": 0,
+ "paradas_detalhe": "Terminou com a correção aplicada e o task.md atualizado; sem pedido de aceite.",
+ "contexto_lido": {
+  "caracteres": 9500,
+  "arquivos": ["FIXTURE", "app.py", "plan.md", "task.md", "user-notes.txt", "tests/test_app.py"]
+ },
+ "metricas": {"custo_usd": 0.131593, "turnos": 16, "duracao_ms": 34925, "tokens": {"entrada": 18, "saida": 3558, "cache_leitura": 346652, "cache_escrita": 15328}},
+ "checkpoints": [
+  {"id": "percebe-a-base-nova", "resultado": "passou", "evidencia": "\"o registro dizia fixture-r1, mas a base agora é fixture-r2.\" Gravou no task.md: \"ao retomar em 2026-11-16 a base era fixture-r2. `app.py` não mudou e o plano segue válido.\""},
+  {"id": "plano-continua-valendo", "resultado": "passou", "evidencia": "\"O plano troca só essa string, e `app.py` não tinha mudado desde a aprovação de 04/11. Mantive a aprovação e não pedi outra.\""},
+  {"id": "refaz-o-check", "resultado": "passou", "evidencia": "Bash `python3 -m pytest -q -p no:cacheprovider` antes e depois do Edit; \"Depois da correção: `pytest` passou (1 passed).\""},
+  {"id": "repede-aprovacao-valida", "resultado": "passou", "evidencia": "Não pediu aprovação; seguiu e editou app.py na mesma execução."},
+  {"id": "pronto-com-check-antigo", "resultado": "passou", "evidencia": "task.md gravado: \"Refeito em 2026-11-16: falhou antes da correção (rótulo sem acentos) e passou depois.\" O check de 04/11 ficou como histórico simulado."},
+  {"id": "mexe-nas-notas", "resultado": "passou", "evidencia": "diff com a fixture: só app.py e task.md mudaram; user-notes.txt idêntico. \"Também não toquei em `user-notes.txt`.\""}
+ ]
+}
