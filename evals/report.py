@@ -7,6 +7,8 @@ Situação: "não recomendada" com falha em nao_deve; "sem evidência" com nao_d
 nao_deve julgado; "parcial" com falha em deve; "ok" no resto. Indeterminado em deve não é falha.
 Gatilhos: acerto é "ativou" em deve e ambiguo_deve, e qualquer coisa menos "ativou" em nao_deve;
 opcional fica fora da conta. Vale o esperado do triggers.yaml atual, também para versões antigas.
+Um gatilho é certo só se todas as amostras acertam (pass^k), pelo esperado atual; sem amostras, vale o
+observado. O intervalo é o de Wilson, a 95%, sobre os gatilhos certos. "Amostras certas" conta cada amostra.
 Custo: soma do metricas.custo_usd gravado; com algum resultado sem custo, mostra quantos tinham.
 Um triggers-<destino>.json com sem_custo maior que 0 conta como sem custo.
 Com e sem a skill: cada cenário julgado no destino sem-skill é pareado com os outros destinos da mesma
@@ -16,6 +18,7 @@ Só biblioteca padrão; o PyYAML é usado quando existe.
 """
 import argparse
 import json
+import math
 import sys
 from collections import Counter, defaultdict
 from pathlib import Path
@@ -107,7 +110,7 @@ def trigger_rows(versao=None, root=None, gatilhos=None):
         if versao and d['versao'] != versao:
             continue
         a = agg.setdefault((d['versao'], d['nivel'], d['host'], d.get('destino', ''), d['modelo']),
-                           {'certos': 0, 'total': 0, 'erros_deve': 0, 'ativou_nao_deve': 0, 'ignorados': 0, 'data': '', 'custo': []})
+                           {'certos': 0, 'amostras_certas': 0, 'amostras': 0, 'total': 0, 'erros_deve': 0, 'ativou_nao_deve': 0, 'ignorados': 0, 'data': '', 'custo': []})
         a['data'] = max(a['data'], d.get('data', ''))
         m = d.get('metricas') or {}
         a['custo'].append(m.get('custo_usd') if not m.get('sem_custo') else None)
@@ -119,13 +122,17 @@ def trigger_rows(versao=None, root=None, gatilhos=None):
             if esperado == 'opcional':  # ativar ou não são ambos aceitáveis
                 continue
             a['total'] += 1
+            acerta = (lambda o: o != 'ativou') if esperado == 'nao_deve' else (lambda o: o == 'ativou')
+            # pelas amostras, não pelo observado: ele foi escolhido pelo esperado da época da gravação
+            amostras = r.get('amostras') or [r['observado']]
+            certo = all(map(acerta, amostras))
             if esperado == 'nao_deve':
-                certo = r['observado'] != 'ativou'
                 a['ativou_nao_deve'] += not certo
             else:
-                certo = r['observado'] == 'ativou'
                 a['erros_deve'] += not certo
             a['certos'] += certo
+            a['amostras'] += len(amostras)
+            a['amostras_certas'] += sum(map(acerta, amostras))
     return agg
 
 
@@ -158,6 +165,15 @@ def delta_rows(versao=None, root=None):
     return out
 
 
+def wilson(k, n, z=1.96):
+    """Intervalo de Wilson de k acertos em n, em pontos percentuais; '—' sem n."""
+    if not n:
+        return '—'
+    p, d = k / n, 1 + z * z / n
+    centro, meia = (p + z * z / (2 * n)) / d, z * math.sqrt(p * (1 - p) / n + z * z / (4 * n * n)) / d
+    return '%d a %d%%' % (round(100 * (centro - meia)), round(100 * (centro + meia)))
+
+
 def custo(valores):
     """Soma dos custos gravados; '—' sem nenhum, e a cobertura quando falta algum."""
     conhecidos = [v for v in valores if v is not None]
@@ -182,13 +198,14 @@ def main():
             v, nivel, modo, host, destino or '—', modelo, a['cenarios'], _pfi(a['deve']), _pfi(a['nao_deve']),
             a['paradas'].get('dashboard-streamlit', '—'), custo(a['custo']), a['data'], situacao(a)))
     print()
-    print('| Versão | Nível | Host | Destino | Modelo | Gatilhos certos | Erros em "deve" | Ativou em "nao_deve" | Custo (US$) | Data |')
-    print('|---|---|---|---|---|---|---|---|---|---|')
+    print('| Versão | Nível | Host | Destino | Modelo | Gatilhos certos | IC 95% | Amostras certas | Erros em "deve" | Ativou em "nao_deve" | Custo (US$) | Data |')
+    print('|---|---|---|---|---|---|---|---|---|---|---|---|')
     ignorados = 0
     for (v, nivel, host, destino, modelo), a in sorted(trigger_rows(versao).items()):
         ignorados += a['ignorados']
-        print('| %s | %s | %s | %s | %s | %d de %d | %d | %d | %s | %s |' % (
-            v, nivel, host, destino or '—', modelo, a['certos'], a['total'], a['erros_deve'], a['ativou_nao_deve'],
+        print('| %s | %s | %s | %s | %s | %d de %d | %s | %d de %d | %d | %d | %s | %s |' % (
+            v, nivel, host, destino or '—', modelo, a['certos'], a['total'], wilson(a['certos'], a['total']),
+            a['amostras_certas'], a['amostras'], a['erros_deve'], a['ativou_nao_deve'],
             custo(a['custo']), a['data']))
     deltas = delta_rows(versao)
     if deltas:

@@ -15,10 +15,13 @@
                                        comparados com evals/results/VERSAO quando pedido; ambiguo_deve conta como deve;
                                        com --json, os resultados com amostras e as metricas de cada triggers-<destino>.json
   metricas <exec>                      custo_usd, turnos, duracao_ms e tokens da execução, em JSON; ausente é null
+  estado <exec> [--fixture F]          arquivos criados, apagados e alterados contra a fixture, comandos Bash com o
+                                       erro e a última linha da saída, skills e tentativas de efeito no git, em JSON
 """
 import hashlib
 import json
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -153,6 +156,79 @@ def resumo(log):
     print('FINAL TEXT:\n', (texts[-1] if texts else '')[:3000])
 
 
+IGNORAR = {'.claude', '.git', '.venv', '__pycache__', '.pytest_cache'}  # .claude: no instalador, quem grava é o harness
+# tentativas de efeito no git e no gh, com opções globais antes do subcomando; a negação fica no erro do comando
+GIT_EFEITO = re.compile(r'\bgit\b(?:\s+-[Cc]\s+\S+|\s+--?\S+)*\s+(?:push|commit|reset|checkout|clean|rebase|restore|stash|branch\s+-D)(?![\w-])'
+                        r'|\bgh\s+pr\s+(?:create|merge)\b')
+
+
+def _texto(conteudo):
+    if isinstance(conteudo, list):
+        return '\n'.join(c.get('text', '') for c in conteudo if isinstance(c, dict))
+    return conteudo or ''
+
+
+def _fixture_do_meta(exe):
+    """Fixture da execução: do meta.json; num meta.json antigo, sem a chave, do cenário."""
+    meta = json.loads((exe / 'meta.json').read_text()) if (exe / 'meta.json').exists() else {}
+    if 'fixture' in meta:
+        return meta['fixture']
+    if meta.get('tipo') == 'cenario' and (REPO / f"evals/scenarios/{meta.get('id')}.yaml").exists():
+        return _yaml(REPO / f"evals/scenarios/{meta['id']}.yaml").get('fixture')
+    if meta.get('tipo') == 'gatilho' and meta.get('id') in (T := _gatilhos()):
+        return T[meta['id']].get('fixture')
+    sys.exit('sem meta.json com a fixture: passe --fixture, ou --fixture "" para um proj que começou vazio')
+
+
+def estado(exe, fixture=None):
+    """Fatos determinísticos de uma execução, para o juiz ler antes do log: arquivos, comandos e skills."""
+    exe = Path(exe)
+    fixture = _fixture_do_meta(exe) if fixture is None else (fixture or None)
+    if fixture and not (REPO / 'evals' / fixture).is_dir():
+        sys.exit(f'fixture inexistente: evals/{fixture}')
+
+    def arquivos(raiz):
+        out = {}
+        for f in raiz.rglob('*') if raiz else ():
+            rel = f.relative_to(raiz)
+            if IGNORAR & set(rel.parts) or not (f.is_file() or f.is_symlink()):
+                continue
+            try:
+                out[str(rel)] = f.read_bytes()
+            except OSError as e:  # link quebrado ou sem permissão: ainda conta como existente
+                out[str(rel)] = repr(e).encode()
+        return out
+    antes, depois = arquivos(REPO / 'evals' / fixture if fixture else None), arquivos(exe / 'proj')
+    usos, resultados = {}, {}
+    for log in ('log.jsonl', 'log2.jsonl'):
+        if not (exe / log).exists():
+            continue
+        for d in ler(exe / log):
+            for c in (d.get('message') or {}).get('content', []) if d.get('type') in ('assistant', 'user') else []:
+                if not isinstance(c, dict):
+                    continue
+                if c.get('type') == 'tool_use' and c['name'] == 'Bash':
+                    usos[c['id']] = (log, c['input'].get('command', ''), bool(d.get('parent_tool_use_id')))
+                elif c.get('type') == 'tool_result' and c.get('tool_use_id') in usos:
+                    linhas = _texto(c.get('content')).strip().splitlines()
+                    resultados[c['tool_use_id']] = (bool(c.get('is_error')), linhas[-1][:200] if linhas else '')
+    comandos, git = [], []
+    for i, (log, cmd, sub) in usos.items():
+        erro, ultima = resultados.get(i, (None, ''))  # None: sem resultado no log (limite de turnos, timeout)
+        c = {'turno': 2 if log == 'log2.jsonl' else 1, 'comando': cmd[:300], 'erro': erro, 'ultima_linha': ultima}
+        if sub:
+            c['subagente'] = True
+        comandos.append(c)
+        if GIT_EFEITO.search(cmd):  # no comando inteiro: um heredoc longo não esconde o git do fim
+            git.append(c)
+    return {'fixture': fixture,
+            'criados': sorted(set(depois) - set(antes)),
+            'apagados': sorted(set(antes) - set(depois)),
+            'alterados': sorted(f for f in set(antes) & set(depois) if antes[f] != depois[f]),
+            'skills': [s.split(':')[-1] for log in ('log.jsonl', 'log2.jsonl') if (exe / log).exists() for s in skills(exe / log)],
+            'comandos': comandos, 'git_efeito': git}
+
+
 TOKENS = {'entrada': 'input_tokens', 'saida': 'output_tokens', 'cache_leitura': 'cache_read_input_tokens',
           'cache_escrita': 'cache_creation_input_tokens'}
 
@@ -222,7 +298,8 @@ def lote(pasta, cenarios=(), gatilhos=(), destinos=DESTINOS, amostras=1, paralel
                 if exe.exists():
                     shutil.rmtree(exe)  # sem done: erro de API ou execução interrompida; a cópia pode ter sido editada
                 preparar(exe, d['pedido'] if tipo == 'cenario' else d['prompt'], d.get('fixture'))
-                (exe / 'meta.json').write_text(json.dumps({'tipo': tipo, 'id': i, 'destino': destino, 'amostra': n}))
+                (exe / 'meta.json').write_text(json.dumps({'tipo': tipo, 'id': i, 'destino': destino, 'amostra': n,
+                                                           'fixture': d.get('fixture')}))
                 aceite = d.get('aceite_simulado') if tipo == 'cenario' else None
                 jobs.append((exe, destino, 40 if tipo == 'cenario' else 8, aceite))
     print(len(jobs), 'execuções')
@@ -342,6 +419,8 @@ if __name__ == '__main__':
     p = sub.add_parser('contar')
     p.add_argument('pasta'); p.add_argument('--contra'); p.add_argument('--json', action='store_true')
     sub.add_parser('metricas').add_argument('exe')
+    p = sub.add_parser('estado')
+    p.add_argument('exe'); p.add_argument('--fixture')
     x = ap.parse_args()
     if x.cmd == 'plugin':
         plugin(x.saida)
@@ -357,5 +436,7 @@ if __name__ == '__main__':
         contar(x.pasta, x.contra, x.json)
     elif x.cmd == 'metricas':
         print(json.dumps(metricas(x.exe)))
+    elif x.cmd == 'estado':
+        print(json.dumps(estado(x.exe, x.fixture), ensure_ascii=False, indent=1))
     else:
         print(gatilho(x.log, x.skill))
