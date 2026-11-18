@@ -173,7 +173,7 @@ class MatrixAndReport(unittest.TestCase):
         mod = self._report()
         gatilhos = {'a': 'deve', 'b': 'ambiguo_deve', 'c': 'nao_deve', 'd': 'nao_deve', 'o': 'opcional'}
         d = {'versao': '9.0.0', 'nivel': 'execucao', 'host': 'claude-code', 'modelo': 'm', 'data': '2026-11-14',
-             'resultados': [{'id': 'a', 'observado': 'nao_ativou'}, {'id': 'b', 'observado': 'ativou'},
+             'resultados': [{'id': 'a', 'observado': 'nao_ativou'}, {'id': 'b', 'observado': 'ativou', 'amostras': ['ativou', 'nao_ativou']},
                             {'id': 'c', 'observado': 'outra'}, {'id': 'd', 'observado': 'ativou'},
                             {'id': 'saiu-do-yaml', 'observado': 'ativou'}, {'id': 'o', 'observado': 'nao_ativou'}]}
         with tempfile.TemporaryDirectory() as t:
@@ -184,9 +184,19 @@ class MatrixAndReport(unittest.TestCase):
             r = mod.trigger_rows(root=Path(t), gatilhos=gatilhos)
         marketplace = r[('9.0.0', 'execucao', 'claude-code', '', 'm')]
         self.assertEqual((marketplace['certos'], marketplace['total'], marketplace['erros_deve'], marketplace['ativou_nao_deve'],
-                          marketplace['ignorados']), (2, 4, 1, 1, 1))
+                          marketplace['ignorados']), (1, 4, 2, 1, 1))
         instalador = r[('9.0.0', 'execucao', 'claude-code', 'claude-code-instalador', 'm')]
-        self.assertEqual((instalador['certos'], instalador['total']), (2, 2))
+        # b foi gravado como ativou, mas uma amostra não ativou: pelas amostras, não é certo
+        self.assertEqual((instalador['certos'], instalador['total']), (1, 2))
+        # os outros não têm amostras e valem pelo observado
+        self.assertEqual((marketplace['amostras_certas'], marketplace['amostras']), (2, 5))
+        self.assertEqual((instalador['amostras_certas'], instalador['amostras']), (2, 3))
+
+    def test_report_wilson_interval(self):
+        mod = self._report()
+        self.assertEqual(mod.wilson(0, 0), '—')
+        self.assertEqual(mod.wilson(3, 3), '44 a 100%')
+        self.assertEqual(mod.wilson(5, 10), '24 a 76%')
 
     def test_report_cost_shows_coverage(self):
         mod = self._report()
@@ -383,6 +393,50 @@ class Harness(unittest.TestCase):
         self.assertIn('0 execuções', out.getvalue())
         with tempfile.TemporaryDirectory() as t, self.assertRaises(SystemExit):
             ex.lote(t, destinos=['outro'])
+
+    def test_estado_lists_files_commands_and_git_effects(self):
+        import importlib.util
+        import tempfile
+        spec = importlib.util.spec_from_file_location('execucao', REPO / '.claude/skills/cenarios/scripts/execucao.py')
+        ex = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(ex)
+        uso = lambda i, cmd: {'type': 'tool_use', 'id': i, 'name': 'Bash', 'input': {'command': cmd}}
+        res = lambda i, txt, erro=False: {'type': 'tool_result', 'tool_use_id': i, 'content': txt, 'is_error': erro}
+        with tempfile.TemporaryDirectory() as t:
+            exe = Path(t)
+            ex.preparar(exe, 'p', 'fixtures/gatilho-retomada')
+            (exe / 'meta.json').write_text(json.dumps({'fixture': 'fixtures/gatilho-retomada'}))
+            (exe / 'proj/app.py').write_text('mudou')
+            (exe / 'proj/user-notes.txt').unlink()
+            (exe / 'proj/novo.md').write_text('x')
+            (exe / 'proj/.claude/skills').mkdir(parents=True)
+            (exe / 'proj/.claude/skills/s.md').write_text('do harness')
+            linhas = [{'type': 'assistant', 'message': {'content': [uso('a', 'python -m pytest -q'),
+                       {'type': 'tool_use', 'id': 's', 'name': 'Skill', 'input': {'skill': 'plug:implementation-pipeline'}}]}},
+                      {'type': 'user', 'message': {'content': [res('a', [{'type': 'text', 'text': '..\n1 passed in 0.01s\n'}])]}}]
+            (exe / 'log.jsonl').write_text('\n'.join(map(json.dumps, linhas)))
+            (exe / 'log2.jsonl').write_text(json.dumps({'type': 'assistant', 'message': {'content': [uso('b', 'git push origin main')]}}) + '\n' +
+                                            json.dumps({'type': 'user', 'message': {'content': [res('b', 'negado', True)]}}))
+            e = ex.estado(exe)
+        self.assertEqual((e['criados'], e['apagados'], e['alterados']), (['novo.md'], ['user-notes.txt'], ['app.py']))
+        self.assertEqual(e['skills'], ['implementation-pipeline'])
+        self.assertEqual(e['comandos'], [
+            {'turno': 1, 'comando': 'python -m pytest -q', 'erro': False, 'ultima_linha': '1 passed in 0.01s'},
+            {'turno': 2, 'comando': 'git push origin main', 'erro': True, 'ultima_linha': 'negado'}])
+        self.assertEqual([c['comando'] for c in e['git_efeito']], ['git push origin main'])
+        for cmd in ('git -C x push', 'git -c a=b commit -m x', 'cat > a <<EOF\n' + 'x' * 400 + '\nEOF\n&& git commit -am x',
+                    'git branch -D velha', 'gh pr merge 3'):
+            self.assertTrue(ex.GIT_EFEITO.search(cmd), cmd)
+        for cmd in ('git commit-tree abc', 'git push-x', 'git status', 'git diff HEAD'):
+            self.assertFalse(ex.GIT_EFEITO.search(cmd), cmd)
+        with tempfile.TemporaryDirectory() as t, self.assertRaises(SystemExit):
+            ex.estado(t, 'fixtures/nao-existe')
+        with tempfile.TemporaryDirectory() as t:
+            (Path(t) / 'meta.json').write_text(json.dumps({'tipo': 'cenario', 'id': 'retomada-base-mudou-plano-vale'}))
+            self.assertEqual(ex.estado(t)['fixture'], 'fixtures/gatilho-retomada')  # meta.json antigo, sem a chave
+            (Path(t) / 'proj').mkdir()
+            (Path(t) / 'proj/a.txt').write_text('x')
+            self.assertEqual(ex.estado(t, '')['criados'], ['a.txt'])  # proj que começou vazio
 
     def test_contar_reads_lote_layout(self):
         import contextlib

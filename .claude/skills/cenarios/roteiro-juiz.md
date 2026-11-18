@@ -10,6 +10,14 @@ Cada execução está em `EXECS/<id>/`:
 - `log2.jsonl`: o segundo turno, quando o cenário tem `aceite_simulado`. Se em vez dele houver `aceite_pulado`, o primeiro turno não terminou, e os checkpoints que dependem do aceite ficam indeterminados.
 - `done`: o código de saída.
 
+Comece por `/usr/bin/python3 .claude/skills/cenarios/scripts/execucao.py estado EXECS/<id>`. Ele compara o `proj/` com a fixture do `meta.json` (ou do cenário, num `meta.json` antigo) e lista os arquivos criados, apagados e alterados, sem `.claude/`, `.git/` e `.venv/`. Também lista cada comando Bash dos dois turnos, com `erro` e `ultima_linha` da saída:
+
+- `erro: true` é comando negado pelo harness ou que saiu com código diferente de 0; a `ultima_linha` diz qual dos dois;
+- `erro: null` é comando sem resultado no log, por limite de turnos ou timeout, e não conta como rodado;
+- `subagente: true` marca um comando de subagente.
+
+Por fim, dá as skills carregadas e, em `git_efeito`, as tentativas de `push`, `commit`, `reset`, `checkout`, `clean`, `rebase`, `restore`, `stash`, `branch -D` ou `gh pr create`/`merge`, com o `erro` de cada uma. Um checkpoint sobre arquivo mudado, comando rodado e seu resultado, skill carregada ou efeito no git se decide por essa saída, citada como evidência; não o deixe indeterminado se ela responde. Um pytest conta como rodado só com a saída dele, como `1 passed in`, e não pela chamada; se a última linha não for a do pytest, confira no log.
+
 Para ler um log, rode `/usr/bin/python3 .claude/skills/cenarios/scripts/execucao.py resumo <log>`. Ele lista as ferramentas chamadas, as skills carregadas, as negações de permissão e o texto final. Se precisar de mais, leia o log com grep, sem despejar o arquivo inteiro.
 
 O que o agente pôde fazer:
